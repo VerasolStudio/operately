@@ -3,6 +3,7 @@ import * as React from "react";
 
 import { encodeUrlParams } from "@/routes/paths";
 import { IconBrandDiscordFilled, IconLifebuoy, IconMail, IconMap2, IconQuestionMark, IconSpeakerphone } from "turboui";
+import { useTranslation } from "react-i18next";
 import { DropdownActionItem, DropdownLinkItem, DropdownMenu, DropdownSeparator } from "./DropdownMenu";
 
 const supportEmail = "support@operately.com";
@@ -18,10 +19,12 @@ export function HelpDropdown({
   company: Companies.Company;
   onOpenKeyboardShortcuts: () => void;
 }) {
+  const { t } = useTranslation();
+
   return (
     <DropdownMenu
       testId="help-dropdown"
-      name="Help"
+      name={t("helpMenu.title")}
       icon={IconLifebuoy}
       align="center"
       minWidth={220}
@@ -29,15 +32,15 @@ export function HelpDropdown({
     >
       <DropdownActionItem
         icon={IconQuestionMark}
-        title="Keyboard shortcuts"
+        title={t("helpMenu.keyboardShortcuts")}
         onClick={onOpenKeyboardShortcuts}
         testId="keyboard-shortcuts-menu-item"
       />
       <DropdownSeparator />
-      <DropdownLinkItem path={contactUsLink(company)} icon={IconMail} title="Contact us" />
-      <DropdownLinkItem path={window.appConfig!.discordUrl} icon={DiscordIcon} title="Discord chat" target="_blank" />
-      <DropdownLinkItem path={newsLink} icon={IconSpeakerphone} title="What's new" target="_blank" />
-      <DropdownLinkItem path={roadmap} icon={IconMap2} title="Roadmap" target="_blank" />
+      <DropdownLinkItem path={contactUsLink(company)} icon={IconMail} title={t("helpMenu.contactUs")} />
+      <DropdownLinkItem path={window.appConfig!.discordUrl} icon={DiscordIcon} title={t("helpMenu.discordChat")} target="_blank" />
+      <DropdownLinkItem path={newsLink} icon={IconSpeakerphone} title={t("helpMenu.whatsNew")} target="_blank" />
+      <DropdownLinkItem path={roadmap} icon={IconMap2} title={t("helpMenu.roadmap")} target="_blank" />
     </DropdownMenu>
   );
 }

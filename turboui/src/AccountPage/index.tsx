@@ -1,9 +1,12 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+
 import { Page } from "../Page";
 import { Avatar } from "../Avatar";
 import { IconUserCircle, IconSettings, IconLockPassword, IconDoorExit } from "../icons";
 import classNames from "../utils/classnames";
 import { BlackLink } from "../Link";
+import "../i18n";
 
 export namespace AccountPage {
   export interface Person {
@@ -38,22 +41,24 @@ export namespace AccountPage {
 }
 
 export function AccountPage(props: AccountPage.Props) {
+  const { t } = useTranslation();
+
   const actionLinks: AccountPage.ActionLink[] = [
     {
       icon: IconUserCircle,
-      label: "Profile",
+      label: t("userMenu.profile", "Profile"),
       to: props.profilePath,
       testId: "profile-link",
     },
     {
       icon: IconSettings,
-      label: "Settings",
+      label: t("userMenu.settings", "Settings"),
       to: props.settingsPath,
       testId: "settings-link",
     },
     {
       icon: IconLockPassword,
-      label: "Password & Security",
+      label: t("userMenu.passwordAndSecurity", "Password & Security"),
       to: props.securityPath,
       testId: "password-link",
     },
@@ -62,7 +67,7 @@ export function AccountPage(props: AccountPage.Props) {
   const actionButtons: AccountPage.ActionButton[] = [
     {
       icon: IconDoorExit,
-      label: "Sign Out",
+      label: t("userMenu.signOut", "Sign Out"),
       onClick: props.onLogOut,
       testId: "log-out-button",
     },
@@ -71,14 +76,14 @@ export function AccountPage(props: AccountPage.Props) {
   const navigation = [
     {
       to: props.homePath,
-      label: "Home",
+      label: t("nav.home", "Home"),
     },
   ];
 
   return (
-    <Page title="My Account" size="small" testId="my-account-page" navigation={navigation}>
+    <Page title={t("account.myAccount", "My Account")} size="small" testId="my-account-page" navigation={navigation}>
       <div className="p-8">
-        <PageTitle />
+        <PageTitle title={t("account.myAccount", "My Account")} />
         <UserInfo person={props.person} />
 
         <div className="flex flex-col gap-8">
@@ -90,11 +95,11 @@ export function AccountPage(props: AccountPage.Props) {
   );
 }
 
-function PageTitle() {
+function PageTitle({ title }: { title: string }) {
   return (
     <div className="flex items-center gap-4 mb-8">
       <FancyLineSeparator />
-      <h1 className="text-4xl font-extrabold text-center">My Account</h1>
+      <h1 className="text-4xl font-extrabold text-center">{title}</h1>
       <FancyLineSeparator />
     </div>
   );

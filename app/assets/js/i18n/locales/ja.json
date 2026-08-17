@@ -1,0 +1,197 @@
+{
+  "Objectives": "目的",
+  "Tenets": "原則",
+  "Projects": "プロジェクト",
+  "KPIs": "KPIs",
+  "Groups": "団体",
+  "People": "人々",
+  "erorr": {
+    "error": "エラー"
+  },
+  "loading": {
+    "loading": "読み込み中..."
+  },
+  "actions": {
+    "add_group": "新しいグループ",
+    "add_person": "新しい人",
+    "add_project": "新しいプロジェクト",
+    "add_kpi": "新しいKPI",
+    "add_objective": "新しい目的",
+    "add_tenet": "新しい原則"
+  },
+  "forms": {
+    "save": "保存する",
+    "cancel": "キャンセル",
+    "group_add_title": "新しいグループ",
+    "group_name_label": "名前",
+    "group_name_placeholder": "例：マーケティング",
+    "kpi_add_title": "新しいKPI",
+    "kpi_name_label": "名前",
+    "kpi_name_placeholder": "例：収益",
+    "kpi_description_label": "説明",
+    "kpi_description_placeholder": "例：すべての収益は売上から来る",
+    "kpi_unit_label": "単位",
+    "kpi_unit_percentage": "パーセンテージ",
+    "kpi_unit_currency": "通貨",
+    "kpi_target_label": "目標",
+    "kpi_target_placeholder": "例：1000000",
+    "kpi_target_direction_label": "目標の方向",
+    "kpi_target_direction_above": "上",
+    "kpi_target_direction_below": "下",
+    "kpi_danger_threshold_label": "危険なしきい値",
+    "kpi_danger_threshold_placeholder": "例：100000",
+    "kpi_danger_direction_label": "危険な方向",
+    "kpi_warning_direction_label": "警告の方向",
+    "objective_add_title": "新しい目的",
+    "objective_name_label": "名前",
+    "objective_name_placeholder": "例：収益の増加",
+    "objective_description_label": "説明",
+    "objective_description_placeholder": "例：収益を10％増やす",
+    "objective_owner_label": "所有者",
+    "objective_owner_search_placeholder": "人々を検索...",
+    "objective_timeframe_label": "時間枠",
+    "objective_timeframe_current_quarter": "現在の四半期",
+    "project_add_title": "新しいプロジェクト",
+    "project_name_label": "名前",
+    "project_name_placeholder": "例：新しいウェブサイト",
+    "project_description_label": "説明",
+    "project_description_placeholder": "例：会社の新しいウェブサイトを作成する",
+    "tenet_add_title": "新しい原則",
+    "tenet_name_label": "名前",
+    "tenet_name_placeholder": "例：ユーザー第一",
+    "tenet_description_label": "説明",
+    "tenet_description_placeholder": "例：常にユーザーのために行動する",
+    "add_group_members_title": "グループメンバーの追加",
+    "add_group_members_search_placeholder": "人々を検索...",
+    "add_group_members_button": "グループメンバーを追加",
+    "kpi_warning_threshold_label": "警告のしきい値",
+    "kpi_warning_threshold_placeholder": "例: 500000"
+  },
+  "keyResults": {
+    "status": "スターテス",
+    "completion": "完了",
+    "lastUpdated": "最終更新",
+    "keyResult": "キーリザルト",
+    "statuses": {
+      "pending": "開始",
+      "on_track": "順調",
+      "at_risk": "リスクあり",
+      "off_track": "遅延",
+      "completed": "完了",
+      "cancelled": "中止"
+    }
+  },
+  "intlDateTime": "{{val, datetime}}",
+  "intlRelativeDateTime": "{{val, relativetime}}",
+  "intlRelativeDateTimeJustNow": "たった今",
+  "objectives": {
+    "projects_in_progress_title": "進行中のプロジェクト",
+    "project_list_title": "プロジェクト名",
+    "project_list_timeline": "期間",
+    "project_list_team": "チーム",
+    "project_list_last_updated": "最終更新",
+    "write_an_update": {
+      "title": "更新を投稿",
+      "placeholder": "更新を書く…",
+      "cta": "目標全体について重要な更新はありますか？進捗やリスクを共有してください。",
+      "button": "更新を書く"
+    },
+    "leave_comment": {
+      "placeholder": "コメントを残す"
+    },
+    "feed": {
+      "title": "フィード"
+    }
+  },
+  "Today": "今日",
+  "Yesterday": "昨日",
+  "Tomorrow": "明日",
+  "nav": {
+    "home": "ホーム",
+    "company": "会社",
+    "myWork": "自分の仕事",
+    "review": "レビュー",
+    "people": "メンバー",
+    "notifications": "通知",
+    "account": "アカウント",
+    "companyAdmin": "会社の管理",
+    "switchCompany": "会社を切り替え",
+    "logOut": "ログアウト"
+  },
+  "companyMenu": {
+    "people": "メンバー",
+    "orgChart": "組織図",
+    "companyAdmin": "会社の管理",
+    "switchCompany": "会社を切り替え"
+  },
+  "helpMenu": {
+    "title": "ヘルプ",
+    "keyboardShortcuts": "キーボードショートカット",
+    "contactUs": "お問い合わせ",
+    "discordChat": "Discord チャット",
+    "whatsNew": "新着情報",
+    "roadmap": "ロードマップ"
+  },
+  "newMenu": {
+    "title": "新規作成",
+    "newGoal": "新しいゴール",
+    "newProject": "新しいプロジェクト",
+    "newSpace": "新しいスペース",
+    "invitePeople": "メンバーを招待"
+  },
+  "userMenu": {
+    "profile": "プロフィール",
+    "settings": "設定",
+    "passwordAndSecurity": "パスワードとセキュリティ",
+    "apiTokens": "API トークン",
+    "mcpConnections": "MCP 接続",
+    "signOut": "ログアウト"
+  },
+  "keyboardShortcuts": {
+    "title": "キーボードショートカット一覧",
+    "groups": {
+      "global": "全体",
+      "taskManagement": "タスク管理"
+    },
+    "openGlobalSearch": "全体検索を開く",
+    "openKeyboardShortcuts": "キーボードショートカットを開く",
+    "selectNextTask": "次のタスクを選択",
+    "selectPreviousTask": "前のタスクを選択",
+    "openSelectedTask": "選択中のタスクを開く",
+    "openAssigneePicker": "選択中のタスクの担当者を選ぶ",
+    "openStatusPicker": "選択中のタスクのステータスを選ぶ（対応している場合）",
+    "openDueDatePicker": "選択中のタスクの期限を選ぶ",
+    "clearTaskSelection": "タスクの選択を解除"
+  },
+  "account": {
+    "title": "アカウント",
+    "settings": {
+      "title": "設定",
+      "description": "利用できるアカウント設定を管理します。",
+      "appearance": "外観",
+      "appearanceDescription": "Operately の見た目を調整します",
+      "notificationSettings": "通知設定",
+      "notificationSettingsDescription": "アクティビティやサマリーメールの配信方法を設定します"
+    },
+    "appearance": {
+      "title": "外観",
+      "colorMode": "カラーモード",
+      "colorModeDescription": "ライト、ダーク、またはお使いのコンピューターの設定に合わせるかを選べます。",
+      "alwaysLight": "常にライト",
+      "alwaysDark": "常にダーク",
+      "sameAsSystem": "システムに合わせる",
+      "saveChanges": "変更を保存",
+      "updateFailed": "テーマを更新できませんでした"
+    },
+    "language": {
+      "title": "言語",
+      "description": "Operately を表示する言語を選びます。選択内容はこのブラウザーに保存されます。",
+      "saveChanges": "変更を保存",
+      "saved": "言語を変更しました"
+    },
+    "myAccount": "マイアカウント"
+  },
+  "errors": {
+    "error": "エラー"
+  }
+}

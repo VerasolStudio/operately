@@ -18,6 +18,7 @@ import {
 
 import { logOut } from "@/routes/auth";
 import { Outlet, useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 import { OperatelyLogo } from "@/components/OperatelyLogo";
 import { DivLink } from "turboui";
@@ -62,6 +63,7 @@ function Navigation(props: NavigationProps) {
 function MobileNavigation({ company }: NavigationProps) {
   const me = useMe()!;
   const paths = usePaths();
+  const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
 
   const handleLogOut = async () => {
@@ -95,43 +97,43 @@ function MobileNavigation({ company }: NavigationProps) {
           onClick={() => setOpen(false)}
         >
           <MobileSectionLink to={paths.homePath()} icon={IconHome2}>
-            Home
+            {t("nav.home")}
           </MobileSectionLink>
 
           <MobileSectionLink to={paths.workMapPath()} icon={IconBuildingEstate}>
-            Company
+            {t("nav.company")}
           </MobileSectionLink>
 
           <MobileSectionLink to={paths.profilePath(me.id)} icon={IconBriefcase}>
-            My work
+            {t("nav.myWork")}
           </MobileSectionLink>
 
           <MobileSectionLink to={paths.reviewPath()} icon={IconCoffee}>
-            Review
+            {t("nav.review")}
           </MobileSectionLink>
 
           <MobileSectionLink to={paths.peoplePath()} icon={IconUserCircle}>
-            People
+            {t("nav.people")}
           </MobileSectionLink>
 
           <MobileSectionLink to={paths.notificationsPath()} icon={IconBell}>
-            Notifications
+            {t("nav.notifications")}
           </MobileSectionLink>
 
           <MobileSectionLink to={paths.accountPath()} icon={IconUser}>
-            Account
+            {t("nav.account")}
           </MobileSectionLink>
 
           <MobileSectionLink to={paths.companyAdminPath()} icon={IconCircleKey}>
-            Company Admin
+            {t("nav.companyAdmin")}
           </MobileSectionLink>
 
           <MobileSectionLink to={Paths.lobbyPath()} icon={IconSwitch}>
-            Switch Company
+            {t("nav.switchCompany")}
           </MobileSectionLink>
 
           <MobileSectionAction onClick={handleLogOut} icon={IconDoorExit}>
-            Log Out
+            {t("nav.logOut")}
           </MobileSectionAction>
         </div>
       )}
@@ -166,6 +168,7 @@ function MobileSectionAction({ onClick, children, icon }) {
 function DesktopNavigation({ company, canAddProject, canAddGoal, onOpenKeyboardShortcuts }: NavigationProps) {
   const me = useMe()!;
   const paths = usePaths();
+  const { t } = useTranslation();
 
   return (
     <div className="transition-all z-50 py-1.5 bg-base border-b border-surface-outline">
@@ -181,15 +184,15 @@ function DesktopNavigation({ company, canAddProject, canAddGoal, onOpenKeyboardS
 
           <div className="flex items-center gap-1 lg:gap-2.5 border-l border-surface-outline px-4">
             <SectionLink to={paths.homePath()} icon={IconHome2}>
-              Home
+              {t("nav.home")}
             </SectionLink>
 
             <SectionLink to={paths.workMapPath()} icon={IconBuildingEstate} testId="company-work-map-link">
-              Company
+              {t("nav.company")}
             </SectionLink>
 
             <SectionLink to={paths.profilePath(me.id)} icon={IconBriefcase}>
-              My work
+              {t("nav.myWork")}
             </SectionLink>
           </div>
 

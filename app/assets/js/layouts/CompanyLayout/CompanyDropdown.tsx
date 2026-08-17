@@ -4,10 +4,12 @@ import * as React from "react";
 import { IconBuildingEstate, IconUserCircle, IconBinaryTree2, IconCircleKey, IconSwitch } from "turboui";
 
 import { Paths, usePaths } from "@/routes/paths";
+import { useTranslation } from "react-i18next";
 import { DropdownLinkItem, DropdownMenu, DropdownSeparator } from "./DropdownMenu";
 
 export function CompanyDropdown({ company }: { company: Companies.Company }) {
   const paths = usePaths();
+  const { t } = useTranslation();
 
   return (
     <DropdownMenu
@@ -20,14 +22,14 @@ export function CompanyDropdown({ company }: { company: Companies.Company }) {
       <DropdownLinkItem
         path={paths.peoplePath()}
         icon={IconUserCircle}
-        title="People"
+        title={t("companyMenu.people")}
         testId="company-dropdown-people"
         hidden={!company.permissions?.canView}
       />
       <DropdownLinkItem
         path={paths.orgChartPath()}
         icon={IconBinaryTree2}
-        title="Org Chart"
+        title={t("companyMenu.orgChart")}
         testId="company-dropdown-org-chart"
         hidden={!company.permissions?.canView}
       />
@@ -37,13 +39,13 @@ export function CompanyDropdown({ company }: { company: Companies.Company }) {
       <DropdownLinkItem
         path={paths.companyAdminPath()}
         icon={IconCircleKey}
-        title="Company Admin"
+        title={t("companyMenu.companyAdmin")}
         testId="company-dropdown-company-admin"
       />
       <DropdownLinkItem
         path={Paths.lobbyPath()}
         icon={IconSwitch}
-        title="Switch Company"
+        title={t("companyMenu.switchCompany")}
         testId="company-dropdown-switch"
       />
     </DropdownMenu>

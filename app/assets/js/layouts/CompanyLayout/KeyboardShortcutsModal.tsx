@@ -1,6 +1,9 @@
 import * as React from "react";
 
 import { Modal } from "turboui";
+import { useTranslation } from "react-i18next";
+
+type TranslateFn = (key: string) => string;
 
 interface KeyboardShortcutsModalProps {
   isOpen: boolean;
@@ -17,29 +20,30 @@ interface Shortcut {
   keys: string[][];
 }
 
-const SHORTCUT_GROUPS: ShortcutGroup[] = [
-  {
-    title: "Task management",
+function taskManagementGroup(t: TranslateFn): ShortcutGroup {
+  return {
+    title: t("keyboardShortcuts.groups.taskManagement"),
     shortcuts: [
-      { label: "Select next task", keys: [["j"]] },
-      { label: "Select previous task", keys: [["k"]] },
-      { label: "Open selected task", keys: [["Return"]] },
-      { label: "Open assignee picker for the selected task", keys: [["a"]] },
-      { label: "Open status picker for the selected task where supported", keys: [["s"]] },
-      { label: "Open due date picker for the selected task", keys: [["d"]] },
-      { label: "Clear task selection", keys: [["Esc"]] },
+      { label: t("keyboardShortcuts.selectNextTask"), keys: [["j"]] },
+      { label: t("keyboardShortcuts.selectPreviousTask"), keys: [["k"]] },
+      { label: t("keyboardShortcuts.openSelectedTask"), keys: [["Return"]] },
+      { label: t("keyboardShortcuts.openAssigneePicker"), keys: [["a"]] },
+      { label: t("keyboardShortcuts.openStatusPicker"), keys: [["s"]] },
+      { label: t("keyboardShortcuts.openDueDatePicker"), keys: [["d"]] },
+      { label: t("keyboardShortcuts.clearTaskSelection"), keys: [["Esc"]] },
     ],
-  },
-];
+  };
+}
 
 export function KeyboardShortcutsModal({ isOpen, onClose }: KeyboardShortcutsModalProps) {
-  const shortcutGroups = React.useMemo(() => buildShortcutGroups(), []);
+  const { t } = useTranslation();
+  const shortcutGroups = React.useMemo(() => buildShortcutGroups(t), [t]);
 
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Keyboard Shortcuts Cheatsheet"
+      title={t("keyboardShortcuts.title")}
       size="small"
       contentPadding="px-[26px] py-6"
     >
@@ -89,16 +93,16 @@ function ShortcutKeySequence({ keys }: { keys: string[] }) {
   );
 }
 
-function buildShortcutGroups(): ShortcutGroup[] {
+function buildShortcutGroups(t: TranslateFn): ShortcutGroup[] {
   return [
     {
-      title: "Global",
+      title: t("keyboardShortcuts.groups.global"),
       shortcuts: [
-        { label: "Open global search", keys: [isMacPlatform() ? ["⌘", "k"] : ["Ctrl", "k"]] },
-        { label: "Open keyboard shortcuts", keys: [["?"]] },
+        { label: t("keyboardShortcuts.openGlobalSearch"), keys: [isMacPlatform() ? ["⌘", "k"] : ["Ctrl", "k"]] },
+        { label: t("keyboardShortcuts.openKeyboardShortcuts"), keys: [["?"]] },
       ],
     },
-    ...SHORTCUT_GROUPS,
+    taskManagementGroup(t),
   ];
 }
 

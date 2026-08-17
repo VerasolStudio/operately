@@ -4,6 +4,7 @@ import { IconPlus, IconTargetArrow, IconTable, IconTent, IconUser } from "turbou
 import { DropdownLinkItem, DropdownMenu, DropdownSeparator } from "./DropdownMenu";
 
 import { usePaths } from "@/routes/paths";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   canAddGoal: boolean;
@@ -14,13 +15,14 @@ interface Props {
 
 export function NewDropdown({ canAddGoal, canAddProject, canAddSpace, canInvitePeople }: Props) {
   const paths = usePaths();
+  const { t } = useTranslation();
 
   return (
-    <DropdownMenu testId="new-dropdown" name="New" icon={IconPlus} align="end" triggerClassName="hidden lg:flex">
+    <DropdownMenu testId="new-dropdown" name={t("newMenu.title")} icon={IconPlus} align="end" triggerClassName="hidden lg:flex">
       <DropdownLinkItem
         path={paths.newGoalPath()}
         icon={IconTargetArrow}
-        title="New goal"
+        title={t("newMenu.newGoal")}
         testId="new-dropdown-new-goal"
         hidden={!canAddGoal}
       />
@@ -28,7 +30,7 @@ export function NewDropdown({ canAddGoal, canAddProject, canAddSpace, canInviteP
       <DropdownLinkItem
         path={paths.newProjectPath()}
         icon={IconTable}
-        title="New project"
+        title={t("newMenu.newProject")}
         testId="new-dropdown-new-project"
         hidden={!canAddProject}
       />
@@ -38,7 +40,7 @@ export function NewDropdown({ canAddGoal, canAddProject, canAddSpace, canInviteP
       <DropdownLinkItem
         path={paths.newSpacePath()}
         icon={IconTent}
-        title="New space"
+        title={t("newMenu.newSpace")}
         testId="new-dropdown-new-space"
         hidden={!canAddSpace}
       />
@@ -48,7 +50,7 @@ export function NewDropdown({ canAddGoal, canAddProject, canAddSpace, canInviteP
       <DropdownLinkItem
         path={paths.invitePeoplePath()}
         icon={IconUser}
-        title="Invite people"
+        title={t("newMenu.invitePeople")}
         testId="new-dropdown-new-team-member"
         hidden={!canInvitePeople}
       />

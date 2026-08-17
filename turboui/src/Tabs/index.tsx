@@ -77,7 +77,10 @@ function TabItem({ tab, activeTab, urlPath }: { tab: Tab; activeTab: string; url
   const testId = `tab-${tab.label.toLowerCase()}`;
 
   const labelClass = classNames("flex items-center gap-1 px-1 py-1.5 text-sm relative -mb-px font-medium sm:px-1.5 sm:-mx-1.5", {
-    "text-white rounded-t": activeTab === tab.id,
+    // `text-content-accent` is white in dark mode and black in light mode; a
+    // literal `text-white` here left the active label invisible on the light
+    // theme, where the page sits on `surface-base` (pure white).
+    "text-content-accent": activeTab === tab.id,
     "text-content-dimmed hover:text-content-base": activeTab !== tab.id,
     "hover:bg-surface-dimmed rounded-lg": activeTab !== tab.id,
   });

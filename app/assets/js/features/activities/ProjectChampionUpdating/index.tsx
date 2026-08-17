@@ -6,6 +6,7 @@ import type { Activity } from "@/models/activities";
 import { Paths } from "@/routes/paths";
 import { feedTitle, projectLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
 
 const ProjectChampionUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -31,7 +32,9 @@ const ProjectChampionUpdating: ActivityHandler = {
   FeedItemTitle({ activity, page }: { activity: Activity; page: string }) {
     const project = content(activity).project!;
     const newChampion = content(activity).newChampion;
-    const message = newChampion ? `assigned ${People.shortName(newChampion)} as the champion` : "removed the champion";
+    const message = newChampion
+      ? t("features.activities.assignedAsTheChampion", { v1: People.shortName(newChampion) })
+      : "removed the champion";
 
     if (page === "project") {
       return feedTitle(activity, message);
@@ -46,7 +49,7 @@ const ProjectChampionUpdating: ActivityHandler = {
     if (oldChampion) {
       return <>Previously, {People.shortName(oldChampion)} was the champion.</>;
     } else {
-      return <>There was no previous champion.</>;
+      return <>{t("features.activities.thereWasNoPreviousChampion")}</>;
     }
   },
 
@@ -70,9 +73,9 @@ const ProjectChampionUpdating: ActivityHandler = {
     }
 
     if (newChampion) {
-      return `Changed the champion for ${project.name}`;
+      return t("features.activities.changedTheChampionFor", { v1: project.name });
     } else {
-      return `Removed the champion for ${project.name}`;
+      return t("features.activities.removedTheChampionFor", { v1: project.name });
     }
   },
 

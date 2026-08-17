@@ -8,6 +8,7 @@ import { isContentEmpty, Link, RichContent, StatusBadge, Summary } from "turboui
 import { feedTitle, goalLink } from "../feedItemLinks";
 import { ActivityHandler } from "../interfaces";
 import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
+import { t } from "@/i18n";
 
 const GoalClosing: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -19,7 +20,7 @@ const GoalClosing: ActivityHandler = {
   },
 
   PageTitle(_props: { activity: any }) {
-    return <>Goal closed</>;
+    return <>{t("features.activities.goalClosed")}</>;
   },
 
   PageContent({ activity }: { activity: Activity }) {

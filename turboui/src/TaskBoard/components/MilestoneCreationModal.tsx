@@ -5,6 +5,7 @@ import Modal from "../../Modal";
 import { DateField } from "../../DateField";
 import { SwitchToggle } from "../../SwitchToggle";
 import { TextField } from "../../TextField";
+import { t } from "../../i18n";
 
 interface MilestoneCreationModalProps {
   isOpen: boolean;
@@ -12,11 +13,7 @@ interface MilestoneCreationModalProps {
   onCreateMilestone: (milestone: Types.NewMilestonePayload) => void;
 }
 
-export function MilestoneCreationModal({
-  isOpen,
-  onClose,
-  onCreateMilestone,
-}: MilestoneCreationModalProps) {
+export function MilestoneCreationModal({ isOpen, onClose, onCreateMilestone }: MilestoneCreationModalProps) {
   // Form state
   const [name, setName] = useState("");
   const [dueDate, setDueDate] = useState<DateField.ContextualDate | null>(null);
@@ -78,45 +75,45 @@ export function MilestoneCreationModal({
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      title="Create Milestone"
-      size="medium"
-    >
+    <Modal isOpen={isOpen} onClose={onClose} title={t("turboui.taskBoard.createMilestone")} size="medium">
       <form onSubmit={handleSubmit} className="space-y-6">
         <TextField
           variant="form-field"
-          label="Milestone name"
+          label={t("turboui.taskBoard.milestoneName")}
           text={name}
           onChange={setName}
-          placeholder="Enter milestone name"
+          placeholder={t("turboui.taskBoard.enterMilestoneName")}
           testId="milestone-name"
           autofocus
           inputRef={nameInputRef}
         />
 
         <div>
-          <label className="block text-sm font-medium text-content-base mb-1">Due date</label>
+          <label className="block text-sm font-medium text-content-base mb-1">{t("turboui.taskBoard.dueDate")}</label>
           <DateField
             variant="form-field"
             date={dueDate}
             onDateSelect={setDueDate}
-            placeholder="Set due date"
+            placeholder={t("turboui.taskBoard.setDueDate")}
             calendarOnly
             testId="milestone-due-date"
           />
         </div>
 
         <div className="flex items-center mt-4 gap-4">
-          <SwitchToggle value={createMore} setValue={setCreateMore} label="Create more" testId="add-more-switch" />
+          <SwitchToggle
+            value={createMore}
+            setValue={setCreateMore}
+            label={t("turboui.taskBoard.createMore")}
+            testId="add-more-switch"
+          />
           <div className="flex-1" />
           <div className="flex gap-3">
             <SecondaryButton onClick={onClose} type="button">
-              Cancel
+              {t("turboui.taskBoard.cancel")}
             </SecondaryButton>
             <PrimaryButton type="submit" disabled={!name.trim()}>
-              Create milestone
+              {t("turboui.taskBoard.createMilestone2")}
             </PrimaryButton>
           </div>
         </div>

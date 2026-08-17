@@ -16,6 +16,7 @@ import Api from "@/api";
 import { useMe, useMentionedPersonLookupFn } from "../../contexts/CurrentCompanyContext";
 import { compareIds, usePaths } from "../../routes/paths";
 import { useCurrentSubscriptionsAdapter, isSubscribedToResource } from "@/models/subscriptions";
+import { t } from "@/i18n";
 
 export default { name: "ProjectDiscussionPage", loader, Page } as PageModule;
 
@@ -82,7 +83,7 @@ function Options() {
       {discussion.author && me && compareIds(discussion.author.id, me.id) && (
         <PageOptions.Link
           icon={IconEdit}
-          title="Edit"
+          title={t("pages.projectDiscussionPage.edit")}
           to={paths.projectDiscussionEditPath(discussion.id)}
           testId="edit"
           keepOutsideOnBigScreen
@@ -111,14 +112,20 @@ function Nav() {
 
   if (discussion.space) {
     items.push({ to: paths.spacePath(discussion.space.id), label: discussion.space.name });
-    items.push({ to: paths.spaceWorkMapPath(discussion.space.id, "projects"), label: "Work Map" });
+    items.push({
+      to: paths.spaceWorkMapPath(discussion.space.id, "projects"),
+      label: t("pages.projectDiscussionPage.workMap"),
+    });
   } else {
-    items.push({ to: paths.workMapPath("projects"), label: "Work Map" });
+    items.push({ to: paths.workMapPath("projects"), label: t("pages.projectDiscussionPage.workMap") });
   }
 
   if (discussion.project) {
     items.push({ to: paths.projectPath(discussion.project.id, { tab: "overview" }), label: discussion.project.name });
-    items.push({ to: paths.projectPath(discussion.project.id, { tab: "discussions" }), label: "Discussions" });
+    items.push({
+      to: paths.projectPath(discussion.project.id, { tab: "discussions" }),
+      label: t("pages.projectDiscussionPage.discussions"),
+    });
   }
 
   return <Paper.Navigation items={items} />;

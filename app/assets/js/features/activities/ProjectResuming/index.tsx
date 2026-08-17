@@ -8,6 +8,7 @@ import type { ActivityHandler } from "../interfaces";
 import { usePaths } from "@/routes/paths";
 import { isContentEmpty, Link, RichContent, Summary } from "turboui";
 import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
+import { t } from "@/i18n";
 
 const ProjectResuming: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -24,7 +25,7 @@ const ProjectResuming: ActivityHandler = {
   },
 
   PageTitle(_props: { activity: any }) {
-    return <>Project resumed</>;
+    return <>{t("features.activities.projectResumed")}</>;
   },
 
   PageContent({ activity }: { activity: Activity }) {
@@ -92,7 +93,7 @@ const ProjectResuming: ActivityHandler = {
 
   NotificationTitle({ activity }: { activity: Activity }) {
     const projectName = content(activity).project?.name;
-    return projectName ? `Resumed the ${projectName} project` : "Resumed a project";
+    return projectName ? t("features.activities.resumedTheProject", { v1: projectName }) : "Resumed a project";
   },
 
   NotificationLocation({ activity }: { activity: Activity }) {

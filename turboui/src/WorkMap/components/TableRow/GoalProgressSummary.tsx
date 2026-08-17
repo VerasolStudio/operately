@@ -4,10 +4,8 @@ import type { GoalCheck, Target } from "../../../ApiTypes";
 import { IconSquare, IconSquareCheckFilled } from "../../../icons";
 import { PieChart } from "../../../PieChart";
 import classNames from "../../../utils/classnames";
-import {
-  calculateTargetProgress,
-  formatTargetValueSummary,
-} from "../../../utils/goalTargetProgress";
+import { calculateTargetProgress, formatTargetValueSummary } from "../../../utils/goalTargetProgress";
+import { t } from "../../../i18n";
 
 interface GoalProgressSummaryProps {
   targets: Target[];
@@ -21,7 +19,7 @@ export function GoalProgressSummary({ targets, checklist }: GoalProgressSummaryP
   if (!hasTargets && !hasChecklist) {
     return (
       <div className="text-content-dimmed text-xs font-normal" data-testid="goal-progress-summary-content">
-        No targets or checklist
+        {t("turboui.workMap.noTargetsOrChecklist")}
       </div>
     );
   }
@@ -42,7 +40,9 @@ function TargetsSection({ targets }: { targets: Target[] }) {
 
   return (
     <div>
-      <div className="text-xs font-semibold text-content-dimmed uppercase tracking-wide mb-1.5">Targets</div>
+      <div className="text-xs font-semibold text-content-dimmed uppercase tracking-wide mb-1.5">
+        {t("turboui.workMap.targets")}
+      </div>
       <div className="flex flex-col gap-1.5">
         {sorted.map((target) => (
           <TargetRow key={target.id ?? target.name ?? String(target.index)} target={target} />
@@ -78,7 +78,9 @@ function ChecklistSection({ checklist }: { checklist: GoalCheck[] }) {
   return (
     <div>
       <div className="flex items-center gap-2 mb-1.5">
-        <div className="text-xs font-semibold text-content-dimmed uppercase tracking-wide">Checklist</div>
+        <div className="text-xs font-semibold text-content-dimmed uppercase tracking-wide">
+          {t("turboui.workMap.checklist")}
+        </div>
         <div className="flex items-center gap-1.5 text-xs text-content-subtle">
           <PieChart size={12} slices={[{ percentage: completionPercentage, color: "var(--color-green-500)" }]} />
           <span>

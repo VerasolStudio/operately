@@ -9,6 +9,7 @@ import { RelatedWork } from "./RelatedWork";
 import { Sidebar } from "./Sidebar";
 import { Targets } from "./Targets";
 import { PageDescription } from "../PageDescription";
+import { t } from "../i18n";
 
 export function Overview(props: GoalPage.State) {
   return (
@@ -28,8 +29,8 @@ function MainContent(props: GoalPage.State) {
       <PageDescription
         {...props}
         canEdit={props.permissions.canEdit}
-        label="Goal description"
-        placeholder="Describe the goal..."
+        label={t("turboui.goalPage.goalDescription")}
+        placeholder={t("turboui.goalPage.describeTheGoal")}
         zeroStatePlaceholder="Describe the goal to provide context and clarity."
         localDraftKey={props.localDraftKeyBase ? `${props.localDraftKeyBase}:description` : undefined}
       />
@@ -72,20 +73,15 @@ function NeglectedGoalWarning(props: GoalPage.State) {
   if (props.permissions.canEdit) {
     return (
       <WarningCallout
-        message="Outdated goal"
-        description={<div>The last check-in was more than a month ago. Please check-in or close the goal.</div>}
+        message={t("turboui.goalPage.outdatedGoal")}
+        description={<div>{t("turboui.goalPage.theLastCheckInWasMore")}</div>}
       />
     );
   } else {
     return (
       <WarningCallout
-        message="Outdated goal"
-        description={
-          <div>
-            The last check-in was more than a month ago. The information may be outdated. Please ping the champion
-            check-in or close the goal.
-          </div>
-        }
+        message={t("turboui.goalPage.outdatedGoal")}
+        description={<div>{t("turboui.goalPage.theLastCheckInWasMore2")}</div>}
       />
     );
   }

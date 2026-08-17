@@ -4,6 +4,7 @@ import { ProjectPage } from ".";
 import { PrimaryButton } from "../Button";
 import { InfoCallout } from "../Callouts";
 import { DiscussionCard } from "../DiscussionCard";
+import { t } from "../i18n";
 
 export function Discussions(props: ProjectPage.State) {
   if (props.discussions.length === 0 && !props.permissions.canEdit) return null;
@@ -15,12 +16,12 @@ export function Discussions(props: ProjectPage.State) {
     <div className="p-4 max-w-3xl mx-auto my-6 overflow-auto">
       <div className="flex items-center gap-2 justify-between">
         <div>
-          <h2 className="font-bold text-xl">Discussions</h2>
+          <h2 className="font-bold text-xl">{t("turboui.projectPage.discussions")}</h2>
         </div>
 
         {showNewDiscussionButton && (
           <PrimaryButton linkTo={props.newDiscussionLink} size="xs" testId="start-discussion">
-            Start discussion
+            {t("turboui.projectPage.startDiscussion")}
           </PrimaryButton>
         )}
       </div>
@@ -51,8 +52,8 @@ function DiscussionsList({ props }: { props: ProjectPage.Props }) {
 function DiscussionsZeroState() {
   return (
     <InfoCallout
-      message="No discussions yet"
-      description="Start a discussion to share updates, ask questions, or get feedback from your team."
+      message={t("turboui.projectPage.noDiscussionsYet")}
+      description={t("turboui.projectPage.startADiscussionToShareUpdates")}
     />
   );
 }

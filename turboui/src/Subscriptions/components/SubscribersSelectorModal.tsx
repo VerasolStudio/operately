@@ -7,6 +7,7 @@ import { PrimaryButton, SecondaryButton } from "../../Button";
 import { ActionLink } from "../../Link";
 import { Checkbox } from "../../Checkbox";
 import { IconSearch, IconX } from "../../icons";
+import { t } from "../../i18n";
 
 interface SubscribersSelectorModalProps {
   isOpen: boolean;
@@ -73,11 +74,11 @@ export function SubscribersSelectorModal({
         <div className="flex flex-col gap-6">
           <div className="flex items-center gap-3">
             <ActionLink onClick={handleSelectEveryone} testId="select-everyone">
-              Select everyone
+              {t("turboui.subscriptions.selectEveryone")}
             </ActionLink>
             <span className="text-content-dimmed">&middot;</span>
             <ActionLink onClick={handleSelectNoOne} testId="select-no-one">
-              Select no one
+              {t("turboui.subscriptions.selectNoOne")}
             </ActionLink>
           </div>
 
@@ -87,8 +88,8 @@ export function SubscribersSelectorModal({
               type="search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Find people"
-              aria-label="Find people"
+              placeholder={t("turboui.subscriptions.findPeople")}
+              aria-label={t("turboui.subscriptions.findPeople")}
               className="w-full rounded-md border border-surface-outline bg-surface-base py-2 pl-9 pr-3 text-sm text-content-accent placeholder:text-content-dimmed focus:outline-none focus:ring-2 focus:ring-brand-1"
             />
           </div>
@@ -104,10 +105,10 @@ export function SubscribersSelectorModal({
 
           <div className="flex gap-2">
             <PrimaryButton onClick={handleSave} testId="submit">
-              Save selection
+              {t("turboui.subscriptions.saveSelection")}
             </PrimaryButton>
             <SecondaryButton onClick={onClose} testId="cancel">
-              Never mind
+              {t("turboui.subscriptions.neverMind")}
             </SecondaryButton>
           </div>
         </div>
@@ -123,11 +124,11 @@ interface ModalHeaderProps {
 function ModalHeader({ onClose }: ModalHeaderProps) {
   return (
     <div className="flex items-center justify-between mb-6">
-      <h2 className="text-2xl font-bold">Select people to notify</h2>
+      <h2 className="text-2xl font-bold">{t("turboui.subscriptions.selectPeopleToNotify")}</h2>
       <button
         onClick={onClose}
         className="text-content-dimmed hover:text-content-accent transition-colors"
-        aria-label="Close"
+        aria-label={t("turboui.subscriptions.close")}
       >
         <IconX size={24} />
       </button>

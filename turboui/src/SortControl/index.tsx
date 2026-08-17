@@ -4,6 +4,7 @@ import { IconCheck, IconChevronDown } from "../icons";
 import { Menu, MenuActionItem } from "../Menu";
 import classNames from "../utils/classnames";
 import { NAME_AND_DATE_SORT_OPTIONS, type NameAndDateSortBy } from "../utils/sortWithFoldersFirst";
+import { t } from "../i18n";
 
 export interface SortControlProps {
   sortBy: NameAndDateSortBy;
@@ -24,7 +25,7 @@ export function SortControl({ sortBy, onSortChange, disabled = false }: SortCont
         disabled ? "cursor-not-allowed opacity-50" : "hover:text-content-accent",
       )}
     >
-      <span>Sort by {currentOption?.label}</span>
+      <span>{t("turboui.sortControl.sortBy", { v1: currentOption?.label })}</span>
       <IconChevronDown size={14} />
     </button>
   );

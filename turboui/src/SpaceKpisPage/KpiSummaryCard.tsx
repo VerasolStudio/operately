@@ -7,6 +7,7 @@ import classNames from "../utils/classnames";
 import { TrendIndicator } from "./TrendIndicator";
 import type { SpaceKpisPage } from "./types";
 import { formatValue, latestEntry, latestTrend } from "./utils";
+import { t } from "../i18n";
 
 interface KpiSummaryCardProps {
   // The KPIs tracked by this space. May be empty.
@@ -26,7 +27,12 @@ interface KpiSummaryCardProps {
 // Inner content for the KPIs tool card on the space home page. The app wraps
 // this in the shared SpaceTools Container (same shell as Goals & Projects,
 // Tasks, and Files) so the card matches their layout and hover behaviour.
-export function KpiSummaryCard({ kpis, canManage = true, maxRows = 7, testId = "kpi-summary-card" }: KpiSummaryCardProps) {
+export function KpiSummaryCard({
+  kpis,
+  canManage = true,
+  maxRows = 7,
+  testId = "kpi-summary-card",
+}: KpiSummaryCardProps) {
   const isZeroState = kpis.length === 0;
 
   return (
@@ -53,7 +59,7 @@ function RegularState({ kpis, maxRows }: { kpis: SpaceKpisPage.Kpi[]; maxRows: n
 }
 
 function Title() {
-  return <div className="font-bold text-base text-center py-2">KPIs</div>;
+  return <div className="font-bold text-base text-center py-2">{t("turboui.spaceKpisPage.kPIs")}</div>;
 }
 
 function KpiRow({ kpi }: { kpi: SpaceKpisPage.Kpi }) {
@@ -74,7 +80,7 @@ function KpiRow({ kpi }: { kpi: SpaceKpisPage.Kpi }) {
           </div>
         ) : (
           <div className="mt-0.5 text-[10px] text-content-subtle" data-test-id={`kpi-summary-no-data-${kpi.id}`}>
-            No data
+            {t("turboui.spaceKpisPage.noData")}
           </div>
         )}
       </div>
@@ -107,13 +113,25 @@ function Sparkline({ entries }: { entries: SpaceKpisPage.KpiEntry[] }) {
 
   const direction = values[values.length - 1]! - values[0]!;
   const strokeClass =
-    direction > 0 ? "stroke-callout-success-content" : direction < 0 ? "stroke-callout-error-content" : "stroke-blue-500";
+    direction > 0
+      ? "stroke-callout-success-content"
+      : direction < 0
+        ? "stroke-callout-error-content"
+        : "stroke-blue-500";
 
   if (entries.length === 1) {
     const cy = height / 2;
     return (
       <svg width={width} height={height} className="shrink-0" aria-hidden>
-        <line x1={pad} x2={width - pad} y1={cy} y2={cy} className="stroke-surface-outline" strokeWidth={1.5} strokeDasharray="3 3" />
+        <line
+          x1={pad}
+          x2={width - pad}
+          y1={cy}
+          y2={cy}
+          className="stroke-surface-outline"
+          strokeWidth={1.5}
+          strokeDasharray="3 3"
+        />
         <circle cx={width / 2} cy={cy} r={2} className="fill-blue-500" />
       </svg>
     );
@@ -123,7 +141,14 @@ function Sparkline({ entries }: { entries: SpaceKpisPage.KpiEntry[] }) {
 
   return (
     <svg width={width} height={height} className="shrink-0" aria-hidden>
-      <path d={linePath} className={strokeClass} strokeWidth={1.5} fill="none" strokeLinejoin="round" strokeLinecap="round" />
+      <path
+        d={linePath}
+        className={strokeClass}
+        strokeWidth={1.5}
+        fill="none"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -140,13 +165,13 @@ function ZeroState({ canManage }: { canManage: boolean }) {
 function ExplanationAndButton({ canManage }: { canManage: boolean }) {
   return (
     <div className="flex flex-col justify-center items-center group">
-      <div className="text-base font-bold">KPIs</div>
+      <div className="text-base font-bold">{t("turboui.spaceKpisPage.kPIs")}</div>
 
       <div className="flex gap-2 mt-1 mb-4 text-center px-6 text-sm">
-        Track the numbers this space cares about and log updates on a weekly or monthly cadence.
+        {t("turboui.spaceKpisPage.trackTheNumbersThisSpaceCares")}
       </div>
 
-      {canManage && <GhostButton size="sm">Track a KPI</GhostButton>}
+      {canManage && <GhostButton size="sm">{t("turboui.spaceKpisPage.trackAKPI")}</GhostButton>}
     </div>
   );
 }
@@ -172,7 +197,11 @@ function Example({ name, value, trend }: { name: string; value: string; trend: "
   );
 
   const strokeClass =
-    trend === "up" ? "stroke-callout-success-content" : trend === "down" ? "stroke-callout-error-content" : "stroke-blue-500";
+    trend === "up"
+      ? "stroke-callout-success-content"
+      : trend === "down"
+        ? "stroke-callout-error-content"
+        : "stroke-blue-500";
 
   return (
     <div className="flex items-center justify-between gap-2 group-hover:gap-3 transition-all shadow-sm pb-2">

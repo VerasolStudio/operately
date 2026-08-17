@@ -11,6 +11,7 @@ import {
   IconCircleXCustom,
 } from "../icons";
 import { createTestId } from "../TestableElement";
+import { t } from "../i18n";
 
 const BUTTON_SIZE_CONFIG: Record<StatusSelector.Size, { textSize: string; padding: string; iconSize: number }> = {
   xs: { textSize: "text-xs", padding: "px-1.5 py-0.5", iconSize: 10 },
@@ -56,7 +57,7 @@ function NoStatusButton({ size, readonly }: { size: StatusSelector.Size; readonl
         size={iconSize}
         className={classNames("flex-shrink-0", StatusSelector.STATUS_COLOR_MAP.gray.iconClass)}
       />
-      <span className="flex items-center leading-none">No status</span>
+      <span className="flex items-center leading-none">{t("turboui.statusSelector.noStatus")}</span>
       {!readonly && (
         <IconChevronDown size={iconSize - 2} className="flex-shrink-0 opacity-60 flex items-center self-center" />
       )}
@@ -260,7 +261,7 @@ export function StatusSelector<T extends StatusSelector.StatusOption = StatusSel
               <input
                 ref={inputRef}
                 className="w-full border border-stroke-base rounded px-2 py-1 text-sm bg-surface-base text-content-accent placeholder:text-content-dimmed focus:outline outline-brand-1 focus:border-stroke-base"
-                placeholder="Change status..."
+                placeholder={t("turboui.statusSelector.changeStatus")}
                 value={searchTerm}
                 autoFocus
                 onChange={(e) => setSearchTerm(e.target.value)}

@@ -6,6 +6,7 @@ import { DateField } from "../../../DateField";
 import FormattedTime, { type FormattedTimePreferences } from "../../../FormattedTime";
 import classNames from "../../../utils/classnames";
 import { useItemStatus } from "../../hooks/useItemStatus";
+import { t } from "../../../i18n";
 
 interface Props {
   tab: WorkMap.Filter;
@@ -39,7 +40,7 @@ export function DueDateCell({ tab, status, completedOn, timeframe, hide, formatt
         </span>
       ) : (
         <span className={textClassName}>
-          <DateField date={timeframe?.endDate} readonly hideCalendarIcon placeholder="N/A" />
+          <DateField date={timeframe?.endDate} readonly hideCalendarIcon placeholder={t("turboui.workMap.nA")} />
         </span>
       )}
     </td>

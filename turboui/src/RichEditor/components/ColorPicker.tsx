@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { SecondaryButton } from "../../Button";
 import { createTestId } from "../../TestableElement";
 import { IconPaintBucket } from "../../icons";
+import { t } from "../../i18n";
 
 const DROPDOWN_CLASS = classNames(
   "border border-t-4 border-stroke-base",
@@ -90,7 +91,7 @@ function ClearOption({ editor }): React.ReactElement {
     return (
       <div className="mt-4 flex items-center justify-center">
         <SecondaryButton size="xs" onClick={handleClick}>
-          Remove Highlight
+          {t("turboui.richEditor.removeHighlight")}
         </SecondaryButton>
       </div>
     );
@@ -119,7 +120,7 @@ function Option({ highlight, editor }): React.ReactElement {
   return (
     <div className="ProseMirror" data-test-id={highlight}>
       <mark className={className} onClick={handleClick} data-highlight={highlight}>
-        Az
+        {t("turboui.richEditor.az")}
       </mark>
     </div>
   );

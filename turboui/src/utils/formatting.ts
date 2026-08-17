@@ -1,3 +1,4 @@
+import i18n from "../i18n";
 import type { TimeFormat } from "../ApiTypes";
 
 export type { TimeFormat };
@@ -10,17 +11,21 @@ export function browserLocale(): string {
   return navigator.languages?.[0] || navigator.language || "en-US";
 }
 
-export function formatNumber(
-  value: number,
-  locale: string = browserLocale(),
-  options?: Intl.NumberFormatOptions,
-): string {
+/**
+ * The locale dates and numbers are rendered in: the interface language the
+ * person picked, falling back to what the browser reports.
+ */
+export function uiLocale(): string {
+  return i18n.language || browserLocale();
+}
+
+export function formatNumber(value: number, locale: string = uiLocale(), options?: Intl.NumberFormatOptions): string {
   return new Intl.NumberFormat(locale, options).format(value);
 }
 
 export function formatTime(
   value: Date,
-  locale: string = browserLocale(),
+  locale: string = uiLocale(),
   timeFormat: TimeFormat = "automatic",
   options: Intl.DateTimeFormatOptions = { timeStyle: "short" },
 ): string {
@@ -35,11 +40,7 @@ export function formatTime(
   return formatted.replace(" AM", "am").replace(" PM", "pm");
 }
 
-export function formatDate(
-  value: Date,
-  locale: string = browserLocale(),
-  options?: Intl.DateTimeFormatOptions,
-): string {
+export function formatDate(value: Date, locale: string = uiLocale(), options?: Intl.DateTimeFormatOptions): string {
   return new Intl.DateTimeFormat(locale, options).format(value);
 }
 

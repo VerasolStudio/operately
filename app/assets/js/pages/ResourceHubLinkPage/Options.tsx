@@ -6,6 +6,7 @@ import { IconEdit, IconTrash } from "turboui";
 import { usePaths } from "@/routes/paths";
 import { assertPresent } from "@/utils/assertions";
 import { useLoadedData } from "./loader";
+import { t } from "@/i18n";
 
 interface Props {
   showDeleteModal: () => void;
@@ -22,7 +23,7 @@ export function useLinkPageOptions({ showDeleteModal }: Props): Page.Option[] {
       {
         type: "link",
         icon: IconEdit,
-        label: "Edit",
+        label: t("pages.resourceHubLinkPage.edit"),
         link: paths.resourceHubEditLinkPath(link.id!),
         hidden: !link.permissions?.canEditLink,
         keepOutsideOnBigScreen: true,
@@ -31,7 +32,7 @@ export function useLinkPageOptions({ showDeleteModal }: Props): Page.Option[] {
       {
         type: "action",
         icon: IconTrash,
-        label: "Delete",
+        label: t("pages.resourceHubLinkPage.delete"),
         onClick: showDeleteModal,
         hidden: !link.permissions?.canDeleteLink,
         testId: "delete-resource-link",

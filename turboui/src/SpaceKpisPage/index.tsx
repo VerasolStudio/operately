@@ -13,6 +13,7 @@ import { KpiFormModal } from "./KpiFormModal";
 import { KpiList } from "./KpiList";
 import { LogUpdateForm } from "./LogUpdateForm";
 import type { SpaceKpisPage as SpaceKpisPageNS } from "./types";
+import { t } from "../i18n";
 
 // The KPIs tool for a space. The page chrome (fullwidth PageNew + breadcrumb
 // header + tool title) mirrors the other space tools such as the Work Map and
@@ -79,9 +80,17 @@ export function SpaceKpisPage(props: SpaceKpisPageNS.Props) {
   let primaryAction: HeaderAction | null = null;
   if (canManage && contentReady) {
     if (selectedKpi) {
-      primaryAction = { label: "Log update", onClick: () => setLogKpiId(selectedKpi.id), testId: "kpi-detail-log-update" };
+      primaryAction = {
+        label: t("turboui.spaceKpisPage.logUpdate"),
+        onClick: () => setLogKpiId(selectedKpi.id),
+        testId: "kpi-detail-log-update",
+      };
     } else {
-      primaryAction = { label: "New KPI", onClick: () => setIsNewOpen(true), testId: "new-kpi" };
+      primaryAction = {
+        label: t("turboui.spaceKpisPage.newKPI"),
+        onClick: () => setIsNewOpen(true),
+        testId: "new-kpi",
+      };
     }
   }
 
@@ -190,7 +199,7 @@ interface PageHeaderProps {
 function PageHeader(props: PageHeaderProps) {
   return (
     <header className="border-b border-surface-outline px-4 py-3">
-      <nav className="mt-1 flex items-center gap-0.5" aria-label="Breadcrumb">
+      <nav className="mt-1 flex items-center gap-0.5" aria-label={t("turboui.spaceKpisPage.breadcrumb")}>
         {props.navigation.map((item, index) => (
           <React.Fragment key={index}>
             <BlackLink to={item.to} className="text-xs leading-snug text-content-dimmed" underline="hover">
@@ -207,19 +216,17 @@ function PageHeader(props: PageHeaderProps) {
             onClick={props.onBackToList}
             data-test-id="kpis-breadcrumb"
           >
-            KPIs
+            {t("turboui.spaceKpisPage.kPIs")}
           </button>
         ) : (
-          <span className="text-xs leading-snug text-content-dimmed">KPIs</span>
+          <span className="text-xs leading-snug text-content-dimmed">{t("turboui.spaceKpisPage.kPIs")}</span>
         )}
       </nav>
 
       <div className="mt-1 flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <IconChartColumn size={20} className="text-content-dimmed" />
-          <h1 className="text-sm font-bold text-content-accent sm:text-base">
-            {props.selectedKpiName ?? "KPIs"}
-          </h1>
+          <h1 className="text-sm font-bold text-content-accent sm:text-base">{props.selectedKpiName ?? "KPIs"}</h1>
         </div>
 
         <div className="flex items-center gap-1.5">
@@ -264,7 +271,13 @@ function KpisContent(props: KpisContentProps) {
   }
 
   if (props.error) {
-    return <ErrorCallout message="Couldn't load KPIs" description={props.error} testId="kpis-error" />;
+    return (
+      <ErrorCallout
+        message={t("turboui.spaceKpisPage.couldnTLoadKPIs")}
+        description={props.error}
+        testId="kpis-error"
+      />
+    );
   }
 
   if (props.selectedKpi) {

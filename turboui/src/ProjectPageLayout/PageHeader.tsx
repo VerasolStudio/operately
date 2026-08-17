@@ -6,6 +6,7 @@ import { PrivacyIndicator } from "../PrivacyIndicator";
 import { StatusBadge } from "../StatusBadge";
 import { TextField } from "../TextField";
 import { ProjectPageLayout } from ".";
+import { t } from "../i18n";
 
 export function PageHeader(props: ProjectPageLayout.Props) {
   const navigation =
@@ -17,7 +18,7 @@ export function PageHeader(props: ProjectPageLayout.Props) {
             label: props.mode === "template" ? "Project Templates" : "Projects",
           },
         ]
-      : [{ to: props.homeLink, label: "Home" }];
+      : [{ to: props.homeLink, label: t("turboui.projectPageLayout.home") }];
 
   const isInviteOnly = props.accessLevels?.company === "no_access" && props.accessLevels?.space === "no_access";
 
@@ -50,7 +51,7 @@ export function PageHeader(props: ProjectPageLayout.Props) {
 
           {props.mode === "template" ? (
             <span className="inline-flex rounded-full border border-brand-1/20 bg-brand-2 px-2 py-0.5 text-xs font-medium text-content-accent">
-              Template
+              {t("turboui.projectPageLayout.template")}
             </span>
           ) : (
             props.status && (
@@ -66,8 +67,8 @@ export function PageHeader(props: ProjectPageLayout.Props) {
 }
 
 function TaskCompletionIndicator({ stats }: { stats: ProjectPageLayout.TaskCompletionStats }) {
-  const title = `${stats.completedCount}/${stats.totalCount} tasks completed`;
-  const ariaLabel = `${stats.percentage}% tasks completed, ${title}`;
+  const title = t("turboui.projectPageLayout.tasksCompleted", { v1: stats.completedCount, v2: stats.totalCount });
+  const ariaLabel = t("turboui.projectPageLayout.tasksCompleted2", { v1: stats.percentage, v2: title });
 
   return (
     <div

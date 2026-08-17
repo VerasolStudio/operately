@@ -4,6 +4,7 @@ import { RelativeDayField } from "../RelativeDayField";
 import { MilestoneList } from "./MilestoneList";
 import type { TemplateProjectPage } from ".";
 import { TemplatePeople } from "./People";
+import { t } from "../i18n";
 
 export function Overview({ props, canEdit }: { props: TemplateProjectPage.Props; canEdit: boolean }) {
   return (
@@ -16,8 +17,8 @@ export function Overview({ props, canEdit }: { props: TemplateProjectPage.Props;
               onDescriptionChange={async (description) => (await props.onTemplateUpdate({ description })) !== false}
               richTextHandlers={props.richTextHandlers}
               canEdit={canEdit}
-              label="Description"
-              placeholder="Add a template description..."
+              label={t("turboui.templateProjectPage.description")}
+              placeholder={t("turboui.templateProjectPage.addATemplateDescription")}
               zeroStatePlaceholder="Add a template description..."
             />
           </section>
@@ -25,14 +26,14 @@ export function Overview({ props, canEdit }: { props: TemplateProjectPage.Props;
         </div>
         <aside className="space-y-6 md:col-span-4 md:pl-8">
           <section>
-            <h2 className="mb-1 text-sm font-bold">Project duration</h2>
+            <h2 className="mb-1 text-sm font-bold">{t("turboui.templateProjectPage.projectDuration")}</h2>
             <RelativeDayField
               value={props.template.durationDays}
               onChange={async (durationDays) => {
                 await props.onTemplateUpdate({ durationDays });
               }}
               readonly={!canEdit}
-              placeholder="Set project duration"
+              placeholder={t("turboui.templateProjectPage.setProjectDuration")}
               testId="template-duration"
             />
           </section>

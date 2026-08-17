@@ -7,6 +7,7 @@ import type { ActivityHandler } from "../interfaces";
 import { usePaths } from "@/routes/paths";
 import { Link } from "turboui";
 import { feedTitle, goalLink } from "../feedItemLinks";
+import { t } from "@/i18n";
 
 const GoalRetrospectiveAcknowledged: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -33,7 +34,7 @@ const GoalRetrospectiveAcknowledged: ActivityHandler = {
     const paths = usePaths();
     const goal = content(activity).goal!;
     const path = paths.goalActivityPath(content(activity).retrospectiveId!);
-    const link = <Link to={path}>Retrospective</Link>;
+    const link = <Link to={path}>{t("features.activities.retrospective")}</Link>;
 
     if (page === "goal") {
       return feedTitle(activity, "acknowledged the", link);

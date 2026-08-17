@@ -12,6 +12,7 @@ import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences
 import { useStartSupportSession } from "@/features/SupportSessions";
 import { useBoolState } from "@/hooks/useBoolState";
 import { useLoadedData } from "./loader";
+import { t } from "@/i18n";
 
 export { loader } from "./loader";
 
@@ -20,9 +21,9 @@ export function Page() {
   const { startSupportSession, supportSessionStarting } = useStartSupportSession(company.id!);
 
   return (
-    <Pages.Page title={"Admininstration"} testId="saas-admin-page">
+    <Pages.Page title={t("pages.saasAdminCompanyPage.admininstration")} testId="saas-admin-page">
       <Paper.Root size="large">
-        <Paper.Navigation items={[{ to: "/admin", label: "All Companies" }]} />
+        <Paper.Navigation items={[{ to: "/admin", label: t("pages.saasAdminCompanyPage.allCompanies") }]} />
 
         <Paper.Body>
           <Options />
@@ -30,16 +31,15 @@ export function Page() {
           <div className="text-3xl font-semibold">{company.name}</div>
           <OwnersSection company={company} />
 
-          <h2 className="mt-8 font-bold">Stats</h2>
+          <h2 className="mt-8 font-bold">{t("pages.saasAdminCompanyPage.stats")}</h2>
           <StatsSection company={company} />
 
-          <h2 className="mt-8 font-bold">Information</h2>
+          <h2 className="mt-8 font-bold">{t("pages.saasAdminCompanyPage.information")}</h2>
           <Info company={company} />
 
-          <h2 className="mt-8 font-bold">Support Mode</h2>
+          <h2 className="mt-8 font-bold">{t("pages.saasAdminCompanyPage.supportMode")}</h2>
           <p className="text-sm text-content-accent mb-3 mt-1 max-w-lg">
-            Temporarily enable elevated support access for troubleshooting issues with this company's account. You will
-            view the account as if you were an owner.
+            {t("pages.saasAdminCompanyPage.temporarilyEnableElevatedSupportAccessFor")}
           </p>
 
           <SecondaryButton
@@ -48,10 +48,10 @@ export function Page() {
             loading={supportSessionStarting}
             testId="start-support-session"
           >
-            Start Support Session
+            {t("pages.saasAdminCompanyPage.startSupportSession")}
           </SecondaryButton>
 
-          <h2 className="mt-8 font-bold">Activity</h2>
+          <h2 className="mt-8 font-bold">{t("pages.saasAdminCompanyPage.activity")}</h2>
           <ActivitySection company={company} />
         </Paper.Body>
       </Paper.Root>
@@ -63,21 +63,21 @@ function Info({ company }: { company: AdminApi.Company }) {
   return (
     <div className="border-y border-stroke-base py-3 px-1 mt-2 text-sm flex flex-col gap-2">
       <div className="flex items-center gap-3">
-        <div className="font-medium w-40">Short ID</div>
+        <div className="font-medium w-40">{t("pages.saasAdminCompanyPage.shortID")}</div>
         <div className="text-blue-500">
           <code>{company.shortId!}</code>
         </div>
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="font-medium w-40">Database ID</div>
+        <div className="font-medium w-40">{t("pages.saasAdminCompanyPage.databaseID")}</div>
         <div className="text-blue-500">
           <code>{company.uuid!}</code>
         </div>
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="font-medium w-40">Enabled Features</div>
+        <div className="font-medium w-40">{t("pages.saasAdminCompanyPage.enabledFeatures")}</div>
         <div className="text-blue-500">
           <code>{company.enabledFeatures!.join(", ") || "None"}</code>
         </div>
@@ -90,11 +90,11 @@ function StatsSection({ company }: { company: AdminApi.Company }) {
   return (
     <div className="border-y border-stroke-base py-3 mt-2">
       <div className="grid grid-cols-5 gap-4 w-full">
-        <Stat title="People" value={company.peopleCount!} />
-        <Stat title="Spaces" value={company.spacesCount!} />
-        <Stat title="Goals" value={company.goalsCount!} />
-        <Stat title="Projects" value={company.projectsCount!} />
-        <Stat title="Storage" value={formatStorageBytes(company.storageUsageBytes)} />
+        <Stat title={t("pages.saasAdminCompanyPage.people")} value={company.peopleCount!} />
+        <Stat title={t("pages.saasAdminCompanyPage.spaces")} value={company.spacesCount!} />
+        <Stat title={t("pages.saasAdminCompanyPage.goals")} value={company.goalsCount!} />
+        <Stat title={t("pages.saasAdminCompanyPage.projects")} value={company.projectsCount!} />
+        <Stat title={t("pages.saasAdminCompanyPage.storage")} value={formatStorageBytes(company.storageUsageBytes)} />
       </div>
     </div>
   );
@@ -137,8 +137,8 @@ function ActivitySection({ company }: { company: AdminApi.Company }) {
   return (
     <div className="mt-3">
       <div className="border-y border-stroke-base py-2 flex items-center gap-4 bg-surface-dimmed uppercase text-xs font-bold">
-        <div className="px-4 w-32">Time</div>
-        <div className="px-4">Activity Description</div>
+        <div className="px-4 w-32">{t("pages.saasAdminCompanyPage.time")}</div>
+        <div className="px-4">{t("pages.saasAdminCompanyPage.activityDescription")}</div>
       </div>
 
       {activities!.map((activity: AdminApi.Activity) => (
@@ -164,13 +164,13 @@ function Options() {
       <PageOptions.Root testId="options-button">
         <PageOptions.Action
           icon={IconFlare}
-          title="Enable Feature"
+          title={t("pages.saasAdminCompanyPage.enableFeature")}
           onClick={toggleEnableFeatureModal}
           testId="enable-feature"
         />
         <PageOptions.Action
           icon={IconTrash}
-          title="Remove Feature Flags"
+          title={t("pages.saasAdminCompanyPage.removeFeatureFlags")}
           onClick={toggleRemoveFeatureFlagsModal}
           testId="remove-feature-flags"
         />

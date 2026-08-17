@@ -7,6 +7,8 @@ import { SpaceField } from "../SpaceField";
 import { TextField } from "../TextField";
 import { showErrorToast } from "../Toasts";
 import { BlackLink } from "../Link";
+import { t } from "../i18n";
+import { Trans } from "react-i18next";
 
 export function GoalAddPage(props: GoalAddForm.Props) {
   const title = props.parentGoal ? "Add a subgoal" : "Add a new goal";
@@ -70,19 +72,24 @@ export function GoalAddForm(props: GoalAddForm.Props) {
       <h1 className="font-bold text-xl">{title}</h1>
       {props.parentGoal && (
         <div className="text-xs text-content-dimmed">
-          Adding under{" "}
-          <BlackLink to={props.parentGoal.link} className="font-medium" underline="hover">
-            {props.parentGoal.name}
-          </BlackLink>
+          <Trans
+            i18nKey="turboui.goalAddForm.addingUnder"
+            values={{ v1: props.parentGoal.name }}
+            components={[
+              <BlackLink to={props.parentGoal.link} className="font-medium" underline="hover">
+                {props.parentGoal.name}
+              </BlackLink>,
+            ]}
+          />
         </div>
       )}
 
       <div className="mt-4 flex flex-col gap-4">
         <TextField
           autofocus
-          label="Name"
+          label={t("turboui.goalAddForm.name")}
           variant="form-field"
-          placeholder="What do you want to achieve?"
+          placeholder={t("turboui.goalAddForm.whatDoYouWantToAchieve")}
           text={state.name}
           onChange={state.setName}
           error={state.nameError}
@@ -90,7 +97,7 @@ export function GoalAddForm(props: GoalAddForm.Props) {
         />
 
         <SpaceField
-          label="Space"
+          label={t("turboui.goalAddForm.space")}
           space={state.space}
           setSpace={state.setSpace}
           search={state.spaceSearch}
@@ -104,13 +111,13 @@ export function GoalAddForm(props: GoalAddForm.Props) {
           setAccessLevels={state.setAccessLevels}
           resourceType={"goal"}
           variant="form-field"
-          label="Privacy"
+          label={t("turboui.goalAddForm.privacy")}
         />
       </div>
 
       <div className="mt-6 flex items-center gap-2">
         <PrimaryButton onClick={state.submit} loading={state.submitting} testId="submit" size="sm">
-          Add Goal
+          {t("turboui.goalAddForm.addGoal")}
         </PrimaryButton>
       </div>
     </div>
@@ -169,7 +176,7 @@ function useFormState(props: GoalAddForm.Props): GoalAddForm.State {
       props.onSuccess?.(res.id);
     } catch (error) {
       console.error("Failed to create goal:", error);
-      showErrorToast("Network error", "Failed to create the goal");
+      showErrorToast(t("turboui.goalAddForm.networkError"), t("turboui.goalAddForm.failedToCreateTheGoal"));
     } finally {
       setSubmitting(false);
     }

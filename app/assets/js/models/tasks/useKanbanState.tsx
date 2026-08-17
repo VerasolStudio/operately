@@ -6,6 +6,7 @@ import { compareIds } from "@/routes/paths";
 
 import { serializeTaskStatus } from "./index";
 import { parseKanbanState, type KanbanState } from "./parseKanbanState";
+import { t } from "@/i18n";
 
 interface TaskKanbanChangeEvent {
   taskId: string;
@@ -99,7 +100,7 @@ export function useKanbanState(options: UseKanbanStateOptions) {
         return true;
       } catch (e) {
         console.error("Failed to update Kanban state", e);
-        showErrorToast("Error", "Failed to update task position");
+        showErrorToast(t("app.useKanbanState.error"), t("app.useKanbanState.failedToUpdateTaskPosition"));
         setKanbanState(previousState);
         return false;
       }
@@ -221,14 +222,14 @@ function isClosedStatus(status: StatusOption): boolean {
 function validateStatusForBackend(statusOption: StatusOption | null): TaskStatus | null {
   if (statusOption?.value === "unknown-status") {
     console.error("Cannot move task to unknown-status");
-    showErrorToast("Error", "Cannot move task to unknown status");
+    showErrorToast(t("app.useKanbanState.error"), t("app.useKanbanState.cannotMoveTaskToUnknownStatus"));
     return null;
   }
 
   const backendStatus = serializeTaskStatus(statusOption);
   if (!backendStatus) {
     console.error("Unknown Kanban status");
-    showErrorToast("Error", "Failed to update task status");
+    showErrorToast(t("app.useKanbanState.error"), t("app.useKanbanState.failedToUpdateTaskStatus"));
     return null;
   }
 

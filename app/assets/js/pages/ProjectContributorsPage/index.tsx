@@ -27,6 +27,7 @@ import { loader, useLoadedData } from "./loader";
 
 import { usePaths } from "@/routes/paths";
 import { PermissionLevels } from "@/features/Permissions";
+import { t } from "@/i18n";
 export default { name: "ProjectContributorsPage", loader, Page } as PageModule;
 
 function Page() {
@@ -57,9 +58,12 @@ function Navigation() {
 
   if (project.space) {
     items.push({ to: paths.spacePath(project.space.id), label: project.space.name });
-    items.push({ to: paths.spaceWorkMapPath(project.space.id, "projects"), label: "Work Map" });
+    items.push({
+      to: paths.spaceWorkMapPath(project.space.id, "projects"),
+      label: t("pages.projectContributorsPage.workMap"),
+    });
   } else {
-    items.push({ to: paths.workMapPath("projects"), label: "Work Map" });
+    items.push({ to: paths.workMapPath("projects"), label: t("pages.projectContributorsPage.workMap") });
   }
   items.push({ to: paths.projectPath(project.id), label: project.name });
 
@@ -71,8 +75,8 @@ function Title() {
     <div className="rounded-t-[20px] pb-12">
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-2xl font-extrabold ">Team &amp; Access</div>
-          <div className="text-medium">Manage the team and access to this project</div>
+          <div className="text-2xl font-extrabold ">{t("pages.projectContributorsPage.teamAmpAccess")}</div>
+          <div className="text-medium">{t("pages.projectContributorsPage.manageTheTeamAndAccessTo")}</div>
         </div>
 
         <AddContribsButton />
@@ -90,7 +94,7 @@ function AddContribsButton() {
 
   return (
     <PrimaryButton linkTo={path} testId="add-contributors-button" size="sm">
-      Add Contributors
+      {t("pages.projectContributorsPage.addContributors")}
     </PrimaryButton>
   );
 }
@@ -101,7 +105,7 @@ function GeneralAccess() {
   const editPath = paths.projectEditPermissionsPath(project.id);
 
   return (
-    <Paper.Section title="General Access">
+    <Paper.Section title={t("pages.projectContributorsPage.generalAccess")}>
       <BorderedRow>
         <AccessLevelSummary
           resourceType="project"
@@ -113,7 +117,7 @@ function GeneralAccess() {
 
         {project.permissions?.hasFullAccess && (
           <SecondaryButton linkTo={editPath} size="xs">
-            Edit
+            {t("pages.projectContributorsPage.edit")}
           </SecondaryButton>
         )}
       </BorderedRow>
@@ -127,7 +131,7 @@ function Champion() {
   if (!champion) return <ChampionPlaceholder />;
 
   return (
-    <Paper.Section title="Champion">
+    <Paper.Section title={t("pages.projectContributorsPage.champion")}>
       <div className="flex items-center justify-between py-2 border-y border-stroke-dimmed">
         <div className="flex items-center gap-2">
           <ContributorAvatar person={champion.person!} role={champion.role!} />
@@ -149,7 +153,7 @@ function Reviewer() {
   if (!reviewer) return <ReviewerPlaceholder />;
 
   return (
-    <Paper.Section title="Reviewer">
+    <Paper.Section title={t("pages.projectContributorsPage.reviewer")}>
       <div className="flex items-center justify-between py-2 border-y border-stroke-dimmed">
         <div className="flex items-center gap-2">
           <ContributorAvatar person={reviewer.person!} role={reviewer.role!} />
@@ -191,17 +195,20 @@ function ReviewerPlaceholder() {
     : "The project doesn't have a reviewer yet";
 
   return (
-    <Paper.Section title="Reviewer">
+    <Paper.Section title={t("pages.projectContributorsPage.reviewer")}>
       <BorderedRow>
         <div className="flex items-center gap-2">
           <PlaceholderAvatar size="lg" />
-          <PlaceholderTitleAndDescription title="No Reviewer" description={description} />
+          <PlaceholderTitleAndDescription
+            title={t("pages.projectContributorsPage.noReviewer")}
+            description={description}
+          />
         </div>
 
         <div className="flex items-center gap-4">
           {canAddReviewer && (
             <SecondaryButton linkTo={path} testId="add-reviewer-button" size="sm">
-              Add reviewer
+              {t("pages.projectContributorsPage.addReviewer")}
             </SecondaryButton>
           )}
         </div>
@@ -230,17 +237,20 @@ function ChampionPlaceholder() {
     : "The project doesn't have a champion yet";
 
   return (
-    <Paper.Section title="Champion">
+    <Paper.Section title={t("pages.projectContributorsPage.champion")}>
       <div className="flex items-center justify-between py-2 border-y border-stroke-dimmed">
         <div className="flex items-center gap-2">
           <PlaceholderAvatar size="lg" />
-          <PlaceholderTitleAndDescription title="No Champion" description={description} />
+          <PlaceholderTitleAndDescription
+            title={t("pages.projectContributorsPage.noChampion")}
+            description={description}
+          />
         </div>
 
         <div className="flex items-center gap-4">
           {canAddChampion && (
             <SecondaryButton linkTo={path} testId="add-champion-button" size="sm">
-              Add champion
+              {t("pages.projectContributorsPage.addChampion")}
             </SecondaryButton>
           )}
         </div>
@@ -255,7 +265,7 @@ function Contributors() {
   if (contributors.length === 0) return null;
 
   return (
-    <Paper.Section title="Contributors">
+    <Paper.Section title={t("pages.projectContributorsPage.contributors")}>
       {contributors.map((contrib) => (
         <Contributor contributor={contrib} key={contrib.id} />
       ))}
@@ -325,7 +335,7 @@ function ReassignAsContributorMenuItem({ contributor }: { contributor: ProjectCo
 
   return (
     <MenuLinkItem to={path} testId="convert-to-contributor">
-      Reassign as contributor
+      {t("pages.projectContributorsPage.reassignAsContributor")}
     </MenuLinkItem>
   );
 }
@@ -336,7 +346,7 @@ function ChangeProjectChampionMenuItem({ contributor }: { contributor: ProjectCo
 
   return (
     <MenuLinkItem to={path} testId="choose-new-champion">
-      Edit champion
+      {t("pages.projectContributorsPage.editChampion")}
     </MenuLinkItem>
   );
 }
@@ -347,7 +357,7 @@ function ChangeProjectReviewerMenuItem({ contributor }: { contributor: ProjectCo
 
   return (
     <MenuLinkItem to={path} testId="choose-new-reviewer">
-      Edit reviewer
+      {t("pages.projectContributorsPage.editReviewer")}
     </MenuLinkItem>
   );
 }
@@ -358,7 +368,7 @@ function EditMenuItem({ contributor }: { contributor: ProjectContributor }) {
 
   return (
     <MenuLinkItem to={path} testId="edit-contributor">
-      Edit contributor
+      {t("pages.projectContributorsPage.editContributor")}
     </MenuLinkItem>
   );
 }
@@ -374,7 +384,7 @@ function RemoveContributorMenuItem({ contributor }: { contributor: ProjectContri
 
   return (
     <MenuActionItem danger={true} onClick={handleClick} testId="remove-contributor">
-      Remove from project
+      {t("pages.projectContributorsPage.removeFromProject")}
     </MenuActionItem>
   );
 }
@@ -391,7 +401,7 @@ function PromoteToChampionMenuItem({ contributor }: { contributor: ProjectContri
 
   return (
     <MenuActionItem danger={true} onClick={handleClick} testId="promote-to-champion">
-      Assign as champion
+      {t("pages.projectContributorsPage.assignAsChampion")}
     </MenuActionItem>
   );
 }
@@ -408,7 +418,7 @@ function PromoteToReviewerMenuItem({ contributor }: { contributor: ProjectContri
 
   return (
     <MenuActionItem danger={true} onClick={handleClick} testId="promote-to-reviewer">
-      Assign as reviewer
+      {t("pages.projectContributorsPage.assignAsReviewer")}
     </MenuActionItem>
   );
 }

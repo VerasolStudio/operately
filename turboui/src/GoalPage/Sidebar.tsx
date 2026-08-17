@@ -29,6 +29,8 @@ import {
   IconUserCheck,
   IconUserStar,
 } from "../icons";
+import { t } from "../i18n";
+import { uiLocale } from "../utils/formatting";
 
 export function Sidebar(props: GoalPage.State) {
   return (
@@ -52,11 +54,11 @@ function StartDate(props: GoalPage.State) {
   const testId = isReadonly ? "start-date-field-readonly" : "start-date-field";
 
   return (
-    <SidebarSection title="Start Date">
+    <SidebarSection title={t("turboui.goalPage.startDate")}>
       <DateField
         date={props.startDate}
         onDateSelect={props.setStartDate}
-        placeholder="Set date"
+        placeholder={t("turboui.goalPage.setDate")}
         readonly={isReadonly}
         testId={testId}
         useStartOfPeriod
@@ -70,11 +72,11 @@ function DueDate(props: GoalPage.State) {
   const testId = isReadonly ? "due-date-field-readonly" : "due-date-field";
 
   return (
-    <SidebarSection title="Due Date">
+    <SidebarSection title={t("turboui.goalPage.dueDate")}>
       <DateField
         date={props.dueDate}
         onDateSelect={props.setDueDate}
-        placeholder="Set date"
+        placeholder={t("turboui.goalPage.setDate")}
         readonly={isReadonly}
         showOverdueWarning={!props.closedAt}
         testId={testId}
@@ -89,12 +91,12 @@ function CompletedOn(props: GoalPage.State) {
   if (!props.closedAt) return null;
 
   return (
-    <SidebarSection title="Completed On">
+    <SidebarSection title={t("turboui.goalPage.completedOn")}>
       <DateField
         date={{
           date: props.closedAt,
           dateType: "day",
-          value: new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric" }).format(
+          value: new Intl.DateTimeFormat(uiLocale(), { year: "numeric", month: "short", day: "numeric" }).format(
             props.closedAt,
           ),
         }}
@@ -111,14 +113,14 @@ function ParentGoal(props: GoalPage.State) {
   }
 
   return (
-    <SidebarSection title="Parent Goal">
+    <SidebarSection title={t("turboui.goalPage.parentGoal")}>
       <GoalField
         testId="parent-goal-field"
         goal={props.parentGoal}
         setGoal={props.setParentGoal}
         searchGoals={props.parentGoalSearch}
         readonly={!props.permissions.canEdit}
-        emptyStateMessage="Set parent goal"
+        emptyStateMessage={t("turboui.goalPage.setParentGoal")}
         emptyStateReadOnlyMessage="No parent goal"
       />
     </SidebarSection>
@@ -133,14 +135,12 @@ function Champion(props: GoalPage.State) {
     <SidebarSection
       title={
         <div className="flex items-center gap-2">
-          <span>Champion</span>
+          <span>{t("turboui.goalPage.champion")}</span>
           <Tooltip
             content={
               <div className="max-w-xs">
-                <div className="font-semibold mb-2">Goal Champion</div>
-                <div className="text-sm">
-                  The goal owner accountable for completion. Plans projects and submits monthly check-ins.
-                </div>
+                <div className="font-semibold mb-2">{t("turboui.goalPage.goalChampion")}</div>
+                <div className="text-sm">{t("turboui.goalPage.theGoalOwnerAccountableForCompletion")}</div>
               </div>
             }
           >
@@ -155,11 +155,11 @@ function Champion(props: GoalPage.State) {
         setPerson={props.setChampion}
         readonly={readonly}
         searchData={props.championSearch}
-        emptyStateMessage="Set champion"
+        emptyStateMessage={t("turboui.goalPage.setChampion")}
         emptyStateReadOnlyMessage="No champion"
         extraDialogMenuOptions={[
           {
-            label: "Assign as reviewer",
+            label: t("turboui.goalPage.assignAsReviewer"),
             onClick: () => {
               props.setReviewer(props.champion!);
               props.setChampion(null);
@@ -175,19 +175,17 @@ function Champion(props: GoalPage.State) {
 function Reviewer(props: GoalPage.State) {
   const readonly = !props.permissions.hasFullAccess;
   const testId = readonly ? "reviewer-field-readonly" : "reviewer-field";
-  
+
   return (
     <SidebarSection
       title={
         <div className="flex items-center gap-2">
-          <span>Reviewer</span>
+          <span>{t("turboui.goalPage.reviewer")}</span>
           <Tooltip
             content={
               <div className="max-w-xs">
-                <div className="font-semibold mb-2">Goal Reviewer</div>
-                <div className="text-sm">
-                  Provides feedback throughout the goal, and is responsible for acknowledging monthly check-ins.
-                </div>
+                <div className="font-semibold mb-2">{t("turboui.goalPage.goalReviewer")}</div>
+                <div className="text-sm">{t("turboui.goalPage.providesFeedbackThroughoutTheGoalAnd")}</div>
               </div>
             }
           >
@@ -202,11 +200,11 @@ function Reviewer(props: GoalPage.State) {
         setPerson={props.setReviewer}
         readonly={readonly}
         searchData={props.reviewerSearch}
-        emptyStateMessage="Set reviewer"
+        emptyStateMessage={t("turboui.goalPage.setReviewer")}
         emptyStateReadOnlyMessage="No reviewer"
         extraDialogMenuOptions={[
           {
-            label: "Assign as champion",
+            label: t("turboui.goalPage.assignAsChampion"),
             onClick: () => {
               props.setReviewer(null);
               props.setChampion(props.reviewer!);
@@ -234,16 +232,16 @@ function CheckInsSection(props: GoalPage.State) {
   } else if (viewerCanCheckIn && isChampion) {
     zeroStateCopy = "Share the first update to set the goal status and start the monthly cadence.";
   } else if (championFirstName) {
-    zeroStateCopy = `${championFirstName} hasn't shared a check-in yet. Updates will land here soon.`;
+    zeroStateCopy = t("turboui.goalPage.hasnTSharedACheckIn", { v1: championFirstName });
   }
 
   const header = (
     <div className="flex items-center gap-2">
-      <span>Last update</span>
+      <span>{t("turboui.goalPage.lastUpdate")}</span>
       {viewerCanCheckIn && (
         <span className="shrink-0">
           <SecondaryButton size="xxs" linkTo={props.newCheckInLink} testId="sidebar-check-in-button">
-            Check in
+            {t("turboui.goalPage.checkIn")}
           </SecondaryButton>
         </span>
       )}
@@ -293,7 +291,7 @@ function Retrospective(props: GoalPage.State) {
   return (
     <div className="text-sm">
       <DivLink to={retro.link} className={className}>
-        <div className="flex items-center font-semibold">Goal Retrospective</div>
+        <div className="flex items-center font-semibold">{t("turboui.goalPage.goalRetrospective")}</div>
 
         <Summary
           content={retro.content}
@@ -329,7 +327,7 @@ function OverdueWarning(props: GoalPage.State) {
 
 function Privacy(props: GoalPage.State) {
   return (
-    <SidebarSection title="Privacy">
+    <SidebarSection title={t("turboui.goalPage.privacy")}>
       <PrivacyField
         testId="goal-privacy-field"
         accessLevels={props.accessLevels}
@@ -340,7 +338,7 @@ function Privacy(props: GoalPage.State) {
       {props.permissions.hasFullAccess && props.manageAccessLink && (
         <div className="mt-3">
           <SecondaryButton linkTo={props.manageAccessLink} size="xs" testId="manage-goal-access-button">
-            Manage access
+            {t("turboui.goalPage.manageAccess")}
           </SecondaryButton>
         </div>
       )}
@@ -354,7 +352,7 @@ function Actions(props: GoalPage.State) {
   const actions = [
     {
       type: "link" as const,
-      label: "Close Goal",
+      label: t("turboui.goalPage.closeGoal"),
       link: props.closeLink,
       icon: IconCircleCheck,
       hidden: !props.permissions.canEdit || props.state === "closed",
@@ -362,7 +360,7 @@ function Actions(props: GoalPage.State) {
     },
     {
       type: "link" as const,
-      label: "Re-open Goal",
+      label: t("turboui.goalPage.reOpenGoal"),
       link: props.reopenLink,
       icon: IconRotateDot,
       hidden: !props.permissions.canEdit || props.state !== "closed",
@@ -370,7 +368,7 @@ function Actions(props: GoalPage.State) {
     },
     {
       type: "action" as const,
-      label: "Move to another space",
+      label: t("turboui.goalPage.moveToAnotherSpace"),
       onClick: props.openMoveModal,
       icon: IconCircleArrowRight,
       hidden: !props.permissions.hasFullAccess || !hasSpace,
@@ -378,7 +376,7 @@ function Actions(props: GoalPage.State) {
     },
     {
       type: "action" as const,
-      label: "Export as Markdown",
+      label: t("turboui.goalPage.exportAsMarkdown"),
       onClick: props.exportMarkdown,
       icon: IconFileExport,
       testId: "export-as-markdown",
@@ -386,7 +384,7 @@ function Actions(props: GoalPage.State) {
     },
     {
       type: "action" as const,
-      label: "Delete",
+      label: t("turboui.goalPage.delete"),
       onClick: props.openDeleteModal,
       icon: IconTrash,
       hidden: !props.permissions.hasFullAccess,

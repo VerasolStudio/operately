@@ -3,6 +3,7 @@ import * as React from "react";
 import { Form, Submit, useForm } from "../Forms";
 import { Modal } from "../Modal";
 import { showSuccessToast } from "../Toasts";
+import { t } from "../i18n";
 
 export interface DiscardDiscussionDraftModalProps {
   isOpen: boolean;
@@ -11,13 +12,21 @@ export interface DiscardDiscussionDraftModalProps {
   onSuccess: () => void;
 }
 
-export function DiscardDiscussionDraftModal({ isOpen, onClose, onDiscard, onSuccess }: DiscardDiscussionDraftModalProps) {
+export function DiscardDiscussionDraftModal({
+  isOpen,
+  onClose,
+  onDiscard,
+  onSuccess,
+}: DiscardDiscussionDraftModalProps) {
   const form = useForm({
     fields: {},
     cancel: onClose,
     submit: async () => {
       await onDiscard();
-      showSuccessToast("Draft discarded", "The draft has been discarded.");
+      showSuccessToast(
+        t("turboui.discardDiscussionDraftModal.draftDiscarded"),
+        t("turboui.discardDiscussionDraftModal.theDraftHasBeenDiscarded"),
+      );
       onSuccess();
     },
   });
@@ -25,8 +34,11 @@ export function DiscardDiscussionDraftModal({ isOpen, onClose, onDiscard, onSucc
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <Form form={form}>
-        <p>Are you sure you want to discard this draft?</p>
-        <Submit saveText="Discard draft" cancelText="Cancel" />
+        <p>{t("turboui.discardDiscussionDraftModal.areYouSureYouWantTo")}</p>
+        <Submit
+          saveText={t("turboui.discardDiscussionDraftModal.discardDraft")}
+          cancelText={t("turboui.discardDiscussionDraftModal.cancel")}
+        />
       </Form>
     </Modal>
   );

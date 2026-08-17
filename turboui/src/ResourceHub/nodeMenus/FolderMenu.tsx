@@ -11,6 +11,7 @@ import type { ResourceHubFolder } from "../types";
 import { CopyFolderModal } from "./CopyFolder";
 import { CopyResourceMenuItem } from "./CopyResource";
 import { MoveResourceMenuItem, MoveResourceModal } from "./MoveResource";
+import { t } from "../../i18n";
 
 interface FolderMenuProps {
   folder: ResourceHubFolder;
@@ -83,7 +84,7 @@ function DeleteFolderMenuItem({
 
   return (
     <MenuActionItem onClick={showConfirmModal} testId={deleteId} danger>
-      Delete
+      {t("turboui.resourceHub.delete")}
     </MenuActionItem>
   );
 }
@@ -93,7 +94,7 @@ function RenameFolderMenuItem({ folder, showForm }: { folder: ResourceHubFolder;
 
   return (
     <MenuActionItem onClick={showForm} testId={testId}>
-      Rename
+      {t("turboui.resourceHub.rename")}
     </MenuActionItem>
   );
 }
@@ -166,13 +167,13 @@ export function RenameFolderModal({ folder, showForm, toggleForm, onSave, onRena
   });
 
   return (
-    <Modal title="Rename folder" isOpen={showForm} onClose={toggleForm}>
+    <Modal title={t("turboui.resourceHub.renameFolder")} isOpen={showForm} onClose={toggleForm}>
       <Forms.Form form={form}>
         <Forms.FieldGroup>
-          <Forms.TextInput label="Name" field="name" testId="new-folder-name" autoFocus />
+          <Forms.TextInput label={t("turboui.resourceHub.name")} field="name" testId="new-folder-name" autoFocus />
         </Forms.FieldGroup>
 
-        <Forms.Submit cancelText="Cancel" />
+        <Forms.Submit cancelText={t("turboui.resourceHub.cancel")} />
       </Forms.Form>
     </Modal>
   );

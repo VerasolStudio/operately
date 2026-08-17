@@ -9,6 +9,7 @@ import * as Companies from "@/models/companies";
 import * as People from "@/models/people";
 import * as Spaces from "@/models/spaces";
 import { getWorkMap } from "@/models/workMap";
+import { t } from "@/i18n";
 
 export default { name: "HomePage", loader, Page } as PageModule;
 
@@ -72,7 +73,7 @@ function Page() {
   }
 
   return (
-    <Pages.Page title="Home" testId="company-home">
+    <Pages.Page title={t("pages.homePage.home")} testId="company-home">
       <Paper.Root size="medium" className="px-4 sm:px-0">
         <Greeting />
         <SpacesSection />
@@ -89,8 +90,8 @@ function SpacesSection() {
   return (
     <div className="mt-8">
       <Paper.Section
-        title="Your Operately Spaces"
-        subtitle="Manage projects, track goals, and organize your team's work."
+        title={t("pages.homePage.yourOperatelySpaces")}
+        subtitle={t("pages.homePage.manageProjectsTrackGoalsAndOrganize")}
         actions={
           <div className="flex flex-wrap gap-2 justify-start sm:justify-end sm:flex-nowrap">
             <InvitePeopleButton />
@@ -107,7 +108,7 @@ function SpacesSection() {
 function FeedSection() {
   return (
     <div className="mt-8">
-      <Paper.Section title="What's new?" subtitle="Stay up to date with your team's progress.">
+      <Paper.Section title={t("pages.homePage.whatSNew")} subtitle={t("pages.homePage.stayUpToDateWithYour")}>
         <div className="bg-surface-base shadow rounded-2xl">
           <ActivityFeed />
         </div>
@@ -134,12 +135,12 @@ function ActivityFeed() {
       await deleteActivity({ activityId: activity.id });
       setActivities((activities) => activities.filter((item) => item.id !== activity.id));
     } catch {
-      showErrorToast("Could not delete feed item", "Please try again.");
+      showErrorToast(t("pages.homePage.couldNotDeleteFeedItem"), t("pages.homePage.pleaseTryAgain"));
     }
   };
 
   if (loading) return <ActivityFeedSkeleton />;
-  if (error) return <div>Error</div>;
+  if (error) return <div>{t("pages.homePage.error")}</div>;
 
   return (
     <Feed
@@ -208,7 +209,7 @@ function AddSpaceButton() {
 
   return (
     <PrimaryButton linkTo={paths.newSpacePath()} testId="add-space" size="sm">
-      Add Space
+      {t("pages.homePage.addSpace")}
     </PrimaryButton>
   );
 }
@@ -223,7 +224,7 @@ function InvitePeopleButton() {
 
   return (
     <GhostButton linkTo={paths.invitePeoplePath()} testId="invite-people" size="sm">
-      Invite People
+      {t("pages.homePage.invitePeople")}
     </GhostButton>
   );
 }

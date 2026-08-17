@@ -12,6 +12,7 @@ import { CompanyAdminAddPeoplePage, InviteMemberForm, showErrorToast } from "tur
 
 import * as Pages from "@/components/Pages";
 import { useMe } from "@/contexts/CurrentCompanyContext";
+import { t } from "@/i18n";
 export default { name: "CompanyAdminAddPeoplePage", loader, Page } as PageModule;
 
 interface LoaderResult {
@@ -54,8 +55,8 @@ function Page() {
 
   const navigationItems = React.useMemo(
     () => [
-      { to: paths.companyAdminPath(), label: "Company Administration" },
-      { to: paths.companyManagePeoplePath(), label: "Manage Team Members" },
+      { to: paths.companyAdminPath(), label: t("pages.companyAdminAddPeoplePage.companyAdministration") },
+      { to: paths.companyManagePeoplePath(), label: t("pages.companyAdminAddPeoplePage.manageTeamMembers") },
     ],
     [paths],
   );

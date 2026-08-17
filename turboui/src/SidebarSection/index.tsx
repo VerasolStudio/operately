@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "../utils/classnames";
 import { NotificationToggle } from "../NotificationToggle";
+import { t } from "../i18n";
 
 export function SidebarSection({
   title,
@@ -28,7 +29,7 @@ export function SidebarNotificationSection(props: SidebarNotificationSection.Pro
 
   return (
     <div className={props.className}>
-      <SidebarSection title="Notifications">
+      <SidebarSection title={t("turboui.sidebarSection.notifications")}>
         <NotificationToggle {...props} />
       </SidebarSection>
     </div>

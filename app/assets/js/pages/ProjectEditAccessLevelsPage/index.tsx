@@ -16,6 +16,7 @@ import { PageModule } from "@/routes/types";
 import { useNavigateTo } from "@/routes/useNavigateTo";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export default { name: "ProjectEditAccessLevelsPage", loader, Page } as PageModule;
 
 interface LoaderResult {
@@ -41,7 +42,7 @@ function Page() {
         <Navigation />
 
         <Paper.Body>
-          <h1 className="text-2xl font-extrabold">Edit General Access</h1>
+          <h1 className="text-2xl font-extrabold">{t("pages.projectEditAccessLevelsPage.editGeneralAccess")}</h1>
           <Form />
         </Paper.Body>
       </Paper.Root>
@@ -56,12 +57,18 @@ function Navigation() {
 
   if (project.space) {
     items.push({ to: paths.spacePath(project.space.id), label: project.space.name });
-    items.push({ to: paths.spaceWorkMapPath(project.space.id, "projects"), label: "Work Map" });
+    items.push({
+      to: paths.spaceWorkMapPath(project.space.id, "projects"),
+      label: t("pages.projectEditAccessLevelsPage.workMap"),
+    });
   } else {
-    items.push({ to: paths.workMapPath("projects"), label: "Work Map" });
+    items.push({ to: paths.workMapPath("projects"), label: t("pages.projectEditAccessLevelsPage.workMap") });
   }
   items.push({ to: paths.projectPath(project.id), label: project.name });
-  items.push({ to: paths.projectContributorsPath(project.id), label: "Team & Access" });
+  items.push({
+    to: paths.projectContributorsPath(project.id),
+    label: t("pages.projectEditAccessLevelsPage.teamAccess"),
+  });
 
   return <Paper.Navigation items={items} />;
 }

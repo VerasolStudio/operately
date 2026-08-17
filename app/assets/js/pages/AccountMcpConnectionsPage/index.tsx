@@ -6,6 +6,7 @@ import { PageModule } from "@/routes/types";
 import { usePaths } from "@/routes/paths";
 import { AccountMcpConnectionsPage, showErrorToast, showSuccessToast } from "turboui";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
+import { t } from "@/i18n";
 
 export default { name: "AccountMcpConnectionsPage", loader, Page } as PageModule;
 
@@ -44,10 +45,16 @@ function Page() {
 
       try {
         await Accounts.revokeMcpGrant(grantId);
-        showSuccessToast("Connection Revoked", "The MCP client can no longer access your account.");
+        showSuccessToast(
+          t("pages.accountMcpConnectionsPage.connectionRevoked"),
+          t("pages.accountMcpConnectionsPage.theMCPClientCanNoLonger"),
+        );
       } catch {
         setGrants((prev) => restoreGrant(prev, revokedGrant));
-        showErrorToast("Failed To Revoke Connection", "Please try again.");
+        showErrorToast(
+          t("pages.accountMcpConnectionsPage.failedToRevokeConnection"),
+          t("pages.accountMcpConnectionsPage.pleaseTryAgain"),
+        );
       } finally {
         setPendingRevokeIds((prev) => {
           const next = { ...prev };

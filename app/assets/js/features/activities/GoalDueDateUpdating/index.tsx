@@ -6,6 +6,7 @@ import { FormattedTime } from "turboui";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 import { feedTitle, goalLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
 
 const GoalDueDateUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -54,9 +55,9 @@ const GoalDueDateUpdating: ActivityHandler = {
     if (oldDueDate) {
       const time = <FormattedTime {...formattedTimePreferences} time={oldDueDate} format="short-date" />;
 
-      return <>Previously the due date was {time}</>;
+      return <>{t("features.activities.previouslyTheDueDateWas", { v1: time })}</>;
     } else {
-      return <>Previously had no due date</>;
+      return <>{t("features.activities.previouslyHadNoDueDate")}</>;
     }
   },
 

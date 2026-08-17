@@ -5,6 +5,7 @@ import type { Activity } from "@/models/activities";
 import { Paths } from "@/routes/paths";
 import { feedTitle, goalLink, spaceLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
+import { Trans } from "react-i18next";
 
 const GoalSpaceUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -37,7 +38,13 @@ const GoalSpaceUpdating: ActivityHandler = {
   FeedItemContent(props: { activity: Activity }) {
     const space = content(props.activity).oldSpace!;
 
-    return <>Previously, it was in the {spaceLink(space)} space.</>;
+    return (
+      <Trans
+        i18nKey="features.activities.previouslyItWasInTheSpace"
+        values={{ v1: space.name }}
+        components={[spaceLink(space)]}
+      />
+    );
   },
 
   feedItemAlignment(_activity: Activity): "items-start" | "items-center" {

@@ -11,6 +11,7 @@ import { IsItemExpandedFn, SetItemExpandedFn, TableRow } from "./TableRow";
 import { ZeroState } from "./ZeroState";
 import { compareIds } from "../../utils/ids";
 import type { FormattedTimePreferences } from "../../FormattedTime";
+import { t } from "../../i18n";
 
 interface Props {
   items: WorkMap.Item[];
@@ -164,13 +165,13 @@ export function TableHeader({ tab, columnOptions = {}, viewer, profileUser }: He
         <HeaderCell
           className={isCompletedPage ? "w-[65%] md:w-[58%] md:px-4" : "w-[65%] lg:w-[55%] xl:w-[40%] md:px-4"}
         >
-          Name
+          {t("turboui.workMap.name")}
         </HeaderCell>
         <HeaderCell hide={columnOptions.hideStatus} className={isCompletedPage ? "md:px-4" : "md:px-4"}>
-          Status
+          {t("turboui.workMap.status")}
         </HeaderCell>
         <HeaderCell hide={isCompletedPage || columnOptions.hideProgress} className="pr-6 lg:px-4">
-          Progress
+          {t("turboui.workMap.progress")}
         </HeaderCell>
         <HeaderCell
           hide={columnOptions.hideDueDate}
@@ -179,16 +180,16 @@ export function TableHeader({ tab, columnOptions = {}, viewer, profileUser }: He
           {isCompletedPage ? "Completed On" : "Due Date"}
         </HeaderCell>
         <HeaderCell hide={columnOptions.hideAssignedDate} className="hidden lg:table-cell md:px-4">
-          Assigned On
+          {t("turboui.workMap.assignedOn")}
         </HeaderCell>
         <HeaderCell hide={columnOptions.hideSpace} className="hidden lg:table-cell md:px-4">
-          Space
+          {t("turboui.workMap.space")}
         </HeaderCell>
         <HeaderCell hide={columnOptions.hideProject} className="hidden lg:table-cell md:px-4">
-          Project
+          {t("turboui.workMap.project")}
         </HeaderCell>
         <HeaderCell hide={columnOptions.hideOwner} className="hidden xl:table-cell md:px-4">
-          Champion
+          {t("turboui.workMap.champion")}
         </HeaderCell>
         {roleLabel && (
           <HeaderCell hide={columnOptions.hideRole} className="hidden xl:table-cell md:px-4">
@@ -220,10 +221,10 @@ function HeaderCell({ className, hide, children }: HeaderCellProps) {
 function NextStepHeaderCell({ hide }: { hide?: boolean }) {
   const tooltipContent = (
     <div className="text-xs">
-      <p className="mb-2">Shows what needs to happen next for this work to progress.</p>
-      <p>For goals: The first target or checklist item that hasn't been completed yet</p>
-      <p className="mb-2">For projects: The upcoming milestone (by due date)</p>
-      <p>Empty when all targets/milestones are complete or none are defined.</p>
+      <p className="mb-2">{t("turboui.workMap.showsWhatNeedsToHappenNext")}</p>
+      <p>{t("turboui.workMap.forGoalsTheFirstTargetOr")}</p>
+      <p className="mb-2">{t("turboui.workMap.forProjectsTheUpcomingMilestoneBy")}</p>
+      <p>{t("turboui.workMap.emptyWhenAllTargetsMilestonesAre")}</p>
     </div>
   );
 
@@ -263,11 +264,11 @@ function AddNewRow({
       <td className="py-2 px-2 sm:px-4">
         <button
           className="flex items-center gap-1 text-sm text-content-dimmed hover:text-content-base transition-colors py-1.5 px-2 rounded-md hover:bg-surface-highlight"
-          aria-label="Add new item"
+          aria-label={t("turboui.workMap.addNewItem")}
           onClick={open}
         >
           <IconPlus size={16} className="text-content-dimmed" />
-          <span>Add new item</span>
+          <span>{t("turboui.workMap.addNewItem")}</span>
         </button>
 
         <AddItemModal

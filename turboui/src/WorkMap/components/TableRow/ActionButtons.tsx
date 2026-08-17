@@ -1,6 +1,7 @@
 import React from "react";
 import { IconPlus, IconTrash } from "../../../icons";
 import { SecondaryButton } from "../../../Button";
+import { t } from "../../../i18n";
 
 interface Props {
   display: boolean;
@@ -25,12 +26,8 @@ interface ButtonProps {
 function AddButton({ onClick }: ButtonProps) {
   return (
     <div className="rounded-2xl overflow-hidden">
-      <SecondaryButton
-        size="xxs"
-        onClick={onClick}
-        icon={IconPlus}
-      >
-        Add
+      <SecondaryButton size="xxs" onClick={onClick} icon={IconPlus}>
+        {t("turboui.workMap.add")}
       </SecondaryButton>
     </div>
   );
@@ -39,10 +36,7 @@ function AddButton({ onClick }: ButtonProps) {
 function DeleteButton({ onClick }: ButtonProps) {
   return (
     <div className="rounded-full overflow-hidden text-red-500 hover:text-red-600">
-      <SecondaryButton
-        size="xxs"
-        onClick={onClick}
-      >
+      <SecondaryButton size="xxs" onClick={onClick}>
         <IconTrash size={14} />
       </SecondaryButton>
     </div>

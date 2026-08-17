@@ -7,6 +7,7 @@ import * as React from "react";
 import { Form } from "./Form";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export default { name: "GoalReopenPage", loader, Page } as PageModule;
 
 interface LoaderResult {
@@ -29,7 +30,7 @@ function Page() {
   const { goal } = Pages.useLoadedData<LoaderResult>();
 
   return (
-    <Pages.Page title={"Reopen " + goal.name}>
+    <Pages.Page title={t("pages.goalReopenPage.reopen", { name: goal.name })}>
       <Paper.Root>
         <Paper.Navigation items={[{ to: paths.goalPath(goal.id!), label: goal.name! }]} />
 
@@ -43,5 +44,5 @@ function Page() {
 }
 
 function Title() {
-  return <div className="text-content-accent text-3xl font-extrabold">Reopening Goal</div>;
+  return <div className="text-content-accent text-3xl font-extrabold">{t("pages.goalReopenPage.reopeningGoal")}</div>;
 }

@@ -9,6 +9,7 @@ import { CompanyImportPage, showErrorToast, showSuccessToast } from "turboui";
 
 import { useLoadedData, loader } from "./loader";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
+import { t } from "@/i18n";
 
 export default { name: "CompanyImportPage", loader, Page } as PageModule;
 
@@ -70,7 +71,10 @@ function Page() {
         uploading: false,
       });
 
-      showErrorToast("Upload failed", `Failed to upload ${file.name}. Please try again.`);
+      showErrorToast(
+        t("pages.companyImportPage.uploadFailed"),
+        t("pages.companyImportPage.failedToUploadPleaseTryAgain", { v1: file.name }),
+      );
     }
   }, []);
 
@@ -85,10 +89,16 @@ function Page() {
       });
 
       setPackageFile(EMPTY_UPLOAD_STATE);
-      showSuccessToast("Import started", "The company is being imported in the background.");
+      showSuccessToast(
+        t("pages.companyImportPage.importStarted"),
+        t("pages.companyImportPage.theCompanyIsBeingImportedIn"),
+      );
       await refreshRuns();
     } catch {
-      showErrorToast("Failed to start import", "Please confirm the package finished uploading and try again.");
+      showErrorToast(
+        t("pages.companyImportPage.failedToStartImport"),
+        t("pages.companyImportPage.pleaseConfirmThePackageFinishedUploading"),
+      );
     } finally {
       setStarting(false);
     }

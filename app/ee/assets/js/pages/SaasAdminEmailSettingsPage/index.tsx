@@ -4,6 +4,7 @@ import * as React from "react";
 
 import * as AdminApi from "@/ee/admin_api";
 import { EmailSettingsSection } from "./EmailSettingsSection";
+import { t } from "@/i18n";
 
 export const loader = async () => {
   const data = await AdminApi.getEmailSettings({});
@@ -14,11 +15,14 @@ export function Page() {
   const { emailSettings } = Pages.useLoadedData() as { emailSettings: AdminApi.EmailSettings | null };
 
   return (
-    <Pages.Page title="Email Configuration" testId="saas-admin-email-settings-page">
+    <Pages.Page
+      title={t("pages.saasAdminEmailSettingsPage.emailConfiguration")}
+      testId="saas-admin-email-settings-page"
+    >
       <Paper.Root size="large">
-        <Paper.Navigation items={[{ to: "/admin", label: "Administration" }]} />
+        <Paper.Navigation items={[{ to: "/admin", label: t("pages.saasAdminEmailSettingsPage.administration") }]} />
         <Paper.Body>
-          <Paper.Header title="Email Configuration" />
+          <Paper.Header title={t("pages.saasAdminEmailSettingsPage.emailConfiguration")} />
           <EmailSettingsSection initialSettings={emailSettings} />
         </Paper.Body>
       </Paper.Root>

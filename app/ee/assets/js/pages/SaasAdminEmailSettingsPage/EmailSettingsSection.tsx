@@ -5,6 +5,7 @@ import * as AdminApi from "@/ee/admin_api";
 import classNames from "classnames";
 import { Forms, IconInfoCircle, Spacer, Tooltip } from "turboui";
 import { TestEmailAction } from "./TestEmailModal";
+import { t } from "@/i18n";
 
 interface Props {
   initialSettings: AdminApi.EmailSettings | null;
@@ -16,8 +17,8 @@ export function EmailSettingsSection({ initialSettings }: Props) {
   return (
     <div className="mt-12">
       <Paper.Section
-        title="Email Settings"
-        subtitle="Configure the email provider used by all companies. Secrets are never displayed; enter a new value to replace them."
+        title={t("pages.saasAdminEmailSettingsPage.emailSettings")}
+        subtitle={t("pages.saasAdminEmailSettingsPage.configureTheEmailProviderUsedBy")}
         actions={<TestEmailAction />}
       >
         <EmailSettingsForm emailSettings={emailSettings} onUpdate={setEmailSettings} />
@@ -90,13 +91,17 @@ function EmailSettingsForm({ emailSettings, onUpdate }: FormProps) {
   return (
     <Forms.Form form={form}>
       <Forms.FieldGroup>
-        <Forms.TextInput field="notificationEmail" label="Notification Email" placeholder="noreply@yourcompany.com" />
+        <Forms.TextInput
+          field="notificationEmail"
+          label={t("pages.saasAdminEmailSettingsPage.notificationEmail")}
+          placeholder={t("pages.saasAdminEmailSettingsPage.noreplyYourcompanyCom")}
+        />
         <Forms.RadioButtons
           field="provider"
-          label="Provider"
+          label={t("pages.saasAdminEmailSettingsPage.provider")}
           options={[
             { value: "smtp", label: "SMTP" },
-            { value: "sendgrid", label: "SendGrid" },
+            { value: "sendgrid", label: t("pages.saasAdminEmailSettingsPage.sendGrid") },
           ]}
         />
       </Forms.FieldGroup>
@@ -107,29 +112,41 @@ function EmailSettingsForm({ emailSettings, onUpdate }: FormProps) {
         <Forms.FieldGroup>
           <SecretPasswordInput
             field="sendgridApiKey"
-            label="SendGrid API Key"
+            label={t("pages.saasAdminEmailSettingsPage.sendGridAPIKey")}
             isSet={sendgridKeySet}
-            placeholder="Enter API key"
+            placeholder={t("pages.saasAdminEmailSettingsPage.enterAPIKey")}
           />
         </Forms.FieldGroup>
       )}
 
       {form.values.provider === "smtp" && (
         <Forms.FieldGroup layout="grid" layoutOptions={{ columns: 2 }}>
-          <Forms.TextInput field="smtpHost" label="SMTP Host" placeholder="smtp.example.com" />
-          <Forms.NumberInput field="smtpPort" label="SMTP Port" placeholder="587" />
-          <Forms.TextInput field="smtpUsername" label="SMTP Username" placeholder="user@example.com" />
+          <Forms.TextInput
+            field="smtpHost"
+            label={t("pages.saasAdminEmailSettingsPage.sMTPHost")}
+            placeholder="smtp.example.com"
+          />
+          <Forms.NumberInput
+            field="smtpPort"
+            label={t("pages.saasAdminEmailSettingsPage.sMTPPort")}
+            placeholder="587"
+          />
+          <Forms.TextInput
+            field="smtpUsername"
+            label={t("pages.saasAdminEmailSettingsPage.sMTPUsername")}
+            placeholder={t("pages.saasAdminEmailSettingsPage.userExampleCom")}
+          />
           <SmtpPasswordInput isSet={smtpPasswordSet} />
           <div className="col-span-2 space-y-2">
-            <BooleanCheckbox field="smtpSsl" label="Use SSL" />
-            <BooleanCheckbox field="smtpTlsRequired" label="Require TLS" />
+            <BooleanCheckbox field="smtpSsl" label={t("pages.saasAdminEmailSettingsPage.useSSL")} />
+            <BooleanCheckbox field="smtpTlsRequired" label={t("pages.saasAdminEmailSettingsPage.requireTLS")} />
           </div>
         </Forms.FieldGroup>
       )}
 
       {statusMessage && <StatusMessage tone={statusTone}>{statusMessage}</StatusMessage>}
 
-      <Forms.Submit saveText="Save Email Settings" />
+      <Forms.Submit saveText={t("pages.saasAdminEmailSettingsPage.saveEmailSettings")} />
     </Forms.Form>
   );
 }
@@ -195,13 +212,15 @@ function SmtpPasswordInput({ isSet }: { isSet: boolean }) {
   const [isFocused, setIsFocused] = React.useState(false);
 
   const helperText = (
-    <div className="text-xs text-content-dimmed">Password already set. Leave blank to keep current password</div>
+    <div className="text-xs text-content-dimmed">
+      {t("pages.saasAdminEmailSettingsPage.passwordAlreadySetLeaveBlankTo")}
+    </div>
   );
   const placeholder = isSet && !isFocused && value === "" ? "••••••••" : "Enter password";
 
   const labelNode = (
     <span className="inline-flex items-center gap-2">
-      <span>SMTP Password</span>
+      <span>{t("pages.saasAdminEmailSettingsPage.sMTPPassword")}</span>
       <Tooltip content={helperText}>
         <span className="inline-flex items-center">
           <IconInfoCircle size={14} className="text-content-dimmed hover:text-content-accent" />

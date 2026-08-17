@@ -7,6 +7,7 @@ import { IconCircleX, IconExternalLink, IconFlag, IconSearch } from "../icons";
 import { DivLink } from "../Link";
 import classNames from "../utils/classnames";
 import { createTestId, TestableElement } from "../TestableElement";
+import { t } from "../i18n";
 
 export interface Milestone {
   id: string;
@@ -243,7 +244,7 @@ function DialogMenu({ state }: { state: State }) {
         <DialogMenuOption
           testId={createTestId(state.testId, "view-milestone")}
           icon={IconExternalLink}
-          label="View milestone"
+          label={t("turboui.milestoneField.viewMilestone")}
           linkTo={state.milestone.link}
         />
       )}
@@ -252,7 +253,7 @@ function DialogMenu({ state }: { state: State }) {
         <DialogMenuOption
           testId={createTestId(state.testId, "view-in-project")}
           icon={IconExternalLink}
-          label="View in project"
+          label={t("turboui.milestoneField.viewInProject")}
           linkTo={state.milestone.projectLink}
         />
       )}
@@ -260,7 +261,7 @@ function DialogMenu({ state }: { state: State }) {
       <DialogMenuOption
         testId={createTestId(state.testId, "change-milestone")}
         icon={IconSearch}
-        label="Choose different milestone"
+        label={t("turboui.milestoneField.chooseDifferentMilestone")}
         onClick={() => {
           state.setSearchQuery(""); // Clear any previous search
           state.setDialogMode("search");
@@ -284,7 +285,7 @@ function DialogMenu({ state }: { state: State }) {
       <DialogMenuOption
         testId={createTestId(state.testId, "clear-milestone")}
         icon={IconCircleX}
-        label="Clear milestone"
+        label={t("turboui.milestoneField.clearMilestone")}
         onClick={() => {
           state.setMilestone(null);
           state.setIsOpen(false);
@@ -365,7 +366,7 @@ function DialogSearch({ state }: { state: State }) {
       <div className="p-1 pb-0.5">
         <input
           className="w-full border border-surface-outline rounded-lg px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-base bg-surface-base text-content-base"
-          placeholder="Find or create milestone..."
+          placeholder={t("turboui.milestoneField.findOrCreateMilestone")}
           value={state.searchQuery}
           autoFocus
           onChange={(e) => state.setSearchQuery(e.target.value)}
@@ -410,7 +411,9 @@ function DialogSearch({ state }: { state: State }) {
         ))}
 
         {state.milestones.length === 0 && state.searchQuery && (
-          <div className="px-1.5 py-2 text-sm text-content-dimmed text-center">No milestones found</div>
+          <div className="px-1.5 py-2 text-sm text-content-dimmed text-center">
+            {t("turboui.milestoneField.noMilestonesFound")}
+          </div>
         )}
       </div>
     </div>

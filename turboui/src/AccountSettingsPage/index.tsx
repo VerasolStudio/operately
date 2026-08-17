@@ -18,30 +18,32 @@ export function AccountSettingsPage(props: AccountSettingsPage.Props) {
   const { t } = useTranslation();
 
   const navigation = React.useMemo(
-    () => [{ to: props.homePath, label: t("nav.home", "Home") }],
+    () => [{ to: props.homePath, label: t("turboui.accountPage.home") }],
     [props.homePath, t],
   );
 
   return (
-    <Page title={t("account.settings.title", "Settings")} size="small" testId="account-settings-page" navigation={navigation}>
+    <Page
+      title={t("turboui.accountSettingsPage.title")}
+      size="small"
+      testId="account-settings-page"
+      navigation={navigation}
+    >
       <div className="px-4 sm:px-10 py-8">
-        <div className="mb-2 text-content-accent text-3xl font-extrabold">{t("account.settings.title", "Settings")}</div>
-        <p className="mb-8">{t("account.settings.description", "Manage the account settings available to you.")}</p>
+        <div className="mb-2 text-content-accent text-3xl font-extrabold">{t("turboui.accountSettingsPage.title")}</div>
+        <p className="mb-8">{t("turboui.accountSettingsPage.description")}</p>
 
         <OptionsMenuItem
           linkTo={props.appearancePath}
           icon={IconPalette}
-          title={t("account.settings.appearance", "Appearance")}
-          description={t("account.settings.appearanceDescription", "Adjust how Operately looks for you")}
+          title={t("turboui.accountSettingsPage.appearance")}
+          description={t("turboui.accountSettingsPage.appearanceDescription")}
         />
         <OptionsMenuItem
           linkTo={props.notificationSettingsPath}
           icon={IconBell}
-          title={t("account.settings.notificationSettings", "Notification settings")}
-          description={t(
-            "account.settings.notificationSettingsDescription",
-            "Configure how activity and summary emails are delivered",
-          )}
+          title={t("turboui.accountSettingsPage.notificationSettings")}
+          description={t("turboui.accountSettingsPage.notificationSettingsDescription")}
         />
       </div>
     </Page>

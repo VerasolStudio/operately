@@ -4,6 +4,7 @@ import { GoalPage } from ".";
 import { PrimaryButton } from "../Button";
 import { InfoCallout } from "../Callouts";
 import { DiscussionCard } from "../DiscussionCard";
+import { t } from "../i18n";
 
 export function Discussions(props: GoalPage.State) {
   if (props.discussions.length === 0 && !props.permissions.canEdit && props.state !== "closed") return null;
@@ -15,12 +16,12 @@ export function Discussions(props: GoalPage.State) {
     <div className="p-4 max-w-3xl mx-auto my-6 overflow-auto">
       <div className="flex items-center gap-2 justify-between">
         <div>
-          <h2 className="font-bold text-xl">Discussions</h2>
+          <h2 className="font-bold text-xl">{t("turboui.goalPage.discussions")}</h2>
         </div>
 
         {showNewDiscussionButton && (
           <PrimaryButton linkTo={props.newDiscussionLink} size="xs" testId="start-discussion">
-            Start discussion
+            {t("turboui.goalPage.startDiscussion")}
           </PrimaryButton>
         )}
       </div>
@@ -52,8 +53,8 @@ function DiscussionsList({ props }: { props: GoalPage.State }) {
 function DiscussionsZeroState() {
   return (
     <InfoCallout
-      message="No discussions yet"
-      description="Start a discussion to share updates, ask questions, or get feedback from your team."
+      message={t("turboui.goalPage.noDiscussionsYet")}
+      description={t("turboui.goalPage.startADiscussionToShareUpdates")}
     />
   );
 }
@@ -61,8 +62,8 @@ function DiscussionsZeroState() {
 function DiscussionsZeroStateClosed() {
   return (
     <InfoCallout
-      message="No discussions"
-      description="This goal is closed and has no discussions."
+      message={t("turboui.goalPage.noDiscussions")}
+      description={t("turboui.goalPage.thisGoalIsClosedAndHas")}
     />
   );
 }

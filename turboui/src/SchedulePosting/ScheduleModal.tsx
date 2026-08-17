@@ -7,6 +7,7 @@ import type { FormattedTimePreferences } from "../FormattedTime";
 import { TimePicker } from "../TimePicker";
 import { formatDate } from "../utils/formatting";
 import { dateInTimezone, zonedDateTimeToDate } from "../utils/timezone";
+import { t } from "../i18n";
 
 export interface ScheduleModalProps {
   children?: React.ReactNode;
@@ -71,7 +72,7 @@ export function ScheduleModal({
 
         <div className="mb-6 flex items-center gap-4">
           <label id="schedule-time-label" className="text-sm font-medium text-content-dimmed" htmlFor="schedule-time">
-            Time
+            {t("turboui.schedulePosting.time")}
           </label>
           <TimePicker
             value={time}
@@ -91,10 +92,10 @@ export function ScheduleModal({
 
         <div className="flex justify-end gap-2 mt-4 items-center">
           <SecondaryButton onClick={handleCancel} size="sm">
-            Cancel
+            {t("turboui.schedulePosting.cancel")}
           </SecondaryButton>
           <PrimaryButton onClick={handleSchedule} size="sm" disabled={isInvalid}>
-            Schedule
+            {t("turboui.schedulePosting.schedule")}
           </PrimaryButton>
         </div>
       </Modal>

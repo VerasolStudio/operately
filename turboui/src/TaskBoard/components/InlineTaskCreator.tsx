@@ -1,6 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import * as Types from "../types";
 import { PrimaryButton } from "../../Button";
+import { t } from "../../i18n";
 
 export interface InlineTaskCreatorProps {
   milestone: Types.Milestone | null;
@@ -79,14 +80,14 @@ export const InlineTaskCreator = forwardRef<InlineTaskCreatorHandle, InlineTaskC
             onChange={(e) => setTitle(e.target.value)}
             onKeyDown={onKeyDown}
             placeholder={placeholder}
-            aria-label="Add task"
+            aria-label={t("turboui.taskBoard.addTask")}
             data-test-id={testId || "inline-task-title"}
             className="w-full rounded-md border border-surface-outline bg-transparent px-2 py-2 text-base outline-none focus:border-indigo-500 sm:flex-1 sm:py-1 sm:text-sm"
           />
 
           <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center">
             <PrimaryButton size="xs" disabled={!title.trim()} onClick={submit} className="w-full sm:w-auto">
-              Add
+              {t("turboui.taskBoard.add")}
             </PrimaryButton>
             <button
               type="button"
@@ -96,7 +97,7 @@ export const InlineTaskCreator = forwardRef<InlineTaskCreatorHandle, InlineTaskC
                 onCancel?.();
               }}
             >
-              Cancel
+              {t("turboui.taskBoard.cancel")}
             </button>
           </div>
         </div>

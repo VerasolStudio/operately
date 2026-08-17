@@ -9,6 +9,7 @@ import { PageTitle } from "./PageTitle";
 import { LoaderResult, useGotoProjectContributors } from "./loader";
 import { joinStr } from "@/utils/strings";
 import { compareIds } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function ChangeReviewer() {
   const { contributor } = Pages.useLoadedData() as LoaderResult;
@@ -20,8 +21,8 @@ export function ChangeReviewer() {
   const title = `Edit project reviewer`;
 
   const subtitle = joinStr(
-    `${name} is currently the ${contributor.role} on this project. `,
-    `If you select a new reviewer, ${name} will be reassigned as a contributor.`,
+    t("pages.projectContributorsEditPage.isCurrentlyTheOnThisProject", { v1: name, v2: contributor.role }),
+    t("pages.projectContributorsEditPage.ifYouSelectANewReviewer", { v1: name }),
   );
 
   return (
@@ -32,13 +33,13 @@ export function ChangeReviewer() {
         <Forms.FieldGroup>
           <Forms.SelectPerson
             field={"person"}
-            label="Project Reviewer"
+            label={t("pages.projectContributorsEditPage.projectReviewer")}
             searchFn={search}
             default={contributor.person}
           />
         </Forms.FieldGroup>
 
-        <Forms.Submit saveText="Save" />
+        <Forms.Submit saveText={t("pages.projectContributorsEditPage.save")} />
       </Forms.Form>
     </Paper.Body>
   );

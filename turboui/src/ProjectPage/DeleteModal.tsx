@@ -3,6 +3,7 @@ import { ProjectPage } from ".";
 import { DangerButton, SecondaryButton } from "../Button";
 import { WarningCallout } from "../Callouts";
 import Modal from "../Modal";
+import { t } from "../i18n";
 
 export function DeleteModal(props: ProjectPage.State) {
   const title = "Delete " + props.project.name;
@@ -32,16 +33,16 @@ function DeleteForm(props: ProjectPage.State) {
     <div>
       <form className="space-y-6" onSubmit={handleSubmit}>
         <WarningCallout
-          message="This action cannot be undone"
-          description={`Deleting a project is permanent and cannot be undone. Please confirm that you want to delete the ${props.project.name} project.`}
+          message={t("turboui.projectPage.thisActionCannotBeUndone")}
+          description={t("turboui.projectPage.deletingAProjectIsPermanentAnd", { v1: props.project.name })}
         />
 
         <div className="flex items-center gap-2">
           <DangerButton size="sm" type="submit" loading={isDeleting} disabled={isDeleting} testId="delete">
-            Delete Forever
+            {t("turboui.projectPage.deleteForever")}
           </DangerButton>
           <SecondaryButton size="sm" onClick={props.closeDeleteModal} testId="cancel">
-            Cancel
+            {t("turboui.projectPage.cancel")}
           </SecondaryButton>
         </div>
       </form>

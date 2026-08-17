@@ -6,6 +6,7 @@ import * as Tasks from "@/models/tasks";
 import { assertPresent } from "@/utils/assertions";
 
 import { showErrorToast, MilestoneKanbanPage } from "turboui";
+import { t } from "@/i18n";
 
 export function useMilestoneTaskStatuses(
   milestone: Milestones.Milestone,
@@ -84,7 +85,10 @@ export function useMilestoneTaskStatuses(
         if (res.success === false) {
           setBaseStatuses(previousStatuses);
           setBaseTasks(previousTasks);
-          showErrorToast("Error", "Failed to update task statuses");
+          showErrorToast(
+            t("pages.milestoneKanbanPage.error"),
+            t("pages.milestoneKanbanPage.failedToUpdateTaskStatuses"),
+          );
           return;
         }
 
@@ -95,7 +99,7 @@ export function useMilestoneTaskStatuses(
         console.error("Failed to update task statuses", error);
         setBaseStatuses(previousStatuses);
         setBaseTasks(previousTasks);
-        showErrorToast("Error", "Failed to update task statuses");
+        showErrorToast(t("pages.milestoneKanbanPage.error"), t("pages.milestoneKanbanPage.failedToUpdateTaskStatuses"));
       }
     },
     [milestone.project.id, refresh, baseStatuses, baseTasks, setBaseTasks],

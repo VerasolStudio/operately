@@ -46,19 +46,19 @@ export function AccountPage(props: AccountPage.Props) {
   const actionLinks: AccountPage.ActionLink[] = [
     {
       icon: IconUserCircle,
-      label: t("userMenu.profile", "Profile"),
+      label: t("turboui.accountPage.profile"),
       to: props.profilePath,
       testId: "profile-link",
     },
     {
       icon: IconSettings,
-      label: t("userMenu.settings", "Settings"),
+      label: t("turboui.accountPage.settings"),
       to: props.settingsPath,
       testId: "settings-link",
     },
     {
       icon: IconLockPassword,
-      label: t("userMenu.passwordAndSecurity", "Password & Security"),
+      label: t("turboui.accountPage.passwordAndSecurity"),
       to: props.securityPath,
       testId: "password-link",
     },
@@ -67,7 +67,7 @@ export function AccountPage(props: AccountPage.Props) {
   const actionButtons: AccountPage.ActionButton[] = [
     {
       icon: IconDoorExit,
-      label: t("userMenu.signOut", "Sign Out"),
+      label: t("turboui.accountPage.signOut"),
       onClick: props.onLogOut,
       testId: "log-out-button",
     },
@@ -76,14 +76,14 @@ export function AccountPage(props: AccountPage.Props) {
   const navigation = [
     {
       to: props.homePath,
-      label: t("nav.home", "Home"),
+      label: t("turboui.accountPage.home"),
     },
   ];
 
   return (
-    <Page title={t("account.myAccount", "My Account")} size="small" testId="my-account-page" navigation={navigation}>
+    <Page title={t("turboui.accountPage.myAccount")} size="small" testId="my-account-page" navigation={navigation}>
       <div className="p-8">
-        <PageTitle title={t("account.myAccount", "My Account")} />
+        <PageTitle title={t("turboui.accountPage.myAccount")} />
         <UserInfo person={props.person} />
 
         <div className="flex flex-col gap-8">

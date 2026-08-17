@@ -18,6 +18,7 @@ import { useCurrentSubscriptionsAdapter } from "@/models/subscriptions";
 
 import { loader, useLoaderData } from "./loader";
 import { AckCTA, AcknowledgementStatus } from "./AckCTA";
+import { t } from "@/i18n";
 
 export default { name: "GoalActivityPage", loader, Page } as PageModule;
 
@@ -60,11 +61,11 @@ function Nav() {
 
   if (goal.space) {
     items.push({ to: paths.spacePath(goal.space.id), label: goal.space.name });
-    items.push({ to: paths.spaceWorkMapPath(goal.space.id), label: "Work Map" });
+    items.push({ to: paths.spaceWorkMapPath(goal.space.id), label: t("pages.goalActivityPage.workMap") });
   }
   if (isDiscussion) {
     items.push({ to: paths.goalPath(goal.id), label: goal.name });
-    items.push({ to: paths.goalPath(goal.id, { tab: "discussions" }), label: "Discussions" });
+    items.push({ to: paths.goalPath(goal.id, { tab: "discussions" }), label: t("pages.goalActivityPage.discussions") });
   } else {
     items.push({ to: paths.goalPath(goal.id), label: goal.name });
   }

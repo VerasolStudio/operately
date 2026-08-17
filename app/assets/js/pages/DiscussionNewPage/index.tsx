@@ -10,6 +10,7 @@ import { PageModule } from "@/routes/types";
 import { GhostButton, Link, ScheduleFlowControls, SubscribersSelector } from "turboui";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export default { name: "DiscussionNewPage", loader, Page } as PageModule;
 
 interface LoaderResult {
@@ -30,7 +31,7 @@ function Page() {
   const form = useForm({ space: space, mode: "create", potentialSubscribers: space.potentialSubscribers! });
 
   return (
-    <Pages.Page title="New Discussion" testId="new-discussion">
+    <Pages.Page title={t("pages.discussionNewPage.newDiscussion")} testId="new-discussion">
       <Paper.Root>
         <Navigation space={space} />
 
@@ -63,15 +64,15 @@ function Submit({ form }: { form: FormState }) {
     <div>
       <ScheduleFlowControls
         scheduleFlow={form.scheduleFlow}
-        primaryLabel="Post"
+        primaryLabel={t("pages.discussionNewPage.post")}
         onPrimaryClick={form.postMessage}
         loading={form.postMessageSubmitting || form.scheduleSubmitting}
         testId="post-discussion"
         formattedTimePreferences={formattedTimePreferences}
-        modalTitle="Schedule Discussion"
+        modalTitle={t("pages.discussionNewPage.scheduleDiscussion")}
         secondaryAction={
           <GhostButton loading={form.postAsDraftSubmitting} testId="save-as-draft" onClick={form.postAsDraft}>
-            Save as draft
+            {t("pages.discussionNewPage.saveAsDraft")}
           </GhostButton>
         }
       />
@@ -86,7 +87,7 @@ function Submit({ form }: { form: FormState }) {
 function DiscardLink({ form }: { form: FormState }) {
   return (
     <Link to={form.cancelPath} testId="discard" className="font-medium">
-      Discard this message
+      {t("pages.discussionNewPage.discardThisMessage")}
     </Link>
   );
 }

@@ -9,6 +9,7 @@ import { PieChart } from "turboui";
 import { Target } from "./types";
 import { ExpandIcon, TargetNumericField, TargetTextField, TargetValue } from "./components";
 import { useTargetsContext } from "./TargetsContext";
+import { t } from "@/i18n";
 
 interface Props {
   index: number;
@@ -58,9 +59,27 @@ function DetailsSection({ target, editing }) {
 
   return (
     <div className="col-span-3 mt-2 grid grid-cols-3 gap-2">
-      <TargetNumericField label="Start" target={target} field="from" testid="target-input-from" placeholder="30" />
-      <TargetNumericField label="Target" target={target} field="to" testid="target-input-to" placeholder="15" />
-      <TargetTextField label="Unit" target={target} field="unit" testid="target-input-unit" placeholder="minutes" />
+      <TargetNumericField
+        label={t("features.goals.start")}
+        target={target}
+        field="from"
+        testid="target-input-from"
+        placeholder="30"
+      />
+      <TargetNumericField
+        label={t("features.goals.target")}
+        target={target}
+        field="to"
+        testid="target-input-to"
+        placeholder="15"
+      />
+      <TargetTextField
+        label={t("features.goals.unit")}
+        target={target}
+        field="unit"
+        testid="target-input-unit"
+        placeholder="minutes"
+      />
     </div>
   );
 }
@@ -75,7 +94,7 @@ function NameField({ editing, target }: { target: Target; editing: boolean }) {
           target={target}
           field="name"
           testid="target-input-name"
-          placeholder="e.g. Average Onboarding Time is twice as fast"
+          placeholder={t("features.goals.eGAverageOnboardingTimeIs")}
         />
       </div>
     );
@@ -97,11 +116,11 @@ function Actions({ editing, target }: { editing: boolean; target: Target }) {
   return (
     <div className="mt-3 flex items-center gap-2">
       <PrimaryButton size="sm" onClick={() => closeEdit(targetOpen)}>
-        Done
+        {t("features.goals.done")}
       </PrimaryButton>
       {!target.isNew && (
         <SecondaryButton size="sm" onClick={() => resetEdit(targetOpen)}>
-          Cancel
+          {t("features.goals.cancel")}
         </SecondaryButton>
       )}
       <IconTrash className="text-content-dimmed cursor-pointer" size={20} onClick={() => deleteTarget(targetOpen)} />

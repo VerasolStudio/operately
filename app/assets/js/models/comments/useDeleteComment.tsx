@@ -2,6 +2,7 @@ import React from "react";
 import Api, { CommentParentType } from "@/api";
 import { showErrorToast } from "turboui";
 import { compareIds } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function useDeleteComment<T extends { id?: string | null }>(
   comments: T[],
@@ -30,7 +31,7 @@ export function useDeleteComment<T extends { id?: string | null }>(
           // Rollback: restore the comment
           setComments((prev) => [...prev, comment]);
         }
-        showErrorToast("Error", "Failed to delete comment.");
+        showErrorToast(t("app.useDeleteComment.error"), t("app.useDeleteComment.failedToDeleteComment"));
       }
     },
     [comments, parentType, invalidateCache, setComments],

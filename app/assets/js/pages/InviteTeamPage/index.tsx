@@ -6,6 +6,7 @@ import { PageModule } from "@/routes/types";
 import { InvitePeoplePage, showErrorToast } from "turboui";
 import { usePaths } from "../../routes/paths";
 import { useCompanyLoaderData } from "@/routes/useCompanyLoaderData";
+import { t } from "@/i18n";
 
 export default { name: "InviteTeamPage", loader, Page } as PageModule;
 
@@ -32,8 +33,8 @@ function Page() {
   const company = data?.company;
   const navigationItems = React.useMemo(
     () => [
-      { to: paths.companyAdminPath(), label: "Company Administration" },
-      { to: paths.companyManagePeoplePath(), label: "Manage Team Members" },
+      { to: paths.companyAdminPath(), label: t("pages.inviteTeamPage.companyAdministration") },
+      { to: paths.companyManagePeoplePath(), label: t("pages.inviteTeamPage.manageTeamMembers") },
     ],
     [paths],
   );
@@ -61,7 +62,7 @@ function Page() {
         allowedDomains: enabled ? domainState.value.split(",").map((e) => e.trim()) : [],
       });
     } catch (error) {
-      showErrorToast("Network Error", "Failed to update trusted domains");
+      showErrorToast(t("pages.inviteTeamPage.networkError"), t("pages.inviteTeamPage.failedToUpdateTrustedDomains"));
       setDomainState((prev) => ({ ...prev, oldValue }));
     }
   };
@@ -73,7 +74,7 @@ function Page() {
         allowedDomains: value.split(",").map((e) => e.trim()),
       });
     } catch (error) {
-      showErrorToast("Network Error", "Failed to update trusted domains");
+      showErrorToast(t("pages.inviteTeamPage.networkError"), t("pages.inviteTeamPage.failedToUpdateTrustedDomains"));
       setDomainState((prev) => ({ ...prev, value: oldValue }));
     }
   };
@@ -86,7 +87,7 @@ function Page() {
       setLinkEnabled(newValue);
       await Api.invitations.updateCompanyInviteLink({ isActive: newValue });
     } catch (error) {
-      showErrorToast("Network Error", "Failed to disable invite link.");
+      showErrorToast(t("pages.inviteTeamPage.networkError"), t("pages.inviteTeamPage.failedToDisableInviteLink"));
       setLinkEnabled(oldValue);
     }
   };
@@ -99,7 +100,7 @@ function Page() {
       const result = await Api.invitations.resetCompanyInviteLink({});
       setCurrentToken(result.inviteLink.token!);
     } catch (error) {
-      showErrorToast("Network Error", "Failed to reset invite link.");
+      showErrorToast(t("pages.inviteTeamPage.networkError"), t("pages.inviteTeamPage.failedToResetInviteLink"));
       setPageError("Failed to reset invite link. Please try again.");
     } finally {
       setResettingLink(false);

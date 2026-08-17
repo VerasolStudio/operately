@@ -16,6 +16,7 @@ import {
 } from "../icons";
 import { createTestId } from "../TestableElement";
 import type { GlobalSearch } from "./index";
+import { t } from "../i18n";
 
 export interface SearchOption {
   id: string;
@@ -132,7 +133,7 @@ export function buildFullTextSearchOption(state: GlobalSearch.State): SearchOpti
     id: "full-text-search",
     optionId: createTestId(state.testId, "option", "full-text-search"),
     resourceType: "full-text-search",
-    name: `Search all content for “${query}”`,
+    name: t("turboui.globalSearch.searchAllContentFor", { v1: query }),
     link: state.fullTextSearchPath(query),
     icon: <IconSearch size={24} />,
     testId: createTestId(state.testId, "full-text-search"),

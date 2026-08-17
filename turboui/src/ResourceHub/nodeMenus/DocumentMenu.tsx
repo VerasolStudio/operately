@@ -9,6 +9,7 @@ import type { ResourceHubDocument } from "../types";
 import { CopyDocumentModal } from "./CopyDocumentModal";
 import { CopyResourceMenuItem } from "./CopyResource";
 import { MoveResourceMenuItem, MoveResourceModal } from "./MoveResource";
+import { t } from "../../i18n";
 
 interface DocumentMenuProps {
   document: ResourceHubDocument;
@@ -65,7 +66,7 @@ function EditDocumentMenuItem({ document }: DocumentMenuProps) {
 
   return (
     <MenuLinkItem to={editPath} testId={editId}>
-      Edit
+      {t("turboui.resourceHub.edit")}
     </MenuLinkItem>
   );
 }
@@ -81,7 +82,7 @@ function DeleteDocumentMenuItem({
 
   return (
     <MenuActionItem onClick={showConfirmModal} testId={deleteId} danger>
-      Delete
+      {t("turboui.resourceHub.delete")}
     </MenuActionItem>
   );
 }
@@ -133,7 +134,7 @@ function ExportMarkdownMenuItem({ document }: DocumentMenuProps) {
 
   return (
     <MenuActionItem onClick={handleExport} testId={createTestId("export-markdown", document.id)}>
-      Export as Markdown
+      {t("turboui.resourceHub.exportAsMarkdown")}
     </MenuActionItem>
   );
 }

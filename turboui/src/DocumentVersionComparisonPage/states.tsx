@@ -1,6 +1,7 @@
 import React from "react";
 
 import { SecondaryButton } from "../Button";
+import { t } from "../i18n";
 
 export function NoChangesState() {
   return (
@@ -8,7 +9,7 @@ export function NoChangesState() {
       className="border-t border-surface-outline bg-surface-dimmed py-4 text-sm text-content-dimmed"
       data-test-id="no-content-changes"
     >
-      No content changes between these versions.
+      {t("turboui.documentVersionComparisonPage.noContentChangesBetweenTheseVersions")}
     </div>
   );
 }
@@ -19,9 +20,9 @@ export function ComparisonLoadingState() {
       className="grid grid-cols-1 md:grid-cols-2"
       data-test-id="comparison-loading"
       role="status"
-      aria-label="Loading comparison"
+      aria-label={t("turboui.documentVersionComparisonPage.loadingComparison")}
     >
-      <span className="sr-only">Loading comparison…</span>
+      <span className="sr-only">{t("turboui.documentVersionComparisonPage.loadingComparison2")}</span>
       <LoadingPane position="before" />
       <LoadingPane position="after" />
     </div>
@@ -55,13 +56,15 @@ function LoadingPane({ position }: { position: "before" | "after" }) {
 export function ComparisonErrorState({ onRetry }: { onRetry: () => void }) {
   return (
     <div data-test-id="comparison-error" role="alert">
-      <h2 className="font-medium text-content-error">Unable to load this comparison</h2>
+      <h2 className="font-medium text-content-error">
+        {t("turboui.documentVersionComparisonPage.unableToLoadThisComparison")}
+      </h2>
       <p className="mt-1 text-sm text-content-dimmed">
-        One of the selected versions could not be loaded. Try again or choose another version from the history.
+        {t("turboui.documentVersionComparisonPage.oneOfTheSelectedVersionsCould")}
       </p>
       <div className="mt-4">
         <SecondaryButton size="sm" onClick={onRetry} testId="retry-comparison">
-          Retry
+          {t("turboui.documentVersionComparisonPage.retry")}
         </SecondaryButton>
       </div>
     </div>
@@ -71,9 +74,11 @@ export function ComparisonErrorState({ onRetry }: { onRetry: () => void }) {
 export function VersionUnavailableState() {
   return (
     <div data-test-id="version-unavailable" role="alert">
-      <h2 className="font-medium text-content-error">Version unavailable</h2>
+      <h2 className="font-medium text-content-error">
+        {t("turboui.documentVersionComparisonPage.versionUnavailable")}
+      </h2>
       <p className="mt-1 text-sm text-content-dimmed">
-        That version could not be found. Choose another version from the history list.
+        {t("turboui.documentVersionComparisonPage.thatVersionCouldNotBeFound")}
       </p>
     </div>
   );

@@ -18,6 +18,7 @@ import { useShortcutFieldFocusRestore } from "../hooks/useShortcutFieldFocusRest
 
 // Using shared types
 import { Person, TaskWithIndex, Status } from "../types";
+import { t } from "../../i18n";
 
 type DueDateFieldTarget = "mobile" | "desktop" | null;
 
@@ -269,7 +270,7 @@ export function TaskItem({
               size={currentDueDate ? "small" : "lg"}
               calendarOnly
               testId="task-due-date-mobile"
-              ariaLabel="Set due date"
+              ariaLabel={t("turboui.taskBoard.setDueDate")}
               className={
                 currentDueDate
                   ? ""
@@ -293,7 +294,7 @@ export function TaskItem({
               size="small"
               calendarOnly
               testId="task-due-date"
-              ariaLabel="Set due date"
+              ariaLabel={t("turboui.taskBoard.setDueDate")}
               className={
                 currentDueDate
                   ? ""
@@ -346,7 +347,7 @@ function TaskTitleContent({ task }: { task: TaskWithIndex }) {
       {task.hasDescription && (
         <span
           className="text-content-dimmed flex-shrink-0"
-          title="Has description"
+          title={t("turboui.taskBoard.hasDescription")}
           data-test-id="description-indicator"
         >
           <IconFileText size={14} />

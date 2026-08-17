@@ -13,6 +13,7 @@ import { CurrentSubscriptions } from "../Subscriptions";
 import { TextSeparator } from "../TextSeparator";
 
 import type { FilePage as FilePageNS } from "./types";
+import { t } from "../i18n";
 
 export function FilePage(props: FilePageNS.Props) {
   const hasDescription = props.description != null && !isContentEmpty(props.description);
@@ -124,7 +125,7 @@ function Preview({ title, blob }: { title: string; blob: FilePageNS.BlobPreview 
       >
         <video controls style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
           <source src={blob.url} type={blob.contentType || "video/mp4"} />
-          Your browser does not support videos.
+          {t("turboui.filePage.yourBrowserDoesNotSupportVideos")}
         </video>
       </div>
     );
@@ -159,13 +160,12 @@ function FileInfo({
       </div>
       <div className="text-content-dimmed">•</div>
       <div className="text-content-dimmed underline cursor-pointer" onClick={onDownload}>
-        Download
+        {t("turboui.filePage.download")}
       </div>
       <div className="text-content-dimmed">•</div>
       <a className="text-content-dimmed underline cursor-pointer" href={viewUrl} target="_blank">
-        View
+        {t("turboui.filePage.view")}
       </a>
     </div>
   );
 }
-

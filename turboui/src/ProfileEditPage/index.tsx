@@ -8,6 +8,7 @@ import { PersonField } from "../PersonField";
 import { IconPencil } from "../icons";
 import { Editor, useEditor } from "../RichEditor";
 import { RichEditorHandlers } from "../RichEditor/useEditor";
+import { t } from "../i18n";
 
 export namespace ProfileEditPage {
   export interface Person {
@@ -84,11 +85,11 @@ export function ProfileEditPage(props: ProfileEditPage.Props) {
   const navigation = React.useMemo(() => {
     if (props.fromLocation === "admin-manage-people") {
       return [
-        { label: "Company Administration", to: props.companyAdminPath },
-        { label: "Manage Team Members", to: props.managePeoplePath },
+        { label: t("turboui.profileEditPage.companyAdministration"), to: props.companyAdminPath },
+        { label: t("turboui.profileEditPage.manageTeamMembers"), to: props.managePeoplePath },
       ];
     } else {
-      return [{ label: "Home", to: props.homePath }];
+      return [{ label: t("turboui.profileEditPage.home"), to: props.homePath }];
     }
   }, [props.fromLocation, props.companyAdminPath, props.managePeoplePath, props.homePath]);
 
@@ -98,7 +99,12 @@ export function ProfileEditPage(props: ProfileEditPage.Props) {
   };
 
   return (
-    <Page title="Edit Profile" size="small" navigation={navigation} testId="profile-edit-page">
+    <Page
+      title={t("turboui.profileEditPage.editProfile")}
+      size="small"
+      navigation={navigation}
+      testId="profile-edit-page"
+    >
       <div className="p-8">
         <form onSubmit={handleSubmit}>
           <AvatarSection {...props} />
@@ -106,7 +112,7 @@ export function ProfileEditPage(props: ProfileEditPage.Props) {
           {/* Form Fields */}
           <div className="space-y-4">
             <Textfield
-              label="Name"
+              label={t("turboui.profileEditPage.name")}
               value={props.fullName}
               onChange={(e) => props.onFullNameChange(e.target.value)}
               testId="name"
@@ -114,7 +120,7 @@ export function ProfileEditPage(props: ProfileEditPage.Props) {
             />
 
             <Textfield
-              label="Title in Company"
+              label={t("turboui.profileEditPage.titleInCompany")}
               value={props.title}
               onChange={(e) => props.onTitleChange(e.target.value)}
               testId="title"
@@ -122,7 +128,7 @@ export function ProfileEditPage(props: ProfileEditPage.Props) {
 
             {props.isCurrentUser && (
               <div data-test-id="about-me">
-                <label className="font-bold text-sm mb-1 block">About me</label>
+                <label className="font-bold text-sm mb-1 block">{t("turboui.profileEditPage.aboutMe")}</label>
                 <AboutMeEditor
                   value={props.aboutMe}
                   onChange={props.onAboutMeChange}
@@ -133,7 +139,7 @@ export function ProfileEditPage(props: ProfileEditPage.Props) {
             )}
 
             <div>
-              <label className="font-bold text-sm mb-1 block">Timezone</label>
+              <label className="font-bold text-sm mb-1 block">{t("turboui.profileEditPage.timezone")}</label>
               <select
                 value={props.timezone}
                 onChange={(e) => props.onTimezoneChange(e.target.value)}
@@ -150,14 +156,14 @@ export function ProfileEditPage(props: ProfileEditPage.Props) {
 
             {props.isCurrentUser && (
               <div>
-                <label className="font-bold text-sm mb-1 block">Time format</label>
+                <label className="font-bold text-sm mb-1 block">{t("turboui.profileEditPage.timeFormat")}</label>
                 <select
                   value={props.timeFormat}
                   onChange={(e) => props.onTimeFormatChange(e.target.value as ProfileEditPage.TimeFormat)}
                   className="w-full border border-stroke-base rounded-lg px-3 py-1.5 bg-surface-base text-content-base focus:outline-none focus:ring-2 focus:ring-primary-base"
                   data-test-id="time-format"
                 >
-                  <option value="automatic">Automatic</option>
+                  <option value="automatic">{t("turboui.profileEditPage.automatic")}</option>
                   <option value="hour_12">12-hour clock</option>
                   <option value="hour_24">24-hour clock</option>
                 </select>
@@ -173,7 +179,7 @@ export function ProfileEditPage(props: ProfileEditPage.Props) {
                 searchData={props.managerSearch}
                 testId="manager"
                 variant="form-field"
-                emptyStateMessage="Select manager"
+                emptyStateMessage={t("turboui.profileEditPage.selectManager")}
               />
             </div>
           </div>
@@ -181,12 +187,12 @@ export function ProfileEditPage(props: ProfileEditPage.Props) {
           {/* Submit Button */}
           <div className="mt-6 flex gap-2">
             <PrimaryButton type="submit" loading={props.isSubmitting} testId="submit">
-              Save Changes
+              {t("turboui.profileEditPage.saveChanges")}
             </PrimaryButton>
 
             {props.onCancel && (
               <SecondaryButton type="button" onClick={props.onCancel} disabled={props.isSubmitting}>
-                Cancel
+                {t("turboui.profileEditPage.cancel")}
               </SecondaryButton>
             )}
           </div>
@@ -209,7 +215,7 @@ function AboutMeEditor({
 }) {
   const editor = useEditor({
     handlers,
-    placeholder: "Share a short bio, what you work on, or anything you'd like others to know.",
+    placeholder: t("turboui.profileEditPage.shareAShortBioWhatYou"),
     onUpdate: ({ json }) => onChange(json),
     content: value,
     localDraft: { key: localDraftKey },
@@ -278,13 +284,13 @@ function AvatarSection(props: ProfileEditPage.Props) {
               <div className="absolute bottom-2 -right-7 opacity-85 hover:opacity-100 transition-all duration-200 focus:outline-none">
                 <div className="flex items-center gap-0.5 text-xs text-content-dimmed cursor-pointer">
                   <IconPencil size={16} />
-                  Edit
+                  {t("turboui.profileEditPage.edit")}
                 </div>
               </div>
             }
           >
             <MenuActionItem onClick={handleChangePhotoClick} testId="profile-avatar-menu-change">
-              Change photo
+              {t("turboui.profileEditPage.changePhoto")}
             </MenuActionItem>
             <MenuActionItem
               onClick={handleRemovePhotoClick}
@@ -292,7 +298,7 @@ function AvatarSection(props: ProfileEditPage.Props) {
               hidden={!props.person.avatarUrl}
               testId="profile-avatar-menu-remove"
             >
-              Remove photo
+              {t("turboui.profileEditPage.removePhoto")}
             </MenuActionItem>
           </Menu>
         )}

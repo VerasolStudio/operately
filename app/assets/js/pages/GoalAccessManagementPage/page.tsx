@@ -22,6 +22,7 @@ import {
 } from "turboui";
 import { OtherPeople } from "./OtherPeople";
 import { useLoadedData } from "./loader";
+import { t } from "@/i18n";
 
 export function Page() {
   const { goal } = useLoadedData();
@@ -51,9 +52,9 @@ function Navigation() {
 
   if (goal.space) {
     items.push({ to: paths.spacePath(goal.space.id), label: goal.space.name });
-    items.push({ to: paths.spaceWorkMapPath(goal.space.id), label: "Work Map" });
+    items.push({ to: paths.spaceWorkMapPath(goal.space.id), label: t("pages.goalAccessManagementPage.workMap") });
   } else {
-    items.push({ to: paths.workMapPath("goals"), label: "Work Map" });
+    items.push({ to: paths.workMapPath("goals"), label: t("pages.goalAccessManagementPage.workMap") });
   }
   items.push({ to: paths.goalPath(goal.id), label: goal.name });
 
@@ -71,13 +72,13 @@ function Title() {
     <div className="rounded-t-[20px]">
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-2xl font-extrabold">Team &amp; Access</div>
-          <div className="text-medium">Manage the team and access to this goal</div>
+          <div className="text-2xl font-extrabold">{t("pages.goalAccessManagementPage.teamAmpAccess")}</div>
+          <div className="text-medium">{t("pages.goalAccessManagementPage.manageTheTeamAndAccessTo")}</div>
         </div>
 
         {canEdit && (
           <PrimaryButton linkTo={addPath} testId="add-goal-access" size="sm">
-            Add People
+            {t("pages.goalAccessManagementPage.addPeople")}
           </PrimaryButton>
         )}
       </div>
@@ -99,7 +100,7 @@ function GeneralAccess() {
   const canEdit = goal.permissions?.canEdit ?? false;
 
   return (
-    <Paper.Section title="General Access">
+    <Paper.Section title={t("pages.goalAccessManagementPage.generalAccess")}>
       <BorderedRow>
         <AccessLevelSummary
           resourceType="goal"
@@ -111,7 +112,7 @@ function GeneralAccess() {
 
         {canEdit && (
           <SecondaryButton linkTo={editPath} size="xs">
-            Edit
+            {t("pages.goalAccessManagementPage.edit")}
           </SecondaryButton>
         )}
       </BorderedRow>
@@ -125,7 +126,7 @@ function AccessMembers() {
   if (accessMembers.length === 0) return null;
 
   return (
-    <Paper.Section title="People with Direct Access">
+    <Paper.Section title={t("pages.goalAccessManagementPage.peopleWithDirectAccess")}>
       {accessMembers.map((member) => (
         <AccessMemberRow key={member.id} member={member} />
       ))}
@@ -192,7 +193,7 @@ function MemberMenu({ member, role }: { member: People.Person; role: string | nu
     <Menu testId={createTestId("goal-access-menu", menuLabel)} size="medium">
       <ChangeAccessLevelMenuItem onChange={handleUpdate} />
       <MenuActionItem danger={true} onClick={handleRemove} testId="remove-goal-access">
-        Remove from goal
+        {t("pages.goalAccessManagementPage.removeFromGoal")}
       </MenuActionItem>
     </Menu>
   );
@@ -200,18 +201,18 @@ function MemberMenu({ member, role }: { member: People.Person; role: string | nu
 
 function ChangeAccessLevelMenuItem({ onChange }: { onChange: (accessLevel: number) => void }) {
   return (
-    <SubMenu label="Change access level">
+    <SubMenu label={t("pages.goalAccessManagementPage.changeAccessLevel")}>
       <MenuActionItem testId="full-access" onClick={() => onChange(PermissionLevels.FULL_ACCESS)}>
-        Full access
+        {t("pages.goalAccessManagementPage.fullAccess")}
       </MenuActionItem>
       <MenuActionItem testId="edit-access" onClick={() => onChange(PermissionLevels.EDIT_ACCESS)}>
-        Edit access
+        {t("pages.goalAccessManagementPage.editAccess")}
       </MenuActionItem>
       <MenuActionItem testId="comment-access" onClick={() => onChange(PermissionLevels.COMMENT_ACCESS)}>
-        Comment access
+        {t("pages.goalAccessManagementPage.commentAccess")}
       </MenuActionItem>
       <MenuActionItem testId="view-access" onClick={() => onChange(PermissionLevels.VIEW_ACCESS)}>
-        View access
+        {t("pages.goalAccessManagementPage.viewAccess")}
       </MenuActionItem>
     </SubMenu>
   );

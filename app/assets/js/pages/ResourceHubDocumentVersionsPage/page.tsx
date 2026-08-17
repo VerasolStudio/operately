@@ -12,6 +12,7 @@ import * as Pages from "@/components/Pages";
 
 import { useLoadedData } from "./loader";
 import { buildDocumentVersionsPageNavigation } from "./navigation";
+import { t } from "@/i18n";
 
 export function Page() {
   const { document, resourceHub, versions } = useLoadedData();
@@ -39,7 +40,10 @@ export function Page() {
           versionNumber,
           expectedCurrentVersion,
         });
-        showSuccessToast("Version restored", `Version ${versionNumber} restored as the current document.`);
+        showSuccessToast(
+          t("pages.resourceHubDocumentVersionsPage.versionRestored"),
+          t("pages.resourceHubDocumentVersionsPage.versionRestoredAsTheCurrentDocument", { v1: versionNumber }),
+        );
         refresh();
         return "ok";
       } catch (error) {
@@ -47,7 +51,10 @@ export function Page() {
           return "conflict";
         }
 
-        showErrorToast("Restore failed", "We couldn't restore that version. Please try again.");
+        showErrorToast(
+          t("pages.resourceHubDocumentVersionsPage.restoreFailed"),
+          t("pages.resourceHubDocumentVersionsPage.weCouldnTRestoreThatVersion"),
+        );
         return "error";
       }
     },

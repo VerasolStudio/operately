@@ -8,6 +8,7 @@ import { Title } from "../components";
 import { AssigneesField, StatusSelector } from "turboui";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 interface Props {
   space: Space;
@@ -19,7 +20,7 @@ const MAX_TASKS = 7;
 export function RegularState(props: Props) {
   return (
     <div className="flex flex-col h-full">
-      <Title title="Tasks" />
+      <Title title={t("features.spaceTools.tasks")} />
 
       <div className="bg-surface-dimmed rounded mx-2 flex-1">
         <TasksList tasks={props.tasks} space={props.space} />

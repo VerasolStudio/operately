@@ -2,6 +2,7 @@ import React from "react";
 
 import { WorkMap } from "..";
 import FormattedTime, { type FormattedTimePreferences } from "../../../FormattedTime";
+import { t } from "../../../i18n";
 
 interface Props {
   assignedAt: WorkMap.Item["assignedAt"];
@@ -19,7 +20,7 @@ export function AssignedDateCell({ assignedAt, hide, formattedTimePreferences }:
           <FormattedTime {...formattedTimePreferences} time={assignedAt} format="short-date" />
         </span>
       ) : (
-        <span className="text-sm text-content-dimmed">N/A</span>
+        <span className="text-sm text-content-dimmed">{t("turboui.workMap.nA")}</span>
       )}
     </td>
   );

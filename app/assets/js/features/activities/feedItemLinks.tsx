@@ -7,6 +7,7 @@ import * as api from "@/api";
 import { resourceHubLandingPath } from "@/models/resourceHubs/paths";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export const commentPath = (path: string, comment?: Pick<api.Comment, "id"> | null) => {
   return comment?.id ? `${path}#${comment.id}` : path;
@@ -62,7 +63,7 @@ export const goalCheckInLink = (checkIn?: api.GoalProgressUpdate | null) => {
 
   const path = paths.goalCheckInPath(checkIn.id);
 
-  return <Link to={path}>Check-In</Link>;
+  return <Link to={path}>{t("features.activities.checkIn2")}</Link>;
 };
 
 export const projectCheckInLink = (checkIn?: api.ProjectCheckIn | null) => {
@@ -74,7 +75,7 @@ export const projectCheckInLink = (checkIn?: api.ProjectCheckIn | null) => {
 
   const path = paths.projectCheckInPath(checkIn.id);
 
-  return <Link to={path}>Check-In</Link>;
+  return <Link to={path}>{t("features.activities.checkIn2")}</Link>;
 };
 
 export const spaceLink = (space: api.Space) => {

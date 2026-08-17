@@ -10,6 +10,7 @@ import { ResourceHub } from "./ResourceHub";
 import { Tasks } from "./Tasks";
 import { Kpis } from "./Kpis";
 import { Templates } from "./Templates";
+import { t } from "@/i18n";
 
 interface ToolsSectionPros {
   space: Space;
@@ -26,7 +27,7 @@ export function ToolsSection({ space, tools }: ToolsSectionPros) {
     <div className="mt-6 py-6">
       <div className="flex justify-center items-start flex-wrap gap-4">
         <GoalsAndProjects
-          title="Goals & Projects"
+          title={t("features.spaceTools.goalsProjects")}
           space={space}
           goals={tools.goals ?? []}
           projects={tools.projects ?? []}

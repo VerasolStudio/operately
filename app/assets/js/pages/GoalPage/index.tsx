@@ -37,6 +37,7 @@ import { useResourceHubSearchProps } from "@/models/search/resourceHub";
 import { Paths, usePaths } from "@/routes/paths";
 import type * as Hub from "@/models/resourceHubs";
 import { useChecklists } from "./useChecklists";
+import { t } from "@/i18n";
 export default { name: "GoalPage", loader, Page } as PageModule;
 
 export function pageCacheKey(id: string): string {
@@ -152,13 +153,14 @@ function Page() {
   const [description, setDescription] = usePageField({
     value: (data: { goal: Goal }) => data.goal.description && JSON.parse(data.goal.description),
     update: (v) => Api.goals.updateDescription({ goalId: goal.id, description: JSON.stringify(v) }),
-    onError: () => showErrorToast("Network Error", "Reverted the description to its previous value."),
+    onError: () =>
+      showErrorToast(t("pages.goalPage.networkError"), t("pages.goalPage.revertedTheDescriptionToItsPrevious")),
   });
 
   const [accessLevels, setAccessLevels] = usePageField({
     value: (data) => accessLevelsAsStrings(data.goal.accessLevels),
     update: (v) => Api.goals.updateAccessLevels({ goalId: goal.id, accessLevels: accessLevelsAsNumbers(v) }),
-    onError: () => showErrorToast("Network Error", "Reverted the access levels to their previous values."),
+    onError: () => showErrorToast(t("pages.goalPage.networkError"), t("pages.goalPage.revertedTheAccessLevelsToTheir")),
   });
 
   const [space, setSpace] = usePageField({
@@ -168,38 +170,41 @@ function Page() {
 
       return Api.goals.updateSpace({ goalId: goal.id, spaceId: v.id });
     },
-    onError: () => showErrorToast("Network Error", "Reverted the space to its previous value."),
+    onError: () => showErrorToast(t("pages.goalPage.networkError"), t("pages.goalPage.revertedTheSpaceToItsPrevious")),
   });
 
   const [startDate, setStartDate] = usePageField({
     value: (data: { goal: Goal }) => parseContextualDate(data.goal.timeframe?.contextualStartDate),
     update: (v) => Api.goals.updateStartDate({ goalId: goal.id, startDate: serializeContextualDate(v) }),
-    onError: () => showErrorToast("Network Error", "Reverted the start date to its previous value."),
+    onError: () => showErrorToast(t("pages.goalPage.networkError"), t("pages.goalPage.revertedTheStartDateToIts")),
   });
 
   const [dueDate, setDueDate] = usePageField({
     value: (data: { goal: Goal }) => parseContextualDate(data.goal.timeframe?.contextualEndDate),
     update: (v) => Api.goals.updateDueDate({ goalId: goal.id, dueDate: serializeContextualDate(v) }),
-    onError: () => showErrorToast("Network Error", "Reverted the due date to its previous value."),
+    onError: () => showErrorToast(t("pages.goalPage.networkError"), t("pages.goalPage.revertedTheDueDateToIts")),
   });
 
   const [champion, setChampion] = usePageField({
     value: (data) => People.parsePersonForTurboUi(paths, data.goal.champion),
     update: (v) => Api.goals.updateChampion({ goalId: goal.id, championId: v && v.id }),
-    onError: () => showErrorToast("Network Error", "Reverted the champion to its previous value."),
+    onError: () =>
+      showErrorToast(t("pages.goalPage.networkError"), t("pages.goalPage.revertedTheChampionToItsPrevious")),
   });
 
   const [reviewer, setReviewer] = usePageField({
     value: (data) => People.parsePersonForTurboUi(paths, data.goal.reviewer),
     update: (v) => Api.goals.updateReviewer({ goalId: goal.id, reviewerId: v && v.id }),
-    onError: () => showErrorToast("Network Error", "Reverted the reviewer to its previous value."),
+    onError: () =>
+      showErrorToast(t("pages.goalPage.networkError"), t("pages.goalPage.revertedTheReviewerToItsPrevious")),
   });
 
   const [parentGoal, setParentGoal] = usePageField({
     value: (data) => parseParentGoalForTurboUi(paths, data.goal.parentGoal),
     update: (v) => Api.goals.updateParentGoal({ goalId: goal.id, parentGoalId: v && v.id }),
-    onError: () => showErrorToast("Network Error", "Reverted the parent goal to its previous value."),
-    onSuccess: () => showSuccessToast("Parent Goal Updated", "The parent goal has been successfully changed."),
+    onError: () => showErrorToast(t("pages.goalPage.networkError"), t("pages.goalPage.revertedTheParentGoalToIts")),
+    onSuccess: () =>
+      showSuccessToast(t("pages.goalPage.parentGoalUpdated"), t("pages.goalPage.theParentGoalHasBeenSuccessfully")),
   });
 
   // Transform function must be memoized to prevent infinite loop in the hook
@@ -259,7 +264,7 @@ function Page() {
       }
     } catch (error) {
       console.error("Failed to delete goal:", error);
-      showErrorToast("Something went wrong", "Failed to delete the goal. Please try again.");
+      showErrorToast(t("pages.goalPage.somethingWentWrong"), t("pages.goalPage.failedToDeleteTheGoalPlease"));
     }
   };
 
@@ -453,7 +458,7 @@ function prepareWorkMapData(items: WorkMapItem[]): GoalPage.Props["relatedWorkIt
 function GoalFeedItems({ goalId }: { goalId: string }) {
   const { data, loading, error } = useItemsQuery("goal", goalId);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div>{t("pages.goalPage.loading")}</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return <Feed items={data?.activities || []} page="goal" testId="goal-feed" />;

@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 
 import { LeftChevron, RightChevron } from "./Chevrons";
 import { Timeframe } from "../utils/timeframes";
+import { t } from "../i18n";
 
 interface Props {
   timeframe: Timeframe;
@@ -13,7 +14,7 @@ export function CustomRangePicker({ timeframe, setTimeframe }: Props) {
   return (
     <div className="flex flex-col sm:flex-row items-start gap-6">
       <div className="flex flex-col items-start justify-start h-full">
-        <div className="font-bold text-sm mb-1">Start Date</div>
+        <div className="font-bold text-sm mb-1">{t("turboui.timeframeSelectorDialog.startDate")}</div>
         <DatePicker
           inline
           selected={timeframe.startDate}
@@ -30,7 +31,7 @@ export function CustomRangePicker({ timeframe, setTimeframe }: Props) {
       </div>
 
       <div className="flex flex-col items-start justify-start h-full">
-        <div className="font-bold text-sm mb-1">Due Date</div>
+        <div className="font-bold text-sm mb-1">{t("turboui.timeframeSelectorDialog.dueDate")}</div>
 
         <DatePicker
           inline

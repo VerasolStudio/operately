@@ -4,18 +4,21 @@ import { IconCheck, IconX, Page as TurboUIPage } from "turboui";
 import * as React from "react";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export default { name: "CompanyPermissionsPage", loader: Pages.emptyLoader, Page } as PageModule;
 
 function Page() {
   const paths = usePaths();
   return (
     <TurboUIPage
-      title="Permissions"
+      title={t("pages.companyPermissionsPage.permissions")}
       size="small"
-      navigation={[{ to: paths.companyAdminPath(), label: "Company Administration" }]}
+      navigation={[{ to: paths.companyAdminPath(), label: t("pages.companyPermissionsPage.companyAdministration") }]}
     >
       <div className="px-10 py-8">
-        <div className="font-extrabold text-2xl mb-4 text-center">Permission Breakdown</div>
+        <div className="font-extrabold text-2xl mb-4 text-center">
+          {t("pages.companyPermissionsPage.permissionBreakdown")}
+        </div>
 
         <Header />
 
@@ -39,10 +42,10 @@ function Page() {
 function Header() {
   return (
     <div className="flex items-center justify-between mb-4">
-      <div className="flex-1 font-bold">Permission</div>
-      <div className="w-24 flex justify-center font-bold">Members</div>
-      <div className="w-24 flex justify-center font-bold">Admins</div>
-      <div className="w-24 flex justify-center font-bold">Owners</div>
+      <div className="flex-1 font-bold">{t("pages.companyPermissionsPage.permission")}</div>
+      <div className="w-24 flex justify-center font-bold">{t("pages.companyPermissionsPage.members")}</div>
+      <div className="w-24 flex justify-center font-bold">{t("pages.companyPermissionsPage.admins")}</div>
+      <div className="w-24 flex justify-center font-bold">{t("pages.companyPermissionsPage.owners")}</div>
     </div>
   );
 }

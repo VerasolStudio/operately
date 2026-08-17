@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { dropTargetForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import type { BoardLocation } from "../../utils/PragmaticDragAndDrop";
 import { SubtleDropPlaceholder } from "../../utils/PragmaticDragAndDrop";
+import { t } from "../../i18n";
 
 export interface EmptyMilestoneDropZoneProps {
   milestoneId: string;
@@ -44,19 +45,15 @@ export function EmptyMilestoneDropZone({
     <div ref={containerRef} className="py-3 px-4 min-h-[40px] bg-surface-base">
       {shouldShowPlaceholder && (
         <div className="mb-3">
-          <SubtleDropPlaceholder
-            containerId={milestoneId}
-            index={placeholderIndex}
-            height={placeholderHeight}
-          />
+          <SubtleDropPlaceholder containerId={milestoneId} index={placeholderIndex} height={placeholderHeight} />
         </div>
       )}
       {children ? (
         children
       ) : (
         <div className="text-left text-content-subtle text-sm sm:text-center">
-          <span className="sm:hidden">Tap + to add a task.</span>
-          <span className="hidden sm:inline">Click + or press c to add a task, or drag a task here.</span>
+          <span className="sm:hidden">{t("turboui.taskBoard.tapToAddATask")}</span>
+          <span className="hidden sm:inline">{t("turboui.taskBoard.clickOrPressCToAdd")}</span>
         </div>
       )}
     </div>

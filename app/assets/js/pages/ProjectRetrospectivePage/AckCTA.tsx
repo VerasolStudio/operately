@@ -7,6 +7,7 @@ import { PrimaryButton } from "turboui";
 import { useMe } from "@/contexts/CurrentCompanyContext";
 import { compareIds } from "@/routes/paths";
 import { useLoadedData, useRefresh } from "./loader";
+import { t } from "@/i18n";
 
 export function AckCTA() {
   const me = useMe();
@@ -21,7 +22,7 @@ export function AckCTA() {
   return (
     <div className="flex flex-row items-center justify-center mt-4 mb-4">
       <PrimaryButton size="lg" testId="acknowledge-retrospective" onClick={ackHandler}>
-        Acknowledge Retrospective
+        {t("pages.projectRetrospectivePage.acknowledgeRetrospective")}
       </PrimaryButton>
     </div>
   );

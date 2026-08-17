@@ -4,6 +4,7 @@ import { OptionsButton } from "../Button";
 import type { FormattedTimePreferences } from "../FormattedTime";
 import { ScheduleModal } from "./ScheduleModal";
 import { ScheduleNotice } from "./ScheduleNotice";
+import { t } from "../i18n";
 
 /**
  * UI state for the schedule flow. App bridges typically provide this from a
@@ -54,7 +55,7 @@ export function ScheduleFlowControls({
       ? scheduledPrimaryLabel
       : scheduleFlow.primaryButtonLabel(primaryLabel);
   const buttonOptions = showScheduleOption
-    ? [...options, { label: "Schedule for later", action: scheduleFlow.openScheduleModal }]
+    ? [...options, { label: t("turboui.schedulePosting.scheduleForLater"), action: scheduleFlow.openScheduleModal }]
     : options;
 
   return (

@@ -7,6 +7,8 @@ import { feedTitle, projectLink, spaceLink, taskLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
 import { parseContextualDate } from "@/models/contextualDates";
 import { hasAggregatedTasks, UpdatedTaskList } from "../taskUpdatedResources";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 const TaskDueDateUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -102,7 +104,7 @@ const TaskDueDateUpdating: ActivityHandler = {
         </span>
       );
     } else {
-      return <>Previously had no due date</>;
+      return <>{t("features.activities.previouslyHadNoDueDate")}</>;
     }
   },
 
@@ -125,11 +127,15 @@ const TaskDueDateUpdating: ActivityHandler = {
     if (newDueDate) {
       return (
         <span>
-          Updated due date for {name} to <DateDisplay date={parseContextualDate(newDueDate)} />
+          <Trans
+            i18nKey="features.activities.updatedDueDateForTo"
+            values={{ v1: name }}
+            components={[<DateDisplay date={parseContextualDate(newDueDate)} />]}
+          />
         </span>
       );
     } else {
-      return <span>Cleared due date for {name}</span>;
+      return <span>{t("features.activities.clearedDueDateFor", { v1: name })}</span>;
     }
   },
 

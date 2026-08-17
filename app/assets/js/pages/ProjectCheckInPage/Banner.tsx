@@ -7,6 +7,8 @@ import { FormattedTime, Link, PrimaryButton } from "turboui";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 export function banner(project: Projects.Project) {
   return match(project.state)
     .with("closed", () => <ProjectClosedBanner project={project} />)
@@ -21,12 +23,15 @@ function ProjectClosedBanner({ project }: { project: Projects.Project }) {
 
   return (
     <Paper.Banner testId="project-closed-banner">
-      This project was closed on{" "}
-      <FormattedTime {...formattedTimePreferences} time={project.closedAt!} format="long-date" />. View the{" "}
-      <Link to={retroPath} testId="project-retrospective-link" className="font-bold ml-1">
-        retrospective
-      </Link>
-      .
+      <Trans
+        i18nKey="pages.projectCheckInPage.thisProjectWasClosedOn"
+        components={[
+          <FormattedTime {...formattedTimePreferences} time={project.closedAt!} format="long-date" />,
+          <Link to={retroPath} testId="project-retrospective-link" className="font-bold ml-1">
+            retrospective
+          </Link>,
+        ]}
+      />
     </Paper.Banner>
   );
 }
@@ -38,10 +43,10 @@ function ProjectPausedBanner({ project }: { project: Projects.Project }) {
   return (
     <Paper.Banner testId="project-paused-banner">
       <div className="flex items-center gap-2">
-        <div>This project is paused</div>
+        <div>{t("pages.projectCheckInPage.thisProjectIsPaused")}</div>
         {project.permissions?.canEdit && (
           <PrimaryButton linkTo={resumePath} testId="resume-project-button" size="xs">
-            Resume
+            {t("pages.projectCheckInPage.resume")}
           </PrimaryButton>
         )}
       </div>

@@ -3,6 +3,7 @@ import { IconCheck, IconCircleFilled } from "turboui";
 
 import classNames from "classnames";
 import { validatePassword } from "./validatePassword";
+import { t } from "@/i18n";
 
 export function PasswordStrength({ password }) {
   if (password.length === 0) return null;
@@ -13,10 +14,10 @@ export function PasswordStrength({ password }) {
 
   return (
     <div className="text-sm font-medium flex flex-col gap-1">
-      <CheckMark title="At least 12 characters" ok={validation.hasMinLength} />
-      <CheckMark title="At least 1 uppercase letter" ok={validation.hasUpperCase} />
-      <CheckMark title="At least 1 number" ok={validation.hasNumber} />
-      <CheckMark title="At least 1 lowercase" ok={validation.hasLowerCase} />
+      <CheckMark title={t("features.auth.atLeast12Characters")} ok={validation.hasMinLength} />
+      <CheckMark title={t("features.auth.atLeast1UppercaseLetter")} ok={validation.hasUpperCase} />
+      <CheckMark title={t("features.auth.atLeast1Number")} ok={validation.hasNumber} />
+      <CheckMark title={t("features.auth.atLeast1Lowercase")} ok={validation.hasLowerCase} />
     </div>
   );
 }

@@ -8,15 +8,16 @@ import { Forms } from "turboui";
 import { PageTitle } from "./PageTitle";
 import { useGotoProjectContributors, useLoadedData } from "./loader";
 import { accessLevelAsEnumValue, PermissionLevels } from "@/features/Permissions";
+import { t } from "@/i18n";
 
 export function EditContributor() {
   const { contributor } = useLoadedData();
 
   const form = useForm(contributor);
   const name = People.firstName(contributor.person!);
-  const pageTitle = `Edit ${name}'s responsibilities and access level`;
+  const pageTitle = t("pages.projectContributorsEditPage.editSResponsibilitiesAndAccessLevel", { v1: name });
   const placeholder = "e.g. Design the UI/UX for the project";
-  const label = `What is ${name}'s responsibility on this project?`;
+  const label = t("pages.projectContributorsEditPage.whatIsSResponsibilityOnThis", { v1: name });
 
   const permissionsList = React.useMemo(() => {
     if (contributor.permissions?.hasFullAccess) {
@@ -35,10 +36,14 @@ export function EditContributor() {
 
         <Forms.FieldGroup>
           <Forms.TextInput field={"responsibility"} placeholder={placeholder} label={label} />
-          <Forms.SelectBox field={"permissions"} label="Access Level" options={permissionsList} />
+          <Forms.SelectBox
+            field={"permissions"}
+            label={t("pages.projectContributorsEditPage.accessLevel")}
+            options={permissionsList}
+          />
         </Forms.FieldGroup>
 
-        <Forms.Submit saveText="Save" />
+        <Forms.Submit saveText={t("pages.projectContributorsEditPage.save")} />
       </Forms.Form>
     </Paper.Body>
   );

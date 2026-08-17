@@ -7,6 +7,7 @@ import { usePaths } from "@/routes/paths";
 import { useSpaceSearch } from "../../models/spaces";
 import { convertToWorkMapItems, useWorkMapItems } from "../../models/workMap";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
+import { t } from "@/i18n";
 
 export function Page() {
   const paths = usePaths();
@@ -20,7 +21,7 @@ export function Page() {
 
   return (
     <WorkMapPage
-      title="Work Map"
+      title={t("pages.spaceWorkMapPage.workMap")}
       addingEnabled={space.permissions?.canEdit}
       items={convertToWorkMapItems(paths, items)}
       addItem={addItem}

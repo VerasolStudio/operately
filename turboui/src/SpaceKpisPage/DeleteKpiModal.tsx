@@ -4,6 +4,7 @@ import { DangerButton, SecondaryButton } from "../Button";
 import { WarningCallout } from "../Callouts";
 import { Modal } from "../Modal";
 import type { SpaceKpisPage } from "./types";
+import { t } from "../i18n";
 
 interface DeleteKpiModalProps {
   kpi: SpaceKpisPage.Kpi | null;
@@ -47,7 +48,7 @@ export function DeleteKpiModal({ kpi, isOpen, onClose, onDelete, onDeleted }: De
     <Modal isOpen={isOpen} onClose={onClose} title={`Delete ${kpi.name}`} size="small" testId="delete-kpi-modal">
       <div className="space-y-6">
         <WarningCallout
-          message="This action cannot be undone"
+          message={t("turboui.spaceKpisPage.thisActionCannotBeUndone")}
           description={`Deleting "${kpi.name}" permanently removes the KPI and all of its recorded updates.`}
         />
 
@@ -58,11 +59,17 @@ export function DeleteKpiModal({ kpi, isOpen, onClose, onDelete, onDeleted }: De
         )}
 
         <div className="flex items-center gap-2">
-          <DangerButton size="sm" onClick={handleDelete} loading={isDeleting} disabled={isDeleting} testId="confirm-delete-kpi">
-            Delete forever
+          <DangerButton
+            size="sm"
+            onClick={handleDelete}
+            loading={isDeleting}
+            disabled={isDeleting}
+            testId="confirm-delete-kpi"
+          >
+            {t("turboui.spaceKpisPage.deleteForever")}
           </DangerButton>
           <SecondaryButton size="sm" onClick={onClose} testId="cancel-delete-kpi">
-            Cancel
+            {t("turboui.spaceKpisPage.cancel")}
           </SecondaryButton>
         </div>
       </div>

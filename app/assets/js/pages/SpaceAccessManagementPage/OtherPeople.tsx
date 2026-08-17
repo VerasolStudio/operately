@@ -9,6 +9,7 @@ import { Avatar } from "turboui";
 import { match } from "ts-pattern";
 import { SpaceAccessLevelBadge } from "@/components/Badges/AccessLevelBadges";
 import { useBindedPeopleList } from "./loader";
+import { t } from "@/i18n";
 
 export function OtherPeople() {
   const [show, setShow] = React.useState(false);
@@ -30,8 +31,8 @@ function Expanded({ people }: { people: People.Person[] }) {
 
   return (
     <Paper.Section
-      title="Other People with Access"
-      subtitle="People who have access to the space via their company membeship."
+      title={t("pages.spaceAccessManagementPage.otherPeopleWithAccess")}
+      subtitle={t("pages.spaceAccessManagementPage.peopleWhoHaveAccessToThe")}
       testId="other-people-list"
     >
       {groups.map((group) => (
@@ -44,7 +45,7 @@ function Expanded({ people }: { people: People.Person[] }) {
 function Condensed({ people, onShowAllClick }: { people: People.Person[]; onShowAllClick: () => void }) {
   const message = match(people.length)
     .with(1, () => "1 other person has access to this space")
-    .otherwise(() => `${people.length} other people have access to this space`);
+    .otherwise(() => t("pages.spaceAccessManagementPage.otherPeopleHaveAccessToThis", { v1: people.length }));
 
   const testId = "show-all-other-people";
   const showAll = (

@@ -38,7 +38,14 @@ export function isSupportedLanguage(code: string | null | undefined): boolean {
   return !!code && SUPPORTED_LANGUAGES.some((lang) => lang.code === code);
 }
 
+// This module is also loaded by tests running outside a browser, so every
+// browser global it touches is guarded.
+const hasWindow = typeof window !== "undefined";
+const hasDocument = typeof document !== "undefined";
+
 function readStoredLanguage(): string | null {
+  if (!hasWindow) return null;
+
   try {
     return window.localStorage.getItem(STORAGE_KEY);
   } catch {
@@ -48,6 +55,11 @@ function readStoredLanguage(): string | null {
 }
 
 function readBrowserLanguage(): string | null {
+  // Node exposes a `navigator` carrying the machine's locale. Browser-language
+  // detection only makes sense in a real document, and keying off it there
+  // would make server-side and test runs depend on the host's locale.
+  if (!hasDocument || typeof navigator === "undefined") return null;
+
   const languages = navigator.languages?.length ? navigator.languages : [navigator.language];
 
   for (const language of languages) {
@@ -77,14 +89,20 @@ export function getLanguage(): string {
 }
 
 function applyDocumentLanguage(language: string): void {
+  if (!hasDocument) return;
+
   document.documentElement.setAttribute("lang", language);
 }
 
 /**
  * Switches the interface language and remembers the choice for next time.
+ *
+ * The page is reloaded afterwards: label tables that live at module scope are
+ * translated when their module is first evaluated, so a reload is what makes
+ * every last string switch over, not just the ones inside a live component.
  */
 export async function setLanguage(language: string): Promise<void> {
-  if (!isSupportedLanguage(language)) return;
+  if (!isSupportedLanguage(language) || language === getLanguage()) return;
 
   try {
     window.localStorage.setItem(STORAGE_KEY, language);
@@ -94,6 +112,16 @@ export async function setLanguage(language: string): Promise<void> {
 
   applyDocumentLanguage(language);
   await i18n.changeLanguage(language);
+
+  if (hasWindow) window.location.reload();
+}
+
+/**
+ * Translates a key. Safe to call from module scope: importing this module is
+ * what initializes i18next, so it always runs first.
+ */
+export function t(key: string, options?: string | Record<string, unknown>): string {
+  return i18n.t(key, options as never) as unknown as string;
 }
 
 const language = detectLanguage();

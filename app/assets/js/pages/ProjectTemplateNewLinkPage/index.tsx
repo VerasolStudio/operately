@@ -9,6 +9,7 @@ import { LinkNewPage, showErrorToast, type ResourceHubLinkType } from "turboui";
 import type { LinkNewPage as LinkNewPageTypes } from "turboui/LinkNewPage/types";
 import { useNavigate } from "react-router";
 import React from "react";
+import { t } from "@/i18n";
 
 export default { name: "ProjectTemplateNewLinkPage", loader, Page } as PageModule;
 
@@ -52,7 +53,10 @@ function Page() {
       navigate(paths.projectTemplateLinkPath(template.id, result.link.nodeId));
       return true;
     } catch {
-      showErrorToast("Link not created", "Check the form and try again.");
+      showErrorToast(
+        t("pages.projectTemplateNewLinkPage.linkNotCreated"),
+        t("pages.projectTemplateNewLinkPage.checkTheFormAndTryAgain"),
+      );
       return false;
     }
   }
@@ -70,4 +74,3 @@ function Page() {
     />
   );
 }
-

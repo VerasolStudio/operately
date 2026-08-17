@@ -11,6 +11,7 @@ import { useNavigateTo } from "@/routes/useNavigateTo";
 import { LoaderResult } from "./loader";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export function AddReviewer() {
   const { project } = Pages.useLoadedData() as LoaderResult;
 
@@ -22,18 +23,21 @@ export function AddReviewer() {
       <ProjectContribsSubpageNavigation project={project} />
 
       <Paper.Body>
-        <div className="text-2xl font-extrabold">Add Reviewer</div>
+        <div className="text-2xl font-extrabold">{t("pages.projectContributorsAddPage.addReviewer")}</div>
         <div className="text-medium mb-6">
-          Reviewers are responsible for acknowledging each check-in and have the authority to initiate corrective action
-          if needed. This is typically the person to whom the champion reports to.
+          {t("pages.projectContributorsAddPage.reviewersAreResponsibleForAcknowledgingEach")}
         </div>
 
         <Forms.Form form={form}>
           <Forms.FieldGroup>
-            <Forms.SelectPerson field={"person"} label="Reviewer" searchFn={search} />
+            <Forms.SelectPerson
+              field={"person"}
+              label={t("pages.projectContributorsAddPage.reviewer")}
+              searchFn={search}
+            />
           </Forms.FieldGroup>
 
-          <Forms.Submit saveText="Add Reviewer" />
+          <Forms.Submit saveText={t("pages.projectContributorsAddPage.addReviewer")} />
         </Forms.Form>
       </Paper.Body>
     </Paper.Root>

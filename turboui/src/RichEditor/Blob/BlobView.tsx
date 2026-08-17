@@ -6,6 +6,7 @@ import classnames from "classnames";
 
 import { IconFileFilled, IconFileZip, IconPdf, IconTrash, IconX } from "../../icons";
 import classNames from "../../utils/classnames";
+import { t } from "../../i18n";
 
 let imagePreviewScrollLockCount = 0;
 let imagePreviewPreviousBodyOverflow: string | null = null;
@@ -117,7 +118,7 @@ function ImageView({ node, deleteNode, updateAttributes, view }) {
       type="button"
       className="block max-w-full appearance-none bg-transparent border-0 p-0"
       onClick={() => setIsModalOpen(true)}
-      aria-label={`Open ${node.attrs.alt || node.attrs.title || "image"} preview`}
+      aria-label={t("turboui.richEditor.openPreview", { v1: node.attrs.alt || node.attrs.title || "image" })}
     >
       {image}
     </button>
@@ -145,7 +146,7 @@ function ImageView({ node, deleteNode, updateAttributes, view }) {
               title={node.attrs.title}
               href={downloadableUrl(node.attrs.src)}
             >
-              Download
+              {t("turboui.richEditor.download")}
             </a>
           </span>
         )}
@@ -153,7 +154,7 @@ function ImageView({ node, deleteNode, updateAttributes, view }) {
           <span className="flex items-center gap-1 shrink-0 whitespace-nowrap">
             <div className="text-content-dimmed text-sm">•</div>
             <a className="text-content-dimmed text-sm underline cursor-pointer" href={node.attrs.src} target="_blank">
-              View original
+              {t("turboui.richEditor.viewOriginal")}
             </a>
           </span>
         )}
@@ -237,7 +238,7 @@ function ImagePreviewModal({
             type="button"
             className="rounded-full p-1 text-content-subtle transition-colors hover:bg-surface-highlight hover:text-content-base"
             onClick={onClose}
-            aria-label="Close image preview"
+            aria-label={t("turboui.richEditor.closeImagePreview")}
           >
             <IconX size={20} />
           </button>
@@ -292,7 +293,7 @@ function FileView({ node, deleteNode, view }) {
                   title={node.attrs.title}
                   href={downloadableUrl(node.attrs.src)}
                 >
-                  Download
+                  {t("turboui.richEditor.download")}
                 </a>
               </span>
             )}

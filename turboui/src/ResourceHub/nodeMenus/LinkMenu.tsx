@@ -7,6 +7,7 @@ import { DeleteResourceConfirmModal } from "../DeleteResourceConfirmModal";
 import { getResourceName } from "../selectors";
 import type { ResourceHubLink } from "../types";
 import { MoveResourceMenuItem, MoveResourceModal } from "./MoveResource";
+import { t } from "../../i18n";
 
 interface LinkMenuProps {
   link: ResourceHubLink;
@@ -51,7 +52,7 @@ function EditLinkMenuItem({ link }: LinkMenuProps) {
 
   return (
     <MenuLinkItem to={editPath} testId={editId}>
-      Edit
+      {t("turboui.resourceHub.edit")}
     </MenuLinkItem>
   );
 }
@@ -61,12 +62,20 @@ function DeleteLinkMenuItem({ link, toggleDeleteModal }: { link: ResourceHubLink
 
   return (
     <MenuActionItem onClick={toggleDeleteModal} testId={deleteId} danger>
-      Delete
+      {t("turboui.resourceHub.delete")}
     </MenuActionItem>
   );
 }
 
-function DeleteLinkModal({ link, isOpen, hideModal }: { link: ResourceHubLink; isOpen: boolean; hideModal: () => void }) {
+function DeleteLinkModal({
+  link,
+  isOpen,
+  hideModal,
+}: {
+  link: ResourceHubLink;
+  isOpen: boolean;
+  hideModal: () => void;
+}) {
   const { onRefetch, actions } = useResourceHubNodesListContext();
 
   const handleDelete = async () => {

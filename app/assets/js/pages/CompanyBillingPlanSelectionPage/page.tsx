@@ -14,6 +14,7 @@ import { showErrorToast } from "turboui";
 import { useLoadedData } from "../CompanyBillingPage/loader";
 import { useLocation, useNavigate, useRouteLoaderData } from "react-router";
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 interface CompanyRootData {
   company?: {
@@ -89,7 +90,10 @@ export function Page() {
     if (result.outcome === "target_unavailable") {
       setIsSubmitting(false);
       setActionError("That plan is no longer available. Choose another plan.");
-      showErrorToast("Checkout unavailable", "That plan is no longer available. Choose another plan.");
+      showErrorToast(
+        t("pages.companyBillingPlanSelectionPage.checkoutUnavailable"),
+        t("pages.companyBillingPlanSelectionPage.thatPlanIsNoLongerAvailable"),
+      );
       return;
     }
 
@@ -103,7 +107,10 @@ export function Page() {
     }
 
     setActionError("We couldn't start checkout right now. Please try again.");
-    showErrorToast("Failed to start checkout", "We couldn't start checkout right now. Please try again.");
+    showErrorToast(
+      t("pages.companyBillingPlanSelectionPage.failedToStartCheckout"),
+      t("pages.companyBillingPlanSelectionPage.weCouldnTStartCheckoutRight"),
+    );
     setIsSubmitting(false);
   }, [selection.target]);
 
@@ -121,7 +128,10 @@ export function Page() {
     if (result.outcome === "target_unavailable") {
       setIsSubmitting(false);
       setActionError("That plan is no longer available. Choose another plan.");
-      showErrorToast("Plan unavailable", "That plan is no longer available. Choose another plan.");
+      showErrorToast(
+        t("pages.companyBillingPlanSelectionPage.planUnavailable"),
+        t("pages.companyBillingPlanSelectionPage.thatPlanIsNoLongerAvailable"),
+      );
       return;
     }
 
@@ -140,7 +150,10 @@ export function Page() {
     }
 
     setActionError("We couldn't change the plan right now. Please try again.");
-    showErrorToast("Failed to change plan", "We couldn't change the plan right now. Please try again.");
+    showErrorToast(
+      t("pages.companyBillingPlanSelectionPage.failedToChangePlan"),
+      t("pages.companyBillingPlanSelectionPage.weCouldnTChangeThePlan"),
+    );
     setIsSubmitting(false);
   }, [navigate, paths, selection.target]);
 
@@ -159,8 +172,8 @@ export function Page() {
     <TurboCompanyBillingPlanSelectionPage
       title={[companyName, "Choose a plan"]}
       navigation={[
-        { label: "Company Administration", to: paths.companyAdminPath() },
-        { label: "Billing", to: paths.companyBillingPath() },
+        { label: t("pages.companyBillingPlanSelectionPage.companyAdministration"), to: paths.companyAdminPath() },
+        { label: t("pages.companyBillingPlanSelectionPage.billing"), to: paths.companyBillingPath() },
       ]}
       billing={billing}
       selection={selection}

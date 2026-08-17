@@ -7,6 +7,7 @@ import { areRichTextObjectsEqual } from "../RichContent/contentOps";
 import { findNameAndExtension } from "../ResourceHub/utils";
 
 import type { FileEditPage as FileEditPageNS } from "./types";
+import { t } from "../i18n";
 
 export function FileEditPage(props: FileEditPageNS.Props) {
   const navigate = useNavigate();
@@ -38,11 +39,11 @@ export function FileEditPage(props: FileEditPageNS.Props) {
       <Forms.Form form={form}>
         <div className="px-12 py-10">
           <Forms.FieldGroup>
-            <Forms.TitleInput field="title" placeholder="Title..." />
+            <Forms.TitleInput field="title" placeholder={t("turboui.fileEditPage.title")} />
             <Forms.RichTextArea
               field="description"
               richTextHandlers={props.richTextHandlers}
-              placeholder="Write here..."
+              placeholder={t("turboui.fileEditPage.writeHere")}
               hideBorder
             />
           </Forms.FieldGroup>

@@ -7,6 +7,7 @@ import { PageModule } from "@/routes/types";
 import { useNavigate, useRevalidator } from "react-router";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export default { name: "CompanyRenamePage", loader, Page } as PageModule;
 
 interface LoaderResult {
@@ -41,20 +42,27 @@ function Page() {
 
   return (
     <TurboUIPage
-      title={"Rename Company"}
+      title={t("pages.companyRenamePage.renameCompany")}
       size="small"
       testId="company-rename-page"
-      navigation={[{ to: paths.companyAdminPath(), label: "Company Administration" }]}
+      navigation={[{ to: paths.companyAdminPath(), label: t("pages.companyRenamePage.companyAdministration") }]}
     >
       <div className="px-10 py-8">
         <Forms.Form form={form}>
-          <div className="mb-6 text-content-accent text-2xl font-extrabold">Editing Company Name</div>
+          <div className="mb-6 text-content-accent text-2xl font-extrabold">
+            {t("pages.companyRenamePage.editingCompanyName")}
+          </div>
 
           <Forms.FieldGroup>
-            <Forms.TextInput label="Company Name" field={"name"} minLength={2} maxLength={100} />
+            <Forms.TextInput
+              label={t("pages.companyRenamePage.companyName")}
+              field={"name"}
+              minLength={2}
+              maxLength={100}
+            />
           </Forms.FieldGroup>
 
-          <Forms.Submit saveText="Save" />
+          <Forms.Submit saveText={t("pages.companyRenamePage.save")} />
         </Forms.Form>
       </div>
     </TurboUIPage>

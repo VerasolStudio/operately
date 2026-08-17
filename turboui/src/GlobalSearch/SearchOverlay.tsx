@@ -5,6 +5,7 @@ import { IconSearch, IconX } from "../icons";
 import { createTestId } from "../TestableElement";
 import type { GlobalSearch } from "./index";
 import { buildFullTextSearchOption, buildSearchGroups, type SearchGroup, type SearchOption } from "./searchOptions";
+import { t } from "../i18n";
 
 interface SearchOverlayProps {
   state: GlobalSearch.State;
@@ -105,13 +106,13 @@ export function SearchOverlay({ state, isOpen, onClose }: SearchOverlayProps) {
                 state.setSelectedIndex(-1);
               }}
               onKeyDown={handleInputKeyDown}
-              placeholder="Search for spaces, projects, goals, milestones, tasks, or people..."
+              placeholder={t("turboui.globalSearch.searchForSpacesProjectsGoalsMilestones")}
               className="w-full pl-10 pr-12 py-2.5 text-base bg-surface-base border-b border-surface-outline focus:outline-none rounded-b-lg"
               data-test-id={testId}
             />
             <button
               type="button"
-              aria-label="Close search"
+              aria-label={t("turboui.globalSearch.closeSearch")}
               className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-content-dimmed uppercase tracking-wide"
               onClick={onClose}
             >
@@ -202,19 +203,19 @@ function SearchResults({
     <>
       {state.isSearching && (
         <div role="status" aria-live="polite" className="p-4 text-center text-content-dimmed text-sm">
-          Searching…
+          {t("turboui.globalSearch.searching")}
         </div>
       )}
 
       {!state.isSearching && state.searchError && (
         <div role="alert" className="p-4 text-center text-content-error text-sm">
-          Quick search is unavailable.
+          {t("turboui.globalSearch.quickSearchIsUnavailable")}
         </div>
       )}
 
       {!state.isSearching && !state.searchError && quickResultCount === 0 && (
         <div role="status" aria-live="polite" className="p-4 text-center text-content-dimmed text-sm">
-          No title or name matches for “{state.query.trim()}”.
+          {t("turboui.globalSearch.noTitleOrNameMatchesFor", { v1: state.query.trim() })}
         </div>
       )}
 
@@ -228,7 +229,7 @@ function SearchResults({
         <div
           id={listboxId}
           role="listbox"
-          aria-label="Quick search results"
+          aria-label={t("turboui.globalSearch.quickSearchResults")}
           className="flex max-h-[60vh] min-h-0 flex-col"
         >
           <div className="min-h-0 overflow-y-auto py-1">

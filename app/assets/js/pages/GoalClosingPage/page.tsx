@@ -8,11 +8,12 @@ import { Form } from "./Form";
 import { useLoadedData } from "./loader";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export function Page() {
   const { goal } = useLoadedData();
 
   return (
-    <Pages.Page title={"Closing " + goal.name} testId="goal-closing-page">
+    <Pages.Page title={t("pages.goalClosingPage.closing", { name: goal.name })} testId="goal-closing-page">
       <Paper.Root>
         <Navigation />
 
@@ -34,5 +35,9 @@ function Navigation() {
 }
 
 function PageTitle() {
-  return <div className="mb-6 text-content-accent text-2xl font-extrabold">Review &amp; Close Goal</div>;
+  return (
+    <div className="mb-6 text-content-accent text-2xl font-extrabold">
+      {t("pages.goalClosingPage.reviewAmpCloseGoal")}
+    </div>
+  );
 }

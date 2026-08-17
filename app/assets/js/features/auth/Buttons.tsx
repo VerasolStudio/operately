@@ -1,6 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import { DivLink, GoogleLogo, IconMail } from "turboui";
+import { t } from "@/i18n";
 
 export function SignUpWithEmail({
   inviteToken,
@@ -11,7 +12,7 @@ export function SignUpWithEmail({
 }) {
   return (
     <SignUpButton
-      title="Sign up with email"
+      title={t("features.auth.signUpWithEmail")}
       link={signupEmailPath(inviteToken, redirectTo)}
       icon={<IconMail size={24} className="text-content-dimmed" />}
       testId="sign-up-with-email"
@@ -22,7 +23,7 @@ export function SignUpWithEmail({
 export function SignInWithGoogleButton() {
   return (
     <SignUpButton
-      title="Sign in with Google"
+      title={t("features.auth.signInWithGoogle")}
       link={getGoogleAuthUrl()}
       icon={<GoogleLogo />}
       external
@@ -34,7 +35,7 @@ export function SignInWithGoogleButton() {
 export function SignUpWithGoogleButton() {
   return (
     <SignUpButton
-      title="Sign up with Google"
+      title={t("features.auth.signUpWithGoogle")}
       link={getGoogleAuthUrl()}
       icon={<GoogleLogo />}
       external

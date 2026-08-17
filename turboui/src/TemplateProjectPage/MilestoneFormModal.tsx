@@ -5,6 +5,7 @@ import { RelativeDayField } from "../RelativeDayField";
 import { SwitchToggle } from "../SwitchToggle";
 import { TextField } from "../TextField";
 import type { TemplateProjectPage } from ".";
+import { t } from "../i18n";
 
 export function MilestoneFormModal({
   isOpen,
@@ -44,26 +45,28 @@ export function MilestoneFormModal({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Create Milestone" size="medium">
+    <Modal isOpen={isOpen} onClose={onClose} title={t("turboui.templateProjectPage.createMilestone")} size="medium">
       <form onSubmit={create} className="space-y-6" data-test-id="add-template-milestone-form">
         <TextField
           variant="form-field"
-          label="Milestone name"
+          label={t("turboui.templateProjectPage.milestoneName")}
           text={title}
           onChange={setTitle}
-          placeholder="Enter milestone name"
+          placeholder={t("turboui.templateProjectPage.enterMilestoneName")}
           autofocus
           onChangeOnType
           testId="template-milestone-name"
         />
 
         <div>
-          <label className="mb-1 block text-sm font-medium text-content-base">Relative due date</label>
+          <label className="mb-1 block text-sm font-medium text-content-base">
+            {t("turboui.templateProjectPage.relativeDueDate")}
+          </label>
           <RelativeDayField
             variant="form-field"
             value={dueOffsetDays}
             onChange={setDueOffsetDays}
-            placeholder="Set relative date"
+            placeholder={t("turboui.templateProjectPage.setRelativeDate")}
           />
         </div>
 
@@ -71,16 +74,16 @@ export function MilestoneFormModal({
           <SwitchToggle
             value={createMore}
             setValue={setCreateMore}
-            label="Create more"
+            label={t("turboui.templateProjectPage.createMore")}
             testId="add-template-milestone-more-switch"
           />
           <div className="flex-1" />
           <div className="flex space-x-3">
             <SecondaryButton onClick={onClose} type="button">
-              Cancel
+              {t("turboui.templateProjectPage.cancel")}
             </SecondaryButton>
             <PrimaryButton type="submit" disabled={!title.trim()}>
-              Create milestone
+              {t("turboui.templateProjectPage.createMilestone2")}
             </PrimaryButton>
           </div>
         </div>

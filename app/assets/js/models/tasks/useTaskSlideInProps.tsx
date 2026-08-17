@@ -10,6 +10,7 @@ import { prepareTaskTimelineItems, sortTaskTimelineItems } from "./prepareTaskTi
 import Api, { type Person as ApiPerson, type Task as BackendTask } from "@/api";
 import { useSubscription } from "@/models/subscriptions";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
+import { t } from "@/i18n";
 
 type TimelinePerson = NonNullable<TaskPage.ContentProps["currentUser"]>;
 
@@ -378,7 +379,7 @@ export function useTaskSlideInProps(opts: {
             return true;
           } catch (error) {
             console.error("Failed to move task", error);
-            showErrorToast("Error", "Failed to move task.");
+            showErrorToast(t("app.useTaskSlideInProps.error"), t("app.useTaskSlideInProps.failedToMoveTask"));
             return false;
           }
         },

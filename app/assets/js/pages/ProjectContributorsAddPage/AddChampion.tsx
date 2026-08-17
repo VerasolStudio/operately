@@ -11,6 +11,7 @@ import { useNavigateTo } from "@/routes/useNavigateTo";
 import { LoaderResult } from "./loader";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export function AddChampion() {
   const { project } = Pages.useLoadedData() as LoaderResult;
 
@@ -22,14 +23,18 @@ export function AddChampion() {
       <ProjectContribsSubpageNavigation project={project} />
 
       <Paper.Body>
-        <div className="text-2xl font-extrabold mb-4">Add Champion</div>
+        <div className="text-2xl font-extrabold mb-4">{t("pages.projectContributorsAddPage.addChampion")}</div>
 
         <Forms.Form form={form}>
           <Forms.FieldGroup>
-            <Forms.SelectPerson field={"person"} label="Champion" searchFn={search} />
+            <Forms.SelectPerson
+              field={"person"}
+              label={t("pages.projectContributorsAddPage.champion")}
+              searchFn={search}
+            />
           </Forms.FieldGroup>
 
-          <Forms.Submit saveText="Add Champion" />
+          <Forms.Submit saveText={t("pages.projectContributorsAddPage.addChampion")} />
         </Forms.Form>
       </Paper.Body>
     </Paper.Root>

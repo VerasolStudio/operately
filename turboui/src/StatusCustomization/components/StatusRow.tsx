@@ -7,6 +7,7 @@ import { StatusAppearancePicker, STATUS_APPEARANCES } from "../StatusAppearanceP
 import { createTestId } from "../../TestableElement";
 import { StatusSelector } from "../../StatusSelector";
 import { generateStatusValueFromLabel, getAppearanceFromStatus } from "../utils";
+import { t } from "../../i18n";
 
 export type StatusRowProps = {
   status: StatusSelector.StatusOption;
@@ -26,7 +27,10 @@ export function StatusRow({ status, isLabelInvalid, onUpdate, onRemove, canRemov
   return (
     <div className="relative">
       {closestEdge === "top" && <DropIndicator edge="top" />}
-      <div ref={ref as React.RefObject<HTMLDivElement>} className={classNames("flex items-center gap-2 group", isDragging && "opacity-50")}>
+      <div
+        ref={ref as React.RefObject<HTMLDivElement>}
+        className={classNames("flex items-center gap-2 group", isDragging && "opacity-50")}
+      >
         <div ref={dragHandleRef as React.RefObject<HTMLDivElement>} className="flex items-center">
           <DragHandle isDragging={isDragging} className="opacity-100" />
         </div>
@@ -41,7 +45,7 @@ export function StatusRow({ status, isLabelInvalid, onUpdate, onRemove, canRemov
         <input
           value={status.label}
           onChange={(event) => onUpdate(status.id, { label: event.target.value })}
-          placeholder="Status label"
+          placeholder={t("turboui.statusCustomization.statusLabel")}
           className={classNames(
             "flex-1 rounded-md border px-3 py-2 text-sm bg-surface-base text-content-base transition focus:outline-none focus:ring-2 focus:ring-brand-1",
             isLabelInvalid ? "border-rose-300 focus:ring-rose-400" : "border-stroke-base",
@@ -57,7 +61,7 @@ export function StatusRow({ status, isLabelInvalid, onUpdate, onRemove, canRemov
               ? "text-content-subtle cursor-not-allowed opacity-50"
               : "text-content-dimmed hover:text-red-500 hover:bg-red-50",
           )}
-          aria-label="Remove status"
+          aria-label={t("turboui.statusCustomization.removeStatus")}
           disabled={!canRemove}
           data-test-id={createTestId("remove-status", index.toString())}
         >

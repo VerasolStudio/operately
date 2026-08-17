@@ -9,6 +9,7 @@ import { StatusBadge } from "../StatusBadge";
 import { TextSeparator } from "../TextSeparator";
 import { PostedTime } from "./PostedTime";
 import { parseCheckInTimestamp, type CheckInTimestamp } from "./timestamp";
+import { t } from "../i18n";
 
 export { PostedTime } from "./PostedTime";
 export type { PostedTimeProps } from "./PostedTime";
@@ -92,13 +93,13 @@ export function CheckInMetadata({
 
 function Acknowledgement({ acknowledgedBy }: { acknowledgedBy?: CheckInAcknowledgingPerson | null }) {
   if (!acknowledgedBy) {
-    return <span className="flex items-center gap-1">Not yet acknowledged</span>;
+    return <span className="flex items-center gap-1">{t("turboui.checkInHeader.notYetAcknowledged")}</span>;
   }
 
   return (
     <span className="flex items-center gap-1">
       <IconSquareCheckFilled size={16} className="text-accent-1" />
-      <span className="hidden sm:inline">Acknowledged by</span>
+      <span className="hidden sm:inline">{t("turboui.checkInHeader.acknowledgedBy")}</span>
       <span className="truncate">{acknowledgedBy.fullName}</span>
     </span>
   );

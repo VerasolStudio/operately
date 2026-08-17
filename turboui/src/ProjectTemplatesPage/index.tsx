@@ -11,6 +11,7 @@ import type { Navigation } from "../Page/Navigation";
 import { richContentToString, parseContent } from "../RichContent";
 import { SpaceField } from "../SpaceField";
 import { IconArrowRight, IconSearch, IconX } from "../icons";
+import { t } from "../i18n";
 
 type SearchStatus = "idle" | "loading" | "error";
 
@@ -102,16 +103,23 @@ export function ProjectTemplatesPage(props: ProjectTemplatesPage.Props) {
   const isFiltered = search.trim() !== "" || (props.scope === "company" && selectedSpace !== null);
 
   return (
-    <Page title="Project Templates" size="xxlarge" navigation={props.navigation} testId="project-templates-page">
+    <Page
+      title={t("turboui.projectTemplatesPage.projectTemplates")}
+      size="xxlarge"
+      navigation={props.navigation}
+      testId="project-templates-page"
+    >
       <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-8">
         <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold">Project Templates</h1>
-            <p className="mt-1 text-sm text-content-dimmed">Reuse a proven project structure for recurring work.</p>
+            <h1 className="text-2xl font-bold">{t("turboui.projectTemplatesPage.projectTemplates")}</h1>
+            <p className="mt-1 text-sm text-content-dimmed">
+              {t("turboui.projectTemplatesPage.reuseAProvenProjectStructureFor")}
+            </p>
           </div>
           {props.canCreate && (
             <PrimaryButton onClick={() => setIsCreating(true)} testId="new-project-template">
-              New template
+              {t("turboui.projectTemplatesPage.newTemplate")}
             </PrimaryButton>
           )}
         </header>
@@ -125,8 +133,8 @@ export function ProjectTemplatesPage(props: ProjectTemplatesPage.Props) {
             <Forms.Input
               type="text"
               role="searchbox"
-              aria-label="Search project templates"
-              placeholder="Search project templates…"
+              aria-label={t("turboui.projectTemplatesPage.searchProjectTemplates")}
+              placeholder={t("turboui.projectTemplatesPage.searchProjectTemplates2")}
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               className="py-2 pl-9 pr-9 text-sm"
@@ -135,7 +143,7 @@ export function ProjectTemplatesPage(props: ProjectTemplatesPage.Props) {
             {search && (
               <button
                 type="button"
-                aria-label="Clear search"
+                aria-label={t("turboui.projectTemplatesPage.clearSearch")}
                 onClick={() => setSearch("")}
                 className="absolute right-3 top-1/2 z-10 -translate-y-1/2 text-content-dimmed hover:text-content-accent"
               >
@@ -148,7 +156,7 @@ export function ProjectTemplatesPage(props: ProjectTemplatesPage.Props) {
               space={selectedSpace}
               setSpace={setSelectedSpace}
               search={filterSpaceSearch}
-              emptyStateMessage="All Spaces"
+              emptyStateMessage={t("turboui.projectTemplatesPage.allSpaces")}
               testId="project-template-space-filter"
             />
           )}
@@ -176,12 +184,14 @@ function TemplatesContent(
     isFiltered: boolean;
   },
 ) {
-  if (props.status === "loading") return <PageMessage>Loading templates…</PageMessage>;
+  if (props.status === "loading")
+    return <PageMessage>{t("turboui.projectTemplatesPage.loadingTemplates")}</PageMessage>;
   if (props.status === "error")
-    return <PageMessage role="alert">Templates could not be loaded. Try again.</PageMessage>;
+    return <PageMessage role="alert">{t("turboui.projectTemplatesPage.templatesCouldNotBeLoadedTry")}</PageMessage>;
   if (props.templates.length === 0 && props.isFiltered)
-    return <PageMessage>No matching templates. Try a different search or Space.</PageMessage>;
-  if (props.templates.length === 0) return <PageMessage>No project templates yet.</PageMessage>;
+    return <PageMessage>{t("turboui.projectTemplatesPage.noMatchingTemplatesTryADifferent")}</PageMessage>;
+  if (props.templates.length === 0)
+    return <PageMessage>{t("turboui.projectTemplatesPage.noProjectTemplatesYet")}</PageMessage>;
 
   if (props.scope === "space") {
     return <TemplateGrid {...props} />;
@@ -251,7 +261,7 @@ function TemplateCard({
           className="group flex w-full items-center justify-between rounded-b-xl border-t border-surface-outline px-5 py-3 text-sm font-semibold text-content-accent transition-colors hover:bg-surface-highlight focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-base"
           testId={`create-project-from-template-${template.id}`}
         >
-          <span>Create project</span>
+          <span>{t("turboui.projectTemplatesPage.createProject")}</span>
           <IconArrowRight
             size={16}
             aria-hidden="true"
@@ -308,16 +318,27 @@ function CreateTemplateModal({
   }, [editableSpaces, fixedSpace, isOpen]);
 
   return (
-    <Modal isOpen={isOpen} onClose={() => void form.actions.cancel()} title="New project template" size="medium">
+    <Modal
+      isOpen={isOpen}
+      onClose={() => void form.actions.cancel()}
+      title={t("turboui.projectTemplatesPage.newProjectTemplate")}
+      size="medium"
+    >
       <Forms.Form form={form} className="space-y-5" testId="new-project-template-form">
-        <Forms.TextInput field="name" label="Template name" placeholder="e.g. Product launch" required autoFocus />
+        <Forms.TextInput
+          field="name"
+          label={t("turboui.projectTemplatesPage.templateName")}
+          placeholder={t("turboui.projectTemplatesPage.eGProductLaunch")}
+          required
+          autoFocus
+        />
         {!fixedSpace && (
           <SpaceField
             space={space}
             setSpace={setSpace}
             search={spaceSearch}
             variant="form-field"
-            label="Space"
+            label={t("turboui.projectTemplatesPage.space")}
             error={form.errors.space}
             testId="new-project-template-space"
           />
@@ -325,10 +346,10 @@ function CreateTemplateModal({
         <Forms.FormError message={form.errors.form} />
         <div className="flex justify-end gap-3">
           <SecondaryButton type="button" onClick={() => void form.actions.cancel()} disabled={form.state !== "idle"}>
-            Cancel
+            {t("turboui.projectTemplatesPage.cancel")}
           </SecondaryButton>
           <PrimaryButton type="submit" loading={form.state === "submitting"} testId="create-project-template">
-            Create template
+            {t("turboui.projectTemplatesPage.createTemplate")}
           </PrimaryButton>
         </div>
       </Forms.Form>

@@ -8,6 +8,7 @@ import { Navigation } from "../Page/Navigation";
 import { useHtmlTitle } from "../Page/useHtmlTitle";
 import { AddedContent } from "./components/AddedContent";
 import { InvitedContent } from "./components/InvitedContent";
+import { t } from "../i18n";
 
 export namespace CompanyAdminAddPeoplePage {
   export type PageState = PageStateForm | PageStateInvited | PageStateAdded;
@@ -100,7 +101,7 @@ type MemberCopy = {
 
 const helperTextWrapper = (content: React.ReactNode) => (
   <div className="my-8 text-center px-8 sm:px-20">
-    <span className="font-bold">What happens next?</span> {content}
+    <span className="font-bold">{t("turboui.companyAdminAddPeoplePage.whatHappensNext")}</span> {content}
   </div>
 );
 
@@ -108,36 +109,24 @@ const memberCopy: Record<CompanyAdminAddPeoplePage.MemberType, MemberCopy> = {
   team_member: {
     pageTitlePrefix: "Invite new team member",
     formTitle: "Invite a new team member",
-    helperText: helperTextWrapper(
-      <>
-        If the new member already has an account, they will be added to your company. If they don&apos;t have an
-        account, we&apos;ll send them an email with an invitation link, and you&apos;ll get the same link here to share
-        if needed. The link will be valid for 24 hours.
-      </>,
-    ),
+    helperText: helperTextWrapper(<>{t("turboui.companyAdminAddPeoplePage.ifTheNewMemberAlreadyHas")}</>),
     submitLabel: "Invite Member",
     inviteAnotherLabel: "Invite Another Member",
   },
   outside_collaborator: {
     pageTitlePrefix: "Invite new outside collaborator",
     formTitle: "Invite a new outside collaborator",
-    helperText: helperTextWrapper(
-      <>
-        If the outside collaborator already has an account, they will be added to your company as an outside
-        collaborator. If they don&apos;t have an account, we&apos;ll send them an email with an invitation link, and
-        you&apos;ll get the same link here to share if needed. The link will be valid for 24 hours.
-      </>,
-    ),
+    helperText: helperTextWrapper(<>{t("turboui.companyAdminAddPeoplePage.ifTheOutsideCollaboratorAlreadyHas")}</>),
     submitLabel: "Invite Collaborator",
     inviteAnotherLabel: "Invite Another Outside Collaborator",
   },
 };
 
 const DEFAULT_PERMISSION_OPTIONS: CompanyAdminAddPeoplePage.PermissionOption[] = [
-  { value: "full_access", label: "Full Access" },
-  { value: "edit_access", label: "Edit Access" },
-  { value: "comment_access", label: "Comment Access" },
-  { value: "view_access", label: "View Access" },
+  { value: "full_access", label: t("turboui.companyAdminAddPeoplePage.fullAccess") },
+  { value: "edit_access", label: t("turboui.companyAdminAddPeoplePage.editAccess") },
+  { value: "comment_access", label: t("turboui.companyAdminAddPeoplePage.commentAccess") },
+  { value: "view_access", label: t("turboui.companyAdminAddPeoplePage.viewAccess") },
 ];
 
 export function CompanyAdminAddPeoplePage(props: CompanyAdminAddPeoplePage.Props) {
@@ -238,11 +227,7 @@ export function CompanyAdminAddPeoplePage(props: CompanyAdminAddPeoplePage.Props
         )}
 
       {props.limitGuidance && (
-        <BillingLimitGuidanceNotice
-          isOpen={true}
-          onClose={props.onCloseLimitGuidance}
-          guidance={props.limitGuidance}
-        />
+        <BillingLimitGuidanceNotice isOpen={true} onClose={props.onCloseLimitGuidance} guidance={props.limitGuidance} />
       )}
     </div>
   );
@@ -252,7 +237,7 @@ function GrantAccessButton({ onClick, isLoading }: { onClick: () => void; isLoad
   return (
     <div className="flex justify-center mt-4 mb-16">
       <PrimaryButton onClick={onClick} testId="grant-access-button" loading={isLoading}>
-        Grant Access
+        {t("turboui.companyAdminAddPeoplePage.grantAccess")}
       </PrimaryButton>
     </div>
   );

@@ -10,6 +10,7 @@ import { applyAccessLevelConstraints, initialAccessLevels } from "@/features/spa
 import { usePaths } from "@/routes/paths";
 import { PageModule } from "@/routes/types";
 import { AccessLevelSummary, Forms, SecondaryButton, useFormContext } from "turboui";
+import { t } from "@/i18n";
 
 export default { name: "SpaceAddPage", loader: Pages.emptyLoader, Page } as PageModule;
 
@@ -47,9 +48,9 @@ function Page() {
   });
 
   return (
-    <Pages.Page title="Create a new space">
+    <Pages.Page title={t("pages.spaceAddPage.createANewSpace")}>
       <Paper.Root size="small">
-        <Paper.NavigateBack to={paths.homePath()} title="Back to Home" />
+        <Paper.NavigateBack to={paths.homePath()} title={t("pages.spaceAddPage.backToHome")} />
         <Title />
 
         <Forms.Form form={form}>
@@ -64,7 +65,7 @@ function Page() {
             <PrivacyLevel />
           </Paper.Body>
 
-          <Forms.Submit saveText="Create Space" layout="centered" buttonSize="base" />
+          <Forms.Submit saveText={t("pages.spaceAddPage.createSpace")} layout="centered" buttonSize="base" />
         </Forms.Form>
       </Paper.Root>
     </Pages.Page>
@@ -74,8 +75,8 @@ function Page() {
 function Title() {
   return (
     <div className="text-center mb-6">
-      <h1 className="text-3xl font-bold">Create a new space</h1>
-      <span className="text-content-dimmed">Spaces help organize projects, goals, and team members in one place.</span>
+      <h1 className="text-3xl font-bold">{t("pages.spaceAddPage.createANewSpace")}</h1>
+      <span className="text-content-dimmed">{t("pages.spaceAddPage.spacesHelpOrganizeProjectsGoalsAnd")}</span>
     </div>
   );
 }
@@ -85,9 +86,9 @@ function NameInput({ field }: { field: string }) {
 
   return (
     <Forms.TextInput
-      label="Space Name"
+      label={t("pages.spaceAddPage.spaceName")}
       field={field}
-      placeholder="e.g. Marketing"
+      placeholder={t("pages.spaceAddPage.eGMarketing")}
       required
       autoFocus
       onEnter={(event) => {
@@ -101,9 +102,9 @@ function NameInput({ field }: { field: string }) {
 function PurposeInput({ field }: { field: string }) {
   return (
     <Forms.TextInput
-      label="Purpose"
+      label={t("pages.spaceAddPage.purpose")}
       field={field}
-      placeholder="e.g. Create product awareness and bring new leads"
+      placeholder={t("pages.spaceAddPage.eGCreateProductAwarenessAnd")}
       required
     />
   );
@@ -141,7 +142,7 @@ function PrivacyEdit() {
 
   return (
     <SecondaryButton size="xs" onClick={() => setIsAdvanced(true)} testId="edit-access-levels">
-      Edit
+      {t("pages.spaceAddPage.edit")}
     </SecondaryButton>
   );
 }

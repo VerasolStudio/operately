@@ -7,6 +7,7 @@ import { assertPresent } from "@/utils/assertions";
 
 import { Avatar, CommentCountIndicator, richContentToString } from "turboui";
 import classNames from "classnames";
+import { t } from "@/i18n";
 
 interface Props {
   space: Space;
@@ -16,7 +17,7 @@ interface Props {
 export function RegularState(props: Props) {
   return (
     <div>
-      <Title title="Discussions" />
+      <Title title={t("features.spaceTools.discussions")} />
       <DiscussionList discussions={props.discussions} />
     </div>
   );

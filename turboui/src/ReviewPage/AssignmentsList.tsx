@@ -6,6 +6,7 @@ import { IconCalendar, IconFlag, IconGoalPlain, IconMessage, IconProjectPlain, I
 import { createTestId } from "../TestableElement";
 
 import { ReviewPageV2 } from ".";
+import { t } from "../i18n";
 
 const TYPE_ICON: Record<ReviewPageV2.AssignmentType, typeof IconSquare> = {
   check_in: IconMessage,
@@ -57,7 +58,11 @@ function AssignmentGroup({
 
       <div className="flex flex-col gap-1">
         {group.assignments.map((assignment) => (
-          <AssignmentItem key={assignment.resourceId} assignment={assignment} formattedTimePreferences={formattedTimePreferences} />
+          <AssignmentItem
+            key={assignment.resourceId}
+            assignment={assignment}
+            formattedTimePreferences={formattedTimePreferences}
+          />
         ))}
       </div>
     </div>
@@ -138,12 +143,13 @@ function getUrgencyDetails(status: ReviewPageV2.DueStatus | null, dueDate: strin
   switch (status) {
     case "overdue":
       const daysOverdue = calculateDaysOverdue(dueDate);
-      const overdueText = daysOverdue === 1 ? "1 day overdue" : `${daysOverdue} days overdue`;
+      const overdueText =
+        daysOverdue === 1 ? "1 day overdue" : t("turboui.reviewPage.daysOverdue", { v1: daysOverdue });
       return { label: overdueText, className: "text-callout-error-content" };
     case "due_today":
-      return { label: "Due today", className: "text-callout-warning-content" };
+      return { label: t("turboui.reviewPage.dueToday"), className: "text-callout-warning-content" };
     case "due_soon":
-      return { label: "Due tomorrow", className: "text-content-dimmed" };
+      return { label: t("turboui.reviewPage.dueTomorrow"), className: "text-content-dimmed" };
     default:
       return null;
   }

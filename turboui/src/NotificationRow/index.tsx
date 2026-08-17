@@ -3,6 +3,7 @@ import { Avatar, type AvatarPerson } from "../Avatar";
 import { FormattedTime, type FormattedTimePreferences } from "../FormattedTime";
 import { IconCheck } from "../icons";
 import { TextSeparator } from "../TextSeparator";
+import { t } from "../i18n";
 
 export interface NotificationRowProps {
   author: AvatarPerson;
@@ -57,8 +58,8 @@ export function NotificationRow({
       {!read && (
         <button
           type="button"
-          aria-label="Mark as read"
-          title="Mark as read"
+          aria-label={t("turboui.notificationRow.markAsRead")}
+          title={t("turboui.notificationRow.markAsRead")}
           className="absolute -right-8 -top-1 rounded group-hover:opacity-100 focus:opacity-100 opacity-0 cursor-pointer p-2"
           data-test-id={`${testId}-mark-as-read`}
           onClick={handleMarkAsRead}

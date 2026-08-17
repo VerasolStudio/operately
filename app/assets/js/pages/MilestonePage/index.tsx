@@ -27,6 +27,7 @@ import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 import { useSubscription } from "@/models/subscriptions";
 import { useMilestones as useProjectMilestones } from "@/models/milestones/useMilestones";
+import { t } from "@/i18n";
 
 export default { name: "MilestonePage", loader, Page } as PageModule;
 
@@ -106,7 +107,8 @@ function Page() {
     value: ({ milestone }) => milestone.description && JSON.parse(milestone.description),
     update: (v) =>
       Api.projects.updateMilestoneDescription({ milestoneId: milestone.id, description: JSON.stringify(v) }),
-    onError: () => showErrorToast("Error", "Failed to update milestone description."),
+    onError: () =>
+      showErrorToast(t("pages.milestonePage.error"), t("pages.milestonePage.failedToUpdateMilestoneDescription")),
   });
 
   const [dueDate, setDueDate] = usePageField(pageData, {

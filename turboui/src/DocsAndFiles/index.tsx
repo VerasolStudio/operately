@@ -29,6 +29,8 @@ import {
 import type { ResourceHubNode } from "../ResourceHub/types";
 import classNames from "../utils/classnames";
 import { getRecentPreviewNodes, sortDocsAndFilesItems } from "./sorting";
+import { t } from "../i18n";
+import { Trans } from "react-i18next";
 
 export namespace DocsAndFiles {
   export type ItemType = "document" | "folder" | "file" | "link";
@@ -111,7 +113,7 @@ export function DocsAndFilesPreview({
   return (
     <div className="space-y-3" data-test-id="docs-and-files-preview">
       <div className="flex items-center gap-2">
-        <h2 className="font-bold">Docs & Files</h2>
+        <h2 className="font-bold">{t("turboui.docsAndFiles.docsFiles")}</h2>
       </div>
 
       {recentNodes.length > 0 ? (
@@ -131,10 +133,14 @@ export function DocsAndFilesPreview({
         </div>
       ) : (
         <div className="text-sm text-content-dimmed">
-          No support materials yet.{" "}
-          <Link to={tabPath} underline="hover" className="font-medium">
-            Add files, docs, or links
-          </Link>
+          <Trans
+            i18nKey="turboui.docsAndFiles.noSupportMaterialsYet"
+            components={[
+              <Link to={tabPath} underline="hover" className="font-medium">
+                Add files, docs, or links
+              </Link>,
+            ]}
+          />
         </div>
       )}
     </div>
@@ -228,7 +234,7 @@ export function DocsAndFilesDraftPrompt({ prompt }: { prompt?: DocsAndFiles.Draf
   const label =
     prompt.count === 1
       ? "Continue writing your draft document..."
-      : `Continue writing your ${prompt.count} draft documents...`;
+      : t("turboui.docsAndFiles.continueWritingYourDraftDocuments", { v1: prompt.count });
 
   return (
     <div className="flex justify-center py-3">
@@ -393,7 +399,7 @@ function EmptyState({ kind }: { kind: "resourceHub" | "folder" }) {
     <div className="mt-6 flex w-full items-start gap-4 rounded-md border border-dashed border-surface-outline bg-surface-dimmed px-5 py-5">
       <IconFile size={40} className="shrink-0 text-content-dimmed" />
       <div className="max-w-[56ch]">
-        <div className="font-semibold">Ready for your first document</div>
+        <div className="font-semibold">{t("turboui.docsAndFiles.readyForYourFirstDocument")}</div>
         <div className="mt-1 text-sm text-content-dimmed">{message}</div>
       </div>
     </div>

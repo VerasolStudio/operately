@@ -3,6 +3,7 @@ import React from "react";
 import { PrimaryButton, SecondaryButton } from "../../Button";
 import type { CompanyAdminManagePerson } from "../types";
 import { LegacyModal } from "./LegacyModal";
+import { t } from "../../i18n";
 
 export function RemovePersonModal({
   isOpen,
@@ -22,10 +23,12 @@ export function RemovePersonModal({
   const firstName = firstNameFromFullName(person.fullName);
   const isInvitation = person.hasOpenInvitation;
 
-  const title = isInvitation ? `Revoke invitation for ${firstName}?` : `Remove ${firstName} from the company?`;
+  const title = isInvitation
+    ? t("turboui.companyAdminManagePeoplePage.revokeInvitationFor", { v1: firstName })
+    : t("turboui.companyAdminManagePeoplePage.removeFromTheCompany", { v1: firstName });
   const message = isInvitation
-    ? `This will revoke ${firstName}'s invitation. You can create a new invitation later if needed.`
-    : `This will deactivate ${firstName}'s account, restricting access to company resources. You can restore access later if needed.`;
+    ? t("turboui.companyAdminManagePeoplePage.thisWillRevokeSInvitationYou", { v1: firstName })
+    : t("turboui.companyAdminManagePeoplePage.thisWillDeactivateSAccountRestricting", { v1: firstName });
   const buttonText = isInvitation ? "Revoke" : "Deactivate";
 
   return (
@@ -36,7 +39,7 @@ export function RemovePersonModal({
           {buttonText}
         </PrimaryButton>
         <SecondaryButton onClick={onClose} testId="cancel-remove-member" size="sm">
-          Cancel
+          {t("turboui.companyAdminManagePeoplePage.cancel")}
         </SecondaryButton>
       </div>
     </LegacyModal>

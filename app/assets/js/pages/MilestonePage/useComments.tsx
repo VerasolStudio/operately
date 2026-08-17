@@ -8,6 +8,7 @@ import * as Reactions from "@/models/reactions";
 import { Paths } from "@/routes/paths";
 import { useMe } from "@/contexts/CurrentCompanyContext";
 import { showErrorToast } from "turboui";
+import { t } from "@/i18n";
 
 export function useComments(paths: Paths, milestone: Milestones.Milestone, invalidateCache: () => void) {
   const me = useMe()!;
@@ -69,7 +70,7 @@ export function useComments(paths: Paths, milestone: Milestones.Milestone, inval
         return false;
       } catch (error) {
         setComments((prev) => prev.filter((c) => c.id !== tempId));
-        showErrorToast("Error", "Failed to add comment.");
+        showErrorToast(t("pages.milestonePage.error"), t("pages.milestonePage.failedToAddComment"));
         return false;
       }
     },

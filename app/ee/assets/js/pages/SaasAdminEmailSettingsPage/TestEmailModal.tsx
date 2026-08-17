@@ -4,6 +4,7 @@ import classNames from "classnames";
 import * as AdminApi from "@/ee/admin_api";
 import { useBoolState } from "@/hooks/useBoolState";
 import { Forms, Modal, SecondaryButton } from "turboui";
+import { t } from "@/i18n";
 
 interface TestEmailModalProps {
   isOpen: boolean;
@@ -12,7 +13,7 @@ interface TestEmailModalProps {
 
 function TestEmailModal({ isOpen, onClose }: TestEmailModalProps) {
   return (
-    <Modal title="Send Test Email" isOpen={isOpen} onClose={onClose}>
+    <Modal title={t("pages.saasAdminEmailSettingsPage.sendTestEmail")} isOpen={isOpen} onClose={onClose}>
       <TestEmailForm onClose={onClose} />
     </Modal>
   );
@@ -24,7 +25,7 @@ export function TestEmailAction() {
   return (
     <>
       <SecondaryButton size="sm" onClick={openModal}>
-        Send Test Email
+        {t("pages.saasAdminEmailSettingsPage.sendTestEmail")}
       </SecondaryButton>
       <TestEmailModal isOpen={isOpen} onClose={closeModal} />
     </>
@@ -68,14 +69,30 @@ function TestEmailForm({ onClose }: { onClose: () => void }) {
   return (
     <Forms.Form form={form}>
       <Forms.FieldGroup>
-        <Forms.TextInput field="recipient" label="Recipient" placeholder="recipient@example.com" />
-        <Forms.TextInput field="subject" label="Subject" placeholder="Test email" />
-        <TextareaField field="body" label="Body" placeholder="Write a short test message" rows={5} />
+        <Forms.TextInput
+          field="recipient"
+          label={t("pages.saasAdminEmailSettingsPage.recipient")}
+          placeholder={t("pages.saasAdminEmailSettingsPage.recipientExampleCom")}
+        />
+        <Forms.TextInput
+          field="subject"
+          label={t("pages.saasAdminEmailSettingsPage.subject")}
+          placeholder={t("pages.saasAdminEmailSettingsPage.testEmail")}
+        />
+        <TextareaField
+          field="body"
+          label={t("pages.saasAdminEmailSettingsPage.body")}
+          placeholder={t("pages.saasAdminEmailSettingsPage.writeAShortTestMessage")}
+          rows={5}
+        />
       </Forms.FieldGroup>
 
       {statusMessage && <StatusMessage tone={statusTone}>{statusMessage}</StatusMessage>}
 
-      <Forms.Submit saveText="Send Test Email" cancelText="Cancel" />
+      <Forms.Submit
+        saveText={t("pages.saasAdminEmailSettingsPage.sendTestEmail")}
+        cancelText={t("pages.saasAdminEmailSettingsPage.cancel")}
+      />
     </Forms.Form>
   );
 }

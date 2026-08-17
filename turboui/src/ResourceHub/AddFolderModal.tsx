@@ -3,6 +3,7 @@ import * as React from "react";
 import * as Forms from "../Forms";
 import Modal from "../Modal";
 import { useNewFileModalsContext } from "./contexts/NewFileModalsContext";
+import { t } from "../i18n";
 
 export interface AddFolderModalProps {
   resourceHubId: string;
@@ -37,19 +38,19 @@ export function AddFolderModal({ resourceHubId, folderId, onCreated, onCreateFol
   });
 
   return (
-    <Modal title="New folder" isOpen={showAddFolder} onClose={toggleShowAddFolder}>
+    <Modal title={t("turboui.resourceHub.newFolder")} isOpen={showAddFolder} onClose={toggleShowAddFolder}>
       <Forms.Form form={form}>
         <Forms.FieldGroup>
           <Forms.TextInput
-            label="Name"
+            label={t("turboui.resourceHub.name")}
             field="name"
             testId="new-folder-name"
             autoFocus
-            placeholder="e.g. Monthly Reports"
+            placeholder={t("turboui.resourceHub.eGMonthlyReports")}
           />
         </Forms.FieldGroup>
 
-        <Forms.Submit cancelText="Cancel" />
+        <Forms.Submit cancelText={t("turboui.resourceHub.cancel")} />
       </Forms.Form>
     </Modal>
   );

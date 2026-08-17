@@ -8,6 +8,7 @@ import { Project } from "@/models/projects";
 import { Title } from "../components";
 import plurarize from "@/utils/plurarize";
 import { IconTrophy } from "turboui";
+import { t } from "@/i18n";
 
 interface Props {
   title: string;
@@ -23,7 +24,7 @@ export function AllDoneState(props: Props) {
 
       <div className="bg-surface-dimmed rounded mx-2 flex-1 flex flex-col px-2 py-4 items-center">
         <IconTrophy size={35} />
-        <div className="text-sm font-bold mt-3 mb-1">All done!</div>
+        <div className="text-sm font-bold mt-3 mb-1">{t("features.spaceTools.allDone")}</div>
         <div className="text-xs mb-1">{message(props)}</div>
       </div>
     </div>
@@ -38,7 +39,7 @@ function message(props: Props) {
     const projectsMsg = plurarize(projects, "project", "projects");
 
     if (goals > 0 && projects > 0) {
-      return `${goalsMsg} and ${projectsMsg} completed ${when}.`;
+      return t("features.spaceTools.andCompleted", { v1: goalsMsg, v2: projectsMsg, v3: when });
     } else if (goals > 0) {
       return `${goalsMsg} completed ${when}.`;
     } else {

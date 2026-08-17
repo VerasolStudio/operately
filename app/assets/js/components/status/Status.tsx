@@ -4,6 +4,7 @@ import * as People from "@/models/people";
 import classNames from "classnames";
 import { ColorOptions, StatusOptions } from ".";
 import { COLORS, TITLES, CIRCLE_BORDER_COLORS, CIRCLE_BACKGROUND_COLORS } from "turboui";
+import { t } from "@/i18n";
 
 interface StatusProps {
   status: StatusOptions;
@@ -41,13 +42,21 @@ function StatusDescription({ status, reviewer }: { status: StatusOptions; review
 
   switch (status) {
     case "on_track":
-      return <>Progressing as planned. No blockers.</>;
+      return <>{t("components.status.progressingAsPlannedNoBlockers")}</>;
     case "caution":
-      return <>Emerging risks or delays. {reviewerName || "The reviewer"} should be aware.</>;
+      return (
+        <>{t("components.status.emergingRisksOrDelays", { v1: reviewerName || t("components.status.theReviewer") })}</>
+      );
     case "off_track":
-      return <>Significant problems affecting success. {reviewerName || "The reviewer"}’s help is needed.</>;
+      return (
+        <>
+          {t("components.status.significantProblemsAffectingSuccess", {
+            v1: reviewerName || t("components.status.theReviewer"),
+          })}
+        </>
+      );
     case "pending":
-      return <>Work hasn't started yet.</>;
+      return <>{t("components.status.workHasnTStartedYet")}</>;
 
     default:
       throw new Error(`Unknown status: ${status}`);

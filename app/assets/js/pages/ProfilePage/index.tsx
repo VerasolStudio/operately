@@ -13,6 +13,7 @@ import { compareIds, usePaths } from "@/routes/paths";
 import { convertToWorkMapItems } from "../../models/workMap";
 import { useMe, useMentionedPersonLookupFn } from "@/contexts/CurrentCompanyContext";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
+import { t } from "@/i18n";
 
 export default { name: "ProfilePage", loader, Page } as PageModule;
 
@@ -56,8 +57,8 @@ function Page() {
 function ActivityFeed({ personId }: { personId: string }) {
   const { data, loading, error } = useItemsQuery("person", personId);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error</div>;
+  if (loading) return <div>{t("pages.profilePage.loading")}</div>;
+  if (error) return <div>{t("pages.profilePage.error")}</div>;
 
   return <Feed items={data?.activities || []} testId="profile-feed" page="profile" />;
 }

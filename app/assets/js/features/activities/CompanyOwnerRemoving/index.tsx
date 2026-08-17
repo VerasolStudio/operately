@@ -5,6 +5,7 @@ import type { ActivityHandler } from "../interfaces";
 
 import { firstName } from "@/models/people";
 import { feedTitle } from "../feedItemLinks";
+import { t } from "@/i18n";
 
 const CompanyOwnerRemoving: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -30,7 +31,7 @@ const CompanyOwnerRemoving: ActivityHandler = {
   FeedItemTitle({ activity }: { activity: Activity; page: any }) {
     const name = firstName(content(activity).person!);
 
-    return feedTitle(activity, `removed ${name} as an account owner`);
+    return feedTitle(activity, t("features.activities.removedAsAnAccountOwner", { v1: name }));
   },
 
   FeedItemContent(_props: { activity: Activity; page: any }) {

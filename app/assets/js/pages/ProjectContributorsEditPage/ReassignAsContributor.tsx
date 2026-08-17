@@ -9,6 +9,7 @@ import { Forms } from "turboui";
 import { PageTitle } from "./PageTitle";
 import { LoaderResult, useGotoProjectContributors } from "./loader";
 import { joinStr } from "@/utils/strings";
+import { t } from "@/i18n";
 
 export function ReassignAsContributor() {
   const { contributor } = Pages.useLoadedData() as LoaderResult;
@@ -16,16 +17,16 @@ export function ReassignAsContributor() {
   const form = useForm(contributor);
 
   const name = People.firstName(contributor.person!);
-  const title = `Reassign ${name} as a Contributor`;
+  const title = t("pages.projectContributorsEditPage.reassignAsAContributor", { v1: name });
 
   const subtitle = joinStr(
-    `${name} is currently the ${contributor.role} on this project. `,
+    t("pages.projectContributorsEditPage.isCurrentlyTheOnThisProject", { v1: name, v2: contributor.role }),
     "Changing their role to contributor will modify ",
     "their access and responsibilities.",
   );
 
   const placeholder = "e.g. Design the UI/UX for the project";
-  const label = `What is ${name}'s responsibility on this project?`;
+  const label = t("pages.projectContributorsEditPage.whatIsSResponsibilityOnThis", { v1: name });
 
   return (
     <Paper.Body>
@@ -34,10 +35,14 @@ export function ReassignAsContributor() {
 
         <Forms.FieldGroup>
           <Forms.TextInput field={"responsibility"} placeholder={placeholder} label={label} />
-          <Forms.SelectBox field={"permissions"} label="Access Level" options={Permissions.PERMISSIONS_LIST_COMPLETE} />
+          <Forms.SelectBox
+            field={"permissions"}
+            label={t("pages.projectContributorsEditPage.accessLevel")}
+            options={Permissions.PERMISSIONS_LIST_COMPLETE}
+          />
         </Forms.FieldGroup>
 
-        <Forms.Submit saveText="Save" />
+        <Forms.Submit saveText={t("pages.projectContributorsEditPage.save")} />
       </Forms.Form>
     </Paper.Body>
   );

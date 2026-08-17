@@ -9,6 +9,7 @@ import { Modal } from "../Modal";
 import type { RichEditorHandlers } from "../RichEditor/useEditor";
 import { SwitchToggle } from "../SwitchToggle";
 import { Tooltip } from "../Tooltip";
+import { t } from "../i18n";
 
 export namespace SaveProjectAsTemplateModal {
   export type ResourceType = "project" | "milestone" | "task";
@@ -98,26 +99,26 @@ export function SaveProjectAsTemplateModal(props: SaveProjectAsTemplateModal.Pro
     <Modal
       isOpen={props.isOpen}
       onClose={() => void form.actions.cancel()}
-      title="Save project as template"
+      title={t("turboui.saveProjectAsTemplateModal.saveProjectAsTemplate")}
       size="large"
     >
       <Forms.Form form={form} className="space-y-5" testId="save-project-as-template-form">
-        <Forms.TextInput field="name" label="Template name" required autoFocus />
+        <Forms.TextInput field="name" label={t("turboui.saveProjectAsTemplateModal.templateName")} required autoFocus />
         <Forms.RichTextArea
           field="description"
-          label="Description"
+          label={t("turboui.saveProjectAsTemplateModal.description")}
           richTextHandlers={props.richTextHandlers}
           height="min-h-[140px]"
         />
 
         <div className="space-y-4 rounded-lg border border-surface-outline p-4">
           <h3 className="flex items-center gap-2 font-semibold text-content-accent">
-            <span>Include</span>
+            <span>{t("turboui.saveProjectAsTemplateModal.include")}</span>
             <Tooltip
               content={
                 <div className="max-w-xs">
-                  <div className="font-semibold mb-2">Include in template</div>
-                  <div className="text-sm">Choose which parts of this project to copy into the template.</div>
+                  <div className="font-semibold mb-2">{t("turboui.saveProjectAsTemplateModal.includeInTemplate")}</div>
+                  <div className="text-sm">{t("turboui.saveProjectAsTemplateModal.chooseWhichPartsOfThisProject")}</div>
                 </div>
               }
             >
@@ -127,12 +128,20 @@ export function SaveProjectAsTemplateModal(props: SaveProjectAsTemplateModal.Pro
           <IncludeSwitch
             form={form}
             field="includePeopleAndAssignments"
-            label="People and assignments"
+            label={t("turboui.saveProjectAsTemplateModal.peopleAndAssignments")}
             helperText="Copies the project team with their roles and access."
           />
-          <IncludeSwitch form={form} field="includeDiscussions" label="Discussions" />
-          <IncludeSwitch form={form} field="includeComments" label="Comments" />
-          <IncludeSwitch form={form} field="includeDocsAndFiles" label="Docs & Files" />
+          <IncludeSwitch
+            form={form}
+            field="includeDiscussions"
+            label={t("turboui.saveProjectAsTemplateModal.discussions")}
+          />
+          <IncludeSwitch form={form} field="includeComments" label={t("turboui.saveProjectAsTemplateModal.comments")} />
+          <IncludeSwitch
+            form={form}
+            field="includeDocsAndFiles"
+            label={t("turboui.saveProjectAsTemplateModal.docsFiles")}
+          />
         </div>
 
         {scheduleIssues.length > 0 && (
@@ -142,7 +151,7 @@ export function SaveProjectAsTemplateModal(props: SaveProjectAsTemplateModal.Pro
 
         <div className="flex justify-end gap-3">
           <SecondaryButton type="button" onClick={() => void form.actions.cancel()} disabled={form.state !== "idle"}>
-            Cancel
+            {t("turboui.saveProjectAsTemplateModal.cancel")}
           </SecondaryButton>
           <PrimaryButton
             type="submit"
@@ -150,7 +159,7 @@ export function SaveProjectAsTemplateModal(props: SaveProjectAsTemplateModal.Pro
             disabled={!props.submissionEnabled}
             testId="save-project-as-template"
           >
-            Save as template
+            {t("turboui.saveProjectAsTemplateModal.saveAsTemplate")}
           </PrimaryButton>
         </div>
       </Forms.Form>
@@ -187,8 +196,12 @@ function ScheduleIssues({
 }) {
   return (
     <div className="rounded-lg border border-callout-error-content bg-callout-error-bg p-4" role="alert">
-      <p className="font-semibold text-content-error">Some dates are before the project start date.</p>
-      <p className="mt-1 text-sm text-content-base">Change or remove these dates, then try again.</p>
+      <p className="font-semibold text-content-error">
+        {t("turboui.saveProjectAsTemplateModal.someDatesAreBeforeTheProject")}
+      </p>
+      <p className="mt-1 text-sm text-content-base">
+        {t("turboui.saveProjectAsTemplateModal.changeOrRemoveTheseDatesThen")}
+      </p>
       <ul className="mt-3 list-disc space-y-1 pl-5 text-sm">
         {issues.map((issue) => (
           <li key={`${issue.resourceType}-${issue.resourceId}-${issue.field}`}>

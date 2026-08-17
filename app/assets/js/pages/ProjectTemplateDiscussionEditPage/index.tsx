@@ -7,6 +7,7 @@ import type { PageModule } from "@/routes/types";
 import { showErrorToast, TemplateDiscussionForm } from "turboui";
 import { useNavigate } from "react-router";
 import React from "react";
+import { t } from "@/i18n";
 
 export default { name: "ProjectTemplateDiscussionEditPage", loader, Page } as PageModule;
 
@@ -54,7 +55,10 @@ function Page() {
           navigate(paths.projectTemplateDiscussionPath(template.id, discussion.id));
           return true;
         } catch {
-          showErrorToast("Discussion not updated", "Check the form and try again.");
+          showErrorToast(
+            t("pages.projectTemplateDiscussionEditPage.discussionNotUpdated"),
+            t("pages.projectTemplateDiscussionEditPage.checkTheFormAndTryAgain"),
+          );
           return false;
         }
       }}
@@ -65,9 +69,15 @@ function Page() {
 function navigation(template: ProjectTemplate, discussion: ProjectTemplateDiscussion, paths: Paths) {
   return [
     { to: paths.spacePath(template.space.id), label: template.space.name },
-    { to: paths.spaceProjectTemplatesPath(template.space.id), label: "Project Templates" },
+    {
+      to: paths.spaceProjectTemplatesPath(template.space.id),
+      label: t("pages.projectTemplateDiscussionEditPage.projectTemplates"),
+    },
     { to: paths.projectTemplatePath(template.id), label: template.name },
-    { to: paths.projectTemplatePath(template.id, { tab: "discussions" }), label: "Discussions" },
+    {
+      to: paths.projectTemplatePath(template.id, { tab: "discussions" }),
+      label: t("pages.projectTemplateDiscussionEditPage.discussions"),
+    },
     { to: paths.projectTemplateDiscussionPath(template.id, discussion.id), label: discussion.title },
   ];
 }

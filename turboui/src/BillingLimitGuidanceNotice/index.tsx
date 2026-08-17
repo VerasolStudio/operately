@@ -4,6 +4,7 @@ import { PrimaryButton, SecondaryButton } from "../Button";
 import type { CompanyAdminAddPeoplePage } from "../CompanyAdminAddPeoplePage";
 import { IconAlertTriangleFilled } from "../icons";
 import { Modal } from "../Modal";
+import { t } from "../i18n";
 
 export interface BillingLimitGuidanceNoticeProps {
   isOpen: boolean;
@@ -11,11 +12,7 @@ export interface BillingLimitGuidanceNoticeProps {
   guidance: CompanyAdminAddPeoplePage.BillingLimitGuidance;
 }
 
-export function BillingLimitGuidanceNotice({
-  isOpen,
-  onClose,
-  guidance,
-}: BillingLimitGuidanceNoticeProps) {
+export function BillingLimitGuidanceNotice({ isOpen, onClose, guidance }: BillingLimitGuidanceNoticeProps) {
   const nextStepValue = guidance.recommendedPlanLabel
     ? guidance.recommendedPlanLabel
     : guidance.cta
@@ -33,7 +30,7 @@ export function BillingLimitGuidanceNotice({
 
             <div className="min-w-0 flex-1">
               <div className="inline-flex rounded-full border border-stroke-base bg-surface-base px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-content-dimmed">
-                Plan limit reached
+                {t("turboui.billingLimitGuidanceNotice.planLimitReached")}
               </div>
               <h3 className="mt-3 text-lg font-semibold leading-7 text-content-accent">{guidance.title}</h3>
               <p className="mt-2 text-sm leading-6 text-content-dimmed">{guidance.description}</p>
@@ -42,7 +39,7 @@ export function BillingLimitGuidanceNotice({
         </div>
 
         <div className="grid gap-3 px-5 py-5 sm:grid-cols-2 sm:px-6">
-          <InfoTile label="Usage" value={guidance.usageSummary} />
+          <InfoTile label={t("turboui.billingLimitGuidanceNotice.usage")} value={guidance.usageSummary} />
           <InfoTile
             label={guidance.recommendedPlanLabel ? "Recommended plan" : "Next step"}
             value={nextStepValue}
@@ -58,7 +55,7 @@ export function BillingLimitGuidanceNotice({
               </PrimaryButton>
             )}
             <SecondaryButton onClick={onClose} testId="billing-limit-guidance-close">
-              Close
+              {t("turboui.billingLimitGuidanceNotice.close")}
             </SecondaryButton>
           </div>
         </div>
@@ -67,19 +64,15 @@ export function BillingLimitGuidanceNotice({
   );
 }
 
-function InfoTile({
-  label,
-  value,
-  emphasized = false,
-}: {
-  label: string;
-  value: string;
-  emphasized?: boolean;
-}) {
+function InfoTile({ label, value, emphasized = false }: { label: string; value: string; emphasized?: boolean }) {
   return (
     <div className="rounded-2xl border border-stroke-base bg-surface-dimmed px-4 py-4">
       <div className="text-xs font-semibold uppercase tracking-[0.16em] text-content-dimmed">{label}</div>
-      <div className={`mt-2 text-sm leading-6 ${emphasized ? "font-semibold text-content-accent" : "text-content-dimmed"}`}>{value}</div>
+      <div
+        className={`mt-2 text-sm leading-6 ${emphasized ? "font-semibold text-content-accent" : "text-content-dimmed"}`}
+      >
+        {value}
+      </div>
     </div>
   );
 }

@@ -11,6 +11,7 @@ import type { PageModule } from "@/routes/types";
 import { IconEdit, IconTrash, LinkPage, showErrorToast, type ResourceHubLinkType } from "turboui";
 import React from "react";
 import { useNavigate } from "react-router";
+import { t } from "@/i18n";
 
 export default { name: "ProjectTemplateLinkPage", loader, Page } as PageModule;
 
@@ -68,7 +69,10 @@ function Page() {
       await Api.project_templates.deleteResource({ templateId: template.id, nodeId: node.id });
       navigate(docsAndFilesLink);
     } catch {
-      showErrorToast("Resource not deleted", "The link is still on this page. Try again.");
+      showErrorToast(
+        t("pages.projectTemplateLinkPage.resourceNotDeleted"),
+        t("pages.projectTemplateLinkPage.theLinkIsStillOnThis"),
+      );
     }
   }
 
@@ -80,7 +84,7 @@ function Page() {
         {
           type: "link",
           icon: IconEdit,
-          label: "Edit",
+          label: t("pages.projectTemplateLinkPage.edit"),
           link: paths.projectTemplateEditLinkPath(template.id, node.id),
           keepOutsideOnBigScreen: true,
           testId: "edit-link-link",
@@ -88,7 +92,7 @@ function Page() {
         {
           type: "action",
           icon: IconTrash,
-          label: "Delete",
+          label: t("pages.projectTemplateLinkPage.delete"),
           onClick: toggleDeleteModal,
           hidden: !canEdit,
           testId: "delete-resource-link",
@@ -115,4 +119,3 @@ function Page() {
     />
   );
 }
-

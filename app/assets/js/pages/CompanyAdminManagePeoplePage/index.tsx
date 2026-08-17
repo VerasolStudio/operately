@@ -12,6 +12,7 @@ import { useMe } from "@/contexts/CurrentCompanyContext";
 import plurarize from "@/utils/plurarize";
 import { usePaths } from "@/routes/paths";
 import { CompanyAdminManagePeoplePage } from "turboui";
+import { t } from "@/i18n";
 
 export default { name: "CompanyAdminManagePeoplePage", loader, Page } as PageModule;
 
@@ -117,7 +118,7 @@ function Page() {
   );
 
   const navigationItems = React.useMemo(
-    () => [{ to: paths.companyAdminPath(), label: "Company Administration" }],
+    () => [{ to: paths.companyAdminPath(), label: t("pages.companyAdminManagePeoplePage.companyAdministration") }],
     [paths],
   );
 

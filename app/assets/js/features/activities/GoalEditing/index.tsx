@@ -7,6 +7,7 @@ import type { ActivityHandler } from "../interfaces";
 
 import { compareIds } from "@/routes/paths";
 import { feedTitle, goalLink } from "../feedItemLinks";
+import { t } from "@/i18n";
 
 const GoalEditing: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -82,7 +83,7 @@ export default GoalEditing;
 function NewName({ content }: { content: ActivityContentGoalEditing }) {
   if (content.newName === content.oldName) return null;
 
-  return <div>The name was changed to {content.newName}.</div>;
+  return <div>{t("features.activities.theNameWasChangedTo", { v1: content.newName })}</div>;
 }
 
 function Timeframe({ content }: { content: ActivityContentGoalEditing }) {
@@ -91,19 +92,21 @@ function Timeframe({ content }: { content: ActivityContentGoalEditing }) {
 
   if (Timeframes.equalDates(oldTimeframe, newTimeframe)) return null;
 
-  return <div>The timeframe was changed to {Timeframes.getTimeframeRange(newTimeframe)}.</div>;
+  return (
+    <div>{t("features.activities.theTimeframeWasChangedTo", { v1: Timeframes.getTimeframeRange(newTimeframe) })}</div>
+  );
 }
 
 function Champion({ content }: { content: ActivityContentGoalEditing }) {
   if (compareIds(content.oldChampionId, content.newChampionId)) return null;
 
-  return <div>The champion was changed to {content.newChampion!.fullName}.</div>;
+  return <div>{t("features.activities.theChampionWasChangedTo", { v1: content.newChampion!.fullName })}</div>;
 }
 
 function Reviewer({ content }: { content: ActivityContentGoalEditing }) {
   if (compareIds(content.oldReviewerId, content.newReviewerId)) return null;
 
-  return <div>The reviewer was changed to {content.newReviewer!.fullName}.</div>;
+  return <div>{t("features.activities.theReviewerWasChangedTo", { v1: content.newReviewer!.fullName })}</div>;
 }
 
 function AddedTargets({ content }: { content: ActivityContentGoalEditing }) {

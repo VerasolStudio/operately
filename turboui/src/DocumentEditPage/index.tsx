@@ -10,6 +10,7 @@ import { Spacer } from "../Spacer";
 import { SubscribersSelector } from "../Subscriptions";
 
 import type { DocumentEditPage as DocumentEditPageNS } from "./types";
+import { t } from "../i18n";
 
 export function DocumentEditPage(props: DocumentEditPageNS.Props) {
   const navigate = useNavigate();
@@ -35,16 +36,21 @@ export function DocumentEditPage(props: DocumentEditPageNS.Props) {
   });
 
   return (
-    <Page title={props.pageTitle} size="medium" navigation={props.navigation} testId={props.testId ?? "document-edit-page"}>
+    <Page
+      title={props.pageTitle}
+      size="medium"
+      navigation={props.navigation}
+      testId={props.testId ?? "document-edit-page"}
+    >
       <Forms.Form form={form}>
         <div className="px-12 py-10">
           <Forms.FieldGroup>
-            <Forms.TitleInput field="title" placeholder="Title..." />
+            <Forms.TitleInput field="title" placeholder={t("turboui.documentEditPage.title")} />
 
             <Forms.RichTextArea
               field="content"
               richTextHandlers={props.richTextHandlers}
-              placeholder="Write here..."
+              placeholder={t("turboui.documentEditPage.writeHere")}
               hideBorder
               showToolbarTopBorder
               fontSize="text-lg"
@@ -72,7 +78,7 @@ function FormActions({ hidePublishAction }: { hidePublishAction: boolean }) {
     <div className="flex items-center justify-start gap-4 mt-8">
       <Forms.SubmitButton
         name="submit"
-        text="Save Changes"
+        text={t("turboui.documentEditPage.saveChanges")}
         buttonSize="base"
         primary
         onClick={() => form.actions.submit("save")}
@@ -80,12 +86,17 @@ function FormActions({ hidePublishAction }: { hidePublishAction: boolean }) {
       {!hidePublishAction && (
         <Forms.SubmitButton
           name="publish-draft"
-          text="Publish Now"
+          text={t("turboui.documentEditPage.publishNow")}
           buttonSize="base"
           onClick={() => form.actions.submit("publish-draft")}
         />
       )}
-      <Forms.SubmitButton name="cancel" text="Cancel" buttonSize="base" onClick={() => form.actions.cancel()} />
+      <Forms.SubmitButton
+        name="cancel"
+        text={t("turboui.documentEditPage.cancel")}
+        buttonSize="base"
+        onClick={() => form.actions.cancel()}
+      />
     </div>
   );
 }

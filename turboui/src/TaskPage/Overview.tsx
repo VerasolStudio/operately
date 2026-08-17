@@ -2,14 +2,15 @@ import React from "react";
 import { TaskPage } from ".";
 import { Timeline } from "../Timeline";
 import { PageDescription } from "../PageDescription";
+import { t } from "../i18n";
 
 export function Overview(props: TaskPage.ContentState) {
   return (
     <div className="space-y-12 sm:col-span-8 sm:pr-8">
       <PageDescription
         {...props}
-        label="Notes"
-        placeholder="Describe the task..."
+        label={t("turboui.taskPage.notes")}
+        placeholder={t("turboui.taskPage.describeTheTask")}
         zeroStatePlaceholder="Add notes about this task..."
         localDraftKey={props.localDraftKeyBase ? `${props.localDraftKeyBase}:description` : undefined}
       />
@@ -22,7 +23,7 @@ function ActivitySection(props: TaskPage.ContentState) {
   if (props.timelineItems && props.currentUser) {
     return (
       <div data-test-id="task-activity-section">
-        <h3 className="font-bold mb-4">Comments & Activity</h3>
+        <h3 className="font-bold mb-4">{t("turboui.taskPage.commentsActivity")}</h3>
         <Timeline
           items={props.timelineItems}
           currentUser={props.currentUser}
@@ -52,8 +53,8 @@ function ActivitySection(props: TaskPage.ContentState) {
   // Fallback for when timeline data is not provided
   return (
     <div>
-      <h3 className="font-bold mb-4">Comments & Activity</h3>
-      <div className="text-content-dimmed text-center py-8">Timeline data not available</div>
+      <h3 className="font-bold mb-4">{t("turboui.taskPage.commentsActivity")}</h3>
+      <div className="text-content-dimmed text-center py-8">{t("turboui.taskPage.timelineDataNotAvailable")}</div>
     </div>
   );
 }

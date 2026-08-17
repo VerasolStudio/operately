@@ -9,6 +9,7 @@ import { Menu, MenuActionItem } from "../Menu";
 import { Modal } from "../Modal";
 import { Page } from "../Page";
 import { createTestId } from "../TestableElement";
+import { t } from "../i18n";
 
 const MCP_DOCS_URL = "https://operately.com/help/mcp-connections/";
 
@@ -42,33 +43,38 @@ const SCOPE_LABELS: Record<string, string> = {
 export function AccountMcpConnectionsPage(props: AccountMcpConnectionsPage.Props) {
   const navigation = React.useMemo(
     () => [
-      { to: props.homePath, label: "Home" },
-      { to: props.securityPath, label: "Password & Security" },
+      { to: props.homePath, label: t("turboui.accountMcpConnectionsPage.home") },
+      { to: props.securityPath, label: t("turboui.accountMcpConnectionsPage.passwordSecurity") },
     ],
     [props.homePath, props.securityPath],
   );
 
   return (
-    <Page title="MCP Connections" size="small" testId="account-mcp-connections-page" navigation={navigation}>
+    <Page
+      title={t("turboui.accountMcpConnectionsPage.mCPConnections")}
+      size="small"
+      testId="account-mcp-connections-page"
+      navigation={navigation}
+    >
       <div className="px-4 sm:px-10 py-8">
         <header>
-          <h1 className="text-2xl font-bold">MCP Connections</h1>
+          <h1 className="text-2xl font-bold">{t("turboui.accountMcpConnectionsPage.mCPConnections")}</h1>
           <p className="text-sm text-content-dimmed mt-2">
-            Connect AI clients via MCP and manage their access here.
+            {t("turboui.accountMcpConnectionsPage.connectAIClientsViaMCPAnd")}
           </p>
         </header>
 
         <ServerUrlSection mcpServerUrl={props.mcpServerUrl} />
 
         <section className="mt-10" data-test-id="existing-mcp-connections-section">
-          <h2 className="font-bold">Connected Clients</h2>
+          <h2 className="font-bold">{t("turboui.accountMcpConnectionsPage.connectedClients")}</h2>
           <p className="text-sm text-content-dimmed mt-1">
-            Revoke a connection if you no longer trust the client or want to stop its access.
+            {t("turboui.accountMcpConnectionsPage.revokeAConnectionIfYouNo")}
           </p>
 
           {props.grants.length === 0 ? (
             <div className="text-sm text-content-dimmed rounded-md border border-stroke-base p-4 mt-3">
-              No MCP connections yet.
+              {t("turboui.accountMcpConnectionsPage.noMCPConnectionsYet")}
             </div>
           ) : (
             <GrantList
@@ -87,8 +93,8 @@ export function AccountMcpConnectionsPage(props: AccountMcpConnectionsPage.Props
 function ServerUrlSection({ mcpServerUrl }: { mcpServerUrl: string }) {
   return (
     <section className="mt-8" data-test-id="mcp-server-url-section">
-      <h2 className="font-bold">Server URL</h2>
-      <p className="text-sm text-content-dimmed mt-1">Use this URL to create a connection in your AI client.</p>
+      <h2 className="font-bold">{t("turboui.accountMcpConnectionsPage.serverURL")}</h2>
+      <p className="text-sm text-content-dimmed mt-1">{t("turboui.accountMcpConnectionsPage.useThisURLToCreateA")}</p>
 
       <div className="mt-3 rounded-md border border-stroke-base bg-surface-dimmed px-3 py-2.5 flex items-center gap-3">
         <code className="text-sm font-mono break-all flex-1 select-all" data-test-id="mcp-server-url">
@@ -98,7 +104,7 @@ function ServerUrlSection({ mcpServerUrl }: { mcpServerUrl: string }) {
       </div>
 
       <p className="text-sm text-content-dimmed mt-3">
-        More details are in the docs:{" "}
+        {t("turboui.accountMcpConnectionsPage.moreDetailsAreInTheDocs")}{" "}
         <DivLink
           to={MCP_DOCS_URL}
           external
@@ -131,12 +137,14 @@ function GrantList({
         <table className="min-w-full text-sm">
           <thead>
             <tr className="bg-surface-dimmed text-left">
-              <th className="px-3 py-2 font-semibold">Client</th>
-              <th className="px-3 py-2 font-semibold">Access</th>
-              <th className="px-3 py-2 font-semibold">Connected</th>
-              <th className="px-3 py-2 font-semibold whitespace-nowrap">Last Used</th>
+              <th className="px-3 py-2 font-semibold">{t("turboui.accountMcpConnectionsPage.client")}</th>
+              <th className="px-3 py-2 font-semibold">{t("turboui.accountMcpConnectionsPage.access")}</th>
+              <th className="px-3 py-2 font-semibold">{t("turboui.accountMcpConnectionsPage.connected")}</th>
+              <th className="px-3 py-2 font-semibold whitespace-nowrap">
+                {t("turboui.accountMcpConnectionsPage.lastUsed")}
+              </th>
               <th className="px-3 py-2 text-right">
-                <span className="sr-only">Options</span>
+                <span className="sr-only">{t("turboui.accountMcpConnectionsPage.options")}</span>
               </th>
             </tr>
           </thead>
@@ -194,7 +202,11 @@ function GrantRow({
         <td className="px-3 py-3 text-content-dimmed whitespace-nowrap">{formatScopes(grant.scopes)}</td>
 
         <td className="px-3 py-3 text-content-dimmed whitespace-nowrap">
-          <Timestamp value={grant.insertedAt} emptyLabel="Not available" formattedTimePreferences={formattedTimePreferences} />
+          <Timestamp
+            value={grant.insertedAt}
+            emptyLabel="Not available"
+            formattedTimePreferences={formattedTimePreferences}
+          />
         </td>
 
         <td className="px-3 py-3 text-content-dimmed">
@@ -210,7 +222,7 @@ function GrantRow({
                 danger
                 testId={createTestId("revoke-mcp-connection", grant.id)}
               >
-                Revoke
+                {t("turboui.accountMcpConnectionsPage.revoke")}
               </MenuActionItem>
             </Menu>
           </div>
@@ -242,20 +254,26 @@ function RevokeGrantModal({
   clientName: string;
 }) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="small" title="Revoke connection" testId="revoke-mcp-connection-modal">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size="small"
+      title={t("turboui.accountMcpConnectionsPage.revokeConnection")}
+      testId="revoke-mcp-connection-modal"
+    >
       <div className="space-y-4">
         <p className="text-sm text-content-dimmed">
-          Revoke access for <span className="font-medium text-content-base">{clientName}</span>? The client will need
-          to reconnect through OAuth.
+          Revoke access for <span className="font-medium text-content-base">{clientName}</span>? The client will need to
+          reconnect through OAuth.
         </p>
 
         <div className="flex justify-end gap-3">
           <SecondaryButton type="button" onClick={onClose} disabled={isRevoking} testId="revoke-mcp-connection-cancel">
-            Cancel
+            {t("turboui.accountMcpConnectionsPage.cancel")}
           </SecondaryButton>
 
           <DangerButton type="button" onClick={onConfirm} loading={isRevoking} testId="revoke-mcp-connection-confirm">
-            Revoke
+            {t("turboui.accountMcpConnectionsPage.revoke")}
           </DangerButton>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { useFieldValue } from "./context";
 import { FieldGroup } from "./FieldGroup";
 import { SelectBox } from "./SelectBox";
 import type { AccessSelectorsProps, SelectBoxOption } from "./types";
+import { t } from "../i18n";
 
 export const ACCESS_NO_ACCESS_VALUE = 0;
 
@@ -26,7 +27,7 @@ export function AccessSelectors({
   const companySelect = (
     <SelectBox
       field={`${fieldPrefix}.companyMembers`}
-      label="Company members"
+      label={t("turboui.forms.companyMembers")}
       labelIcon={<IconBuilding size={20} />}
       options={companyOptions}
       hidden={hideCompany}
@@ -43,7 +44,7 @@ export function AccessSelectors({
         {companySelect}
         <SelectBox
           field={`${fieldPrefix}.spaceMembers`}
-          label="Space members"
+          label={t("turboui.forms.spaceMembers")}
           labelIcon={<IconTent size={20} />}
           options={spaceOptions}
         />

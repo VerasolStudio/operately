@@ -7,6 +7,7 @@ import { useDownloadFile } from "@/models/blobs";
 import { usePaths } from "@/routes/paths";
 import { assertPresent } from "@/utils/assertions";
 import { useLoadedData } from "./loader";
+import { t } from "@/i18n";
 
 interface Props {
   showDeleteModal: () => void;
@@ -25,7 +26,7 @@ export function useFilePageOptions({ showDeleteModal }: Props): Page.Option[] {
       {
         type: "action",
         icon: IconDownload,
-        label: "Download",
+        label: t("pages.resourceHubFilePage.download"),
         onClick: downloadFile,
         hidden: !file.permissions?.canView || !file.blob?.url || !file.name,
         testId: "download-file-link",
@@ -33,7 +34,7 @@ export function useFilePageOptions({ showDeleteModal }: Props): Page.Option[] {
       {
         type: "link",
         icon: IconEdit,
-        label: "Edit",
+        label: t("pages.resourceHubFilePage.edit"),
         link: paths.resourceHubEditFilePath(file.id!),
         hidden: !file.permissions?.canEditFile,
         keepOutsideOnBigScreen: true,
@@ -42,7 +43,7 @@ export function useFilePageOptions({ showDeleteModal }: Props): Page.Option[] {
       {
         type: "action",
         icon: IconTrash,
-        label: "Delete",
+        label: t("pages.resourceHubFilePage.delete"),
         onClick: showDeleteModal,
         hidden: !file.permissions?.canDeleteFile,
         testId: "delete-resource-link",

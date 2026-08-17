@@ -4,6 +4,7 @@ import { Menu, MenuActionItem, MenuSeparator } from "../Menu";
 import { IconCheck, IconChevronDown, IconFlag, IconFlagFilled, IconList, IconPlus } from "../icons";
 import { MilestoneCreationModal } from "../TaskBoard/components/MilestoneCreationModal";
 import type { ProjectPage } from "./index";
+import { t } from "../i18n";
 
 const ALL_PROJECT_TASKS_LABEL = "All project tasks";
 
@@ -36,7 +37,9 @@ export function MilestoneViewSelector({
   return (
     <>
       <div className="flex min-w-0 items-center gap-2 text-sm">
-        <span className="flex-shrink-0 font-medium text-content-dimmed">Viewing tasks for</span>
+        <span className="flex-shrink-0 font-medium text-content-dimmed">
+          {t("turboui.projectPage.viewingTasksFor")}
+        </span>
 
         <Menu
           customTrigger={
@@ -73,7 +76,7 @@ export function MilestoneViewSelector({
                 onClick={() => setIsCreationModalOpen(true)}
                 testId="create-milestone-from-board"
               >
-                Create milestone
+                {t("turboui.projectPage.createMilestone")}
               </MenuActionItem>
             </>
           )}

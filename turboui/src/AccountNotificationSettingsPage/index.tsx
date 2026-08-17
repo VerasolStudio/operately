@@ -6,6 +6,7 @@ import { PrimaryButton, SecondaryButton } from "../Button";
 import { SwitchToggle } from "../SwitchToggle";
 import { IconChecklist, IconClockPlay, IconMail, IconMailFast } from "../icons";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 export namespace AccountNotificationSettingsPage {
   export type EmailWindowMinutes = 5 | 10 | 15 | 30 | 60;
@@ -61,8 +62,8 @@ const DAILY_SUMMARY_TIME_OPTIONS: DailySummaryTimeOption[] = Array.from({ length
 export function AccountNotificationSettingsPage(props: AccountNotificationSettingsPage.Props) {
   const navigation = React.useMemo(
     () => [
-      { to: props.homePath, label: "Home" },
-      { to: props.settingsPath, label: "Settings" },
+      { to: props.homePath, label: t("turboui.accountNotificationSettingsPage.home") },
+      { to: props.settingsPath, label: t("turboui.accountNotificationSettingsPage.settings") },
     ],
     [props.homePath, props.settingsPath],
   );
@@ -76,27 +77,31 @@ export function AccountNotificationSettingsPage(props: AccountNotificationSettin
   );
 
   return (
-    <Page title="Notification Settings" size="small" navigation={navigation} testId="account-notification-settings-page">
+    <Page
+      title={t("turboui.accountNotificationSettingsPage.notificationSettings")}
+      size="small"
+      navigation={navigation}
+      testId="account-notification-settings-page"
+    >
       <div className="px-4 sm:px-10 py-8">
         <header>
-          <h1 className="text-2xl font-bold">Notification settings</h1>
+          <h1 className="text-2xl font-bold">{t("turboui.accountNotificationSettingsPage.notificationSettings2")}</h1>
           <p className="text-sm text-content-dimmed mt-2">
-            Activity emails are always batched. You can choose whether direct mentions should also be batched or arrive
-            right away.
+            {t("turboui.accountNotificationSettingsPage.activityEmailsAreAlwaysBatchedYou")}
           </p>
         </header>
 
         <form className="mt-8 space-y-8" onSubmit={handleSubmit}>
           <section>
-            <div className="font-bold text-sm">Activity emails</div>
+            <div className="font-bold text-sm">{t("turboui.accountNotificationSettingsPage.activityEmails")}</div>
             <div className="text-sm text-content-dimmed mt-1">
-              Choose how direct mentions should be delivered.
+              {t("turboui.accountNotificationSettingsPage.chooseHowDirectMentionsShouldBe")}
             </div>
 
             <div className="mt-4 grid gap-3">
               <PreferenceCard
-                title="Batched notifications"
-                description="All activity emails wait for the batch window, are grouped together, and sent as a single email."
+                title={t("turboui.accountNotificationSettingsPage.batchedNotifications")}
+                description={t("turboui.accountNotificationSettingsPage.allActivityEmailsWaitForThe")}
                 selected={!props.notifyOnMention}
                 onClick={() => props.onNotifyOnMentionChange(false)}
                 testId="email-preference-buffered"
@@ -104,8 +109,8 @@ export function AccountNotificationSettingsPage(props: AccountNotificationSettin
               />
 
               <PreferenceCard
-                title="Direct mentions are instant"
-                description="Emails for direct mentions are sent right away. All other activity emails wait for the batch window and are sent as a single email."
+                title={t("turboui.accountNotificationSettingsPage.directMentionsAreInstant")}
+                description={t("turboui.accountNotificationSettingsPage.emailsForDirectMentionsAreSent")}
                 selected={props.notifyOnMention}
                 onClick={() => props.onNotifyOnMentionChange(true)}
                 testId="email-preference-mentions-only"
@@ -115,10 +120,9 @@ export function AccountNotificationSettingsPage(props: AccountNotificationSettin
           </section>
 
           <section>
-            <div className="font-bold text-sm">Batch window</div>
+            <div className="font-bold text-sm">{t("turboui.accountNotificationSettingsPage.batchWindow")}</div>
             <div className="text-sm text-content-dimmed mt-1">
-              Choose how long Operately should wait before sending batched activity emails. When direct mentions are
-              instant, this still applies to all other activity emails.
+              {t("turboui.accountNotificationSettingsPage.chooseHowLongOperatelyShouldWait")}
             </div>
 
             <div className="mt-4 max-w-xs">
@@ -145,11 +149,11 @@ export function AccountNotificationSettingsPage(props: AccountNotificationSettin
 
           <div className="flex justify-end gap-2">
             <SecondaryButton type="button" onClick={props.onCancel} disabled={props.isSubmitting}>
-              Cancel
+              {t("turboui.accountNotificationSettingsPage.cancel")}
             </SecondaryButton>
 
             <PrimaryButton type="submit" loading={props.isSubmitting} testId="save-notification-settings">
-              Save Changes
+              {t("turboui.accountNotificationSettingsPage.saveChanges")}
             </PrimaryButton>
           </div>
         </form>
@@ -183,15 +187,15 @@ function DailySummarySection({
         <div className="pr-6">
           <div className="font-bold text-sm flex items-center gap-2">
             <IconClockPlay size={18} />
-            Daily summary
+            {t("turboui.accountNotificationSettingsPage.dailySummary")}
           </div>
           <div className="text-sm text-content-dimmed mt-1">
-            Send one summary email at the end of your workday.
+            {t("turboui.accountNotificationSettingsPage.sendOneSummaryEmailAtThe")}
           </div>
         </div>
 
         <SwitchToggle
-          label="Send daily summary"
+          label={t("turboui.accountNotificationSettingsPage.sendDailySummary")}
           value={sendDailySummary}
           setValue={onSendDailySummaryChange}
           testId={sendDailySummary ? "disable-daily-summary-toggle" : "enable-daily-summary-toggle"}
@@ -201,7 +205,9 @@ function DailySummarySection({
 
       {sendDailySummary && (
         <div className="mt-4 max-w-xs">
-          <div className="text-xs text-content-dimmed mb-1">Delivery time</div>
+          <div className="text-xs text-content-dimmed mb-1">
+            {t("turboui.accountNotificationSettingsPage.deliveryTime")}
+          </div>
           <Dropdown
             items={DAILY_SUMMARY_TIME_OPTIONS}
             value={dailySummaryDeliveryTime}
@@ -227,15 +233,15 @@ function AssignmentsEmailSection({
         <div className="pr-6">
           <div className="font-bold text-sm flex items-center gap-2">
             <IconChecklist size={18} />
-            Assignments email
+            {t("turboui.accountNotificationSettingsPage.assignmentsEmail")}
           </div>
           <div className="text-sm text-content-dimmed mt-1">
-            Receive a daily email with your upcoming check-ins, reviews, and other work that needs your attention.
+            {t("turboui.accountNotificationSettingsPage.receiveADailyEmailWithYour")}
           </div>
         </div>
 
         <SwitchToggle
-          label="Send assignments email"
+          label={t("turboui.accountNotificationSettingsPage.sendAssignmentsEmail")}
           value={notifyAboutAssignments}
           setValue={onNotifyAboutAssignmentsChange}
           testId={notifyAboutAssignments ? "disable-assignments-email-toggle" : "enable-assignments-email-toggle"}

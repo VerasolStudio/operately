@@ -11,6 +11,7 @@ import classnames from "classnames";
 import plurarize from "@/utils/plurarize";
 import { useNavigate } from "react-router";
 import { formatCompanyBillingPlanName } from "turboui/CompanyBilling";
+import { t } from "@/i18n";
 
 export default { name: "BillingPickCompanyPage", loader, Page } as PageModule;
 
@@ -38,8 +39,12 @@ function Page() {
         <Paper.Body>
           <div className="flex items-center justify-between mb-8">
             <div>
-              <div className="text-content-accent text-xl font-semibold">Select a company</div>
-              <div className="text-content-accent mt-1">Which company would you like to manage billing for?</div>
+              <div className="text-content-accent text-xl font-semibold">
+                {t("pages.billingPickCompanyPage.selectACompany")}
+              </div>
+              <div className="text-content-accent mt-1">
+                {t("pages.billingPickCompanyPage.whichCompanyWouldYouLikeTo")}
+              </div>
               {plan && (
                 <div className="text-content-dimmed text-sm mt-1">
                   Selected plan: <span className="font-semibold">{formatCompanyBillingPlanName(plan, plan)}</span>
@@ -69,7 +74,7 @@ function CompanyList({
   if (companies.length === 0) {
     return (
       <div className="text-center text-content-dimmed py-8">
-        You don't have access to manage billing for any companies yet.
+        {t("pages.billingPickCompanyPage.youDonTHaveAccessTo")}
       </div>
     );
   }

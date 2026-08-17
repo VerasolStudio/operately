@@ -5,6 +5,7 @@ import * as Pages from "@/components/Pages";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 import { SearchIndexAdminPage, showSuccessToast } from "turboui";
 import type { MaintenanceKind, SearchIndexSourceStatus, StartMaintenanceResult } from "turboui";
+import { t } from "@/i18n";
 
 interface LoaderResult {
   sources: AdminApi.SearchIndexSourceStatus[];
@@ -36,7 +37,7 @@ export function Page() {
   };
 
   return (
-    <Pages.Page title="Search index" testId="saas-admin-search-index-page">
+    <Pages.Page title={t("pages.saasAdminSearchIndexPage.searchIndex")} testId="saas-admin-search-index-page">
       <SearchIndexAdminPage
         sources={sources}
         formattedTimePreferences={formattedTimePreferences}
@@ -66,8 +67,11 @@ export async function startMaintenanceAndRefresh(
 
   const count = result.startedSourceTypes.length;
   const skipped = result.alreadyRunningSourceTypes.length;
-  const description = skipped > 0 ? `${count} started. ${skipped} already running.` : `${count} started.`;
-  showSuccessToast("Search index maintenance started", description);
+  const description =
+    skipped > 0
+      ? t("pages.saasAdminSearchIndexPage.startedAlreadyRunning", { v1: count, v2: skipped })
+      : `${count} started.`;
+  showSuccessToast(t("pages.saasAdminSearchIndexPage.searchIndexMaintenanceStarted"), description);
 
   return result;
 }

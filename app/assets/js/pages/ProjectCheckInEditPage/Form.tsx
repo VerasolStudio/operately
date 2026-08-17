@@ -23,6 +23,8 @@ import {
 } from "turboui";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 export function Form({ checkIn }: { checkIn: ProjectCheckIn }) {
   const paths = usePaths();
@@ -122,7 +124,7 @@ function FullEditDisabledMessage({ allowFullEdit, isUnpublished }: { allowFullEd
 
   return (
     <InfoCallout
-      message="Editing locked after 3 days"
+      message={t("pages.projectCheckInEditPage.editingLockedAfter3Days")}
       description="You can edit the status for up to 3 days after submitting your check-in. After that, it's locked in to keep the history clear and decisions accountable. Need to make a change? Leave a comment or create a new check-in."
     />
   );
@@ -148,7 +150,7 @@ function SubmitButtons({
   const isSubmitting = form.state === "submitting";
 
   if (!canSchedule) {
-    return <Forms.Submit saveText="Submit" buttonSize="base" />;
+    return <Forms.Submit saveText={t("pages.projectCheckInEditPage.submit")} buttonSize="base" />;
   }
 
   return (
@@ -164,7 +166,7 @@ function SubmitButtons({
         }
         testId="publish-draft"
         formattedTimePreferences={formattedTimePreferences}
-        modalTitle="Schedule Check-in"
+        modalTitle={t("pages.projectCheckInEditPage.scheduleCheckIn")}
         scheduledPrimaryLabel={isScheduled ? "Save Changes" : undefined}
         showScheduleOption={!isScheduled}
         secondaryAction={
@@ -175,15 +177,23 @@ function SubmitButtons({
               size="base"
               onClick={() => submit("save")}
             >
-              Save draft
+              {t("pages.projectCheckInEditPage.saveDraft")}
             </GhostButton>
           )
         }
         options={
           isScheduled
             ? [
-                { label: "Publish now", action: () => submit("publish-now"), testId: "publish-now-option" },
-                { label: "Save as draft", action: () => submit("save-as-draft"), testId: "save-as-draft-option" },
+                {
+                  label: t("pages.projectCheckInEditPage.publishNow"),
+                  action: () => submit("publish-now"),
+                  testId: "publish-now-option",
+                },
+                {
+                  label: t("pages.projectCheckInEditPage.saveAsDraft"),
+                  action: () => submit("save-as-draft"),
+                  testId: "save-as-draft-option",
+                },
               ]
             : []
         }
@@ -198,8 +208,10 @@ function Header({ checkIn }: { checkIn: ProjectCheckIn }) {
   return (
     <div>
       <div className="text-2xl font-bold mx-auto">
-        Editing the Check-In from{" "}
-        <FormattedTime {...formattedTimePreferences} time={displayDate(checkIn)} format="long-date" />
+        <Trans
+          i18nKey="pages.projectCheckInEditPage.editingTheCheckInFrom"
+          components={[<FormattedTime {...formattedTimePreferences} time={displayDate(checkIn)} format="long-date" />]}
+        />
       </div>
     </div>
   );
@@ -218,7 +230,7 @@ function StatusSection({
     return (
       <div className="mt-8 mb-4">
         <Forms.SelectStatus
-          label="1. How's the project going?"
+          label={t("pages.projectCheckInEditPage.1HowSTheProjectGoing")}
           field="status"
           reviewer={reviewer}
           options={["on_track", "caution", "off_track"]}
@@ -244,10 +256,10 @@ function DescriptionSection({ checkIn }: { checkIn: ProjectCheckIn }) {
 
   return (
     <Forms.RichTextArea
-      label="2. What's new since the last check-in?"
+      label={t("pages.projectCheckInEditPage.2WhatSNewSinceThe")}
       field="description"
       richTextHandlers={richTextHandlers}
-      placeholder="Write your check-in here..."
+      placeholder={t("pages.projectCheckInEditPage.writeYourCheckInHere")}
     />
   );
 }

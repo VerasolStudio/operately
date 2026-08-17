@@ -13,6 +13,7 @@ import { useSubscriptionsAdapter, SubscriptionsState } from "@/models/subscripti
 import { usePaths } from "../../routes/paths";
 
 import { useNavigate } from "react-router";
+import { t } from "@/i18n";
 
 export default { name: "ProjectDiscussionEditPage", loader, Page } as PageModule;
 
@@ -89,16 +90,16 @@ function Form() {
         <div>
           <Forms.TitleInput
             field="title"
-            placeholder="Title..."
+            placeholder={t("pages.projectDiscussionEditPage.title")}
             autoFocus
             testId="discussion-title"
-            errorMessage="Please add a title"
+            errorMessage={t("pages.projectDiscussionEditPage.pleaseAddATitle")}
           />
           <div className="mt-2 border-y border-stroke-base text-content-base font-medium">
             <Forms.RichTextArea
               field="message"
               richTextHandlers={richTextHandlers}
-              placeholder="Write here..."
+              placeholder={t("pages.projectDiscussionEditPage.writeHere")}
               hideBorder
               height="min-h-[350px]"
               fontSize="text-lg"
@@ -111,11 +112,18 @@ function Form() {
 
       <Subscribers discussion={discussion} subscriptionsState={subscriptionsState} />
 
-      <Forms.FormError message="Fill out all the required fields" className="mt-4" />
+      <Forms.FormError message={t("pages.projectDiscussionEditPage.fillOutAllTheRequiredFields")} className="mt-4" />
 
       <div className="flex items-center gap-4 mt-4">
-        <Forms.Submit saveText="Save" buttonSize="base" testId="post-discussion" containerClassName="mt-0" />
-        <DimmedLink to={paths.projectDiscussionPath(discussion.id)}>Cancel</DimmedLink>
+        <Forms.Submit
+          saveText={t("pages.projectDiscussionEditPage.save")}
+          buttonSize="base"
+          testId="post-discussion"
+          containerClassName="mt-0"
+        />
+        <DimmedLink to={paths.projectDiscussionPath(discussion.id)}>
+          {t("pages.projectDiscussionEditPage.cancel")}
+        </DimmedLink>
       </div>
     </Forms.Form>
   );

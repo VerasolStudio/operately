@@ -9,6 +9,7 @@ import { usePaths } from "@/routes/paths";
 import { truncateString } from "@/utils/strings";
 import { Link, SmallStatusIndicator, richContentToString } from "turboui";
 import { feedTitle, goalLink } from "../feedItemLinks";
+import { t } from "@/i18n";
 
 const GoalCheckIn: ActivityHandler = {
   pagePath(paths, activity: Activity): string {
@@ -20,7 +21,7 @@ const GoalCheckIn: ActivityHandler = {
   },
 
   PageTitle(_props: { activity: any }) {
-    return <>Check In</>;
+    return <>{t("features.activities.checkIn")}</>;
   },
 
   PageContent(_data: { activity: Activity }) {

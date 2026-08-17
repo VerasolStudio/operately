@@ -10,6 +10,7 @@ import classNames from "classnames";
 import { OrgChart, OrgChartNode, useOrgChart } from "./useOrgChart";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function Page() {
   const { people } = useLoadedData();
@@ -17,9 +18,9 @@ export function Page() {
   const chart = useOrgChart(people);
 
   return (
-    <Pages.Page title={"Org Chart"}>
+    <Pages.Page title={t("pages.peopleOrgChartPage.orgChart")}>
       <div className="max-w-5xl mx-auto sm:px-6 lg:px-8 mt-20">
-        <h1 className="text-3xl font-bold text-center mt-2 mb-16">Org Chart</h1>
+        <h1 className="text-3xl font-bold text-center mt-2 mb-16">{t("pages.peopleOrgChartPage.orgChart")}</h1>
         <Root chart={chart} />
 
         {chart.expanded.map((personId) => {

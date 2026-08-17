@@ -1,6 +1,7 @@
 import React from "react";
 import { IconCircleKey, SecondaryButton } from "turboui";
 import { useEndSupportSession, useHasSupportSessionCookie } from "../../features/SupportSessions";
+import { t } from "@/i18n";
 
 export function SupportSessionBanner() {
   const handleEndSession = useEndSupportSession();
@@ -17,13 +18,13 @@ export function SupportSessionBanner() {
         <div className="flex items-center gap-3">
           <IconCircleKey size={20} className="text-yellow-600" />
           <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
-            <span className="font-semibold text-yellow-800">Support Mode Active</span>
-            <span className="text-sm text-yellow-700">You are viewing this account as support staff.</span>
+            <span className="font-semibold text-yellow-800">{t("layouts.companyLayout.supportModeActive")}</span>
+            <span className="text-sm text-yellow-700">{t("layouts.companyLayout.youAreViewingThisAccountAs")}</span>
           </div>
         </div>
 
         <SecondaryButton onClick={handleEndSession} size="sm" testId="end-support-session-button">
-          <span className="hidden sm:inline">Exit Support Mode</span>
+          <span className="hidden sm:inline">{t("layouts.companyLayout.exitSupportMode")}</span>
         </SecondaryButton>
       </div>
     </div>

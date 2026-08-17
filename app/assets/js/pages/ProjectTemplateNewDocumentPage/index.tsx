@@ -8,6 +8,7 @@ import type { PageModule } from "@/routes/types";
 import { NewDocumentPage, showErrorToast } from "turboui";
 import { useNavigate } from "react-router";
 import React from "react";
+import { t } from "@/i18n";
 
 export default { name: "ProjectTemplateNewDocumentPage", loader, Page } as PageModule;
 
@@ -47,7 +48,10 @@ function Page() {
       navigate(paths.projectTemplateDocumentPath(template.id, result.document.nodeId));
       return true;
     } catch {
-      showErrorToast("Document not created", "Check the form and try again.");
+      showErrorToast(
+        t("pages.projectTemplateNewDocumentPage.documentNotCreated"),
+        t("pages.projectTemplateNewDocumentPage.checkTheFormAndTryAgain"),
+      );
       return false;
     }
   }
@@ -65,4 +69,3 @@ function Page() {
     />
   );
 }
-

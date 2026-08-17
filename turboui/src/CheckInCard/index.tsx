@@ -9,6 +9,8 @@ import FormattedTime, { type FormattedTimePreferences } from "../FormattedTime";
 import { CommentCountIndicator } from "../CommentCountIndicator";
 import { StatusBadge, BadgeStatus } from "../StatusBadge";
 import { ScheduledPostDate, ScheduledPostLabel } from "../SchedulePosting";
+import { uiLocale } from "../utils/formatting";
+import { t } from "../i18n";
 
 namespace CheckInCard {
   interface CheckIn {
@@ -50,7 +52,7 @@ export function CheckInCard({ checkIn, mentionedPersonLookup, type, formattedTim
         <div className="flex-1 h-full">
           <div className="flex items-center gap-2 mb-1">
             <div className="font-semibold leading-none" data-test-id="check-in-title">
-              Check-In for {formatTitleDate(checkIn.date, type)}
+              {t("turboui.checkInCard.checkInFor", { v1: formatTitleDate(checkIn.date, type) })}
             </div>
             {checkIn.state === "draft" && (
               <StatusBadge status="pending" customLabel="Draft" hideIcon className="scale-95 inline-block shrink-0" />
@@ -95,18 +97,18 @@ function formatTitleDate(date: Date, type: "goal" | "project") {
   if (type === "project") {
     if (year === thisYear) {
       const options: Intl.DateTimeFormatOptions = { month: "long", day: "numeric" };
-      return new Intl.DateTimeFormat("en-US", options).format(date);
+      return new Intl.DateTimeFormat(uiLocale(), options).format(date);
     } else {
       const options: Intl.DateTimeFormatOptions = { month: "long", day: "numeric", year: "numeric" };
-      return new Intl.DateTimeFormat("en-US", options).format(date);
+      return new Intl.DateTimeFormat(uiLocale(), options).format(date);
     }
   } else {
     if (year === thisYear) {
       const options: Intl.DateTimeFormatOptions = { month: "long" };
-      return new Intl.DateTimeFormat("en-US", options).format(date);
+      return new Intl.DateTimeFormat(uiLocale(), options).format(date);
     } else {
       const options: Intl.DateTimeFormatOptions = { month: "long", year: "numeric" };
-      return new Intl.DateTimeFormat("en-US", options).format(date);
+      return new Intl.DateTimeFormat(uiLocale(), options).format(date);
     }
   }
 }

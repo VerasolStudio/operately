@@ -8,6 +8,7 @@ import type { ActivityHandler } from "../interfaces";
 import { accessLevelAsString } from "@/features/Permissions";
 import { compareIds } from "@/routes/paths";
 import { feedTitle, projectLink } from "../feedItemLinks";
+import { t } from "@/i18n";
 
 const ProjectContributorEdited: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -78,7 +79,7 @@ const ProjectContributorEdited: ActivityHandler = {
 
       return (
         <div className="text-xs">
-          The previous {oldRole} {oldName} is now a {newRole}
+          {t("features.activities.thePreviousIsNowA", { v1: oldRole, v2: oldName, v3: newRole })}
         </div>
       );
     }
@@ -87,11 +88,7 @@ const ProjectContributorEdited: ActivityHandler = {
       const oldRole = content(activity).previousContributor!.role!;
       const person = People.firstName(content(activity).updatedContributor!.person!);
 
-      return (
-        <div className="text-xs">
-          Previously {person} was a {oldRole}
-        </div>
-      );
+      return <div className="text-xs">{t("features.activities.previouslyWasA", { v1: person, v2: oldRole })}</div>;
     }
 
     if (accessChanged(activity)) {

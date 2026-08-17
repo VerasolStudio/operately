@@ -23,6 +23,7 @@ import { showSuccessToast, showErrorToast } from "../Toasts";
 import { ProjectPage } from ".";
 import { CheckInOverdueCallout } from "./CheckInOverdueCallout";
 import { viewerCanPostCheckIn } from "./checkInPermissions";
+import { t } from "../i18n";
 
 export function OverviewSidebar(props: ProjectPage.State) {
   return (
@@ -63,16 +64,16 @@ function CheckInsSection(props: ProjectPage.State) {
   } else if (viewerCanCheckIn) {
     zeroStateCopy = "Share the first update to set the project status and start the weekly cadence.";
   } else if (championFirstName) {
-    zeroStateCopy = `${championFirstName} hasn't shared a check-in yet. Updates will land here soon.`;
+    zeroStateCopy = t("turboui.projectPage.hasnTSharedACheckIn", { v1: championFirstName });
   }
 
   const header = (
     <div className="flex items-center gap-2">
-      <span>Last update</span>
+      <span>{t("turboui.projectPage.lastUpdate")}</span>
       {viewerCanCheckIn && (
         <span className="shrink-0">
           <SecondaryButton size="xxs" linkTo={props.newCheckInLink} testId="sidebar-check-in-button">
-            Check in
+            {t("turboui.projectPage.checkIn")}
           </SecondaryButton>
         </span>
       )}
@@ -104,14 +105,14 @@ function ParentGoal(props: ProjectPage.State) {
   }
 
   return (
-    <SidebarSection title="Parent goal">
+    <SidebarSection title={t("turboui.projectPage.parentGoal")}>
       <GoalField
         testId="parent-goal-field"
         goal={props.parentGoal}
         setGoal={props.setParentGoal}
         searchGoals={props.parentGoalSearch}
         readonly={!props.permissions.canEdit}
-        emptyStateMessage="Set parent goal"
+        emptyStateMessage={t("turboui.projectPage.setParentGoal")}
         emptyStateReadOnlyMessage="No parent goal"
       />
     </SidebarSection>
@@ -121,23 +122,23 @@ function ParentGoal(props: ProjectPage.State) {
 function ProjectDates(props: ProjectPage.State) {
   return (
     <div className="space-y-4">
-      <SidebarSection title="Start date">
+      <SidebarSection title={t("turboui.projectPage.startDate")}>
         <DateField
           date={props.startedAt || null}
           onDateSelect={props.setStartedAt || (() => {})}
           readonly={!props.permissions.canEdit}
-          placeholder="Set start date"
+          placeholder={t("turboui.projectPage.setStartDate")}
           showOverdueWarning={false}
           useStartOfPeriod={true}
           testId="project-start-date"
         />
       </SidebarSection>
-      <SidebarSection title="Due date">
+      <SidebarSection title={t("turboui.projectPage.dueDate")}>
         <DateField
           date={props.dueAt || null}
           onDateSelect={props.setDueAt || (() => {})}
           readonly={!props.permissions.canEdit}
-          placeholder="Set due date"
+          placeholder={t("turboui.projectPage.setDueDate")}
           testId="project-due-date"
           showOverdueWarning={props.state === "active"}
           showOverdueMessage={props.state === "active"}
@@ -153,15 +154,12 @@ function Champion(props: ProjectPage.State) {
     <SidebarSection
       title={
         <div className="flex items-center gap-2">
-          <span>Champion</span>
+          <span>{t("turboui.projectPage.champion")}</span>
           <Tooltip
             content={
               <div className="max-w-xs">
-                <div className="font-semibold mb-2">Project champion</div>
-                <div className="text-sm">
-                  The project owner accountable for completion. Plans, assigns responsibilities, and submits weekly
-                  check-ins.
-                </div>
+                <div className="font-semibold mb-2">{t("turboui.projectPage.projectChampion")}</div>
+                <div className="text-sm">{t("turboui.projectPage.theProjectOwnerAccountableForCompletion")}</div>
               </div>
             }
           >
@@ -175,7 +173,7 @@ function Champion(props: ProjectPage.State) {
           testId="champion-field"
           person={props.champion}
           readonly={true}
-          emptyStateMessage="Set champion"
+          emptyStateMessage={t("turboui.projectPage.setChampion")}
           emptyStateReadOnlyMessage="No champion"
         />
       ) : (
@@ -184,7 +182,7 @@ function Champion(props: ProjectPage.State) {
           person={props.champion}
           setPerson={props.setChampion}
           searchData={props.championSearch}
-          emptyStateMessage="Set champion"
+          emptyStateMessage={t("turboui.projectPage.setChampion")}
           emptyStateReadOnlyMessage="No champion"
         />
       )}
@@ -198,14 +196,12 @@ function Reviewer(props: ProjectPage.State) {
     <SidebarSection
       title={
         <div className="flex items-center gap-2">
-          <span>Reviewer</span>
+          <span>{t("turboui.projectPage.reviewer")}</span>
           <Tooltip
             content={
               <div className="max-w-xs">
-                <div className="font-semibold mb-2">Project reviewer</div>
-                <div className="text-sm">
-                  Provides feedback throughout the project, and is responsible for acknowledging weekly check-ins.
-                </div>
+                <div className="font-semibold mb-2">{t("turboui.projectPage.projectReviewer")}</div>
+                <div className="text-sm">{t("turboui.projectPage.providesFeedbackThroughoutTheProjectAnd")}</div>
               </div>
             }
           >
@@ -219,7 +215,7 @@ function Reviewer(props: ProjectPage.State) {
           testId="reviewer-field"
           person={props.reviewer || null}
           readonly={true}
-          emptyStateMessage="Set reviewer"
+          emptyStateMessage={t("turboui.projectPage.setReviewer")}
           emptyStateReadOnlyMessage="No reviewer"
         />
       ) : (
@@ -228,7 +224,7 @@ function Reviewer(props: ProjectPage.State) {
           person={props.reviewer || null}
           setPerson={props.setReviewer || (() => {})}
           searchData={props.reviewerSearch}
-          emptyStateMessage="Set reviewer"
+          emptyStateMessage={t("turboui.projectPage.setReviewer")}
           emptyStateReadOnlyMessage="No reviewer"
         />
       )}
@@ -238,7 +234,7 @@ function Reviewer(props: ProjectPage.State) {
 
 function Privacy(props: ProjectPage.State) {
   return (
-    <SidebarSection title="Privacy">
+    <SidebarSection title={t("turboui.projectPage.privacy")}>
       <PrivacyField
         testId="project-privacy-field"
         accessLevels={props.accessLevels}
@@ -249,7 +245,7 @@ function Privacy(props: ProjectPage.State) {
       {props.permissions.canEdit && props.manageAccessLink && (
         <div className="mt-3">
           <SecondaryButton linkTo={props.manageAccessLink} size="xs" testId="manage-project-access-button">
-            Manage team & access
+            {t("turboui.projectPage.manageTeamAccess")}
           </SecondaryButton>
         </div>
       )}
@@ -261,14 +257,14 @@ function Contributors(props: ProjectPage.State) {
   const contributors = props.contributors.filter((c) => ![props.champion?.id, props.reviewer?.id].includes(c.id));
 
   return (
-    <SidebarSection title="Contributors">
+    <SidebarSection title={t("turboui.projectPage.contributors")}>
       <div className="space-y-3">
         {contributors.length > 0 ? (
           contributors.map((person: any) => (
             <PersonField key={person.id} person={person} readonly={true} showTitle={true} />
           ))
         ) : (
-          <div className="text-sm text-content-dimmed">No contributors</div>
+          <div className="text-sm text-content-dimmed">{t("turboui.projectPage.noContributors")}</div>
         )}
       </div>
     </SidebarSection>
@@ -279,29 +275,29 @@ function Actions(props: ProjectPage.State) {
   const handleCopyURL = async () => {
     try {
       await navigator.clipboard?.writeText(window.location.href);
-      showSuccessToast("Success", "Project URL copied to clipboard");
+      showSuccessToast(t("turboui.projectPage.success"), t("turboui.projectPage.projectURLCopiedToClipboard"));
     } catch {
-      showErrorToast("Copy failed", "Unable to copy URL to clipboard");
+      showErrorToast(t("turboui.projectPage.copyFailed"), t("turboui.projectPage.unableToCopyURLToClipboard"));
     }
   };
 
   const actions = [
     {
       type: "action" as const,
-      label: "Copy URL",
+      label: t("turboui.projectPage.copyURL"),
       onClick: handleCopyURL,
       icon: IconCopy,
     },
     {
       type: "action" as const,
-      label: "Move to another space",
+      label: t("turboui.projectPage.moveToAnotherSpace"),
       onClick: props.openMoveModal,
       icon: IconCircleArrowRight,
       hidden: !props.permissions.hasFullAccess || !("space" in props),
     },
     {
       type: "link" as const,
-      label: "Pause project",
+      label: t("turboui.projectPage.pauseProject"),
       link: props.pauseLink,
       icon: IconPlayerPause,
       testId: "pause-project",
@@ -309,7 +305,7 @@ function Actions(props: ProjectPage.State) {
     },
     {
       type: "link" as const,
-      label: "Close project",
+      label: t("turboui.projectPage.closeProject"),
       link: props.closeLink,
       icon: IconCircleCheck,
       testId: "close-project",
@@ -317,7 +313,7 @@ function Actions(props: ProjectPage.State) {
     },
     {
       type: "link" as const,
-      label: "Resume project",
+      label: t("turboui.projectPage.resumeProject"),
       link: props.reopenLink,
       icon: IconRotateDot,
       testId: "resume-project",
@@ -325,7 +321,7 @@ function Actions(props: ProjectPage.State) {
     },
     {
       type: "action" as const,
-      label: "Export as Markdown",
+      label: t("turboui.projectPage.exportAsMarkdown"),
       onClick: props.exportMarkdown,
       icon: IconFileExport,
       testId: "export-as-markdown",
@@ -333,7 +329,7 @@ function Actions(props: ProjectPage.State) {
     },
     {
       type: "action" as const,
-      label: "Save as template",
+      label: t("turboui.projectPage.saveAsTemplate"),
       onClick: props.openSaveAsTemplateModal ?? (() => undefined),
       icon: IconStack2,
       testId: "save-project-as-template-action",
@@ -341,7 +337,7 @@ function Actions(props: ProjectPage.State) {
     },
     {
       type: "action" as const,
-      label: "Delete",
+      label: t("turboui.projectPage.delete"),
       onClick: props.openDeleteModal,
       icon: IconTrash,
       hidden: !props.permissions.hasFullAccess,
@@ -355,7 +351,7 @@ function Actions(props: ProjectPage.State) {
   }
 
   return (
-    <SidebarSection title="Actions" testId="actions-section">
+    <SidebarSection title={t("turboui.projectPage.actions")} testId="actions-section">
       <ActionList actions={visibleActions} />
     </SidebarSection>
   );

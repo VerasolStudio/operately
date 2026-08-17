@@ -9,6 +9,7 @@ import { LinkEditPage, emptyContent, showErrorToast } from "turboui";
 import type { LinkEditPage as LinkEditPageTypes } from "turboui/LinkEditPage/types";
 import { useNavigate } from "react-router";
 import React from "react";
+import { t } from "@/i18n";
 
 export default { name: "ProjectTemplateEditLinkPage", loader, Page } as PageModule;
 
@@ -58,7 +59,10 @@ function Page() {
       navigate(cancelLink);
       return true;
     } catch {
-      showErrorToast("Link not updated", "Check the form and try again.");
+      showErrorToast(
+        t("pages.projectTemplateEditLinkPage.linkNotUpdated"),
+        t("pages.projectTemplateEditLinkPage.checkTheFormAndTryAgain"),
+      );
       return false;
     }
   }
@@ -80,4 +84,3 @@ function Page() {
     />
   );
 }
-

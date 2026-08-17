@@ -9,6 +9,7 @@ import { assertPresent } from "@/utils/assertions";
 
 import { useForm } from "./useForm";
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function Form({ goal }: { goal: Goals.Goal }) {
   const paths = usePaths();
@@ -30,16 +31,16 @@ export function Form({ goal }: { goal: Goals.Goal }) {
         <div>
           <Forms.TitleInput
             field="title"
-            placeholder="Title..."
+            placeholder={t("pages.goalDiscussionNewPage.title")}
             autoFocus
             testId="discussion-title"
-            errorMessage="Please add a title"
+            errorMessage={t("pages.goalDiscussionNewPage.pleaseAddATitle")}
           />
           <div className="mt-2 border-y border-stroke-base text-content-base font-medium">
             <Forms.RichTextArea
               field="message"
               richTextHandlers={richTextHandlers}
-              placeholder="Start a new discussion..."
+              placeholder={t("pages.goalDiscussionNewPage.startANewDiscussion")}
               hideBorder
               height="min-h-[350px]"
               fontSize="text-lg"
@@ -54,11 +55,18 @@ export function Form({ goal }: { goal: Goals.Goal }) {
         <SubscribersSelector {...subscriptionsState} />
       </div>
 
-      <Forms.FormError message="Fill out all the required fields" className="mt-4" />
+      <Forms.FormError message={t("pages.goalDiscussionNewPage.fillOutAllTheRequiredFields")} className="mt-4" />
 
       <div className="flex items-center gap-4 mt-4">
-        <Forms.Submit saveText="Post Discussion" buttonSize="base" testId="post-discussion" containerClassName="mt-0" />
-        <DimmedLink to={paths.goalPath(goal.id, { tab: "discussions" })}>Cancel</DimmedLink>
+        <Forms.Submit
+          saveText={t("pages.goalDiscussionNewPage.postDiscussion")}
+          buttonSize="base"
+          testId="post-discussion"
+          containerClassName="mt-0"
+        />
+        <DimmedLink to={paths.goalPath(goal.id, { tab: "discussions" })}>
+          {t("pages.goalDiscussionNewPage.cancel")}
+        </DimmedLink>
       </div>
     </Forms.Form>
   );

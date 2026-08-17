@@ -4,6 +4,7 @@ import { IconCheck, IconChevronDown } from "../icons";
 import { Menu, MenuActionItem } from "../Menu";
 import { Tooltip } from "../Tooltip";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 export type SortMode = "best_match" | "most_recent";
 
@@ -29,15 +30,15 @@ export interface RefineControlsProps {
 }
 
 const SORT_OPTIONS: Array<{ id: SortMode; label: string }> = [
-  { id: "best_match", label: "Best match" },
-  { id: "most_recent", label: "Most recent" },
+  { id: "best_match", label: t("turboui.searchPage.bestMatch") },
+  { id: "most_recent", label: t("turboui.searchPage.mostRecent") },
 ];
 
 export function RefineControls({ sort, onSortChange, filters, onFilterChange }: RefineControlsProps) {
   return (
     <div
       role="group"
-      aria-label="Refine results"
+      aria-label={t("turboui.searchPage.refineResults")}
       className="mt-3 flex flex-wrap items-center justify-start gap-x-8 gap-y-2"
       data-test-id="search-refine-controls"
     >
@@ -53,7 +54,7 @@ function SortToggle({ sort, onSortChange }: Pick<RefineControlsProps, "sort" | "
   return (
     <div
       role="group"
-      aria-label="Sort results"
+      aria-label={t("turboui.searchPage.sortResults")}
       className="inline-flex shrink-0 rounded-full bg-surface-dimmed p-0.5"
       data-test-id="search-sort-toggle"
     >
@@ -117,7 +118,13 @@ function FilterChip({
   );
 
   const menu = (
-    <Menu testId={`search-filter-${filter.id}`} size="small" align="start" customTrigger={trigger} onOpenChange={setMenuOpen}>
+    <Menu
+      testId={`search-filter-${filter.id}`}
+      size="small"
+      align="start"
+      customTrigger={trigger}
+      onOpenChange={setMenuOpen}
+    >
       {filter.options.map((option) => {
         const selected = filter.selectedOptionIds.includes(option.id);
 

@@ -8,10 +8,18 @@ import { Tooltip } from "../Tooltip";
 import { AssignmentGroups } from "./AssignmentsList";
 import { mergeUrgentGroups } from "./utils";
 import type { FormattedTimePreferences } from "../FormattedTime";
+import { t } from "../i18n";
 
 export namespace ReviewPageV2 {
   export type AssignmentRole = "owner" | "reviewer";
-  export type AssignmentType = "check_in" | "goal_update" | "space_task" | "project_task" | "milestone" | "project_retrospective" | "goal_retrospective";
+  export type AssignmentType =
+    | "check_in"
+    | "goal_update"
+    | "space_task"
+    | "project_task"
+    | "milestone"
+    | "project_retrospective"
+    | "goal_retrospective";
   export type OriginType = "project" | "goal" | "space";
   export type DueStatus = "overdue" | "due_today" | "due_soon" | "upcoming" | "none";
 
@@ -59,10 +67,7 @@ export function ReviewPage(props: ReviewPageV2.Props) {
   const { dueSoon, needsReview, upcoming } = props;
 
   // Merge due_soon and needs_review while maintaining backend's sort order
-  const urgentGroups = React.useMemo(
-    () => mergeUrgentGroups(dueSoon, needsReview),
-    [dueSoon, needsReview]
-  );
+  const urgentGroups = React.useMemo(() => mergeUrgentGroups(dueSoon, needsReview), [dueSoon, needsReview]);
 
   const hasUrgent = urgentGroups.length > 0;
   const hasUpcoming = upcoming.length > 0;
@@ -81,12 +86,14 @@ export function ReviewPage(props: ReviewPageV2.Props) {
         <div className="flex flex-col mt-8 gap-6">
           {hasAnyAssignments ? (
             <>
-              {hasUrgent && <AssignmentGroups groups={urgentGroups} formattedTimePreferences={props.formattedTimePreferences} />}
+              {hasUrgent && (
+                <AssignmentGroups groups={urgentGroups} formattedTimePreferences={props.formattedTimePreferences} />
+              )}
 
               {hasUpcoming && (
                 <Section
-                  title="My upcoming work"
-                  description="Work assigned to you with future due dates, sorted chronologically."
+                  title={t("turboui.reviewPage.myUpcomingWork")}
+                  description={t("turboui.reviewPage.workAssignedToYouWithFuture")}
                   groups={upcoming}
                   testId="upcoming-section"
                   formattedTimePreferences={props.formattedTimePreferences}
@@ -117,12 +124,10 @@ function Header({ assignmentsCount }: { assignmentsCount: number }) {
 
         <div>
           <div className="flex items-baseline gap-2">
-            <h1 className="text-lg font-semibold text-content-strong">Review</h1>
+            <h1 className="text-lg font-semibold text-content-strong">{t("turboui.reviewPage.review")}</h1>
             <span className="text-sm text-content-dimmed">{headline}</span>
           </div>
-          <p className="text-sm text-content-dimmed mt-1">
-            Catch up on work that's due soon or waiting for your review.
-          </p>
+          <p className="text-sm text-content-dimmed mt-1">{t("turboui.reviewPage.catchUpOnWorkThatS")}</p>
         </div>
       </div>
     </div>
@@ -152,7 +157,7 @@ function Section({ title, description, infoTooltip, groups, testId, formattedTim
               <Tooltip content={infoTooltip} delayDuration={150}>
                 <button
                   type="button"
-                  aria-label={`More information about ${title}`}
+                  aria-label={t("turboui.reviewPage.moreInformationAbout", { v1: title })}
                   className="inline-flex items-center justify-center text-content-dimmed hover:text-content-strong"
                 >
                   <IconInfoCircle size={14} className="relative top-px" />
@@ -176,10 +181,8 @@ function CaughtUpState() {
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-callout-success-bg">
           <IconSparkles size={20} className="text-callout-success-content" />
         </div>
-        <p className="text-lg font-semibold text-content-strong">You're all caught up</p>
-        <p className="text-sm text-content-dimmed">
-          No assignments, check-ins, milestones, or reviews need your attention right now.
-        </p>
+        <p className="text-lg font-semibold text-content-strong">{t("turboui.reviewPage.youReAllCaughtUp")}</p>
+        <p className="text-sm text-content-dimmed">{t("turboui.reviewPage.noAssignmentsCheckInsMilestonesOr")}</p>
       </div>
     </div>
   );

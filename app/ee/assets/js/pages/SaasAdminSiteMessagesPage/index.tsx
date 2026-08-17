@@ -20,6 +20,7 @@ import {
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 
 import { SiteMessageModal } from "./SiteMessageModal";
+import { t } from "@/i18n";
 
 interface LoaderResult {
   messages: AdminApi.SiteMessage[];
@@ -52,26 +53,28 @@ export function Page() {
   };
 
   return (
-    <Pages.Page title="Site messages" testId="saas-admin-site-messages-page">
+    <Pages.Page title={t("pages.saasAdminSiteMessagesPage.siteMessages")} testId="saas-admin-site-messages-page">
       <Paper.Root size="xlarge">
-        <Paper.Navigation items={[{ to: "/admin", label: "Administration" }]} />
+        <Paper.Navigation items={[{ to: "/admin", label: t("pages.saasAdminSiteMessagesPage.administration") }]} />
         <Paper.Body>
           <div className="flex items-start justify-between gap-4">
-            <Paper.Header title="Site messages" />
+            <Paper.Header title={t("pages.saasAdminSiteMessagesPage.siteMessages")} />
             <SecondaryButton
               size="sm"
               icon={IconPlus}
               onClick={() => setIsCreateOpen(true)}
               testId="create-site-message-button"
             >
-              Create message
+              {t("pages.saasAdminSiteMessagesPage.createMessage")}
             </SecondaryButton>
           </div>
 
           {messages.length === 0 ? (
             <div className="py-12 text-center">
-              <p className="text-lg text-content-accent">No site messages yet.</p>
-              <p className="mt-2 text-sm text-content-subtle">Create a message to show a banner to company users.</p>
+              <p className="text-lg text-content-accent">{t("pages.saasAdminSiteMessagesPage.noSiteMessagesYet")}</p>
+              <p className="mt-2 text-sm text-content-subtle">
+                {t("pages.saasAdminSiteMessagesPage.createAMessageToShowA")}
+              </p>
             </div>
           ) : (
             <MessageTable messages={messages} onEdit={setModalMessage} onDelete={setMessageToDelete} />
@@ -93,10 +96,10 @@ export function Page() {
         isOpen={messageToDelete !== undefined}
         onCancel={() => setMessageToDelete(undefined)}
         onConfirm={handleDelete}
-        title="Delete this message?"
-        message="Users who haven't dismissed it will stop seeing it immediately."
-        confirmText="Delete message"
-        cancelText="Cancel"
+        title={t("pages.saasAdminSiteMessagesPage.deleteThisMessage")}
+        message={t("pages.saasAdminSiteMessagesPage.usersWhoHavenTDismissedIt")}
+        confirmText={t("pages.saasAdminSiteMessagesPage.deleteMessage")}
+        cancelText={t("pages.saasAdminSiteMessagesPage.cancel")}
         variant="danger"
         testId="delete-site-message-confirmation"
       />
@@ -118,12 +121,12 @@ function MessageTable({
   return (
     <div className="mt-6">
       <TableRow header gridTemplateColumns="2fr 1fr 0.75fr 1fr 1fr 0.5fr">
-        <div>Title</div>
-        <div>Audience</div>
-        <div>Status</div>
-        <div>Expires</div>
-        <div>Created</div>
-        <div className="text-right">Actions</div>
+        <div>{t("pages.saasAdminSiteMessagesPage.title")}</div>
+        <div>{t("pages.saasAdminSiteMessagesPage.audience")}</div>
+        <div>{t("pages.saasAdminSiteMessagesPage.status")}</div>
+        <div>{t("pages.saasAdminSiteMessagesPage.expires")}</div>
+        <div>{t("pages.saasAdminSiteMessagesPage.created")}</div>
+        <div className="text-right">{t("pages.saasAdminSiteMessagesPage.actions")}</div>
       </TableRow>
 
       {messages.map((message) => (
@@ -151,10 +154,10 @@ function MessageTable({
           <div className="flex justify-end">
             <Menu>
               <MenuActionItem icon={IconEdit} onClick={() => onEdit(message)}>
-                Edit
+                {t("pages.saasAdminSiteMessagesPage.edit")}
               </MenuActionItem>
               <MenuActionItem icon={IconTrash} onClick={() => onDelete(message)}>
-                Delete
+                {t("pages.saasAdminSiteMessagesPage.delete")}
               </MenuActionItem>
             </Menu>
           </div>

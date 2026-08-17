@@ -5,6 +5,7 @@ import { IconArrowBackUp } from "../../icons";
 import { StatusSelector } from "../../StatusSelector";
 import { Tooltip } from "../../Tooltip";
 import { createTestId } from "../../TestableElement";
+import { t } from "../../i18n";
 
 export type DeletedStatusRowProps = {
   deletedStatus: StatusSelector.StatusOption;
@@ -63,7 +64,7 @@ export function DeletedStatusRow({
                 type="button"
                 onClick={onRestore}
                 className="p-1 rounded transition text-content-dimmed hover:text-content-base hover:bg-surface-dimmed"
-                aria-label="Restore status"
+                aria-label={t("turboui.statusCustomization.restoreStatus")}
                 data-test-id={createTestId("restore-deleted-status", deletedStatus.id)}
               >
                 <IconArrowBackUp size={16} />
@@ -78,7 +79,7 @@ export function DeletedStatusRow({
           className="text-xs text-rose-600 text-right"
           data-test-id={createTestId("missing-replacement", deletedStatus.id)}
         >
-          Select a replacement status
+          {t("turboui.statusCustomization.selectAReplacementStatus")}
         </div>
       )}
     </div>

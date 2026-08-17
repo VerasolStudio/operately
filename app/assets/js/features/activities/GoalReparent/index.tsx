@@ -4,6 +4,8 @@ import { Activity, ActivityContentGoalReparent } from "@/api";
 
 import { feedTitle, goalLink } from "../feedItemLinks";
 import { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 const GoalReparent: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -48,20 +50,36 @@ const GoalReparent: ActivityHandler = {
     if (newParentGoal && oldParentGoal) {
       return (
         <>
-          Changed the parent goal from {oldParentLink} to {newParentLink}.
+          <Trans
+            i18nKey="features.activities.changedTheParentGoalFromTo"
+            values={{ v1: oldParentGoal.name, v2: newParentGoal.name }}
+            components={[oldParentLink!, newParentLink!]}
+          />
         </>
       );
     }
 
     if (newParentGoal) {
-      return <>Changed the parent goal to {newParentLink}.</>;
+      return (
+        <Trans
+          i18nKey="features.activities.changedTheParentGoalTo"
+          values={{ v1: newParentGoal.name }}
+          components={[newParentLink!]}
+        />
+      );
     }
 
     if (oldParentGoal) {
-      return <>Removed the parent goal {oldParentLink}.</>;
+      return (
+        <Trans
+          i18nKey="features.activities.removedTheParentGoal"
+          values={{ v1: oldParentGoal.name }}
+          components={[oldParentLink!]}
+        />
+      );
     }
 
-    return <>No parent goal was set.</>;
+    return <>{t("features.activities.noParentGoalWasSet")}</>;
   },
 
   feedItemAlignment(_activity: Activity): "items-start" | "items-center" {

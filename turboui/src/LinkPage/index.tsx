@@ -13,6 +13,7 @@ import { Spacer } from "../Spacer";
 import { CurrentSubscriptions } from "../Subscriptions";
 
 import type { LinkPage as LinkPageNS } from "./types";
+import { t } from "../i18n";
 
 export function LinkPage(props: LinkPageNS.Props) {
   const hasDescription = props.description != null && !isContentEmpty(props.description);
@@ -32,7 +33,7 @@ export function LinkPage(props: LinkPageNS.Props) {
           <div className="font-medium inline-flex gap-1">
             {props.author && <span>{props.author.fullName}</span>}
             {props.author && <BulletDot />}
-            <span>Posted</span>
+            <span>{t("turboui.linkPage.posted")}</span>
             <FormattedTime {...props.formattedTimePreferences} time={props.postedAt} format="relative-time-or-date" />
           </div>
         </div>
@@ -41,7 +42,7 @@ export function LinkPage(props: LinkPageNS.Props) {
           <div className="flex flex-col rounded gap-4">
             <div className="flex items-center gap-2">
               <PrimaryButton linkTo={props.url} linkTarget="_blank">
-                Open Link
+                {t("turboui.linkPage.openLink")}
               </PrimaryButton>
             </div>
           </div>
@@ -50,12 +51,8 @@ export function LinkPage(props: LinkPageNS.Props) {
         {hasDescription && (
           <>
             <Spacer size={2} />
-            <div className="font-bold text-content-accent">Notes:</div>
-            <RichContent
-              content={props.description}
-              mentionedPersonLookup={props.mentionedPersonLookup}
-              parseContent
-            />
+            <div className="font-bold text-content-accent">{t("turboui.linkPage.notes")}</div>
+            <RichContent content={props.description} mentionedPersonLookup={props.mentionedPersonLookup} parseContent />
           </>
         )}
 
@@ -94,4 +91,3 @@ export function LinkPage(props: LinkPageNS.Props) {
     </Page>
   );
 }
-

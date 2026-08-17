@@ -5,6 +5,7 @@ import { KpiLineChart } from "./KpiLineChart";
 import { TrendIndicator } from "./TrendIndicator";
 import type { SpaceKpisPage } from "./types";
 import { formatCadence, formatShortDate, formatValue, latestEntry, latestTrend } from "./utils";
+import { t } from "../i18n";
 
 interface KpiDetailProps {
   kpi: SpaceKpisPage.Kpi;
@@ -39,7 +40,7 @@ export function KpiDetail({ kpi, loadingHistory = false }: KpiDetailProps) {
               {kpi.champion.fullName}
             </span>
           ) : (
-            <span className="font-medium text-content-subtle">Unassigned</span>
+            <span className="font-medium text-content-subtle">{t("turboui.spaceKpisPage.unassigned")}</span>
           )}
         </span>
       </div>
@@ -64,7 +65,7 @@ export function KpiDetail({ kpi, loadingHistory = false }: KpiDetailProps) {
           </div>
 
           <div className="mt-6 rounded-lg border border-stroke-base bg-surface-base p-4">
-            <h2 className="mb-3 text-sm font-bold text-content-accent">History</h2>
+            <h2 className="mb-3 text-sm font-bold text-content-accent">{t("turboui.spaceKpisPage.history")}</h2>
             <KpiLineChart entries={kpi.entries} unit={kpi.unit} />
           </div>
 
@@ -83,14 +84,14 @@ function EntriesTable({ entries, unit }: { entries: SpaceKpisPage.KpiEntry[]; un
 
   return (
     <div className="mt-6">
-      <h2 className="mb-3 text-sm font-bold text-content-accent">Recorded updates</h2>
+      <h2 className="mb-3 text-sm font-bold text-content-accent">{t("turboui.spaceKpisPage.recordedUpdates")}</h2>
       <div className="overflow-hidden rounded-lg border border-stroke-base">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-stroke-base bg-surface-dimmed text-left text-xs uppercase tracking-wide text-content-dimmed">
-              <th className="px-4 py-2 font-medium">Date</th>
-              <th className="px-4 py-2 font-medium">Recorded by</th>
-              <th className="px-4 py-2 text-right font-medium">Value</th>
+              <th className="px-4 py-2 font-medium">{t("turboui.spaceKpisPage.date")}</th>
+              <th className="px-4 py-2 font-medium">{t("turboui.spaceKpisPage.recordedBy")}</th>
+              <th className="px-4 py-2 text-right font-medium">{t("turboui.spaceKpisPage.value")}</th>
             </tr>
           </thead>
           <tbody>
@@ -108,7 +109,7 @@ function EntriesTable({ entries, unit }: { entries: SpaceKpisPage.KpiEntry[]; un
                       <span className="text-content-base">{entry.recordedBy.fullName}</span>
                     </div>
                   ) : (
-                    <span className="text-content-subtle">Unknown</span>
+                    <span className="text-content-subtle">{t("turboui.spaceKpisPage.unknown")}</span>
                   )}
                 </td>
                 <td className="px-4 py-2 text-right font-medium text-content-accent">

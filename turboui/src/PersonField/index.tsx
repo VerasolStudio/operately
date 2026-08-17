@@ -6,6 +6,7 @@ import { Avatar } from "../Avatar";
 import { DivLink } from "../Link";
 import { createTestId } from "../TestableElement";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 interface DialogMenuOptionProps {
   icon: React.ComponentType<{ size?: string | number; [key: string]: any }>;
@@ -355,7 +356,7 @@ function DialogMenu({ state }: { state: PersonField.State }) {
       options.push({
         testId: `${state.testId}-view-profile`,
         icon: IconExternalLink,
-        label: "View profile",
+        label: t("turboui.personField.viewProfile"),
         linkTo: state.person.profileLink,
       });
     }
@@ -364,7 +365,7 @@ function DialogMenu({ state }: { state: PersonField.State }) {
       options.push({
         testId: `${state.testId}-assign-another`,
         icon: IconSearch,
-        label: "Choose someone else",
+        label: t("turboui.personField.chooseSomeoneElse"),
         onClick: () => {
           state.setSearchQuery(""); // Clear any previous search
           state.setDialogMode("search");
@@ -391,7 +392,7 @@ function DialogMenu({ state }: { state: PersonField.State }) {
       options.push({
         testId: `${state.testId}-clear-assignment`,
         icon: IconCircleX,
-        label: "Clear assignment",
+        label: t("turboui.personField.clearAssignment"),
         onClick: () => {
           state?.setPerson?.(null);
           state.setIsOpen(false);
@@ -528,7 +529,7 @@ function DialogSearch({ state }: { state: PersonField.State }) {
         {/* Use text-base (16px) on mobile to prevent auto-zoom and text-sm (14px) on desktop for consistency */}
         <input
           className="w-full border border-surface-outline rounded-lg px-2 py-1.5 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary-base bg-surface-base text-content-base"
-          placeholder="Search..."
+          placeholder={t("turboui.personField.search")}
           value={state.searchQuery}
           autoFocus
           onChange={(e) => state.setSearchQuery(e.target.value)}

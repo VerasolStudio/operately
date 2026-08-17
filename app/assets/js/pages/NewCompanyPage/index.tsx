@@ -10,6 +10,8 @@ import { useNavigate } from "react-router";
 import { Forms, Link } from "turboui";
 import { PageModule } from "@/routes/types";
 import { BillingCatalog, parseBillingIntent } from "./billingIntent";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 export default { name: "NewCompanyPage", loader, Page } as PageModule;
 
@@ -57,37 +59,49 @@ function Page() {
   });
 
   return (
-    <Pages.Page title={"New Company"}>
+    <Pages.Page title={t("pages.newCompanyPage.newCompany")}>
       <Paper.Root size="small" className="mt-24">
-        <Paper.NavigateBack to={Paths.lobbyPath()} title="Back to the Lobby" />
+        <Paper.NavigateBack to={Paths.lobbyPath()} title={t("pages.newCompanyPage.backToTheLobby")} />
         <Paper.Body>
           <PageTitle />
 
           <Forms.Form form={form}>
             <Forms.FieldGroup>
-              <Forms.TextInput field="companyName" label="Name of the company" placeholder="e.g. Acme Co." />
-              <Forms.TextInput field="title" label="What's your title in the company?" placeholder="e.g. Founder" />
+              <Forms.TextInput
+                field="companyName"
+                label={t("pages.newCompanyPage.nameOfTheCompany")}
+                placeholder={t("pages.newCompanyPage.eGAcmeCo")}
+              />
+              <Forms.TextInput
+                field="title"
+                label={t("pages.newCompanyPage.whatSYourTitleInThe")}
+                placeholder={t("pages.newCompanyPage.eGFounder")}
+              />
 
               {window.appConfig.demoBuilder && (
                 <Forms.RadioButtons
                   field="isDemo"
-                  label="Is this a demo company?"
+                  label={t("pages.newCompanyPage.isThisADemoCompany")}
                   options={[
-                    { label: "Yes", value: "true" },
-                    { label: "No", value: "false" },
+                    { label: t("pages.newCompanyPage.yes"), value: "true" },
+                    { label: t("pages.newCompanyPage.no"), value: "false" },
                   ]}
                 />
               )}
             </Forms.FieldGroup>
 
-            <Forms.Submit saveText="Create Company" buttonSize="sm" />
+            <Forms.Submit saveText={t("pages.newCompanyPage.createCompany")} buttonSize="sm" />
           </Forms.Form>
 
           <div className="mt-4 text-center text-sm text-content-dimmed">
-            Do you have an existing company?{" "}
-            <Link to={Paths.companyImportPath()} underline="hover">
-              Import it here
-            </Link>
+            <Trans
+              i18nKey="pages.newCompanyPage.doYouHaveAnExistingCompany"
+              components={[
+                <Link to={Paths.companyImportPath()} underline="hover">
+                  Import it here
+                </Link>,
+              ]}
+            />
           </div>
         </Paper.Body>
       </Paper.Root>
@@ -99,8 +113,8 @@ function PageTitle() {
   return (
     <div className="flex items-center justify-between mb-8">
       <div className="">
-        <div className="text-content-accent text-xl font-semibold">New Company</div>
-        <div className="text-content-accent">Let&apos;s set up your company in Operately.</div>
+        <div className="text-content-accent text-xl font-semibold">{t("pages.newCompanyPage.newCompany")}</div>
+        <div className="text-content-accent">{t("pages.newCompanyPage.letAposSSetUpYour")}</div>
       </div>
       <OperatelyLogo width="40" height="40" />
     </div>

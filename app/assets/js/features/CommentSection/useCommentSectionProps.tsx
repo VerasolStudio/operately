@@ -8,16 +8,11 @@ import { useMe } from "@/contexts/CurrentCompanyContext";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
 import { compareIds, usePaths } from "@/routes/paths";
-import {
-  Comment,
-  CommentSectionItem,
-  CommentSectionProps,
-  Reactions,
-  showErrorToast,
-} from "turboui";
+import { Comment, CommentSectionItem, CommentSectionProps, Reactions, showErrorToast } from "turboui";
 import * as ReactionsModel from "@/models/reactions";
 
 import { FormState } from "./form";
+import { t } from "@/i18n";
 
 interface UseCommentSectionPropsArgs {
   form: FormState;
@@ -39,10 +34,7 @@ export function useCommentSectionProps({
   const [markNotificationAsRead] = useMarkNotificationAsRead();
 
   const currentUser = People.parsePersonForTurboUi(paths, me);
-  const mappedItems = React.useMemo(
-    () => mapFormItemsToCommentSectionItems(paths, form.items),
-    [paths, form.items],
-  );
+  const mappedItems = React.useMemo(() => mapFormItemsToCommentSectionItems(paths, form.items), [paths, form.items]);
 
   const [items, setItems] = React.useState(mappedItems);
 
@@ -224,7 +216,7 @@ function useCommentFeedAddReaction(
             };
           }),
         );
-        showErrorToast("Error", "Failed to add reaction.");
+        showErrorToast(t("features.commentSection.error"), t("features.commentSection.failedToAddReaction"));
       }
     },
     [add, me, parentType, paths, setItems],
@@ -273,7 +265,7 @@ function useCommentFeedRemoveReaction(setItems: React.Dispatch<React.SetStateAct
             }),
           );
         }
-        showErrorToast("Error", "Failed to remove reaction.");
+        showErrorToast(t("features.commentSection.error"), t("features.commentSection.failedToRemoveReaction"));
       }
     },
     [removeReaction, setItems],

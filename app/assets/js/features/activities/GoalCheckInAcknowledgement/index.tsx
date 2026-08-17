@@ -7,6 +7,7 @@ import type { ActivityHandler } from "../interfaces";
 import { usePaths } from "@/routes/paths";
 import { Link } from "turboui";
 import { feedTitle, goalLink } from "../feedItemLinks";
+import { t } from "@/i18n";
 
 const GoalCheckInAcknowledgement: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -35,7 +36,7 @@ const GoalCheckInAcknowledgement: ActivityHandler = {
     const update = content(activity).update!;
 
     const path = paths.goalCheckInPath(update.id!);
-    const link = <Link to={path}>Check-In</Link>;
+    const link = <Link to={path}>{t("features.activities.checkIn2")}</Link>;
 
     if (page === "goal") {
       return feedTitle(activity, "acknowledged the", link);

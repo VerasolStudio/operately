@@ -7,6 +7,7 @@ import { PersonField } from "../PersonField";
 import { createTestId } from "../TestableElement";
 import classNames from "../utils/classnames";
 import { plurarize, plurarizeWord } from "../utils/plurarize";
+import { t } from "../i18n";
 
 export namespace AssigneesField {
   export type Person = PersonField.Person;
@@ -226,7 +227,8 @@ function TriggerText({ state }: { state: State }) {
     );
   }
 
-  const label = state.people.length === 1 ? state.people[0]!.fullName : plurarize(state.people.length, "assignee", "assignees");
+  const label =
+    state.people.length === 1 ? state.people[0]!.fullName : plurarize(state.people.length, "assignee", "assignees");
   const title = state.people.map((person) => person.fullName).join(", ");
 
   return (
@@ -333,7 +335,7 @@ function DialogContent({ state }: { state: State }) {
         <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-content-dimmed" size={14} />
         <input
           className="w-full border border-surface-outline rounded-lg pl-7 pr-2 py-1.5 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary-base bg-surface-base text-content-base"
-          placeholder="Search..."
+          placeholder={t("turboui.assigneesField.search")}
           value={state.searchQuery}
           autoFocus
           onChange={(e) => state.setSearchQuery(e.target.value)}

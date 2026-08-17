@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { IconX } from "../icons";
+import { t } from "../i18n";
 
 export interface ModalProps {
   /**
@@ -127,7 +128,7 @@ export function Modal({
             <button
               onClick={onClose}
               className="text-content-subtle hover:text-content-base transition-colors p-1 rounded-full hover:bg-surface-highlight"
-              aria-label="Close"
+              aria-label={t("turboui.modal.close")}
             >
               <IconX size={20} />
             </button>

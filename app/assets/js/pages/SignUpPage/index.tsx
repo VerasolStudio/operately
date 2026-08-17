@@ -8,6 +8,7 @@ import { Link } from "turboui";
 import { TosAndPrivacyPolicy } from "@/features/auth/AgreeToTosAndPp";
 import { SignUpWithEmail, SignUpWithGoogleButton } from "@/features/auth/Buttons";
 import { PageModule } from "@/routes/types";
+import { t } from "@/i18n";
 
 export default { name: "SignUpPage", loader: Pages.emptyLoader, Page } as PageModule;
 
@@ -42,8 +43,8 @@ function Header() {
   return (
     <div className="mb-8">
       <OperatelyLogo width="40px" height="40px" />
-      <h1 className="text-2xl font-bold mt-4">Sign up for Operately</h1>
-      <div className="mt-2">Get started in a minute. No credit card required.</div>
+      <h1 className="text-2xl font-bold mt-4">{t("pages.signUpPage.signUpForOperately")}</h1>
+      <div className="mt-2">{t("pages.signUpPage.getStartedInAMinuteNo")}</div>
     </div>
   );
 }
@@ -51,7 +52,7 @@ function Header() {
 function SignInLink() {
   return (
     <div className="text-center font-medium mt-8 pt-8 border-t border-stroke-base text-sm">
-      Already have an account? <Link to="/log_in">Sign in</Link>
+      Already have an account? <Link to="/log_in">{t("pages.signUpPage.signIn")}</Link>
     </div>
   );
 }

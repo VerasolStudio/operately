@@ -11,6 +11,7 @@ import { PageModule } from "@/routes/types";
 import { useNavigateTo } from "@/routes/useNavigateTo";
 import { usePaths } from "../../routes/paths";
 import { optimisticallyMarkNotificationAsRead } from "./optimisticMarkAsRead";
+import { t } from "@/i18n";
 
 export default { name: "NotificationsPage", loader, Page } as PageModule;
 
@@ -48,11 +49,11 @@ function Page() {
   );
 
   return (
-    <Pages.Page title="Notifications" onLoad={onLoad}>
+    <Pages.Page title={t("pages.notificationsPage.notifications")} onLoad={onLoad}>
       <Paper.Root size="medium">
         <Paper.Body className="relative flex flex-col items-stretch">
-          <h1 className="text-2xl font-bold text-center">Notifications</h1>
-          <div className="text-center text-sm">Here's every notification you've received from Operately.</div>
+          <h1 className="text-2xl font-bold text-center">{t("pages.notificationsPage.notifications")}</h1>
+          <div className="text-center text-sm">{t("pages.notificationsPage.hereSEveryNotificationYouVe")}</div>
 
           <UnreadNotifications notifications={notifications} onMarkAsRead={handleMarkAsRead} />
           <PreviousNotifications notifications={notifications} onMarkAsRead={handleMarkAsRead} />
@@ -73,7 +74,7 @@ function UnreadNotifications({ notifications, onMarkAsRead }: NotificationListPr
   return (
     <div className="pt-2" style={{ minHeight: "200px" }}>
       <div className="flex items-center gap-4 mb-3">
-        <div className="text-sm uppercase font-extrabold text-orange-500">New for you</div>
+        <div className="text-sm uppercase font-extrabold text-orange-500">{t("pages.notificationsPage.newForYou")}</div>
         <div className="h-px bg-stroke-base flex-1" />
         {unread.length > 0 && <MarkAllReadButton />}
       </div>
@@ -81,7 +82,7 @@ function UnreadNotifications({ notifications, onMarkAsRead }: NotificationListPr
       {unread.length === 0 && (
         <div className="px-12 pt-16 py-20 text-content-accent font-medium flex items-center flex-col gap-2">
           <IconSparkles className="text-yellow-500" />
-          Nothing new for you.
+          {t("pages.notificationsPage.nothingNewForYou")}
         </div>
       )}
 
@@ -103,7 +104,7 @@ function MarkAllReadButton() {
 
   return (
     <SecondaryButton size="xs" testId="mark-all-read" onClick={onClick} loading={loading}>
-      Mark all read
+      {t("pages.notificationsPage.markAllRead")}
     </SecondaryButton>
   );
 }
@@ -113,7 +114,7 @@ function PreviousNotifications({ notifications, onMarkAsRead }: NotificationList
 
   return (
     <Paper.DimmedSection>
-      <div className="text-content-accent font-bold mb-2">Previous Notifications</div>
+      <div className="text-content-accent font-bold mb-2">{t("pages.notificationsPage.previousNotifications")}</div>
       {previouslyRead.map((notification) => (
         <NotificationItem key={notification.id} notification={notification} onMarkAsRead={onMarkAsRead} />
       ))}

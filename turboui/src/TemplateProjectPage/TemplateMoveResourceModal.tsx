@@ -7,6 +7,7 @@ import { ResourceHubTypeIcon } from "../ResourceHub/NodeIcon";
 import { sortNodesWithFoldersFirst } from "../ResourceHub/utils";
 import type { TemplateProjectPage } from ".";
 import { blockedDestinationFolderIds, findFolder, nodesInFolder } from "./resourceTree";
+import { t } from "../i18n";
 
 type ResourceNode = TemplateProjectPage.ResourceNode;
 
@@ -57,7 +58,10 @@ export function TemplateMoveResourceModal({
           <DestinationFolderSelect field="location" nodes={resourceNodes} blockedFolderIds={blockedFolderIds} />
         </Forms.FieldGroup>
 
-        <Forms.Submit saveText="Move Here" cancelText="Cancel" />
+        <Forms.Submit
+          saveText={t("turboui.templateProjectPage.moveHere")}
+          cancelText={t("turboui.templateProjectPage.cancel")}
+        />
       </Forms.Form>
     </Modal>
   );
@@ -80,7 +84,7 @@ function DestinationFolderSelect({
 
   return (
     <FolderSelectField
-      label="Select destination"
+      label={t("turboui.templateProjectPage.selectDestination")}
       field={field}
       error={error}
       current={{

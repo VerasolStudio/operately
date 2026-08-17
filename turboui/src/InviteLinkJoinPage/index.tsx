@@ -6,6 +6,7 @@ import { PrimaryButton, SecondaryButton } from "../Button";
 import { IconMoodSad } from "../icons";
 import { OperatelyLogo } from "../Logo";
 import { useHtmlTitle } from "../Page/useHtmlTitle";
+import { t } from "../i18n";
 
 export namespace InviteLinkJoinPage {
   export type PageState = "logged-in-user-valid-token" | "anonymous-user-valid-token" | "invalid-token";
@@ -44,7 +45,7 @@ export function InviteLinkJoinPage(props: InviteLinkJoinPage.Props) {
   return (
     <div className="">
       <div className="flex items-center justify-center gap-2 text-xl font-bold mb-6 mt-12">
-        <OperatelyLogo width="30" height="30" /> Operately
+        <OperatelyLogo width="30" height="30" /> {t("turboui.inviteLinkJoinPage.operately")}
       </div>
 
       {match(props.pageState)
@@ -91,17 +92,17 @@ function AnonymousValidTokenState(props: InviteLinkJoinPage.Props) {
 
       <div className="flex items-center flex-col items-stretch">
         <SecondaryButton onClick={props.handleSignUpAndJoin} testId="sign-up-and-join">
-          Sign Up & Join {props.invitation?.company?.name}
+          {t("turboui.inviteLinkJoinPage.signUpAndJoin", { v1: props.invitation?.company?.name })}
         </SecondaryButton>
 
         <div className="flex items-center my-4 w-full gap-4">
           <div className="border-t border-surface-outline flex-grow" />
-          <div className="text-content-dimmed text-sm">Or, if you've used Operately before</div>
+          <div className="text-content-dimmed text-sm">{t("turboui.inviteLinkJoinPage.orIfYouVeUsedOperately")}</div>
           <div className="border-t border-surface-outline flex-grow" />
         </div>
 
         <SecondaryButton onClick={props.handleLogInAndJoin} testId="log-in-and-join">
-          Log in with your account
+          {t("turboui.inviteLinkJoinPage.logInWithYourAccount")}
         </SecondaryButton>
       </div>
     </div>
@@ -114,11 +115,9 @@ function InvalidTokenState() {
       <div className="bg-callout-warning-bg p-4 rounded-md">
         <div className="flex items-center text-center gap-2">
           <IconMoodSad size={24} className="text-callout-warning-content mb-2" />
-          <div className="font-semibold mb-2">Invalid Link</div>
+          <div className="font-semibold mb-2">{t("turboui.inviteLinkJoinPage.invalidLink")}</div>
         </div>
-        <div>
-          Hmm, something's not right with this link. Double-check it or ask whoever sent it to you for a fresh one.
-        </div>
+        <div>{t("turboui.inviteLinkJoinPage.hmmSomethingSNotRightWith")}</div>
       </div>
     </div>
   );

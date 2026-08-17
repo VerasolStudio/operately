@@ -5,11 +5,9 @@ import { InfoCallout, WarningCallout } from "../Callouts";
 import { Page } from "../Page";
 import type { CompanyBillingCancellationPage as CompanyBillingCancellationPageTypes } from "./types";
 import { buildCompanyBillingCancellationPageViewModel } from "./viewModel";
+import { t } from "../i18n";
 
-export {
-  buildCompanyBillingCancellationPageViewModel,
-  buildCompanyBillingCancellationSummary,
-} from "./viewModel";
+export { buildCompanyBillingCancellationPageViewModel, buildCompanyBillingCancellationSummary } from "./viewModel";
 
 export namespace CompanyBillingCancellationPage {
   export type BillingOverview = CompanyBillingCancellationPageTypes.BillingOverview;
@@ -30,7 +28,10 @@ export function CompanyBillingCancellationPage(props: CompanyBillingCancellation
 
         <div className="space-y-8">
           {viewModel.errorMessage && (
-            <WarningCallout message="Cancellation unavailable" description={viewModel.errorMessage} />
+            <WarningCallout
+              message={t("turboui.companyBillingCancellationPage.cancellationUnavailable")}
+              description={viewModel.errorMessage}
+            />
           )}
 
           <InfoCallout
@@ -45,7 +46,7 @@ export function CompanyBillingCancellationPage(props: CompanyBillingCancellation
             />
           )}
 
-          <Section title="Downgrade details">
+          <Section title={t("turboui.companyBillingCancellationPage.downgradeDetails")}>
             <SectionCard>
               <DetailRows rows={viewModel.summary.rows} />
             </SectionCard>
@@ -66,13 +67,7 @@ export function CompanyBillingCancellationPage(props: CompanyBillingCancellation
   );
 }
 
-function Header({
-  title,
-  subtitle,
-}: {
-  title: string;
-  subtitle: string;
-}) {
+function Header({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <div className="mb-8">
       <div className="text-content-accent text-3xl font-extrabold">{title}</div>

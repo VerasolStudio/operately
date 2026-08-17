@@ -4,6 +4,7 @@ import { IconFlag, IconFlagFilled } from "../../../icons";
 import { PieChart } from "../../../PieChart";
 import classNames from "../../../utils/classnames";
 import { WorkMap } from "..";
+import { t } from "../../../i18n";
 
 interface ProjectProgressSummaryProps {
   milestones: WorkMap.Milestone[];
@@ -13,7 +14,7 @@ export function ProjectProgressSummary({ milestones }: ProjectProgressSummaryPro
   if (milestones.length === 0) {
     return (
       <div className="text-content-dimmed text-xs font-normal" data-testid="project-progress-summary-content">
-        No milestones
+        {t("turboui.workMap.noMilestones")}
       </div>
     );
   }
@@ -28,7 +29,9 @@ export function ProjectProgressSummary({ milestones }: ProjectProgressSummaryPro
       data-testid="project-progress-summary-content"
     >
       <div className="flex items-center gap-2 mb-0.5">
-        <div className="text-xs font-semibold text-content-dimmed uppercase tracking-wide">Milestones</div>
+        <div className="text-xs font-semibold text-content-dimmed uppercase tracking-wide">
+          {t("turboui.workMap.milestones")}
+        </div>
         <div className="flex items-center gap-1.5 text-xs text-content-subtle">
           <PieChart size={12} slices={[{ percentage: completionPercentage, color: "var(--color-green-500)" }]} />
           <span>

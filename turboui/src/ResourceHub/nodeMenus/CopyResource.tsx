@@ -8,6 +8,7 @@ import { createTestId } from "../../TestableElement";
 import { ResourceHubFolderSelectField } from "../FolderSelectField";
 import { getResourceName } from "../selectors";
 import type { ResourceHubResource } from "../types";
+import { t } from "../../i18n";
 
 interface CopyResourceMenuItemProps {
   resource: { id: string; name?: string | null };
@@ -19,7 +20,7 @@ export function CopyResourceMenuItem({ resource, showModal }: CopyResourceMenuIt
 
   return (
     <MenuActionItem onClick={showModal} testId={testId}>
-      Copy
+      {t("turboui.resourceHub.copy")}
     </MenuActionItem>
   );
 }
@@ -33,14 +34,18 @@ interface CopyResourceModalProps {
 
 export function CopyResourceModal({ form, resource, isOpen, hideModal }: CopyResourceModalProps) {
   return (
-    <Modal title={`Create a copy of ${getResourceName(resource)}`} isOpen={isOpen} onClose={hideModal}>
+    <Modal
+      title={t("turboui.resourceHub.createACopyOf", { v1: getResourceName(resource) })}
+      isOpen={isOpen}
+      onClose={hideModal}
+    >
       <Forms.Form form={form} testId="copy-resource-modal">
         <Forms.FieldGroup>
-          <Forms.TextInput field="name" label="New document name" required />
-          <ResourceHubFolderSelectField field="location" label="Select destination" />
+          <Forms.TextInput field="name" label={t("turboui.resourceHub.newDocumentName")} required />
+          <ResourceHubFolderSelectField field="location" label={t("turboui.resourceHub.selectDestination")} />
         </Forms.FieldGroup>
 
-        <Forms.Submit saveText="Create Copy" cancelText="Cancel" />
+        <Forms.Submit saveText={t("turboui.resourceHub.createCopy")} cancelText={t("turboui.resourceHub.cancel")} />
       </Forms.Form>
     </Modal>
   );

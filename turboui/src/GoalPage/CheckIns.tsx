@@ -2,6 +2,7 @@ import React from "react";
 import { GoalPage } from ".";
 import { PrimaryButton } from "../Button";
 import { CheckInCard } from "../CheckInCard";
+import { t } from "../i18n";
 
 export function CheckIns(props: GoalPage.State) {
   const showCheckInButton = props.permissions.canEdit && props.state !== "closed";
@@ -10,15 +11,15 @@ export function CheckIns(props: GoalPage.State) {
     <div className="p-4 max-w-3xl mx-auto my-6 overflow-auto">
       <div className="flex items-center gap-2 justify-between">
         <div>
-          <h2 className="font-bold text-lg">Check-Ins</h2>
+          <h2 className="font-bold text-lg">{t("turboui.goalPage.checkIns")}</h2>
           <div className="flex items-center gap-2 text-sm">
-            Champions post monthly updates to document progress and share insights.
+            {t("turboui.goalPage.championsPostMonthlyUpdatesToDocument")}
           </div>
         </div>
 
         {showCheckInButton && (
           <PrimaryButton linkTo={props.newCheckInLink} size="xs" testId="check-in-button">
-            Post check-in
+            {t("turboui.goalPage.postCheckIn")}
           </PrimaryButton>
         )}
       </div>

@@ -3,6 +3,7 @@ import { TimelineItem } from "./TimelineItem";
 import { CommentInput } from "../CommentSection/CommentInput";
 import * as Types from "./types";
 import { TimelineSkeleton } from "./TimelineSkeleton";
+import { t } from "../i18n";
 
 export namespace Timeline {
   export type MilestoneActivity = Types.MilestoneActivity;
@@ -119,8 +120,8 @@ export function Timeline({
 function EmptyTimeline() {
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center">
-      <div className="text-content-dimmed text-lg mb-2">No activity yet</div>
-      <div className="text-content-dimmed text-sm">Comments and task updates will appear here</div>
+      <div className="text-content-dimmed text-lg mb-2">{t("turboui.timeline.noActivityYet")}</div>
+      <div className="text-content-dimmed text-sm">{t("turboui.timeline.commentsAndTaskUpdatesWillAppear")}</div>
     </div>
   );
 }

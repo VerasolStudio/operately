@@ -7,6 +7,7 @@ import type { MentionedPersonLookupFn } from "../RichEditor/useEditor";
 import type { ComparisonStatus, VersionSnapshot } from "../DocumentVersionHistoryPage/types";
 import { ComparisonPanel } from "./ComparisonPanel";
 import { DocumentVersionPageHeader } from "./DocumentVersionPageHeader";
+import { t } from "../i18n";
 
 export namespace DocumentVersionComparisonPage {
   export type Props = {
@@ -30,7 +31,10 @@ export function DocumentVersionComparisonPage(props: DocumentVersionComparisonPa
   return (
     <Page title={props.title} size="xlarge" navigation={props.navigation} testId="document-version-comparison-page">
       <div className="min-h-[75vh] px-4 py-8 sm:px-8 sm:py-10 lg:px-10">
-        <DocumentVersionPageHeader title="See what changed" showLegend={showLegend} />
+        <DocumentVersionPageHeader
+          title={t("turboui.documentVersionComparisonPage.seeWhatChanged")}
+          showLegend={showLegend}
+        />
 
         <ComparisonPanel
           versions={props.versions}

@@ -9,6 +9,7 @@ import { DimmedLink, Forms, SubscribersSelector } from "turboui";
 import { useSubscriptionsAdapter } from "@/models/subscriptions";
 import { usePaths } from "../../routes/paths";
 import { useForm } from "./useForm";
+import { t } from "@/i18n";
 
 export default { name: "ProjectDiscussionNewPage", loader, Page } as PageModule;
 
@@ -50,13 +51,19 @@ function Nav() {
 
   if (project.space) {
     items.push({ to: paths.spacePath(project.space.id), label: project.space.name });
-    items.push({ to: paths.spaceWorkMapPath(project.space.id, "projects"), label: "Work Map" });
+    items.push({
+      to: paths.spaceWorkMapPath(project.space.id, "projects"),
+      label: t("pages.projectDiscussionNewPage.workMap"),
+    });
   } else {
-    items.push({ to: paths.workMapPath("projects"), label: "Work Map" });
+    items.push({ to: paths.workMapPath("projects"), label: t("pages.projectDiscussionNewPage.workMap") });
   }
 
   items.push({ to: paths.projectPath(project.id, { tab: "overview" }), label: project.name });
-  items.push({ to: paths.projectPath(project.id, { tab: "discussions" }), label: "Discussions" });
+  items.push({
+    to: paths.projectPath(project.id, { tab: "discussions" }),
+    label: t("pages.projectDiscussionNewPage.discussions"),
+  });
 
   return <Paper.Navigation items={items} />;
 }
@@ -79,16 +86,16 @@ function Form() {
         <div>
           <Forms.TitleInput
             field="title"
-            placeholder="Title..."
+            placeholder={t("pages.projectDiscussionNewPage.title")}
             autoFocus
             testId="discussion-title"
-            errorMessage="Please add a title"
+            errorMessage={t("pages.projectDiscussionNewPage.pleaseAddATitle")}
           />
           <div className="mt-2 border-y border-stroke-base text-content-base font-medium">
             <Forms.RichTextArea
               field="message"
               richTextHandlers={richTextHandlers}
-              placeholder="Start a new discussion..."
+              placeholder={t("pages.projectDiscussionNewPage.startANewDiscussion")}
               hideBorder
               height="min-h-[350px]"
               fontSize="text-lg"
@@ -103,11 +110,16 @@ function Form() {
         <SubscribersSelector {...subscriptionsState} />
       </div>
 
-      <Forms.FormError message="Fill out all the required fields" className="mt-4" />
+      <Forms.FormError message={t("pages.projectDiscussionNewPage.fillOutAllTheRequiredFields")} className="mt-4" />
 
       <div className="flex items-center gap-4 mt-4">
-        <Forms.Submit saveText="Post Discussion" buttonSize="base" testId="post-discussion" containerClassName="mt-0" />
-        <DimmedLink to={paths.projectPath(project.id)}>Cancel</DimmedLink>
+        <Forms.Submit
+          saveText={t("pages.projectDiscussionNewPage.postDiscussion")}
+          buttonSize="base"
+          testId="post-discussion"
+          containerClassName="mt-0"
+        />
+        <DimmedLink to={paths.projectPath(project.id)}>{t("pages.projectDiscussionNewPage.cancel")}</DimmedLink>
       </div>
     </Forms.Form>
   );

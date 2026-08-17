@@ -5,6 +5,7 @@ import * as React from "react";
 import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
 import classNames from "classnames";
 import { emptyContent, Forms, IconSearch, IconX, Modal, parseContent } from "turboui";
+import { t } from "@/i18n";
 
 const SEARCH_DEBOUNCE_MS = 250;
 
@@ -60,15 +61,20 @@ export function SiteMessageModal({ isOpen, onClose, onSuccess, message }: SiteMe
     <Modal title={isEdit ? "Edit message" : "Create message"} isOpen={isOpen} onClose={onClose} size="large">
       <Forms.Form form={form}>
         <Forms.FieldGroup>
-          <Forms.TextInput field="title" label="Title" required autoFocus />
-          <Forms.RichTextArea field="description" label="Description" required richTextHandlers={richTextHandlers} />
+          <Forms.TextInput field="title" label={t("pages.saasAdminSiteMessagesPage.title")} required autoFocus />
+          <Forms.RichTextArea
+            field="description"
+            label={t("pages.saasAdminSiteMessagesPage.description")}
+            required
+            richTextHandlers={richTextHandlers}
+          />
 
           <Forms.SelectBox
             field="audience"
-            label="Audience"
+            label={t("pages.saasAdminSiteMessagesPage.audience")}
             options={[
-              { value: "all", label: "All companies" },
-              { value: "specific", label: "Specific companies" },
+              { value: "all", label: t("pages.saasAdminSiteMessagesPage.allCompanies") },
+              { value: "specific", label: t("pages.saasAdminSiteMessagesPage.specificCompanies") },
             ]}
             required
           />
@@ -83,19 +89,28 @@ export function SiteMessageModal({ isOpen, onClose, onSuccess, message }: SiteMe
 
           <Forms.SelectBox
             field="active"
-            label="Status"
+            label={t("pages.saasAdminSiteMessagesPage.status")}
             options={[
-              { value: "true", label: "Active" },
-              { value: "false", label: "Inactive" },
+              { value: "true", label: t("pages.saasAdminSiteMessagesPage.active") },
+              { value: "false", label: t("pages.saasAdminSiteMessagesPage.inactive") },
             ]}
             required
           />
 
-          <Forms.TextInput field="expiresAt" label="Expires on" placeholder="YYYY-MM-DD" />
-          <div className="text-xs text-content-subtle">Optional. Leave blank to show until deactivated or deleted.</div>
+          <Forms.TextInput
+            field="expiresAt"
+            label={t("pages.saasAdminSiteMessagesPage.expiresOn")}
+            placeholder={t("pages.saasAdminSiteMessagesPage.yYYYMMDD")}
+          />
+          <div className="text-xs text-content-subtle">
+            {t("pages.saasAdminSiteMessagesPage.optionalLeaveBlankToShowUntil")}
+          </div>
         </Forms.FieldGroup>
 
-        <Forms.Submit saveText={isEdit ? "Save changes" : "Create message"} cancelText="Cancel" />
+        <Forms.Submit
+          saveText={isEdit ? "Save changes" : "Create message"}
+          cancelText={t("pages.saasAdminSiteMessagesPage.cancel")}
+        />
       </Forms.Form>
     </Modal>
   );
@@ -127,7 +142,7 @@ function CompanyPicker({
   };
 
   return (
-    <Forms.InputField field="companyIds" label="Companies" error={error}>
+    <Forms.InputField field="companyIds" label={t("pages.saasAdminSiteMessagesPage.companies")} error={error}>
       <div className="space-y-3">
         {selectedCompanies.length > 0 ? (
           <div className="flex flex-wrap gap-2">
@@ -144,7 +159,9 @@ function CompanyPicker({
             ))}
           </div>
         ) : (
-          <div className="text-sm text-content-subtle">No companies selected yet.</div>
+          <div className="text-sm text-content-subtle">
+            {t("pages.saasAdminSiteMessagesPage.noCompaniesSelectedYet")}
+          </div>
         )}
 
         <div className="flex items-center gap-2 rounded-lg border border-surface-outline px-3 py-2">
@@ -153,17 +170,27 @@ function CompanyPicker({
             type="text"
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.target.value)}
-            placeholder="Search companies"
+            placeholder={t("pages.saasAdminSiteMessagesPage.searchCompanies")}
             className="min-w-0 flex-1 bg-transparent text-sm outline-none"
             data-test-id="site-message-company-search"
           />
         </div>
 
         <div className="max-h-48 overflow-y-auto rounded-lg border border-surface-outline">
-          {loading ? <div className="px-3 py-2 text-sm text-content-subtle">Loading companies...</div> : null}
-          {loadError ? <div className="px-3 py-2 text-sm text-red-500">Failed to load companies</div> : null}
+          {loading ? (
+            <div className="px-3 py-2 text-sm text-content-subtle">
+              {t("pages.saasAdminSiteMessagesPage.loadingCompanies")}
+            </div>
+          ) : null}
+          {loadError ? (
+            <div className="px-3 py-2 text-sm text-red-500">
+              {t("pages.saasAdminSiteMessagesPage.failedToLoadCompanies")}
+            </div>
+          ) : null}
           {!loading && filteredCompanies.length === 0 ? (
-            <div className="px-3 py-2 text-sm text-content-subtle">No companies match your search.</div>
+            <div className="px-3 py-2 text-sm text-content-subtle">
+              {t("pages.saasAdminSiteMessagesPage.noCompaniesMatchYourSearch")}
+            </div>
           ) : null}
           {filteredCompanies.map((company) => {
             const selected = company.id ? selectedCompanyIds.includes(company.id) : false;
@@ -179,7 +206,9 @@ function CompanyPicker({
                 onClick={() => company.id && toggleCompany(company.id)}
               >
                 <span>{company.name}</span>
-                {selected ? <span className="text-xs text-content-subtle">Selected</span> : null}
+                {selected ? (
+                  <span className="text-xs text-content-subtle">{t("pages.saasAdminSiteMessagesPage.selected")}</span>
+                ) : null}
               </button>
             );
           })}

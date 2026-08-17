@@ -6,6 +6,8 @@ import { SwitchToggle } from "../SwitchToggle";
 import { TextField } from "../TextField";
 import { showErrorToast, showSuccessToast } from "../Toasts";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
+import { Trans } from "react-i18next";
 
 interface DomainRestrictionControls {
   enabled: boolean;
@@ -48,9 +50,12 @@ export function InviteLinkSection({
 
     try {
       await copyToClipboard(invitationLink);
-      showSuccessToast("Link copied", "The invite link has been copied to your clipboard.");
+      showSuccessToast(
+        t("turboui.invitePeoplePage.linkCopied"),
+        t("turboui.invitePeoplePage.theInviteLinkHasBeenCopied"),
+      );
     } catch {
-      showErrorToast("Copy failed", "We couldn't copy the invite link automatically.");
+      showErrorToast(t("turboui.invitePeoplePage.copyFailed"), t("turboui.invitePeoplePage.weCouldnTCopyTheInvite"));
       return;
     }
   }, [invitationLink, linkEnabled]);
@@ -59,15 +64,13 @@ export function InviteLinkSection({
     <section className="rounded-lg border border-surface-outline bg-surface-base p-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h2 className="text-lg font-semibold">Invite your whole team at once</h2>
-          <p className="mt-1 text-sm text-content-dimmed">
-            Share it in group chat, via email, or wherever your team is.
-          </p>
+          <h2 className="text-lg font-semibold">{t("turboui.invitePeoplePage.inviteYourWholeTeamAtOnce")}</h2>
+          <p className="mt-1 text-sm text-content-dimmed">{t("turboui.invitePeoplePage.shareItInGroupChatVia")}</p>
         </div>
         <SwitchToggle
           value={linkEnabled}
           setValue={onToggleLink}
-          label="Enable invite link"
+          label={t("turboui.invitePeoplePage.enableInviteLink")}
           labelHidden
           testId="invite-people-link-toggle"
         />
@@ -87,35 +90,43 @@ export function InviteLinkSection({
             data-test-id="invite-people-invite-link"
             onFocus={(event) => event.currentTarget.select()}
           />
-          <PrimaryButton onClick={handleCopyLink} disabled={!canCopy} size="sm" icon={IconCopy} testId="invite-people-copy-link">
-            Copy
+          <PrimaryButton
+            onClick={handleCopyLink}
+            disabled={!canCopy}
+            size="sm"
+            icon={IconCopy}
+            testId="invite-people-copy-link"
+          >
+            {t("turboui.invitePeoplePage.copy")}
           </PrimaryButton>
         </div>
 
         {linkEnabled ? (
           <p className="text-xs text-content-dimmed">
-            Only company admins can see and share this link. You can also{" "}
-            <button
-              type="button"
-              onClick={onOpenResetConfirm}
-              disabled={isResettingLink}
-              data-test-id="invite-people-reset-link"
-              className={classNames(
-                "font-medium text-content-link underline focus:outline-none",
-                isResettingLink && "cursor-not-allowed opacity-60",
-              )}
-            >
-              generate a new link
-            </button>
-            .
+            <Trans
+              i18nKey="turboui.invitePeoplePage.onlyCompanyAdminsCanSeeAndShare"
+              components={[
+                <button
+                  type="button"
+                  onClick={onOpenResetConfirm}
+                  disabled={isResettingLink}
+                  data-test-id="invite-people-reset-link"
+                  className={classNames(
+                    "font-medium text-content-link underline focus:outline-none",
+                    isResettingLink && "cursor-not-allowed opacity-60",
+                  )}
+                >
+                  generate a new link
+                </button>,
+              ]}
+            />
           </p>
         ) : null}
-
       </div>
 
       {linkEnabled && domainRestriction ? (
         <div className="mt-6 space-y-3">
-          <p className="text-sm font-medium text-content-strong">Who can join?</p>
+          <p className="text-sm font-medium text-content-strong">{t("turboui.invitePeoplePage.whoCanJoin")}</p>
 
           <div className="space-y-1" data-test-id={domainTestId}>
             <label
@@ -134,7 +145,7 @@ export function InviteLinkSection({
                 className="h-4 w-4 border-surface-outline text-brand-1 focus:ring-brand-1"
                 data-test-id={`${domainTestId}-anyone`}
               />
-              <span>Anyone with the link</span>
+              <span>{t("turboui.invitePeoplePage.anyoneWithTheLink")}</span>
             </label>
 
             <div className="space-y-2 text-sm text-content-strong">
@@ -165,13 +176,15 @@ export function InviteLinkSection({
                     variant="form-field"
                     text={domainRestriction.value}
                     onChange={onDomainChange}
-                    placeholder="e.g. acme.com, example.org"
+                    placeholder={t("turboui.invitePeoplePage.eGAcmeComExampleOrg")}
                     error={domainRestriction.error}
                     className={classNames("sm:max-w-md", !domainRestriction.onChange && "opacity-60")}
                     testId="invite-people-domain-input"
                     readonly={!domainRestriction.onChange}
                   />
-                  <p className="text-xs text-content-dimmed">Separate multiple domains with commas.</p>
+                  <p className="text-xs text-content-dimmed">
+                    {t("turboui.invitePeoplePage.separateMultipleDomainsWithCommas")}
+                  </p>
                 </div>
               )}
             </div>

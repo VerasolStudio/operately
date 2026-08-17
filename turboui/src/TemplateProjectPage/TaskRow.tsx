@@ -9,6 +9,7 @@ import { IconAlertTriangleFilled, IconX } from "../icons";
 import type { TemplateProjectPage } from ".";
 import { useSortableItem } from "../utils/PragmaticDragAndDrop";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 export function TaskRow({
   task,
@@ -171,7 +172,10 @@ function UnavailableTaskAssignees({
     (assignee) => assignee.person ?? { id: assignee.id, fullName: "Unavailable person", avatarUrl: null },
   );
   const names = people.map((person) => person.fullName).join(", ");
-  const message = assignees.length === 1 ? `${names} is no longer active.` : `${names} are no longer active.`;
+  const message =
+    assignees.length === 1
+      ? t("turboui.templateProjectPage.isNoLongerActive", { v1: names })
+      : t("turboui.templateProjectPage.areNoLongerActive", { v1: names });
 
   return (
     <div className="flex items-center gap-0.5" data-test-id="unavailable-task-assignees">
@@ -190,11 +194,11 @@ function UnavailableTaskAssignees({
           icon={IconX}
           iconSize={11}
           onClick={onRemove}
-          ariaLabel="Remove unavailable assignees"
+          ariaLabel={t("turboui.templateProjectPage.removeUnavailableAssignees")}
           testId="remove-unavailable-task-assignees"
           className="!h-5 !w-5 !rounded-full !border-0 !p-0 mb-5"
         >
-          <span className="sr-only">Remove unavailable assignees</span>
+          <span className="sr-only">{t("turboui.templateProjectPage.removeUnavailableAssignees")}</span>
         </SecondaryButton>
       )}
     </div>

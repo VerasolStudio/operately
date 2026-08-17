@@ -8,6 +8,7 @@ import { showErrorToast } from "turboui";
 import { useLoadedData } from "./loader";
 import { useNavigate, useRouteLoaderData } from "react-router";
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 interface CompanyRootData {
   company?: {
@@ -68,7 +69,10 @@ export function Page() {
     }
 
     setActionError("We couldn't schedule the cancellation right now. Please try again.");
-    showErrorToast("Cancellation unavailable", "We couldn't schedule the cancellation right now. Please try again.");
+    showErrorToast(
+      t("pages.companyBillingCancellationPage.cancellationUnavailable"),
+      t("pages.companyBillingCancellationPage.weCouldnTScheduleTheCancellation"),
+    );
     setIsSubmitting(false);
   }, [navigate, paths]);
 
@@ -76,8 +80,8 @@ export function Page() {
     <TurboCompanyBillingCancellationPage
       title={[companyName, "Cancel plan"]}
       navigation={[
-        { label: "Company Administration", to: paths.companyAdminPath() },
-        { label: "Billing", to: paths.companyBillingPath() },
+        { label: t("pages.companyBillingCancellationPage.companyAdministration"), to: paths.companyAdminPath() },
+        { label: t("pages.companyBillingCancellationPage.billing"), to: paths.companyBillingPath() },
       ]}
       billing={billing}
       actionError={actionError}

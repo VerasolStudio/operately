@@ -4,6 +4,7 @@ import { IconTable, IconTimeline } from "../../icons";
 import { Tabs, TabsState } from "../../Tabs";
 import { ViewToggle } from "../../ViewToggle";
 import { WorkMap } from ".";
+import { t } from "../../i18n";
 
 export interface Props {
   tabsState: TabsState;
@@ -26,10 +27,15 @@ export function WorkMapNavigation({ tabsState, timelineAvailable = false, view =
         <ViewToggle
           className="my-2 shrink-0"
           value={view}
-          ariaLabel="Work map view"
+          ariaLabel={t("turboui.workMap.workMapView")}
           options={[
-            { value: "table", label: "Table", icon: <IconTable size={14} />, to: tablePath },
-            { value: "timeline", label: "Timeline", icon: <IconTimeline size={14} />, to: timelinePath },
+            { value: "table", label: t("turboui.workMap.table"), icon: <IconTable size={14} />, to: tablePath },
+            {
+              value: "timeline",
+              label: t("turboui.workMap.timeline"),
+              icon: <IconTimeline size={14} />,
+              to: timelinePath,
+            },
           ]}
         />
       )}

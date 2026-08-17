@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import { Forms, showSuccessToast, showErrorToast, Page as TurboUIPage } from "turboui";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export default { name: "AccountChangePasswordPage", loader: Pages.emptyLoader, Page } as PageModule;
 
 function Page() {
@@ -32,10 +33,16 @@ function Page() {
           newPasswordConfirmation: form.values.confirmPassword,
         });
 
-        showSuccessToast("Password Changed", "Your password has been updated successfully.");
+        showSuccessToast(
+          t("pages.accountChangePasswordPage.passwordChanged"),
+          t("pages.accountChangePasswordPage.yourPasswordHasBeenUpdatedSuccessfully"),
+        );
         navigate(paths.accountSecurityPath());
       } catch (error) {
-        showErrorToast("Password Change Failed", "There was an error updating your password. Please try again.");
+        showErrorToast(
+          t("pages.accountChangePasswordPage.passwordChangeFailed"),
+          t("pages.accountChangePasswordPage.thereWasAnErrorUpdatingYour"),
+        );
       }
     },
     cancel: () => navigate(paths.accountSecurityPath()),
@@ -43,41 +50,46 @@ function Page() {
 
   return (
     <TurboUIPage
-      title={"Change Password"}
+      title={t("pages.accountChangePasswordPage.changePassword")}
       size="small"
       testId="change-password-page"
       navigation={[
-        { to: paths.homePath(), label: "Home" },
-        { to: paths.accountSecurityPath(), label: "Password & Security" },
+        { to: paths.homePath(), label: t("pages.accountChangePasswordPage.home") },
+        { to: paths.accountSecurityPath(), label: t("pages.accountChangePasswordPage.passwordSecurity") },
       ]}
     >
       <div className="px-10 py-8">
         <div className="mb-6">
-          <div className="text-content-accent text-lg md:text-2xl font-extrabold">Change Password</div>
+          <div className="text-content-accent text-lg md:text-2xl font-extrabold">
+            {t("pages.accountChangePasswordPage.changePassword")}
+          </div>
         </div>
 
         <Forms.Form form={form}>
           <Forms.FieldGroup>
             <Forms.PasswordInput
               field={"currentPassword"}
-              label="Current Password"
-              placeholder="Enter your current password"
+              label={t("pages.accountChangePasswordPage.currentPassword")}
+              placeholder={t("pages.accountChangePasswordPage.enterYourCurrentPassword")}
             />
             <Forms.PasswordInput
               field={"newPassword"}
-              label="New Password"
+              label={t("pages.accountChangePasswordPage.newPassword")}
               minLength={12}
-              placeholder="At least 12 characters"
+              placeholder={t("pages.accountChangePasswordPage.atLeast12Characters")}
             />
             <Forms.PasswordInput
               field={"confirmPassword"}
-              label="Confirm New Password"
+              label={t("pages.accountChangePasswordPage.confirmNewPassword")}
               minLength={12}
-              placeholder="At least 12 characters"
+              placeholder={t("pages.accountChangePasswordPage.atLeast12Characters")}
             />
           </Forms.FieldGroup>
 
-          <Forms.Submit saveText="Change Password" cancelText="Cancel" />
+          <Forms.Submit
+            saveText={t("pages.accountChangePasswordPage.changePassword")}
+            cancelText={t("pages.accountChangePasswordPage.cancel")}
+          />
         </Forms.Form>
       </div>
     </TurboUIPage>

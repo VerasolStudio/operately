@@ -1,3 +1,5 @@
+import i18n from "@/i18n";
+
 export type TimeFormat = "automatic" | "hour_12" | "hour_24";
 
 export function browserLocale(): string {
@@ -8,17 +10,21 @@ export function browserLocale(): string {
   return navigator.languages?.[0] || navigator.language || "en-US";
 }
 
-export function formatNumber(
-  value: number,
-  locale: string = browserLocale(),
-  options?: Intl.NumberFormatOptions,
-): string {
+/**
+ * The locale dates and numbers are rendered in: the interface language the
+ * person picked, falling back to what the browser reports.
+ */
+export function uiLocale(): string {
+  return i18n.language || browserLocale();
+}
+
+export function formatNumber(value: number, locale: string = uiLocale(), options?: Intl.NumberFormatOptions): string {
   return new Intl.NumberFormat(locale, options).format(value);
 }
 
 export function formatTime(
   value: Date,
-  locale: string = browserLocale(),
+  locale: string = uiLocale(),
   timeFormat: TimeFormat = "automatic",
   options: Intl.DateTimeFormatOptions = { timeStyle: "short" },
 ): string {

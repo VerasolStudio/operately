@@ -10,6 +10,7 @@ import { NewDocumentPage, showErrorToast } from "turboui";
 
 import { useLoadedData } from "./loader";
 import { buildNewDocumentPageNavigation } from "./navigation";
+import { t } from "@/i18n";
 
 export function Page() {
   const { resourceHub, folder } = useLoadedData();
@@ -41,14 +42,17 @@ export function Page() {
       navigate(paths.resourceHubDocumentPath(res.document!.id!));
       return true;
     } catch {
-      showErrorToast("Document not created", "Check the form and try again.");
+      showErrorToast(
+        t("pages.resourceHubNewDocumentPage.documentNotCreated"),
+        t("pages.resourceHubNewDocumentPage.checkTheFormAndTryAgain"),
+      );
       return false;
     }
   }
 
   return (
     <NewDocumentPage
-      pageTitle="New Document"
+      pageTitle={t("pages.resourceHubNewDocumentPage.newDocument")}
       navigation={buildNewDocumentPageNavigation(resourceHub, folder, paths)}
       testId="resource-hub-new-document-page"
       richTextHandlers={richTextHandlers}

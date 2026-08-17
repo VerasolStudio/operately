@@ -6,6 +6,7 @@ import { Person } from "@/models/people";
 import PeopleSearch, { Option } from "@/components/PeopleSearch";
 import { FormState } from "./useForm";
 import * as People from "@/models/people";
+import { t } from "@/i18n";
 
 export function AddOwnersModal({ form }: { form: FormState }) {
   const state = useState(form);
@@ -13,14 +14,19 @@ export function AddOwnersModal({ form }: { form: FormState }) {
   return (
     <>
       <PrimaryButton onClick={state.openModal} testId="add-owners" size="xs">
-        Add Owner
+        {t("pages.companyAdminManageAdminsPage.addOwner")}
       </PrimaryButton>
 
-      <Modal title="Add owners" isOpen={state.isModalOpen} onClose={state.hideModal} contentClassName="min-h-[600px]">
+      <Modal
+        title={t("pages.companyAdminManageAdminsPage.addOwners")}
+        isOpen={state.isModalOpen}
+        onClose={state.hideModal}
+        contentClassName="min-h-[600px]"
+      >
         <SearchField
           onSelect={state.add}
           loader={state.search}
-          placeholder={"Search for people to promote to owner"}
+          placeholder={t("pages.companyAdminManageAdminsPage.searchForPeopleToPromoteTo2")}
           alreadySelected={state.excludeIds}
         />
 
@@ -30,7 +36,7 @@ export function AddOwnersModal({ form }: { form: FormState }) {
 
         <div className="mt-4 flex items-center justify-center">
           <PrimaryButton onClick={state.submit} testId="save-owners">
-            Add Owners
+            {t("pages.companyAdminManageAdminsPage.addOwners2")}
           </PrimaryButton>
         </div>
       </Modal>

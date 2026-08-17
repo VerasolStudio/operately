@@ -1,5 +1,6 @@
 import { match } from "ts-pattern";
 import { overdueDays } from "./time";
+import { uiLocale } from "./formatting";
 
 export type TimeframeType = "month" | "quarter" | "year" | "days";
 
@@ -26,7 +27,7 @@ function formatMonth(timeframe: Timeframe) {
   if (!timeframe.startDate) return null;
   if (!timeframe.endDate) return null;
 
-  return timeframe.startDate.toLocaleString("default", { month: "long", year: "numeric" });
+  return timeframe.startDate.toLocaleString(uiLocale(), { month: "long", year: "numeric" });
 }
 
 function formatQuarter(timeframe: Timeframe) {
@@ -46,19 +47,19 @@ function formatDays(timeframe: Timeframe) {
 
   if (timeframe.startDate.getFullYear() === timeframe.endDate.getFullYear()) {
     if (getCurrentFullYear() === timeframe.startDate.getFullYear()) {
-      const start = timeframe.startDate.toLocaleString("default", { month: "long", day: "numeric" });
-      const end = timeframe.endDate.toLocaleString("default", { month: "long", day: "numeric" });
+      const start = timeframe.startDate.toLocaleString(uiLocale(), { month: "long", day: "numeric" });
+      const end = timeframe.endDate.toLocaleString(uiLocale(), { month: "long", day: "numeric" });
 
       return `${start} - ${end}`;
     } else {
-      const start = timeframe.startDate.toLocaleString("default", { month: "long", day: "numeric" });
-      const end = timeframe.endDate.toLocaleString("default", { month: "long", day: "numeric", year: "numeric" });
+      const start = timeframe.startDate.toLocaleString(uiLocale(), { month: "long", day: "numeric" });
+      const end = timeframe.endDate.toLocaleString(uiLocale(), { month: "long", day: "numeric", year: "numeric" });
 
       return `${start} - ${end}`;
     }
   } else {
-    const start = timeframe.startDate.toLocaleString("default", { month: "long", day: "numeric", year: "numeric" });
-    const end = timeframe.endDate.toLocaleString("default", { month: "long", day: "numeric", year: "numeric" });
+    const start = timeframe.startDate.toLocaleString(uiLocale(), { month: "long", day: "numeric", year: "numeric" });
+    const end = timeframe.endDate.toLocaleString(uiLocale(), { month: "long", day: "numeric", year: "numeric" });
 
     return `${start} - ${end}`;
   }

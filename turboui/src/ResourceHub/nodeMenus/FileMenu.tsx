@@ -7,6 +7,7 @@ import { DeleteResourceConfirmModal } from "../DeleteResourceConfirmModal";
 import { getResourceName } from "../selectors";
 import type { ResourceHubFile } from "../types";
 import { MoveResourceMenuItem, MoveResourceModal } from "./MoveResource";
+import { t } from "../../i18n";
 
 interface FileMenuProps {
   file: ResourceHubFile;
@@ -24,7 +25,12 @@ export function FileMenu({ file }: FileMenuProps) {
 
   const menuId = createTestId("menu", file.id);
 
-  const relevantPermissions = [permissions.canView, permissions.canEditFile, permissions.canEditParentFolder, permissions.canDeleteFile];
+  const relevantPermissions = [
+    permissions.canView,
+    permissions.canEditFile,
+    permissions.canEditParentFolder,
+    permissions.canDeleteFile,
+  ];
 
   if (!relevantPermissions.some(Boolean)) return null;
 
@@ -57,7 +63,7 @@ function DownloadFileMenuItem({ file }: FileMenuProps) {
     downloadFile(downloadUrl, file.name);
   };
 
-  return <MenuActionItem onClick={handleDownload}>Download</MenuActionItem>;
+  return <MenuActionItem onClick={handleDownload}>{t("turboui.resourceHub.download")}</MenuActionItem>;
 }
 
 function EditFileMenuItem({ file }: FileMenuProps) {
@@ -70,7 +76,7 @@ function EditFileMenuItem({ file }: FileMenuProps) {
 
   return (
     <MenuLinkItem testId={editId} to={editPath}>
-      Edit
+      {t("turboui.resourceHub.edit")}
     </MenuLinkItem>
   );
 }
@@ -80,12 +86,20 @@ function DeleteFileMenuItem({ file, toggleDeleteModal }: { file: ResourceHubFile
 
   return (
     <MenuActionItem onClick={toggleDeleteModal} testId={deleteId} danger>
-      Delete
+      {t("turboui.resourceHub.delete")}
     </MenuActionItem>
   );
 }
 
-function DeleteFileModal({ file, isOpen, hideModal }: { file: ResourceHubFile; isOpen: boolean; hideModal: () => void }) {
+function DeleteFileModal({
+  file,
+  isOpen,
+  hideModal,
+}: {
+  file: ResourceHubFile;
+  isOpen: boolean;
+  hideModal: () => void;
+}) {
   const { onRefetch, actions } = useResourceHubNodesListContext();
 
   const handleDelete = async () => {

@@ -13,6 +13,7 @@ import type { RichTextJSON } from "../../RichContent";
 import type { RichEditorHandlers } from "../../RichEditor/useEditor";
 import type { FormattedTimePreferences } from "../../FormattedTime";
 import * as Types from "../types";
+import { t } from "../../i18n";
 
 interface TaskCreationModalProps {
   isOpen: boolean;
@@ -112,39 +113,41 @@ export function TaskCreationModal({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Create Task" size="medium">
+    <Modal isOpen={isOpen} onClose={onClose} title={t("turboui.taskBoard.createTask")} size="medium">
       <form onSubmit={handleSubmit} className="space-y-6" data-test-id="add-task-form">
         <TextField
           variant="form-field"
-          label="Task title"
+          label={t("turboui.taskBoard.taskTitle")}
           text={title}
           onChange={setTitle}
-          placeholder="Enter task title"
+          placeholder={t("turboui.taskBoard.enterTaskTitle")}
           autofocus
           testId="task-title"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-content-base mb-1">Due date</label>
+            <label className="block text-sm font-medium text-content-base mb-1">{t("turboui.taskBoard.dueDate")}</label>
             <DateField
               variant="form-field"
               date={dueDate}
               onDateSelect={setDueDate}
-              placeholder="Set due date"
+              placeholder={t("turboui.taskBoard.setDueDate")}
               testId="task-due-date"
               calendarOnly
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-content-base mb-1">Assignees</label>
+            <label className="block text-sm font-medium text-content-base mb-1">
+              {t("turboui.taskBoard.assignees")}
+            </label>
             {assigneePersonSearch ? (
               <AssigneesField
                 people={assignees}
                 setPeople={setAssignees}
                 searchData={assigneePersonSearch}
-                emptyStateMessage="Select assignees"
+                emptyStateMessage={t("turboui.taskBoard.selectAssignees")}
                 testId="assignee"
                 variant="form-field"
               />
@@ -153,7 +156,7 @@ export function TaskCreationModal({
                 people={assignees}
                 setPeople={setAssignees}
                 readonly={true}
-                emptyStateMessage="Select assignees"
+                emptyStateMessage={t("turboui.taskBoard.selectAssignees")}
                 testId="assignee"
                 variant="form-field"
               />
@@ -162,7 +165,7 @@ export function TaskCreationModal({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-content-base mb-1">Milestone</label>
+          <label className="block text-sm font-medium text-content-base mb-1">{t("turboui.taskBoard.milestone")}</label>
           <div className="min-w-0 overflow-hidden w-full">
             <div className="w-full">
               <MilestoneField
@@ -182,7 +185,7 @@ export function TaskCreationModal({
                 }}
                 milestones={milestones.map((m) => ({ ...m, title: m.name }))}
                 onSearch={onMilestoneSearch}
-                emptyStateMessage="Select milestone"
+                emptyStateMessage={t("turboui.taskBoard.selectMilestone")}
                 readonly={milestoneReadOnly}
                 formattedTimePreferences={formattedTimePreferences}
               />
@@ -192,20 +195,25 @@ export function TaskCreationModal({
 
         {richTextHandlers && (
           <div>
-            <label className="block text-sm font-medium text-content-base mb-1">Notes</label>
+            <label className="block text-sm font-medium text-content-base mb-1">{t("turboui.taskBoard.notes")}</label>
             <TaskNotesField key={descriptionEditorKey} richTextHandlers={richTextHandlers} onChange={setDescription} />
           </div>
         )}
 
         <div className="flex items-center mt-8">
-          <SwitchToggle value={createMore} setValue={setCreateMore} label="Create more" testId="add-more-switch" />
+          <SwitchToggle
+            value={createMore}
+            setValue={setCreateMore}
+            label={t("turboui.taskBoard.createMore")}
+            testId="add-more-switch"
+          />
           <div className="flex-1"></div>
           <div className="flex space-x-3">
             <SecondaryButton onClick={onClose} type="button">
-              Cancel
+              {t("turboui.taskBoard.cancel")}
             </SecondaryButton>
             <PrimaryButton type="submit" disabled={disabled}>
-              Create task
+              {t("turboui.taskBoard.createTask2")}
             </PrimaryButton>
           </div>
         </div>
@@ -223,7 +231,7 @@ function TaskNotesField({ richTextHandlers, onChange }: TaskNotesFieldProps) {
   const editor = useEditor({
     content: null,
     editable: true,
-    placeholder: "Add notes about this task...",
+    placeholder: t("turboui.taskBoard.addNotesAboutThisTask"),
     handlers: richTextHandlers,
     onUpdate: ({ json }) => onChange(json as RichTextJSON),
   });

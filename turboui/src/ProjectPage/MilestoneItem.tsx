@@ -7,6 +7,7 @@ import * as TaskBoardTypes from "../TaskBoard/types";
 import classNames from "../utils/classnames";
 import { createTestId } from "../TestableElement";
 import { useSortableItem } from "../utils/PragmaticDragAndDrop";
+import { t } from "../i18n";
 
 interface MilestoneItemProps {
   milestone: TaskBoardTypes.Milestone;
@@ -93,16 +94,16 @@ export function MilestoneItem({
               <DateField
                 date={editDueDate}
                 onDateSelect={setEditDueDate}
-                placeholder="Due date (optional)"
+                placeholder={t("turboui.projectPage.dueDateOptional")}
                 testId={dateTestId}
                 calendarOnly
               />
               <div className="flex gap-2">
                 <Button size="sm" onClick={handleSave} disabled={!editName.trim()}>
-                  Save
+                  {t("turboui.projectPage.save")}
                 </Button>
                 <SecondaryButton size="sm" onClick={handleCancel}>
-                  Cancel
+                  {t("turboui.projectPage.cancel")}
                 </SecondaryButton>
               </div>
             </div>
@@ -169,7 +170,7 @@ export function MilestoneItem({
               // Edit button - shown on hover on medium+ screens (hover disabled on small screens to prevent double-tap on mobile)
               <div className="opacity-0 md:group-hover:opacity-100 transition-opacity">
                 <SecondaryButton testId={editBtnTestId} size="xxs" onClick={() => setIsEditing(true)}>
-                  Edit
+                  {t("turboui.projectPage.edit")}
                 </SecondaryButton>
               </div>
             )}

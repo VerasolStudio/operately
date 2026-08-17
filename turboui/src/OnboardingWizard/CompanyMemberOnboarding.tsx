@@ -8,6 +8,7 @@ import { TextField } from "../TextField";
 import { WelcomeStep } from "./WelcomeStep";
 import { useWizardState, WizardState } from "./WizadState";
 import { WizardHeading, WizardModal, WizardStep } from "./WizardLayout";
+import { t } from "../i18n";
 
 export namespace CompanyMemberOnboardingWizard {
   export interface AvatarData {
@@ -89,9 +90,9 @@ function RoleStep({ state }: { state: State }) {
     <WizardStep
       footer={
         <>
-          <SecondaryButton onClick={state.back}>Back</SecondaryButton>
+          <SecondaryButton onClick={state.back}>{t("turboui.onboardingWizard.back")}</SecondaryButton>
           <PrimaryButton onClick={state.next} disabled={!validRole}>
-            Next
+            {t("turboui.onboardingWizard.next")}
           </PrimaryButton>
         </>
       }
@@ -100,14 +101,14 @@ function RoleStep({ state }: { state: State }) {
         <WizardHeading
           stepNumber={1}
           totalSteps={2}
-          title="What's your role?"
-          subtitle="Let teammates know what you focus on. You can change this later."
+          title={t("turboui.onboardingWizard.whatSYourRole")}
+          subtitle={t("turboui.onboardingWizard.letTeammatesKnowWhatYouFocus")}
           id="company-member-onboarding-heading"
         />
         <TextField
           variant="form-field"
-          label="Your role"
-          placeholder="e.g Product Manager, Designer, CEO"
+          label={t("turboui.onboardingWizard.yourRole")}
+          placeholder={t("turboui.onboardingWizard.eGProductManagerDesignerCEO")}
           text={state.role}
           onChange={state.setRole}
           trimBeforeSave={false}
@@ -169,13 +170,13 @@ function AvatarStep({ state }: { state: State }) {
   }, [state.avatar, state.role]);
 
   return (
-    <WizardStep footer={<PrimaryButton onClick={state.next}>Finish</PrimaryButton>}>
+    <WizardStep footer={<PrimaryButton onClick={state.next}>{t("turboui.onboardingWizard.finish")}</PrimaryButton>}>
       <div className="space-y-6">
         <WizardHeading
           stepNumber={2}
           totalSteps={2}
-          title="Add your profile picture"
-          subtitle="Help your teammates put a face to your name."
+          title={t("turboui.onboardingWizard.addYourProfilePicture")}
+          subtitle={t("turboui.onboardingWizard.helpYourTeammatesPutAFace")}
           id="company-member-onboarding-heading"
         />
 
@@ -186,7 +187,7 @@ function AvatarStep({ state }: { state: State }) {
             ) : (
               <div className="flex flex-col items-center justify-center text-content-dimmed px-6 py-4">
                 <IconUpload size={36} aria-hidden="true" />
-                <span className="mt-2 text-sm">Upload a square image for best results.</span>
+                <span className="mt-2 text-sm">{t("turboui.onboardingWizard.uploadASquareImageForBest")}</span>
               </div>
             )}
             <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
@@ -198,11 +199,11 @@ function AvatarStep({ state }: { state: State }) {
             </PrimaryButton>
             {state.avatar && (
               <SecondaryButton size="sm" onClick={handleRemove}>
-                Remove photo
+                {t("turboui.onboardingWizard.removePhoto")}
               </SecondaryButton>
             )}
             <p className="text-xs text-content-dimmed max-w-sm text-center sm:text-left">
-              PNG, JPG, or GIF up to 5MB. You can adjust or replace it later from your profile settings.
+              {t("turboui.onboardingWizard.pNGJPGOrGIFUpTo")}
             </p>
             {error && <p className="text-xs text-red-500">{error}</p>}
           </div>

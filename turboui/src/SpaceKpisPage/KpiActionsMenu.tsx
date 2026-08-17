@@ -2,6 +2,7 @@ import React from "react";
 
 import { Menu, MenuActionItem } from "../Menu";
 import { IconEdit, IconTrash } from "../icons";
+import { t } from "../i18n";
 
 interface KpiActionsMenuProps {
   kpiId: string;
@@ -20,10 +21,10 @@ export function KpiActionsMenu({ kpiId, onEdit, onDelete, customTrigger }: KpiAc
   return (
     <Menu testId={`kpi-actions-${kpiId}`} customTrigger={customTrigger} size="tiny">
       <MenuActionItem icon={IconEdit} onClick={onEdit} testId={`edit-kpi-${kpiId}`}>
-        Edit KPI
+        {t("turboui.spaceKpisPage.editKPI")}
       </MenuActionItem>
       <MenuActionItem icon={IconTrash} onClick={onDelete} danger testId={`delete-kpi-${kpiId}`}>
-        Delete KPI
+        {t("turboui.spaceKpisPage.deleteKPI")}
       </MenuActionItem>
     </Menu>
   );

@@ -6,6 +6,7 @@ import type { Activity } from "@/models/activities";
 import { Paths } from "@/routes/paths";
 import { feedTitle, projectLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
 
 const ProjectReviewerUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -31,7 +32,9 @@ const ProjectReviewerUpdating: ActivityHandler = {
   FeedItemTitle({ activity, page }: { activity: Activity; page: string }) {
     const project = content(activity).project!;
     const newReviewer = content(activity).newReviewer;
-    const message = newReviewer ? `assigned ${People.shortName(newReviewer)} as the reviewer` : "removed the reviewer";
+    const message = newReviewer
+      ? t("features.activities.assignedAsTheReviewer", { v1: People.shortName(newReviewer) })
+      : "removed the reviewer";
 
     if (page === "project") {
       return feedTitle(activity, message);
@@ -46,7 +49,7 @@ const ProjectReviewerUpdating: ActivityHandler = {
     if (oldReviewer) {
       return <>Previously, {People.shortName(oldReviewer)} was the reviewer.</>;
     } else {
-      return <>There was no previous reviewer.</>;
+      return <>{t("features.activities.thereWasNoPreviousReviewer")}</>;
     }
   },
 

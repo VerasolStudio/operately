@@ -5,6 +5,7 @@ import { MemberTypeSelectionPage } from "turboui";
 import { PageModule } from "@/routes/types";
 import { usePaths } from "@/routes/paths";
 import * as Companies from "@/models/companies";
+import { t } from "@/i18n";
 
 export default { name: "MemberTypeSelectionPage", loader, Page } as PageModule;
 
@@ -29,8 +30,8 @@ function Page() {
   const { company } = Pages.useLoadedData() as LoaderResult;
   const navigationItems = React.useMemo(
     () => [
-      { to: paths.companyAdminPath(), label: "Company Administration" },
-      { to: paths.companyManagePeoplePath(), label: "Manage Team Members" },
+      { to: paths.companyAdminPath(), label: t("pages.memberTypeSelectionPage.companyAdministration") },
+      { to: paths.companyManagePeoplePath(), label: t("pages.memberTypeSelectionPage.manageTeamMembers") },
     ],
     [paths],
   );

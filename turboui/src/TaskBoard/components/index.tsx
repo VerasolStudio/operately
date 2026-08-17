@@ -21,6 +21,7 @@ import { StatusSelector } from "../../StatusSelector";
 import { TaskSlideIn } from "../KanbanView/TaskSlideIn";
 import { compareIds } from "../../utils/ids";
 import { CompletedMilestonesSection } from "./CompletedMilestonesSection";
+import { t } from "../../i18n";
 
 export { TaskDisplayMenu, TasksMenu };
 
@@ -340,7 +341,7 @@ export function TaskBoard({
               {/* If no tasks at all */}
               {showNoTasksMsg && (
                 <li className="py-4 text-center text-content-subtle">
-                  Add the first task to start breaking down the work.
+                  {t("turboui.taskBoard.addTheFirstTaskToStart")}
                 </li>
               )}
 
@@ -379,7 +380,9 @@ export function TaskBoard({
                   <div className="flex items-center justify-between px-4 py-3 bg-surface-dimmed border-b border-surface-outline">
                     <div className="flex items-center gap-2">
                       {/* No progress pie chart for tasks without milestone */}
-                      <span className="text-sm font-semibold text-content-base">No milestone</span>
+                      <span className="text-sm font-semibold text-content-base">
+                        {t("turboui.taskBoard.noMilestone")}
+                      </span>
                       {/* No indicators for 'No milestone' header */}
                     </div>
                     <SecondaryButton
@@ -389,7 +392,7 @@ export function TaskBoard({
                       onClick={openNoMilestoneCreator}
                       testId="no-milestone-add-task"
                     >
-                      <span className="sr-only">Add task</span>
+                      <span className="sr-only">{t("turboui.taskBoard.addTask")}</span>
                     </SecondaryButton>
                   </div>
 
@@ -484,13 +487,13 @@ function StickyActionBar({
             }}
             testId="add-task"
           >
-            New task
+            {t("turboui.taskBoard.newTask")}
           </PrimaryButton>
         )}
 
         {canCreateMilestone && (
           <SecondaryButton size="xs" onClick={openMilestoneModal} testId="add-milestone">
-            New milestone
+            {t("turboui.taskBoard.newMilestone")}
           </SecondaryButton>
         )}
 

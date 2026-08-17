@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as People from "@/models/people";
-import { browserLocale } from "@/utils/formatting";
+import { uiLocale } from "@/utils/formatting";
 import type { TimeFormat } from "@/utils/formatting";
 
 import { useMe } from "@/contexts/CurrentCompanyContext";
@@ -13,7 +13,7 @@ interface TimezoneContextProps {
 
 const TimezoneContext = React.createContext<TimezoneContextProps>({
   timezone: "Etc/UTC",
-  locale: "en-US",
+  locale: "en",
   timeFormat: "automatic",
 });
 
@@ -37,7 +37,7 @@ export function useTimeFormat(): TimeFormat {
 }
 
 function initializeTimezone(me: People.Person | null): TimezoneContextProps {
-  const locale = browserLocale();
+  const locale = uiLocale();
 
   if (!me || !me.timezone) {
     return { timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, locale, timeFormat: "automatic" };

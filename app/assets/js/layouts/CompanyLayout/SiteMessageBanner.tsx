@@ -5,6 +5,7 @@ import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
 import * as People from "@/models/people";
 import { useCompanyLoaderData } from "@/routes/useCompanyLoaderData";
 import { IconX, RichContent } from "turboui";
+import { t } from "@/i18n";
 
 const STORAGE_NAMESPACE = "announcements";
 const STORAGE_KEY = "dismissed-site-message-ids";
@@ -57,7 +58,7 @@ export function SiteMessageBanner() {
           type="button"
           className="mt-0.5 shrink-0 rounded-md p-1 text-yellow-700 transition-colors hover:bg-yellow-100 hover:text-yellow-900"
           data-test-id="site-message-banner-dismiss"
-          aria-label="Dismiss message"
+          aria-label={t("layouts.companyLayout.dismissMessage")}
           onClick={dismiss}
         >
           <IconX size={18} />

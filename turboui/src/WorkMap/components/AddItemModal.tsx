@@ -7,6 +7,7 @@ import { SpaceField } from "../../SpaceField";
 import { SwitchToggle } from "../../SwitchToggle";
 import { TextField } from "../../TextField";
 import { showErrorToast } from "../../Toasts";
+import { t } from "../../i18n";
 
 export namespace AddItemModal {
   export interface SaveProps {
@@ -53,7 +54,13 @@ export function AddItemModal(props: AddItemModal.Props) {
   const state = useAddItemModalState(props);
 
   return (
-    <Modal isOpen={props.isOpen} onClose={props.close} size="large" closeOnBackdropClick={false} testId="add-item-modal">
+    <Modal
+      isOpen={props.isOpen}
+      onClose={props.close}
+      size="large"
+      closeOnBackdropClick={false}
+      testId="add-item-modal"
+    >
       <div className="p-4">
         <h1 className="font-bold text-xl w-52">Add {state.itemType === "goal" ? "goal" : "project"}</h1>
 
@@ -70,12 +77,12 @@ export function AddItemModal(props: AddItemModal.Props) {
             options={[
               {
                 value: "goal",
-                label: "Goal",
+                label: t("turboui.workMap.goal"),
                 description: "big-picture outcome",
               },
               {
                 value: "project",
-                label: "Project",
+                label: t("turboui.workMap.project"),
                 description: "concrete actions or deliverables",
               },
             ]}
@@ -94,7 +101,7 @@ export function AddItemModal(props: AddItemModal.Props) {
           <div className="flex flex-col gap-4">
             <TextField
               autofocus
-              label="Name"
+              label={t("turboui.workMap.name")}
               variant="form-field"
               placeholder={
                 state.itemType === "goal" ? "e.g. Increase user acquisition" : "e.g. Implement new website design"
@@ -106,7 +113,7 @@ export function AddItemModal(props: AddItemModal.Props) {
             />
 
             <SpaceField
-              label="Space"
+              label={t("turboui.workMap.space")}
               space={state.space}
               setSpace={state.setSpace}
               search={state.spaceSearch}
@@ -120,20 +127,24 @@ export function AddItemModal(props: AddItemModal.Props) {
               setAccessLevels={state.setAccessLevels}
               resourceType={state.itemType}
               variant="form-field"
-              label="Privacy"
+              label={t("turboui.workMap.privacy")}
               hideCompanyAccess={Boolean(props.hideCompanyAccess)}
             />
           </div>
 
           <div className="flex items-center mt-8">
             {!props.hideCreateMore && (
-              <SwitchToggle value={state.createMore} setValue={state.setCreateMore} label="Create more" />
+              <SwitchToggle
+                value={state.createMore}
+                setValue={state.setCreateMore}
+                label={t("turboui.workMap.createMore")}
+              />
             )}
 
             <div className="flex-1"></div>
             <div className="flex space-x-3">
               <SecondaryButton type="button" data-testid="cancel" size="sm" onClick={props.close}>
-                Cancel
+                {t("turboui.workMap.cancel")}
               </SecondaryButton>
 
               <PrimaryButton type="submit" loading={state.submitting} testId="submit" size="sm">
@@ -232,7 +243,7 @@ function useAddItemModalState(props: AddItemModal.Props) {
       }
     } catch (error) {
       console.error("Failed to create item:", error);
-      showErrorToast("Network error", "Failed to create the " + itemType + ".");
+      showErrorToast(t("turboui.workMap.networkError"), t("turboui.workMap.failedToCreateThe") + itemType + ".");
       setSubmitting(false);
     }
   };

@@ -10,6 +10,7 @@ import FormattedTime, { type FormattedTimePreferences } from "../FormattedTime";
 import type { PersonField } from "../PersonField";
 import type { RichEditorHandlers } from "../RichEditor/useEditor";
 import { IconEdit } from "../icons";
+import { t } from "../i18n";
 
 export namespace TemplateDiscussionPage {
   export interface Props {
@@ -36,7 +37,7 @@ export function TemplateDiscussionPage(props: TemplateDiscussionPage.Props) {
             {
               type: "link",
               icon: IconEdit,
-              label: "Edit discussion",
+              label: t("turboui.templateDiscussionPage.editDiscussion"),
               link: props.editLink,
               testId: "edit-template-discussion",
             },

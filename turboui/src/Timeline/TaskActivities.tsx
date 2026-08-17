@@ -21,6 +21,7 @@ import {
 import { TaskActivityProps, TaskActivity, TaskStatus } from "./types";
 import { DateField } from "../DateField";
 import { capitalizeFirstLetter } from "../utils/strings";
+import { t } from "../i18n";
 
 export function TaskActivityItem({ activity, formattedTimePreferences }: TaskActivityProps) {
   return (
@@ -210,8 +211,8 @@ function ActivityText({ activity }: { activity: TaskActivity }) {
       return (
         <span className="text-content-dimmed">
           {activity.hasContent
-            ? `updated the description ${activity.page === "task" ? "" : "of " + taskName}`
-            : `removed the description ${activity.page === "task" ? "" : "from " + taskName}`}
+            ? t("turboui.timeline.updatedTheDescription", { v1: activity.page === "task" ? "" : "of " + taskName })
+            : t("turboui.timeline.removedTheDescription", { v1: activity.page === "task" ? "" : "from " + taskName })}
         </span>
       );
 

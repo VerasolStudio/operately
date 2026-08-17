@@ -5,6 +5,7 @@ import { SecondaryButton } from "../../Button";
 import classNames from "../../utils/classnames";
 
 import { ProfilePage } from "..";
+import { t } from "../../i18n";
 
 export function Colleagues(props: ProfilePage.Props) {
   const [allPeersVisible, setAllPeersVisible] = React.useState(false);
@@ -28,19 +29,19 @@ export function Colleagues(props: ProfilePage.Props) {
 
   return (
     <div className="py-6">
-      <div className="text-xs mb-2 uppercase font-bold">Colleagues</div>
+      <div className="text-xs mb-2 uppercase font-bold">{t("turboui.profilePage.colleagues")}</div>
 
       <div className="overflow-x-auto">
         <div className={getGridColumnsClass(hasManager, hasReportsColumn)}>
           {hasManager && (
             <div className="w-full">
-              <div className="text-xs font-medium text-content-dimmed mb-2">Manager</div>
+              <div className="text-xs font-medium text-content-dimmed mb-2">{t("turboui.profilePage.manager")}</div>
               <PersonCard person={props.manager!} link />
             </div>
           )}
 
           <div className="w-full">
-            <div className="text-xs font-medium text-content-dimmed mb-2">Peers</div>
+            <div className="text-xs font-medium text-content-dimmed mb-2">{t("turboui.profilePage.peers")}</div>
 
             <div className="flex flex-col gap-2 w-full">
               <div ref={mainPersonRef}>
@@ -67,7 +68,7 @@ export function Colleagues(props: ProfilePage.Props) {
             {!allPeersVisible && props.peers.length > visiblePeers.length && (
               <div className="mt-2 flex items-center justify-center">
                 <SecondaryButton size="xxs" onClick={() => setAllPeersVisible(true)}>
-                  Show all
+                  {t("turboui.profilePage.showAll")}
                 </SecondaryButton>
               </div>
             )}
@@ -75,7 +76,7 @@ export function Colleagues(props: ProfilePage.Props) {
 
           {hasReportsColumn && (
             <div className="w-full">
-              <div className="text-xs font-medium text-content-dimmed mb-2">Reports</div>
+              <div className="text-xs font-medium text-content-dimmed mb-2">{t("turboui.profilePage.reports")}</div>
 
               <div className="flex flex-col gap-2 w-full">
                 {visibleReports.map((person, index) => (
@@ -92,7 +93,7 @@ export function Colleagues(props: ProfilePage.Props) {
               {!allReportsVisible && props.reports.length > visibleReports.length && (
                 <div className="mt-2 flex items-center justify-center">
                   <SecondaryButton size="xxs" onClick={() => setAllReportsVisible(true)}>
-                    Show all
+                    {t("turboui.profilePage.showAll")}
                   </SecondaryButton>
                 </div>
               )}

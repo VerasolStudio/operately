@@ -4,6 +4,7 @@ import { PrimaryButton } from "../Button";
 import { CheckInCard } from "../CheckInCard";
 import { CheckInOverdueCallout } from "./CheckInOverdueCallout";
 import { viewerCanPostCheckIn } from "./checkInPermissions";
+import { t } from "../i18n";
 
 export function CheckIns(props: ProjectPage.State) {
   const showCheckInButton = viewerCanPostCheckIn(props);
@@ -12,15 +13,15 @@ export function CheckIns(props: ProjectPage.State) {
     <div className="p-4 max-w-3xl mx-auto my-6 overflow-auto">
       <div className="flex items-center gap-2 justify-between">
         <div>
-          <h2 className="font-bold text-lg">Check-Ins</h2>
+          <h2 className="font-bold text-lg">{t("turboui.projectPage.checkIns")}</h2>
           <div className="flex items-center gap-2 text-sm">
-            Champions post weekly updates to document progress and share insights.
+            {t("turboui.projectPage.championsPostWeeklyUpdatesToDocument")}
           </div>
         </div>
 
         {showCheckInButton && (
           <PrimaryButton linkTo={props.newCheckInLink} size="xs" testId="check-in-button">
-            Post check-in
+            {t("turboui.projectPage.postCheckIn")}
           </PrimaryButton>
         )}
       </div>

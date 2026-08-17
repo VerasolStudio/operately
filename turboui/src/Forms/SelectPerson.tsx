@@ -8,6 +8,7 @@ import { useFieldError, useFieldValue } from "./context";
 import { InputField } from "./FieldGroup";
 import type { SelectPersonPerson, SelectPersonProps } from "./types";
 import { useValidation, validatePresence } from "./validation";
+import { t } from "../i18n";
 
 interface Option {
   value: string | null;
@@ -58,7 +59,7 @@ function SelectPersonInput(props: SelectPersonProps) {
         autoFocus={props.autoFocus}
         inputId={createTestId(field)}
         onChange={onChange}
-        placeholder="Search for person..."
+        placeholder={t("turboui.forms.searchForPerson")}
         defaultValue={props.default || undefined}
         loader={searchFn}
         error={!!error}
@@ -122,9 +123,7 @@ function PersonSearch(props: PersonSearchProps) {
       // When `portalMenu` is set, render the menu in a body-level portal so it
       // floats above (and is not clipped by) overflow/scroll boundaries of
       // ancestors such as the Modal's `overflow-auto` container.
-      menuPortalTarget={
-        props.portalMenu && typeof document !== "undefined" ? document.body : undefined
-      }
+      menuPortalTarget={props.portalMenu && typeof document !== "undefined" ? document.body : undefined}
       menuPlacement={props.portalMenu ? "auto" : undefined}
     />
   );

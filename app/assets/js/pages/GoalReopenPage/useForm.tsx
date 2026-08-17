@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 
 import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
 import { useEditor } from "turboui";
+import { t } from "@/i18n";
 
 export interface FormState {
   messageEditor: any;
@@ -20,7 +21,7 @@ export function useForm(goal: Goals.Goal, subscriptionsState: SubscriptionsState
 
   const handlers = useRichEditorHandlers({ scope: { type: "goal", id: goal.id } });
   const messageEditor = useEditor({
-    placeholder: "Write here...",
+    placeholder: t("pages.goalReopenPage.writeHere"),
     className: "min-h-[200px] py-2 font-medium",
     handlers,
     localDraft: { key: `goal:${goal.id}:reopen-message` },

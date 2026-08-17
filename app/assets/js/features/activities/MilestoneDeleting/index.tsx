@@ -4,6 +4,7 @@ import { Paths } from "@/routes/paths";
 import React from "react";
 import { feedTitle, projectLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
 
 const MilestoneDeleting: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -54,7 +55,7 @@ const MilestoneDeleting: ActivityHandler = {
 
   NotificationTitle(props: { activity: Activity }) {
     const { milestoneName } = content(props.activity);
-    return <>Milestone "{milestoneName}" was deleted</>;
+    return <>{t("features.activities.milestoneWasDeleted", { v1: milestoneName })}</>;
   },
 
   NotificationLocation(props: { activity: Activity }) {

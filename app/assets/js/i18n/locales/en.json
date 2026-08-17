@@ -1,197 +1,1606 @@
 {
-  "intlDateTime": "{{val, datetime}}",
-  "intlRelativeDateTime": "{{val, relativetime}}",
-  "intlRelativeDateTimeJustNow": "just now",
-  "Objectives": "Objectives",
-  "Tenets": "Tenets",
-  "Projects": "Projects",
-  "KPIs": "KPIs",
   "Groups": "Groups",
+  "KPIs": "KPIs",
+  "Objectives": "Objectives",
   "People": "People",
-  "erorr": {
-    "error": "Error"
-  },
-  "loading": {
-    "loading": "Loading..."
+  "Projects": "Projects",
+  "Tenets": "Tenets",
+  "account": {
+    "appearance": {
+      "alwaysDark": "Always Dark",
+      "alwaysLight": "Always Light",
+      "colorMode": "Color Mode",
+      "colorModeDescription": "Choose if appearance should be light, or dark, or follow your computer's settings.",
+      "sameAsSystem": "Same as System",
+      "saveChanges": "Save Changes",
+      "title": "Appearance",
+      "updateFailed": "Failed to update theme"
+    },
+    "language": {
+      "description": "Choose the language Operately is displayed in. The choice is remembered in this browser.",
+      "saveChanges": "Save Changes",
+      "saved": "Language updated",
+      "title": "Language"
+    },
+    "myAccount": "My Account",
+    "settings": {
+      "appearance": "Appearance",
+      "appearanceDescription": "Adjust how Operately looks for you",
+      "description": "Manage the account settings available to you.",
+      "notificationSettings": "Notification settings",
+      "notificationSettingsDescription": "Configure how activity and summary emails are delivered",
+      "title": "Settings"
+    },
+    "title": "Account"
   },
   "actions": {
     "add_group": "Add Group",
-    "add_person": "Add Person",
-    "add_project": "New Project",
     "add_kpi": "New Kpi",
     "add_objective": "Add Objective",
+    "add_person": "Add Person",
+    "add_project": "New Project",
     "add_tenet": "New Tenet"
   },
+  "app": {
+    "errorPage": {
+      "anUnexpectedErrorHasOccurred": "An unexpected error has occurred.",
+      "errorStackTrace": "Error Stack Trace",
+      "goBackToHome": "Go back to Home",
+      "goBackToLobby": "Go back to Lobby",
+      "oopsSomethingWentWrong": "Oops! Something went wrong.",
+      "thisErrorIsVisibleOnlyIn": "This error is visible only in dev and test environments."
+    },
+    "index": {
+      "commentAccess": "Comment Access",
+      "editAccess": "Edit Access",
+      "fullAccess": "Full Access",
+      "thisPackageWasExportedFromOperately": "This package was exported from Operately {{v1}}, but this instance is running {{v2}}. The import failure may be related to version differences.",
+      "viewAccess": "View Access"
+    },
+    "time": {
+      "daysAgo": "{{v1}} days ago"
+    },
+    "useDeleteComment": {
+      "error": "Error",
+      "failedToDeleteComment": "Failed to delete comment."
+    },
+    "useEditComment": {
+      "error": "Error",
+      "failedToEditComment": "Failed to edit comment."
+    },
+    "useKanbanState": {
+      "cannotMoveTaskToUnknownStatus": "Cannot move task to unknown status",
+      "error": "Error",
+      "failedToUpdateTaskPosition": "Failed to update task position",
+      "failedToUpdateTaskStatus": "Failed to update task status"
+    },
+    "useOptimisticComments": {
+      "error": "Error",
+      "failedToAddComment": "Failed to add comment.",
+      "failedToAddReaction": "Failed to add reaction.",
+      "failedToDeleteComment": "Failed to delete comment.",
+      "failedToEditComment": "Failed to edit comment.",
+      "failedToRemoveReaction": "Failed to remove reaction."
+    },
+    "useProjectTasksForTurboUi": {
+      "error": "Error",
+      "failedToCreateTask": "Failed to create task",
+      "failedToDeleteTask": "Failed to delete task",
+      "failedToUpdateTaskAssignee": "Failed to update task assignee",
+      "failedToUpdateTaskDescription": "Failed to update task description.",
+      "failedToUpdateTaskDueDate": "Failed to update task due date",
+      "failedToUpdateTaskMilestone": "Failed to update task milestone",
+      "failedToUpdateTaskName": "Failed to update task name.",
+      "failedToUpdateTaskReminders": "Failed to update task reminders",
+      "failedToUpdateTaskStatus": "Failed to update task status",
+      "somethingWentWrong": "Something went wrong",
+      "taskNameCannotBeEmpty": "Task name cannot be empty"
+    },
+    "useReactionHandlers": {
+      "error": "Error",
+      "failedToAddReaction": "Failed to add reaction.",
+      "failedToRemoveReaction": "Failed to remove reaction."
+    },
+    "useSpaceTasksForTurboUi": {
+      "error": "Error",
+      "failedToCreateTask": "Failed to create task",
+      "failedToDeleteTask": "Failed to delete task",
+      "failedToUpdateTaskAssignee": "Failed to update task assignee",
+      "failedToUpdateTaskDescription": "Failed to update task description",
+      "failedToUpdateTaskDueDate": "Failed to update task due date",
+      "failedToUpdateTaskName": "Failed to update task name",
+      "failedToUpdateTaskReminders": "Failed to update task reminders",
+      "failedToUpdateTaskStatus": "Failed to update task status"
+    },
+    "useSubscription": {
+      "error": "Error",
+      "failedToSubscribeToNotifications": "Failed to subscribe to {{v1}} notifications.",
+      "failedToUnsubscribeFromNotifications": "Failed to unsubscribe from {{v1}} notifications."
+    },
+    "useSubscriptionsAdapter": {
+      "allPeople": "All {{v1}} people",
+      "contributingTo": "contributing to {{v1}}",
+      "whoAreMembersOfTheSpace": "who are members of the {{v1}} space",
+      "whoHaveAccessTo": "who have access to {{v1}}"
+    },
+    "useTaskSlideInProps": {
+      "error": "Error",
+      "failedToMoveTask": "Failed to move task."
+    },
+    "useTaskStatuses": {
+      "error": "Error",
+      "failedToUpdateTaskStatuses": "Failed to update task statuses"
+    },
+    "useTemplateComments": {
+      "commentNotAdded": "Comment not added",
+      "commentNotDeleted": "Comment not deleted",
+      "commentNotUpdated": "Comment not updated",
+      "theCommentIsStillOnThis": "The comment is still on this page. Try again.",
+      "theCommentWasNotSavedTry": "The comment was not saved. Try again."
+    }
+  },
+  "companyMenu": {
+    "companyAdmin": "Company Admin",
+    "orgChart": "Org Chart",
+    "people": "People",
+    "switchCompany": "Switch Company"
+  },
+  "components": {
+    "badges": {
+      "commentAccess": "Comment Access",
+      "editAccess": "Edit Access",
+      "fullAccess": "Full Access",
+      "invalidAccessLevel": "Invalid access level: {{v1}}",
+      "noAccess": "No Access",
+      "viewAccess": "View Access"
+    },
+    "projectPageNavigation": {
+      "retrospective": "Retrospective",
+      "teamAccess": "Team & Access"
+    },
+    "status": {
+      "emergingRisksOrDelays": "Emerging risks or delays. {{v1}} should be aware.",
+      "progressingAsPlannedNoBlockers": "Progressing as planned. No blockers.",
+      "significantProblemsAffectingSuccess": "Significant problems affecting success. {{v1}}’s help is needed.",
+      "theReviewer": "The reviewer",
+      "workHasnTStartedYet": "Work hasn't started yet."
+    }
+  },
+  "erorr": {
+    "error": "Error"
+  },
+  "errors": {
+    "error": "Error"
+  },
+  "features": {
+    "activities": {
+      "addedTheMilestone": "added the {{v1}} milestone",
+      "addedTheTarget": "added the {{v1}} target",
+      "assignedAsTheChampion": "assigned {{v1}} as the champion",
+      "assignedAsTheReviewer": "assigned {{v1}} as the reviewer",
+      "assignedPeopleToTheTask": "assigned {{v1}} people to the task",
+      "assignedTo": "assigned to {{v1}}",
+      "assignedToTheTask": "assigned to {{v1}} the task",
+      "changedTheChampionFor": "Changed the champion for {{v1}}",
+      "changedTheParentGoalFromTo": "Changed the parent goal from <0>{{v1}}</0> to <1>{{v2}}</1>.",
+      "changedTheParentGoalTo": "Changed the parent goal to <0>{{v1}}</0>.",
+      "checkIn": "Check In",
+      "checkIn2": "Check-In",
+      "clearedDueDateFor": "Cleared due date for {{v1}}",
+      "connectedAProjectToTheGoal": "Connected a project to the {{v1}} goal",
+      "connectedProjectToTheGoal": "Connected {{v1}} project to the {{v2}} goal",
+      "createdKPI": "Created KPI: {{v1}}",
+      "dateRemoved": "Date removed",
+      "deletedTheTarget": "deleted the {{v1}} target",
+      "disconnectedAProjectFromTheGoal": "Disconnected a project from the {{v1}} goal",
+      "disconnectedProjectFromTheGoal": "Disconnected {{v1}} project from the {{v2}} goal",
+      "disconnectedTheProjectFromTheGoal": "Disconnected the {{v1}} project from the {{v2}} goal",
+      "dueDateOn": "Due date on <0/>",
+      "dueDateWasChangedFromTo": "Due date was changed from <0><1/></0> to <2><3/></2>.",
+      "dueDateWasRemoved": "Due date <0><1/></0> was removed.",
+      "dueDateWasSetTo": "Due date was set to <0><1/></0>.",
+      "dueDateWasUpdated": "Due date was updated.",
+      "edit": "Edit",
+      "goalClosed": "Goal closed",
+      "goalReopened": "Goal reopened",
+      "hasRevokedSAdminPrivileges": "has revoked {{v1}}'s admin privileges",
+      "hasUpdatedAccessLevel": "has updated {{v1}} {{v2}} access level",
+      "milestoneWasDeleted": "Milestone \"{{v1}}\" was deleted",
+      "name": "Name:",
+      "noLongerAssignedTo": "no longer assigned to {{v1}}",
+      "noParentGoalWasSet": "No parent goal was set.",
+      "pausedTheProject": "Paused the {{v1}} project",
+      "previouslyAssignedTo": "Previously assigned to:",
+      "previouslyAssignedToPeople": "Previously assigned to {{v1}} people",
+      "previouslyHadNoDueDate": "Previously had no due date",
+      "previouslyHadNoStartDate": "Previously had no start date",
+      "previouslyItWasIn": "Previously, it was in {{v1}}",
+      "previouslyItWasInTheSpace": "Previously, it was in the <0>{{v1}}</0> space.",
+      "previouslyItWasNowItIs": "Previously it was {{v1}}, now it is {{v2}}.",
+      "previouslyItWasUnassigned": "Previously it was unassigned",
+      "previouslyTheDueDateWas": "Previously the due date was {{v1}}",
+      "previouslyTheStartDateWas": "Previously the start date was {{v1}}",
+      "previouslyTheTaskWasNamed": "Previously, the task was named \"{{v1}}\".",
+      "previouslyTheTaskWasNowIts": "Previously, the task was {{v1}}. Now it's {{v2}}.",
+      "previouslyWasA": "Previously {{v1}} was a {{v2}}",
+      "projectPaused": "Project paused",
+      "projectResumed": "Project resumed",
+      "purpose": "Purpose:",
+      "removedAsAnAccountOwner": "removed {{v1}} as an account owner",
+      "removedTheChampionFor": "Removed the champion for {{v1}}",
+      "removedTheParentGoal": "Removed the parent goal <0>{{v1}}</0>.",
+      "resumedTheProject": "Resumed the {{v1}} project",
+      "retrospective": "Retrospective",
+      "theChampionWasChangedTo": "The champion was changed to {{v1}}.",
+      "theDueDateWasSetTo": "The due date was set to {{v1}}.",
+      "theNameWasChangedTo": "The name was changed to {{v1}}.",
+      "thePreviousIsNowA": "The previous {{v1}} {{v2}} is now a {{v3}}",
+      "theReviewerWasChangedTo": "The reviewer was changed to {{v1}}.",
+      "theStartDateWasSetTo": "The start date was set to {{v1}}.",
+      "theTimeframeWasChangedTo": "The timeframe was changed to {{v1}}.",
+      "thereWasNoPreviousChampion": "There was no previous champion.",
+      "thereWasNoPreviousReviewer": "There was no previous reviewer.",
+      "totalProjectDurationChanged": "Total project duration {{v1}} by {{v2}}% ({{v3}} days -> {{v4}} days).",
+      "totalProjectDurationIsDays": "Total project duration is {{v1}} days.",
+      "type": "Type:",
+      "unassignedFromTheTask": "unassigned {{v1}} from the task",
+      "unassignedPeopleFromTheTask": "unassigned {{v1}} people from the task",
+      "updatedDueDateForTo": "Updated due date for {{v1}} to <0></0>",
+      "updatedTheMilestone": "updated the milestone {{v1}}",
+      "updatedTheMilestoneTo": "updated the milestone {{v1}} to {{v2}}",
+      "updatedTheParentGoalOfProject": "Updated the parent goal of {{v1}} project",
+      "updatedTheSpace": "Updated the {{v1}} space",
+      "updatedTheValueForTheTarget": "updated the value for the {{v1}} target",
+      "updatedYourCompanyAccessLevelTo": "Updated your company access level to {{v1}}",
+      "url": "Url:"
+    },
+    "auth": {
+      "atLeast12Characters": "At least 12 characters",
+      "atLeast1Lowercase": "At least 1 lowercase",
+      "atLeast1Number": "At least 1 number",
+      "atLeast1UppercaseLetter": "At least 1 uppercase letter",
+      "byContinuingYouAgreeToThe": "By continuing, you agree to the <0>Terms of Service</0> and <1>Privacy Policy</1>.",
+      "privacyPolicy": "Privacy Policy",
+      "signInWithGoogle": "Sign in with Google",
+      "signUpWithEmail": "Sign up with email",
+      "signUpWithGoogle": "Sign up with Google"
+    },
+    "commentSection": {
+      "error": "Error",
+      "failedToAddReaction": "Failed to add reaction.",
+      "failedToDeleteComment": "Failed to delete comment.",
+      "failedToRemoveReaction": "Failed to remove reaction."
+    },
+    "devBar": {
+      "loadTime": "Load Time:",
+      "pageName": "Page Name:"
+    },
+    "discussionForm": {
+      "pleaseAddATitle": "Please add a title",
+      "title": "Title...",
+      "writeHere": "Write here..."
+    },
+    "feed": {
+      "allQuietForNow": "All quiet for now",
+      "delete": "Delete",
+      "deleteFeedItem": "Delete feed item",
+      "feedItemActions": "Feed item actions",
+      "ooopsSomethingWentWrongWhileLoading": "Ooops, something went wrong while loading the feed",
+      "thisRemovesTheItemFromThe": "This removes the item from the company feed. The underlying project, goal, task, or document will not be deleted."
+    },
+    "goals": {
+      "addTarget": "Add target",
+      "cancel": "Cancel",
+      "checkIn": "Check-in",
+      "current": "Current",
+      "describeKeyWinsObstaclesAndNeeds": "Describe key wins, obstacles and needs",
+      "discussions": "Discussions",
+      "done": "Done",
+      "dueDate": "Due Date",
+      "eGAverageOnboardingTimeIs": "e.g. Average Onboarding Time is twice as fast",
+      "editingLockedAfter3Days": "Editing locked after 3 days",
+      "emergingRisksOrDelaysShouldBe": "Emerging risks or delays. {{v1}} should be aware.",
+      "fillOutAllTheRequiredFields": "Fill out all the required fields",
+      "keyWinsObstaclesAndNeeds": "Key wins, obstacles and needs",
+      "noDueDateSet": "No due date set.",
+      "noDueDateSet2": "No due date set",
+      "overview": "Overview",
+      "pickAStatusHellip": "Pick a status…",
+      "postedByOn": "Posted by {{v1}} on <0/>",
+      "previousCheckIn": "Previous check-in",
+      "publishNow": "Publish now",
+      "save": "Save",
+      "saveAsDraft": "Save as draft",
+      "saveDraft": "Save draft",
+      "scheduleCheckIn": "Schedule Check-in",
+      "significantProblemsAffectingSuccessSHelp": "Significant problems affecting success. {{v1}}'s help is needed.",
+      "start": "Start",
+      "status": "Status",
+      "target": "Target",
+      "thisGoalWasArchivedOn": "This goal was archived on <0/>",
+      "unit": "Unit",
+      "unknown": "Unknown",
+      "viewOriginal": "View original",
+      "workMap": "Work Map",
+      "writeHere": "Write here..."
+    },
+    "permissions": {
+      "commentAccess": "Comment Access",
+      "editAccess": "Edit Access",
+      "fullAccess": "Full Access",
+      "noAccess": "No Access",
+      "viewAccess": "View Access"
+    },
+    "projectRetrospective": {
+      "didThisProjectAchieveItsIntended": "Did this project achieve its intended outcomes?",
+      "no": "No",
+      "retrospectiveNotes": "Retrospective notes",
+      "whatWentWellWhatDidnT": "What went well? What didn't? What did you learn?",
+      "yes": "Yes"
+    },
+    "projects": {
+      "companyMembers": "Company members",
+      "spaceMembers": "Space members"
+    },
+    "spaceTools": {
+      "aPlaceToShareRichText": "A place to share rich text documents, images, videos, and other files",
+      "addADocumentOrFile": "Add a document or file",
+      "addANewTask": "Add a new task",
+      "addGoalOrProject": "Add goal or project",
+      "allDone": "All done!",
+      "andCompleted": "{{v1}} and {{v2}} completed {{v3}}.",
+      "assignAnOwner": "Assign an owner",
+      "discussIdeas": "Discuss ideas",
+      "discussions": "Discussions",
+      "documentsAmpFiles": "Documents & Files",
+      "draftThePlan": "Draft the plan",
+      "employeeHandbook": "Employee Handbook",
+      "goalsAmpProjects": "Goals & Projects",
+      "goalsProjects": "Goals & Projects",
+      "markItDone": "Mark it done",
+      "monthlyReports": "Monthly Reports",
+      "organizeTasksOnAKanbanBoard": "Organize tasks on a Kanban board with status columns.",
+      "pitchIdeas": "Pitch Ideas",
+      "postAnnouncements": "Post Announcements",
+      "postAnnouncementsPitchIdeasAndDiscuss": "Post announcements, pitch ideas, and discuss ideas with your team.",
+      "productRoadmap": "Product Roadmap",
+      "project1": "Project 1",
+      "quarterlyGoal1": "Quarterly Goal 1",
+      "quarterlyGoal2": "Quarterly Goal 2",
+      "setGoalsTrackYourProgressAnd": "Set goals, track your progress, and collaborate with your team to achieve them.",
+      "tasks": "Tasks",
+      "writeANewPost": "Write a new post",
+      "yearlyGoal": "Yearly Goal"
+    }
+  },
   "forms": {
-    "save": "Save",
+    "add_group_members_button": "Add Members",
+    "add_group_members_search_placeholder": "Search for a person...",
+    "add_group_members_title": "Add Group Members",
     "cancel": "Cancel",
     "group_add_title": "Add Group",
     "group_name_label": "Name",
     "group_name_placeholder": "ex. Marketing",
     "kpi_add_title": "Add KPI",
-    "kpi_name_label": "Name",
-    "kpi_name_placeholder": "ex. Revenue",
-    "kpi_description_label": "Description",
-    "kpi_description_placeholder": "ex. Total revenue from sales",
-    "kpi_unit_label": "Unit",
-    "kpi_unit_percentage": "percentage",
-    "kpi_unit_currency": "currency",
-    "kpi_target_label": "Target",
-    "kpi_target_placeholder": "ex. 1000000",
-    "kpi_target_direction_label": "Target direction",
-    "kpi_target_direction_above": "above",
-    "kpi_target_direction_below": "below",
-    "kpi_warning_threshold_label": "Warning threshold",
-    "kpi_warning_threshold_placeholder": "ex. 500000",
+    "kpi_danger_direction_label": "Danger direction",
     "kpi_danger_threshold_label": "Danger threshold",
     "kpi_danger_threshold_placeholder": "ex. 100000",
-    "kpi_danger_direction_label": "Danger direction",
+    "kpi_description_label": "Description",
+    "kpi_description_placeholder": "ex. Total revenue from sales",
+    "kpi_name_label": "Name",
+    "kpi_name_placeholder": "ex. Revenue",
+    "kpi_target_direction_above": "above",
+    "kpi_target_direction_below": "below",
+    "kpi_target_direction_label": "Target direction",
+    "kpi_target_label": "Target",
+    "kpi_target_placeholder": "ex. 1000000",
+    "kpi_unit_currency": "currency",
+    "kpi_unit_label": "Unit",
+    "kpi_unit_percentage": "percentage",
     "kpi_warning_direction_label": "Warning direction",
+    "kpi_warning_threshold_label": "Warning threshold",
+    "kpi_warning_threshold_placeholder": "ex. 500000",
     "objective_add_title": "Add Objective",
-    "objective_name_label": "Name",
-    "objective_name_placeholder": "ex. Increase revenue",
     "objective_description_label": "Description",
     "objective_description_placeholder": "ex. Increase revenue by 10%",
+    "objective_name_label": "Name",
+    "objective_name_placeholder": "ex. Increase revenue",
     "objective_owner_label": "Owner",
     "objective_owner_search_placeholder": "Search for a person...",
-    "objective_timeframe_label": "Timeframe",
     "objective_timeframe_current_quarter": "Current quarter",
+    "objective_timeframe_label": "Timeframe",
     "project_add_title": "Add Project",
-    "project_name_label": "Name",
-    "project_name_placeholder": "ex. New Website",
     "project_description_label": "Description",
     "project_description_placeholder": "ex. Create a new website for the company",
+    "project_name_label": "Name",
+    "project_name_placeholder": "ex. New Website",
+    "save": "Save",
     "tenet_add_title": "Add Tenet",
-    "tenet_name_label": "Name",
-    "tenet_name_placeholder": "ex. Customer First",
     "tenet_description_label": "Description",
     "tenet_description_placeholder": "ex. Always put the customer first",
-    "add_group_members_title": "Add Group Members",
-    "add_group_members_search_placeholder": "Search for a person...",
-    "add_group_members_button": "Add Members"
-  },
-  "keyResults": {
-    "status": "Status",
-    "completion": "Completion",
-    "lastUpdated": "Last Updated",
-    "keyResult": "Key Result",
-    "statuses": {
-      "pending": "Pending",
-      "on_track": "On Track",
-      "at_risk": "At Risk",
-      "off_track": "Off Track",
-      "completed": "Completed",
-      "cancelled": "Cancelled"
-    }
-  },
-  "objectives": {
-    "projects_in_progress_title": "Projects in Progress",
-    "project_list_title": "Project Title",
-    "project_list_timeline": "Timeline",
-    "project_list_team": "Team",
-    "project_list_last_updated": "Last Updated",
-    "write_an_update": {
-      "title": "POST AN UPDATE",
-      "placeholder": "Write an update…",
-      "cta": "Is there an important update about your objective as a whole? Share any progress and risks.",
-      "button": "Write an update"
-    },
-    "leave_comment": {
-      "placeholder": "Leave a comment"
-    },
-    "feed": {
-      "title": "FEED"
-    }
-  },
-  "Today": "Today",
-  "Yesterday": "Yesterday",
-  "Tomorrow": "Tomorrow",
-  "nav": {
-    "home": "Home",
-    "company": "Company",
-    "myWork": "My work",
-    "review": "Review",
-    "people": "People",
-    "notifications": "Notifications",
-    "account": "Account",
-    "companyAdmin": "Company Admin",
-    "switchCompany": "Switch Company",
-    "logOut": "Log Out"
-  },
-  "companyMenu": {
-    "people": "People",
-    "orgChart": "Org Chart",
-    "companyAdmin": "Company Admin",
-    "switchCompany": "Switch Company"
+    "tenet_name_label": "Name",
+    "tenet_name_placeholder": "ex. Customer First"
   },
   "helpMenu": {
-    "title": "Help",
-    "keyboardShortcuts": "Keyboard shortcuts",
     "contactUs": "Contact us",
     "discordChat": "Discord chat",
-    "whatsNew": "What's new",
-    "roadmap": "Roadmap"
+    "keyboardShortcuts": "Keyboard shortcuts",
+    "roadmap": "Roadmap",
+    "title": "Help",
+    "whatsNew": "What's new"
   },
-  "newMenu": {
-    "title": "New",
-    "newGoal": "New goal",
-    "newProject": "New project",
-    "newSpace": "New space",
-    "invitePeople": "Invite people"
-  },
-  "userMenu": {
-    "profile": "Profile",
-    "settings": "Settings",
-    "passwordAndSecurity": "Password & Security",
-    "apiTokens": "API Tokens",
-    "mcpConnections": "MCP Connections",
-    "signOut": "Sign Out"
+  "intlDateTime": "{{val, datetime}}",
+  "intlRelativeDateTime": "{{val, relativetime}}",
+  "intlRelativeDateTimeJustNow": "just now",
+  "keyResults": {
+    "completion": "Completion",
+    "keyResult": "Key Result",
+    "lastUpdated": "Last Updated",
+    "status": "Status",
+    "statuses": {
+      "at_risk": "At Risk",
+      "cancelled": "Cancelled",
+      "completed": "Completed",
+      "off_track": "Off Track",
+      "on_track": "On Track",
+      "pending": "Pending"
+    }
   },
   "keyboardShortcuts": {
-    "title": "Keyboard Shortcuts Cheatsheet",
+    "clearTaskSelection": "Clear task selection",
     "groups": {
       "global": "Global",
       "taskManagement": "Task management"
     },
+    "openAssigneePicker": "Open assignee picker for the selected task",
+    "openDueDatePicker": "Open due date picker for the selected task",
     "openGlobalSearch": "Open global search",
     "openKeyboardShortcuts": "Open keyboard shortcuts",
+    "openSelectedTask": "Open selected task",
+    "openStatusPicker": "Open status picker for the selected task where supported",
     "selectNextTask": "Select next task",
     "selectPreviousTask": "Select previous task",
-    "openSelectedTask": "Open selected task",
-    "openAssigneePicker": "Open assignee picker for the selected task",
-    "openStatusPicker": "Open status picker for the selected task where supported",
-    "openDueDatePicker": "Open due date picker for the selected task",
-    "clearTaskSelection": "Clear task selection"
+    "title": "Keyboard Shortcuts Cheatsheet"
   },
-  "account": {
-    "title": "Account",
-    "settings": {
-      "title": "Settings",
-      "description": "Manage the account settings available to you.",
-      "appearance": "Appearance",
-      "appearanceDescription": "Adjust how Operately looks for you",
-      "notificationSettings": "Notification settings",
-      "notificationSettingsDescription": "Configure how activity and summary emails are delivered"
+  "layouts": {
+    "companyLayout": {
+      "billingDeadline": "by <0/>",
+      "billingNeedsAttention": "Billing needs attention",
+      "dismissMessage": "Dismiss message",
+      "exitSupportMode": "Exit Support Mode",
+      "pausedUntilThisCompanyIsBack": "{{v1}} {{v2}} paused until this company is back within its plan limits. Contact an admin or owner.",
+      "pausedUntilThisCompanyIsBack2": "{{v1}} {{v2}} paused until this company is back within its plan limits. Review billing to change the plan or reduce usage.",
+      "supportModeActive": "Support Mode Active",
+      "youAreViewingThisAccountAs": "You are viewing this account as support staff."
     },
-    "appearance": {
-      "title": "Appearance",
-      "colorMode": "Color Mode",
-      "colorModeDescription": "Choose if appearance should be light, or dark, or follow your computer's settings.",
-      "alwaysLight": "Always Light",
-      "alwaysDark": "Always Dark",
-      "sameAsSystem": "Same as System",
-      "saveChanges": "Save Changes",
-      "updateFailed": "Failed to update theme"
-    },
-    "language": {
-      "title": "Language",
-      "description": "Choose the language Operately is displayed in. The choice is remembered in this browser.",
-      "saveChanges": "Save Changes",
-      "saved": "Language updated"
-    },
-    "myAccount": "My Account"
+    "saasAdminLayoutTsx": {
+      "exitAdminPanel": "Exit Admin Panel",
+      "operately": "Operately",
+      "saasAdminPanel": "Saas Admin Panel"
+    }
   },
-  "errors": {
-    "error": "Error"
+  "loading": {
+    "loading": "Loading..."
+  },
+  "nav": {
+    "account": "Account",
+    "company": "Company",
+    "companyAdmin": "Company Admin",
+    "home": "Home",
+    "logOut": "Log Out",
+    "myWork": "My work",
+    "notifications": "Notifications",
+    "people": "People",
+    "review": "Review",
+    "switchCompany": "Switch Company"
+  },
+  "newMenu": {
+    "invitePeople": "Invite people",
+    "newGoal": "New goal",
+    "newProject": "New project",
+    "newSpace": "New space",
+    "title": "New"
+  },
+  "objectives": {
+    "feed": {
+      "title": "FEED"
+    },
+    "leave_comment": {
+      "placeholder": "Leave a comment"
+    },
+    "project_list_last_updated": "Last Updated",
+    "project_list_team": "Team",
+    "project_list_timeline": "Timeline",
+    "project_list_title": "Project Title",
+    "projects_in_progress_title": "Projects in Progress",
+    "write_an_update": {
+      "button": "Write an update",
+      "cta": "Is there an important update about your objective as a whole? Share any progress and risks.",
+      "placeholder": "Write an update…",
+      "title": "POST AN UPDATE"
+    }
+  },
+  "pages": {
+    "accountApiTokensPage": {
+      "aPITokenCreated": "API Token Created",
+      "copyTheTokenNowForSecurity": "Copy the token now. For security reasons, it will only be shown once.",
+      "failedToCreateToken": "Failed To Create Token",
+      "failedToDeleteToken": "Failed To Delete Token",
+      "failedToUpdateToken": "Failed To Update Token",
+      "pleaseTryAgain": "Please try again.",
+      "theAPITokenWasRemoved": "The API token was removed.",
+      "tokenDeleted": "Token Deleted",
+      "tokenNameUpdated": "Token name updated.",
+      "tokenUpdated": "Token Updated"
+    },
+    "accountChangePasswordPage": {
+      "atLeast12Characters": "At least 12 characters",
+      "cancel": "Cancel",
+      "changePassword": "Change Password",
+      "confirmNewPassword": "Confirm New Password",
+      "currentPassword": "Current Password",
+      "enterYourCurrentPassword": "Enter your current password",
+      "home": "Home",
+      "newPassword": "New Password",
+      "passwordChangeFailed": "Password Change Failed",
+      "passwordChanged": "Password Changed",
+      "passwordSecurity": "Password & Security",
+      "thereWasAnErrorUpdatingYour": "There was an error updating your password. Please try again.",
+      "yourPasswordHasBeenUpdatedSuccessfully": "Your password has been updated successfully."
+    },
+    "accountMcpConnectionsPage": {
+      "connectionRevoked": "Connection Revoked",
+      "failedToRevokeConnection": "Failed To Revoke Connection",
+      "pleaseTryAgain": "Please try again.",
+      "theMCPClientCanNoLonger": "The MCP client can no longer access your account."
+    },
+    "accountNotificationSettingsPage": {
+      "error": "Error",
+      "failedToUpdateNotificationSettings": "Failed to update notification settings"
+    },
+    "billingPickCompanyPage": {
+      "selectACompany": "Select a company",
+      "whichCompanyWouldYouLikeTo": "Which company would you like to manage billing for?",
+      "youDonTHaveAccessTo": "You don't have access to manage billing for any companies yet."
+    },
+    "companyAdminAddPeoplePage": {
+      "companyAdministration": "Company Administration",
+      "manageTeamMembers": "Manage Team Members"
+    },
+    "companyAdminManageAdminsPage": {
+      "accountOwners": "Account Owners",
+      "addAdmin": "Add Admin",
+      "addAdmininstrators": "Add Admininstrators",
+      "addAdministrators": "Add administrators",
+      "addOwner": "Add Owner",
+      "addOwners": "Add owners",
+      "addOwners2": "Add Owners",
+      "addRemovePeopleWhoAreIn": "Add/Remove people who are in charge of the company and its operations",
+      "administrators": "Administrators",
+      "companyAdministration": "Company Administration",
+      "companyAdministratorsCanAddRemovePeople": "Company administrators can add/remove people from the company, manage their profiles, update company settings, and more.",
+      "manageAdminsAndOwners": "Manage admins and owners",
+      "ownersHaveTheHighestLevelOf": "Owners have the highest level of access and can manage all aspects of the company, including billing, and have access to all resources.",
+      "remove": "Remove",
+      "searchForPeopleToPromoteTo": "Search for people to promote to admin",
+      "searchForPeopleToPromoteTo2": "Search for people to promote to owner"
+    },
+    "companyAdminManagePeoplePage": {
+      "companyAdministration": "Company Administration"
+    },
+    "companyAdminPage": {
+      "accountOwners": "Account Owners",
+      "administrators": "Administrators",
+      "asAnAdminOrOwnerYou": "As an admin or owner, you can:",
+      "asAnOwnerYouCan": "As an owner, you can:",
+      "cancel": "Cancel",
+      "companyAdministration": "Company Administration",
+      "dangerZone": "Danger Zone:",
+      "deleteCompany": "Delete Company",
+      "deleteThisCompany": "Delete this company",
+      "error": "Error",
+      "exportCompanyData": "Export company data",
+      "failedToDeleteCompany": "Failed to delete company",
+      "home": "Home",
+      "manageAdministratorsAndOwners": "Manage administrators and owners",
+      "managePlan": "Manage plan",
+      "manageTeamMembers": "Manage team members",
+      "manageTrustedEmailDomains": "Manage trusted email domains",
+      "permanentlyDeleteTheCompanyAndAll": "Permanently delete the company and all its resources. This action cannot be undone.",
+      "renameTheCompany": "Rename the company",
+      "restoreAccessForDeactivatedTeamMembers": "Restore access for deactivated team members",
+      "thisActionCannotBeUndone": "This action cannot be undone.",
+      "thisIsTheCompanyAdministrationPage": "This is the company administration page where owners and admins can manage the company's settings. They have special permissions to add or remove team members, change who can access the application, and more. If you need something done, contact one of them.",
+      "toConfirmType": "To confirm, type \"{{v1}}\" in the box below",
+      "viewPermissionBreakdown": "View permission breakdown",
+      "whatSThis": "What's this?"
+    },
+    "companyAdminRestoreSuspendedPeoplePage": {
+      "companyAdministration": "Company Administration",
+      "manageTeamMembers": "Manage Team Members",
+      "noDeactivatedTeamMembers": "There are no deactivated team members in {{v1}}. To remove access for departing team members, visit the <0>Manage Team Members</0> page.",
+      "reactivateAccount": "Reactivate Account",
+      "restoreDeactivatedTeamMembers": "Restore Deactivated Team Members",
+      "unableToRestoreMember": "Unable to restore member"
+    },
+    "companyAdminTrustedEmailDomainsPage": {
+      "add": "Add",
+      "addTrustedEmailDomain": "Add Trusted Email Domain",
+      "companyAdministration": "Company Administration",
+      "noTrustedEmailDomainsOnlyManually": "No trusted email domains. Only manually added members can sign up.",
+      "trustedEmailDomains": "Trusted Email Domains",
+      "trustedEmailDomainsAreEmailDomains": "Trusted email domains are email domains that are allowed to sign up for an account in this company. If a user signs up with an email address that is not from a trusted domain, and she wasn't manually added by an admin, they will be denied access.",
+      "whatSThis": "What's this?"
+    },
+    "companyBillingCancellationPage": {
+      "billing": "Billing",
+      "cancellationUnavailable": "Cancellation unavailable",
+      "companyAdministration": "Company Administration",
+      "weCouldnTScheduleTheCancellation": "We couldn't schedule the cancellation right now. Please try again."
+    },
+    "companyBillingPage": {
+      "billingManagementUnavailable": "Billing management unavailable",
+      "checkoutUnavailable": "Checkout unavailable",
+      "companyAdministration": "Company Administration",
+      "failedToStartCheckout": "Failed to start checkout",
+      "paymentMethodUnavailable": "Payment method unavailable",
+      "reactivationUnavailable": "Reactivation unavailable",
+      "thatPlanIsNoLongerAvailable": "That plan is no longer available. Choose another plan.",
+      "weCouldnTKeepTheCurrent": "We couldn't keep the current plan right now. Please try again.",
+      "weCouldnTOpenBillingHistory": "We couldn't open billing history right now. Please try again.",
+      "weCouldnTOpenPaymentMethod": "We couldn't open payment method details right now. Please try again.",
+      "weCouldnTStartCheckoutRight": "We couldn't start checkout right now. Please try again."
+    },
+    "companyBillingPlanSelectionPage": {
+      "billing": "Billing",
+      "checkoutUnavailable": "Checkout unavailable",
+      "companyAdministration": "Company Administration",
+      "failedToChangePlan": "Failed to change plan",
+      "failedToStartCheckout": "Failed to start checkout",
+      "planUnavailable": "Plan unavailable",
+      "thatPlanIsNoLongerAvailable": "That plan is no longer available. Choose another plan.",
+      "weCouldnTChangeThePlan": "We couldn't change the plan right now. Please try again.",
+      "weCouldnTStartCheckoutRight": "We couldn't start checkout right now. Please try again."
+    },
+    "companyExportPage": {
+      "downloadFailed": "Download failed",
+      "exportStarted": "Export started",
+      "failedToStartExport": "Failed to start export",
+      "pleaseTryAgain": "Please try again.",
+      "theExportPackageIsNotReady": "The export package is not ready yet.",
+      "youLlReceiveThePackageHere": "You'll receive the package here when the job finishes."
+    },
+    "companyImportPage": {
+      "failedToStartImport": "Failed to start import",
+      "failedToUploadPleaseTryAgain": "Failed to upload {{v1}}. Please try again.",
+      "importStarted": "Import started",
+      "pleaseConfirmThePackageFinishedUploading": "Please confirm the package finished uploading and try again.",
+      "theCompanyIsBeingImportedIn": "The company is being imported in the background.",
+      "uploadFailed": "Upload failed"
+    },
+    "companyPermissionsPage": {
+      "admins": "Admins",
+      "companyAdministration": "Company Administration",
+      "members": "Members",
+      "owners": "Owners",
+      "permission": "Permission",
+      "permissionBreakdown": "Permission Breakdown",
+      "permissions": "Permissions"
+    },
+    "companyRenamePage": {
+      "companyAdministration": "Company Administration",
+      "companyName": "Company Name",
+      "editingCompanyName": "Editing Company Name",
+      "renameCompany": "Rename Company",
+      "save": "Save"
+    },
+    "companyWorkMapPage": {
+      "workMap": "{{v1}} Work Map"
+    },
+    "discussionDraftsPage": {
+      "discardDraft": "Discard draft",
+      "discussions": "Discussions",
+      "draftActions": "Draft actions",
+      "lastEditedOn": "Last edited on <0/> —",
+      "newDiscussion": "New Discussion",
+      "youDonTHaveAnyDrafts": "You don't have any drafts.",
+      "yourDrafts": "Your Drafts"
+    },
+    "discussionEditPage": {
+      "cancel": "Cancel",
+      "discardDraft": "Discard draft",
+      "discussions": "Discussions",
+      "editDiscussion": "Edit Discussion",
+      "publishNow": "Publish now",
+      "saveAsDraft": "Save as draft",
+      "saveChanges": "Save Changes",
+      "scheduleDiscussion": "Schedule Discussion"
+    },
+    "discussionNewPage": {
+      "discardThisMessage": "Discard this message",
+      "newDiscussion": "New Discussion",
+      "post": "Post",
+      "saveAsDraft": "Save as draft",
+      "scheduleDiscussion": "Schedule Discussion"
+    },
+    "discussionPage": {
+      "delete": "Delete",
+      "discardDraft": "Discard draft",
+      "discussions": "Discussions",
+      "edit": "Edit"
+    },
+    "forgotPasswordPage": {
+      "backToSignIn": "Back to Sign In",
+      "eGYourEmailCom": "e.g. your@email.com",
+      "email": "Email",
+      "forgotPassword": "Forgot Password?",
+      "getResetInstructionsViaEmail": "Get reset instructions via email.",
+      "passwordResetInstructionsHaveBeenSent": "Password reset instructions have been sent to your email.",
+      "resendInstructions": "Resend Instructions",
+      "sendResetInstructions": "Send Reset Instructions"
+    },
+    "goalAccessAddPage": {
+      "accessLevel": "Access Level",
+      "addPeople": "Add people",
+      "addPeopleTo": "Add people to {{v1}}",
+      "backToTeamAccess": "Back to Team & Access",
+      "person": "Person"
+    },
+    "goalAccessManagementPage": {
+      "addPeople": "Add People",
+      "changeAccessLevel": "Change access level",
+      "commentAccess": "Comment access",
+      "edit": "Edit",
+      "editAccess": "Edit access",
+      "fullAccess": "Full access",
+      "generalAccess": "General Access",
+      "manageTheTeamAndAccessTo": "Manage the team and access to this goal",
+      "otherPeopleHaveAccessToThis": "{{v1}} other people have access to this goal",
+      "otherPeopleWithAccess": "Other People with Access",
+      "peopleWhoHaveAccessToThe": "People who have access to the goal based on their company or space membership but are not directly assigned.",
+      "peopleWithDirectAccess": "People with Direct Access",
+      "removeFromGoal": "Remove from goal",
+      "teamAmpAccess": "Team & Access",
+      "viewAccess": "View access",
+      "workMap": "Work Map"
+    },
+    "goalActivityPage": {
+      "acknowledgeRetrospective": "Acknowledge Retrospective",
+      "acknowledgedByName": "Acknowledged by {{v1}}",
+      "discussions": "Discussions",
+      "notYetAcknowledged": "Not yet acknowledged",
+      "workMap": "Work Map"
+    },
+    "goalAsMarkdownPage": {
+      "goalAsMarkdown": "Goal As Markdown"
+    },
+    "goalCheckInNewPage": {
+      "checkIns": "Check-ins",
+      "shareTheProgressWithTheTeam": "Share the progress with the team",
+      "workMap": "Work Map"
+    },
+    "goalCheckInPage": {
+      "acknowledgeThisCheckIn": "Acknowledge this Check-In",
+      "areYouSureYouWantTo": "Are you sure you want to discard this draft?",
+      "cancel": "Cancel",
+      "checkIns": "Check-ins",
+      "discardDraft": "Discard draft",
+      "draftDiscarded": "Draft discarded",
+      "edit": "Edit",
+      "theDraftHasBeenDiscarded": "The draft has been discarded.",
+      "workMap": "Work Map"
+    },
+    "goalClosingPage": {
+      "closeGoal": "Close Goal",
+      "closing": "Closing {{name}}",
+      "no": "No",
+      "retrospectiveNotes": "Retrospective notes",
+      "reviewAmpCloseGoal": "Review & Close Goal",
+      "wasThisGoalAchieved": "Was this goal achieved?",
+      "whatWentWellWhatDidnT": "What went well? What didn't? What did you learn?",
+      "yes": "Yes"
+    },
+    "goalDiscussionEditPage": {
+      "cancel": "Cancel",
+      "fillOutAllTheRequiredFields": "Fill out all the required fields",
+      "pleaseAddATitle": "Please add a title",
+      "save": "Save",
+      "startANewDiscussion": "Start a new discussion...",
+      "title": "Title..."
+    },
+    "goalDiscussionNewPage": {
+      "cancel": "Cancel",
+      "fillOutAllTheRequiredFields": "Fill out all the required fields",
+      "pleaseAddATitle": "Please add a title",
+      "postDiscussion": "Post Discussion",
+      "startANewDiscussion": "Start a new discussion...",
+      "title": "Title..."
+    },
+    "goalEditAccessLevelsPage": {
+      "editGeneralAccess": "Edit General Access",
+      "teamAccess": "Team & Access",
+      "workMap": "Work Map"
+    },
+    "goalPage": {
+      "failedToAddChecklistItem": "Failed to add checklist item",
+      "failedToDeleteChecklistItem": "Failed to delete checklist item",
+      "failedToDeleteTheGoalPlease": "Failed to delete the goal. Please try again.",
+      "failedToToggleChecklistItem": "Failed to toggle checklist item",
+      "failedToUpdateChecklistItem": "Failed to update checklist item",
+      "failedToUpdateChecklistItemIndex": "Failed to update checklist item index",
+      "loading": "Loading...",
+      "networkError": "Network Error",
+      "parentGoalUpdated": "Parent Goal Updated",
+      "revertedTheAccessLevelsToTheir": "Reverted the access levels to their previous values.",
+      "revertedTheChampionToItsPrevious": "Reverted the champion to its previous value.",
+      "revertedTheDescriptionToItsPrevious": "Reverted the description to its previous value.",
+      "revertedTheDueDateToIts": "Reverted the due date to its previous value.",
+      "revertedTheParentGoalToIts": "Reverted the parent goal to its previous value.",
+      "revertedTheReviewerToItsPrevious": "Reverted the reviewer to its previous value.",
+      "revertedTheSpaceToItsPrevious": "Reverted the space to its previous value.",
+      "revertedTheStartDateToIts": "Reverted the start date to its previous value.",
+      "somethingWentWrong": "Something went wrong",
+      "theParentGoalHasBeenSuccessfully": "The parent goal has been successfully changed."
+    },
+    "goalReopenPage": {
+      "cancel": "Cancel",
+      "reopen": "Reopen {{name}}",
+      "reopenGoal": "Reopen Goal",
+      "reopeningGoal": "Reopening Goal",
+      "whyAreYouReopeningThisGoal": "Why are you reopening this goal?",
+      "writeHere": "Write here..."
+    },
+    "homePage": {
+      "addSpace": "Add Space",
+      "couldNotDeleteFeedItem": "Could not delete feed item",
+      "error": "Error",
+      "home": "Home",
+      "invitePeople": "Invite People",
+      "manageProjectsTrackGoalsAndOrganize": "Manage projects, track goals, and organize your team's work.",
+      "noSpacesYet": "No spaces yet",
+      "pleaseTryAgain": "Please try again.",
+      "spacesWillAppearHereWhenSomeone": "Spaces will appear here when someone grants you access to them.",
+      "stayUpToDateWithYour": "Stay up to date with your team's progress.",
+      "whatSNew": "What's new?",
+      "yourOperatelySpaces": "Your Operately Spaces"
+    },
+    "inviteLinkFullPage": {
+      "anAdminOrOwnerNeedsTo": "An admin or owner needs to help",
+      "anAdminOrOwnerNeedsTo2": "An admin or owner needs to review billing or free up member space before anyone else can join.",
+      "backToHome": "Back to home",
+      "memberLimitReached": "Member limit reached",
+      "onceTheUpgradeIsDoneCome": "Once the upgrade is done, come back to this link and try again.",
+      "thisCompanyHasReachedItsMember": "This company has reached its member limit, so this invite can't be used yet.",
+      "tryAgain": "Try again",
+      "tryAgainLater": "Try again later"
+    },
+    "inviteTeamPage": {
+      "companyAdministration": "Company Administration",
+      "failedToDisableInviteLink": "Failed to disable invite link.",
+      "failedToResetInviteLink": "Failed to reset invite link.",
+      "failedToUpdateTrustedDomains": "Failed to update trusted domains",
+      "manageTeamMembers": "Manage Team Members",
+      "networkError": "Network Error"
+    },
+    "joinPage": {
+      "chooseAPasswordMinimum12Characters": "Choose a password (minimum 12 characters)",
+      "repeatPassword": "Repeat password",
+      "setPasswordAmpLogIn": "Set password & Log in",
+      "welcomeToOperately": "Welcome to Operately!",
+      "whatHappensNext": "What happens next?",
+      "youWereInvitedByToJoin": "You were invited by {{v1}} to join {{v2}}.",
+      "youWillJoinTheCompany": "You will join the {{v1}} company."
+    },
+    "lobbyPage": {
+      "adminPanel": "Admin Panel",
+      "letSGetYouStarted": "Let's get you started",
+      "lobby": "Lobby",
+      "orVisitThe": "Or, visit the <0/>.",
+      "startFreshWithANewCompany": "Start fresh with a new company account",
+      "welcomeToOperatelyName": "Welcome to Operately, {{v1}}!"
+    },
+    "loginPage": {
+      "createAnAccount": "Create an account",
+      "email": "Email",
+      "forgotPassword": "Forgot password?",
+      "operately": "Operately",
+      "password": "Password",
+      "pleaseEnterYourDetailsToSign": "Please enter your details to sign in",
+      "signIn": "Sign in",
+      "yourEmailCom": "your@email.com"
+    },
+    "memberTypeSelectionPage": {
+      "companyAdministration": "Company Administration",
+      "manageTeamMembers": "Manage Team Members"
+    },
+    "milestoneKanbanPage": {
+      "error": "Error",
+      "failedToUpdateTaskStatuses": "Failed to update task statuses",
+      "projects": "Projects"
+    },
+    "milestonePage": {
+      "error": "Error",
+      "failedToAddComment": "Failed to add comment.",
+      "failedToUpdateMilestoneDescription": "Failed to update milestone description."
+    },
+    "newCompanyPage": {
+      "backToTheLobby": "Back to the Lobby",
+      "createCompany": "Create Company",
+      "doYouHaveAnExistingCompany": "Do you have an existing company? <0>Import it here</0>",
+      "eGAcmeCo": "e.g. Acme Co.",
+      "eGFounder": "e.g. Founder",
+      "importItHere": "Import it here",
+      "isThisADemoCompany": "Is this a demo company?",
+      "letAposSSetUpYour": "Let's set up your company in Operately.",
+      "nameOfTheCompany": "Name of the company",
+      "newCompany": "New Company",
+      "no": "No",
+      "whatSYourTitleInThe": "What's your title in the company?",
+      "yes": "Yes"
+    },
+    "notFoundPage": {
+      "goBackToHome": "Go back to Home",
+      "goBackToLobby": "Go back to Lobby",
+      "pageNotFound": "Page Not Found",
+      "sorryWeCouldnTFindThat": "Sorry, we couldn't find that page you were looking for."
+    },
+    "notificationsPage": {
+      "hereSEveryNotificationYouVe": "Here's every notification you've received from Operately.",
+      "markAllRead": "Mark all read",
+      "newForYou": "New for you",
+      "nothingNewForYou": "Nothing new for you.",
+      "notifications": "Notifications",
+      "previousNotifications": "Previous Notifications"
+    },
+    "peopleOrgChartPage": {
+      "orgChart": "Org Chart"
+    },
+    "peoplePage": {
+      "membersOf": "Members of {{v1}}",
+      "people": "People"
+    },
+    "profilePage": {
+      "error": "Error",
+      "loading": "Loading..."
+    },
+    "projectAddPage": {
+      "addProject": "Add Project",
+      "champion": "Champion",
+      "eGHRSystemUpdate": "e.g. HR System Update",
+      "edit": "Edit",
+      "goal": "Goal",
+      "newProject": "New Project",
+      "projectName": "Project Name",
+      "reviewer": "Reviewer",
+      "space": "Space",
+      "startANewProject": "Start a new project",
+      "startANewProjectIn": "Start a new project in {{v1}}"
+    },
+    "projectAsMarkdownPage": {
+      "projectAsMarkdown": "Project As Markdown"
+    },
+    "projectCheckInEditPage": {
+      "1HowSTheProjectGoing": "1. How's the project going?",
+      "2WhatSNewSinceThe": "2. What's new since the last check-in?",
+      "checkIns": "Check-Ins",
+      "editingLockedAfter3Days": "Editing locked after 3 days",
+      "editingTheCheckInFrom": "Editing the Check-In from <0/>",
+      "publishNow": "Publish now",
+      "saveAsDraft": "Save as draft",
+      "saveDraft": "Save draft",
+      "scheduleCheckIn": "Schedule Check-in",
+      "submit": "Submit",
+      "workMap": "Work Map",
+      "writeYourCheckInHere": "Write your check-in here..."
+    },
+    "projectCheckInNewPage": {
+      "1HowSTheProjectGoing": "1. How's the project going?",
+      "checkIns": "Check-Ins",
+      "fillOutAllTheRequiredFields": "Fill out all the required fields",
+      "letSCheckIn": "Let's Check In",
+      "postedByOn": "Posted by {{v1}} on <0/>",
+      "previousCheckIn": "Previous check-in",
+      "saveAsDraft": "Save as draft",
+      "scheduleCheckIn": "Schedule Check-in",
+      "submit": "Submit",
+      "unknown": "Unknown",
+      "viewOriginal": "View original",
+      "workMap": "Work Map",
+      "writeYourCheckInHere": "Write your check-in here..."
+    },
+    "projectCheckInPage": {
+      "acknowledgeThisCheckIn": "Acknowledge this Check-In",
+      "cancel": "Cancel",
+      "checkInDeleted": "Check-in deleted",
+      "checkIns": "Check-Ins",
+      "draftDiscarded": "Draft discarded",
+      "edit": "Edit",
+      "resume": "Resume",
+      "theCheckInHasBeenSuccessfully": "The check-in has been successfully deleted.",
+      "theDraftHasBeenDiscarded": "The draft has been discarded.",
+      "thisProjectIsPaused": "This project is paused",
+      "thisProjectWasClosedOn": "This project was closed on <0/>. View the <1>retrospective</1>.",
+      "workMap": "Work Map"
+    },
+    "projectClosePage": {
+      "closing": "Closing {{name}}",
+      "reviewAmpCloseProject": "Review & Close Project"
+    },
+    "projectContributorsAddPage": {
+      "accessLevel": "Access Level",
+      "addChampion": "Add Champion",
+      "addContributors": "Add contributors",
+      "addContributorsTo": "Add contributors to {{v1}}",
+      "addReviewer": "Add Reviewer",
+      "backToTeamAccess": "Back to Team & Access",
+      "champion": "Champion",
+      "contributor": "Contributor",
+      "eGProjectManager": "e.g. Project Manager",
+      "inviteSomeoneNewToTheOrganization": "Invite someone new to the organization",
+      "onlyExistingMembersCanBeAdded": "Only existing members can be added. <0>Invite someone new to the organization</0>",
+      "responsibility": "Responsibility",
+      "reviewer": "Reviewer",
+      "reviewersAreResponsibleForAcknowledgingEach": "Reviewers are responsible for acknowledging each check-in and have the authority to initiate corrective action if needed. This is typically the person to whom the champion reports to."
+    },
+    "projectContributorsEditPage": {
+      "accessLevel": "Access Level",
+      "editSResponsibilitiesAndAccessLevel": "Edit {{v1}}'s responsibilities and access level",
+      "ifYouSelectANewChampion": "If you select a new champion, {{v1}} will be reassigned as a contributor.",
+      "ifYouSelectANewReviewer": "If you select a new reviewer, {{v1}} will be reassigned as a contributor.",
+      "isCurrentlyTheOnThisProject": "{{v1}} is currently the {{v2}} on this project.",
+      "projectChampion": "Project Champion",
+      "projectReviewer": "Project Reviewer",
+      "reassignAsAContributor": "Reassign {{v1}} as a Contributor",
+      "save": "Save",
+      "whatIsSResponsibilityOnThis": "What is {{v1}}'s responsibility on this project?"
+    },
+    "projectContributorsPage": {
+      "addChampion": "Add champion",
+      "addContributors": "Add Contributors",
+      "addReviewer": "Add reviewer",
+      "assignAsChampion": "Assign as champion",
+      "assignAsReviewer": "Assign as reviewer",
+      "champion": "Champion",
+      "contributors": "Contributors",
+      "edit": "Edit",
+      "editChampion": "Edit champion",
+      "editContributor": "Edit contributor",
+      "editReviewer": "Edit reviewer",
+      "generalAccess": "General Access",
+      "manageTheTeamAndAccessTo": "Manage the team and access to this project",
+      "noChampion": "No Champion",
+      "noReviewer": "No Reviewer",
+      "otherPeopleHaveAccessToThis": "{{v1}} other people have access to this project",
+      "otherPeopleWithAccess": "Other People with Access",
+      "peopleWhoHaveAccessToThe": "People who have access to the project based on their company or space membership but are not directly assigned to the project.",
+      "reassignAsContributor": "Reassign as contributor",
+      "removeFromProject": "Remove from project",
+      "reviewer": "Reviewer",
+      "teamAmpAccess": "Team & Access",
+      "workMap": "Work Map"
+    },
+    "projectDiscussionEditPage": {
+      "cancel": "Cancel",
+      "fillOutAllTheRequiredFields": "Fill out all the required fields",
+      "pleaseAddATitle": "Please add a title",
+      "save": "Save",
+      "title": "Title...",
+      "writeHere": "Write here..."
+    },
+    "projectDiscussionNewPage": {
+      "cancel": "Cancel",
+      "discussions": "Discussions",
+      "fillOutAllTheRequiredFields": "Fill out all the required fields",
+      "pleaseAddATitle": "Please add a title",
+      "postDiscussion": "Post Discussion",
+      "startANewDiscussion": "Start a new discussion...",
+      "title": "Title...",
+      "workMap": "Work Map"
+    },
+    "projectDiscussionPage": {
+      "discussions": "Discussions",
+      "edit": "Edit",
+      "workMap": "Work Map"
+    },
+    "projectEditAccessLevelsPage": {
+      "editGeneralAccess": "Edit General Access",
+      "teamAccess": "Team & Access",
+      "workMap": "Work Map"
+    },
+    "projectPage": {
+      "error": "Error",
+      "failedToCreateMilestone": "Failed to create milestone",
+      "failedToDeleteProject": "Failed to delete project",
+      "failedToUpdateMilestone": "Failed to update milestone",
+      "failedToUpdateTasksView": "Failed to update tasks view",
+      "networkError": "Network Error",
+      "revertedTheAccessLevelsToTheir": "Reverted the access levels to their previous values.",
+      "revertedTheChampionToItsPrevious": "Reverted the champion to its previous value.",
+      "revertedTheDescriptionToItsPrevious": "Reverted the description to its previous value.",
+      "revertedTheDueDateToIts": "Reverted the due date to its previous value.",
+      "revertedTheParentGoalToIts": "Reverted the parent goal to its previous value.",
+      "revertedTheReviewerToItsPrevious": "Reverted the reviewer to its previous value.",
+      "revertedTheSpaceToItsPrevious": "Reverted the space to its previous value.",
+      "revertedTheStartedDateToIts": "Reverted the started date to its previous value."
+    },
+    "projectPausePage": {
+      "keepItActive": "Keep it active",
+      "moveTheProjectToYourPaused": "Move the project to your paused projects list",
+      "noteYouCanResumeTheProject": "Note: You can resume the project at any time.",
+      "pauseProject": "Pause project",
+      "pauseThisProject": "Pause this project?",
+      "stopNotificationsForTeamMembers": "Stop notifications for team members",
+      "suspendAllAssociatedMilestonesAndTasks": "Suspend all associated milestones and tasks",
+      "whyAreYouPausingThisProject": "Why are you pausing this project?",
+      "writeHere": "Write here..."
+    },
+    "projectResumePage": {
+      "keepItPaused": "Keep it paused",
+      "makeTheProjectVisibleInActive": "Make the project visible in active project lists",
+      "reactivateProjectMilestonesAndTasks": "Reactivate project milestones and tasks",
+      "readyToResumeProject": "Ready to resume project?",
+      "restartNotificationsForTeamMembers": "Restart notifications for team members",
+      "resumeProject": "Resume project",
+      "whyAreYouResumingThisProject": "Why are you resuming this project?",
+      "writeHere": "Write here..."
+    },
+    "projectRetrospectiveEditPage": {
+      "editingProjectRetrospective": "Editing Project Retrospective",
+      "editingRetrospective": "Editing Retrospective"
+    },
+    "projectRetrospectivePage": {
+      "acknowledgeRetrospective": "Acknowledge Retrospective",
+      "acknowledgedByName": "Acknowledged by {{v1}}",
+      "editRetrospective": "Edit retrospective",
+      "notYetAcknowledged": "Not yet acknowledged",
+      "projectRetrospective": "Project Retrospective"
+    },
+    "projectTemplateDiscussionEditPage": {
+      "checkTheFormAndTryAgain": "Check the form and try again.",
+      "discussionNotUpdated": "Discussion not updated",
+      "discussions": "Discussions",
+      "projectTemplates": "Project Templates"
+    },
+    "projectTemplateDiscussionNewPage": {
+      "checkTheFormAndTryAgain": "Check the form and try again.",
+      "discussionNotCreated": "Discussion not created",
+      "discussions": "Discussions",
+      "projectTemplates": "Project Templates"
+    },
+    "projectTemplateDiscussionPage": {
+      "discussions": "Discussions",
+      "projectTemplates": "Project Templates"
+    },
+    "projectTemplateDocumentPage": {
+      "delete": "Delete",
+      "edit": "Edit",
+      "resourceNotDeleted": "Resource not deleted",
+      "theDocumentIsStillOnThis": "The document is still on this page. Try again."
+    },
+    "projectTemplateEditDocumentPage": {
+      "checkTheFormAndTryAgain": "Check the form and try again.",
+      "documentNotUpdated": "Document not updated"
+    },
+    "projectTemplateEditFilePage": {
+      "checkTheFormAndTryAgain": "Check the form and try again.",
+      "fileNotUpdated": "File not updated"
+    },
+    "projectTemplateEditLinkPage": {
+      "checkTheFormAndTryAgain": "Check the form and try again.",
+      "linkNotUpdated": "Link not updated"
+    },
+    "projectTemplateFilePage": {
+      "delete": "Delete",
+      "download": "Download",
+      "edit": "Edit",
+      "resourceNotDeleted": "Resource not deleted",
+      "theFileIsStillOnThis": "The file is still on this page. Try again."
+    },
+    "projectTemplateLinkPage": {
+      "delete": "Delete",
+      "edit": "Edit",
+      "resourceNotDeleted": "Resource not deleted",
+      "theLinkIsStillOnThis": "The link is still on this page. Try again."
+    },
+    "projectTemplateNewDocumentPage": {
+      "checkTheFormAndTryAgain": "Check the form and try again.",
+      "documentNotCreated": "Document not created"
+    },
+    "projectTemplateNewLinkPage": {
+      "checkTheFormAndTryAgain": "Check the form and try again.",
+      "linkNotCreated": "Link not created"
+    },
+    "projectTemplatesPage": {
+      "checkTheNameAndSpaceThen": "Check the name and Space, then try again.",
+      "home": "Home",
+      "templateNotCreated": "Template not created"
+    },
+    "resetPasswordPage": {
+      "confirmPassword": "Confirm Password",
+      "eGYourEmailCom": "e.g. your@email.com",
+      "email": "Email",
+      "enterYourNewPassword": "Enter your new password",
+      "password": "Password",
+      "reEnterYourNewPassword": "Re-enter your new password",
+      "resetPassword": "Reset Password"
+    },
+    "resourceHubDocumentPage": {
+      "copy": "Copy",
+      "delete": "Delete",
+      "edit": "Edit",
+      "exportAsMarkdown": "Export as Markdown",
+      "historyOfChanges": "History of changes"
+    },
+    "resourceHubDocumentVersionComparisonPage": {
+      "historyOfChanges": "History of changes"
+    },
+    "resourceHubDocumentVersionsPage": {
+      "restoreFailed": "Restore failed",
+      "versionRestored": "Version restored",
+      "versionRestoredAsTheCurrentDocument": "Version {{v1}} restored as the current document.",
+      "weCouldnTRestoreThatVersion": "We couldn't restore that version. Please try again."
+    },
+    "resourceHubEditDocumentPage": {
+      "checkTheFormAndTryAgain": "Check the form and try again.",
+      "documentNotUpdated": "Document not updated",
+      "editDocument": "Edit Document"
+    },
+    "resourceHubEditFilePage": {
+      "checkTheFormAndTryAgain": "Check the form and try again.",
+      "editFile": "Edit File",
+      "fileNotUpdated": "File not updated"
+    },
+    "resourceHubEditLinkPage": {
+      "checkTheFormAndTryAgain": "Check the form and try again.",
+      "editLink": "Edit Link",
+      "linkNotUpdated": "Link not updated"
+    },
+    "resourceHubFilePage": {
+      "delete": "Delete",
+      "download": "Download",
+      "edit": "Edit"
+    },
+    "resourceHubLinkPage": {
+      "delete": "Delete",
+      "edit": "Edit"
+    },
+    "resourceHubNewDocumentPage": {
+      "checkTheFormAndTryAgain": "Check the form and try again.",
+      "documentNotCreated": "Document not created",
+      "newDocument": "New Document"
+    },
+    "resourceHubNewLinkPage": {
+      "checkTheFormAndTryAgain": "Check the form and try again.",
+      "linkNotCreated": "Link not created",
+      "newLink": "New Link"
+    },
+    "saasAdminBillingCatalogPage": {
+      "actions": "Actions",
+      "archive": "Archive",
+      "archivePlan": "Archive Plan",
+      "archiveProduct": "Archive Product",
+      "behavior": "Behavior",
+      "billingBehavior": "Billing behavior",
+      "billingCatalog": "Billing Catalog",
+      "billingInterval": "Billing Interval",
+      "cancel": "Cancel",
+      "createPlan": "Create plan",
+      "createProduct": "Create product",
+      "created": "Created",
+      "customerSelectable": "Customer selectable",
+      "displayName": "Display Name",
+      "editPlan": "Edit plan",
+      "editProduct": "Edit product",
+      "internal": "Internal",
+      "interval": "Interval",
+      "key": "Key",
+      "limited": "Limited",
+      "memberLimit": "Member limit",
+      "memberLimitValue": "Member limit value",
+      "monthly": "Monthly",
+      "no": "No",
+      "plan": "Plan",
+      "planFamily": "Plan Family",
+      "planKey": "Plan key",
+      "plans": "Plans",
+      "price": "Price",
+      "priceInCents": "Price (in cents)",
+      "product": "Product",
+      "products": "Products",
+      "provider": "Provider",
+      "providerManaged": "Provider managed",
+      "selectable": "Selectable",
+      "setActive": "Set active",
+      "status": "Status",
+      "storageLimit": "Storage limit",
+      "storageLimitBytes": "Storage limit bytes",
+      "syncFromPolar": "Sync from Polar",
+      "tierRank": "Tier rank",
+      "unarchive": "Unarchive",
+      "unlimited": "Unlimited",
+      "yearly": "Yearly",
+      "yes": "Yes"
+    },
+    "saasAdminCompanyPage": {
+      "activity": "Activity",
+      "activityDescription": "Activity Description",
+      "admininstration": "Admininstration",
+      "allCompanies": "All Companies",
+      "allFlagsMarkedForRemoval": "All flags marked for removal",
+      "cancel": "Cancel",
+      "databaseID": "Database ID",
+      "enableAnExperimentalFeatureForThis": "Enable an experimental feature for this company.",
+      "enableFeature": "Enable Feature",
+      "enableFeatureFlag": "Enable Feature Flag",
+      "enabledFeatures": "Enabled Features",
+      "failedToRemoveFeatureFlags": "Failed to remove feature flags",
+      "goals": "Goals",
+      "information": "Information",
+      "noFeatureFlagsEnabled": "No feature flags enabled",
+      "people": "People",
+      "projects": "Projects",
+      "removeExperimentalFeatureFlagsFromThis": "Remove experimental feature flags from this company. Changes are saved when you click Save.",
+      "removeFeatureFlags": "Remove Feature Flags",
+      "save": "Save",
+      "shortID": "Short ID",
+      "spaces": "Spaces",
+      "startSupportSession": "Start Support Session",
+      "stats": "Stats",
+      "storage": "Storage",
+      "supportMode": "Support Mode",
+      "temporarilyEnableElevatedSupportAccessFor": "Temporarily enable elevated support access for troubleshooting issues with this company's account. You will view the account as if you were an owner.",
+      "time": "Time"
+    },
+    "saasAdminEmailSettingsPage": {
+      "administration": "Administration",
+      "body": "Body",
+      "cancel": "Cancel",
+      "configureTheEmailProviderUsedBy": "Configure the email provider used by all companies. Secrets are never displayed; enter a new value to replace them.",
+      "emailConfiguration": "Email Configuration",
+      "emailSettings": "Email Settings",
+      "enterAPIKey": "Enter API key",
+      "noreplyYourcompanyCom": "noreply@yourcompany.com",
+      "notificationEmail": "Notification Email",
+      "passwordAlreadySetLeaveBlankTo": "Password already set. Leave blank to keep current password",
+      "provider": "Provider",
+      "recipient": "Recipient",
+      "recipientExampleCom": "recipient@example.com",
+      "requireTLS": "Require TLS",
+      "sMTPHost": "SMTP Host",
+      "sMTPPassword": "SMTP Password",
+      "sMTPPort": "SMTP Port",
+      "sMTPUsername": "SMTP Username",
+      "saveEmailSettings": "Save Email Settings",
+      "sendGrid": "SendGrid",
+      "sendGridAPIKey": "SendGrid API Key",
+      "sendTestEmail": "Send Test Email",
+      "subject": "Subject",
+      "testEmail": "Test email",
+      "useSSL": "Use SSL",
+      "userExampleCom": "user@example.com",
+      "writeAShortTestMessage": "Write a short test message"
+    },
+    "saasAdminPage": {
+      "account": "Account",
+      "actions": "Actions",
+      "activeCompanies": "Active Companies",
+      "activeCompanyCriteria": "Active Company Criteria",
+      "administration": "Administration",
+      "allAccounts": "All Accounts",
+      "allCompanies": "All Companies",
+      "billingCatalog": "Billing Catalog",
+      "cancel": "Cancel",
+      "clearSearch": "Clear search",
+      "companies": "Companies",
+      "companiesNeedToMeetAllActivity": "Companies need to meet all activity criteria to appear here",
+      "company": "Company",
+      "createdAt": "Created At",
+      "deleteAccount": "Delete account",
+      "deleteThisWillSuspendAllLinked": "Delete {{v1}}? This will suspend all linked people, anonymize personal data, and revoke access permanently.",
+      "email": "Email",
+      "emailConfiguration": "Email Configuration",
+      "errorLoadingAccounts": "Error loading accounts: {{v1}}",
+      "errorLoadingActiveCompanies": "Error loading active companies: {{v1}}",
+      "errorLoadingCompanies": "Error loading companies: {{v1}}",
+      "goals": "Goals",
+      "grantAccess": "Grant access",
+      "grantAccessToTheSiteAdmin": "Grant {{v1}} access to the site admin dashboard? Site admins can manage instance-wide settings and other privileged admin actions. Only grant this access to someone who should administer the whole site.",
+      "grantSiteAdminAccess": "Grant site admin access",
+      "hasBeenDeleted": "{{v1}} has been deleted.",
+      "isNowASiteAdmin": "{{v1}} is now a site admin.",
+      "lastActivity": "Last Activity",
+      "loadingAccounts": "Loading accounts...",
+      "loadingActiveCompanies": "Loading active companies...",
+      "loadingCompanies": "Loading companies...",
+      "noAccountsFound": "No accounts found",
+      "noActiveCompaniesFound": "No active companies found",
+      "noCompaniesFound": "No companies found",
+      "noLongerHasSiteAdminAccess": "{{v1}} no longer has site admin access.",
+      "noMatchingFound": "No matching {{v1}} found",
+      "ownedCompanies": "Owned Companies",
+      "owners": "Owners",
+      "people": "People",
+      "projects": "Projects",
+      "promoteToSiteAdmin": "Promote to site admin",
+      "removeAccess": "Remove access",
+      "removeSiteAdminAccess": "Remove site admin access",
+      "removeSiteAdminAccessFromThis": "Remove site admin access from {{v1}}? This will revoke access to the site admin dashboard and other privileged admin actions. Use this carefully.",
+      "searchIndex": "Search Index",
+      "siteAdmin": "Site Admin",
+      "siteMessages": "Site Messages",
+      "spaces": "Spaces",
+      "storage": "Storage"
+    },
+    "saasAdminSearchIndexPage": {
+      "searchIndex": "Search index",
+      "searchIndexMaintenanceStarted": "Search index maintenance started",
+      "startedAlreadyRunning": "{{v1}} started. {{v2}} already running."
+    },
+    "saasAdminSiteMessagesPage": {
+      "actions": "Actions",
+      "active": "Active",
+      "administration": "Administration",
+      "allCompanies": "All companies",
+      "audience": "Audience",
+      "cancel": "Cancel",
+      "companies": "Companies",
+      "createAMessageToShowA": "Create a message to show a banner to company users.",
+      "createMessage": "Create message",
+      "created": "Created",
+      "delete": "Delete",
+      "deleteMessage": "Delete message",
+      "deleteThisMessage": "Delete this message?",
+      "description": "Description",
+      "edit": "Edit",
+      "expires": "Expires",
+      "expiresOn": "Expires on",
+      "failedToLoadCompanies": "Failed to load companies",
+      "inactive": "Inactive",
+      "loadingCompanies": "Loading companies...",
+      "noCompaniesMatchYourSearch": "No companies match your search.",
+      "noCompaniesSelectedYet": "No companies selected yet.",
+      "noSiteMessagesYet": "No site messages yet.",
+      "optionalLeaveBlankToShowUntil": "Optional. Leave blank to show until deactivated or deleted.",
+      "searchCompanies": "Search companies",
+      "selected": "Selected",
+      "siteMessages": "Site messages",
+      "specificCompanies": "Specific companies",
+      "status": "Status",
+      "title": "Title",
+      "usersWhoHavenTDismissedIt": "Users who haven't dismissed it will stop seeing it immediately.",
+      "yYYYMMDD": "YYYY-MM-DD"
+    },
+    "setupPage": {
+      "aDMINACCOUNT": "ADMIN ACCOUNT",
+      "atLeast12Characters": "At least 12 characters",
+      "eGAcmeCo": "e.g. Acme Co.",
+      "eGFounder": "e.g. Founder",
+      "eGJohnJohnson": "e.g. John Johnson",
+      "eGJohnYourCompanyCom": "e.g. john@your-company.com",
+      "email": "Email",
+      "fullName": "Full name",
+      "letAposSSetUpYour": "Let's set up your company.",
+      "nameOfTheCompany": "Name of the company",
+      "password": "Password",
+      "repeatPassword": "Repeat password",
+      "titleInTheCompany": "Title in the company",
+      "welcomeToOperately": "Welcome to Operately!"
+    },
+    "signUpPage": {
+      "getStartedInAMinuteNo": "Get started in a minute. No credit card required.",
+      "signIn": "Sign in",
+      "signUpForOperately": "Sign up for Operately"
+    },
+    "signUpWithEmailPage": {
+      "atLeast12Characters": "At least 12 characters",
+      "canTFindYourCodeCheck": "Can’t find your code? Check your spam folder.",
+      "checkYourEmailForACode": "Check your email for a code",
+      "confirmPassword": "Confirm Password",
+      "continue": "Continue ->",
+      "enterYourFullName": "Enter your full name",
+      "fullName": "Full Name",
+      "nameCompanyCom": "name@company.com",
+      "operatelyWillSendYouACode": "Operately will send you a code to verify your email address.",
+      "password": "Password",
+      "signUpForOperately": "Sign up for Operately",
+      "useYourWorkEmailKeepWork": "Use your work email — keep work and life separate.",
+      "whatHappensNext": "What happens next?",
+      "workEmail": "Work Email"
+    },
+    "spaceAccessManagementPage": {
+      "addMembers": "Add Members",
+      "changeAccessLevel": "Change access level",
+      "commentAccess": "Comment access",
+      "edit": "Edit",
+      "editAccess": "Edit access",
+      "generalAccess": "General Access",
+      "manageTheTeamAndAccessTo": "Manage the team and access to this space",
+      "members": "Members",
+      "otherPeopleHaveAccessToThis": "{{v1}} other people have access to this space",
+      "otherPeopleWithAccess": "Other People with Access",
+      "peopleWhoHaveAccessToThe": "People who have access to the space via their company membeship.",
+      "promoteToManager": "Promote to manager",
+      "reassignToMember": "Reassign to member",
+      "removeFromSpace": "Remove from space",
+      "spaceManagers": "Space Managers",
+      "teamAmpAccess": "Team & Access",
+      "viewAccess": "View access"
+    },
+    "spaceAddMembersPage": {
+      "accessLevel": "Access Level",
+      "addMembers": "Add members",
+      "addMembersTo": "Add members to {{v1}}",
+      "backToTeamAccess": "Back to Team & Access",
+      "inviteSomeoneNewToTheOrganization": "Invite someone new to the organization",
+      "member": "Member",
+      "onlyExistingMembersCanBeAdded": "Only existing members can be added. <0>Invite someone new to the organization</0>"
+    },
+    "spaceAddPage": {
+      "backToHome": "Back to Home",
+      "createANewSpace": "Create a new space",
+      "createSpace": "Create Space",
+      "eGCreateProductAwarenessAnd": "e.g. Create product awareness and bring new leads",
+      "eGMarketing": "e.g. Marketing",
+      "edit": "Edit",
+      "purpose": "Purpose",
+      "spaceName": "Space Name",
+      "spacesHelpOrganizeProjectsGoalsAnd": "Spaces help organize projects, goals, and team members in one place."
+    },
+    "spaceDiscussionsPage": {
+      "continueWritingYourDraftHellip": "Continue writing your draft…",
+      "continueWritingYourDrafts": "Continue writing your {{v1}} drafts…",
+      "discussions": "Discussions",
+      "newDiscussion": "New discussion",
+      "postAnnouncementsPitchIdeasAndStart": "Post announcements, pitch ideas, and start discussions."
+    },
+    "spaceEditGeneralAccessPage": {
+      "editGeneralAccess": "Edit General Access"
+    },
+    "spaceEditPage": {
+      "name": "Name",
+      "purpose": "Purpose",
+      "save": "Save"
+    },
+    "spacePage": {
+      "activity": "Activity",
+      "cancel": "Cancel",
+      "configureTools": "Configure tools",
+      "delete": "Delete",
+      "deleteEverything": "Delete everything",
+      "deleteSpace": "Delete space",
+      "deletingThisSpaceWillPermanentlyRemove": "Deleting this space will permanently remove everything in it. This includes all projects, goals, and discussions.",
+      "edit": "Edit",
+      "error": "Error",
+      "failedToDeleteSpace": "Failed to delete space",
+      "joinThisSpace": "Join this Space",
+      "loading": "Loading...",
+      "manageAccess": "Manage access",
+      "pleaseTryAgain": "Please try again.",
+      "spaceDeleted": "Space deleted",
+      "theSpaceAndItsContentWere": "The space and its content were deleted.",
+      "thisActionCannotBeUndone": "This action cannot be undone."
+    },
+    "spaceWorkMapPage": {
+      "workMap": "Work Map"
+    },
+    "taskPage": {
+      "error": "Error",
+      "failedToDeleteTask": "Failed to delete task.",
+      "failedToMoveTask": "Failed to move task.",
+      "failedToUpdateAssignees": "Failed to update assignees.",
+      "failedToUpdateDueDate": "Failed to update due date.",
+      "failedToUpdateMilestone": "Failed to update milestone.",
+      "failedToUpdateTaskDescription": "Failed to update task description.",
+      "failedToUpdateTaskReminders": "Failed to update task reminders.",
+      "failedToUpdateTaskStatus": "Failed to update task status."
+    }
+  },
+  "userMenu": {
+    "apiTokens": "API Tokens",
+    "mcpConnections": "MCP Connections",
+    "passwordAndSecurity": "Password & Security",
+    "profile": "Profile",
+    "settings": "Settings",
+    "signOut": "Sign Out"
   }
 }

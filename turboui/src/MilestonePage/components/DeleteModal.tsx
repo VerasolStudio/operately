@@ -3,6 +3,7 @@ import { MilestonePage } from "..";
 import { DangerButton, SecondaryButton } from "../../Button";
 import { WarningCallout } from "../../Callouts";
 import Modal from "../../Modal";
+import { t } from "../../i18n";
 
 export function DeleteModal(props: MilestonePage.State) {
   const title = "Delete Milestone";
@@ -34,16 +35,16 @@ function DeleteForm(props: MilestonePage.State) {
     <div>
       <form className="space-y-6" onSubmit={handleSubmit}>
         <WarningCallout
-          message="This action cannot be undone"
+          message={t("turboui.milestonePage.thisActionCannotBeUndone")}
           description={`Deleting a milestone is permanent and cannot be undone. Please confirm that you want to delete this milestone.`}
         />
 
         <div className="flex items-center gap-2">
           <DangerButton size="sm" type="submit" loading={isDeleting} disabled={isDeleting} testId="delete-milestone">
-            Delete Forever
+            {t("turboui.milestonePage.deleteForever")}
           </DangerButton>
           <SecondaryButton size="sm" onClick={props.closeDeleteModal} testId="cancel-delete-milestone">
-            Cancel
+            {t("turboui.milestonePage.cancel")}
           </SecondaryButton>
         </div>
       </form>

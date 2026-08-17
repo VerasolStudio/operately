@@ -6,6 +6,7 @@ import classNames from "../utils/classnames";
 import { PrimaryButton, SecondaryButton } from "../Button";
 import { IconBuilding, IconChevronDown, IconLock, IconLockFilled, IconTent } from "../icons";
 import { createTestId } from "../TestableElement";
+import { t } from "../i18n";
 
 export const ACCESS_LEVELS = ["no_access", "view", "comment", "edit", "full"] as const;
 
@@ -101,17 +102,17 @@ function PrivacyPickerPopover(props: PrivacyField.State) {
     >
       <div className="p-4">
         <div className="mb-3">
-          <div className="text-sm font-medium">Privacy Settings</div>
+          <div className="text-sm font-medium">{t("turboui.privacyField.privacySettings")}</div>
         </div>
 
         <AccessLevelOptions {...props} accessLevels={tempAccessLevels} setAccessLevels={setTempAccessLevels} />
 
         <div className="flex justify-end gap-2 mt-4">
           <SecondaryButton size="xs" onClick={handleCancel} testId="cancel">
-            Cancel
+            {t("turboui.privacyField.cancel")}
           </SecondaryButton>
           <PrimaryButton size="xs" onClick={handleSave} testId="save">
-            Save
+            {t("turboui.privacyField.save")}
           </PrimaryButton>
         </div>
       </div>
@@ -221,7 +222,7 @@ function AccessLevelOptions(props: PrivacyField.State) {
           <div className="flex items-center gap-2 justify-between">
             <div className="flex items-center gap-2">
               <IconBuilding size={18} className="-mt-[1px]" />
-              <label className="text-sm">Company Members</label>
+              <label className="text-sm">{t("turboui.privacyField.companyMembers")}</label>
             </div>
 
             <div className="w-40">
@@ -243,7 +244,7 @@ function AccessLevelOptions(props: PrivacyField.State) {
         <div className="flex items-center gap-2 justify-between">
           <div className="flex items-center gap-2">
             <IconTent size={18} className="-mt-[1px]" />
-            <label className="text-sm">Space Members</label>
+            <label className="text-sm">{t("turboui.privacyField.spaceMembers")}</label>
           </div>
 
           <div className="w-40">

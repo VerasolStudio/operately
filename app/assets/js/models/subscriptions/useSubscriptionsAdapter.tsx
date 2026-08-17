@@ -3,6 +3,7 @@ import { useMe } from "@/contexts/CurrentCompanyContext";
 import { Subscriber } from "@/models/notifications";
 import { compareIds } from "@/routes/paths";
 import { SubscribersSelector } from "turboui";
+import { t } from "@/i18n";
 
 type LabelContext =
   | { projectName: string }
@@ -120,17 +121,17 @@ function isSubscriberInList(list: Subscriber[], subscriber: Subscriber) {
 
 function buildAllSubscribersLabel(subscribers: Subscriber[], opts: UseSubscriptionsAdapterOpts): string {
   const count = subscribers.length;
-  const part1 = count > 1 ? `All ${count} people` : "The 1 person";
+  const part1 = count > 1 ? t("app.useSubscriptionsAdapter.allPeople", { v1: count }) : "The 1 person";
 
   let part2 = "";
   if ("projectName" in opts) {
-    part2 = ` contributing to ${opts.projectName}`;
+    part2 = t("app.useSubscriptionsAdapter.contributingTo", { v1: opts.projectName });
   } else if ("spaceName" in opts) {
-    part2 = ` who are members of the ${opts.spaceName} space`;
+    part2 = t("app.useSubscriptionsAdapter.whoAreMembersOfTheSpace", { v1: opts.spaceName });
   } else if ("resourceHubName" in opts) {
-    part2 = ` who have access to ${opts.resourceHubName}`;
+    part2 = t("app.useSubscriptionsAdapter.whoHaveAccessTo", { v1: opts.resourceHubName });
   } else if ("goalName" in opts) {
-    part2 = ` who have access to ${opts.goalName}`;
+    part2 = t("app.useSubscriptionsAdapter.whoHaveAccessTo", { v1: opts.goalName });
   }
 
   return part1 + part2;

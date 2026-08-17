@@ -2,6 +2,7 @@ import React from "react";
 import classNames from "../utils/classnames";
 import { IconCheck } from "../icons";
 import { Status } from "../TaskBoard/types";
+import { t } from "../i18n";
 
 interface TaskCheckboxProps {
   status: Status | null;
@@ -23,7 +24,7 @@ export function TaskCheckbox({ status, canEdit, onComplete }: TaskCheckboxProps)
       type="button"
       role="checkbox"
       aria-checked={isDone}
-      aria-label="Mark task as done"
+      aria-label={t("turboui.taskPage.markTaskAsDone")}
       aria-disabled={!canToggleToDone}
       disabled={!canToggleToDone}
       onClick={handleClick}

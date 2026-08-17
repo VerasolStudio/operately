@@ -1,4 +1,5 @@
 defmodule OperatelyEmail.Emails.SpaceJoiningEmail do
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
   def send(_person, _activity) do
     raise "Email for SpaceJoining not implemented"
   end
@@ -12,7 +13,7 @@ defmodule OperatelyEmail.Emails.SpaceJoiningEmail do
       parent_id: space.id,
       parent_type: :space,
       parent_name: space.name,
-      headline: "joined the space \"#{space.name}\"",
+      headline: t("spaceJoining.headline", %{v1: space.name}),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.space_path(company, space) |> OperatelyWeb.Paths.to_url(),

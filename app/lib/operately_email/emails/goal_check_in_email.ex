@@ -7,6 +7,7 @@ defmodule OperatelyEmail.Emails.GoalCheckInEmail do
 
   alias OperatelyWeb.Paths
   alias __MODULE__.OverviewMsg
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     update_id = activity.content["update_id"]
@@ -23,7 +24,7 @@ defmodule OperatelyEmail.Emails.GoalCheckInEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: goal.name, who: author, action: "submitted a check-in")
+    |> subject(where: goal.name, who: author, action: t("goalCheckIn.action"))
     |> assign(:author, author)
     |> assign(:goal, goal)
     |> assign(:update, update)
@@ -42,7 +43,7 @@ defmodule OperatelyEmail.Emails.GoalCheckInEmail do
     if Permissions.can_acknowledge(access_level, update, person.id) do
       {"Acknowledge", url <> "?acknowledge=true"}
     else
-      {"View Check-In", url}
+      {t("goalCheckIn.viewCheckIn"), url}
     end
   end
 
@@ -76,24 +77,24 @@ defmodule OperatelyEmail.Emails.GoalCheckInEmail do
     end
 
     defp status_msg(:on_track) do
-      [text("The goal is "), bg_green("on-track"), text(" and progressing as planned.")]
+      [text(t("goalCheckIn.theGoalIs")), bg_green("on-track"), text(t("goalCheckIn.andProgressingAsPlanned"))]
     end
 
     defp status_msg(:caution) do
-      [text("The goal "), bg_yellow("needs attention"), text(" due to emerging risks or delays.")]
+      [text(t("goalCheckIn.theGoal")), bg_yellow(t("goalCheckIn.needsAttention")), text(t("goalCheckIn.dueToEmergingRisksOrDelays"))]
     end
 
     defp status_msg(:off_track) do
-      [text("The goal is "), bg_red("off track"), text(" due to significant problems affecting success.")]
+      [text(t("goalCheckIn.theGoalIs")), bg_red(t("goalCheckIn.offTrack")), text(t("goalCheckIn.dueToSignificantProblemsAffectingSuccess"))]
     end
 
     def reviewer_note(:on_track, _), do: []
 
     def reviewer_note(:caution, reviewer),
-      do: [text(" "), text(Person.first_name(reviewer)), text(" should be aware.")]
+      do: [text(" "), text(Person.first_name(reviewer)), text(t("goalCheckIn.shouldBeAware"))]
 
     def reviewer_note(:off_track, reviewer),
-      do: [text(" "), text(Person.first_name(reviewer) <> "'s"), text(" help is needed.")]
+      do: [text(" "), text(Person.first_name(reviewer) <> "'s"), text(t("goalCheckIn.helpIsNeeded"))]
 
     defp due_date(date) do
       if is_nil(date) do
@@ -104,8 +105,8 @@ defmodule OperatelyEmail.Emails.GoalCheckInEmail do
 
         cond do
           days < 0 -> [text(" "), text(duration), text(" "), bg_red("overdue.")]
-          days == 0 -> [text(" "), text("due today.")]
-          days > 0 -> [text(" "), text(duration), text(" "), text("until the deadline.")]
+          days == 0 -> [text(" "), text(t("goalCheckIn.dueToday"))]
+          days > 0 -> [text(" "), text(duration), text(" "), text(t("goalCheckIn.untilTheDeadline"))]
         end
       end
     end
@@ -133,7 +134,7 @@ defmodule OperatelyEmail.Emails.GoalCheckInEmail do
       parent_id: goal.id,
       parent_type: :goal,
       parent_name: goal.name,
-      headline: "submitted a check-in with status \"#{status_label(update.status)}\"",
+      headline: t("goalCheckIn.headline", %{v1: status_label(update.status)}),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: OperatelyWeb.Paths.goal_check_in_path(company, update) |> OperatelyWeb.Paths.to_url(),
@@ -144,7 +145,7 @@ defmodule OperatelyEmail.Emails.GoalCheckInEmail do
   end
 
   defp status_label(:on_track), do: "on track"
-  defp status_label(:off_track), do: "off track"
+  defp status_label(:off_track), do: t("goalCheckIn.offTrack")
   defp status_label(status) when is_binary(status), do: status
   defp status_label(status) when is_atom(status), do: Atom.to_string(status)
 end

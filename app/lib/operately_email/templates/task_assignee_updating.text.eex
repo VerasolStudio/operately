@@ -1,15 +1,15 @@
 <%= if @assigned_to_recipient do %>
-<%= short_name(@author) %> assigned you the task <%= @name %>.
+<%= t("taskAssigneeUpdating.assignedYouTheTask", %{v1: short_name(@author), v2: @name}) %>
 
-You are now assigned to this task.
+<%= t("taskAssigneeUpdating.youAreNowAssignedToThis") %>
 <% else %>
 <%= if @removed_from_recipient do %>
-<%= short_name(@author) %> removed you from the task <%= @name %>.
+<%= t("taskAssigneeUpdating.removedYouFromTheTask", %{v1: short_name(@author), v2: @name}) %>
 
-You are no longer assigned to this task.
+<%= t("taskAssigneeUpdating.youAreNoLongerAssignedTo") %>
 <% else %>
-<%= short_name(@author) %> changed the assignees for <%= @name %>.
+<%= t("taskAssigneeUpdating.changedTheAssigneesFor", %{v1: short_name(@author), v2: @name}) %>
 <% end %>
 <% end %>
 
-Link: <%= @cta_url %>
+<%= t("taskAssigneeUpdating.link", %{v1: @cta_url}) %>

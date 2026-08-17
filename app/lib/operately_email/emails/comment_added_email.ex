@@ -2,6 +2,7 @@ defmodule OperatelyEmail.Emails.CommentAddedEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.Repo
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -45,27 +46,27 @@ defmodule OperatelyEmail.Emails.CommentAddedEmail do
 
     cond do
       activity.action == "goal_timeframe_editing" ->
-        "commented on the goal timeframe change"
+        t("commentAdded.commentedOnTheGoalTimeframeChange")
 
       activity.action == "goal_closing" ->
-        "commented on the goal closing"
+        t("commentAdded.commentedOnTheGoalClosing")
 
       activity.action == "goal_discussion_creation" ->
         parent_comment_thread = Operately.Comments.get_thread!(activity.comment_thread_id)
 
-        "commented on: #{parent_comment_thread.title}"
+        t("commentAdded.commentedOn", %{v1: parent_comment_thread.title})
 
       activity.action == "goal_reopening" ->
-        "commented on the goal reopening"
+        t("commentAdded.commentedOnTheGoalReopening")
 
       activity.action == "project_discussion_submitted" ->
-        "commented on: #{comment_thread.title}"
+        t("commentAdded.commentedOn", %{v1: comment_thread.title})
 
       activity.action == "project_resuming" ->
-        "commented on the project resumption"
+        t("commentAdded.commentedOnTheProjectResumption")
 
       activity.action == "project_pausing" ->
-        "commented on the project pausing"
+        t("commentAdded.commentedOnTheProjectPausing")
 
       true ->
         raise "Unsupported action: #{activity.action}"

@@ -3,6 +3,7 @@ defmodule OperatelyEmail.Emails.CompanyMemberConvertedToGuestEmail do
 
   alias Operately.Repo
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     activity = Repo.preload(activity, author: :company)
@@ -14,7 +15,7 @@ defmodule OperatelyEmail.Emails.CompanyMemberConvertedToGuestEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: company.name, who: author, action: "converted your account to an outside collaborator")
+    |> subject(where: company.name, who: author, action: t("companyMemberConvertedToGuest.action"))
     |> assign(:author, author)
     |> assign(:company, company)
     |> assign(:login_url, login_url)

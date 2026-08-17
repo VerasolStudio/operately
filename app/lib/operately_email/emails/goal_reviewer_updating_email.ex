@@ -2,6 +2,7 @@ defmodule OperatelyEmail.Emails.GoalReviewerUpdatingEmail do
   import OperatelyEmail.Mailers.ActivityMailer
 
   alias Operately.{Repo, Goals}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -12,7 +13,7 @@ defmodule OperatelyEmail.Emails.GoalReviewerUpdatingEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: goal.name, who: author, action: "assigned you as the reviewer")
+    |> subject(where: goal.name, who: author, action: t("goalReviewerUpdating.action"))
     |> assign(:author, author)
     |> assign(:goal, goal)
     |> assign(:link, OperatelyWeb.Paths.goal_path(company, goal) |> OperatelyWeb.Paths.to_url())
@@ -39,8 +40,8 @@ defmodule OperatelyEmail.Emails.GoalReviewerUpdatingEmail do
     }
   end
 
-  defp buffered_headline(nil), do: "removed the goal reviewer"
-  defp buffered_headline(reviewer), do: "assigned #{reviewer.full_name} as the goal reviewer"
+  defp buffered_headline(nil), do: t("goalReviewerUpdating.removedTheGoalReviewer")
+  defp buffered_headline(reviewer), do: t("goalReviewerUpdating.assignedAsTheGoalReviewer", %{v1: reviewer.full_name})
 
   defp get_reviewer(nil), do: nil
   defp get_reviewer(id), do: Operately.People.get_person!(id)

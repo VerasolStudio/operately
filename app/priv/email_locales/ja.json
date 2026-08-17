@@ -1,0 +1,739 @@
+{
+  "assignments": {
+    "dueInDays": "あと {{v1}} 日で期限",
+    "dueToday": "本日が期限",
+    "dueTomorrow": "明日が期限",
+    "noDueDate": "期限なし",
+    "overdueBy1Day": "期限を 1 日超過",
+    "overdueByDays": "期限を {{v1}} 日超過",
+    "reminderForToday": "本日のリマインダー",
+    "space": "スペース: {{v1}}",
+    "subject": "{{v1}}: 本日の作業",
+    "tasksRemindersAndReviewsThatNeed": "本日確認が必要なタスク、リマインダー、レビューです。",
+    "yourWorkForToday": "{{v1}} - 本日の作業"
+  },
+  "billingLimitReached": {
+    "addingOrRestoringPeopleIsBlocked": "プランをアップグレードするまで、メンバーの追加と復元はできません。",
+    "hasReachedItsFreePlanMember": "{{v1}} が Free プランのメンバー数上限に達しました",
+    "hasReachedItsMemberLimitOf": "{{v1}} がメンバー数の上限に達しました: 有効なメンバー {{v2}} / {{v3}} 人。",
+    "reviewBilling": "請求内容を確認"
+  },
+  "billingNearLimitWarning": {
+    "addingOrRestoringPeopleWillBe": "メンバー数の上限に達すると、メンバーの追加と復元ができなくなります。",
+    "hasOfActiveMembersOnThe": "{{v1}} の Free プランでの有効なメンバーは {{v2}} / {{v3}} 人です。",
+    "isNearItsFreePlanMember": "{{v1}} が Free プランのメンバー数上限に近づいています",
+    "isNearItsFreePlanStorage": "{{v1}} が Free プランのストレージ上限に近づいています",
+    "isUsingOfOnTheFree": "{{v1}} は Free プランで {{v2}} / {{v3}} を使用しています。",
+    "reviewBilling": "請求内容を確認",
+    "uploadingFilesWillBeBlockedOnce": "ストレージの上限に達すると、ファイルをアップロードできなくなります。"
+  },
+  "bufferedActivityDigest": {
+    "manageEmailSettings": "メール設定を管理",
+    "manageEmailSettings2": "メール設定の管理: {{v1}}",
+    "nUpdates": "{{v1}} 件の更新",
+    "noNewUpdates": "新しい更新はありません。",
+    "oneUpdate": "1 件の更新",
+    "youHaveNewUpdates": "新しい更新が {{v1}} 件あります",
+    "youHaveOneNewUpdate": "新しい更新が 1 件あります",
+    "youReAllCaughtUp": "対応が必要な作業はありません",
+    "youReAllCaughtUp2": "対応が必要な作業はありません。"
+  },
+  "commentAdded": {
+    "commentedOn": "が「{{v1}}」にコメントしました",
+    "commentedOnTheGoalClosing": "がゴールのクローズにコメントしました",
+    "commentedOnTheGoalReopening": "がゴールの再開にコメントしました",
+    "commentedOnTheGoalTimeframeChange": "がゴールの対象期間の変更にコメントしました",
+    "commentedOnTheProjectPausing": "がプロジェクトの一時停止にコメントしました",
+    "commentedOnTheProjectResumption": "がプロジェクトの再開にコメントしました",
+    "link": "リンク: {{v1}}",
+    "viewComment": "コメントを見る"
+  },
+  "companyAdminAdded": {
+    "action": "があなたに管理者権限を付与しました",
+    "link": "リンク: {{v1}}",
+    "viewCompanyAdminTools": "会社の管理ツールを見る",
+    "youHaveBeenGrantedAdminPrivileges": "{{v1}} さんがあなたに管理者権限を付与しました",
+    "youHaveBeenGrantedAdminPrivileges2": "{{v1}} さんがあなたに管理者権限を付与しました。"
+  },
+  "companyAdminRemoved": {
+    "action": "があなたの管理者権限を取り消しました",
+    "link": "リンク: {{v1}}",
+    "viewCompany": "会社を見る",
+    "yourAdminPrivilegesHaveBeenRevoked": "{{v1}} さんがあなたの管理者権限を取り消しました",
+    "yourAdminPrivilegesHaveBeenRevoked2": "{{v1}} さんがあなたの管理者権限を取り消しました。"
+  },
+  "companyMemberAdded": {
+    "addedYouAsACompanyMember": "があなたを会社メンバーとして追加しました",
+    "invitedYouToJoin": "があなたを {{v1}} に招待しました",
+    "join": "{{v1}} に参加",
+    "logInToOperately": "Operately にログイン",
+    "youNowHaveAccessToAs": "{{v1}} に会社メンバーとしてアクセスできるようになりました。"
+  },
+  "companyMemberConvertedToGuest": {
+    "action": "があなたのアカウントを社外協力者に変更しました",
+    "convertedYourAccountInToAn": "{{v1}} さんがあなたの {{v2}} でのアカウントを社外協力者に変更しました。",
+    "logInToOperately": "Operately にログイン",
+    "logInToOperately2": "Operately にログイン: {{v1}}",
+    "v1ConvertedYourAccountInV2": "{{v1}} さんがあなたの {{v2}} でのアカウントを社外協力者に変更しました",
+    "yourTeamMemberPermissionsWereRemoved": "チームメンバーの権限が削除されました。引き続きログインでき、明示的に招待された作業にはアクセスできます。"
+  },
+  "companyMemberRestoring": {
+    "action": "があなたのアカウントを復元しました",
+    "link": "リンク: {{v1}}",
+    "viewCompany": "会社を見る",
+    "yourAccountHasBeenRestoredAs": "{{v1}} さんがあなたのアカウントを会社メンバーとして復元しました",
+    "yourAccountHasBeenRestoredAs2": "{{v1}} さんがあなたのアカウントを会社メンバーとして復元しました。"
+  },
+  "companyMembersPermissionsEdited": {
+    "action": "があなたのアクセス権限を更新しました",
+    "link": "リンク: {{v1}}",
+    "newAccessLevel": "変更後のアクセス権限:",
+    "noAccess": "アクセス権なし",
+    "previousAccessLevel": "変更前のアクセス権限:",
+    "viewCompany": "会社を見る",
+    "yourAccessLevelHasBeenUpdated": "{{v1}} さんがあなたのアクセス権限を更新しました",
+    "yourAccessLevelHasBeenUpdated2": "{{v1}} さんがあなたのアクセス権限を更新しました。"
+  },
+  "companyOwnerRemoving": {
+    "action": "があなたの会社オーナー権限を取り消しました",
+    "link": "リンク: {{v1}}",
+    "viewCompany": "会社を見る",
+    "youHaveBeenRemovedAsA": "{{v1}} さんがあなたを会社オーナーから外しました",
+    "youHaveBeenRemovedAsA2": "{{v1}} さんがあなたを会社オーナーから外しました。"
+  },
+  "companyOwnersAdding": {
+    "action": "があなたを会社オーナーに任命しました",
+    "link": "リンク: {{v1}}",
+    "viewCompany": "会社を見る",
+    "youHaveBeenPromotedToCompany": "{{v1}} さんがあなたを会社オーナーに任命しました",
+    "youHaveBeenPromotedToCompany2": "{{v1}} さんがあなたを会社オーナーに任命しました。"
+  },
+  "dailyActivityDigest": {
+    "manageEmailSettings": "メール設定を管理",
+    "manageEmailSettings2": "メール設定の管理: {{v1}}",
+    "nUpdates": "{{v1}} 件の更新",
+    "noNewUpdates": "新しい更新はありません。",
+    "oneUpdate": "1 件の更新",
+    "youHaveNewUpdates": "新しい更新が {{v1}} 件あります",
+    "youHaveOneNewUpdate": "新しい更新が 1 件あります",
+    "youReAllCaughtUp": "対応が必要な作業はありません",
+    "youReAllCaughtUp2": "対応が必要な作業はありません。"
+  },
+  "digest": {
+    "newUpdates": "新しい更新が {{v1}} 件あります",
+    "oneNewUpdate": "新しい更新が 1 件あります"
+  },
+  "discussionCommentSubmitted": {
+    "action": "が「{{v1}}」にコメントしました",
+    "commentedOn": "{{v1}} さんが「{{v2}}」にコメントしました",
+    "headline": "がディスカッション「{{v1}}」にコメントしました",
+    "link": "リンク: {{v1}}",
+    "v1CommentedOnV2": "{{v1}} さんが「{{v2}}」にコメントしました",
+    "viewComment": "コメントを見る"
+  },
+  "discussionEditing": {
+    "headline": "がディスカッション「{{v1}}」を編集しました"
+  },
+  "discussionPosting": {
+    "action": "が「{{v1}}」を投稿しました",
+    "headline": "がディスカッション「{{v1}}」を開始しました",
+    "link": "リンク: {{v1}}",
+    "posted": "{{v1}} さんが「{{v2}}」を投稿しました",
+    "v1PostedV2": "{{v1}} さんが「{{v2}}」を投稿しました",
+    "viewDiscussion": "ディスカッションを見る"
+  },
+  "emailActivationCode": {
+    "confirmYourEmailAddress": "メールアドレスの確認",
+    "confirmYourEmailAddressYourConfirmation": "メールアドレスをご確認ください。確認コードは {{v1}} です。Operately でこのコードを入力して、メールアドレスの確認またはログインを完了してください。",
+    "ifYouDidntRequestThisEmail": "このメールに心当たりがない場合は、そのまま破棄していただいて問題ありません。",
+    "operatelyConfirmationCode": "Operately 確認コード: {{v1}}",
+    "yourConfirmationCodeIsBelow": "確認コードは下記のとおりです。Operately でこのコードを入力して、メールアドレスの確認またはログインを完了してください。"
+  },
+  "goalArchived": {
+    "action": "がゴール「{{v1}}」をアーカイブしました",
+    "archivedTheGoal": "{{v1}} さんがゴール「{{v2}}」をアーカイブしました。",
+    "headline": "がこのゴールをアーカイブしました",
+    "link": "リンク: {{v1}}",
+    "v1ArchivedTheV2Goal": "{{v1}} さんがゴール「{{v2}}」をアーカイブしました",
+    "viewArchivedGoal": "アーカイブしたゴールを見る"
+  },
+  "goalChampionUpdating": {
+    "action": "があなたを責任者に指定しました",
+    "assignedAsTheGoalChampion": "が {{v1}} さんをゴールの責任者に指定しました",
+    "link": "リンク: {{v1}}",
+    "removedTheGoalChampion": "がゴールの責任者を解除しました",
+    "v1AssingedYouAsTheChampion": "{{v1}} さんがあなたを「{{v2}}」の責任者に指定しました",
+    "viewGoal": "ゴールを見る"
+  },
+  "goalCheckIn": {
+    "action": "がチェックインを投稿しました",
+    "andProgressingAsPlanned": "で、計画どおり進んでいます。",
+    "checklist": "チェックリスト",
+    "dueToEmergingRisksOrDelays": "。リスクや遅延が出始めています。",
+    "dueToSignificantProblemsAffectingSuccess": "。成否に関わる重大な問題があります。",
+    "dueToday": "本日が期限です。",
+    "headline": "がステータス「{{v1}}」でチェックインを投稿しました",
+    "helpIsNeeded": " の支援が必要です。",
+    "keyWinsObstaclesAndNeeds": "主な成果、障害、必要な支援",
+    "needsAttention": "注意が必要です",
+    "offTrack": "遅延",
+    "overview": "概要",
+    "shouldBeAware": " に共有が必要です。",
+    "targets": "目標値",
+    "theGoal": "このゴールは",
+    "theGoalIs": "このゴールは",
+    "untilTheDeadline": "が期限までの残りです。",
+    "v1SubmittedACheckIn": "{{v1}} さんがチェックインを投稿しました",
+    "viewCheckIn": "チェックインを見る"
+  },
+  "goalCheckInAcknowledgement": {
+    "acknowledgedTheCheckInFor": "{{v1}} さんが「{{v2}}」のチェックインを承認しました。",
+    "action": "があなたのチェックインを承認しました",
+    "headline": "がゴールのチェックインを承認しました",
+    "link": "リンク: {{v1}}",
+    "v1AcknowledgedTheCheckInFor": "{{v1}} さんが「{{v2}}」のチェックインを承認しました。",
+    "viewCheckIn": "チェックインを見る"
+  },
+  "goalCheckInCommented": {
+    "commentedOnTheCheckIn": "がチェックインにコメントしました",
+    "headline": "がゴールのチェックインにコメントしました",
+    "link": "リンク: {{v1}}",
+    "viewComment": "コメントを見る"
+  },
+  "goalClosing": {
+    "action": "がゴール「{{v1}}」をクローズしました",
+    "closedTheGoal": "{{v1}} さんがゴール「{{v2}}」をクローズしました。",
+    "headline": "がこのゴールをクローズしました",
+    "link": "リンク: {{v1}}",
+    "markedAsAccomplished": "達成としてクローズ",
+    "markedAsNotAccomplished": "未達成としてクローズ",
+    "v1ClosedTheV2Goal": "{{v1}} さんがゴール「{{v2}}」をクローズしました",
+    "viewRetrospective": "振り返りを見る"
+  },
+  "goalCreated": {
+    "action": "がゴール「{{v1}}」を追加しました",
+    "addedTheAndAssignedYouAs": "{{v1}} さんが「{{v2}}」を追加し、あなたを{{v3}}に指定しました。",
+    "headline": "がゴールを作成しました",
+    "link": "リンク: {{v1}}",
+    "v1AddedTheV2Goal": "{{v1}} さんがゴール「{{v2}}」を追加しました",
+    "viewGoal": "ゴールを見る"
+  },
+  "goalDescriptionChanged": {
+    "action": "がゴールの説明を更新しました",
+    "headline": "がゴールの説明を更新しました",
+    "theDescriptionWasCleared": "説明が削除されました。",
+    "updatedTheDescriptionFor": "{{v1}} さんが「{{v2}}」の説明を更新しました。",
+    "v1UpdatedTheDescriptionForV2": "{{v1}} さんが「{{v2}}」の説明を更新しました",
+    "viewGoal": "ゴールを見る",
+    "viewGoal2": "ゴールを見る: {{v1}}",
+    "viewTheGoalToReadThe": "ゴールを開いて、更新された内容をご確認ください。"
+  },
+  "goalDiscussionCreation": {
+    "action": "が「{{v1}}」を投稿しました",
+    "headline": "がゴールのディスカッション「{{v1}}」を開始しました",
+    "link": "リンク: {{v1}}",
+    "posted": "{{v1}} さんが「{{v2}}」を投稿しました",
+    "v1PostedV2": "{{v1}} さんが「{{v2}}」を投稿しました",
+    "viewDiscussion": "ディスカッションを見る"
+  },
+  "goalEditing": {
+    "action": "がゴールを編集しました",
+    "headline": "がこのゴールを編集しました",
+    "link": "リンク: {{v1}}",
+    "theChampionWasChangedFromTo": "責任者を {{v1}} さんから {{v2}} さんに変更しました",
+    "theFollowingMeasurementsWereAdded": "次の指標を追加しました:",
+    "theFollowingMeasurementsWereDeleted": "次の指標を削除しました:",
+    "theFollowingMeasurementsWereUpdated": "次の指標を更新しました:",
+    "theNameWasChangedFromTo": "名前を「{{v1}}」から「{{v2}}」に変更しました。",
+    "theReviewerWasChangedFromTo": "レビュアーを {{v1}} さんから {{v2}} さんに変更しました",
+    "theTimeframeWasChangedFromTo": "対象期間を {{v1}} から {{v2}} に変更しました。",
+    "v1EditedTheV2Goal": "{{v1}} さんがゴール「{{v2}}」を編集しました",
+    "viewGoal": "ゴールを見る"
+  },
+  "goalReopening": {
+    "action": "がゴール「{{v1}}」を再開しました",
+    "discuss": "ディスカッション",
+    "headline": "がこのゴールを再開しました",
+    "link": "リンク: {{v1}}",
+    "reopenedTheGoal": "{{v1}} さんがゴール「{{v2}}」を再開しました。",
+    "v1ReopenedTheV2Goal": "{{v1}} さんがゴール「{{v2}}」を再開しました"
+  },
+  "goalReparent": {
+    "action": "が「{{v1}}」の親ゴールを変更しました",
+    "changedTheGoalSParentTo": "がゴールの親ゴールを「{{v1}}」に変更しました",
+    "link": "リンク: {{v1}}",
+    "removedTheGoalSParent": "がゴールの親ゴールを解除しました",
+    "theParentGoalOfWasChanged": "「{{v1}}」の親ゴールを「{{v2}}」に変更しました",
+    "theParentGoalWasRemovedFrom": "「{{v1}}」から親ゴールを解除しました",
+    "v1ChangedTheGoalParentOf": "{{v1}} さんが「{{v2}}」の親ゴールを変更しました",
+    "viewGoal": "ゴールを見る"
+  },
+  "goalRetrospectiveAcknowledged": {
+    "acknowledgedTheRetrospectiveFor": "{{v1}} さんが「{{v2}}」の振り返りを承認しました。",
+    "action": "があなたの振り返りを承認しました",
+    "headline": "がゴールの振り返りを承認しました",
+    "v1AcknowledgedTheRetrospectiveForV2": "{{v1}} さんが「{{v2}}」の振り返りを承認しました。",
+    "viewRetrospective": "振り返りを見る",
+    "viewRetrospective2": "振り返りを見る: {{v1}}"
+  },
+  "goalReviewerUpdating": {
+    "action": "があなたをレビュアーに指定しました",
+    "assignedAsTheGoalReviewer": "が {{v1}} さんをゴールのレビュアーに指定しました",
+    "link": "リンク: {{v1}}",
+    "removedTheGoalReviewer": "がゴールのレビュアーを解除しました",
+    "v1AssignedYouAsTheReviewer": "{{v1}} さんがあなたを「{{v2}}」のレビュアーに指定しました",
+    "viewGoal": "ゴールを見る"
+  },
+  "goalTimeframeEditing": {
+    "action": "が対象期間を変更しました",
+    "headline": "がゴールの対象期間を更新しました",
+    "link": "リンク: {{v1}}",
+    "newTimeframe": "変更後の対象期間:",
+    "oldTimeframe": "変更前の対象期間:",
+    "v1EditedTheTimeframeOfThe": "{{v1}} さんがゴール「{{v2}}」の対象期間を変更しました",
+    "viewComment": "表示・コメント"
+  },
+  "guestInvited": {
+    "action": "があなたを社外協力者として招待しました",
+    "invitedYouAsAnOutsideCollaborator": "{{v1}} さんがあなたを社外協力者として {{v2}} に招待しました。",
+    "logInToOperately": "Operately にログイン",
+    "logInToOperately2": "Operately にログイン: {{v1}}",
+    "v1InvitedYouAsAnOutside": "{{v1}} さんがあなたを社外協力者として {{v2}} に招待しました",
+    "youNowHaveAccessToAs": "{{v1}} に社外協力者としてアクセスできるようになりました。"
+  },
+  "mailer": {
+    "fromName": "{{v1}}（Operately）",
+    "subject": "（{{v1}}）{{v2}} {{v3}}"
+  },
+  "milestoneDescriptionUpdating": {
+    "headline": "がマイルストーン「{{v1}}」の説明を更新しました",
+    "mentionedYouInTheDescriptionFor": "が「{{v1}}」の説明であなたをメンションしました",
+    "theDescriptionWasCleared": "説明が削除されました。",
+    "updatedTheDescriptionFor": "が「{{v1}}」の説明を更新しました",
+    "v1UpdatedTheDescriptionForV2": "{{v1}} さんが「{{v2}}」の説明を更新しました",
+    "viewMilestone": "マイルストーンを見る",
+    "viewMilestone2": "マイルストーンを見る: {{v1}}",
+    "viewTheMilestoneToReadThe": "マイルストーンを開いて、更新された内容をご確認ください。"
+  },
+  "milestoneDueDateUpdating": {
+    "action": "が「{{v1}}」の期限を変更しました",
+    "changedTheDueDateFor": "{{v1}} さんが「{{v2}}」の期限を変更しました。",
+    "changedTheDueDateOfThe": "がマイルストーン「{{v1}}」の期限を {{v2}} に変更しました",
+    "link": "リンク: {{v1}}",
+    "removedTheDueDateFromThe": "がマイルストーン「{{v1}}」の期限を削除しました",
+    "setTheDueDateOfThe": "がマイルストーン「{{v1}}」の期限を {{v2}} に設定しました",
+    "theDueDateIsNow": "期限は現在 {{v1}} です。",
+    "theDueDateWasChangedFrom": "期限を {{v1}} から {{v2}} に変更しました。",
+    "theDueDateWasRemovedPreviously": "期限を削除しました。以前の期限は {{v1}} でした。",
+    "v1ChangedTheDueDateFor": "{{v1}} さんが「{{v2}}」の期限を変更しました",
+    "v1RemovedTheDueDateFor": "{{v1}} さんが「{{v2}}」の期限を削除しました",
+    "viewProject": "プロジェクトを見る"
+  },
+  "partials": {
+    "digestGroup": {
+      "viewUpdate": "更新を見る"
+    }
+  },
+  "projectArchived": {
+    "action": "がプロジェクト「{{v1}}」をアーカイブしました",
+    "archivedTheProject": "{{v1}} さんがプロジェクト「{{v2}}」をアーカイブしました。",
+    "headline": "がプロジェクトをアーカイブしました",
+    "link": "リンク: {{v1}}",
+    "v1ArchivedTheV2Project": "{{v1}} さんがプロジェクト「{{v2}}」をアーカイブしました",
+    "viewArchivedProject": "アーカイブしたプロジェクトを見る"
+  },
+  "projectChampionUpdating": {
+    "assignedAsTheChampion": "が {{v1}} さんを責任者に指定しました",
+    "assignedAsTheProjectChampion": "が {{v1}} さんをプロジェクトの責任者に指定しました",
+    "assignedYouAsTheChampion": "があなたを責任者に指定しました",
+    "changedTheChampionFor": "{{v1}} さんが「{{v2}}」の責任者を変更しました。",
+    "link": "リンク: {{v1}}",
+    "removedTheChampion": "が責任者を解除しました",
+    "removedTheProjectChampion": "がプロジェクトの責任者を解除しました",
+    "v1AssignedV2AsTheChampion": "{{v1}} さんが {{v2}} さんを「{{v3}}」の責任者に指定しました",
+    "v1AssignedYouAsTheChampion": "{{v1}} さんがあなたを「{{v2}}」の責任者に指定しました",
+    "v1RemovedTheChampionOnV2": "{{v1}} さんが「{{v2}}」の責任者を解除しました",
+    "viewProject": "プロジェクトを見る"
+  },
+  "projectCheckInAcknowledged": {
+    "acknowledgedYourCheckInFor": "{{v1}} さんが「{{v2}}」のチェックインを承認しました。",
+    "action": "があなたのチェックインを承認しました",
+    "ctaText": "チェックインを見る",
+    "headline": "がプロジェクトのチェックインを承認しました",
+    "v1AcknowledgedYourCheckInFor": "{{v1}} さんがプロジェクト「{{v2}}」のチェックインを承認しました"
+  },
+  "projectCheckInCommented": {
+    "action": "がチェックインにコメントしました",
+    "commentedOnACheckInFor": "{{v1}} さんが「{{v2}}」のチェックインにコメントしました。",
+    "ctaText": "コメントを見る",
+    "headline": "がプロジェクトのチェックインにコメントしました",
+    "link": "リンク: {{v1}}",
+    "v1CommentedOnACheckIn": "{{v1}} さんがプロジェクト「{{v2}}」のチェックインにコメントしました"
+  },
+  "projectCheckInSubmitted": {
+    "action": "がチェックインを投稿しました",
+    "andProgressingAsPlanned": "で、計画どおり進んでいます。",
+    "checkInNotes": "チェックインのメモ",
+    "dueToEmergingRisksOrDelays": "。リスクや遅延が出始めています。",
+    "dueToSignificantProblemsAffectingSuccess": "。成否に関わる重大な問題があります。",
+    "headline": "がステータス「{{v1}}」でチェックインを投稿しました",
+    "helpIsNeeded": " の支援が必要です。",
+    "needsAttention": "注意が必要です",
+    "offTrack": "遅延",
+    "overview": "概要",
+    "shouldBeAware": " に共有が必要です。",
+    "theProject": "このプロジェクトは",
+    "theProjectIs": "このプロジェクトは",
+    "untilTheDeadline": "が期限までの残りです。",
+    "v1SubmittedACheckIn": "{{v1}} さんがチェックインを投稿しました",
+    "viewCheckIn": "チェックインを見る"
+  },
+  "projectClosed": {
+    "action": "がプロジェクトをクローズし、振り返りを投稿しました",
+    "closedTheProjectAndSubmittedA": "{{v1}} さんがプロジェクトをクローズし、振り返りを投稿しました。",
+    "headline": "がプロジェクトをクローズしました",
+    "link": "リンク: {{v1}}",
+    "retrospectiveNotes": "振り返りのメモ:",
+    "v1ClosedTheV2ProjectAnd": "{{v1}} さんがプロジェクト「{{v2}}」をクローズし、振り返りを投稿しました",
+    "viewRetrospective": "振り返りを見る"
+  },
+  "projectContributorAddition": {
+    "action": "があなたを{{v1}}に追加しました",
+    "asAChampionYouAreResponsible": "責任者として、プロジェクトを推進し、スコープ・ゴール・スケジュールを定め、定期的に状況を共有する役割を担います。",
+    "asAReviewerYouAreResponsible": "レビュアーとして、プロジェクトの進捗を確認し、フィードバックを行い、最終成果物を承認する役割を担います。",
+    "link": "リンク: {{v1}}",
+    "v1AddedYouAsAV2": "{{v1}} さんがあなたを「{{v3}}」の{{v2}}に追加しました",
+    "viewProject": "プロジェクトを見る",
+    "youAreResponsibleFor": "あなたの担当: {{v1}}"
+  },
+  "projectContributorsAddition": {
+    "action": "があなたをコントリビューターに追加しました",
+    "link": "リンク: {{v1}}",
+    "v1AddedYouAsAContributor": "{{v1}} さんがあなたを「{{v2}}」のコントリビューターに追加しました",
+    "viewProject": "プロジェクトを見る"
+  },
+  "projectCreated": {
+    "action": "がプロジェクト「{{v1}}」を追加しました",
+    "createdTheProjectAndAssignedYou": "{{v1}} さんがプロジェクト「{{v2}}」を作成し、あなたを{{v3}}に指定しました。",
+    "headline": "がプロジェクトを作成しました",
+    "link": "リンク: {{v1}}",
+    "v1AddedTheV2Project": "{{v1}} さんがプロジェクト「{{v2}}」を追加しました",
+    "viewProject": "プロジェクトを見る"
+  },
+  "projectDescriptionChanged": {
+    "headline": "がプロジェクトの説明を更新しました",
+    "mentionedYouInTheDescriptionFor": "が「{{v1}}」の説明であなたをメンションしました",
+    "theDescriptionWasCleared": "説明が削除されました。",
+    "updatedTheDescriptionFor": "が「{{v1}}」の説明を更新しました",
+    "updatedTheProjectDescription": "{{v1}} さんがプロジェクト「{{v2}}」の説明を更新しました。",
+    "v1UpdatedTheV2ProjectDescription": "{{v1}} さんがプロジェクト「{{v2}}」の説明を更新しました",
+    "viewProject": "プロジェクトを見る",
+    "viewProject2": "プロジェクトを見る: {{v1}}",
+    "viewTheProjectToReadThe": "プロジェクトを開いて、更新された内容をご確認ください。"
+  },
+  "projectDiscussionSubmitted": {
+    "action": "が「{{v1}}」を投稿しました",
+    "headline": "がプロジェクトのディスカッション「{{v1}}」を開始しました",
+    "link": "リンク: {{v1}}",
+    "posted": "{{v1}} さんが「{{v2}}」を投稿しました",
+    "v1PostedV2": "{{v1}} さんが「{{v2}}」を投稿しました",
+    "viewDiscussion": "ディスカッションを見る"
+  },
+  "projectDueDateUpdating": {
+    "changedTheDueDate": "が期限を変更しました",
+    "changedTheDueDateForFrom": "{{v1}} さんが「{{v2}}」の期限を {{v3}} から {{v4}} に変更しました。",
+    "changedTheProjectSDueDate": "がプロジェクトの期限を {{v1}} に変更しました",
+    "link": "リンク: {{v1}}",
+    "removedTheDueDate": "が期限を削除しました",
+    "removedTheDueDateFor": "{{v1}} さんが「{{v2}}」の期限を削除しました。",
+    "removedTheDueDateForIt": "{{v1}} さんが「{{v2}}」の期限を削除しました。以前の期限は {{v3}} でした。",
+    "removedTheProjectSDueDate": "がプロジェクトの期限を削除しました",
+    "setTheDueDate": "が期限を設定しました",
+    "setTheDueDateForTo": "{{v1}} さんが「{{v2}}」の期限を {{v3}} に設定しました。",
+    "setTheProjectSDueDate": "がプロジェクトの期限を {{v1}} に設定しました",
+    "theDueDateIsNow": "期限は現在 {{v1}} です。",
+    "theDueDateWasChangedFrom": "期限を {{v1}} から {{v2}} に変更しました。",
+    "theDueDateWasRemoved": "期限を削除しました。",
+    "theDueDateWasRemovedPreviously": "期限を削除しました。以前の期限は {{v1}} でした。",
+    "v1ChangedTheDueDateFor": "{{v1}} さんが「{{v2}}」の期限を変更しました",
+    "v1RemovedTheDueDateFor": "{{v1}} さんが「{{v2}}」の期限を削除しました",
+    "v1SetTheDueDateFor": "{{v1}} さんが「{{v2}}」の期限を設定しました",
+    "viewProject": "プロジェクトを見る"
+  },
+  "projectGoalConnection": {
+    "action": "がプロジェクトをゴール「{{v1}}」に紐づけました",
+    "headline": "がプロジェクトをゴール「{{v1}}」に紐づけました",
+    "link": "リンク: {{v1}}",
+    "v1ConnectedTheV2ProjectTo": "{{v1}} さんがプロジェクト「{{v2}}」をゴール「{{v3}}」に紐づけました",
+    "viewProject": "プロジェクトを見る"
+  },
+  "projectGoalDisconnection": {
+    "action": "がプロジェクトをゴール「{{v1}}」から切り離しました",
+    "headline": "がプロジェクトをゴール「{{v1}}」から切り離しました",
+    "link": "リンク: {{v1}}",
+    "v1DisconnectedTheV2ProjectFrom": "{{v1}} さんがプロジェクト「{{v2}}」をゴール「{{v3}}」から切り離しました",
+    "viewProject": "プロジェクトを見る"
+  },
+  "projectMilestoneCommented": {
+    "commentedOnTheMilestone": "がマイルストーン「{{v1}}」にコメントしました",
+    "commentedOnTheMilestone2": "がマイルストーン「{{v1}}」にコメントしました",
+    "completedTheMilestone": "がマイルストーン「{{v1}}」を完了しました",
+    "completedTheMilestone2": "がマイルストーン「{{v1}}」を完了しました",
+    "link": "リンク: {{v1}}",
+    "reOpenedTheMilestone": "がマイルストーン「{{v1}}」を再オープンしました",
+    "reOpenedTheMilestone2": "がマイルストーン「{{v1}}」を再オープンしました",
+    "viewComment": "コメントを見る",
+    "viewMilestone": "マイルストーンを見る"
+  },
+  "projectMilestoneCreation": {
+    "aNewMilestoneWasAddedTo": "「{{v1}}」に新しいマイルストーンが追加されました。",
+    "action": "がマイルストーン「{{v1}}」を作成しました",
+    "createdTheMilestoneFor": "{{v1}} さんが「{{v3}}」にマイルストーン「{{v2}}」を作成しました。",
+    "headline": "がマイルストーン「{{v1}}」を作成しました",
+    "itIsScheduledFor": "予定日は {{v1}} です。",
+    "link": "リンク: {{v1}}",
+    "v1CreatedTheV2Milestone": "{{v1}} さんがマイルストーン「{{v2}}」を作成しました",
+    "viewMilestone": "マイルストーンを見る"
+  },
+  "projectPausing": {
+    "action": "がプロジェクトを一時停止しました",
+    "headline": "がプロジェクトを一時停止しました",
+    "link": "リンク: {{v1}}",
+    "pausedTheProject": "{{v1}} さんがプロジェクト「{{v2}}」を一時停止しました。",
+    "v1PausedTheProject": "{{v1}} さんがプロジェクトを一時停止しました",
+    "viewProject": "プロジェクトを見る"
+  },
+  "projectResuming": {
+    "action": "がプロジェクトを再開しました",
+    "headline": "がプロジェクトを再開しました",
+    "link": "リンク: {{v1}}",
+    "resumedTheProject": "{{v1}} さんがプロジェクト「{{v2}}」を再開しました。",
+    "v1ResumedTheProject": "{{v1}} さんがプロジェクトを再開しました",
+    "viewProject": "プロジェクトを見る"
+  },
+  "projectRetrospectiveAcknowledged": {
+    "acknowledgedYourRetrospectiveForProject": "{{v1}} さんがプロジェクト「{{v2}}」の振り返りを承認しました",
+    "action": "があなたの振り返りを承認しました",
+    "ctaText": "振り返りを見る",
+    "headline": "がプロジェクトの振り返りを承認しました",
+    "v1AcknowledgedYourRetrospectiveForV2": "{{v1}} さんがプロジェクト「{{v2}}」の振り返りを承認しました"
+  },
+  "projectRetrospectiveCommented": {
+    "commentedOnARetrospectiveFor": "{{v1}} さんが「{{v2}}」の振り返りにコメントしました。",
+    "commentedOnTheProjectRetrospective": "がプロジェクトの振り返りにコメントしました",
+    "ctaText": "振り返りを見る",
+    "headline": "がプロジェクトの振り返りにコメントしました",
+    "link": "リンク: {{v1}}",
+    "v1CommentedOnTheRetrospectiveFor": "{{v1}} さんがプロジェクト「{{v2}}」の振り返りにコメントしました"
+  },
+  "projectReviewerUpdating": {
+    "assignedAsTheProjectReviewer": "が {{v1}} さんをプロジェクトのレビュアーに指定しました",
+    "assignedAsTheReviewer": "が {{v1}} さんをレビュアーに指定しました",
+    "assignedYouAsTheReviewer": "があなたをレビュアーに指定しました",
+    "changedTheReviewerFor": "{{v1}} さんが「{{v2}}」のレビュアーを変更しました。",
+    "link": "リンク: {{v1}}",
+    "removedTheProjectReviewer": "がプロジェクトのレビュアーを解除しました",
+    "removedTheReviewer": "がレビュアーを解除しました",
+    "v1AssignedV2AsTheReviewer": "{{v1}} さんが {{v2}} さんを「{{v3}}」のレビュアーに指定しました",
+    "v1AssignedYouAsTheReviewer": "{{v1}} さんがあなたを「{{v2}}」のレビュアーに指定しました",
+    "v1RemovedTheReviewerOnV2": "{{v1}} さんが「{{v2}}」のレビュアーを解除しました",
+    "viewProject": "プロジェクトを見る"
+  },
+  "projectTaskCommented": {
+    "action": "が「{{v1}}」にコメントしました",
+    "commentedOnTheFollowingTask": "{{v1}} さんが次のタスクにコメントしました: {{v2}}。",
+    "headline": "がタスク「{{v1}}」にコメントしました",
+    "link": "リンク: {{v1}}",
+    "v1CommentedOnTheV2Task": "{{v1}} さんがタスク「{{v2}}」にコメントしました",
+    "viewComment": "コメントを見る"
+  },
+  "projectTimelineEdited": {
+    "action": "がスケジュールを変更しました",
+    "changedTheProjectTimelineFor": "{{v1}} さんが「{{v2}}」のプロジェクトスケジュールを変更しました。",
+    "link": "リンク: {{v1}}",
+    "newMilestonesAdded": "追加されたマイルストーン:",
+    "theDurationIsNow": "期間は現在 {{v1}} です。",
+    "theDurationWasChangedFromTo": "期間を {{v1}} から {{v2}} に変更しました。",
+    "updatedTheProjectSTimeline": "がプロジェクトのスケジュールを更新しました",
+    "updatedTheProjectSTimelineFrom": "がプロジェクトのスケジュールを {{v1}} 〜 {{v2}} に更新しました",
+    "updatedTheProjectSTimelineTo": "がプロジェクトの開始日を {{v1}} に更新しました",
+    "updatedTheProjectSTimelineTo2": "がプロジェクトの終了日を {{v1}} に更新しました",
+    "v1ChangedTheTimelineForV2": "{{v1}} さんが「{{v2}}」のスケジュールを変更しました",
+    "viewProject": "プロジェクトを見る"
+  },
+  "resetPassword": {
+    "resetPasswordInstructions": "パスワード再設定のご案内",
+    "resetPasswordLink": "パスワードを再設定",
+    "resetYourPassword": "パスワードの再設定",
+    "theLinkWillExpireIn24": "セキュリティのため、このリンクは 24 時間で失効します。",
+    "thisPasswordResetLinkWillExpire": "セキュリティのため、このパスワード再設定リンクは 24 時間で失効します。",
+    "visitTheLinkBelowToReset": "下記のリンクからパスワードを再設定してください。",
+    "weReceivedARequestToReset": "アカウントのパスワード再設定のリクエストを受け付けました。"
+  },
+  "resourceHubDocumentCommented": {
+    "action": "が「{{v1}}」にコメントしました",
+    "commentedOn": "{{v1}} さんが「{{v2}}」にコメントしました",
+    "headline": "がドキュメント「{{v1}}」にコメントしました",
+    "link": "リンク: {{v1}}",
+    "v1CommentedOnV2": "{{v1}} さんが「{{v2}}」にコメントしました",
+    "viewComment": "コメントを見る"
+  },
+  "resourceHubDocumentCreated": {
+    "action": "がドキュメント「{{v2}}」を{{v1}}しました",
+    "addedADocument": "{{v1}} さんがドキュメント「{{v2}}」を追加しました",
+    "headline": "がドキュメント「{{v2}}」を{{v1}}しました",
+    "link": "リンク: {{v1}}",
+    "v1AddedADocumentV2": "{{v1}} さんがドキュメント「{{v2}}」を追加しました",
+    "v1CreatedACopyOfV2": "{{v1}} さんが「{{v2}}」のコピーを作成し、「{{v3}}」という名前を付けました",
+    "viewDocument": "ドキュメントを見る"
+  },
+  "resourceHubDocumentDeleted": {
+    "action": "がドキュメント「{{v1}}」を削除しました",
+    "deletedADocument": "{{v1}} さんがドキュメント「{{v2}}」を削除しました",
+    "headline": "がドキュメント「{{v1}}」を削除しました",
+    "link": "リンク: {{v1}}",
+    "v1DeletedADocumentV2": "{{v1}} さんがドキュメント「{{v2}}」を削除しました",
+    "viewResourceHub": "リソースハブを見る"
+  },
+  "resourceHubDocumentEdited": {
+    "headline": "がドキュメント「{{v1}}」を更新しました",
+    "link": "リンク: {{v1}}",
+    "mentionedYouInTheDocument": "がドキュメント「{{v1}}」であなたをメンションしました",
+    "updatedTheDocument": "がドキュメント「{{v1}}」を更新しました",
+    "v1UpdatedTheDocumentV2": "{{v1}} さんがドキュメント「{{v2}}」を更新しました",
+    "viewDocument": "ドキュメントを見る"
+  },
+  "resourceHubFileCommented": {
+    "action": "が「{{v1}}」にコメントしました",
+    "commentedOn": "{{v1}} さんが「{{v2}}」にコメントしました",
+    "headline": "がファイル「{{v1}}」にコメントしました",
+    "link": "リンク: {{v1}}",
+    "v1CommentedOnV2": "{{v1}} さんが「{{v2}}」にコメントしました",
+    "viewComment": "コメントを見る"
+  },
+  "resourceHubFileCreated": {
+    "link": "リンク: {{v1}}",
+    "uploadedFiles": "が {{v1}} 件のファイルをアップロードしました",
+    "uploadedTheFile": "がファイル「{{v1}}」をアップロードしました",
+    "viewFile": "ファイルを見る",
+    "viewFiles": "ファイル一覧を見る"
+  },
+  "resourceHubFileDeleted": {
+    "action": "がファイル「{{v1}}」を削除しました",
+    "deletedAFile": "{{v1}} さんがファイル「{{v2}}」を削除しました",
+    "headline": "がファイル「{{v1}}」を削除しました",
+    "link": "リンク: {{v1}}",
+    "v1DeletedAFileV2": "{{v1}} さんがファイル「{{v2}}」を削除しました",
+    "viewResourceHub": "リソースハブを見る"
+  },
+  "resourceHubLinkCommented": {
+    "action": "が「{{v1}}」にコメントしました",
+    "commentedOn": "{{v1}} さんが「{{v2}}」にコメントしました",
+    "headline": "がリンク「{{v1}}」にコメントしました",
+    "link": "リンク: {{v1}}",
+    "v1CommentedOnV2": "{{v1}} さんが「{{v2}}」にコメントしました",
+    "viewComment": "コメントを見る"
+  },
+  "resourceHubLinkCreated": {
+    "action": "がリンクを追加しました",
+    "addedALink": "{{v1}} さんがリンクを追加しました",
+    "headline": "がリンク「{{v1}}」を追加しました",
+    "link": "リンク: {{v1}}",
+    "v1AddedALink": "{{v1}} さんがリンクを追加しました",
+    "viewLink": "リンクを見る"
+  },
+  "resourceHubLinkDeleted": {
+    "action": "がリンク「{{v1}}」を削除しました",
+    "deletedALink": "{{v1}} さんがリンク「{{v2}}」を削除しました",
+    "headline": "がリンク「{{v1}}」を削除しました",
+    "link": "リンク: {{v1}}",
+    "v1DeletedALinkV2": "{{v1}} さんがリンク「{{v2}}」を削除しました",
+    "viewResourceHub": "リソースハブを見る"
+  },
+  "resourceHubLinkEdited": {
+    "action": "がリンク「{{v1}}」を編集しました",
+    "editedALink": "{{v1}} さんがリンク「{{v2}}」を編集しました",
+    "headline": "がリンク「{{v1}}」を編集しました",
+    "link": "リンク: {{v1}}",
+    "v1EditedALinkV2": "{{v1}} さんがリンク「{{v2}}」を編集しました",
+    "viewLink": "リンクを見る"
+  },
+  "spaceJoining": {
+    "headline": "がスペース「{{v1}}」に参加しました"
+  },
+  "spaceMembersAdded": {
+    "action": "があなたを「{{v1}}」スペースに追加しました",
+    "addedYouToTheSpace": "{{v1}} さんがあなたを「{{v2}}」スペースに追加しました。",
+    "link": "リンク: {{v1}}",
+    "v1AddedYouToTheV2": "{{v1}} さんがあなたを「{{v2}}」スペースに追加しました",
+    "viewSpace": "スペースを見る"
+  },
+  "spaceTaskCommented": {
+    "action": "が「{{v1}}」にコメントしました",
+    "commentedOnTheFollowingTask": "{{v1}} さんが次のタスクにコメントしました: {{v2}}。",
+    "headline": "がタスク「{{v1}}」にコメントしました",
+    "link": "リンク: {{v1}}",
+    "v1CommentedOnTheV2Task": "{{v1}} さんがタスク「{{v2}}」にコメントしました",
+    "viewComment": "コメントを見る"
+  },
+  "taskAdding": {
+    "aNewTaskNamedWasCreated": "このプロジェクトに「{{v1}}」という新しいタスクが作成されました。",
+    "addedTheTask": "がタスク「{{v1}}」を追加しました",
+    "headline": "がタスク「{{v1}}」を作成しました",
+    "link": "リンク: {{v1}}",
+    "mentionedYouInTheDescriptionFor": "が「{{v1}}」の説明であなたをメンションしました",
+    "viewTask": "タスクを見る",
+    "youWereMentionedInTheDescription": "「{{v1}}」の説明であなたがメンションされました。"
+  },
+  "taskAssigneeUpdating": {
+    "assignedToTheTask": "が {{v1}} さんをタスク「{{v2}}」の担当に指定しました",
+    "assignedYouTheTask": "があなたにタスク「{{v1}}」を割り当てました",
+    "changedTheAssigneesFor": "が「{{v1}}」の担当者を変更しました",
+    "changedTheAssigneesForTheTask": "がタスク「{{v1}}」の担当者を変更しました",
+    "link": "リンク: {{v1}}",
+    "removedFromTheTask": "が {{v1}} さんをタスク「{{v2}}」の担当から外しました",
+    "removedYouFromTheTask": "があなたをタスク「{{v1}}」の担当から外しました",
+    "theAssigneeIsNow": "現在の担当者は {{v1}} さんです",
+    "theAssigneeWasChangedFromTo": "担当者を {{v1}} さんから {{v2}} さんに変更しました",
+    "theAssigneeWasRemovedPreviouslyIt": "担当者を解除しました。以前の担当者は {{v1}} さんでした",
+    "theTaskAssigneesWereChanged": "タスクの担当者が変更されました。",
+    "v1AssignedYouTheTaskV2": "{{v1}} さんがあなたにタスク「{{v2}}」を割り当てました",
+    "v1ChangedTheAssigneesForV2": "{{v1}} さんが「{{v2}}」の担当者を変更しました",
+    "v1RemovedAssigneesForV2": "{{v1}} さんが「{{v2}}」の担当者を解除しました",
+    "v1RemovedYouFromTheTask": "{{v1}} さんがあなたをタスク「{{v2}}」の担当から外しました",
+    "viewTask": "タスクを見る",
+    "youAreNoLongerAssignedTo": "あなたはこのタスクの担当ではなくなりました。",
+    "youAreNowAssignedToThis": "あなたがこのタスクの担当になりました。"
+  },
+  "taskDescriptionChange": {
+    "headline": "がタスク「{{v1}}」の説明を更新しました",
+    "link": "リンク: {{v1}}",
+    "mentionedYouInTheDescriptionFor": "が「{{v1}}」の説明であなたをメンションしました",
+    "theDescriptionWasCleared": "説明が削除されました。",
+    "updatedTheDescriptionFor": "が「{{v1}}」の説明を更新しました",
+    "viewTask": "タスクを見る"
+  },
+  "taskDueDateUpdating": {
+    "action": "が「{{v1}}」の期限を変更しました",
+    "changedTheDueDateFor": "{{v1}} さんが「{{v2}}」の期限を変更しました。",
+    "changedTheDueDateOfThe": "がタスク「{{v1}}」の期限を {{v2}} に変更しました",
+    "link": "リンク: {{v1}}",
+    "removedTheDueDateFromThe": "がタスク「{{v1}}」の期限を削除しました",
+    "setTheDueDateOfThe": "がタスク「{{v1}}」の期限を {{v2}} に設定しました",
+    "theDueDateIsNow": "期限は現在 {{v1}} です。",
+    "theDueDateWasChangedFrom": "期限を {{v1}} から {{v2}} に変更しました。",
+    "theDueDateWasRemovedPreviously": "期限を削除しました。以前の期限は {{v1}} でした。",
+    "v1ChangedTheDueDateFor": "{{v1}} さんが「{{v2}}」の期限を変更しました",
+    "v1RemovedTheDueDateFor": "{{v1}} さんが「{{v2}}」の期限を削除しました",
+    "viewTask": "タスクを見る"
+  },
+  "taskMoving": {
+    "action": "がタスク「{{v1}}」を移動しました",
+    "headline": "がタスク「{{v1}}」を移動しました",
+    "link": "リンク: {{v1}}",
+    "moved": "{{v1}} さんが「{{v2}}」を移動しました。",
+    "theTaskIsNowIn": "このタスクは現在 {{v1}} にあります。",
+    "v1MovedV2": "{{v1}} さんが「{{v2}}」を移動しました",
+    "viewTask": "タスクを見る"
+  }
+}

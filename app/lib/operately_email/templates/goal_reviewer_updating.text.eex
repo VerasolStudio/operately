@@ -1,3 +1,3 @@
 <%= "#{short_name(@author)} assigned you as the reviewer for the goal #{@goal.name}." %>
 
-Link: <%= @link %>
+<%= t("goalReviewerUpdating.link", %{v1: @link}) %>

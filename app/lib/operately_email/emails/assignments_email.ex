@@ -7,11 +7,12 @@ defmodule OperatelyEmail.Emails.AssignmentsEmail do
   alias OperatelyWeb.Paths
 
   require Logger
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   @due_soon_window_in_days 1
   @far_future_tuple {9999, 12, 31}
   @due_status_rank %{overdue: 0, due_today: 1, due_soon: 2, upcoming: 3, none: 4}
-  @reminder_due_today_label "Reminder for today"
+  @reminder_due_today_label t("assignments.reminderForToday")
 
   #
   # Sending out an email to remind people of their assignments.
@@ -28,7 +29,7 @@ defmodule OperatelyEmail.Emails.AssignmentsEmail do
           |> new()
           |> from("Operately")
           |> to(person)
-          |> subject("#{company.name}: Your work for today")
+          |> subject(t("assignments.subject", %{v1: company.name}))
           |> assign(:company, company)
 
         email =
@@ -185,7 +186,7 @@ defmodule OperatelyEmail.Emails.AssignmentsEmail do
     {assignment_sort_key(first), String.downcase(origin.name || "")}
   end
 
-  defp resolve_due_status(nil), do: {:none, "No due date"}
+  defp resolve_due_status(nil), do: {:none, t("assignments.noDueDate")}
 
   defp resolve_due_status(%Date{} = due_date) do
     today = Date.utc_today()
@@ -194,20 +195,20 @@ defmodule OperatelyEmail.Emails.AssignmentsEmail do
     cond do
       diff < 0 ->
         days = abs(diff)
-        label = if days == 1, do: "Overdue by 1 day", else: "Overdue by #{days} days"
+        label = if days == 1, do: t("assignments.overdueBy1Day"), else: t("assignments.overdueByDays", %{v1: days})
         {:overdue, label}
 
       diff == 0 ->
-        {:due_today, "Due today"}
+        {:due_today, t("assignments.dueToday")}
 
       diff == 1 ->
-        {:due_soon, "Due tomorrow"}
+        {:due_soon, t("assignments.dueTomorrow")}
 
       diff <= @due_soon_window_in_days ->
-        {:due_soon, "Due in #{diff} days"}
+        {:due_soon, t("assignments.dueInDays", %{v1: diff})}
 
       true ->
-        {:upcoming, "Due in #{diff} days"}
+        {:upcoming, t("assignments.dueInDays", %{v1: diff})}
     end
   end
 

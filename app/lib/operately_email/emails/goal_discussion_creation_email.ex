@@ -2,6 +2,7 @@ defmodule OperatelyEmail.Emails.GoalDiscussionCreationEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Goals}
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -18,7 +19,7 @@ defmodule OperatelyEmail.Emails.GoalDiscussionCreationEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: goal.name, who: author, action: "posted: #{title}")
+    |> subject(where: goal.name, who: author, action: t("goalDiscussionCreation.action", %{v1: title}))
     |> assign(:author, author)
     |> assign(:goal, goal)
     |> assign(:title, title)
@@ -39,7 +40,7 @@ defmodule OperatelyEmail.Emails.GoalDiscussionCreationEmail do
       parent_id: goal.id,
       parent_type: :goal,
       parent_name: goal.name,
-      headline: "started a goal discussion: #{discussion.title}",
+      headline: t("goalDiscussionCreation.headline", %{v1: discussion.title}),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: Paths.goal_activity_path(company, activity) |> Paths.to_url(),

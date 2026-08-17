@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.TaskAddingEmail do
   alias Operately.Repo
   alias OperatelyWeb.Paths
   alias Operately.Tasks.Task
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -31,9 +32,9 @@ defmodule OperatelyEmail.Emails.TaskAddingEmail do
 
   defp get_action(person, activity, task) do
     if mentioned?(person, activity) do
-      "mentioned you in the description for \"#{task.name}\""
+      t("taskAdding.mentionedYouInTheDescriptionFor", %{v1: task.name})
     else
-      "added the task \"#{task.name}\""
+      t("taskAdding.addedTheTask", %{v1: task.name})
     end
   end
 
@@ -72,7 +73,7 @@ defmodule OperatelyEmail.Emails.TaskAddingEmail do
       parent_id: parent.id,
       parent_type: parent.type,
       parent_name: parent.name,
-      headline: "created the task \"#{task.name}\"",
+      headline: t("taskAdding.headline", %{v1: task.name}),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.task_path(company, task) |> OperatelyWeb.Paths.to_url(),

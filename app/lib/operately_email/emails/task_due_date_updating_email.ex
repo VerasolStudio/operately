@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.TaskDueDateUpdatingEmail do
   alias Operately.Repo
   alias OperatelyWeb.Paths
   alias Operately.Tasks.Task
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -20,7 +21,7 @@ defmodule OperatelyEmail.Emails.TaskDueDateUpdatingEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: where, who: author, action: "changed the due date for \"#{task.name}\"")
+    |> subject(where: where, who: author, action: t("taskDueDateUpdating.action", %{v1: task.name}))
     |> assign(:author, author)
     |> assign(:name, task.name)
     |> assign(:previous_date, previous_date)
@@ -64,7 +65,7 @@ defmodule OperatelyEmail.Emails.TaskDueDateUpdatingEmail do
     }
   end
 
-  defp buffered_headline(task_name, _old_date, nil), do: "removed the due date from the task \"#{task_name}\""
-  defp buffered_headline(task_name, nil, new_date), do: "set the due date of the task \"#{task_name}\" to #{new_date}"
-  defp buffered_headline(task_name, _old_date, new_date), do: "changed the due date of the task \"#{task_name}\" to #{new_date}"
+  defp buffered_headline(task_name, _old_date, nil), do: t("taskDueDateUpdating.removedTheDueDateFromThe", %{v1: task_name})
+  defp buffered_headline(task_name, nil, new_date), do: t("taskDueDateUpdating.setTheDueDateOfThe", %{v1: task_name, v2: new_date})
+  defp buffered_headline(task_name, _old_date, new_date), do: t("taskDueDateUpdating.changedTheDueDateOfThe", %{v1: task_name, v2: new_date})
 end

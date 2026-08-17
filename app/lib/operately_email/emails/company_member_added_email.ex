@@ -5,6 +5,7 @@ defmodule OperatelyEmail.Emails.CompanyMemberAddedEmail do
 
   def send(person, activity) do
     import OperatelyEmail.Mailers.ActivityMailer
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
     activity = Repo.preload(activity, author: :company)
     author = activity.author
@@ -38,11 +39,11 @@ defmodule OperatelyEmail.Emails.CompanyMemberAddedEmail do
     |> Repo.one()
   end
 
-  defp get_action(nil, _company), do: "added you as a company member"
-  defp get_action(_ = %InviteLink{}, company), do: "invited you to join #{company.name}"
+  defp get_action(nil, _company), do: t("companyMemberAdded.addedYouAsACompanyMember")
+  defp get_action(_ = %InviteLink{}, company), do: t("companyMemberAdded.invitedYouToJoin", %{v1: company.name})
 
-  defp get_button_text(nil, _company), do: "Log in to Operately"
-  defp get_button_text(_ = %InviteLink{}, company), do: "Join #{company.name}"
+  defp get_button_text(nil, _company), do: t("companyMemberAdded.logInToOperately")
+  defp get_button_text(_ = %InviteLink{}, company), do: t("companyMemberAdded.join", %{v1: company.name})
 
   defp get_url(nil), do: Paths.to_url(Paths.login_path())
   defp get_url(invite_link), do: Paths.to_url(Paths.join_path(invite_link.token))

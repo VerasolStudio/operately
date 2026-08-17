@@ -4,7 +4,7 @@
 <%= Operately.MD.RichText.render(@description) %>
 
 <% else %>
-The description was cleared.
+<%= t("taskDescriptionChange.theDescriptionWasCleared") %>
 
 <% end %>
-Link: <%= @cta_url %>
+<%= t("taskDescriptionChange.link", %{v1: @cta_url}) %>

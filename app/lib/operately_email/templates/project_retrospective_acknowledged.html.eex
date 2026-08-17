@@ -1,4 +1,4 @@
-<%= title("#{short_name(@author)} acknowledged your retrospective for #{@project.name} project") %>
+<%= title(t("projectRetrospectiveAcknowledged.v1AcknowledgedYourRetrospectiveForV2", %{v1: short_name(@author), v2: @project.name})) %>
 
 <%= spacer() %>
 

@@ -1,6 +1,7 @@
 defmodule OperatelyEmail.Emails.ProjectContributorsAdditionEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Projects}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -13,7 +14,7 @@ defmodule OperatelyEmail.Emails.ProjectContributorsAdditionEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: project.name, who: author, action: "added you as a contributor")
+    |> subject(where: project.name, who: author, action: t("projectContributorsAddition.action"))
     |> assign(:author, author)
     |> assign(:project, project)
     |> assign(:responsibility, contributor.responsibility)

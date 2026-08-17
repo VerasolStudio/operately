@@ -2,6 +2,7 @@ defmodule OperatelyEmail.Emails.ProjectCreatedEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Projects}
   alias Operately.People.Person
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -16,7 +17,7 @@ defmodule OperatelyEmail.Emails.ProjectCreatedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: space.name, who: author, action: "added the #{project.name} project")
+    |> subject(where: space.name, who: author, action: t("projectCreated.action", %{v1: project.name}))
     |> assign(:author, author)
     |> assign(:author_role, author_role)
     |> assign(:role, role)
@@ -34,7 +35,7 @@ defmodule OperatelyEmail.Emails.ProjectCreatedEmail do
       parent_id: project.id,
       parent_type: :project,
       parent_name: project.name,
-      headline: "created the project",
+      headline: t("projectCreated.headline"),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.project_path(company, project) |> OperatelyWeb.Paths.to_url(),

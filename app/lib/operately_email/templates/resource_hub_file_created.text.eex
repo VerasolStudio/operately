@@ -1,7 +1,7 @@
 <%= short_name(@author) %> <%= @action %>
 
 <%= if length(@files) == 1 do %>
-    Link: <%= @file_url %>
+    <%= t("resourceHubFileCreated.link", %{v1: @file_url}) %>
 <% else %>
-    Link: <%= @cta_url %>
+    <%= t("resourceHubFileCreated.link", %{v1: @cta_url}) %>
 <% end %>

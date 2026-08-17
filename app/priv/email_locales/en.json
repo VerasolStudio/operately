@@ -1,0 +1,739 @@
+{
+  "assignments": {
+    "dueInDays": "Due in {{v1}} days",
+    "dueToday": "Due today",
+    "dueTomorrow": "Due tomorrow",
+    "noDueDate": "No due date",
+    "overdueBy1Day": "Overdue by 1 day",
+    "overdueByDays": "Overdue by {{v1}} days",
+    "reminderForToday": "Reminder for today",
+    "space": "Space: {{v1}}",
+    "subject": "{{v1}}: Your work for today",
+    "tasksRemindersAndReviewsThatNeed": "Tasks, reminders, and reviews that need your attention today.",
+    "yourWorkForToday": "{{v1}} - Your work for today"
+  },
+  "billingLimitReached": {
+    "addingOrRestoringPeopleIsBlocked": "Adding or restoring people is blocked until the plan is upgraded.",
+    "hasReachedItsFreePlanMember": "{{v1}} has reached its Free plan member limit",
+    "hasReachedItsMemberLimitOf": "{{v1}} has reached its member limit: {{v2}} of {{v3}} active members.",
+    "reviewBilling": "Review billing"
+  },
+  "billingNearLimitWarning": {
+    "addingOrRestoringPeopleWillBe": "Adding or restoring people will be blocked once the member limit is reached.",
+    "hasOfActiveMembersOnThe": "{{v1}} has {{v2}} of {{v3}} active members on the Free plan.",
+    "isNearItsFreePlanMember": "{{v1}} is near its Free plan member limit",
+    "isNearItsFreePlanStorage": "{{v1}} is near its Free plan storage limit",
+    "isUsingOfOnTheFree": "{{v1}} is using {{v2}} of {{v3}} on the Free plan.",
+    "reviewBilling": "Review billing",
+    "uploadingFilesWillBeBlockedOnce": "Uploading files will be blocked once the storage limit is reached."
+  },
+  "bufferedActivityDigest": {
+    "manageEmailSettings": "Manage email settings",
+    "manageEmailSettings2": "Manage email settings: {{v1}}",
+    "nUpdates": "{{v1}} updates",
+    "noNewUpdates": "No new updates.",
+    "oneUpdate": "1 update",
+    "youHaveNewUpdates": "You have {{v1}} new updates",
+    "youHaveOneNewUpdate": "You have 1 new update",
+    "youReAllCaughtUp": "You're all caught up",
+    "youReAllCaughtUp2": "You're all caught up."
+  },
+  "commentAdded": {
+    "commentedOn": "commented on: {{v1}}",
+    "commentedOnTheGoalClosing": "commented on the goal closing",
+    "commentedOnTheGoalReopening": "commented on the goal reopening",
+    "commentedOnTheGoalTimeframeChange": "commented on the goal timeframe change",
+    "commentedOnTheProjectPausing": "commented on the project pausing",
+    "commentedOnTheProjectResumption": "commented on the project resumption",
+    "link": "Link: {{v1}}",
+    "viewComment": "View Comment"
+  },
+  "companyAdminAdded": {
+    "action": "granted you admin privileges",
+    "link": "Link: {{v1}}",
+    "viewCompanyAdminTools": "View Company Admin Tools",
+    "youHaveBeenGrantedAdminPrivileges": "You have been granted admin privileges by {{v1}}",
+    "youHaveBeenGrantedAdminPrivileges2": "You have been granted admin privileges by {{v1}}."
+  },
+  "companyAdminRemoved": {
+    "action": "revoked your admin privileges",
+    "link": "Link: {{v1}}",
+    "viewCompany": "View Company",
+    "yourAdminPrivilegesHaveBeenRevoked": "Your admin privileges have been revoked by {{v1}}",
+    "yourAdminPrivilegesHaveBeenRevoked2": "Your admin privileges have been revoked by {{v1}}."
+  },
+  "companyMemberAdded": {
+    "addedYouAsACompanyMember": "added you as a company member",
+    "invitedYouToJoin": "invited you to join {{v1}}",
+    "join": "Join {{v1}}",
+    "logInToOperately": "Log in to Operately",
+    "youNowHaveAccessToAs": "You now have access to {{v1}} as a company member."
+  },
+  "companyMemberConvertedToGuest": {
+    "action": "converted your account to an outside collaborator",
+    "convertedYourAccountInToAn": "{{v1}} converted your account in {{v2}} to an outside collaborator.",
+    "logInToOperately": "Log in to Operately",
+    "logInToOperately2": "Log in to Operately: {{v1}}",
+    "v1ConvertedYourAccountInV2": "{{v1}} converted your account in {{v2}} to an outside collaborator",
+    "yourTeamMemberPermissionsWereRemoved": "Your team-member permissions were removed. You can still sign in and access the work you are explicitly invited to."
+  },
+  "companyMemberRestoring": {
+    "action": "has restored your account",
+    "link": "Link: {{v1}}",
+    "viewCompany": "View Company",
+    "yourAccountHasBeenRestoredAs": "Your account has been restored as a company member by {{v1}}",
+    "yourAccountHasBeenRestoredAs2": "Your account has been restored as a company member by {{v1}}."
+  },
+  "companyMembersPermissionsEdited": {
+    "action": "updated your access level",
+    "link": "Link: {{v1}}",
+    "newAccessLevel": "New Access Level:",
+    "noAccess": "No Access",
+    "previousAccessLevel": "Previous Access Level:",
+    "viewCompany": "View Company",
+    "yourAccessLevelHasBeenUpdated": "Your access level has been updated by {{v1}}",
+    "yourAccessLevelHasBeenUpdated2": "Your access level has been updated by {{v1}}."
+  },
+  "companyOwnerRemoving": {
+    "action": "has revoked your account owner status",
+    "link": "Link: {{v1}}",
+    "viewCompany": "View Company",
+    "youHaveBeenRemovedAsA": "You have been removed as a company owner by {{v1}}",
+    "youHaveBeenRemovedAsA2": "You have been removed as a company owner by {{v1}}."
+  },
+  "companyOwnersAdding": {
+    "action": "promoted you to an account owner",
+    "link": "Link: {{v1}}",
+    "viewCompany": "View Company",
+    "youHaveBeenPromotedToCompany": "You have been promoted to company owner by {{v1}}",
+    "youHaveBeenPromotedToCompany2": "You have been promoted to company owner by {{v1}}."
+  },
+  "dailyActivityDigest": {
+    "manageEmailSettings": "Manage email settings",
+    "manageEmailSettings2": "Manage email settings: {{v1}}",
+    "nUpdates": "{{v1}} updates",
+    "noNewUpdates": "No new updates.",
+    "oneUpdate": "1 update",
+    "youHaveNewUpdates": "You have {{v1}} new updates",
+    "youHaveOneNewUpdate": "You have 1 new update",
+    "youReAllCaughtUp": "You're all caught up",
+    "youReAllCaughtUp2": "You're all caught up."
+  },
+  "digest": {
+    "newUpdates": "You have {{v1}} new updates",
+    "oneNewUpdate": "You have 1 new update"
+  },
+  "discussionCommentSubmitted": {
+    "action": "commented on: {{v1}}",
+    "commentedOn": "{{v1}} commented on: {{v2}}",
+    "headline": "commented on the discussion \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1CommentedOnV2": "{{v1}} commented on: {{v2}}",
+    "viewComment": "View Comment"
+  },
+  "discussionEditing": {
+    "headline": "edited the discussion \"{{v1}}\""
+  },
+  "discussionPosting": {
+    "action": "posted: {{v1}}",
+    "headline": "started the discussion \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "posted": "{{v1}} posted: {{v2}}",
+    "v1PostedV2": "{{v1}} posted: {{v2}}",
+    "viewDiscussion": "View Discussion"
+  },
+  "emailActivationCode": {
+    "confirmYourEmailAddress": "Confirm your email address",
+    "confirmYourEmailAddressYourConfirmation": "Confirm your email address. Your confirmation code is {{v1}}. Enter it in Operately to confirm your email address or finish signing in.",
+    "ifYouDidntRequestThisEmail": "If you didn’t request this email, there’s nothing to worry about — you can safely ignore it.",
+    "operatelyConfirmationCode": "Operately confirmation code: {{v1}}",
+    "yourConfirmationCodeIsBelow": "Your confirmation code is below. Enter it in Operately to confirm your email address or finish signing in."
+  },
+  "goalArchived": {
+    "action": "archived the {{v1}} goal",
+    "archivedTheGoal": "{{v1}} archived the {{v2}} goal.",
+    "headline": "archived this goal",
+    "link": "Link: {{v1}}",
+    "v1ArchivedTheV2Goal": "{{v1}} archived the {{v2}} goal",
+    "viewArchivedGoal": "View Archived Goal"
+  },
+  "goalChampionUpdating": {
+    "action": "assigned you as the champion",
+    "assignedAsTheGoalChampion": "assigned {{v1}} as the goal champion",
+    "link": "Link: {{v1}}",
+    "removedTheGoalChampion": "removed the goal champion",
+    "v1AssingedYouAsTheChampion": "{{v1}} assinged you as the champion on {{v2}}",
+    "viewGoal": "View Goal"
+  },
+  "goalCheckIn": {
+    "action": "submitted a check-in",
+    "andProgressingAsPlanned": " and progressing as planned.",
+    "checklist": "Checklist",
+    "dueToEmergingRisksOrDelays": " due to emerging risks or delays.",
+    "dueToSignificantProblemsAffectingSuccess": " due to significant problems affecting success.",
+    "dueToday": "due today.",
+    "headline": "submitted a check-in with status \"{{v1}}\"",
+    "helpIsNeeded": " help is needed.",
+    "keyWinsObstaclesAndNeeds": "Key wins, obstacles and needs",
+    "needsAttention": "needs attention",
+    "offTrack": "off track",
+    "overview": "Overview",
+    "shouldBeAware": " should be aware.",
+    "targets": "Targets",
+    "theGoal": "The goal ",
+    "theGoalIs": "The goal is ",
+    "untilTheDeadline": "until the deadline.",
+    "v1SubmittedACheckIn": "{{v1}} submitted a check-in",
+    "viewCheckIn": "View Check-In"
+  },
+  "goalCheckInAcknowledgement": {
+    "acknowledgedTheCheckInFor": "{{v1}} acknowledged the check-in for {{v2}}.",
+    "action": "acknowledged your check-in",
+    "headline": "acknowledged a goal check-in",
+    "link": "Link: {{v1}}",
+    "v1AcknowledgedTheCheckInFor": "{{v1}} acknowledged the check-in for {{v2}}.",
+    "viewCheckIn": "View Check-In"
+  },
+  "goalCheckInCommented": {
+    "commentedOnTheCheckIn": "commented on the check-in",
+    "headline": "commented on a goal check-in",
+    "link": "Link: {{v1}}",
+    "viewComment": "View Comment"
+  },
+  "goalClosing": {
+    "action": "closed the {{v1}} goal",
+    "closedTheGoal": "{{v1}} closed the goal \"{{v2}}\".",
+    "headline": "closed this goal",
+    "link": "Link: {{v1}}",
+    "markedAsAccomplished": "Marked as accomplished",
+    "markedAsNotAccomplished": "Marked as not accomplished",
+    "v1ClosedTheV2Goal": "{{v1}} closed the {{v2}} goal",
+    "viewRetrospective": "View Retrospective"
+  },
+  "goalCreated": {
+    "action": "added the {{v1}} goal",
+    "addedTheAndAssignedYouAs": "{{v1}} added the {{v2}} and assigned you as the {{v3}}.",
+    "headline": "created the goal",
+    "link": "Link: {{v1}}",
+    "v1AddedTheV2Goal": "{{v1}} added the {{v2}} goal",
+    "viewGoal": "View Goal"
+  },
+  "goalDescriptionChanged": {
+    "action": "updated the goal description",
+    "headline": "updated the goal's description",
+    "theDescriptionWasCleared": "The description was cleared.",
+    "updatedTheDescriptionFor": "{{v1}} updated the description for \"{{v2}}\".",
+    "v1UpdatedTheDescriptionForV2": "{{v1}} updated the description for \\\"{{v2}}\\\"",
+    "viewGoal": "View Goal",
+    "viewGoal2": "View Goal: {{v1}}",
+    "viewTheGoalToReadThe": "View the goal to read the updated details."
+  },
+  "goalDiscussionCreation": {
+    "action": "posted: {{v1}}",
+    "headline": "started a goal discussion: {{v1}}",
+    "link": "Link: {{v1}}",
+    "posted": "{{v1}} posted: {{v2}}",
+    "v1PostedV2": "{{v1}} posted: {{v2}}",
+    "viewDiscussion": "View Discussion"
+  },
+  "goalEditing": {
+    "action": "edited the goal",
+    "headline": "edited this goal",
+    "link": "Link: {{v1}}",
+    "theChampionWasChangedFromTo": "The champion was changed from {{v1}} to {{v2}}",
+    "theFollowingMeasurementsWereAdded": "The following measurements were added:",
+    "theFollowingMeasurementsWereDeleted": "The following measurements were deleted:",
+    "theFollowingMeasurementsWereUpdated": "The following measurements were updated:",
+    "theNameWasChangedFromTo": "The name was changed from {{v1}} to {{v2}}.",
+    "theReviewerWasChangedFromTo": "The reviewer was changed from {{v1}} to {{v2}}",
+    "theTimeframeWasChangedFromTo": "The timeframe was changed from {{v1}} to {{v2}}.",
+    "v1EditedTheV2Goal": "{{v1}} edited the {{v2}} goal",
+    "viewGoal": "View Goal"
+  },
+  "goalReopening": {
+    "action": "reopened the {{v1}} goal",
+    "discuss": "Discuss",
+    "headline": "reopened this goal",
+    "link": "Link: {{v1}}",
+    "reopenedTheGoal": "{{v1}} reopened the goal \"{{v2}}\".",
+    "v1ReopenedTheV2Goal": "{{v1}} reopened the {{v2}} goal"
+  },
+  "goalReparent": {
+    "action": "changed the goal parent of {{v1}}",
+    "changedTheGoalSParentTo": "changed the goal's parent to \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "removedTheGoalSParent": "removed the goal's parent",
+    "theParentGoalOfWasChanged": "The parent goal of {{v1}} was changed to {{v2}}",
+    "theParentGoalWasRemovedFrom": "The parent goal was removed from {{v1}}",
+    "v1ChangedTheGoalParentOf": "{{v1}} changed the goal parent of {{v2}}",
+    "viewGoal": "View Goal"
+  },
+  "goalRetrospectiveAcknowledged": {
+    "acknowledgedTheRetrospectiveFor": "{{v1}} acknowledged the retrospective for {{v2}}.",
+    "action": "acknowledged your retrospective",
+    "headline": "acknowledged a goal retrospective",
+    "v1AcknowledgedTheRetrospectiveForV2": "{{v1}} acknowledged the retrospective for {{v2}}.",
+    "viewRetrospective": "View Retrospective",
+    "viewRetrospective2": "View Retrospective: {{v1}}"
+  },
+  "goalReviewerUpdating": {
+    "action": "assigned you as the reviewer",
+    "assignedAsTheGoalReviewer": "assigned {{v1}} as the goal reviewer",
+    "link": "Link: {{v1}}",
+    "removedTheGoalReviewer": "removed the goal reviewer",
+    "v1AssignedYouAsTheReviewer": "{{v1}} assigned you as the reviewer on {{v2}}",
+    "viewGoal": "View Goal"
+  },
+  "goalTimeframeEditing": {
+    "action": "edited the timeframe",
+    "headline": "updated the goal's timeframe",
+    "link": "Link: {{v1}}",
+    "newTimeframe": "New timeframe:",
+    "oldTimeframe": "Old timeframe:",
+    "v1EditedTheTimeframeOfThe": "{{v1}} edited the timeframe of the {{v2}} goal",
+    "viewComment": "View/Comment"
+  },
+  "guestInvited": {
+    "action": "invited you as an outside collaborator",
+    "invitedYouAsAnOutsideCollaborator": "{{v1}} invited you as an outside collaborator to {{v2}}.",
+    "logInToOperately": "Log in to Operately",
+    "logInToOperately2": "Log in to Operately: {{v1}}",
+    "v1InvitedYouAsAnOutside": "{{v1}} invited you as an outside collaborator to {{v2}}",
+    "youNowHaveAccessToAs": "You now have access to {{v1}} as an outside collaborator."
+  },
+  "mailer": {
+    "fromName": "{{v1}} (Operately)",
+    "subject": "({{v1}}) {{v2}} {{v3}}"
+  },
+  "milestoneDescriptionUpdating": {
+    "headline": "updated the description of the milestone \"{{v1}}\"",
+    "mentionedYouInTheDescriptionFor": "mentioned you in the description for \"{{v1}}\"",
+    "theDescriptionWasCleared": "The description was cleared.",
+    "updatedTheDescriptionFor": "updated the description for \"{{v1}}\"",
+    "v1UpdatedTheDescriptionForV2": "{{v1}} updated the description for \\\"{{v2}}\\\"",
+    "viewMilestone": "View Milestone",
+    "viewMilestone2": "View Milestone: {{v1}}",
+    "viewTheMilestoneToReadThe": "View the milestone to read the updated details."
+  },
+  "milestoneDueDateUpdating": {
+    "action": "changed the due date for \"{{v1}}\"",
+    "changedTheDueDateFor": "{{v1}} changed the due date for {{v2}}.",
+    "changedTheDueDateOfThe": "changed the due date of the milestone \"{{v1}}\" to {{v2}}",
+    "link": "Link: {{v1}}",
+    "removedTheDueDateFromThe": "removed the due date from the milestone \"{{v1}}\"",
+    "setTheDueDateOfThe": "set the due date of the milestone \"{{v1}}\" to {{v2}}",
+    "theDueDateIsNow": "The due date is now {{v1}}.",
+    "theDueDateWasChangedFrom": "The due date was changed from {{v1}} to {{v2}}.",
+    "theDueDateWasRemovedPreviously": "The due date was removed. Previously it was {{v1}}.",
+    "v1ChangedTheDueDateFor": "{{v1}} changed the due date for {{v2}}",
+    "v1RemovedTheDueDateFor": "{{v1}} removed the due date for {{v2}}",
+    "viewProject": "View Project"
+  },
+  "partials": {
+    "digestGroup": {
+      "viewUpdate": "View update"
+    }
+  },
+  "projectArchived": {
+    "action": "archived the {{v1}} project",
+    "archivedTheProject": "{{v1}} archived the {{v2}} project.",
+    "headline": "archived the project",
+    "link": "Link: {{v1}}",
+    "v1ArchivedTheV2Project": "{{v1}} archived the {{v2}} project",
+    "viewArchivedProject": "View Archived Project"
+  },
+  "projectChampionUpdating": {
+    "assignedAsTheChampion": "assigned {{v1}} as the champion",
+    "assignedAsTheProjectChampion": "assigned {{v1}} as the project champion",
+    "assignedYouAsTheChampion": "assigned you as the champion",
+    "changedTheChampionFor": "{{v1}} changed the champion for {{v2}}.",
+    "link": "Link: {{v1}}",
+    "removedTheChampion": "removed the champion",
+    "removedTheProjectChampion": "removed the project champion",
+    "v1AssignedV2AsTheChampion": "{{v1}} assigned {{v2}} as the champion on {{v3}}",
+    "v1AssignedYouAsTheChampion": "{{v1}} assigned you as the champion on {{v2}}",
+    "v1RemovedTheChampionOnV2": "{{v1}} removed the champion on {{v2}}",
+    "viewProject": "View Project"
+  },
+  "projectCheckInAcknowledged": {
+    "acknowledgedYourCheckInFor": "{{v1}} acknowledged your check-in for {{v2}}.",
+    "action": "acknowledged your check-in",
+    "ctaText": "View Check-In",
+    "headline": "acknowledged a project check-in",
+    "v1AcknowledgedYourCheckInFor": "{{v1}} acknowledged your check-in for {{v2}} project"
+  },
+  "projectCheckInCommented": {
+    "action": "commented on a check-in",
+    "commentedOnACheckInFor": "{{v1}} commented on a check-in for {{v2}}.",
+    "ctaText": "View Comment",
+    "headline": "commented on a project check-in",
+    "link": "Link: {{v1}}",
+    "v1CommentedOnACheckIn": "{{v1}} commented on a Check-in for the {{v2}} project"
+  },
+  "projectCheckInSubmitted": {
+    "action": "submitted a check-in",
+    "andProgressingAsPlanned": " and progressing as planned.",
+    "checkInNotes": "Check-in notes",
+    "dueToEmergingRisksOrDelays": " due to emerging risks or delays.",
+    "dueToSignificantProblemsAffectingSuccess": " due to significant problems affecting success.",
+    "headline": "submitted a check-in with status \"{{v1}}\"",
+    "helpIsNeeded": " help is needed.",
+    "needsAttention": "needs attention",
+    "offTrack": "off track",
+    "overview": "Overview",
+    "shouldBeAware": " should be aware.",
+    "theProject": "The project ",
+    "theProjectIs": "The project is ",
+    "untilTheDeadline": "until the deadline.",
+    "v1SubmittedACheckIn": "{{v1}} submitted a check-in",
+    "viewCheckIn": "View Check-In"
+  },
+  "projectClosed": {
+    "action": "closed the project and submitted a retrospective",
+    "closedTheProjectAndSubmittedA": "{{v1}} closed the project and submitted a retrospective.",
+    "headline": "closed the project",
+    "link": "Link: {{v1}}",
+    "retrospectiveNotes": "Retrospective notes:",
+    "v1ClosedTheV2ProjectAnd": "{{v1}} closed the {{v2}} project and submitted a retrospective",
+    "viewRetrospective": "View Retrospective"
+  },
+  "projectContributorAddition": {
+    "action": "added you as a {{v1}}",
+    "asAChampionYouAreResponsible": "As a champion, you are responsible for leading the project, defining the scope, goals and timeline, and providing regular updates.",
+    "asAReviewerYouAreResponsible": "As a reviewer, you are responsible for reviewing the progress of the project, providing feedback, and approving the final deliverables.",
+    "link": "Link: {{v1}}",
+    "v1AddedYouAsAV2": "{{v1}} added you as a {{v2}} on {{v3}}",
+    "viewProject": "View Project",
+    "youAreResponsibleFor": "You are responsible for: {{v1}}"
+  },
+  "projectContributorsAddition": {
+    "action": "added you as a contributor",
+    "link": "Link: {{v1}}",
+    "v1AddedYouAsAContributor": "{{v1}} added you as a contributor on {{v2}}",
+    "viewProject": "View Project"
+  },
+  "projectCreated": {
+    "action": "added the {{v1}} project",
+    "createdTheProjectAndAssignedYou": "{{v1}} created the {{v2}} project and assigned you as the {{v3}}.",
+    "headline": "created the project",
+    "link": "Link: {{v1}}",
+    "v1AddedTheV2Project": "{{v1}} added the {{v2}} project",
+    "viewProject": "View Project"
+  },
+  "projectDescriptionChanged": {
+    "headline": "updated the project's description",
+    "mentionedYouInTheDescriptionFor": "mentioned you in the description for \"{{v1}}\"",
+    "theDescriptionWasCleared": "The description was cleared.",
+    "updatedTheDescriptionFor": "updated the description for \"{{v1}}\"",
+    "updatedTheProjectDescription": "{{v1}} updated the \"{{v2}}\" project description.",
+    "v1UpdatedTheV2ProjectDescription": "{{v1}} updated the \\\"{{v2}}\\\" project description",
+    "viewProject": "View Project",
+    "viewProject2": "View Project: {{v1}}",
+    "viewTheProjectToReadThe": "View the project to read the updated details."
+  },
+  "projectDiscussionSubmitted": {
+    "action": "posted: {{v1}}",
+    "headline": "started the project discussion \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "posted": "{{v1}} posted: {{v2}}",
+    "v1PostedV2": "{{v1}} posted: {{v2}}",
+    "viewDiscussion": "View Discussion"
+  },
+  "projectDueDateUpdating": {
+    "changedTheDueDate": "changed the due date",
+    "changedTheDueDateForFrom": "{{v1}} changed the due date for {{v2}} from {{v3}} to {{v4}}.",
+    "changedTheProjectSDueDate": "changed the project's due date to {{v1}}",
+    "link": "Link: {{v1}}",
+    "removedTheDueDate": "removed the due date",
+    "removedTheDueDateFor": "{{v1}} removed the due date for {{v2}}.",
+    "removedTheDueDateForIt": "{{v1}} removed the due date for {{v2}}. It was previously {{v3}}.",
+    "removedTheProjectSDueDate": "removed the project's due date",
+    "setTheDueDate": "set the due date",
+    "setTheDueDateForTo": "{{v1}} set the due date for {{v2}} to {{v3}}.",
+    "setTheProjectSDueDate": "set the project's due date to {{v1}}",
+    "theDueDateIsNow": "The due date is now {{v1}}.",
+    "theDueDateWasChangedFrom": "The due date was changed from {{v1}} to {{v2}}.",
+    "theDueDateWasRemoved": "The due date was removed.",
+    "theDueDateWasRemovedPreviously": "The due date was removed. Previously it was {{v1}}.",
+    "v1ChangedTheDueDateFor": "{{v1}} changed the due date for {{v2}}",
+    "v1RemovedTheDueDateFor": "{{v1}} removed the due date for {{v2}}",
+    "v1SetTheDueDateFor": "{{v1}} set the due date for {{v2}}",
+    "viewProject": "View Project"
+  },
+  "projectGoalConnection": {
+    "action": "connected the project to the {{v1}} goal",
+    "headline": "connected the project to the goal \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1ConnectedTheV2ProjectTo": "{{v1}} connected the {{v2}} project to the {{v3}} goal",
+    "viewProject": "View Project"
+  },
+  "projectGoalDisconnection": {
+    "action": "disconnected the project from the {{v1}} goal",
+    "headline": "disconnected the project from the goal \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1DisconnectedTheV2ProjectFrom": "{{v1}} disconnected the {{v2}} project from the {{v3}} goal",
+    "viewProject": "View Project"
+  },
+  "projectMilestoneCommented": {
+    "commentedOnTheMilestone": "commented on the {{v1}} milestone",
+    "commentedOnTheMilestone2": "commented on the milestone \"{{v1}}\"",
+    "completedTheMilestone": "completed the {{v1}} milestone",
+    "completedTheMilestone2": "completed the milestone \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "reOpenedTheMilestone": "re-opened the {{v1}} milestone",
+    "reOpenedTheMilestone2": "re-opened the milestone \"{{v1}}\"",
+    "viewComment": "View Comment",
+    "viewMilestone": "View Milestone"
+  },
+  "projectMilestoneCreation": {
+    "aNewMilestoneWasAddedTo": "A new milestone was added to {{v1}}.",
+    "action": "created the \"{{v1}}\" milestone",
+    "createdTheMilestoneFor": "{{v1}} created the {{v2}} milestone for {{v3}}.",
+    "headline": "created the milestone \"{{v1}}\"",
+    "itIsScheduledFor": "It is scheduled for {{v1}}.",
+    "link": "Link: {{v1}}",
+    "v1CreatedTheV2Milestone": "{{v1}} created the {{v2}} milestone",
+    "viewMilestone": "View Milestone"
+  },
+  "projectPausing": {
+    "action": "paused the project",
+    "headline": "paused the project",
+    "link": "Link: {{v1}}",
+    "pausedTheProject": "{{v1}} paused the {{v2}} project.",
+    "v1PausedTheProject": "{{v1}} paused the project",
+    "viewProject": "View Project"
+  },
+  "projectResuming": {
+    "action": "resumed the project",
+    "headline": "resumed the project",
+    "link": "Link: {{v1}}",
+    "resumedTheProject": "{{v1}} resumed the {{v2}} project.",
+    "v1ResumedTheProject": "{{v1}} resumed the project",
+    "viewProject": "View Project"
+  },
+  "projectRetrospectiveAcknowledged": {
+    "acknowledgedYourRetrospectiveForProject": "{{v1}} acknowledged your retrospective for {{v2}} project",
+    "action": "acknowledged your retrospective",
+    "ctaText": "View Retrospective",
+    "headline": "acknowledged a project retrospective",
+    "v1AcknowledgedYourRetrospectiveForV2": "{{v1}} acknowledged your retrospective for {{v2}} project"
+  },
+  "projectRetrospectiveCommented": {
+    "commentedOnARetrospectiveFor": "{{v1}} commented on a retrospective for {{v2}}.",
+    "commentedOnTheProjectRetrospective": "commented on the project retrospective",
+    "ctaText": "View Retrospective",
+    "headline": "commented on the project retrospective",
+    "link": "Link: {{v1}}",
+    "v1CommentedOnTheRetrospectiveFor": "{{v1}} commented on the retrospective for the {{v2}} project"
+  },
+  "projectReviewerUpdating": {
+    "assignedAsTheProjectReviewer": "assigned {{v1}} as the project reviewer",
+    "assignedAsTheReviewer": "assigned {{v1}} as the reviewer",
+    "assignedYouAsTheReviewer": "assigned you as the reviewer",
+    "changedTheReviewerFor": "{{v1}} changed the reviewer for {{v2}}.",
+    "link": "Link: {{v1}}",
+    "removedTheProjectReviewer": "removed the project reviewer",
+    "removedTheReviewer": "removed the reviewer",
+    "v1AssignedV2AsTheReviewer": "{{v1}} assigned {{v2}} as the reviewer on {{v3}}",
+    "v1AssignedYouAsTheReviewer": "{{v1}} assigned you as the reviewer on {{v2}}",
+    "v1RemovedTheReviewerOnV2": "{{v1}} removed the reviewer on {{v2}}",
+    "viewProject": "View Project"
+  },
+  "projectTaskCommented": {
+    "action": "commented on: {{v1}}",
+    "commentedOnTheFollowingTask": "{{v1}} commented on the following task: {{v2}}.",
+    "headline": "commented on the task \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1CommentedOnTheV2Task": "{{v1}} commented on the {{v2}} task",
+    "viewComment": "View Comment"
+  },
+  "projectTimelineEdited": {
+    "action": "edited the timeline",
+    "changedTheProjectTimelineFor": "{{v1}} changed the project timeline for {{v2}}.",
+    "link": "Link: {{v1}}",
+    "newMilestonesAdded": "New milestones added:",
+    "theDurationIsNow": "The duration is now {{v1}}.",
+    "theDurationWasChangedFromTo": "The duration was changed from {{v1}} to {{v2}}.",
+    "updatedTheProjectSTimeline": "updated the project's timeline",
+    "updatedTheProjectSTimelineFrom": "updated the project's timeline from {{v1}} to {{v2}}",
+    "updatedTheProjectSTimelineTo": "updated the project's timeline to start on {{v1}}",
+    "updatedTheProjectSTimelineTo2": "updated the project's timeline to end on {{v1}}",
+    "v1ChangedTheTimelineForV2": "{{v1}} changed the timeline for {{v2}}",
+    "viewProject": "View Project"
+  },
+  "resetPassword": {
+    "resetPasswordInstructions": "Reset password instructions",
+    "resetPasswordLink": "Reset password",
+    "resetYourPassword": "Reset your password",
+    "theLinkWillExpireIn24": "The link will expire in 24 hours for security reasons.",
+    "thisPasswordResetLinkWillExpire": "This password reset link will expire in 24 hours for security reasons.",
+    "visitTheLinkBelowToReset": "Visit the link below to reset your password.",
+    "weReceivedARequestToReset": "We received a request to reset the password for your account."
+  },
+  "resourceHubDocumentCommented": {
+    "action": "commented on: {{v1}}",
+    "commentedOn": "{{v1}} commented on: {{v2}}",
+    "headline": "commented on the document \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1CommentedOnV2": "{{v1}} commented on: {{v2}}",
+    "viewComment": "View Comment"
+  },
+  "resourceHubDocumentCreated": {
+    "action": "{{v1}} a document: {{v2}}",
+    "addedADocument": "{{v1}} added a document: {{v2}}",
+    "headline": "{{v1}} the document \"{{v2}}\"",
+    "link": "Link: {{v1}}",
+    "v1AddedADocumentV2": "{{v1}} added a document: {{v2}}",
+    "v1CreatedACopyOfV2": "{{v1}} created a copy of {{v2}} and named it {{v3}}",
+    "viewDocument": "View Document"
+  },
+  "resourceHubDocumentDeleted": {
+    "action": "deleted a document: {{v1}}",
+    "deletedADocument": "{{v1}} deleted a document: {{v2}}",
+    "headline": "deleted the document \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1DeletedADocumentV2": "{{v1}} deleted a document: {{v2}}",
+    "viewResourceHub": "View Resource Hub"
+  },
+  "resourceHubDocumentEdited": {
+    "headline": "updated the document \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "mentionedYouInTheDocument": "mentioned you in the document \"{{v1}}\"",
+    "updatedTheDocument": "updated the document \"{{v1}}\"",
+    "v1UpdatedTheDocumentV2": "{{v1}} updated the document: {{v2}}",
+    "viewDocument": "View Document"
+  },
+  "resourceHubFileCommented": {
+    "action": "commented on: {{v1}}",
+    "commentedOn": "{{v1}} commented on: {{v2}}",
+    "headline": "commented on the file \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1CommentedOnV2": "{{v1}} commented on: {{v2}}",
+    "viewComment": "View Comment"
+  },
+  "resourceHubFileCreated": {
+    "link": "Link: {{v1}}",
+    "uploadedFiles": "uploaded {{v1}} files",
+    "uploadedTheFile": "uploaded the file \"{{v1}}\"",
+    "viewFile": "View File",
+    "viewFiles": "View Files"
+  },
+  "resourceHubFileDeleted": {
+    "action": "deleted a file: {{v1}}",
+    "deletedAFile": "{{v1}} deleted a file: {{v2}}",
+    "headline": "deleted the file \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1DeletedAFileV2": "{{v1}} deleted a file: {{v2}}",
+    "viewResourceHub": "View Resource Hub"
+  },
+  "resourceHubLinkCommented": {
+    "action": "commented on: {{v1}}",
+    "commentedOn": "{{v1}} commented on: {{v2}}",
+    "headline": "commented on the link \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1CommentedOnV2": "{{v1}} commented on: {{v2}}",
+    "viewComment": "View Comment"
+  },
+  "resourceHubLinkCreated": {
+    "action": "added a link",
+    "addedALink": "{{v1}} added a link",
+    "headline": "added the link \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1AddedALink": "{{v1}} added a link",
+    "viewLink": "View Link"
+  },
+  "resourceHubLinkDeleted": {
+    "action": "deleted a link: {{v1}}",
+    "deletedALink": "{{v1}} deleted a link: {{v2}}",
+    "headline": "deleted the link \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1DeletedALinkV2": "{{v1}} deleted a link: {{v2}}",
+    "viewResourceHub": "View Resource Hub"
+  },
+  "resourceHubLinkEdited": {
+    "action": "edited a link: {{v1}}",
+    "editedALink": "{{v1}} edited a link: {{v2}}",
+    "headline": "edited the link \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1EditedALinkV2": "{{v1}} edited a link: {{v2}}",
+    "viewLink": "View Link"
+  },
+  "spaceJoining": {
+    "headline": "joined the space \"{{v1}}\""
+  },
+  "spaceMembersAdded": {
+    "action": "added you to the {{v1}} space",
+    "addedYouToTheSpace": "{{v1}} added you to the {{v2}} space.",
+    "link": "Link: {{v1}}",
+    "v1AddedYouToTheV2": "{{v1}} added you to the {{v2}} space",
+    "viewSpace": "View Space"
+  },
+  "spaceTaskCommented": {
+    "action": "commented on: {{v1}}",
+    "commentedOnTheFollowingTask": "{{v1}} commented on the following task: {{v2}}.",
+    "headline": "commented on the task \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "v1CommentedOnTheV2Task": "{{v1}} commented on the {{v2}} task",
+    "viewComment": "View Comment"
+  },
+  "taskAdding": {
+    "aNewTaskNamedWasCreated": "A new task named {{v1}} was created in this project.",
+    "addedTheTask": "added the task \"{{v1}}\"",
+    "headline": "created the task \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "mentionedYouInTheDescriptionFor": "mentioned you in the description for \"{{v1}}\"",
+    "viewTask": "View Task",
+    "youWereMentionedInTheDescription": "You were mentioned in the description for {{v1}}."
+  },
+  "taskAssigneeUpdating": {
+    "assignedToTheTask": "assigned {{v1}} to the task \"{{v2}}\"",
+    "assignedYouTheTask": "assigned you the task {{v1}}",
+    "changedTheAssigneesFor": "changed the assignees for {{v1}}",
+    "changedTheAssigneesForTheTask": "changed the assignees for the task \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "removedFromTheTask": "removed {{v1}} from the task \"{{v2}}\"",
+    "removedYouFromTheTask": "removed you from the task {{v1}}",
+    "theAssigneeIsNow": "The assignee is now {{v1}}",
+    "theAssigneeWasChangedFromTo": "The assignee was changed from {{v1}} to {{v2}}",
+    "theAssigneeWasRemovedPreviouslyIt": "The assignee was removed. Previously it was {{v1}}",
+    "theTaskAssigneesWereChanged": "The task assignees were changed.",
+    "v1AssignedYouTheTaskV2": "{{v1}} assigned you the task {{v2}}",
+    "v1ChangedTheAssigneesForV2": "{{v1}} changed the assignees for {{v2}}",
+    "v1RemovedAssigneesForV2": "{{v1}} removed assignees for {{v2}}",
+    "v1RemovedYouFromTheTask": "{{v1}} removed you from the task {{v2}}",
+    "viewTask": "View Task",
+    "youAreNoLongerAssignedTo": "You are no longer assigned to this task.",
+    "youAreNowAssignedToThis": "You are now assigned to this task."
+  },
+  "taskDescriptionChange": {
+    "headline": "updated the description of the task \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "mentionedYouInTheDescriptionFor": "mentioned you in the description for \"{{v1}}\"",
+    "theDescriptionWasCleared": "The description was cleared.",
+    "updatedTheDescriptionFor": "updated the description for \"{{v1}}\"",
+    "viewTask": "View Task"
+  },
+  "taskDueDateUpdating": {
+    "action": "changed the due date for \"{{v1}}\"",
+    "changedTheDueDateFor": "{{v1}} changed the due date for {{v2}}.",
+    "changedTheDueDateOfThe": "changed the due date of the task \"{{v1}}\" to {{v2}}",
+    "link": "Link: {{v1}}",
+    "removedTheDueDateFromThe": "removed the due date from the task \"{{v1}}\"",
+    "setTheDueDateOfThe": "set the due date of the task \"{{v1}}\" to {{v2}}",
+    "theDueDateIsNow": "The due date is now {{v1}}.",
+    "theDueDateWasChangedFrom": "The due date was changed from {{v1}} to {{v2}}.",
+    "theDueDateWasRemovedPreviously": "The due date was removed. Previously it was {{v1}}.",
+    "v1ChangedTheDueDateFor": "{{v1}} changed the due date for {{v2}}",
+    "v1RemovedTheDueDateFor": "{{v1}} removed the due date for {{v2}}",
+    "viewTask": "View Task"
+  },
+  "taskMoving": {
+    "action": "moved the task \"{{v1}}\"",
+    "headline": "moved the task \"{{v1}}\"",
+    "link": "Link: {{v1}}",
+    "moved": "{{v1}} moved {{v2}}.",
+    "theTaskIsNowIn": "The task is now in {{v1}}.",
+    "v1MovedV2": "{{v1}} moved {{v2}}",
+    "viewTask": "View Task"
+  }
+}

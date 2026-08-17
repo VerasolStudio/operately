@@ -1,4 +1,4 @@
-<%= title("#{short_name(@author)} added a link") %>
+<%= title(t("resourceHubLinkCreated.v1AddedALink", %{v1: short_name(@author)})) %>
 
 <%= spacer() %>
 
@@ -13,5 +13,5 @@
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@cta_url, "View Link") %>
+  <%= cta_button(@cta_url, t("resourceHubLinkCreated.viewLink")) %>
 <% end %>

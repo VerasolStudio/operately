@@ -1,7 +1,7 @@
-<%= title("You have been removed as a company owner by #{short_name(@author)}") %>
+<%= title(t("companyOwnerRemoving.youHaveBeenRemovedAsA", %{v1: short_name(@author)})) %>
 
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@link, "View Company") %>
+  <%= cta_button(@link, t("companyOwnerRemoving.viewCompany")) %>
 <% end %>

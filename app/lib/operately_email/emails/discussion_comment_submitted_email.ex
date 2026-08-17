@@ -5,6 +5,7 @@ defmodule OperatelyEmail.Emails.DiscussionCommentSubmittedEmail do
   alias Operately.Updates
   alias OperatelyWeb.Paths
   alias Operately.Messages.Message
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -18,7 +19,7 @@ defmodule OperatelyEmail.Emails.DiscussionCommentSubmittedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: space.name, who: author, action: "commented on: #{title}")
+    |> subject(where: space.name, who: author, action: t("discussionCommentSubmitted.action", %{v1: title}))
     |> assign(:author, author)
     |> assign(:discussion, message)
     |> assign(:title, title)
@@ -40,7 +41,7 @@ defmodule OperatelyEmail.Emails.DiscussionCommentSubmittedEmail do
       parent_id: space.id,
       parent_type: :space,
       parent_name: space.name,
-      headline: "commented on the discussion \"#{title}\"",
+      headline: t("discussionCommentSubmitted.headline", %{v1: title}),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: Paths.message_path(company, message, comment) |> Paths.to_url(),

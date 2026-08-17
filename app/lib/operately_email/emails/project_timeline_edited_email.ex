@@ -1,6 +1,7 @@
 defmodule OperatelyEmail.Emails.ProjectTimelineEditedEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Projects}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -23,7 +24,7 @@ defmodule OperatelyEmail.Emails.ProjectTimelineEditedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: project.name, who: author, action: "edited the timeline")
+    |> subject(where: project.name, who: author, action: t("projectTimelineEdited.action"))
     |> assign(:author, author)
     |> assign(:project, project)
     |> assign(:activity, activity)
@@ -76,10 +77,10 @@ defmodule OperatelyEmail.Emails.ProjectTimelineEditedEmail do
     }
   end
 
-  defp buffered_headline(nil, nil), do: "updated the project's timeline"
-  defp buffered_headline(start_date, nil), do: "updated the project's timeline to start on #{format_date(start_date)}"
-  defp buffered_headline(nil, end_date), do: "updated the project's timeline to end on #{format_date(end_date)}"
-  defp buffered_headline(start_date, end_date), do: "updated the project's timeline from #{format_date(start_date)} to #{format_date(end_date)}"
+  defp buffered_headline(nil, nil), do: t("projectTimelineEdited.updatedTheProjectSTimeline")
+  defp buffered_headline(start_date, nil), do: t("projectTimelineEdited.updatedTheProjectSTimelineTo", %{v1: format_date(start_date)})
+  defp buffered_headline(nil, end_date), do: t("projectTimelineEdited.updatedTheProjectSTimelineTo2", %{v1: format_date(end_date)})
+  defp buffered_headline(start_date, end_date), do: t("projectTimelineEdited.updatedTheProjectSTimelineFrom", %{v1: format_date(start_date), v2: format_date(end_date)})
 
   defp format_date(date) when is_binary(date) do
     case Date.from_iso8601(date) do

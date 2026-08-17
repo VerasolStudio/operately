@@ -3,6 +3,7 @@ defmodule OperatelyEmail.Emails.GoalDescriptionChangedEmail do
 
   alias Operately.{Goals, Repo}
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -13,7 +14,7 @@ defmodule OperatelyEmail.Emails.GoalDescriptionChangedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: goal.name, who: author, action: "updated the goal description")
+    |> subject(where: goal.name, who: author, action: t("goalDescriptionChanged.action"))
     |> assign(:author, author)
     |> assign(:goal_name, goal.name)
     |> assign(:description, decode_description(activity.content["new_description"]))
@@ -44,7 +45,7 @@ defmodule OperatelyEmail.Emails.GoalDescriptionChangedEmail do
       parent_id: goal.id,
       parent_type: :goal,
       parent_name: goal.name,
-      headline: "updated the goal's description",
+      headline: t("goalDescriptionChanged.headline"),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: OperatelyWeb.Paths.goal_path(company, goal) |> OperatelyWeb.Paths.to_url(),

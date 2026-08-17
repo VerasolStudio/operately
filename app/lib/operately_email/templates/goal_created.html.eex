@@ -1,7 +1,7 @@
-<%= title("#{short_name(@author)} added the #{@goal.name} goal") %>
+<%= title(t("goalCreated.v1AddedTheV2Goal", %{v1: short_name(@author), v2: @goal.name})) %>
 
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@cta_url, "View Goal") %>
+  <%= cta_button(@cta_url, t("goalCreated.viewGoal")) %>
 <% end %>

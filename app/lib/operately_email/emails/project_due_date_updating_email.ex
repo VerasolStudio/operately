@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.ProjectDueDateUpdatingEmail do
   alias Operately.Repo
   alias OperatelyWeb.Paths
   alias Operately.Projects.Project
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -37,9 +38,9 @@ defmodule OperatelyEmail.Emails.ProjectDueDateUpdatingEmail do
   end
   defp get_date_value(date), do: Calendar.strftime(date, "%b %-d, %Y")
 
-  defp subject_action(_old, nil), do: "removed the due date"
-  defp subject_action(nil, _new), do: "set the due date"
-  defp subject_action(_old, _new), do: "changed the due date"
+  defp subject_action(_old, nil), do: t("projectDueDateUpdating.removedTheDueDate")
+  defp subject_action(nil, _new), do: t("projectDueDateUpdating.setTheDueDate")
+  defp subject_action(_old, _new), do: t("projectDueDateUpdating.changedTheDueDate")
 
   def buffered_item(_person, activity) do
     project = Operately.Projects.get_project!(activity.content["project_id"])
@@ -62,7 +63,7 @@ defmodule OperatelyEmail.Emails.ProjectDueDateUpdatingEmail do
     }
   end
 
-  defp buffered_headline(_old_date, nil), do: "removed the project's due date"
-  defp buffered_headline(nil, new_date), do: "set the project's due date to #{new_date}"
-  defp buffered_headline(_old_date, new_date), do: "changed the project's due date to #{new_date}"
+  defp buffered_headline(_old_date, nil), do: t("projectDueDateUpdating.removedTheProjectSDueDate")
+  defp buffered_headline(nil, new_date), do: t("projectDueDateUpdating.setTheProjectSDueDate", %{v1: new_date})
+  defp buffered_headline(_old_date, new_date), do: t("projectDueDateUpdating.changedTheProjectSDueDate", %{v1: new_date})
 end

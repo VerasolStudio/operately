@@ -1,6 +1,6 @@
-<%= @company.name %> - Your work for today
+<%= t("assignments.yourWorkForToday", %{v1: @company.name}) %>
 
-Tasks, reminders, and reviews that need your attention today.
+<%= t("assignments.tasksRemindersAndReviewsThatNeed") %>
 
 <%= Enum.map(@urgent_groups, fn group -> %>
 - <%= group.origin.name %><%= if group.origin.space_name do %> — Space: <%= group.origin.space_name %><% end %>

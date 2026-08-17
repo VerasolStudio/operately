@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.BillingLimitReachedEmail do
   alias OperatelyWeb.Paths
   alias OperatelyEmail.Mailers.BaseMailer
   alias OperatelyEmail.Mailers.NotificationMailer
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send([], _company, _status), do: {:ok, :no_recipients}
 
@@ -25,7 +26,7 @@ defmodule OperatelyEmail.Emails.BillingLimitReachedEmail do
   end
 
   def subject(company, %LimitStatus{limit_key: :member_count}) do
-    "#{company.name} has reached its Free plan member limit"
+    t("billingLimitReached.hasReachedItsFreePlanMember", %{v1: company.name})
   end
 
   def template_assigns(company, %LimitStatus{} = status, cta_url) do
@@ -33,7 +34,7 @@ defmodule OperatelyEmail.Emails.BillingLimitReachedEmail do
       headline: subject(company, status),
       usage_summary: usage_summary(company, status),
       impact_message: impact_message(status),
-      cta_label: "Review billing",
+      cta_label: t("billingLimitReached.reviewBilling"),
       cta_url: cta_url
     }
   end
@@ -44,10 +45,10 @@ defmodule OperatelyEmail.Emails.BillingLimitReachedEmail do
   defp format_usage(:member_count, value), do: Integer.to_string(value)
 
   defp usage_summary(company, %LimitStatus{limit_key: :member_count} = status) do
-    "#{company.name} has reached its member limit: #{format_usage(status.limit_key, status.current_usage)} of #{format_usage(status.limit_key, status.limit)} active members."
+    t("billingLimitReached.hasReachedItsMemberLimitOf", %{v1: company.name, v2: format_usage(status.limit_key, status.current_usage), v3: format_usage(status.limit_key, status.limit)})
   end
 
   defp impact_message(%LimitStatus{limit_key: :member_count}) do
-    "Adding or restoring people is blocked until the plan is upgraded."
+    t("billingLimitReached.addingOrRestoringPeopleIsBlocked")
   end
 end

@@ -5,6 +5,7 @@ defmodule OperatelyEmail.Emails.ProjectReviewerUpdatingEmail do
   alias Operately.Projects
   alias Operately.People.Person
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -27,12 +28,12 @@ defmodule OperatelyEmail.Emails.ProjectReviewerUpdatingEmail do
   defp get_reviewer(nil), do: nil
   defp get_reviewer(id), do: Person.get!(:system, id: id)
 
-  defp get_action(_person, nil), do: "removed the reviewer"
+  defp get_action(_person, nil), do: t("projectReviewerUpdating.removedTheReviewer")
   defp get_action(person, reviewer) do
     if person.id == reviewer.id do
-      "assigned you as the reviewer"
+      t("projectReviewerUpdating.assignedYouAsTheReviewer")
     else
-      "assigned #{Person.short_name(reviewer)} as the reviewer"
+      t("projectReviewerUpdating.assignedAsTheReviewer", %{v1: Person.short_name(reviewer)})
     end
   end
 
@@ -56,6 +57,6 @@ defmodule OperatelyEmail.Emails.ProjectReviewerUpdatingEmail do
     }
   end
 
-  defp buffered_headline(nil), do: "removed the project reviewer"
-  defp buffered_headline(reviewer), do: "assigned #{reviewer.full_name} as the project reviewer"
+  defp buffered_headline(nil), do: t("projectReviewerUpdating.removedTheProjectReviewer")
+  defp buffered_headline(reviewer), do: t("projectReviewerUpdating.assignedAsTheProjectReviewer", %{v1: reviewer.full_name})
 end

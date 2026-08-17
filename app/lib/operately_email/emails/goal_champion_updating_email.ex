@@ -2,6 +2,7 @@ defmodule OperatelyEmail.Emails.GoalChampionUpdatingEmail do
   import OperatelyEmail.Mailers.ActivityMailer
 
   alias Operately.{Repo, Goals}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -12,7 +13,7 @@ defmodule OperatelyEmail.Emails.GoalChampionUpdatingEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: goal.name, who: author, action: "assigned you as the champion")
+    |> subject(where: goal.name, who: author, action: t("goalChampionUpdating.action"))
     |> assign(:author, author)
     |> assign(:goal, goal)
     |> assign(:link, OperatelyWeb.Paths.goal_path(company, goal) |> OperatelyWeb.Paths.to_url())
@@ -42,6 +43,6 @@ defmodule OperatelyEmail.Emails.GoalChampionUpdatingEmail do
   defp get_champion(nil), do: nil
   defp get_champion(id), do: Operately.People.Person.get!(:system, id: id)
 
-  defp buffered_headline(nil), do: "removed the goal champion"
-  defp buffered_headline(champion), do: "assigned #{champion.full_name} as the goal champion"
+  defp buffered_headline(nil), do: t("goalChampionUpdating.removedTheGoalChampion")
+  defp buffered_headline(champion), do: t("goalChampionUpdating.assignedAsTheGoalChampion", %{v1: champion.full_name})
 end

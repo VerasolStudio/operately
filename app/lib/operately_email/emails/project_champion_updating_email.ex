@@ -5,6 +5,7 @@ defmodule OperatelyEmail.Emails.ProjectChampionUpdatingEmail do
   alias Operately.Projects.Project
   alias Operately.People.Person
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -28,12 +29,12 @@ defmodule OperatelyEmail.Emails.ProjectChampionUpdatingEmail do
   defp get_champion(nil), do: nil
   defp get_champion(id), do: Person.get!(:system, id: id)
 
-  defp get_action(_person, nil), do: "removed the champion"
+  defp get_action(_person, nil), do: t("projectChampionUpdating.removedTheChampion")
   defp get_action(person, champion) do
     if person.id == champion.id do
-      "assigned you as the champion"
+      t("projectChampionUpdating.assignedYouAsTheChampion")
     else
-      "assigned #{Person.short_name(champion)} as the champion"
+      t("projectChampionUpdating.assignedAsTheChampion", %{v1: Person.short_name(champion)})
     end
   end
 
@@ -57,6 +58,6 @@ defmodule OperatelyEmail.Emails.ProjectChampionUpdatingEmail do
     }
   end
 
-  defp buffered_headline(nil), do: "removed the project champion"
-  defp buffered_headline(champion), do: "assigned #{champion.full_name} as the project champion"
+  defp buffered_headline(nil), do: t("projectChampionUpdating.removedTheProjectChampion")
+  defp buffered_headline(champion), do: t("projectChampionUpdating.assignedAsTheProjectChampion", %{v1: champion.full_name})
 end

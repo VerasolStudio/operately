@@ -109,3 +109,17 @@ DB_TIMEOUT=60000
 
 This value is in milliseconds. If `DB_TIMEOUT` is not set, Operately keeps its
 current default database timeout behavior.
+
+### Optional email language
+
+Outgoing email is written in English by default. A queued email has no browser
+to ask, so the language is set for the whole instance:
+
+```bash
+# operately.env
+EMAIL_LOCALE=ja
+```
+
+Supported values are `en` and `ja`. Anything else falls back to English. The
+web interface language is chosen per person under Account → Appearance and is
+independent of this setting.

@@ -5,6 +5,7 @@ defmodule OperatelyEmail.Emails.TaskAssigneeUpdatingEmail do
   alias OperatelyWeb.Paths
   alias Operately.Tasks.Task
   alias Operately.People.Person
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -36,9 +37,9 @@ defmodule OperatelyEmail.Emails.TaskAssigneeUpdatingEmail do
     |> render("task_assignee_updating")
   end
 
-  defp subject_action(task, true, _), do: "assigned you the task #{task.name}"
-  defp subject_action(task, _, true), do: "removed you from the task #{task.name}"
-  defp subject_action(task, _, _), do: "changed the assignees for #{task.name}"
+  defp subject_action(task, true, _), do: t("taskAssigneeUpdating.assignedYouTheTask", %{v1: task.name})
+  defp subject_action(task, _, true), do: t("taskAssigneeUpdating.removedYouFromTheTask", %{v1: task.name})
+  defp subject_action(task, _, _), do: t("taskAssigneeUpdating.changedTheAssigneesFor", %{v1: task.name})
 
   defp get_person(nil), do: nil
   defp get_person(id) do
@@ -87,7 +88,7 @@ defmodule OperatelyEmail.Emails.TaskAssigneeUpdatingEmail do
     end
   end
 
-  defp buffered_headline(task_name, assignee, _old_assignee, [_], []), do: "assigned #{assignee.full_name} to the task \"#{task_name}\""
-  defp buffered_headline(task_name, _new_assignee, assignee, [], [_]), do: "removed #{assignee.full_name} from the task \"#{task_name}\""
-  defp buffered_headline(task_name, _new_assignee, _old_assignee, _added_assignee_ids, _removed_assignee_ids), do: "changed the assignees for the task \"#{task_name}\""
+  defp buffered_headline(task_name, assignee, _old_assignee, [_], []), do: t("taskAssigneeUpdating.assignedToTheTask", %{v1: assignee.full_name, v2: task_name})
+  defp buffered_headline(task_name, _new_assignee, assignee, [], [_]), do: t("taskAssigneeUpdating.removedFromTheTask", %{v1: assignee.full_name, v2: task_name})
+  defp buffered_headline(task_name, _new_assignee, _old_assignee, _added_assignee_ids, _removed_assignee_ids), do: t("taskAssigneeUpdating.changedTheAssigneesForTheTask", %{v1: task_name})
 end

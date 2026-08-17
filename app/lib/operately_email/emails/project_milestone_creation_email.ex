@@ -5,6 +5,7 @@ defmodule OperatelyEmail.Emails.ProjectMilestoneCreationEmail do
   alias Operately.Projects.Milestone
   alias Operately.ContextualDates.ContextualDate
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -18,7 +19,7 @@ defmodule OperatelyEmail.Emails.ProjectMilestoneCreationEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: project.name, who: author, action: "created the \"#{milestone.title}\" milestone")
+    |> subject(where: project.name, who: author, action: t("projectMilestoneCreation.action", %{v1: milestone.title}))
     |> assign(:author, author)
     |> assign(:project, project)
     |> assign(:milestone, milestone)
@@ -49,7 +50,7 @@ defmodule OperatelyEmail.Emails.ProjectMilestoneCreationEmail do
       parent_id: parent.id,
       parent_type: parent.type,
       parent_name: parent.name,
-      headline: "created the milestone \"#{milestone.title}\"",
+      headline: t("projectMilestoneCreation.headline", %{v1: milestone.title}),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.project_milestone_path(company, milestone) |> OperatelyWeb.Paths.to_url(),

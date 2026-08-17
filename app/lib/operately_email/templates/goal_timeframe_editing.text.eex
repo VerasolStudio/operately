@@ -1,3 +1,3 @@
 <%= "#{short_name(@author)} edited the timeline of the #{@goal.name} goal" %>
 
-Link: <%= @link %>
+<%= t("goalTimeframeEditing.link", %{v1: @link}) %>

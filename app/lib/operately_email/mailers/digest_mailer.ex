@@ -20,7 +20,10 @@ defmodule OperatelyEmail.Mailers.DigestMailer do
     total_updates = calculate_total_updates(parent_groups)
     notifications_url = OperatelyWeb.Paths.notifications_path(company) |> OperatelyWeb.Paths.to_url()
     settings_url = OperatelyWeb.Paths.account_notification_settings_path(company) |> OperatelyWeb.Paths.to_url()
-    subject = "You have #{total_updates} new #{if total_updates == 1, do: "update", else: "updates"}"
+    subject =
+      if total_updates == 1,
+        do: OperatelyEmail.I18n.t("digest.oneNewUpdate"),
+        else: OperatelyEmail.I18n.t("digest.newUpdates", %{v1: total_updates})
 
     assigns = %{
       subject: subject,
@@ -45,7 +48,10 @@ defmodule OperatelyEmail.Mailers.DigestMailer do
     total_updates = calculate_total_updates(parent_groups)
     notifications_url = OperatelyWeb.Paths.notifications_path(company) |> OperatelyWeb.Paths.to_url()
     settings_url = OperatelyWeb.Paths.account_notification_settings_path(company) |> OperatelyWeb.Paths.to_url()
-    subject = "You have #{total_updates} new #{if total_updates == 1, do: "update", else: "updates"}"
+    subject =
+      if total_updates == 1,
+        do: OperatelyEmail.I18n.t("digest.oneNewUpdate"),
+        else: OperatelyEmail.I18n.t("digest.newUpdates", %{v1: total_updates})
 
     assigns = %{
       subject: subject,

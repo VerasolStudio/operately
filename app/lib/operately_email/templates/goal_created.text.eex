@@ -1,3 +1,3 @@
-<%= short_name(@author) %> added the <%= @goal.name %> and assigned you as the <%= @role %>.
+<%= t("goalCreated.addedTheAndAssignedYouAs", %{v1: short_name(@author), v2: @goal.name, v3: @role}) %>
 
-Link: <%= @cta_url %>
+<%= t("goalCreated.link", %{v1: @cta_url}) %>

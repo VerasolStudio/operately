@@ -3,6 +3,7 @@ defmodule OperatelyEmail.Emails.CompanyMembersPermissionsEditedEmail do
   alias Operately.Repo
   alias Operately.Access.Binding
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     activity = Repo.preload(activity, [author: :company])
@@ -19,7 +20,7 @@ defmodule OperatelyEmail.Emails.CompanyMembersPermissionsEditedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: company.name, who: author, action: "updated your access level")
+    |> subject(where: company.name, who: author, action: t("companyMembersPermissionsEdited.action"))
     |> assign(:author, author)
     |> assign(:link, link)
     |> assign(:previous_access_level, access_level_name(member["previous_access_level"]))
@@ -27,6 +28,6 @@ defmodule OperatelyEmail.Emails.CompanyMembersPermissionsEditedEmail do
     |> render("company_members_permissions_edited")
   end
 
-  defp access_level_name(nil), do: "No Access"
+  defp access_level_name(nil), do: t("companyMembersPermissionsEdited.noAccess")
   defp access_level_name(level), do: Binding.label(level)
 end

@@ -3,6 +3,7 @@ defmodule OperatelyEmail.Emails.ProjectDescriptionChangedEmail do
 
   alias Operately.{Projects, Repo}
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -27,9 +28,9 @@ defmodule OperatelyEmail.Emails.ProjectDescriptionChangedEmail do
     mentioned_ids = Operately.RichContent.find_mentioned_ids(activity.content["description"], :decode_ids)
 
     if person.id in mentioned_ids do
-      "mentioned you in the description for \"#{project.name}\""
+      t("projectDescriptionChanged.mentionedYouInTheDescriptionFor", %{v1: project.name})
     else
-      "updated the description for \"#{project.name}\""
+      t("projectDescriptionChanged.updatedTheDescriptionFor", %{v1: project.name})
     end
   end
 
@@ -65,7 +66,7 @@ defmodule OperatelyEmail.Emails.ProjectDescriptionChangedEmail do
       parent_id: project.id,
       parent_type: :project,
       parent_name: project.name,
-      headline: "updated the project's description",
+      headline: t("projectDescriptionChanged.headline"),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: OperatelyWeb.Paths.project_path(company, project) |> OperatelyWeb.Paths.to_url(),

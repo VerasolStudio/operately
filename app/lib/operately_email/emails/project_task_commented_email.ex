@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.ProjectTaskCommentedEmail do
   alias OperatelyWeb.Paths
   alias Operately.{Repo, Updates}
   alias Operately.Tasks.Task
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -18,7 +19,7 @@ defmodule OperatelyEmail.Emails.ProjectTaskCommentedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: task.project.name, who: author, action: "commented on: #{task.name}")
+    |> subject(where: task.project.name, who: author, action: t("projectTaskCommented.action", %{v1: task.name}))
     |> assign(:author, author)
     |> assign(:comment, comment)
     |> assign(:name, task.name)
@@ -39,7 +40,7 @@ defmodule OperatelyEmail.Emails.ProjectTaskCommentedEmail do
       parent_id: parent.id,
       parent_type: parent.type,
       parent_name: parent.name,
-      headline: "commented on the task \"#{task.name}\"",
+      headline: t("projectTaskCommented.headline", %{v1: task.name}),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: Paths.task_path(company, task, comment) |> Paths.to_url(),

@@ -2,6 +2,7 @@ defmodule OperatelyEmail.Emails.CompanyAdminRemovedEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.Repo
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     activity = Repo.preload(activity, [author: :company])
@@ -13,7 +14,7 @@ defmodule OperatelyEmail.Emails.CompanyAdminRemovedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: company.name, who: author, action: "revoked your admin privileges")
+    |> subject(where: company.name, who: author, action: t("companyAdminRemoved.action"))
     |> assign(:author, author)
     |> assign(:link, link)
     |> render("company_admin_removed")

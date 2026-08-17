@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.TaskMovingEmail do
   alias Operately.Repo
   alias Operately.Tasks.Task
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -15,7 +16,7 @@ defmodule OperatelyEmail.Emails.TaskMovingEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: destination_name(task), who: author, action: "moved the task \"#{task.name}\"")
+    |> subject(where: destination_name(task), who: author, action: t("taskMoving.action", %{v1: task.name}))
     |> assign(:author, author)
     |> assign(:task_name, task.name)
     |> assign(:destination_name, destination_name(task))
@@ -40,7 +41,7 @@ defmodule OperatelyEmail.Emails.TaskMovingEmail do
       parent_id: parent.id,
       parent_type: parent.type,
       parent_name: parent.name,
-      headline: "moved the task \"#{task.name}\"",
+      headline: t("taskMoving.headline", %{v1: task.name}),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.task_path(company, task) |> OperatelyWeb.Paths.to_url(),

@@ -1,13 +1,13 @@
-<%= title("#{short_name(@author)} edited the timeframe of the #{@goal.name} goal") %>
+<%= title(t("goalTimeframeEditing.v1EditedTheTimeframeOfThe", %{v1: short_name(@author), v2: @goal.name})) %>
 
 <%= spacer() %>
 
 <%= row do %>
-  Old timeframe: <%= Date.to_string(@old_timeframe.start_date) %> &rarr; <%= Date.to_string(@old_timeframe.end_date) %>
+  <%= t("goalTimeframeEditing.oldTimeframe") %> <%= Date.to_string(@old_timeframe.start_date) %> &rarr; <%= Date.to_string(@old_timeframe.end_date) %>
 <% end %>
 
 <%= row do %>
-  New timeframe: <%= Date.to_string(@new_timeframe.start_date) %> &rarr; <%= Date.to_string(@new_timeframe.end_date) %>
+  <%= t("goalTimeframeEditing.newTimeframe") %> <%= Date.to_string(@new_timeframe.start_date) %> &rarr; <%= Date.to_string(@new_timeframe.end_date) %>
 <% end %>
 
 <%= spacer() %>
@@ -19,5 +19,5 @@
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@link, "View/Comment") %>
+  <%= cta_button(@link, t("goalTimeframeEditing.viewComment")) %>
 <% end %>

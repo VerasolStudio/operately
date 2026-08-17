@@ -1,12 +1,14 @@
-You have <%= @total_updates %> new <%= if @total_updates == 1, do: "update", else: "updates" %>
+<%= if @total_updates == 1,
+      do: t("dailyActivityDigest.youHaveOneNewUpdate"),
+      else: t("dailyActivityDigest.youHaveNewUpdates", %{v1: @total_updates}) %>
 
 <%= if Enum.empty?(@parent_groups) do %>
-You're all caught up.
-No new updates.
+<%= t("dailyActivityDigest.youReAllCaughtUp2") %>
+<%= t("dailyActivityDigest.noNewUpdates") %>
 <% else %>
 <%= for group <- @parent_groups do %>
 <% group_total = Enum.reduce(group.author_groups, 0, fn ag, acc -> acc + length(ag.items) end) %>
-<%= group.parent_name %> (<%= group_total %> <%= if group_total == 1, do: "update", else: "updates" %>)
+<%= group.parent_name %> (<%= if group_total == 1, do: t("dailyActivityDigest.oneUpdate"), else: t("dailyActivityDigest.nUpdates", %{v1: group_total}) %>)
 <%= if group.parent_url do %>
 <%= group.parent_url %>
 <% end %>
@@ -37,4 +39,4 @@ No new updates.
 <% end %>
 
 ---
-Manage email settings: <%= @settings_url %>
+<%= t("dailyActivityDigest.manageEmailSettings2", %{v1: @settings_url}) %>

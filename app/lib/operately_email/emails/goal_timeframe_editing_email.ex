@@ -1,6 +1,7 @@
 defmodule OperatelyEmail.Emails.GoalTimeframeEditingEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Goals}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -14,7 +15,7 @@ defmodule OperatelyEmail.Emails.GoalTimeframeEditingEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: goal.name, who: author, action: "edited the timeframe")
+    |> subject(where: goal.name, who: author, action: t("goalTimeframeEditing.action"))
     |> assign(:author, author)
     |> assign(:goal, goal)
     |> assign(:old_timeframe, activity.content.old_timeframe)
@@ -33,7 +34,7 @@ defmodule OperatelyEmail.Emails.GoalTimeframeEditingEmail do
       parent_id: goal.id,
       parent_type: :goal,
       parent_name: goal.name,
-      headline: "updated the goal's timeframe",
+      headline: t("goalTimeframeEditing.headline"),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.goal_activity_path(company, activity) |> OperatelyWeb.Paths.to_url(),

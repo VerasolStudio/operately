@@ -4,6 +4,7 @@ import { PrimaryButton, SecondaryButton } from "../Button";
 import { ConfirmDialog } from "../ConfirmDialog";
 import { ErrorCallout, InfoCallout } from "../Callouts";
 import { FormattedTime, FormattedTimePreferences } from "../FormattedTime";
+import { t } from "../i18n";
 
 export type MaintenanceKind = "backfill" | "reconciliation";
 export type RunStatus = "pending" | "running" | "completed" | "completed_with_errors" | "failed";
@@ -74,26 +75,26 @@ export function SearchIndexAdminPage(props: SearchIndexAdminPageProps) {
     <div className="mx-auto w-full max-w-6xl px-8 py-10" data-test-id="search-index-admin-page">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-content-base">Search index</h1>
+          <h1 className="text-2xl font-bold text-content-base">{t("turboui.searchIndexAdminPage.searchIndex")}</h1>
           <p className="mt-1 max-w-3xl text-sm text-content-subtle">
-            Monitor indexing progress and repair search data when canonical records change.
+            {t("turboui.searchIndexAdminPage.monitorIndexingProgressAndRepairSearch")}
           </p>
         </div>
 
         <div className="flex flex-wrap gap-2">
           <SecondaryButton size="sm" onClick={() => setPendingAction({ kind: "backfill" })}>
-            Backfill all sources
+            {t("turboui.searchIndexAdminPage.backfillAllSources")}
           </SecondaryButton>
           <PrimaryButton size="sm" onClick={() => setPendingAction({ kind: "reconciliation" })}>
-            Reconcile all sources
+            {t("turboui.searchIndexAdminPage.reconcileAllSources")}
           </PrimaryButton>
         </div>
       </div>
 
       <div className="mt-6">
         <InfoCallout
-          message="Backfills add missing entries. Reconciliation performs a complete repair."
-          description="Reconciliation also updates stale entries and removes entries whose source record no longer exists."
+          message={t("turboui.searchIndexAdminPage.backfillsAddMissingEntriesReconciliationPerforms")}
+          description={t("turboui.searchIndexAdminPage.reconciliationAlsoUpdatesStaleEntriesAnd")}
         />
       </div>
 
@@ -105,10 +106,10 @@ export function SearchIndexAdminPage(props: SearchIndexAdminPageProps) {
 
       <div className="mt-6 overflow-hidden rounded-lg border border-stroke-base bg-surface-base">
         <div className="hidden grid-cols-[minmax(12rem,1.2fr)_minmax(12rem,1fr)_minmax(20rem,2fr)_auto] gap-4 border-b border-stroke-base bg-surface-dimmed px-5 py-3 text-xs font-bold uppercase text-content-subtle lg:grid">
-          <div>Source</div>
-          <div>Latest run</div>
-          <div>Progress</div>
-          <div>Actions</div>
+          <div>{t("turboui.searchIndexAdminPage.source")}</div>
+          <div>{t("turboui.searchIndexAdminPage.latestRun")}</div>
+          <div>{t("turboui.searchIndexAdminPage.progress")}</div>
+          <div>{t("turboui.searchIndexAdminPage.actions")}</div>
         </div>
 
         {props.sources.map((source) => (
@@ -128,7 +129,7 @@ export function SearchIndexAdminPage(props: SearchIndexAdminPageProps) {
         title={confirmationTitle(pendingAction)}
         message={confirmationMessage(pendingAction)}
         confirmText={confirmationButton(pendingAction)}
-        cancelText="Cancel"
+        cancelText={t("turboui.searchIndexAdminPage.cancel")}
         testId="confirm-search-index-maintenance"
       />
 
@@ -169,7 +170,7 @@ function SourceRow({
             </div>
             <div className="mt-1 space-y-0.5 text-xs text-content-subtle">
               <div>
-                <span>Started:</span>{" "}
+                <span>{t("turboui.searchIndexAdminPage.started")}</span>{" "}
                 <FormattedTime
                   {...formattedTimePreferences}
                   time={run.startedAt || run.insertedAt}
@@ -178,14 +179,14 @@ function SourceRow({
               </div>
               {run.completedAt ? (
                 <div>
-                  <span>Completed:</span>{" "}
+                  <span>{t("turboui.searchIndexAdminPage.completed")}</span>{" "}
                   <FormattedTime {...formattedTimePreferences} time={run.completedAt} format="relative-time-or-date" />
                 </div>
               ) : null}
             </div>
           </>
         ) : (
-          <span className="text-sm text-content-subtle">Not started</span>
+          <span className="text-sm text-content-subtle">{t("turboui.searchIndexAdminPage.notStarted")}</span>
         )}
       </div>
 
@@ -193,28 +194,28 @@ function SourceRow({
         {run ? (
           <>
             <div className="grid grid-cols-2 gap-x-5 gap-y-1 text-xs text-content-dimmed sm:grid-cols-4">
-              <Counter label="Processed" value={run.processedCount} />
-              <Counter label="Inserted" value={run.insertedCount} />
-              <Counter label="Updated" value={run.updatedCount} />
-              <Counter label="Unchanged" value={run.unchangedCount} />
-              <Counter label="Skipped" value={run.skippedCount} />
-              <Counter label="Failed" value={run.failedCount} />
-              <Counter label="Superseded" value={run.supersededCount} />
-              <Counter label="Orphans removed" value={run.deletedOrphanCount} />
+              <Counter label={t("turboui.searchIndexAdminPage.processed")} value={run.processedCount} />
+              <Counter label={t("turboui.searchIndexAdminPage.inserted")} value={run.insertedCount} />
+              <Counter label={t("turboui.searchIndexAdminPage.updated")} value={run.updatedCount} />
+              <Counter label={t("turboui.searchIndexAdminPage.unchanged")} value={run.unchangedCount} />
+              <Counter label={t("turboui.searchIndexAdminPage.skipped")} value={run.skippedCount} />
+              <Counter label={t("turboui.searchIndexAdminPage.failed")} value={run.failedCount} />
+              <Counter label={t("turboui.searchIndexAdminPage.superseded")} value={run.supersededCount} />
+              <Counter label={t("turboui.searchIndexAdminPage.orphansRemoved")} value={run.deletedOrphanCount} />
             </div>
             {run.lastError ? <p className="mt-2 break-words text-xs text-content-error">{run.lastError}</p> : null}
           </>
         ) : (
-          <span className="text-sm text-content-subtle">No progress to report.</span>
+          <span className="text-sm text-content-subtle">{t("turboui.searchIndexAdminPage.noProgressToReport")}</span>
         )}
       </div>
 
       <div className="flex flex-wrap gap-2 lg:justify-end">
         <SecondaryButton size="xs" disabled={active} onClick={() => onStart("backfill")}>
-          Run backfill
+          {t("turboui.searchIndexAdminPage.runBackfill")}
         </SecondaryButton>
         <SecondaryButton size="xs" disabled={active} onClick={() => onStart("reconciliation")}>
-          Run reconciliation
+          {t("turboui.searchIndexAdminPage.runReconciliation")}
         </SecondaryButton>
       </div>
     </div>

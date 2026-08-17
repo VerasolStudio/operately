@@ -1,7 +1,7 @@
 <%= if @copied_document do %>
-  <%= title("#{short_name(@author)} created a copy of #{@copied_document.name} and named it #{@document.name}") %>
+  <%= title(t("resourceHubDocumentCreated.v1CreatedACopyOfV2", %{v1: short_name(@author), v2: @copied_document.name, v3: @document.name})) %>
 <% else %>
-  <%= title("#{short_name(@author)} added a document: #{@document.name}") %>
+  <%= title(t("resourceHubDocumentCreated.v1AddedADocumentV2", %{v1: short_name(@author), v2: @document.name})) %>
 <% end %>
 
 <%= spacer() %>
@@ -14,5 +14,5 @@
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@cta_url, "View Document") %>
+  <%= cta_button(@cta_url, t("resourceHubDocumentCreated.viewDocument")) %>
 <% end %>

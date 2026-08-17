@@ -6,6 +6,7 @@ import { IconGoal } from "../icons";
 import { DivLink } from "../Link";
 import { createTestId } from "../TestableElement";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 export namespace GoalField {
   export interface Goal {
@@ -66,7 +67,7 @@ const DefaultProps = {
   isOpen: false,
   iconSize: 20,
   readonly: false,
-  emptyStateMessage: "Select a goal",
+  emptyStateMessage: t("turboui.goalField.selectAGoal"),
   emptyStateReadOnlyMessage: "No goal selected",
   extraDialogMenuOptions: [],
 };
@@ -194,14 +195,14 @@ function DialogMenu({ state }: { state: GoalField.State }) {
       <DialogMenuOption
         testId={`${state.testId}-view-goal`}
         icon={IconExternalLink}
-        label="See goal"
+        label={t("turboui.goalField.seeGoal")}
         linkTo={state.goal?.link || "#"}
       />
 
       <DialogMenuOption
         testId={`${state.testId}-search`}
         icon={IconSearch}
-        label="Choose another goal"
+        label={t("turboui.goalField.chooseAnotherGoal")}
         onClick={() => state.setDialogMode("search")}
       />
 
@@ -221,7 +222,7 @@ function DialogMenu({ state }: { state: GoalField.State }) {
       <DialogMenuOption
         testId={`${state.testId}-clear`}
         icon={IconCircleX}
-        label="Clear goal"
+        label={t("turboui.goalField.clearGoal")}
         onClick={() => {
           state.setGoal(null);
           state.setIsOpen(false);
@@ -265,7 +266,7 @@ function DialogSearch({ state }: { state: GoalField.State }) {
       <div className="p-1 pb-0.5">
         <input
           className="w-full border border-surface-outline rounded px-2 py-1 text-sm focus:outline-none focus:ring-0 text-content-base bg-surface-base"
-          placeholder="Search goals..."
+          placeholder={t("turboui.goalField.searchGoals")}
           value={state.searchQuery}
           autoFocus
           onChange={(e) => state.setSearchQuery(e.target.value)}

@@ -9,6 +9,7 @@ import { Link, Summary } from "turboui";
 import { commentPath, commentedLink, feedTitle, projectLink } from "./../feedItemLinks";
 import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
 import { parseCommentContent } from "@/models/comments";
+import { t } from "@/i18n";
 
 const ProjectRetrospectiveCommented: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -39,7 +40,7 @@ const ProjectRetrospectiveCommented: ActivityHandler = {
 
     const retrospectivePath = paths.projectRetrospectivePath(project.id);
     const action = commentedLink(retrospectivePath, comment);
-    const retrospectiveLink = <Link to={retrospectivePath}>Retrospective</Link>;
+    const retrospectiveLink = <Link to={retrospectivePath}>{t("features.activities.retrospective")}</Link>;
 
     if (page === "project") {
       return feedTitle(activity, action, "on", retrospectiveLink);

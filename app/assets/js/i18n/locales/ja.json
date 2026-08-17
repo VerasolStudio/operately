@@ -1,0 +1,1606 @@
+{
+  "Groups": "グループ",
+  "KPIs": "KPI",
+  "Objectives": "目標",
+  "People": "メンバー",
+  "Projects": "プロジェクト",
+  "Tenets": "行動指針",
+  "account": {
+    "appearance": {
+      "alwaysDark": "常にダーク",
+      "alwaysLight": "常にライト",
+      "colorMode": "カラーモード",
+      "colorModeDescription": "ライト、ダーク、またはお使いのコンピューターの設定に合わせるかを選べます。",
+      "sameAsSystem": "システムに合わせる",
+      "saveChanges": "変更を保存",
+      "title": "外観",
+      "updateFailed": "テーマを更新できませんでした"
+    },
+    "language": {
+      "description": "Operately を表示する言語を選びます。選択内容はこのブラウザーに保存されます。",
+      "saveChanges": "変更を保存",
+      "saved": "言語を変更しました",
+      "title": "言語"
+    },
+    "myAccount": "マイアカウント",
+    "settings": {
+      "appearance": "外観",
+      "appearanceDescription": "Operately の見た目を調整します",
+      "description": "利用できるアカウント設定を管理します。",
+      "notificationSettings": "通知設定",
+      "notificationSettingsDescription": "アクティビティやサマリーメールの配信方法を設定します",
+      "title": "設定"
+    },
+    "title": "アカウント"
+  },
+  "actions": {
+    "add_group": "グループを追加",
+    "add_kpi": "新しい KPI",
+    "add_objective": "目標を追加",
+    "add_person": "メンバーを追加",
+    "add_project": "新しいプロジェクト",
+    "add_tenet": "新しい行動指針"
+  },
+  "app": {
+    "errorPage": {
+      "anUnexpectedErrorHasOccurred": "予期しないエラーが発生しました。",
+      "errorStackTrace": "エラーのスタックトレース",
+      "goBackToHome": "ホームに戻る",
+      "goBackToLobby": "ロビーに戻る",
+      "oopsSomethingWentWrong": "問題が発生しました。",
+      "thisErrorIsVisibleOnlyIn": "このエラーは開発環境とテスト環境でのみ表示されます。"
+    },
+    "index": {
+      "commentAccess": "コメント権限",
+      "editAccess": "編集権限",
+      "fullAccess": "フルアクセス",
+      "thisPackageWasExportedFromOperately": "このパッケージは Operately {{v1}} からエクスポートされましたが、このインスタンスは {{v2}} で動作しています。バージョンの違いがインポート失敗の原因かもしれません。",
+      "viewAccess": "閲覧権限"
+    },
+    "time": {
+      "daysAgo": "{{v1}} 日前"
+    },
+    "useDeleteComment": {
+      "error": "エラー",
+      "failedToDeleteComment": "コメントを削除できませんでした。"
+    },
+    "useEditComment": {
+      "error": "エラー",
+      "failedToEditComment": "コメントを編集できませんでした。"
+    },
+    "useKanbanState": {
+      "cannotMoveTaskToUnknownStatus": "不明なステータスにはタスクを移動できません",
+      "error": "エラー",
+      "failedToUpdateTaskPosition": "タスクの並び順を更新できませんでした",
+      "failedToUpdateTaskStatus": "タスクのステータスを更新できませんでした"
+    },
+    "useOptimisticComments": {
+      "error": "エラー",
+      "failedToAddComment": "コメントを追加できませんでした。",
+      "failedToAddReaction": "リアクションを追加できませんでした。",
+      "failedToDeleteComment": "コメントを削除できませんでした。",
+      "failedToEditComment": "コメントを編集できませんでした。",
+      "failedToRemoveReaction": "リアクションを削除できませんでした。"
+    },
+    "useProjectTasksForTurboUi": {
+      "error": "エラー",
+      "failedToCreateTask": "タスクを作成できませんでした",
+      "failedToDeleteTask": "タスクを削除できませんでした",
+      "failedToUpdateTaskAssignee": "タスクの担当者を更新できませんでした",
+      "failedToUpdateTaskDescription": "タスクの説明を更新できませんでした。",
+      "failedToUpdateTaskDueDate": "タスクの期限を更新できませんでした",
+      "failedToUpdateTaskMilestone": "タスクのマイルストーンを更新できませんでした",
+      "failedToUpdateTaskName": "タスク名を更新できませんでした。",
+      "failedToUpdateTaskReminders": "タスクのリマインダーを更新できませんでした",
+      "failedToUpdateTaskStatus": "タスクのステータスを更新できませんでした",
+      "somethingWentWrong": "問題が発生しました",
+      "taskNameCannotBeEmpty": "タスク名は空にできません"
+    },
+    "useReactionHandlers": {
+      "error": "エラー",
+      "failedToAddReaction": "リアクションを追加できませんでした。",
+      "failedToRemoveReaction": "リアクションを削除できませんでした。"
+    },
+    "useSpaceTasksForTurboUi": {
+      "error": "エラー",
+      "failedToCreateTask": "タスクを作成できませんでした",
+      "failedToDeleteTask": "タスクを削除できませんでした",
+      "failedToUpdateTaskAssignee": "タスクの担当者を更新できませんでした",
+      "failedToUpdateTaskDescription": "タスクの説明を更新できませんでした",
+      "failedToUpdateTaskDueDate": "タスクの期限を更新できませんでした",
+      "failedToUpdateTaskName": "タスク名を更新できませんでした",
+      "failedToUpdateTaskReminders": "タスクのリマインダーを更新できませんでした",
+      "failedToUpdateTaskStatus": "タスクのステータスを更新できませんでした"
+    },
+    "useSubscription": {
+      "error": "エラー",
+      "failedToSubscribeToNotifications": "{{v1}} の通知を購読できませんでした。",
+      "failedToUnsubscribeFromNotifications": "{{v1}} の通知の購読を解除できませんでした。"
+    },
+    "useSubscriptionsAdapter": {
+      "allPeople": "{{v1}}のメンバー全員",
+      "contributingTo": "{{v1}} に貢献しているメンバー",
+      "whoAreMembersOfTheSpace": "スペース「{{v1}}」のメンバー",
+      "whoHaveAccessTo": "{{v1}} にアクセスできるメンバー"
+    },
+    "useTaskSlideInProps": {
+      "error": "エラー",
+      "failedToMoveTask": "タスクを移動できませんでした。"
+    },
+    "useTaskStatuses": {
+      "error": "エラー",
+      "failedToUpdateTaskStatuses": "タスクのステータスを更新できませんでした"
+    },
+    "useTemplateComments": {
+      "commentNotAdded": "コメントを追加できませんでした",
+      "commentNotDeleted": "コメントを削除できませんでした",
+      "commentNotUpdated": "コメントを更新できませんでした",
+      "theCommentIsStillOnThis": "コメントはこのページに残っています。もう一度お試しください。",
+      "theCommentWasNotSavedTry": "コメントは保存されませんでした。もう一度お試しください。"
+    }
+  },
+  "companyMenu": {
+    "companyAdmin": "会社の管理",
+    "orgChart": "組織図",
+    "people": "メンバー",
+    "switchCompany": "会社を切り替え"
+  },
+  "components": {
+    "badges": {
+      "commentAccess": "コメント権限",
+      "editAccess": "編集権限",
+      "fullAccess": "フルアクセス",
+      "invalidAccessLevel": "無効なアクセス権限です: {{v1}}",
+      "noAccess": "アクセス権なし",
+      "viewAccess": "閲覧権限"
+    },
+    "projectPageNavigation": {
+      "retrospective": "振り返り",
+      "teamAccess": "チームとアクセス権"
+    },
+    "status": {
+      "emergingRisksOrDelays": "リスクや遅延が出始めています。{{v1}} に共有が必要です。",
+      "progressingAsPlannedNoBlockers": "計画どおり進行中。障害はありません。",
+      "significantProblemsAffectingSuccess": "成否に関わる重大な問題があります。{{v1}} の支援が必要です。",
+      "theReviewer": "レビュアー",
+      "workHasnTStartedYet": "まだ着手していません。"
+    }
+  },
+  "erorr": {
+    "error": "エラー"
+  },
+  "errors": {
+    "error": "エラー"
+  },
+  "features": {
+    "activities": {
+      "addedTheMilestone": "がマイルストーン「{{v1}}」を追加しました",
+      "addedTheTarget": "が目標値「{{v1}}」を追加しました",
+      "assignedAsTheChampion": "が {{v1}} を責任者に指定しました",
+      "assignedAsTheReviewer": "が {{v1}} をレビュアーに指定しました",
+      "assignedPeopleToTheTask": "が {{v1}} 人をタスクに割り当てました",
+      "assignedTo": "が {{v1}} に割り当てました",
+      "assignedToTheTask": "が {{v1}} にタスクを割り当てました",
+      "changedTheChampionFor": "{{v1}} の責任者を変更しました",
+      "changedTheParentGoalFromTo": "親ゴールを <0>{{v1}}</0> から <1>{{v2}}</1> に変更しました。",
+      "changedTheParentGoalTo": "親ゴールを <0>{{v1}}</0> に変更しました。",
+      "checkIn": "チェックイン",
+      "checkIn2": "チェックイン",
+      "clearedDueDateFor": "{{v1}} の期限を削除しました",
+      "connectedAProjectToTheGoal": "プロジェクトをゴール「{{v1}}」に紐づけました",
+      "connectedProjectToTheGoal": "プロジェクト「{{v1}}」をゴール「{{v2}}」に紐づけました",
+      "createdKPI": "KPI を作成しました: {{v1}}",
+      "dateRemoved": "日付を削除しました",
+      "deletedTheTarget": "が目標値「{{v1}}」を削除しました",
+      "disconnectedAProjectFromTheGoal": "プロジェクトをゴール「{{v1}}」から切り離しました",
+      "disconnectedProjectFromTheGoal": "プロジェクト「{{v1}}」をゴール「{{v2}}」から切り離しました",
+      "disconnectedTheProjectFromTheGoal": "プロジェクト「{{v1}}」をゴール「{{v2}}」から切り離しました",
+      "dueDateOn": "期限: <0/>",
+      "dueDateWasChangedFromTo": "期限を <0><1/></0> から <2><3/></2> に変更しました。",
+      "dueDateWasRemoved": "期限 <0><1/></0> を削除しました。",
+      "dueDateWasSetTo": "期限を <0><1/></0> に設定しました。",
+      "dueDateWasUpdated": "期限を更新しました。",
+      "edit": "編集",
+      "goalClosed": "ゴールをクローズしました",
+      "goalReopened": "ゴールを再開しました",
+      "hasRevokedSAdminPrivileges": "が {{v1}} の管理者権限を取り消しました",
+      "hasUpdatedAccessLevel": "が {{v1}} {{v2}} のアクセス権限を更新しました",
+      "milestoneWasDeleted": "マイルストーン「{{v1}}」が削除されました",
+      "name": "名前:",
+      "noLongerAssignedTo": "が {{v1}} の担当を解除しました",
+      "noParentGoalWasSet": "親ゴールは設定されていませんでした。",
+      "pausedTheProject": "プロジェクト「{{v1}}」を一時停止しました",
+      "previouslyAssignedTo": "以前の担当者:",
+      "previouslyAssignedToPeople": "以前は {{v1}} 人が担当していました",
+      "previouslyHadNoDueDate": "以前は期限が設定されていませんでした",
+      "previouslyHadNoStartDate": "以前は開始日が設定されていませんでした",
+      "previouslyItWasIn": "以前は {{v1}} にありました",
+      "previouslyItWasInTheSpace": "以前はスペース <0>{{v1}}</0> にありました。",
+      "previouslyItWasNowItIs": "以前は「{{v1}}」でしたが、現在は「{{v2}}」です。",
+      "previouslyItWasUnassigned": "以前は未割り当てでした",
+      "previouslyTheDueDateWas": "以前の期限は {{v1}} でした",
+      "previouslyTheStartDateWas": "以前の開始日は {{v1}} でした",
+      "previouslyTheTaskWasNamed": "以前のタスク名は「{{v1}}」でした。",
+      "previouslyTheTaskWasNowIts": "以前のタスクは「{{v1}}」でしたが、現在は「{{v2}}」です。",
+      "previouslyWasA": "以前 {{v1}} は{{v2}}でした",
+      "projectPaused": "プロジェクトを一時停止しました",
+      "projectResumed": "プロジェクトを再開しました",
+      "purpose": "目的:",
+      "removedAsAnAccountOwner": "が {{v1}} をアカウントオーナーから外しました",
+      "removedTheChampionFor": "{{v1}} の責任者を解除しました",
+      "removedTheParentGoal": "親ゴール <0>{{v1}}</0> を解除しました。",
+      "resumedTheProject": "プロジェクト「{{v1}}」を再開しました",
+      "retrospective": "振り返り",
+      "theChampionWasChangedTo": "責任者を {{v1}} に変更しました。",
+      "theDueDateWasSetTo": "期限を {{v1}} に設定しました。",
+      "theNameWasChangedTo": "名前を「{{v1}}」に変更しました。",
+      "thePreviousIsNowA": "これまで{{v1}}だった {{v2}} は、現在は{{v3}}です",
+      "theReviewerWasChangedTo": "レビュアーを {{v1}} に変更しました。",
+      "theStartDateWasSetTo": "開始日を {{v1}} に設定しました。",
+      "theTimeframeWasChangedTo": "対象期間を {{v1}} に変更しました。",
+      "thereWasNoPreviousChampion": "以前の責任者はいませんでした。",
+      "thereWasNoPreviousReviewer": "以前のレビュアーはいませんでした。",
+      "totalProjectDurationChanged": "プロジェクトの総期間が {{v2}}% {{v1}}しました（{{v3}} 日 → {{v4}} 日）。",
+      "totalProjectDurationIsDays": "プロジェクトの総期間は {{v1}} 日です。",
+      "type": "種類:",
+      "unassignedFromTheTask": "が {{v1}} をタスクの担当から外しました",
+      "unassignedPeopleFromTheTask": "が {{v1}} 人をタスクの担当から外しました",
+      "updatedDueDateForTo": "{{v1}} の期限を <0></0> に更新しました",
+      "updatedTheMilestone": "がマイルストーン「{{v1}}」を更新しました",
+      "updatedTheMilestoneTo": "がマイルストーン「{{v1}}」を「{{v2}}」に変更しました",
+      "updatedTheParentGoalOfProject": "プロジェクト「{{v1}}」の親ゴールを更新しました",
+      "updatedTheSpace": "スペース「{{v1}}」を更新しました",
+      "updatedTheValueForTheTarget": "が目標値「{{v1}}」の値を更新しました",
+      "updatedYourCompanyAccessLevelTo": "会社のアクセス権限を {{v1}} に更新しました",
+      "url": "URL:"
+    },
+    "auth": {
+      "atLeast12Characters": "12 文字以上",
+      "atLeast1Lowercase": "小文字を 1 文字以上",
+      "atLeast1Number": "数字を 1 文字以上",
+      "atLeast1UppercaseLetter": "大文字を 1 文字以上",
+      "byContinuingYouAgreeToThe": "続行すると、<0>利用規約</0>および<1>プライバシーポリシー</1>に同意したものとみなされます。",
+      "privacyPolicy": "プライバシーポリシー",
+      "signInWithGoogle": "Google でログイン",
+      "signUpWithEmail": "メールアドレスで登録",
+      "signUpWithGoogle": "Google で登録"
+    },
+    "commentSection": {
+      "error": "エラー",
+      "failedToAddReaction": "リアクションを追加できませんでした。",
+      "failedToDeleteComment": "コメントを削除できませんでした。",
+      "failedToRemoveReaction": "リアクションを削除できませんでした。"
+    },
+    "devBar": {
+      "loadTime": "読み込み時間:",
+      "pageName": "ページ名:"
+    },
+    "discussionForm": {
+      "pleaseAddATitle": "タイトルを入力してください",
+      "title": "タイトル...",
+      "writeHere": "ここに入力..."
+    },
+    "feed": {
+      "allQuietForNow": "今のところ更新はありません",
+      "delete": "削除",
+      "deleteFeedItem": "フィード項目を削除",
+      "feedItemActions": "フィード項目の操作",
+      "ooopsSomethingWentWrongWhileLoading": "フィードの読み込み中に問題が発生しました",
+      "thisRemovesTheItemFromThe": "会社のフィードから項目を削除します。元のプロジェクト、ゴール、タスク、ドキュメントは削除されません。"
+    },
+    "goals": {
+      "addTarget": "目標値を追加",
+      "cancel": "キャンセル",
+      "checkIn": "チェックイン",
+      "current": "現在値",
+      "describeKeyWinsObstaclesAndNeeds": "主な成果、障害、必要な支援を記入してください",
+      "discussions": "ディスカッション",
+      "done": "完了",
+      "dueDate": "期限",
+      "eGAverageOnboardingTimeIs": "例: オンボーディングにかかる平均時間が 2 倍速くなる",
+      "editingLockedAfter3Days": "3 日経過すると編集できなくなります",
+      "emergingRisksOrDelaysShouldBe": "リスクや遅延が出始めています。{{v1}} に共有が必要です。",
+      "fillOutAllTheRequiredFields": "必須項目をすべて入力してください",
+      "keyWinsObstaclesAndNeeds": "主な成果、障害、必要な支援",
+      "noDueDateSet": "期限は設定されていません。",
+      "noDueDateSet2": "期限は設定されていません",
+      "overview": "概要",
+      "pickAStatusHellip": "ステータスを選択…",
+      "postedByOn": "{{v1}} が <0/> に投稿",
+      "previousCheckIn": "前回のチェックイン",
+      "publishNow": "今すぐ投稿",
+      "save": "保存",
+      "saveAsDraft": "下書きとして保存",
+      "saveDraft": "下書きを保存",
+      "scheduleCheckIn": "チェックインを予約",
+      "significantProblemsAffectingSuccessSHelp": "成否に関わる重大な問題があります。{{v1}} の支援が必要です。",
+      "start": "開始",
+      "status": "ステータス",
+      "target": "目標値",
+      "thisGoalWasArchivedOn": "このゴールは <0/> にアーカイブされました",
+      "unit": "単位",
+      "unknown": "不明",
+      "viewOriginal": "元の投稿を表示",
+      "workMap": "ワークマップ",
+      "writeHere": "ここに入力..."
+    },
+    "permissions": {
+      "commentAccess": "コメント権限",
+      "editAccess": "編集権限",
+      "fullAccess": "フルアクセス",
+      "noAccess": "アクセス権なし",
+      "viewAccess": "閲覧権限"
+    },
+    "projectRetrospective": {
+      "didThisProjectAchieveItsIntended": "このプロジェクトは目的とした成果を達成できましたか？",
+      "no": "いいえ",
+      "retrospectiveNotes": "振り返りメモ",
+      "whatWentWellWhatDidnT": "うまくいったことは？いかなかったことは？学びは？",
+      "yes": "はい"
+    },
+    "projects": {
+      "companyMembers": "会社のメンバー",
+      "spaceMembers": "スペースのメンバー"
+    },
+    "spaceTools": {
+      "aPlaceToShareRichText": "リッチテキスト文書、画像、動画、その他のファイルを共有する場所",
+      "addADocumentOrFile": "ドキュメントやファイルを追加",
+      "addANewTask": "新しいタスクを追加",
+      "addGoalOrProject": "ゴールまたはプロジェクトを追加",
+      "allDone": "すべて完了しました",
+      "andCompleted": "{{v1}}と{{v2}}が{{v3}}に完了しました。",
+      "assignAnOwner": "オーナーを割り当てる",
+      "discussIdeas": "アイデアを話し合う",
+      "discussions": "ディスカッション",
+      "documentsAmpFiles": "ドキュメントとファイル",
+      "draftThePlan": "計画を作成する",
+      "employeeHandbook": "従業員ハンドブック",
+      "goalsAmpProjects": "ゴールとプロジェクト",
+      "goalsProjects": "ゴールとプロジェクト",
+      "markItDone": "完了にする",
+      "monthlyReports": "月次レポート",
+      "organizeTasksOnAKanbanBoard": "ステータス列のあるカンバンボードでタスクを整理します。",
+      "pitchIdeas": "アイデアを提案する",
+      "postAnnouncements": "お知らせを投稿する",
+      "postAnnouncementsPitchIdeasAndDiscuss": "お知らせの投稿、アイデアの提案、チームでの議論ができます。",
+      "productRoadmap": "プロダクトロードマップ",
+      "project1": "プロジェクト 1",
+      "quarterlyGoal1": "四半期ゴール 1",
+      "quarterlyGoal2": "四半期ゴール 2",
+      "setGoalsTrackYourProgressAnd": "ゴールを設定し、進捗を追跡し、チームで協力して達成します。",
+      "tasks": "タスク",
+      "writeANewPost": "新しい投稿を書く",
+      "yearlyGoal": "年間ゴール"
+    }
+  },
+  "forms": {
+    "add_group_members_button": "メンバーを追加",
+    "add_group_members_search_placeholder": "メンバーを検索...",
+    "add_group_members_title": "グループメンバーを追加",
+    "cancel": "キャンセル",
+    "group_add_title": "グループを追加",
+    "group_name_label": "名前",
+    "group_name_placeholder": "例: マーケティング",
+    "kpi_add_title": "KPI を追加",
+    "kpi_danger_direction_label": "危険の方向",
+    "kpi_danger_threshold_label": "危険のしきい値",
+    "kpi_danger_threshold_placeholder": "例: 100000",
+    "kpi_description_label": "説明",
+    "kpi_description_placeholder": "例: 販売による総売上高",
+    "kpi_name_label": "名前",
+    "kpi_name_placeholder": "例: 売上高",
+    "kpi_target_direction_above": "以上",
+    "kpi_target_direction_below": "以下",
+    "kpi_target_direction_label": "目標の方向",
+    "kpi_target_label": "目標値",
+    "kpi_target_placeholder": "例: 1000000",
+    "kpi_unit_currency": "通貨",
+    "kpi_unit_label": "単位",
+    "kpi_unit_percentage": "パーセント",
+    "kpi_warning_direction_label": "警告の方向",
+    "kpi_warning_threshold_label": "警告のしきい値",
+    "kpi_warning_threshold_placeholder": "例: 500000",
+    "objective_add_title": "目標を追加",
+    "objective_description_label": "説明",
+    "objective_description_placeholder": "例: 売上を 10% 伸ばす",
+    "objective_name_label": "名前",
+    "objective_name_placeholder": "例: 売上を伸ばす",
+    "objective_owner_label": "オーナー",
+    "objective_owner_search_placeholder": "メンバーを検索...",
+    "objective_timeframe_current_quarter": "今四半期",
+    "objective_timeframe_label": "対象期間",
+    "project_add_title": "プロジェクトを追加",
+    "project_description_label": "説明",
+    "project_description_placeholder": "例: 会社の新しいウェブサイトを作る",
+    "project_name_label": "名前",
+    "project_name_placeholder": "例: 新しいウェブサイト",
+    "save": "保存",
+    "tenet_add_title": "行動指針を追加",
+    "tenet_description_label": "説明",
+    "tenet_description_placeholder": "例: 常に顧客を第一に考える",
+    "tenet_name_label": "名前",
+    "tenet_name_placeholder": "例: 顧客第一"
+  },
+  "helpMenu": {
+    "contactUs": "お問い合わせ",
+    "discordChat": "Discord チャット",
+    "keyboardShortcuts": "キーボードショートカット",
+    "roadmap": "ロードマップ",
+    "title": "ヘルプ",
+    "whatsNew": "新着情報"
+  },
+  "intlDateTime": "{{val, datetime}}",
+  "intlRelativeDateTime": "{{val, relativetime}}",
+  "intlRelativeDateTimeJustNow": "たった今",
+  "keyResults": {
+    "completion": "達成率",
+    "keyResult": "主要な成果",
+    "lastUpdated": "最終更新",
+    "status": "ステータス",
+    "statuses": {
+      "at_risk": "リスクあり",
+      "cancelled": "中止",
+      "completed": "完了",
+      "off_track": "遅延",
+      "on_track": "順調",
+      "pending": "未着手"
+    }
+  },
+  "keyboardShortcuts": {
+    "clearTaskSelection": "タスクの選択を解除",
+    "groups": {
+      "global": "全体",
+      "taskManagement": "タスク管理"
+    },
+    "openAssigneePicker": "選択中のタスクの担当者を選ぶ",
+    "openDueDatePicker": "選択中のタスクの期限を選ぶ",
+    "openGlobalSearch": "全体検索を開く",
+    "openKeyboardShortcuts": "キーボードショートカットを開く",
+    "openSelectedTask": "選択中のタスクを開く",
+    "openStatusPicker": "選択中のタスクのステータスを選ぶ（対応している場合）",
+    "selectNextTask": "次のタスクを選択",
+    "selectPreviousTask": "前のタスクを選択",
+    "title": "キーボードショートカット一覧"
+  },
+  "layouts": {
+    "companyLayout": {
+      "billingDeadline": "（期限: <0/>）",
+      "billingNeedsAttention": "請求内容の確認が必要です",
+      "dismissMessage": "メッセージを閉じる",
+      "exitSupportMode": "サポートモードを終了",
+      "pausedUntilThisCompanyIsBack": "この会社がプランの上限内に戻るまで、{{v1}}の{{v2}}は停止されています。管理者またはオーナーにご連絡ください。",
+      "pausedUntilThisCompanyIsBack2": "この会社がプランの上限内に戻るまで、{{v1}}の{{v2}}は停止されています。請求内容を確認してプランを変更するか、利用量を減らしてください。",
+      "supportModeActive": "サポートモード有効",
+      "youAreViewingThisAccountAs": "サポート担当者としてこのアカウントを表示しています。"
+    },
+    "saasAdminLayoutTsx": {
+      "exitAdminPanel": "管理パネルを終了",
+      "operately": "Operately",
+      "saasAdminPanel": "SaaS 管理パネル"
+    }
+  },
+  "loading": {
+    "loading": "読み込み中..."
+  },
+  "nav": {
+    "account": "アカウント",
+    "company": "会社",
+    "companyAdmin": "会社の管理",
+    "home": "ホーム",
+    "logOut": "ログアウト",
+    "myWork": "自分の仕事",
+    "notifications": "通知",
+    "people": "メンバー",
+    "review": "レビュー",
+    "switchCompany": "会社を切り替え"
+  },
+  "newMenu": {
+    "invitePeople": "メンバーを招待",
+    "newGoal": "新しいゴール",
+    "newProject": "新しいプロジェクト",
+    "newSpace": "新しいスペース",
+    "title": "新規作成"
+  },
+  "objectives": {
+    "feed": {
+      "title": "フィード"
+    },
+    "leave_comment": {
+      "placeholder": "コメントを残す"
+    },
+    "project_list_last_updated": "最終更新",
+    "project_list_team": "チーム",
+    "project_list_timeline": "期間",
+    "project_list_title": "プロジェクト名",
+    "projects_in_progress_title": "進行中のプロジェクト",
+    "write_an_update": {
+      "button": "更新を書く",
+      "cta": "目標全体について重要な更新はありますか？進捗やリスクを共有してください。",
+      "placeholder": "更新を書く…",
+      "title": "更新を投稿"
+    }
+  },
+  "pages": {
+    "accountApiTokensPage": {
+      "aPITokenCreated": "API トークンを作成しました",
+      "copyTheTokenNowForSecurity": "今すぐトークンをコピーしてください。セキュリティ上、この値が表示されるのは一度きりです。",
+      "failedToCreateToken": "トークンを作成できませんでした",
+      "failedToDeleteToken": "トークンを削除できませんでした",
+      "failedToUpdateToken": "トークンを更新できませんでした",
+      "pleaseTryAgain": "もう一度お試しください。",
+      "theAPITokenWasRemoved": "API トークンを削除しました。",
+      "tokenDeleted": "トークンを削除しました",
+      "tokenNameUpdated": "トークン名を更新しました。",
+      "tokenUpdated": "トークンを更新しました"
+    },
+    "accountChangePasswordPage": {
+      "atLeast12Characters": "12 文字以上",
+      "cancel": "キャンセル",
+      "changePassword": "パスワードを変更",
+      "confirmNewPassword": "新しいパスワード（確認）",
+      "currentPassword": "現在のパスワード",
+      "enterYourCurrentPassword": "現在のパスワードを入力",
+      "home": "ホーム",
+      "newPassword": "新しいパスワード",
+      "passwordChangeFailed": "パスワードを変更できませんでした",
+      "passwordChanged": "パスワードを変更しました",
+      "passwordSecurity": "パスワードとセキュリティ",
+      "thereWasAnErrorUpdatingYour": "パスワードの更新中にエラーが発生しました。もう一度お試しください。",
+      "yourPasswordHasBeenUpdatedSuccessfully": "パスワードを更新しました。"
+    },
+    "accountMcpConnectionsPage": {
+      "connectionRevoked": "接続を失効しました",
+      "failedToRevokeConnection": "接続を失効できませんでした",
+      "pleaseTryAgain": "もう一度お試しください。",
+      "theMCPClientCanNoLonger": "この MCP クライアントはアカウントにアクセスできなくなりました。"
+    },
+    "accountNotificationSettingsPage": {
+      "error": "エラー",
+      "failedToUpdateNotificationSettings": "通知設定を更新できませんでした"
+    },
+    "billingPickCompanyPage": {
+      "selectACompany": "会社を選択",
+      "whichCompanyWouldYouLikeTo": "どの会社の請求を管理しますか？",
+      "youDonTHaveAccessTo": "請求を管理できる会社がまだありません。"
+    },
+    "companyAdminAddPeoplePage": {
+      "companyAdministration": "会社の管理",
+      "manageTeamMembers": "チームメンバーを管理"
+    },
+    "companyAdminManageAdminsPage": {
+      "accountOwners": "アカウントオーナー",
+      "addAdmin": "管理者を追加",
+      "addAdmininstrators": "管理者を追加",
+      "addAdministrators": "管理者を追加",
+      "addOwner": "オーナーを追加",
+      "addOwners": "オーナーを追加",
+      "addOwners2": "オーナーを追加",
+      "addRemovePeopleWhoAreIn": "会社とその運営に責任を持つメンバーを追加・削除します",
+      "administrators": "管理者",
+      "companyAdministration": "会社の管理",
+      "companyAdministratorsCanAddRemovePeople": "会社の管理者は、メンバーの追加・削除、プロフィールの管理、会社設定の更新などができます。",
+      "manageAdminsAndOwners": "管理者とオーナーを管理",
+      "ownersHaveTheHighestLevelOf": "オーナーは最上位の権限を持ち、請求を含む会社のあらゆる側面を管理でき、すべてのリソースにアクセスできます。",
+      "remove": "削除",
+      "searchForPeopleToPromoteTo": "管理者に指名するメンバーを検索",
+      "searchForPeopleToPromoteTo2": "オーナーに指名するメンバーを検索"
+    },
+    "companyAdminManagePeoplePage": {
+      "companyAdministration": "会社の管理"
+    },
+    "companyAdminPage": {
+      "accountOwners": "アカウントオーナー",
+      "administrators": "管理者",
+      "asAnAdminOrOwnerYou": "管理者またはオーナーとして、次のことができます:",
+      "asAnOwnerYouCan": "オーナーとして、次のことができます:",
+      "cancel": "キャンセル",
+      "companyAdministration": "会社の管理",
+      "dangerZone": "危険な操作:",
+      "deleteCompany": "会社を削除",
+      "deleteThisCompany": "この会社を削除",
+      "error": "エラー",
+      "exportCompanyData": "会社データをエクスポート",
+      "failedToDeleteCompany": "会社を削除できませんでした",
+      "home": "ホーム",
+      "manageAdministratorsAndOwners": "管理者とオーナーを管理",
+      "managePlan": "プランを管理",
+      "manageTeamMembers": "チームメンバーを管理",
+      "manageTrustedEmailDomains": "信頼するメールドメインを管理",
+      "permanentlyDeleteTheCompanyAndAll": "会社とそのすべてのリソースを完全に削除します。この操作は取り消せません。",
+      "renameTheCompany": "会社名を変更",
+      "restoreAccessForDeactivatedTeamMembers": "無効化されたチームメンバーのアクセスを復元",
+      "thisActionCannotBeUndone": "この操作は取り消せません。",
+      "thisIsTheCompanyAdministrationPage": "ここは会社の管理ページです。オーナーと管理者が会社の設定を管理できます。チームメンバーの追加・削除やアプリケーションへのアクセス権の変更など、特別な権限を持っています。何か必要なことがあれば、いずれかのメンバーに連絡してください。",
+      "toConfirmType": "確認のため、下の入力欄に「{{v1}}」と入力してください",
+      "viewPermissionBreakdown": "権限の一覧を表示",
+      "whatSThis": "これは何ですか？"
+    },
+    "companyAdminRestoreSuspendedPeoplePage": {
+      "companyAdministration": "会社の管理",
+      "manageTeamMembers": "チームメンバーを管理",
+      "noDeactivatedTeamMembers": "{{v1}} に無効化されたチームメンバーはいません。退職するメンバーのアクセスを削除するには、<0>チームメンバーを管理</0>ページをご覧ください。",
+      "reactivateAccount": "アカウントを再有効化",
+      "restoreDeactivatedTeamMembers": "無効化されたチームメンバーを復元",
+      "unableToRestoreMember": "メンバーを復元できません"
+    },
+    "companyAdminTrustedEmailDomainsPage": {
+      "add": "追加",
+      "addTrustedEmailDomain": "信頼するメールドメインを追加",
+      "companyAdministration": "会社の管理",
+      "noTrustedEmailDomainsOnlyManually": "信頼するメールドメインはありません。手動で追加されたメンバーのみ登録できます。",
+      "trustedEmailDomains": "信頼するメールドメイン",
+      "trustedEmailDomainsAreEmailDomains": "信頼するメールドメインとは、この会社のアカウント登録を許可するメールドメインのことです。信頼するドメイン以外のメールアドレスで登録しようとし、かつ管理者が手動で追加していない場合、そのユーザーはアクセスを拒否されます。",
+      "whatSThis": "これは何ですか？"
+    },
+    "companyBillingCancellationPage": {
+      "billing": "請求",
+      "cancellationUnavailable": "解約できません",
+      "companyAdministration": "会社の管理",
+      "weCouldnTScheduleTheCancellation": "現在、解約を予約できませんでした。もう一度お試しください。"
+    },
+    "companyBillingPage": {
+      "billingManagementUnavailable": "請求情報を表示できません",
+      "checkoutUnavailable": "決済を開始できません",
+      "companyAdministration": "会社の管理",
+      "failedToStartCheckout": "決済を開始できませんでした",
+      "paymentMethodUnavailable": "支払方法を表示できません",
+      "reactivationUnavailable": "再開できません",
+      "thatPlanIsNoLongerAvailable": "そのプランは現在利用できません。別のプランを選んでください。",
+      "weCouldnTKeepTheCurrent": "現在、プランを継続できませんでした。もう一度お試しください。",
+      "weCouldnTOpenBillingHistory": "現在、請求履歴を開けませんでした。もう一度お試しください。",
+      "weCouldnTOpenPaymentMethod": "現在、支払方法の詳細を開けませんでした。もう一度お試しください。",
+      "weCouldnTStartCheckoutRight": "現在、決済を開始できませんでした。もう一度お試しください。"
+    },
+    "companyBillingPlanSelectionPage": {
+      "billing": "請求",
+      "checkoutUnavailable": "決済を開始できません",
+      "companyAdministration": "会社の管理",
+      "failedToChangePlan": "プランを変更できませんでした",
+      "failedToStartCheckout": "決済を開始できませんでした",
+      "planUnavailable": "プランを利用できません",
+      "thatPlanIsNoLongerAvailable": "そのプランは現在利用できません。別のプランを選んでください。",
+      "weCouldnTChangeThePlan": "現在、プランを変更できませんでした。もう一度お試しください。",
+      "weCouldnTStartCheckoutRight": "現在、決済を開始できませんでした。もう一度お試しください。"
+    },
+    "companyExportPage": {
+      "downloadFailed": "ダウンロードに失敗しました",
+      "exportStarted": "エクスポートを開始しました",
+      "failedToStartExport": "エクスポートを開始できませんでした",
+      "pleaseTryAgain": "もう一度お試しください。",
+      "theExportPackageIsNotReady": "エクスポートパッケージはまだ準備できていません。",
+      "youLlReceiveThePackageHere": "処理が完了すると、ここにパッケージが表示されます。"
+    },
+    "companyImportPage": {
+      "failedToStartImport": "インポートを開始できませんでした",
+      "failedToUploadPleaseTryAgain": "{{v1}} をアップロードできませんでした。もう一度お試しください。",
+      "importStarted": "インポートを開始しました",
+      "pleaseConfirmThePackageFinishedUploading": "パッケージのアップロードが完了しているか確認してから、もう一度お試しください。",
+      "theCompanyIsBeingImportedIn": "会社をバックグラウンドでインポートしています。",
+      "uploadFailed": "アップロードに失敗しました"
+    },
+    "companyPermissionsPage": {
+      "admins": "管理者",
+      "companyAdministration": "会社の管理",
+      "members": "メンバー",
+      "owners": "オーナー",
+      "permission": "権限",
+      "permissionBreakdown": "権限の一覧",
+      "permissions": "権限"
+    },
+    "companyRenamePage": {
+      "companyAdministration": "会社の管理",
+      "companyName": "会社名",
+      "editingCompanyName": "会社名を編集",
+      "renameCompany": "会社名を変更",
+      "save": "保存"
+    },
+    "companyWorkMapPage": {
+      "workMap": "{{v1}} のワークマップ"
+    },
+    "discussionDraftsPage": {
+      "discardDraft": "下書きを破棄",
+      "discussions": "ディスカッション",
+      "draftActions": "下書きの操作",
+      "lastEditedOn": "最終編集: <0/> —",
+      "newDiscussion": "新しいディスカッション",
+      "youDonTHaveAnyDrafts": "下書きはありません。",
+      "yourDrafts": "自分の下書き"
+    },
+    "discussionEditPage": {
+      "cancel": "キャンセル",
+      "discardDraft": "下書きを破棄",
+      "discussions": "ディスカッション",
+      "editDiscussion": "ディスカッションを編集",
+      "publishNow": "今すぐ投稿",
+      "saveAsDraft": "下書きとして保存",
+      "saveChanges": "変更を保存",
+      "scheduleDiscussion": "ディスカッションを予約投稿"
+    },
+    "discussionNewPage": {
+      "discardThisMessage": "このメッセージを破棄",
+      "newDiscussion": "新しいディスカッション",
+      "post": "投稿",
+      "saveAsDraft": "下書きとして保存",
+      "scheduleDiscussion": "ディスカッションを予約投稿"
+    },
+    "discussionPage": {
+      "delete": "削除",
+      "discardDraft": "下書きを破棄",
+      "discussions": "ディスカッション",
+      "edit": "編集"
+    },
+    "forgotPasswordPage": {
+      "backToSignIn": "ログイン画面に戻る",
+      "eGYourEmailCom": "例: your@email.com",
+      "email": "メールアドレス",
+      "forgotPassword": "パスワードをお忘れですか？",
+      "getResetInstructionsViaEmail": "再設定の手順をメールで受け取る。",
+      "passwordResetInstructionsHaveBeenSent": "パスワード再設定の手順をメールでお送りしました。",
+      "resendInstructions": "手順を再送する",
+      "sendResetInstructions": "再設定の手順を送信"
+    },
+    "goalAccessAddPage": {
+      "accessLevel": "アクセス権限",
+      "addPeople": "メンバーを追加",
+      "addPeopleTo": "{{v1}} にメンバーを追加",
+      "backToTeamAccess": "チームとアクセス権に戻る",
+      "person": "メンバー"
+    },
+    "goalAccessManagementPage": {
+      "addPeople": "メンバーを追加",
+      "changeAccessLevel": "アクセス権限を変更",
+      "commentAccess": "コメント権限",
+      "edit": "編集",
+      "editAccess": "編集権限",
+      "fullAccess": "フルアクセス",
+      "generalAccess": "全体のアクセス権",
+      "manageTheTeamAndAccessTo": "このゴールのチームとアクセス権を管理する",
+      "otherPeopleHaveAccessToThis": "他に {{v1}} 人がこのゴールにアクセスできます",
+      "otherPeopleWithAccess": "アクセス権を持つその他のメンバー",
+      "peopleWhoHaveAccessToThe": "直接割り当てられてはいないものの、会社またはスペースのメンバーであることでこのゴールにアクセスできるメンバーです。",
+      "peopleWithDirectAccess": "直接アクセス権を持つメンバー",
+      "removeFromGoal": "ゴールから外す",
+      "teamAmpAccess": "チームとアクセス権",
+      "viewAccess": "閲覧権限",
+      "workMap": "ワークマップ"
+    },
+    "goalActivityPage": {
+      "acknowledgeRetrospective": "振り返りを承認",
+      "acknowledgedByName": "{{v1}} が承認しました",
+      "discussions": "ディスカッション",
+      "notYetAcknowledged": "未承認",
+      "workMap": "ワークマップ"
+    },
+    "goalAsMarkdownPage": {
+      "goalAsMarkdown": "ゴールを Markdown で表示"
+    },
+    "goalCheckInNewPage": {
+      "checkIns": "チェックイン",
+      "shareTheProgressWithTheTeam": "進捗をチームに共有する",
+      "workMap": "ワークマップ"
+    },
+    "goalCheckInPage": {
+      "acknowledgeThisCheckIn": "このチェックインを承認",
+      "areYouSureYouWantTo": "この下書きを破棄してもよろしいですか？",
+      "cancel": "キャンセル",
+      "checkIns": "チェックイン",
+      "discardDraft": "下書きを破棄",
+      "draftDiscarded": "下書きを破棄しました",
+      "edit": "編集",
+      "theDraftHasBeenDiscarded": "下書きを破棄しました。",
+      "workMap": "ワークマップ"
+    },
+    "goalClosingPage": {
+      "closeGoal": "ゴールをクローズ",
+      "closing": "{{name}} をクローズ中",
+      "no": "いいえ",
+      "retrospectiveNotes": "振り返りメモ",
+      "reviewAmpCloseGoal": "確認してゴールをクローズ",
+      "wasThisGoalAchieved": "このゴールは達成されましたか？",
+      "whatWentWellWhatDidnT": "うまくいったことは？いかなかったことは？学びは？",
+      "yes": "はい"
+    },
+    "goalDiscussionEditPage": {
+      "cancel": "キャンセル",
+      "fillOutAllTheRequiredFields": "必須項目をすべて入力してください",
+      "pleaseAddATitle": "タイトルを入力してください",
+      "save": "保存",
+      "startANewDiscussion": "新しいディスカッションを始める...",
+      "title": "タイトル..."
+    },
+    "goalDiscussionNewPage": {
+      "cancel": "キャンセル",
+      "fillOutAllTheRequiredFields": "必須項目をすべて入力してください",
+      "pleaseAddATitle": "タイトルを入力してください",
+      "postDiscussion": "ディスカッションを投稿",
+      "startANewDiscussion": "新しいディスカッションを始める...",
+      "title": "タイトル..."
+    },
+    "goalEditAccessLevelsPage": {
+      "editGeneralAccess": "全体のアクセス権を編集",
+      "teamAccess": "チームとアクセス権",
+      "workMap": "ワークマップ"
+    },
+    "goalPage": {
+      "failedToAddChecklistItem": "チェックリスト項目を追加できませんでした",
+      "failedToDeleteChecklistItem": "チェックリスト項目を削除できませんでした",
+      "failedToDeleteTheGoalPlease": "ゴールを削除できませんでした。もう一度お試しください。",
+      "failedToToggleChecklistItem": "チェックリスト項目の完了状態を切り替えられませんでした",
+      "failedToUpdateChecklistItem": "チェックリスト項目を更新できませんでした",
+      "failedToUpdateChecklistItemIndex": "チェックリスト項目の並び順を更新できませんでした",
+      "loading": "読み込み中...",
+      "networkError": "ネットワークエラー",
+      "parentGoalUpdated": "親ゴールを更新しました",
+      "revertedTheAccessLevelsToTheir": "アクセス権限を以前の設定に戻しました。",
+      "revertedTheChampionToItsPrevious": "責任者を以前の設定に戻しました。",
+      "revertedTheDescriptionToItsPrevious": "説明を以前の内容に戻しました。",
+      "revertedTheDueDateToIts": "期限を以前の値に戻しました。",
+      "revertedTheParentGoalToIts": "親ゴールを以前の設定に戻しました。",
+      "revertedTheReviewerToItsPrevious": "レビュアーを以前の設定に戻しました。",
+      "revertedTheSpaceToItsPrevious": "スペースを以前の設定に戻しました。",
+      "revertedTheStartDateToIts": "開始日を以前の値に戻しました。",
+      "somethingWentWrong": "問題が発生しました",
+      "theParentGoalHasBeenSuccessfully": "親ゴールを変更しました。"
+    },
+    "goalReopenPage": {
+      "cancel": "キャンセル",
+      "reopen": "{{name}} を再開",
+      "reopenGoal": "ゴールを再開",
+      "reopeningGoal": "ゴールを再開中",
+      "whyAreYouReopeningThisGoal": "このゴールを再開する理由は何ですか？",
+      "writeHere": "ここに入力..."
+    },
+    "homePage": {
+      "addSpace": "スペースを追加",
+      "couldNotDeleteFeedItem": "フィード項目を削除できませんでした",
+      "error": "エラー",
+      "home": "ホーム",
+      "invitePeople": "メンバーを招待",
+      "manageProjectsTrackGoalsAndOrganize": "プロジェクトを管理し、ゴールを追跡し、チームの仕事を整理します。",
+      "noSpacesYet": "スペースはまだありません",
+      "pleaseTryAgain": "もう一度お試しください。",
+      "spacesWillAppearHereWhenSomeone": "誰かからアクセス権を付与されると、ここにスペースが表示されます。",
+      "stayUpToDateWithYour": "チームの進捗を把握しましょう。",
+      "whatSNew": "新着情報",
+      "yourOperatelySpaces": "自分の Operately スペース"
+    },
+    "inviteLinkFullPage": {
+      "anAdminOrOwnerNeedsTo": "管理者またはオーナーの対応が必要です",
+      "anAdminOrOwnerNeedsTo2": "他のメンバーが参加するには、管理者またはオーナーが請求内容を確認するか、メンバー枠を空ける必要があります。",
+      "backToHome": "ホームに戻る",
+      "memberLimitReached": "メンバー数の上限に達しました",
+      "onceTheUpgradeIsDoneCome": "アップグレードが完了したら、このリンクに戻ってもう一度お試しください。",
+      "thisCompanyHasReachedItsMember": "この会社はメンバー数の上限に達しているため、この招待はまだ利用できません。",
+      "tryAgain": "もう一度試す",
+      "tryAgainLater": "しばらくしてからもう一度お試しください"
+    },
+    "inviteTeamPage": {
+      "companyAdministration": "会社の管理",
+      "failedToDisableInviteLink": "招待リンクを無効にできませんでした。",
+      "failedToResetInviteLink": "招待リンクを再作成できませんでした。",
+      "failedToUpdateTrustedDomains": "信頼するドメインを更新できませんでした",
+      "manageTeamMembers": "チームメンバーを管理",
+      "networkError": "ネットワークエラー"
+    },
+    "joinPage": {
+      "chooseAPasswordMinimum12Characters": "パスワードを設定してください（12 文字以上）",
+      "repeatPassword": "パスワードを再入力",
+      "setPasswordAmpLogIn": "パスワードを設定してログイン",
+      "welcomeToOperately": "Operately へようこそ",
+      "whatHappensNext": "この後の流れ",
+      "youWereInvitedByToJoin": "{{v1}} さんから {{v2}} への招待が届いています。",
+      "youWillJoinTheCompany": "{{v1}} に参加します。"
+    },
+    "lobbyPage": {
+      "adminPanel": "管理パネル",
+      "letSGetYouStarted": "さっそく始めましょう",
+      "lobby": "ロビー",
+      "orVisitThe": "または <0/> をご覧ください。",
+      "startFreshWithANewCompany": "新しい会社アカウントで始める",
+      "welcomeToOperatelyName": "{{v1}} さん、Operately へようこそ"
+    },
+    "loginPage": {
+      "createAnAccount": "アカウントを作成",
+      "email": "メールアドレス",
+      "forgotPassword": "パスワードをお忘れですか？",
+      "operately": "Operately",
+      "password": "パスワード",
+      "pleaseEnterYourDetailsToSign": "ログイン情報を入力してください",
+      "signIn": "ログイン",
+      "yourEmailCom": "your@email.com"
+    },
+    "memberTypeSelectionPage": {
+      "companyAdministration": "会社の管理",
+      "manageTeamMembers": "チームメンバーを管理"
+    },
+    "milestoneKanbanPage": {
+      "error": "エラー",
+      "failedToUpdateTaskStatuses": "タスクのステータスを更新できませんでした",
+      "projects": "プロジェクト"
+    },
+    "milestonePage": {
+      "error": "エラー",
+      "failedToAddComment": "コメントを追加できませんでした。",
+      "failedToUpdateMilestoneDescription": "マイルストーンの説明を更新できませんでした。"
+    },
+    "newCompanyPage": {
+      "backToTheLobby": "ロビーに戻る",
+      "createCompany": "会社を作成",
+      "doYouHaveAnExistingCompany": "すでに会社をお持ちですか？<0>こちらからインポート</0>",
+      "eGAcmeCo": "例: 株式会社アクメ",
+      "eGFounder": "例: 創業者",
+      "importItHere": "こちらからインポート",
+      "isThisADemoCompany": "これはデモ用の会社ですか？",
+      "letAposSSetUpYour": "Operately で会社をセットアップしましょう。",
+      "nameOfTheCompany": "会社名",
+      "newCompany": "新しい会社",
+      "no": "いいえ",
+      "whatSYourTitleInThe": "会社での役職を教えてください",
+      "yes": "はい"
+    },
+    "notFoundPage": {
+      "goBackToHome": "ホームに戻る",
+      "goBackToLobby": "ロビーに戻る",
+      "pageNotFound": "ページが見つかりません",
+      "sorryWeCouldnTFindThat": "お探しのページは見つかりませんでした。"
+    },
+    "notificationsPage": {
+      "hereSEveryNotificationYouVe": "Operately から届いた通知の一覧です。",
+      "markAllRead": "すべて既読にする",
+      "newForYou": "新着",
+      "nothingNewForYou": "新着はありません。",
+      "notifications": "通知",
+      "previousNotifications": "以前の通知"
+    },
+    "peopleOrgChartPage": {
+      "orgChart": "組織図"
+    },
+    "peoplePage": {
+      "membersOf": "{{v1}} のメンバー",
+      "people": "メンバー"
+    },
+    "profilePage": {
+      "error": "エラー",
+      "loading": "読み込み中..."
+    },
+    "projectAddPage": {
+      "addProject": "プロジェクトを追加",
+      "champion": "責任者",
+      "eGHRSystemUpdate": "例: 人事システムの刷新",
+      "edit": "編集",
+      "goal": "ゴール",
+      "newProject": "新しいプロジェクト",
+      "projectName": "プロジェクト名",
+      "reviewer": "レビュアー",
+      "space": "スペース",
+      "startANewProject": "新しいプロジェクトを始める",
+      "startANewProjectIn": "{{v1}} で新しいプロジェクトを始める"
+    },
+    "projectAsMarkdownPage": {
+      "projectAsMarkdown": "プロジェクトを Markdown で表示"
+    },
+    "projectCheckInEditPage": {
+      "1HowSTheProjectGoing": "1. プロジェクトの状況はいかがですか？",
+      "2WhatSNewSinceThe": "2. 前回のチェックイン以降の変化は？",
+      "checkIns": "チェックイン",
+      "editingLockedAfter3Days": "3 日経過すると編集できなくなります",
+      "editingTheCheckInFrom": "<0/> のチェックインを編集",
+      "publishNow": "今すぐ投稿",
+      "saveAsDraft": "下書きとして保存",
+      "saveDraft": "下書きを保存",
+      "scheduleCheckIn": "チェックインを予約",
+      "submit": "送信",
+      "workMap": "ワークマップ",
+      "writeYourCheckInHere": "ここにチェックインを書いてください..."
+    },
+    "projectCheckInNewPage": {
+      "1HowSTheProjectGoing": "1. プロジェクトの状況はいかがですか？",
+      "checkIns": "チェックイン",
+      "fillOutAllTheRequiredFields": "必須項目をすべて入力してください",
+      "letSCheckIn": "チェックインしましょう",
+      "postedByOn": "{{v1}} が <0/> に投稿",
+      "previousCheckIn": "前回のチェックイン",
+      "saveAsDraft": "下書きとして保存",
+      "scheduleCheckIn": "チェックインを予約",
+      "submit": "送信",
+      "unknown": "不明",
+      "viewOriginal": "元の投稿を表示",
+      "workMap": "ワークマップ",
+      "writeYourCheckInHere": "ここにチェックインを書いてください..."
+    },
+    "projectCheckInPage": {
+      "acknowledgeThisCheckIn": "このチェックインを承認",
+      "cancel": "キャンセル",
+      "checkInDeleted": "チェックインを削除しました",
+      "checkIns": "チェックイン",
+      "draftDiscarded": "下書きを破棄しました",
+      "edit": "編集",
+      "resume": "再開",
+      "theCheckInHasBeenSuccessfully": "チェックインを削除しました。",
+      "theDraftHasBeenDiscarded": "下書きを破棄しました。",
+      "thisProjectIsPaused": "このプロジェクトは一時停止中です",
+      "thisProjectWasClosedOn": "このプロジェクトは <0/> にクローズされました。<1>振り返り</1>をご覧ください。",
+      "workMap": "ワークマップ"
+    },
+    "projectClosePage": {
+      "closing": "{{name}} をクローズ中",
+      "reviewAmpCloseProject": "確認してプロジェクトをクローズ"
+    },
+    "projectContributorsAddPage": {
+      "accessLevel": "アクセス権限",
+      "addChampion": "責任者を追加",
+      "addContributors": "コントリビューターを追加",
+      "addContributorsTo": "{{v1}} にコントリビューターを追加",
+      "addReviewer": "レビュアーを追加",
+      "backToTeamAccess": "チームとアクセス権に戻る",
+      "champion": "責任者",
+      "contributor": "コントリビューター",
+      "eGProjectManager": "例: プロジェクトマネージャー",
+      "inviteSomeoneNewToTheOrganization": "新しいメンバーを組織に招待する",
+      "onlyExistingMembersCanBeAdded": "追加できるのは既存のメンバーのみです。<0>新しいメンバーを組織に招待する</0>",
+      "responsibility": "担当領域",
+      "reviewer": "レビュアー",
+      "reviewersAreResponsibleForAcknowledgingEach": "レビュアーは各チェックインを承認する責任を持ち、必要に応じて是正措置を指示する権限があります。通常は責任者の上長が担当します。"
+    },
+    "projectContributorsEditPage": {
+      "accessLevel": "アクセス権限",
+      "editSResponsibilitiesAndAccessLevel": "{{v1}} の担当領域とアクセス権限を編集",
+      "ifYouSelectANewChampion": "新しい責任者を選ぶと、{{v1}} はコントリビューターに変更されます。",
+      "ifYouSelectANewReviewer": "新しいレビュアーを選ぶと、{{v1}} はコントリビューターに変更されます。",
+      "isCurrentlyTheOnThisProject": "{{v1}} は現在このプロジェクトの{{v2}}です。",
+      "projectChampion": "プロジェクト責任者",
+      "projectReviewer": "プロジェクトレビュアー",
+      "reassignAsAContributor": "{{v1}} をコントリビューターに変更",
+      "save": "保存",
+      "whatIsSResponsibilityOnThis": "{{v1}} はこのプロジェクトで何を担当しますか？"
+    },
+    "projectContributorsPage": {
+      "addChampion": "責任者を追加",
+      "addContributors": "コントリビューターを追加",
+      "addReviewer": "レビュアーを追加",
+      "assignAsChampion": "責任者に指定",
+      "assignAsReviewer": "レビュアーに指定",
+      "champion": "責任者",
+      "contributors": "コントリビューター",
+      "edit": "編集",
+      "editChampion": "責任者を変更",
+      "editContributor": "コントリビューターを編集",
+      "editReviewer": "レビュアーを変更",
+      "generalAccess": "全体のアクセス権",
+      "manageTheTeamAndAccessTo": "このプロジェクトのチームとアクセス権を管理する",
+      "noChampion": "責任者なし",
+      "noReviewer": "レビュアーなし",
+      "otherPeopleHaveAccessToThis": "他に {{v1}} 人がこのプロジェクトにアクセスできます",
+      "otherPeopleWithAccess": "アクセス権を持つその他のメンバー",
+      "peopleWhoHaveAccessToThe": "プロジェクトに直接割り当てられてはいないものの、会社またはスペースのメンバーであることでこのプロジェクトにアクセスできるメンバーです。",
+      "reassignAsContributor": "コントリビューターに戻す",
+      "removeFromProject": "プロジェクトから外す",
+      "reviewer": "レビュアー",
+      "teamAmpAccess": "チームとアクセス権",
+      "workMap": "ワークマップ"
+    },
+    "projectDiscussionEditPage": {
+      "cancel": "キャンセル",
+      "fillOutAllTheRequiredFields": "必須項目をすべて入力してください",
+      "pleaseAddATitle": "タイトルを入力してください",
+      "save": "保存",
+      "title": "タイトル...",
+      "writeHere": "ここに入力..."
+    },
+    "projectDiscussionNewPage": {
+      "cancel": "キャンセル",
+      "discussions": "ディスカッション",
+      "fillOutAllTheRequiredFields": "必須項目をすべて入力してください",
+      "pleaseAddATitle": "タイトルを入力してください",
+      "postDiscussion": "ディスカッションを投稿",
+      "startANewDiscussion": "新しいディスカッションを始める...",
+      "title": "タイトル...",
+      "workMap": "ワークマップ"
+    },
+    "projectDiscussionPage": {
+      "discussions": "ディスカッション",
+      "edit": "編集",
+      "workMap": "ワークマップ"
+    },
+    "projectEditAccessLevelsPage": {
+      "editGeneralAccess": "全体のアクセス権を編集",
+      "teamAccess": "チームとアクセス権",
+      "workMap": "ワークマップ"
+    },
+    "projectPage": {
+      "error": "エラー",
+      "failedToCreateMilestone": "マイルストーンを作成できませんでした",
+      "failedToDeleteProject": "プロジェクトを削除できませんでした",
+      "failedToUpdateMilestone": "マイルストーンを更新できませんでした",
+      "failedToUpdateTasksView": "タスクの表示設定を更新できませんでした",
+      "networkError": "ネットワークエラー",
+      "revertedTheAccessLevelsToTheir": "アクセス権限を以前の設定に戻しました。",
+      "revertedTheChampionToItsPrevious": "責任者を以前の設定に戻しました。",
+      "revertedTheDescriptionToItsPrevious": "説明を以前の内容に戻しました。",
+      "revertedTheDueDateToIts": "期限を以前の値に戻しました。",
+      "revertedTheParentGoalToIts": "親ゴールを以前の設定に戻しました。",
+      "revertedTheReviewerToItsPrevious": "レビュアーを以前の設定に戻しました。",
+      "revertedTheSpaceToItsPrevious": "スペースを以前の設定に戻しました。",
+      "revertedTheStartedDateToIts": "開始日を以前の値に戻しました。"
+    },
+    "projectPausePage": {
+      "keepItActive": "有効のままにする",
+      "moveTheProjectToYourPaused": "プロジェクトを一時停止中の一覧に移動する",
+      "noteYouCanResumeTheProject": "※ プロジェクトはいつでも再開できます。",
+      "pauseProject": "プロジェクトを一時停止",
+      "pauseThisProject": "このプロジェクトを一時停止しますか？",
+      "stopNotificationsForTeamMembers": "チームメンバーへの通知を停止する",
+      "suspendAllAssociatedMilestonesAndTasks": "関連するマイルストーンとタスクをすべて保留にする",
+      "whyAreYouPausingThisProject": "このプロジェクトを一時停止する理由は何ですか？",
+      "writeHere": "ここに入力..."
+    },
+    "projectResumePage": {
+      "keepItPaused": "一時停止のままにする",
+      "makeTheProjectVisibleInActive": "進行中のプロジェクト一覧にこのプロジェクトを表示する",
+      "reactivateProjectMilestonesAndTasks": "プロジェクトのマイルストーンとタスクを再開する",
+      "readyToResumeProject": "プロジェクトを再開しますか？",
+      "restartNotificationsForTeamMembers": "チームメンバーへの通知を再開する",
+      "resumeProject": "プロジェクトを再開",
+      "whyAreYouResumingThisProject": "このプロジェクトを再開する理由は何ですか？",
+      "writeHere": "ここに入力..."
+    },
+    "projectRetrospectiveEditPage": {
+      "editingProjectRetrospective": "プロジェクトの振り返りを編集中",
+      "editingRetrospective": "振り返りを編集中"
+    },
+    "projectRetrospectivePage": {
+      "acknowledgeRetrospective": "振り返りを承認",
+      "acknowledgedByName": "{{v1}} が承認しました",
+      "editRetrospective": "振り返りを編集",
+      "notYetAcknowledged": "未承認",
+      "projectRetrospective": "プロジェクトの振り返り"
+    },
+    "projectTemplateDiscussionEditPage": {
+      "checkTheFormAndTryAgain": "入力内容を確認して、もう一度お試しください。",
+      "discussionNotUpdated": "ディスカッションを更新できませんでした",
+      "discussions": "ディスカッション",
+      "projectTemplates": "プロジェクトテンプレート"
+    },
+    "projectTemplateDiscussionNewPage": {
+      "checkTheFormAndTryAgain": "入力内容を確認して、もう一度お試しください。",
+      "discussionNotCreated": "ディスカッションを作成できませんでした",
+      "discussions": "ディスカッション",
+      "projectTemplates": "プロジェクトテンプレート"
+    },
+    "projectTemplateDiscussionPage": {
+      "discussions": "ディスカッション",
+      "projectTemplates": "プロジェクトテンプレート"
+    },
+    "projectTemplateDocumentPage": {
+      "delete": "削除",
+      "edit": "編集",
+      "resourceNotDeleted": "リソースを削除できませんでした",
+      "theDocumentIsStillOnThis": "ドキュメントはこのページに残っています。もう一度お試しください。"
+    },
+    "projectTemplateEditDocumentPage": {
+      "checkTheFormAndTryAgain": "入力内容を確認して、もう一度お試しください。",
+      "documentNotUpdated": "ドキュメントを更新できませんでした"
+    },
+    "projectTemplateEditFilePage": {
+      "checkTheFormAndTryAgain": "入力内容を確認して、もう一度お試しください。",
+      "fileNotUpdated": "ファイルを更新できませんでした"
+    },
+    "projectTemplateEditLinkPage": {
+      "checkTheFormAndTryAgain": "入力内容を確認して、もう一度お試しください。",
+      "linkNotUpdated": "リンクを更新できませんでした"
+    },
+    "projectTemplateFilePage": {
+      "delete": "削除",
+      "download": "ダウンロード",
+      "edit": "編集",
+      "resourceNotDeleted": "リソースを削除できませんでした",
+      "theFileIsStillOnThis": "ファイルはこのページに残っています。もう一度お試しください。"
+    },
+    "projectTemplateLinkPage": {
+      "delete": "削除",
+      "edit": "編集",
+      "resourceNotDeleted": "リソースを削除できませんでした",
+      "theLinkIsStillOnThis": "リンクはこのページに残っています。もう一度お試しください。"
+    },
+    "projectTemplateNewDocumentPage": {
+      "checkTheFormAndTryAgain": "入力内容を確認して、もう一度お試しください。",
+      "documentNotCreated": "ドキュメントを作成できませんでした"
+    },
+    "projectTemplateNewLinkPage": {
+      "checkTheFormAndTryAgain": "入力内容を確認して、もう一度お試しください。",
+      "linkNotCreated": "リンクを作成できませんでした"
+    },
+    "projectTemplatesPage": {
+      "checkTheNameAndSpaceThen": "名前とスペースを確認して、もう一度お試しください。",
+      "home": "ホーム",
+      "templateNotCreated": "テンプレートを作成できませんでした"
+    },
+    "resetPasswordPage": {
+      "confirmPassword": "パスワードの確認",
+      "eGYourEmailCom": "例: your@email.com",
+      "email": "メールアドレス",
+      "enterYourNewPassword": "新しいパスワードを入力",
+      "password": "パスワード",
+      "reEnterYourNewPassword": "新しいパスワードを再入力",
+      "resetPassword": "パスワードを再設定"
+    },
+    "resourceHubDocumentPage": {
+      "copy": "コピー",
+      "delete": "削除",
+      "edit": "編集",
+      "exportAsMarkdown": "Markdown でエクスポート",
+      "historyOfChanges": "変更履歴"
+    },
+    "resourceHubDocumentVersionComparisonPage": {
+      "historyOfChanges": "変更履歴"
+    },
+    "resourceHubDocumentVersionsPage": {
+      "restoreFailed": "復元に失敗しました",
+      "versionRestored": "バージョンを復元しました",
+      "versionRestoredAsTheCurrentDocument": "バージョン {{v1}} を現在のドキュメントとして復元しました。",
+      "weCouldnTRestoreThatVersion": "そのバージョンを復元できませんでした。もう一度お試しください。"
+    },
+    "resourceHubEditDocumentPage": {
+      "checkTheFormAndTryAgain": "入力内容を確認して、もう一度お試しください。",
+      "documentNotUpdated": "ドキュメントを更新できませんでした",
+      "editDocument": "ドキュメントを編集"
+    },
+    "resourceHubEditFilePage": {
+      "checkTheFormAndTryAgain": "入力内容を確認して、もう一度お試しください。",
+      "editFile": "ファイルを編集",
+      "fileNotUpdated": "ファイルを更新できませんでした"
+    },
+    "resourceHubEditLinkPage": {
+      "checkTheFormAndTryAgain": "入力内容を確認して、もう一度お試しください。",
+      "editLink": "リンクを編集",
+      "linkNotUpdated": "リンクを更新できませんでした"
+    },
+    "resourceHubFilePage": {
+      "delete": "削除",
+      "download": "ダウンロード",
+      "edit": "編集"
+    },
+    "resourceHubLinkPage": {
+      "delete": "削除",
+      "edit": "編集"
+    },
+    "resourceHubNewDocumentPage": {
+      "checkTheFormAndTryAgain": "入力内容を確認して、もう一度お試しください。",
+      "documentNotCreated": "ドキュメントを作成できませんでした",
+      "newDocument": "新しいドキュメント"
+    },
+    "resourceHubNewLinkPage": {
+      "checkTheFormAndTryAgain": "入力内容を確認して、もう一度お試しください。",
+      "linkNotCreated": "リンクを作成できませんでした",
+      "newLink": "新しいリンク"
+    },
+    "saasAdminBillingCatalogPage": {
+      "actions": "操作",
+      "archive": "アーカイブ",
+      "archivePlan": "プランをアーカイブ",
+      "archiveProduct": "商品をアーカイブ",
+      "behavior": "動作",
+      "billingBehavior": "請求の動作",
+      "billingCatalog": "請求カタログ",
+      "billingInterval": "請求間隔",
+      "cancel": "キャンセル",
+      "createPlan": "プランを作成",
+      "createProduct": "商品を作成",
+      "created": "作成日時",
+      "customerSelectable": "顧客が選択可能",
+      "displayName": "表示名",
+      "editPlan": "プランを編集",
+      "editProduct": "商品を編集",
+      "internal": "社内向け",
+      "interval": "間隔",
+      "key": "キー",
+      "limited": "制限あり",
+      "memberLimit": "メンバー数の上限",
+      "memberLimitValue": "メンバー数の上限値",
+      "monthly": "月次",
+      "no": "いいえ",
+      "plan": "プラン",
+      "planFamily": "プランファミリー",
+      "planKey": "プランキー",
+      "plans": "プラン",
+      "price": "価格",
+      "priceInCents": "価格（セント単位）",
+      "product": "商品",
+      "products": "商品",
+      "provider": "プロバイダー",
+      "providerManaged": "プロバイダー管理",
+      "selectable": "選択可能",
+      "setActive": "有効にする",
+      "status": "ステータス",
+      "storageLimit": "ストレージ上限",
+      "storageLimitBytes": "ストレージ上限（バイト）",
+      "syncFromPolar": "Polar から同期",
+      "tierRank": "ティア順位",
+      "unarchive": "アーカイブを解除",
+      "unlimited": "無制限",
+      "yearly": "年次",
+      "yes": "はい"
+    },
+    "saasAdminCompanyPage": {
+      "activity": "アクティビティ",
+      "activityDescription": "アクティビティの説明",
+      "admininstration": "管理",
+      "allCompanies": "すべての会社",
+      "allFlagsMarkedForRemoval": "すべてのフラグが削除対象です",
+      "cancel": "キャンセル",
+      "databaseID": "データベース ID",
+      "enableAnExperimentalFeatureForThis": "この会社で試験的な機能を有効にします。",
+      "enableFeature": "機能を有効化",
+      "enableFeatureFlag": "機能フラグを有効化",
+      "enabledFeatures": "有効な機能",
+      "failedToRemoveFeatureFlags": "機能フラグを削除できませんでした",
+      "goals": "ゴール",
+      "information": "情報",
+      "noFeatureFlagsEnabled": "有効な機能フラグはありません",
+      "people": "メンバー",
+      "projects": "プロジェクト",
+      "removeExperimentalFeatureFlagsFromThis": "この会社から試験的な機能フラグを削除します。変更は「保存」をクリックすると反映されます。",
+      "removeFeatureFlags": "機能フラグを削除",
+      "save": "保存",
+      "shortID": "短縮 ID",
+      "spaces": "スペース",
+      "startSupportSession": "サポートセッションを開始",
+      "stats": "統計",
+      "storage": "ストレージ",
+      "supportMode": "サポートモード",
+      "temporarilyEnableElevatedSupportAccessFor": "この会社のアカウントに関する問題を調査するため、一時的に高権限のサポートアクセスを有効にします。オーナーとしてアカウントを閲覧することになります。",
+      "time": "日時"
+    },
+    "saasAdminEmailSettingsPage": {
+      "administration": "管理",
+      "body": "本文",
+      "cancel": "キャンセル",
+      "configureTheEmailProviderUsedBy": "すべての会社で使用するメールプロバイダーを設定します。シークレットは表示されません。置き換えるには新しい値を入力してください。",
+      "emailConfiguration": "メール設定",
+      "emailSettings": "メール設定",
+      "enterAPIKey": "API キーを入力",
+      "noreplyYourcompanyCom": "noreply@yourcompany.com",
+      "notificationEmail": "通知メールアドレス",
+      "passwordAlreadySetLeaveBlankTo": "パスワードは設定済みです。現在のパスワードを維持する場合は空欄のままにしてください",
+      "provider": "プロバイダー",
+      "recipient": "宛先",
+      "recipientExampleCom": "recipient@example.com",
+      "requireTLS": "TLS を必須にする",
+      "sMTPHost": "SMTP ホスト",
+      "sMTPPassword": "SMTP パスワード",
+      "sMTPPort": "SMTP ポート",
+      "sMTPUsername": "SMTP ユーザー名",
+      "saveEmailSettings": "メール設定を保存",
+      "sendGrid": "SendGrid",
+      "sendGridAPIKey": "SendGrid API キー",
+      "sendTestEmail": "テストメールを送信",
+      "subject": "件名",
+      "testEmail": "テストメール",
+      "useSSL": "SSL を使用する",
+      "userExampleCom": "user@example.com",
+      "writeAShortTestMessage": "短いテストメッセージを入力してください"
+    },
+    "saasAdminPage": {
+      "account": "アカウント",
+      "actions": "操作",
+      "activeCompanies": "アクティブな会社",
+      "activeCompanyCriteria": "アクティブな会社の条件",
+      "administration": "管理",
+      "allAccounts": "すべてのアカウント",
+      "allCompanies": "すべての会社",
+      "billingCatalog": "請求カタログ",
+      "cancel": "キャンセル",
+      "clearSearch": "検索条件をクリア",
+      "companies": "会社",
+      "companiesNeedToMeetAllActivity": "ここに表示されるには、会社がすべての活動条件を満たす必要があります",
+      "company": "会社",
+      "createdAt": "作成日時",
+      "deleteAccount": "アカウントを削除",
+      "deleteThisWillSuspendAllLinked": "{{v1}} を削除しますか？関連するメンバーはすべて利用停止となり、個人データは匿名化され、アクセス権は完全に失われます。",
+      "email": "メールアドレス",
+      "emailConfiguration": "メール設定",
+      "errorLoadingAccounts": "アカウントの読み込みエラー: {{v1}}",
+      "errorLoadingActiveCompanies": "アクティブな会社の読み込みエラー: {{v1}}",
+      "errorLoadingCompanies": "会社の読み込みエラー: {{v1}}",
+      "goals": "ゴール",
+      "grantAccess": "アクセス権を付与",
+      "grantAccessToTheSiteAdmin": "{{v1}} にサイト管理ダッシュボードへのアクセス権を付与しますか？サイト管理者はインスタンス全体の設定管理など、特権的な操作を行えます。サイト全体を管理すべき相手にのみ付与してください。",
+      "grantSiteAdminAccess": "サイト管理者権限を付与",
+      "hasBeenDeleted": "{{v1}} を削除しました。",
+      "isNowASiteAdmin": "{{v1}} をサイト管理者にしました。",
+      "lastActivity": "最終アクティビティ",
+      "loadingAccounts": "アカウントを読み込み中...",
+      "loadingActiveCompanies": "アクティブな会社を読み込み中...",
+      "loadingCompanies": "会社を読み込み中...",
+      "noAccountsFound": "アカウントが見つかりません",
+      "noActiveCompaniesFound": "アクティブな会社が見つかりません",
+      "noCompaniesFound": "会社が見つかりません",
+      "noLongerHasSiteAdminAccess": "{{v1}} のサイト管理者権限を削除しました。",
+      "noMatchingFound": "一致する{{v1}}が見つかりません",
+      "ownedCompanies": "所有する会社",
+      "owners": "オーナー",
+      "people": "メンバー",
+      "projects": "プロジェクト",
+      "promoteToSiteAdmin": "サイト管理者に昇格",
+      "removeAccess": "アクセス権を削除",
+      "removeSiteAdminAccess": "サイト管理者権限を削除",
+      "removeSiteAdminAccessFromThis": "{{v1}} のサイト管理者権限を削除しますか？サイト管理ダッシュボードへのアクセスと特権的な操作ができなくなります。慎重に実行してください。",
+      "searchIndex": "検索インデックス",
+      "siteAdmin": "サイト管理者",
+      "siteMessages": "サイトメッセージ",
+      "spaces": "スペース",
+      "storage": "ストレージ"
+    },
+    "saasAdminSearchIndexPage": {
+      "searchIndex": "検索インデックス",
+      "searchIndexMaintenanceStarted": "検索インデックスのメンテナンスを開始しました",
+      "startedAlreadyRunning": "{{v1}} を開始しました。{{v2}} は実行中です。"
+    },
+    "saasAdminSiteMessagesPage": {
+      "actions": "操作",
+      "active": "有効",
+      "administration": "管理",
+      "allCompanies": "すべての会社",
+      "audience": "表示対象",
+      "cancel": "キャンセル",
+      "companies": "会社",
+      "createAMessageToShowA": "会社のユーザーにバナーを表示するメッセージを作成します。",
+      "createMessage": "メッセージを作成",
+      "created": "作成日時",
+      "delete": "削除",
+      "deleteMessage": "メッセージを削除",
+      "deleteThisMessage": "このメッセージを削除しますか？",
+      "description": "説明",
+      "edit": "編集",
+      "expires": "有効期限",
+      "expiresOn": "有効期限",
+      "failedToLoadCompanies": "会社の読み込みに失敗しました",
+      "inactive": "無効",
+      "loadingCompanies": "会社を読み込み中...",
+      "noCompaniesMatchYourSearch": "検索条件に一致する会社はありません。",
+      "noCompaniesSelectedYet": "会社がまだ選択されていません。",
+      "noSiteMessagesYet": "サイトメッセージはまだありません。",
+      "optionalLeaveBlankToShowUntil": "任意。空欄にすると、無効化または削除するまで表示されます。",
+      "searchCompanies": "会社を検索",
+      "selected": "選択済み",
+      "siteMessages": "サイトメッセージ",
+      "specificCompanies": "特定の会社",
+      "status": "ステータス",
+      "title": "タイトル",
+      "usersWhoHavenTDismissedIt": "まだ閉じていないユーザーには、直ちに表示されなくなります。",
+      "yYYYMMDD": "YYYY-MM-DD"
+    },
+    "setupPage": {
+      "aDMINACCOUNT": "管理者アカウント",
+      "atLeast12Characters": "12 文字以上",
+      "eGAcmeCo": "例: 株式会社アクメ",
+      "eGFounder": "例: 創業者",
+      "eGJohnJohnson": "例: 山田 太郎",
+      "eGJohnYourCompanyCom": "例: yamada@your-company.com",
+      "email": "メールアドレス",
+      "fullName": "氏名",
+      "letAposSSetUpYour": "会社をセットアップしましょう。",
+      "nameOfTheCompany": "会社名",
+      "password": "パスワード",
+      "repeatPassword": "パスワードを再入力",
+      "titleInTheCompany": "会社での役職",
+      "welcomeToOperately": "Operately へようこそ"
+    },
+    "signUpPage": {
+      "getStartedInAMinuteNo": "1 分で始められます。クレジットカードは不要です。",
+      "signIn": "ログイン",
+      "signUpForOperately": "Operately に登録"
+    },
+    "signUpWithEmailPage": {
+      "atLeast12Characters": "12 文字以上",
+      "canTFindYourCodeCheck": "コードが見つかりませんか？迷惑メールフォルダーもご確認ください。",
+      "checkYourEmailForACode": "メールに届いたコードをご確認ください",
+      "confirmPassword": "パスワードの確認",
+      "continue": "続ける ->",
+      "enterYourFullName": "氏名を入力してください",
+      "fullName": "氏名",
+      "nameCompanyCom": "name@company.com",
+      "operatelyWillSendYouACode": "メールアドレスを確認するためのコードを Operately からお送りします。",
+      "password": "パスワード",
+      "signUpForOperately": "Operately に登録",
+      "useYourWorkEmailKeepWork": "仕事用のメールアドレスをご利用ください。仕事とプライベートを分けられます。",
+      "whatHappensNext": "この後の流れ",
+      "workEmail": "仕事用メールアドレス"
+    },
+    "spaceAccessManagementPage": {
+      "addMembers": "メンバーを追加",
+      "changeAccessLevel": "アクセス権限を変更",
+      "commentAccess": "コメント権限",
+      "edit": "編集",
+      "editAccess": "編集権限",
+      "generalAccess": "全体のアクセス権",
+      "manageTheTeamAndAccessTo": "このスペースのチームとアクセス権を管理する",
+      "members": "メンバー",
+      "otherPeopleHaveAccessToThis": "他に {{v1}} 人がこのスペースにアクセスできます",
+      "otherPeopleWithAccess": "アクセス権を持つその他のメンバー",
+      "peopleWhoHaveAccessToThe": "会社のメンバーであることでこのスペースにアクセスできるメンバーです。",
+      "promoteToManager": "管理者に指定",
+      "reassignToMember": "メンバーに戻す",
+      "removeFromSpace": "スペースから外す",
+      "spaceManagers": "スペース管理者",
+      "teamAmpAccess": "チームとアクセス権",
+      "viewAccess": "閲覧権限"
+    },
+    "spaceAddMembersPage": {
+      "accessLevel": "アクセス権限",
+      "addMembers": "メンバーを追加",
+      "addMembersTo": "{{v1}} にメンバーを追加",
+      "backToTeamAccess": "チームとアクセス権に戻る",
+      "inviteSomeoneNewToTheOrganization": "新しいメンバーを組織に招待する",
+      "member": "メンバー",
+      "onlyExistingMembersCanBeAdded": "追加できるのは既存のメンバーのみです。<0>新しいメンバーを組織に招待する</0>"
+    },
+    "spaceAddPage": {
+      "backToHome": "ホームに戻る",
+      "createANewSpace": "新しいスペースを作成",
+      "createSpace": "スペースを作成",
+      "eGCreateProductAwarenessAnd": "例: 商品の認知度を高め、新規リードを獲得する",
+      "eGMarketing": "例: マーケティング",
+      "edit": "編集",
+      "purpose": "目的",
+      "spaceName": "スペース名",
+      "spacesHelpOrganizeProjectsGoalsAnd": "スペースを使うと、プロジェクト・ゴール・チームメンバーを 1 か所にまとめて整理できます。"
+    },
+    "spaceDiscussionsPage": {
+      "continueWritingYourDraftHellip": "下書きの続きを書く…",
+      "continueWritingYourDrafts": "{{v1}} 件の下書きの続きを書く…",
+      "discussions": "ディスカッション",
+      "newDiscussion": "新しいディスカッション",
+      "postAnnouncementsPitchIdeasAndStart": "お知らせの投稿、アイデアの提案、ディスカッションの開始ができます。"
+    },
+    "spaceEditGeneralAccessPage": {
+      "editGeneralAccess": "全体のアクセス権を編集"
+    },
+    "spaceEditPage": {
+      "name": "名前",
+      "purpose": "目的",
+      "save": "保存"
+    },
+    "spacePage": {
+      "activity": "アクティビティ",
+      "cancel": "キャンセル",
+      "configureTools": "ツールを設定",
+      "delete": "削除",
+      "deleteEverything": "すべて削除",
+      "deleteSpace": "スペースを削除",
+      "deletingThisSpaceWillPermanentlyRemove": "このスペースを削除すると、中身がすべて完全に削除されます。すべてのプロジェクト、ゴール、ディスカッションが対象です。",
+      "edit": "編集",
+      "error": "エラー",
+      "failedToDeleteSpace": "スペースを削除できませんでした",
+      "joinThisSpace": "このスペースに参加",
+      "loading": "読み込み中...",
+      "manageAccess": "アクセス権を管理",
+      "pleaseTryAgain": "もう一度お試しください。",
+      "spaceDeleted": "スペースを削除しました",
+      "theSpaceAndItsContentWere": "スペースとその内容を削除しました。",
+      "thisActionCannotBeUndone": "この操作は取り消せません。"
+    },
+    "spaceWorkMapPage": {
+      "workMap": "ワークマップ"
+    },
+    "taskPage": {
+      "error": "エラー",
+      "failedToDeleteTask": "タスクを削除できませんでした。",
+      "failedToMoveTask": "タスクを移動できませんでした。",
+      "failedToUpdateAssignees": "担当者を更新できませんでした。",
+      "failedToUpdateDueDate": "期限を更新できませんでした。",
+      "failedToUpdateMilestone": "マイルストーンを更新できませんでした。",
+      "failedToUpdateTaskDescription": "タスクの説明を更新できませんでした。",
+      "failedToUpdateTaskReminders": "タスクのリマインダーを更新できませんでした。",
+      "failedToUpdateTaskStatus": "タスクのステータスを更新できませんでした。"
+    }
+  },
+  "userMenu": {
+    "apiTokens": "API トークン",
+    "mcpConnections": "MCP 接続",
+    "passwordAndSecurity": "パスワードとセキュリティ",
+    "profile": "プロフィール",
+    "settings": "設定",
+    "signOut": "ログアウト"
+  }
+}

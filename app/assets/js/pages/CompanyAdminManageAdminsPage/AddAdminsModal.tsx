@@ -6,6 +6,7 @@ import { Person } from "@/models/people";
 import PeopleSearch, { Option } from "@/components/PeopleSearch";
 import { FormState } from "./useForm";
 import * as People from "@/models/people";
+import { t } from "@/i18n";
 
 export function AddAdminsModal({ form }: { form: FormState }) {
   const state = useState(form);
@@ -13,11 +14,11 @@ export function AddAdminsModal({ form }: { form: FormState }) {
   return (
     <>
       <PrimaryButton onClick={state.openModal} testId="add-admins" size="xs">
-        Add Admin
+        {t("pages.companyAdminManageAdminsPage.addAdmin")}
       </PrimaryButton>
 
       <Modal
-        title="Add administrators"
+        title={t("pages.companyAdminManageAdminsPage.addAdministrators")}
         isOpen={state.isModalOpen}
         onClose={state.hideModal}
         contentClassName="min-h-[600px]"
@@ -25,7 +26,7 @@ export function AddAdminsModal({ form }: { form: FormState }) {
         <SearchField
           onSelect={state.add}
           loader={state.search}
-          placeholder={"Search for people to promote to admin"}
+          placeholder={t("pages.companyAdminManageAdminsPage.searchForPeopleToPromoteTo")}
           alreadySelected={state.excludeIds}
         />
 
@@ -35,7 +36,7 @@ export function AddAdminsModal({ form }: { form: FormState }) {
 
         <div className="mt-4 flex items-center justify-center">
           <PrimaryButton onClick={state.submit} testId="save-admins">
-            Add Admininstrators
+            {t("pages.companyAdminManageAdminsPage.addAdmininstrators")}
           </PrimaryButton>
         </div>
       </Modal>

@@ -13,6 +13,7 @@ import {
   OPEN_TASK_EVENT,
 } from "../hooks/useTaskKeyboardNavigation";
 import { useShortcutFieldFocusRestore } from "../hooks/useShortcutFieldFocusRestore";
+import { t } from "../../i18n";
 
 interface CardProps {
   task: TaskBoard.Task;
@@ -184,7 +185,7 @@ export function Card({
               {shouldShowDescriptionIndicator && (
                 <span
                   className="inline-flex items-center gap-1"
-                  title="Has description"
+                  title={t("turboui.taskBoard.hasDescription")}
                   data-test-id="description-indicator"
                 >
                   <IconFileText size={14} />
@@ -192,7 +193,11 @@ export function Card({
               )}
 
               {shouldShowCommentsIndicator && (
-                <span className="inline-flex items-center gap-1" title="Has comments" data-test-id="comments-indicator">
+                <span
+                  className="inline-flex items-center gap-1"
+                  title={t("turboui.taskBoard.hasComments")}
+                  data-test-id="comments-indicator"
+                >
                   <IconMessageCircle size={14} />
                   {shouldShowCommentCount && <span>{task.commentCount}</span>}
                 </span>

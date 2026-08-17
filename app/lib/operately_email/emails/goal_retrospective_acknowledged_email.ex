@@ -2,6 +2,7 @@ defmodule OperatelyEmail.Emails.GoalRetrospectiveAcknowledgedEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Goals, Activities}
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -13,7 +14,7 @@ defmodule OperatelyEmail.Emails.GoalRetrospectiveAcknowledgedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: goal.name, who: author, action: "acknowledged your retrospective")
+    |> subject(where: goal.name, who: author, action: t("goalRetrospectiveAcknowledged.action"))
     |> assign(:author, author)
     |> assign(:goal, goal)
     |> assign(:cta_url, Paths.goal_activity_path(company, retrospective_activity) |> Paths.to_url())
@@ -30,7 +31,7 @@ defmodule OperatelyEmail.Emails.GoalRetrospectiveAcknowledgedEmail do
       parent_id: goal.id,
       parent_type: :goal,
       parent_name: goal.name,
-      headline: "acknowledged a goal retrospective",
+      headline: t("goalRetrospectiveAcknowledged.headline"),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: Paths.goal_activity_path(company, retrospective_activity) |> Paths.to_url(),

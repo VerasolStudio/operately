@@ -32,6 +32,7 @@ import {
 
 import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function Page() {
   const { discussion } = useLoadedData();
@@ -166,7 +167,7 @@ function Navigation({ space }) {
     <Paper.Navigation
       items={[
         { to: paths.spacePath(space.id), label: space.name },
-        { to: paths.spaceDiscussionsPath(space.id), label: "Discussions" },
+        { to: paths.spaceDiscussionsPath(space.id), label: t("pages.discussionPage.discussions") },
       ]}
     />
   );
@@ -203,7 +204,7 @@ function Options() {
       <PageOptions.Root testId="options-button">
         <PageOptions.Link
           icon={IconEdit}
-          title="Edit"
+          title={t("pages.discussionPage.edit")}
           to={paths.discussionEditPath(discussion.id!)}
           testId="edit-discussion"
           keepOutsideOnBigScreen
@@ -212,12 +213,17 @@ function Options() {
         {isUnpublished ? (
           <PageOptions.Action
             icon={IconTrash}
-            title="Discard draft"
+            title={t("pages.discussionPage.discardDraft")}
             onClick={toggleDiscardModal}
             testId="discard-draft"
           />
         ) : (
-          <PageOptions.Action icon={IconTrash} title="Delete" onClick={handleArchive} testId="archive-discussion" />
+          <PageOptions.Action
+            icon={IconTrash}
+            title={t("pages.discussionPage.delete")}
+            onClick={handleArchive}
+            testId="archive-discussion"
+          />
         )}
       </PageOptions.Root>
 

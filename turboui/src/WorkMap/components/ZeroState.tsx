@@ -7,6 +7,8 @@ import { ActionLink } from "../../Link";
 import { SpaceField } from "../../SpaceField";
 import { IconGoal, IconGrowth, IconProject } from "../../icons";
 import { AddItemModal } from "./AddItemModal";
+import { t } from "../../i18n";
+import { Trans } from "react-i18next";
 
 interface ZeroStateProps {
   addingEnabled: boolean;
@@ -53,31 +55,29 @@ export function ZeroStateCanAdd({ spaceSearch, addItem, addItemDefaultSpace, hid
   return (
     <div className="py-12 relative">
       <div className="mx-auto flex max-w-3xl flex-col items-center text-center relative z-10">
-        <h2 className="text-base font-semibold text-content-strong sm:text-xl">Start by adding a goal or project</h2>
-        <p className="mt-2 text-content-dimmed">
-          See what you and your team are working on, with progress and deadlines.
-        </p>
+        <h2 className="text-base font-semibold text-content-strong sm:text-xl">
+          {t("turboui.workMap.startByAddingAGoalOr")}
+        </h2>
+        <p className="mt-2 text-content-dimmed">{t("turboui.workMap.seeWhatYouAndYourTeam")}</p>
 
         <div className="mt-8 grid w-full gap-4 sm:grid-cols-2 sm:gap-6">
           <ZeroStateCard
             icon={<IconGoal size={40} className="p-2 rounded-lg bg-red-50 dark:bg-red-900" />}
-            title="Add a goal"
-            description="Long-term outcomes you're working toward. Track overall progress and impact."
+            title={t("turboui.workMap.addAGoal")}
+            description={t("turboui.workMap.longTermOutcomesYouReWorking")}
             onClick={open("goal")}
             testId="add-goal"
           />
           <ZeroStateCard
             icon={<IconProject size={40} className="p-2 rounded-lg bg-blue-50 dark:bg-blue-900" />}
-            title="Add a project"
-            description="Concrete steps and tasks with specific deliverables. Get things done."
+            title={t("turboui.workMap.addAProject")}
+            description={t("turboui.workMap.concreteStepsAndTasksWithSpecific")}
             onClick={open("project")}
             testId="add-project"
           />
         </div>
 
-        <p className="mt-8 text-xs text-content-dimmed sm:text-sm">
-          Not sure? Start with a project - you can always set goals later.
-        </p>
+        <p className="mt-8 text-xs text-content-dimmed sm:text-sm">{t("turboui.workMap.notSureStartWithAProject")}</p>
       </div>
 
       <AddItemModal
@@ -133,9 +133,11 @@ function FirstProjectZeroState({ spaceSearch, addItem, addItemDefaultSpace, onIt
     <div className="px-4 py-12 sm:py-16" data-test-id="first-project-zero-state">
       <div className="mx-auto flex max-w-sm flex-col items-center gap-6 text-center">
         <div className="flex flex-col items-center gap-2">
-          <h2 className="text-balance text-xl font-semibold text-content-strong">Add your first project</h2>
+          <h2 className="text-balance text-xl font-semibold text-content-strong">
+            {t("turboui.workMap.addYourFirstProject")}
+          </h2>
           <p className="max-w-[42ch] text-pretty text-base text-content-dimmed sm:text-sm">
-            Start with something already in motion. You can add tasks, milestones, and teammates next.
+            {t("turboui.workMap.startWithSomethingAlreadyInMotion")}
           </p>
         </div>
 
@@ -145,29 +147,32 @@ function FirstProjectZeroState({ spaceSearch, addItem, addItemDefaultSpace, onIt
               <Forms.TextInput
                 autoFocus
                 field="name"
-                label="Project name"
-                placeholder="e.g. Launch the new website"
+                label={t("turboui.workMap.projectName")}
+                placeholder={t("turboui.workMap.eGLaunchTheNewWebsite")}
                 testId="first-project-name"
               />
             </Forms.FieldGroup>
 
             <PrimaryButton className="w-full" type="submit" loading={submitting} testId="create-first-project">
-              Create project
+              {t("turboui.workMap.createProject")}
             </PrimaryButton>
           </div>
         </Forms.Form>
 
         <p className="text-pretty text-base text-content-dimmed sm:text-sm">
-          Tracking an outcome instead?{" "}
-          <ActionLink
-            underline="hover"
-            className="font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-1"
-            onClick={() => setGoalModalOpen(true)}
-            testId="add-first-goal"
-          >
-            Add a goal
-          </ActionLink>
-          .
+          <Trans
+            i18nKey="turboui.workMap.trackingAnOutcomeInstead"
+            components={[
+              <ActionLink
+                underline="hover"
+                className="font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-1"
+                onClick={() => setGoalModalOpen(true)}
+                testId="add-first-goal"
+              >
+                Add a goal
+              </ActionLink>,
+            ]}
+          />
         </p>
       </div>
 

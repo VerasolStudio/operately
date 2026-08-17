@@ -2,6 +2,8 @@ import React from "react";
 import { PrimaryButton } from "../Button";
 import { Link } from "../Link";
 import { IconPlayerPauseFilled, IconArchive } from "../icons";
+import { t } from "../i18n";
+import { uiLocale } from "../utils/formatting";
 
 export namespace StatusBanner {
   export interface Props {
@@ -13,7 +15,13 @@ export namespace StatusBanner {
   }
 }
 
-export function StatusBanner({ state, closedAt, reopenLink, retrospectiveLink, entityName = "project" }: StatusBanner.Props) {
+export function StatusBanner({
+  state,
+  closedAt,
+  reopenLink,
+  retrospectiveLink,
+  entityName = "project",
+}: StatusBanner.Props) {
   if (state === "paused") {
     return (
       <div data-test-id="paused-status-banner" className="bg-callout-warning-bg border-y my-2 border-surface-outline">
@@ -25,7 +33,7 @@ export function StatusBanner({ state, closedAt, reopenLink, retrospectiveLink, e
             </div>
             {reopenLink && (
               <PrimaryButton linkTo={reopenLink} size="xs">
-                Resume
+                {t("turboui.projectPageLayout.resume")}
               </PrimaryButton>
             )}
           </div>
@@ -36,7 +44,7 @@ export function StatusBanner({ state, closedAt, reopenLink, retrospectiveLink, e
 
   if (state === "closed") {
     const formatDate = (date: Date) => {
-      return date.toLocaleDateString("en-US", {
+      return date.toLocaleDateString(uiLocale(), {
         month: "long",
         day: "numeric",
         year: closedAt?.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined,
@@ -54,11 +62,11 @@ export function StatusBanner({ state, closedAt, reopenLink, retrospectiveLink, e
               </span>
               {retrospectiveLink && (
                 <>
-                  <span> Read the </span>
+                  <span> {t("turboui.projectPageLayout.readThe")} </span>
                   <Link to={retrospectiveLink} className="font-bold">
-                    retrospective
+                    {t("turboui.projectPageLayout.retrospectiveLink")}
                   </Link>
-                  <span>.</span>
+                  <span>{t("turboui.projectPageLayout.readTheSuffix")}</span>
                 </>
               )}
             </div>

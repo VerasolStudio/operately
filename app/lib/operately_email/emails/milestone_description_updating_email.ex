@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.MilestoneDescriptionUpdatingEmail do
   alias Operately.Repo
   alias OperatelyWeb.Paths
   alias Operately.Projects.Milestone
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -36,9 +37,9 @@ defmodule OperatelyEmail.Emails.MilestoneDescriptionUpdatingEmail do
     mentioned_ids = Operately.RichContent.find_mentioned_ids(activity.content["description"], :decode_ids)
 
     if person.id in mentioned_ids do
-      "mentioned you in the description for \"#{milestone.title}\""
+      t("milestoneDescriptionUpdating.mentionedYouInTheDescriptionFor", %{v1: milestone.title})
     else
-      "updated the description for \"#{milestone.title}\""
+      t("milestoneDescriptionUpdating.updatedTheDescriptionFor", %{v1: milestone.title})
     end
   end
 
@@ -66,7 +67,7 @@ defmodule OperatelyEmail.Emails.MilestoneDescriptionUpdatingEmail do
       parent_id: parent.id,
       parent_type: parent.type,
       parent_name: parent.name,
-      headline: "updated the description of the milestone \"#{milestone.title}\"",
+      headline: t("milestoneDescriptionUpdating.headline", %{v1: milestone.title}),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: OperatelyWeb.Paths.project_milestone_path(company, milestone) |> OperatelyWeb.Paths.to_url(),

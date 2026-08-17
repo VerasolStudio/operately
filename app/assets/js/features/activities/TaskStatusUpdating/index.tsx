@@ -6,6 +6,7 @@ import { Paths } from "@/routes/paths";
 import { feedTitle, projectLink, spaceLink, taskLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
 import { hasAggregatedTasks, UpdatedTaskList } from "../taskUpdatedResources";
+import { t } from "@/i18n";
 
 const TaskStatusUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -80,11 +81,7 @@ const TaskStatusUpdating: ActivityHandler = {
 
     const { oldStatus, newStatus } = content(activity);
 
-    return (
-      <>
-        Previously, the task was {oldStatus.label}. Now it's {newStatus.label}.
-      </>
-    );
+    return <>{t("features.activities.previouslyTheTaskWasNowIts", { v1: oldStatus.label, v2: newStatus.label })}</>;
   },
 
   feedItemAlignment(_activity: Activity): "items-start" | "items-center" {

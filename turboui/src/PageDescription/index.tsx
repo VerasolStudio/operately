@@ -3,6 +3,7 @@ import { PrimaryButton, SecondaryButton } from "../Button";
 import RichContent, { countCharacters, isContentEmpty, shortenContent } from "../RichContent";
 import { Editor, MentionedPersonLookupFn, useEditor } from "../RichEditor";
 import { RichEditorHandlers } from "../RichEditor/useEditor";
+import { t } from "../i18n";
 
 const PREVIEW_CHARACTER_LIMIT = 450;
 
@@ -86,7 +87,7 @@ function SectionHeader({ title, startEdit, showButtons }: SectionHeaderProps) {
       <h2 className="font-bold">{title}</h2>
       {showButtons && (
         <SecondaryButton size="xxs" onClick={startEdit} testId="edit-description">
-          Edit
+          {t("turboui.pageDescription.edit")}
         </SecondaryButton>
       )}
     </div>
@@ -123,7 +124,14 @@ interface EditModeProps {
   localDraftKey?: string;
 }
 
-function EditMode({ description, richTextHandlers, onDescriptionChange, setMode, placeholder, localDraftKey }: EditModeProps) {
+function EditMode({
+  description,
+  richTextHandlers,
+  onDescriptionChange,
+  setMode,
+  placeholder,
+  localDraftKey,
+}: EditModeProps) {
   const editor = useEditor({
     content: description,
     editable: true,
@@ -158,10 +166,10 @@ function EditMode({ description, richTextHandlers, onDescriptionChange, setMode,
       <Editor editor={editor} />
       <div className="flex gap-2 mt-2">
         <PrimaryButton size="xs" onClick={save}>
-          Save
+          {t("turboui.pageDescription.save")}
         </PrimaryButton>
         <SecondaryButton size="xs" onClick={cancel}>
-          Cancel
+          {t("turboui.pageDescription.cancel")}
         </SecondaryButton>
       </div>
     </div>

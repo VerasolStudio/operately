@@ -6,6 +6,7 @@ import type { Activity } from "@/models/activities";
 import { Paths } from "@/routes/paths";
 import { feedTitle, goalLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
 
 const GoalChampionUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -31,7 +32,9 @@ const GoalChampionUpdating: ActivityHandler = {
   FeedItemTitle({ activity, page }: { activity: Activity; page: string }) {
     const goal = content(activity).goal!;
     const newChampion = content(activity).newChampion;
-    const message = newChampion ? `assigned ${People.shortName(newChampion)} as the champion` : "removed the champion";
+    const message = newChampion
+      ? t("features.activities.assignedAsTheChampion", { v1: People.shortName(newChampion) })
+      : "removed the champion";
 
     if (page === "goal") {
       return feedTitle(activity, message);
@@ -46,7 +49,7 @@ const GoalChampionUpdating: ActivityHandler = {
     if (oldChampion) {
       return <>Previously, {People.shortName(oldChampion)} was the champion.</>;
     } else {
-      return <>There was no previous champion.</>;
+      return <>{t("features.activities.thereWasNoPreviousChampion")}</>;
     }
   },
 

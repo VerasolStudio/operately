@@ -10,6 +10,7 @@ import { Forms, IconEdit, IconTrash, Modal, showSuccessToast } from "turboui";
 import { useBoolState } from "@/hooks/useBoolState";
 import { useDeleteGoalProgressUpdate } from "@/models/goalCheckIns";
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function Options() {
   const { update, goal } = useLoadedData();
@@ -32,7 +33,7 @@ export function Options() {
         {isEditVisible && (
           <PageOptions.Action
             icon={IconEdit}
-            title={"Edit"}
+            title={t("pages.goalCheckInPage.edit")}
             onClick={() => setPageMode("edit")}
             testId="edit-check-in"
             keepOutsideOnBigScreen
@@ -41,7 +42,7 @@ export function Options() {
         {isDiscardVisible && (
           <PageOptions.Action
             icon={IconTrash}
-            title="Discard draft"
+            title={t("pages.goalCheckInPage.discardDraft")}
             onClick={toggleDiscardModal}
             testId="delete-check-in"
           />
@@ -77,7 +78,7 @@ function DiscardDraftModal({
     cancel: toggleModal,
     submit: async () => {
       await remove({ id: updateId });
-      showSuccessToast("Draft discarded", "The draft has been discarded.");
+      showSuccessToast(t("pages.goalCheckInPage.draftDiscarded"), t("pages.goalCheckInPage.theDraftHasBeenDiscarded"));
       navigate(paths.goalPath(goalId, { tab: "check-ins" }));
     },
   });
@@ -85,8 +86,11 @@ function DiscardDraftModal({
   return (
     <Modal isOpen={isOpen} onClose={toggleModal}>
       <Forms.Form form={form}>
-        <p>Are you sure you want to discard this draft?</p>
-        <Forms.Submit saveText="Discard draft" cancelText="Cancel" />
+        <p>{t("pages.goalCheckInPage.areYouSureYouWantTo")}</p>
+        <Forms.Submit
+          saveText={t("pages.goalCheckInPage.discardDraft")}
+          cancelText={t("pages.goalCheckInPage.cancel")}
+        />
       </Forms.Form>
     </Modal>
   );

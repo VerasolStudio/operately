@@ -2,6 +2,7 @@ import React from "react";
 
 import RichContent, { parseContent } from "../../RichContent";
 import { MentionedPersonLookupFn } from "../../RichEditor/useEditor";
+import { t } from "../../i18n";
 
 export function AboutMe({
   content,
@@ -14,7 +15,7 @@ export function AboutMe({
 
   return (
     <div>
-      <div className="text-xs mb-2 uppercase font-bold">About me</div>
+      <div className="text-xs mb-2 uppercase font-bold">{t("turboui.profilePage.aboutMe")}</div>
       <RichContent
         content={parsedContent}
         mentionedPersonLookup={mentionedPersonLookup}

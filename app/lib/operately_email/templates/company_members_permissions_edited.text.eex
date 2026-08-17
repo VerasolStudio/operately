@@ -1,6 +1,6 @@
-Your access level has been updated by <%= short_name(@author) %>.
+<%= t("companyMembersPermissionsEdited.yourAccessLevelHasBeenUpdated2", %{v1: short_name(@author)}) %>
 
-Previous Access Level: <%= @previous_access_level %>
-New Access Level: <%= @updated_access_level %>
+<%= t("companyMembersPermissionsEdited.previousAccessLevel", %{v1: @previous_access_level}) %>
+<%= t("companyMembersPermissionsEdited.newAccessLevel", %{v1: @updated_access_level}) %>
 
-Link: <%= @link %>
+<%= t("companyMembersPermissionsEdited.link", %{v1: @link}) %>

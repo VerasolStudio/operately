@@ -1,9 +1,9 @@
-<%= short_name(@author) %> updated the description for "<%= @goal_name %>".
+<%= t("goalDescriptionChanged.updatedTheDescriptionFor", %{v1: short_name(@author), v2: @goal_name}) %>
 
 <%= if @description do %>
-View the goal to read the updated details.
+<%= t("goalDescriptionChanged.viewTheGoalToReadThe") %>
 <% else %>
-The description was cleared.
+<%= t("goalDescriptionChanged.theDescriptionWasCleared") %>
 <% end %>
 
-View Goal: <%= @cta_url %>
+<%= t("goalDescriptionChanged.viewGoal2", %{v1: @cta_url}) %>

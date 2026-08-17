@@ -3,6 +3,7 @@ import { Avatar } from "../Avatar";
 import { RadioGroup, Radio } from "./components/RadioGroup";
 import { SubscribersSelectorModal } from "./components/SubscribersSelectorModal";
 import { sortSubscribersByName } from "./utils";
+import { t } from "../i18n";
 
 export function SubscribersSelector({
   subscribers,
@@ -35,7 +36,7 @@ export function SubscribersSelector({
 
   return (
     <div>
-      <p className="font-bold mb-1.5">When I post this, notify:</p>
+      <p className="font-bold mb-1.5">{t("turboui.subscriptions.whenIPostThisNotify")}</p>
 
       <RadioGroup
         name="subscriptions-options"
@@ -52,7 +53,7 @@ export function SubscribersSelector({
 
         <div onClick={() => setShowModal(true)}>
           <SubscriptionOptionItem
-            label="Only the people I select"
+            label={t("turboui.subscriptions.onlyThePeopleISelect")}
             value={SubscribersSelector.SubscriptionOption.SELECTED}
             subscribers={selectedSubscribers}
             isSelected={subscriptionType === SubscribersSelector.SubscriptionOption.SELECTED}
@@ -61,7 +62,7 @@ export function SubscribersSelector({
         </div>
 
         <SubscriptionOptionItem
-          label="No one"
+          label={t("turboui.subscriptions.noOne")}
           value={SubscribersSelector.SubscriptionOption.NONE}
           subscribers={[]}
           isSelected={subscriptionType === SubscribersSelector.SubscriptionOption.NONE}
@@ -90,7 +91,7 @@ function AlwaysNotifyOnly({
 }) {
   return (
     <div>
-      <p className="font-bold mb-1.5">When I post this, notify:</p>
+      <p className="font-bold mb-1.5">{t("turboui.subscriptions.whenIPostThisNotify")}</p>
       <div className="my-1">
         <p className="text-content-accent">{allSubscribersLabel}</p>
         <SelectedPeople subscribers={subscribers} hide={false} indent={false} />

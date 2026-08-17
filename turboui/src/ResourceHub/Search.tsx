@@ -4,6 +4,7 @@ import { Input } from "../Forms";
 import { IconSearch, IconX } from "../icons";
 import type { ResourceHubSearchProps } from "../ResourceHubPage/types";
 import type { ResourceHubSearchState } from "./useResourceHubSearch";
+import { t } from "../i18n";
 
 export function ResourceHubSearchInput({
   search,
@@ -35,7 +36,7 @@ export function ResourceHubSearchInput({
       {searchState.query && (
         <button
           type="button"
-          aria-label="Clear search"
+          aria-label={t("turboui.resourceHub.clearSearch")}
           onClick={() => searchState.setQuery("")}
           className="absolute right-3 top-1/2 -translate-y-1/2 text-content-dimmed hover:text-content-accent"
         >
@@ -48,15 +49,15 @@ export function ResourceHubSearchInput({
 
 export function ResourceHubSearchMessage({ searchState }: { searchState: ResourceHubSearchState }) {
   if (searchState.status === "loading") {
-    return <SearchMessage role="status">Searching…</SearchMessage>;
+    return <SearchMessage role="status">{t("turboui.resourceHub.searching")}</SearchMessage>;
   }
 
   if (searchState.status === "error") {
-    return <SearchMessage role="alert">Search is unavailable. Try again.</SearchMessage>;
+    return <SearchMessage role="alert">{t("turboui.resourceHub.searchIsUnavailableTryAgain")}</SearchMessage>;
   }
 
   if (searchState.status === "success" && searchState.results.length === 0) {
-    return <SearchMessage role="status">No matching items. Try different keywords.</SearchMessage>;
+    return <SearchMessage role="status">{t("turboui.resourceHub.noMatchingItemsTryDifferentKeywords")}</SearchMessage>;
   }
 
   return null;

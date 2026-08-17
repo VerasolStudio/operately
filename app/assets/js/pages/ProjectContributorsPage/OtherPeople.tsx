@@ -8,6 +8,7 @@ import { useBindedPeopleList } from "./loader";
 
 import { Avatar } from "turboui";
 import { match } from "ts-pattern";
+import { t } from "@/i18n";
 
 export function OtherPeople() {
   const [show, setShow] = React.useState(false);
@@ -29,10 +30,9 @@ function Expanded({ people }: { people: People.Person[] }) {
 
   return (
     <div>
-      <div className="font-bold mt-10 text-lg">Other People with Access</div>
+      <div className="font-bold mt-10 text-lg">{t("pages.projectContributorsPage.otherPeopleWithAccess")}</div>
       <div className="text-medium text-sm max-w-lg mb-6">
-        People who have access to the project based on their company or space membership but are not directly assigned
-        to the project.
+        {t("pages.projectContributorsPage.peopleWhoHaveAccessToThe")}
       </div>
 
       <div data-test-id="other-people-list">
@@ -47,7 +47,7 @@ function Expanded({ people }: { people: People.Person[] }) {
 function Condensed({ people, onShowAllClick }: { people: People.Person[]; onShowAllClick: () => void }) {
   const message = match(people.length)
     .with(1, () => "1 other person has access to this project")
-    .otherwise(() => `${people.length} other people have access to this project`);
+    .otherwise(() => t("pages.projectContributorsPage.otherPeopleHaveAccessToThis", { v1: people.length }));
 
   const testId = "show-all-other-people";
   const showAll = (

@@ -7,6 +7,7 @@ import { ProgressBar } from "../ProgressBar";
 import { Tooltip } from "../Tooltip";
 import { IconX } from "../icons";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 export namespace CompanyImportPage {
   export interface UploadedFileState {
@@ -48,28 +49,36 @@ export namespace CompanyImportPage {
 }
 
 export function CompanyImportPage(props: CompanyImportPage.Props) {
-  const navigation = React.useMemo(() => [{ to: props.backPath, label: "Back to the Lobby" }], [props.backPath]);
+  const navigation = React.useMemo(
+    () => [{ to: props.backPath, label: t("turboui.companyImportPage.backToTheLobby") }],
+    [props.backPath],
+  );
 
   return (
-    <Page title="Import Company" size="small" testId="company-import-page" navigation={navigation}>
+    <Page
+      title={t("turboui.companyImportPage.importCompany")}
+      size="small"
+      testId="company-import-page"
+      navigation={navigation}
+    >
       <div className="px-4 sm:px-10 py-8">
         <header>
           <div>
-            <div className="uppercase text-sm tracking-wide">Company Import</div>
-            <h1 className="text-content-accent text-3xl font-extrabold">Import company</h1>
-            <p className="mt-2 text-content-dimmed">
-              Upload the exported ZIP package, then start importing the company into this Operately instance.
-            </p>
+            <div className="uppercase text-sm tracking-wide">{t("turboui.companyImportPage.companyImport")}</div>
+            <h1 className="text-content-accent text-3xl font-extrabold">
+              {t("turboui.companyImportPage.importCompany2")}
+            </h1>
+            <p className="mt-2 text-content-dimmed">{t("turboui.companyImportPage.uploadTheExportedZIPPackageThen")}</p>
           </div>
         </header>
 
         <section className="mt-10">
-          <h2 className="font-bold">Package</h2>
+          <h2 className="font-bold">{t("turboui.companyImportPage.package")}</h2>
 
           {props.canUpload ? (
             <div className="mt-3">
               <ArtifactUploadCard
-                title="Operately package"
+                title={t("turboui.companyImportPage.operatelyPackage")}
                 testIdPrefix="import-package"
                 state={props.packageFile}
                 accept=".zip,application/zip"
@@ -79,8 +88,13 @@ export function CompanyImportPage(props: CompanyImportPage.Props) {
                 clearDisabled={props.starting}
                 action={
                   props.canStartImport ? (
-                    <PrimaryButton size="sm" onClick={props.onStartImport} loading={props.starting} testId="start-import-button">
-                      Start import
+                    <PrimaryButton
+                      size="sm"
+                      onClick={props.onStartImport}
+                      loading={props.starting}
+                      testId="start-import-button"
+                    >
+                      {t("turboui.companyImportPage.startImport")}
                     </PrimaryButton>
                   ) : null
                 }
@@ -94,14 +108,19 @@ export function CompanyImportPage(props: CompanyImportPage.Props) {
         </section>
 
         <section className="mt-10">
-          <h2 className="font-bold">Imports</h2>
+          <h2 className="font-bold">{t("turboui.companyImportPage.imports")}</h2>
 
           {props.runs.length === 0 ? (
             <EmptyState />
           ) : (
             <div className="space-y-3 mt-3">
               {props.runs.map((run, index) => (
-                <ImportRunCard key={run.id} run={run} latest={index === 0} formattedTimePreferences={props.formattedTimePreferences} />
+                <ImportRunCard
+                  key={run.id}
+                  run={run}
+                  latest={index === 0}
+                  formattedTimePreferences={props.formattedTimePreferences}
+                />
               ))}
             </div>
           )}
@@ -188,10 +207,11 @@ function ArtifactUploadCard({
                 type="button"
                 onClick={onClearFile}
                 disabled={clearDisabled}
-                aria-label="Clear ZIP"
+                aria-label={t("turboui.companyImportPage.clearZIP")}
                 data-test-id={`${testIdPrefix}-clear`}
                 className={classNames("shrink-0 rounded p-1 transition-colors", {
-                  "cursor-pointer text-content-subtle hover:bg-surface-highlight hover:text-content-base": !clearDisabled,
+                  "cursor-pointer text-content-subtle hover:bg-surface-highlight hover:text-content-base":
+                    !clearDisabled,
                   "cursor-not-allowed text-content-subtle opacity-50": clearDisabled,
                 })}
               >
@@ -233,12 +253,20 @@ function ImportRunCard({
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-2 flex-wrap">
-            <Tooltip content={<RunStatusTooltip run={run} formattedTimePreferences={formattedTimePreferences} />} size="sm" testId={latestStatusTestId}>
+            <Tooltip
+              content={<RunStatusTooltip run={run} formattedTimePreferences={formattedTimePreferences} />}
+              size="sm"
+              testId={latestStatusTestId}
+            >
               <RunStatus status={run.status} />
             </Tooltip>
 
             <div className="text-xs text-content-dimmed">
-              <FormattedTime {...formattedTimePreferences} time={run.completedAt || run.insertedAt} format="short-date-with-weekday" />
+              <FormattedTime
+                {...formattedTimePreferences}
+                time={run.completedAt || run.insertedAt}
+                format="short-date-with-weekday"
+              />
             </div>
           </div>
 
@@ -256,7 +284,7 @@ function ImportRunCard({
             data-test-id={latest ? "latest-import-open-company" : undefined}
             className="cursor-pointer text-sm text-link-base transition-colors hover:text-link-hover"
           >
-            Open company
+            {t("turboui.companyImportPage.openCompany")}
           </a>
         )}
       </div>
@@ -278,7 +306,7 @@ function ImportRunCard({
 function EmptyState() {
   return (
     <div className="rounded-lg border border-dashed border-surface-outline p-6 text-sm text-content-dimmed mt-3">
-      No imports yet. Upload a package above to create the first one.
+      {t("turboui.companyImportPage.noImportsYetUploadAPackage")}
     </div>
   );
 }
@@ -302,7 +330,8 @@ function RunStatusTooltip({
 
       {run.completedAt && (
         <div>
-          Completed: <FormattedTime {...formattedTimePreferences} time={run.completedAt} format="relative-time-or-date" />
+          Completed:{" "}
+          <FormattedTime {...formattedTimePreferences} time={run.completedAt} format="relative-time-or-date" />
         </div>
       )}
 

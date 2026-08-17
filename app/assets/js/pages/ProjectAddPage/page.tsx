@@ -17,9 +17,10 @@ import { AccessSelectors } from "@/features/projects/AccessSelectors";
 import { AccessLevelSummary, Forms, ProjectTemplateSelection, SecondaryButton } from "turboui";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export function Page() {
   return (
-    <Pages.Page title="New Project">
+    <Pages.Page title={t("pages.projectAddPage.newProject")}>
       <Paper.Root size="small">
         <Navigation />
         <PageTitle />
@@ -33,9 +34,13 @@ function PageTitle() {
   const { spaceID, space } = useLoadedData();
 
   if (spaceID && space) {
-    return <h1 className="mb-4 font-bold text-3xl text-center">Start a new project in {space!.name}</h1>;
+    return (
+      <h1 className="mb-4 font-bold text-3xl text-center">
+        {t("pages.projectAddPage.startANewProjectIn", { v1: space!.name })}
+      </h1>
+    );
   } else {
-    return <h1 className="mb-4 font-bold text-3xl text-center">Start a new project</h1>;
+    return <h1 className="mb-4 font-bold text-3xl text-center">{t("pages.projectAddPage.startANewProject")}</h1>;
   }
 }
 
@@ -127,8 +132,14 @@ function Form() {
     <Forms.Form form={form}>
       <Paper.Body minHeight="300px">
         <Forms.FieldGroup>
-          <Forms.TextInput label="Project Name" field="name" placeholder="e.g. HR System Update" autoFocus required />
-          <Forms.SelectBox label="Space" field="space" options={spaceOptions} required />
+          <Forms.TextInput
+            label={t("pages.projectAddPage.projectName")}
+            field="name"
+            placeholder={t("pages.projectAddPage.eGHRSystemUpdate")}
+            autoFocus
+            required
+          />
+          <Forms.SelectBox label={t("pages.projectAddPage.space")} field="space" options={spaceOptions} required />
           {projectTemplatesEnabled ? (
             <ProjectTemplateSelection
               spaceId={form.values.space}
@@ -141,7 +152,7 @@ function Form() {
               }))}
             />
           ) : null}
-          <Forms.SelectGoal label="Goal" field="goal" goals={goals} required={false} />
+          <Forms.SelectGoal label={t("pages.projectAddPage.goal")} field="goal" goals={goals} required={false} />
 
           {!form.values.template && (
             <Forms.FieldGroup layout="grid">
@@ -155,19 +166,21 @@ function Form() {
         <Forms.FormError message={form.errors.form} />
       </Paper.Body>
 
-      <Forms.Submit saveText="Add Project" layout="centered" buttonSize="lg" />
+      <Forms.Submit saveText={t("pages.projectAddPage.addProject")} layout="centered" buttonSize="lg" />
     </Forms.Form>
   );
 }
 
 function SelectChampion({ me, search }: { me: People.Person; search: (query: string) => Promise<People.Person[]> }) {
-  return <Forms.SelectPerson label="Champion" field="champion" searchFn={search} default={me} />;
+  return (
+    <Forms.SelectPerson label={t("pages.projectAddPage.champion")} field="champion" searchFn={search} default={me} />
+  );
 }
 
 function SelectReviewer({ me, search }: { me: People.Person; search: (query: string) => Promise<People.Person[]> }) {
   return (
     <Forms.SelectPerson
-      label="Reviewer"
+      label={t("pages.projectAddPage.reviewer")}
       field="reviewer"
       searchFn={search}
       allowEmpty={true}
@@ -216,7 +229,7 @@ function PrivacyEdit() {
 
   return (
     <SecondaryButton size="xs" onClick={() => setIsAdvanced(true)} testId="edit-access-levels">
-      Edit
+      {t("pages.projectAddPage.edit")}
     </SecondaryButton>
   );
 }

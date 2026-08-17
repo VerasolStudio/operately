@@ -1,4 +1,5 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { t } from "../../../i18n";
 
 interface Person {
   id: string;
@@ -132,5 +133,5 @@ function ItemList({ items, selectItem, selectedIndex }: ItemListProps): JSX.Elem
 }
 
 function NoResult(): JSX.Element {
-  return <div className="px-1.5 py-1 text-left">No result</div>;
+  return <div className="px-1.5 py-1 text-left">{t("turboui.richEditor.noResult")}</div>;
 }

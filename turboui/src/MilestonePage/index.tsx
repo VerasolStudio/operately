@@ -20,6 +20,7 @@ import { PageDescription } from "../PageDescription";
 import { SidebarNotificationSection } from "../SidebarSection";
 import { ProjectPermissions } from "../ProjectPage/types";
 import type { FormattedTimePreferences } from "../FormattedTime";
+import { t } from "../i18n";
 
 export namespace MilestonePage {
   export type Milestone = Types.Milestone;
@@ -214,8 +215,8 @@ export function MilestonePage(props: MilestonePage.Props) {
             <PageDescription
               {...state}
               canEdit={permissions.canEdit}
-              label="Notes"
-              placeholder="Describe the milestone..."
+              label={t("turboui.milestonePage.notes")}
+              placeholder={t("turboui.milestonePage.describeTheMilestone")}
               zeroStatePlaceholder="Add details about this milestone..."
               emptyTestId="description-section-empty"
               localDraftKey={state.localDraftKeyBase ? `${state.localDraftKeyBase}:description` : undefined}
@@ -267,29 +268,29 @@ function MobileMeta(props: MilestonePage.State) {
   return (
     <div className="sm:hidden mt-4 mb-6" data-test-id="milestone-mobile-meta">
       <div className="flex flex-wrap gap-4">
-        <SidebarSection title="Due date" className="flex-1 min-w-[160px]">
+        <SidebarSection title={t("turboui.milestonePage.dueDate2")} className="flex-1 min-w-[160px]">
           <DateField
             date={dueDate ?? milestone.dueDate ?? null}
             onDateSelect={onDueDateChange}
             readonly={!canEdit}
             showOverdueWarning={showOverdueWarning}
-            placeholder="Set due date"
+            placeholder={t("turboui.milestonePage.setDueDate")}
             size="small"
           />
         </SidebarSection>
 
-        <SidebarSection title="Milestone status" className="flex-1 min-w-[160px]">
+        <SidebarSection title={t("turboui.milestonePage.milestoneStatus")} className="flex-1 min-w-[160px]">
           <div className="flex flex-wrap items-center gap-3 text-sm">
             <div className="flex items-center gap-2">
               {isCompleted ? (
                 <>
                   <IconFlagFilled size={16} className="text-accent-1" />
-                  <span className="font-medium text-accent-1">Completed</span>
+                  <span className="font-medium text-accent-1">{t("turboui.milestonePage.completed")}</span>
                 </>
               ) : (
                 <>
                   <IconFlag size={16} className="text-content-dimmed" />
-                  <span className="text-content-base">Active</span>
+                  <span className="text-content-base">{t("turboui.milestonePage.active")}</span>
                 </>
               )}
             </div>
@@ -297,11 +298,11 @@ function MobileMeta(props: MilestonePage.State) {
             {canEdit &&
               (isCompleted ? (
                 <SecondaryButton size="xs" onClick={handleStatusToggle}>
-                  Reopen
+                  {t("turboui.milestonePage.reopen")}
                 </SecondaryButton>
               ) : (
                 <GhostButton size="xs" icon={IconCheck} onClick={handleStatusToggle}>
-                  Mark complete
+                  {t("turboui.milestonePage.markComplete")}
                 </GhostButton>
               ))}
           </div>
@@ -324,7 +325,7 @@ function MainContainer({ children }: { children: React.ReactNode }) {
 function TimelineSection(props: MilestonePage.State) {
   return (
     <div className="pt-8" data-test-id="timeline-section">
-      <h3 className="font-bold mb-4">Comments & Activity</h3>
+      <h3 className="font-bold mb-4">{t("turboui.milestonePage.commentsActivity")}</h3>
       <Timeline
         items={props.timelineItems}
         currentUser={props.currentUser}

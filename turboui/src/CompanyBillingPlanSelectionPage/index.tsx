@@ -5,6 +5,7 @@ import { PrimaryButton, SecondaryButton } from "../Button";
 import { InfoCallout, WarningCallout } from "../Callouts";
 import type { CompanyBillingPlanSelectionPage as CompanyBillingPlanSelectionPageTypes } from "./types";
 import { buildCompanyBillingPlanSelectionPageViewModel } from "./viewModel";
+import { t } from "../i18n";
 
 export { buildCompanyBillingPlanSelectionMode, buildCompanyBillingPlanSelectionPageViewModel } from "./viewModel";
 
@@ -37,13 +38,7 @@ export function CompanyBillingPlanSelectionPage(props: CompanyBillingPlanSelecti
   );
 }
 
-function Header({
-  title,
-  subtitle,
-}: {
-  title: string;
-  subtitle: string;
-}) {
+function Header({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <div className="mb-8">
       <div>
@@ -57,7 +52,12 @@ function Header({
 function SelectionModeView({ selection }: { selection: CompanyBillingPlanSelectionPage.SelectionModeView }) {
   return (
     <div className="space-y-10">
-      {selection.errorMessage && <WarningCallout message="Plan action unavailable" description={selection.errorMessage} />}
+      {selection.errorMessage && (
+        <WarningCallout
+          message={t("turboui.companyBillingPlanSelectionPage.planActionUnavailable")}
+          description={selection.errorMessage}
+        />
+      )}
 
       <BillingCycleSelector selection={selection} />
 
@@ -80,18 +80,18 @@ function BillingCycleSelector({ selection }: { selection: CompanyBillingPlanSele
   return (
     <div className="mx-auto w-fit">
       <div className="mb-2 text-center text-[11px] font-medium uppercase tracking-[0.12em] text-content-dimmed">
-        Billing cycle
+        {t("turboui.companyBillingPlanSelectionPage.billingCycle")}
       </div>
 
       <div className="inline-flex items-center gap-1 rounded-xl border border-stroke-base bg-surface-base p-1 shadow-xs">
         <BillingCycleOption
           active={selection.selectedInterval === "monthly"}
-          title="Monthly"
+          title={t("turboui.companyBillingPlanSelectionPage.monthly")}
           onClick={() => selection.onSelectInterval("monthly")}
         />
         <BillingCycleOption
           active={selection.selectedInterval === "yearly"}
-          title="Yearly"
+          title={t("turboui.companyBillingPlanSelectionPage.yearly")}
           onClick={() => selection.onSelectInterval("yearly")}
         />
       </div>
@@ -99,15 +99,7 @@ function BillingCycleSelector({ selection }: { selection: CompanyBillingPlanSele
   );
 }
 
-function BillingCycleOption({
-  active,
-  title,
-  onClick,
-}: {
-  active: boolean;
-  title: string;
-  onClick: () => void;
-}) {
+function BillingCycleOption({ active, title, onClick }: { active: boolean; title: string; onClick: () => void }) {
   return (
     <button
       type="button"
@@ -147,7 +139,11 @@ function PlanCard({ card }: { card: CompanyBillingPlanSelectionPage.PlanCard }) 
         </div>
 
         <div className="flex flex-col items-end gap-2">
-          {card.selected && <span className="rounded-full bg-brand-1 px-2 py-1 text-xs font-semibold text-white-1">Selected</span>}
+          {card.selected && (
+            <span className="rounded-full bg-brand-1 px-2 py-1 text-xs font-semibold text-white-1">
+              {t("turboui.companyBillingPlanSelectionPage.selected")}
+            </span>
+          )}
         </div>
       </div>
 
@@ -160,11 +156,7 @@ function PlanCard({ card }: { card: CompanyBillingPlanSelectionPage.PlanCard }) 
   );
 }
 
-function ConsequenceNotice({
-  notice,
-}: {
-  notice: CompanyBillingPlanSelectionPage.ConsequenceNotice;
-}) {
+function ConsequenceNotice({ notice }: { notice: CompanyBillingPlanSelectionPage.ConsequenceNotice }) {
   return (
     <div className="space-y-3">
       {notice.tone === "warning" ? (
@@ -195,13 +187,7 @@ function DetailRows({ rows }: { rows: CompanyBillingPlanSelectionPage.Consequenc
   );
 }
 
-function ActionButton({
-  action,
-  size,
-}: {
-  action: CompanyBillingPlanSelectionPage.Action;
-  size: "xs" | "sm";
-}) {
+function ActionButton({ action, size }: { action: CompanyBillingPlanSelectionPage.Action; size: "xs" | "sm" }) {
   if (action.tone === "secondary") {
     return (
       <SecondaryButton size={size} onClick={action.onClick} disabled={action.disabled} loading={action.loading}>

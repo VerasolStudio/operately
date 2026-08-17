@@ -1,13 +1,14 @@
 defmodule OperatelyEmail.Emails.EmailActivationCodeEmail do
   import OperatelyEmail.Mailers.NotificationMailer, only: [html: 2, text: 2]
   import Swoosh.Email
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(email_activation_code) do
     formatted_code = format_code(email_activation_code.code)
 
     assigns = %{
       code: formatted_code,
-      subject: "Operately confirmation code: #{formatted_code}"
+      subject: t("emailActivationCode.operatelyConfirmationCode", %{v1: formatted_code})
     }
 
     email = new()

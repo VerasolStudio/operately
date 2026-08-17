@@ -14,6 +14,7 @@ import { PageModule } from "@/routes/types";
 import { useNavigateTo } from "@/routes/useNavigateTo";
 import { assertPresent } from "@/utils/assertions";
 import { Forms } from "turboui";
+import { t } from "@/i18n";
 
 export default { name: "GoalEditAccessLevelsPage", loader, Page } as PageModule;
 
@@ -39,7 +40,7 @@ function Page() {
       <Paper.Root size="small">
         <Navigation />
         <Paper.Body>
-          <h1 className="text-2xl font-extrabold">Edit General Access</h1>
+          <h1 className="text-2xl font-extrabold">{t("pages.goalEditAccessLevelsPage.editGeneralAccess")}</h1>
           <Form />
         </Paper.Body>
       </Paper.Root>
@@ -55,12 +56,12 @@ function Navigation() {
 
   if (goal.space) {
     items.push({ to: paths.spacePath(goal.space.id), label: goal.space.name });
-    items.push({ to: paths.spaceWorkMapPath(goal.space.id), label: "Work Map" });
+    items.push({ to: paths.spaceWorkMapPath(goal.space.id), label: t("pages.goalEditAccessLevelsPage.workMap") });
   } else {
-    items.push({ to: paths.workMapPath("goals"), label: "Work Map" });
+    items.push({ to: paths.workMapPath("goals"), label: t("pages.goalEditAccessLevelsPage.workMap") });
   }
   items.push({ to: paths.goalPath(goal.id), label: goal.name });
-  items.push({ to: paths.goalAccessManagementPath(goal.id), label: "Team & Access" });
+  items.push({ to: paths.goalAccessManagementPath(goal.id), label: t("pages.goalEditAccessLevelsPage.teamAccess") });
 
   return <Paper.Navigation items={items} />;
 }

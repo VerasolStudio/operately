@@ -23,6 +23,7 @@ import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
 import { useLoadedData } from "./loader";
 
 import classNames from "classnames";
+import { t } from "@/i18n";
 
 export function Page() {
   const { space, discussions } = useLoadedData();
@@ -44,7 +45,12 @@ export function Page() {
 
 function Header() {
   return (
-    <Paper.Header title="Discussions" layout="title-center-actions-left" actions={<NewDiscussionButton />} underline />
+    <Paper.Header
+      title={t("pages.spaceDiscussionsPage.discussions")}
+      layout="title-center-actions-left"
+      actions={<NewDiscussionButton />}
+      underline
+    />
   );
 }
 
@@ -56,7 +62,7 @@ function NewDiscussionButton() {
 
   return (
     <PrimaryButton linkTo={paths.discussionNewPath(space.id!)} size="sm" testId="new-discussion">
-      New discussion
+      {t("pages.spaceDiscussionsPage.newDiscussion")}
     </PrimaryButton>
   );
 }
@@ -73,7 +79,7 @@ function ContinueEditingDrafts() {
     return (
       <div className="flex justify-center">
         <Link className="font-medium" to={path} testId="continue-editing-draft">
-          Continue writing your draft&hellip;
+          {t("pages.spaceDiscussionsPage.continueWritingYourDraftHellip")}
         </Link>
       </div>
     );
@@ -83,7 +89,7 @@ function ContinueEditingDrafts() {
     return (
       <div className="flex justify-center">
         <Link className="font-medium" to={path} testId="continue-editing-draft">
-          Continue writing your {myDrafts.length} drafts&hellip;
+          {t("pages.spaceDiscussionsPage.continueWritingYourDrafts", { v1: myDrafts.length })}
         </Link>
       </div>
     );
@@ -93,7 +99,7 @@ function ContinueEditingDrafts() {
 function ZeroDiscussions() {
   return (
     <div className="text-center text-base text-content-dimmed mt-28">
-      Post announcements, pitch ideas, and start discussions.
+      {t("pages.spaceDiscussionsPage.postAnnouncementsPitchIdeasAndStart")}
     </div>
   );
 }

@@ -5,6 +5,12 @@ defmodule OperatelyEmail.Templates do
   # Utils
   #
 
+  @doc """
+  Translates email copy. Available in every template.
+  """
+  def t(key), do: OperatelyEmail.I18n.t(key)
+  def t(key, bindings), do: OperatelyEmail.I18n.t(key, bindings)
+
   def head(_title), do: ""
   def body(do: _content), do: ""
 

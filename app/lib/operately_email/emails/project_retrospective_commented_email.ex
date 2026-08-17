@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.ProjectRetrospectiveCommentedEmail do
   alias Operately.{Repo, Updates}
   alias Operately.Projects.Project
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author} = Repo.preload(activity, [:author])
@@ -11,7 +12,7 @@ defmodule OperatelyEmail.Emails.ProjectRetrospectiveCommentedEmail do
       preload: [:group, :company]
     ])
     comment = Updates.get_comment!(activity.content["comment_id"])
-    action = "commented on the project retrospective"
+    action = t("projectRetrospectiveCommented.commentedOnTheProjectRetrospective")
 
     company
     |> new()
@@ -21,7 +22,7 @@ defmodule OperatelyEmail.Emails.ProjectRetrospectiveCommentedEmail do
     |> assign(:author, author)
     |> assign(:project, project)
     |> assign(:comment, comment)
-    |> assign(:cta_text, "View Retrospective")
+    |> assign(:cta_text, t("projectRetrospectiveCommented.ctaText"))
     |> assign(:cta_url, Paths.project_retrospective_path(company, project, comment) |> Paths.to_url())
     |> render("project_retrospective_commented")
   end
@@ -38,7 +39,7 @@ defmodule OperatelyEmail.Emails.ProjectRetrospectiveCommentedEmail do
       parent_id: project.id,
       parent_type: :project,
       parent_name: project.name,
-      headline: "commented on the project retrospective",
+      headline: t("projectRetrospectiveCommented.headline"),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: OperatelyWeb.Paths.project_retrospective_path(company, project, comment) |> OperatelyWeb.Paths.to_url(),

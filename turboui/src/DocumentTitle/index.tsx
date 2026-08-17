@@ -4,6 +4,7 @@ import { Avatar, type AvatarPerson } from "../Avatar";
 import { BulletDot } from "../BulletDot";
 import { FormattedTime, type FormattedTimePreferences } from "../FormattedTime";
 import { ScheduledPostDate, ScheduledPostLabel } from "../SchedulePosting";
+import { t } from "../i18n";
 
 const validStates = ["draft", "scheduled", "published"] as const;
 
@@ -50,7 +51,7 @@ export function DocumentTitle({
         {state === "published" && (
           <>
             {author && <BulletDot margin="mx-0.5" />}
-            <span>Posted</span>
+            <span>{t("turboui.documentTitle.posted")}</span>
             <FormattedTime {...formattedTimePreferences} time={publishedAt!} format="relative-time-or-date" />
           </>
         )}
@@ -65,7 +66,7 @@ export function DocumentTitle({
         {state === "published" && showModifiedAt && (
           <>
             <BulletDot margin="mx-0.5" />
-            <span>Edited</span>
+            <span>{t("turboui.documentTitle.edited")}</span>
             <FormattedTime {...formattedTimePreferences} time={modifiedAt!} format="relative-time-or-date" />
           </>
         )}

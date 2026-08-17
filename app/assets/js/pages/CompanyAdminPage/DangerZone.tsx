@@ -14,6 +14,7 @@ import {
 } from "turboui";
 
 import { Section } from "./Section";
+import { t } from "@/i18n";
 
 export function DangerZone() {
   const { company, ownerIds } = useLoadedData();
@@ -23,7 +24,7 @@ export function DangerZone() {
   if (!amIOwner) return null;
 
   return (
-    <Section title="Danger Zone:">
+    <Section title={t("pages.companyAdminPage.dangerZone")}>
       <div className="bg-surface-base">
         <DeleteCompanyItem companyName={company.name!} />
       </div>
@@ -38,10 +39,10 @@ function DeleteCompanyItem({ companyName }: { companyName: string }) {
     <>
       <OptionsMenuItem
         icon={IconTrash}
-        title="Delete this company"
+        title={t("pages.companyAdminPage.deleteThisCompany")}
         onClick={() => setShowModal(true)}
         danger
-        description="Permanently delete the company and all its resources. This action cannot be undone."
+        description={t("pages.companyAdminPage.permanentlyDeleteTheCompanyAndAll")}
       />
 
       {showModal && (
@@ -71,15 +72,21 @@ function DeleteCompanyModal({
       window.location.href = Paths.lobbyPath();
     } catch (e) {
       console.error("Failed to delete company", e);
-      showErrorToast("Error", "Failed to delete company");
+      showErrorToast(t("pages.companyAdminPage.error"), t("pages.companyAdminPage.failedToDeleteCompany"));
     }
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Delete Company" size="medium" closeOnBackdropClick={!loading}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={t("pages.companyAdminPage.deleteCompany")}
+      size="medium"
+      closeOnBackdropClick={!loading}
+    >
       <div className="space-y-4">
         <WarningCallout
-          message="This action cannot be undone."
+          message={t("pages.companyAdminPage.thisActionCannotBeUndone")}
           description={
             <>
               This will permanently delete <strong>{companyName}</strong> and its spaces, goals, projects, and other
@@ -90,7 +97,7 @@ function DeleteCompanyModal({
 
         <div>
           <label className="block text-sm font-medium text-content-accent mb-1">
-            To confirm, type "{companyName}" in the box below
+            {t("pages.companyAdminPage.toConfirmType", { v1: companyName })}
           </label>
           <input
             type="text"
@@ -111,7 +118,7 @@ function DeleteCompanyModal({
           >
             {loading ? "Deleting..." : "Delete Company"}
           </DangerButton>
-          <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
+          <SecondaryButton onClick={onClose}>{t("pages.companyAdminPage.cancel")}</SecondaryButton>
         </div>
       </div>
     </Modal>

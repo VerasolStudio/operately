@@ -9,6 +9,7 @@ import { Link, IconEdit, isContentEmpty, RichContent, Summary } from "turboui";
 import { ActivityHandler } from "../interfaces";
 import { feedTitle, goalLink } from "./../feedItemLinks";
 import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
+import { t } from "@/i18n";
 
 const GoalDiscussionCreation: ActivityHandler = {
   pageHtmlTitle(activity: Activity) {
@@ -48,7 +49,7 @@ const GoalDiscussionCreation: ActivityHandler = {
         {activity.author!.id! === me?.id && (
           <PageOptions.Link
             icon={IconEdit}
-            title="Edit"
+            title={t("features.activities.edit")}
             to={paths.goalDiscussionEditPath(activity.id!)}
             testId="edit"
             keepOutsideOnBigScreen

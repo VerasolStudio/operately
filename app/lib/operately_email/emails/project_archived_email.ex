@@ -1,6 +1,7 @@
 defmodule OperatelyEmail.Emails.ProjectArchivedEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Projects}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -13,7 +14,7 @@ defmodule OperatelyEmail.Emails.ProjectArchivedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: space.name, who: author, action: "archived the #{project.name} project")
+    |> subject(where: space.name, who: author, action: t("projectArchived.action", %{v1: project.name}))
     |> assign(:author, author)
     |> assign(:project, project)
     |> assign(:link, link)
@@ -29,7 +30,7 @@ defmodule OperatelyEmail.Emails.ProjectArchivedEmail do
       parent_id: project.id,
       parent_type: :project,
       parent_name: project.name,
-      headline: "archived the project",
+      headline: t("projectArchived.headline"),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.project_path(company, project) |> OperatelyWeb.Paths.to_url(),

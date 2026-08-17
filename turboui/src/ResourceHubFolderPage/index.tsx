@@ -4,6 +4,7 @@ import { Page } from "../Page";
 import { IconEdit } from "../icons";
 import { RenameFolderModal, type ResourceHubFolder } from "../ResourceHub";
 import { SharedListPage, type SharedListPageProps } from "../ResourceHubPage/SharedListPage";
+import { t } from "../i18n";
 
 export namespace ResourceHubFolderPage {
   export interface Props extends SharedListPageProps {
@@ -27,7 +28,7 @@ export function ResourceHubFolderPage(props: ResourceHubFolderPage.Props) {
       {
         type: "action",
         icon: IconEdit,
-        label: "Rename",
+        label: t("turboui.resourceHubFolderPage.rename"),
         onClick: toggleRenameForm,
         hidden: !props.folder.permissions?.canRenameFolder,
         testId: "rename-folder",

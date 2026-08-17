@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.ProjectClosedEmail do
   alias Operately.Repo
   alias Operately.Projects
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -19,7 +20,7 @@ defmodule OperatelyEmail.Emails.ProjectClosedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: project.name, who: author, action: "closed the project and submitted a retrospective")
+    |> subject(where: project.name, who: author, action: t("projectClosed.action"))
     |> assign(:project, project)
     |> assign(:retrospective, project.retrospective)
     |> assign(:author, author)
@@ -34,7 +35,7 @@ defmodule OperatelyEmail.Emails.ProjectClosedEmail do
     if can_acknowledge?(person, project, author) do
       {"Acknowledge", url <> "?acknowledge=true"}
     else
-      {"View Retrospective", url}
+      {t("projectClosed.viewRetrospective"), url}
     end
   end
 
@@ -59,7 +60,7 @@ defmodule OperatelyEmail.Emails.ProjectClosedEmail do
       parent_id: project.id,
       parent_type: :project,
       parent_name: project.name,
-      headline: "closed the project",
+      headline: t("projectClosed.headline"),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: Paths.project_retrospective_path(company, project) |> Paths.to_url(),

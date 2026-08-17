@@ -1,28 +1,28 @@
-<%= title("#{short_name(@author)} edited the #{@goal.name} goal") %>
+<%= title(t("goalEditing.v1EditedTheV2Goal", %{v1: short_name(@author), v2: @goal.name})) %>
 
 <%= spacer() %>
 
 <%= if @content.old_name != @content.new_name do %>
   <%= row do %>
-    The name was changed from <%= @content.old_name %> to <%= @content.new_name %>.
+    <%= t("goalEditing.theNameWasChangedFromTo", %{v1: @content.old_name, v2: @content.new_name}) %>
   <% end %>
 <% end %>
 
 <%= if @content.old_timeframe != @content.new_timeframe do %>
   <%= row do %>
-    The timeframe was changed from <%= @content.old_timeframe %> to <%= @content.new_timeframe %>.
+    <%= t("goalEditing.theTimeframeWasChangedFromTo", %{v1: @content.old_timeframe, v2: @content.new_timeframe}) %>
   <% end %>
 <% end %>
 
 <%= if @content.old_champion_id != @content.new_champion_id do %>
   <%= row do %>
-    The champion was changed from <%= short_name(@old_champion) %> to <%= short_name(@new_champion) %>
+    <%= t("goalEditing.theChampionWasChangedFromTo", %{v1: short_name(@old_champion), v2: short_name(@new_champion)}) %>
   <% end %>
 <% end %>
 
 <%= if @content.old_reviewer_id != @content.new_reviewer_id do %>
   <%= row do %>
-    The reviewer was changed from <%= short_name(@old_reviewer) %> to <%= short_name(@new_reviewer) %>
+    <%= t("goalEditing.theReviewerWasChangedFromTo", %{v1: short_name(@old_reviewer), v2: short_name(@new_reviewer)}) %>
   <% end %>
 <% end %>
 
@@ -30,7 +30,7 @@
 
 <%= if @content.added_targets != [] do %>
   <%= row do %>
-    The following measurements were added:
+    <%= t("goalEditing.theFollowingMeasurementsWereAdded") %>
   <% end %>
 
   <%= for target <- @content.added_targets do %>
@@ -44,7 +44,7 @@
 
 <%= if @content.updated_targets != [] do %>
   <%= row do %>
-    The following measurements were updated:
+    <%= t("goalEditing.theFollowingMeasurementsWereUpdated") %>
   <% end %>
 
   <%= for target <- @content.updated_targets do %>
@@ -58,7 +58,7 @@
 
 <%= if @content.deleted_targets != [] do %>
   <%= row do %>
-    The following measurements were deleted:
+    <%= t("goalEditing.theFollowingMeasurementsWereDeleted") %>
   <% end %>
 
   <%= for target <- @content.deleted_targets do %>
@@ -71,5 +71,5 @@
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@link, "View Goal") %>
+  <%= cta_button(@link, t("goalEditing.viewGoal")) %>
 <% end %>

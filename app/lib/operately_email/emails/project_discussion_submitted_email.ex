@@ -5,6 +5,7 @@ defmodule OperatelyEmail.Emails.ProjectDiscussionSubmittedEmail do
   alias Operately.Projects.Project
   alias Operately.Repo
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -21,7 +22,7 @@ defmodule OperatelyEmail.Emails.ProjectDiscussionSubmittedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: project.name, who: author, action: "posted: #{title}")
+    |> subject(where: project.name, who: author, action: t("projectDiscussionSubmitted.action", %{v1: title}))
     |> assign(:author, author)
     |> assign(:project, project)
     |> assign(:title, title)
@@ -41,7 +42,7 @@ defmodule OperatelyEmail.Emails.ProjectDiscussionSubmittedEmail do
       parent_id: project.id,
       parent_type: :project,
       parent_name: project.name,
-      headline: "started the project discussion \"#{discussion.title}\"",
+      headline: t("projectDiscussionSubmitted.headline", %{v1: discussion.title}),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: Paths.project_discussion_path(company, discussion) |> Paths.to_url(),

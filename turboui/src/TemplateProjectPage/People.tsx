@@ -8,12 +8,13 @@ import { PersonField } from "../PersonField";
 import { SidebarSection } from "../SidebarSection";
 import { TextField } from "../TextField";
 import type { TemplateProjectPage } from ".";
+import { t } from "../i18n";
 
 const CONTRIBUTOR_ACCESS_LEVELS = [
-  { value: 10, label: "View Access" },
-  { value: 40, label: "Comment Access" },
-  { value: 70, label: "Edit Access" },
-  { value: 100, label: "Full Access" },
+  { value: 10, label: t("turboui.templateProjectPage.viewAccess") },
+  { value: 40, label: t("turboui.templateProjectPage.commentAccess") },
+  { value: 70, label: t("turboui.templateProjectPage.editAccess") },
+  { value: 100, label: t("turboui.templateProjectPage.fullAccess") },
 ];
 
 const FORM_FIELD_LABEL_CLASS = "mb-1 block text-left text-sm font-bold text-content-base";
@@ -44,14 +45,14 @@ export function TemplatePeople({ props, canEdit }: { props: TemplateProjectPage.
     <section data-test-id="template-people">
       <div className="space-y-6">
         <RoleField
-          label="Champion"
+          label={t("turboui.templateProjectPage.champion")}
           value={champion}
           canEdit={canEdit}
           searchData={props.personSearch}
           onChange={(person) => setRole("champion", champion, person)}
         />
         <RoleField
-          label="Reviewer"
+          label={t("turboui.templateProjectPage.reviewer")}
           value={reviewer}
           canEdit={canEdit}
           searchData={props.personSearch}
@@ -97,10 +98,10 @@ function ContributorsSection({
     <SidebarSection
       title={
         <div className="flex items-center justify-between">
-          <span>Contributors</span>
+          <span>{t("turboui.templateProjectPage.contributors")}</span>
           {canEdit && (
             <SecondaryButton size="xs" onClick={onAdd} testId="add-template-contributor">
-              Add contributor
+              {t("turboui.templateProjectPage.addContributor")}
             </SecondaryButton>
           )}
         </div>
@@ -127,7 +128,7 @@ function ContributorsSection({
                         },
                         {
                           icon: IconTrash,
-                          label: "Remove contributor",
+                          label: t("turboui.templateProjectPage.removeContributor"),
                           onClick: () => onDelete?.(templatePerson.id),
                           testId: `remove-template-person-${templatePerson.id}`,
                           danger: true,
@@ -140,7 +141,7 @@ function ContributorsSection({
             </div>
           ))
         ) : (
-          <div className="text-sm text-content-dimmed">No contributors</div>
+          <div className="text-sm text-content-dimmed">{t("turboui.templateProjectPage.noContributors")}</div>
         )}
       </div>
     </SidebarSection>
@@ -151,7 +152,7 @@ function UnavailableContributorLabel() {
   return (
     <span className="flex shrink-0 items-center gap-1 text-xs font-medium text-amber-600 dark:text-amber-400">
       <IconAlertTriangleFilled size={14} />
-      Not active
+      {t("turboui.templateProjectPage.notActive")}
     </span>
   );
 }
@@ -198,7 +199,9 @@ function ContributorModal({
   onUpdate?: TemplateProjectPage.Props["onPersonUpdate"];
 }) {
   const isReplacingUnavailableContributor = Boolean(templatePerson && !templatePerson.active);
-  const [person, setPerson] = React.useState(isReplacingUnavailableContributor ? null : (templatePerson?.person ?? null));
+  const [person, setPerson] = React.useState(
+    isReplacingUnavailableContributor ? null : (templatePerson?.person ?? null),
+  );
   const [responsibility, setResponsibility] = React.useState(templatePerson?.responsibility ?? "");
   const [accessLevel, setAccessLevel] = React.useState(templatePerson?.accessLevel ?? 70);
   const accessUpdateId = React.useRef(0);
@@ -242,7 +245,9 @@ function ContributorModal({
     <Modal isOpen onClose={onClose} title={modalTitle} size="small">
       <div className="space-y-5" data-test-id="template-contributor-form">
         <div>
-          <label className={FORM_FIELD_LABEL_CLASS}>{isReplacingUnavailableContributor ? "Replacement" : "Person"}</label>
+          <label className={FORM_FIELD_LABEL_CLASS}>
+            {isReplacingUnavailableContributor ? "Replacement" : "Person"}
+          </label>
           {templatePerson && !isReplacingUnavailableContributor ? (
             <PersonField person={person} variant="form-field" readonly />
           ) : (
@@ -257,13 +262,13 @@ function ContributorModal({
         </div>
         <TextField
           variant="form-field"
-          label="Responsibility"
+          label={t("turboui.templateProjectPage.responsibility")}
           text={responsibility}
           onChange={setResponsibility}
-          placeholder="What are they responsible for?"
+          placeholder={t("turboui.templateProjectPage.whatAreTheyResponsibleFor")}
         />
         <div>
-          <label className={FORM_FIELD_LABEL_CLASS}>Access level</label>
+          <label className={FORM_FIELD_LABEL_CLASS}>{t("turboui.templateProjectPage.accessLevel")}</label>
           <Menu
             testId="template-contributor-access"
             customTrigger={
@@ -289,7 +294,7 @@ function ContributorModal({
           </Menu>
         </div>
         <div className="flex justify-end gap-2">
-          <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
+          <SecondaryButton onClick={onClose}>{t("turboui.templateProjectPage.cancel")}</SecondaryButton>
           <PrimaryButton onClick={() => void save()} disabled={!person}>
             {saveLabel}
           </PrimaryButton>

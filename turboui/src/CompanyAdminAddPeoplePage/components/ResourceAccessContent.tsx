@@ -3,11 +3,12 @@ import { CompanyAdminAddPeoplePage } from "..";
 import { IconPlus, IconX } from "../../icons";
 import { Dropdown } from "../../FormElements/Dropdown";
 import { SecondaryButton } from "../../Button";
+import { t } from "../../i18n";
 
 const RESOURCE_TYPE_OPTIONS: { value: CompanyAdminAddPeoplePage.ResourceType; label: string }[] = [
-  { value: "space", label: "Space" },
-  { value: "goal", label: "Goal" },
-  { value: "project", label: "Project" },
+  { value: "space", label: t("turboui.companyAdminAddPeoplePage.space") },
+  { value: "goal", label: t("turboui.companyAdminAddPeoplePage.goal") },
+  { value: "project", label: t("turboui.companyAdminAddPeoplePage.project") },
 ];
 
 export interface ResourceAccessContentProps {
@@ -40,7 +41,7 @@ export function ResourceAccessContent({
   if (accessGranted) {
     return (
       <div className="mt-6 p-4 bg-surface-dimmed rounded-lg text-sm text-content-accent text-center">
-        Access granted successfully.
+        {t("turboui.companyAdminAddPeoplePage.accessGrantedSuccessfully")}
       </div>
     );
   }
@@ -49,7 +50,7 @@ export function ResourceAccessContent({
     <div className="mt-12">
       <div className="border-t border-surface-outline mb-12" />
       <div className="text-sm font-bold mb-3">
-        Choose what spaces, goals and projects {fullName} should have access to:
+        {t("turboui.companyAdminAddPeoplePage.chooseWhatSpacesGoalsAndProjects", { v1: fullName })}
       </div>
 
       <div className="flex flex-col gap-3">
@@ -107,7 +108,7 @@ function ResourceAccessRow({
     <div className="relative border border-surface-outline rounded-lg p-4" data-test-id={`resource-access-${index}`}>
       <div className="flex flex-col gap-3 sm:flex-row sm:gap-2">
         <div className="sm:w-1/4">
-          <label className="font-bold text-xs mb-1 block">Type</label>
+          <label className="font-bold text-xs mb-1 block">{t("turboui.companyAdminAddPeoplePage.type")}</label>
           <TypeSelector
             value={entry.resourceType}
             onChange={(resourceType) => onUpdate(entry.key, { resourceType, resourceId: "", resourceName: "" })}
@@ -116,7 +117,7 @@ function ResourceAccessRow({
         </div>
 
         <div className="sm:flex-1">
-          <label className="font-bold text-xs mb-1 block">Resource</label>
+          <label className="font-bold text-xs mb-1 block">{t("turboui.companyAdminAddPeoplePage.resource")}</label>
           <ResourceSelector
             entry={entry}
             resources={resourceList}
@@ -127,7 +128,7 @@ function ResourceAccessRow({
         </div>
 
         <div className="sm:w-1/4">
-          <label className="font-bold text-xs mb-1 block">Access Level</label>
+          <label className="font-bold text-xs mb-1 block">{t("turboui.companyAdminAddPeoplePage.accessLevel")}</label>
           <AccessLevelSelector
             value={entry.accessLevel}
             options={permissionOptions}

@@ -8,12 +8,12 @@
   <% end %>
 <% else %>
   <%= row do %>
-    The description was cleared.
+    <%= t("taskDescriptionChange.theDescriptionWasCleared") %>
   <% end %>
 <% end %>
 
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@cta_url, "View Task") %>
+  <%= cta_button(@cta_url, t("taskDescriptionChange.viewTask")) %>
 <% end %>

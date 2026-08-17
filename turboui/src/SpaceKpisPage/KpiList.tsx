@@ -6,6 +6,7 @@ import { KpiActionsMenu } from "./KpiActionsMenu";
 import type { SpaceKpisPage } from "./types";
 import { formatCadence, formatValue, latestEntry, latestTrend } from "./utils";
 import { TrendIndicator } from "./TrendIndicator";
+import { t } from "../i18n";
 
 interface KpiListProps {
   kpis: SpaceKpisPage.Kpi[];
@@ -28,9 +29,9 @@ export function KpiList({ kpis, canManage, onSelect, onLogUpdate, onNewKpi, onEd
         <thead>
           <tr className="border-b border-stroke-base bg-surface-dimmed text-left text-xs uppercase tracking-wide text-content-dimmed">
             <th className="px-4 py-2 font-medium">KPI</th>
-            <th className="px-4 py-2 font-medium">Cadence</th>
-            <th className="px-4 py-2 font-medium">Champion</th>
-            <th className="px-4 py-2 text-right font-medium">Latest value</th>
+            <th className="px-4 py-2 font-medium">{t("turboui.spaceKpisPage.cadence")}</th>
+            <th className="px-4 py-2 font-medium">{t("turboui.spaceKpisPage.champion")}</th>
+            <th className="px-4 py-2 text-right font-medium">{t("turboui.spaceKpisPage.latestValue")}</th>
             <th className="px-4 py-2" />
           </tr>
         </thead>
@@ -78,7 +79,7 @@ function KpiRow({
     >
       <td className="px-4 py-3">
         <div className="font-semibold text-content-accent group-hover:underline">{kpi.name}</div>
-        <div className="text-xs text-content-dimmed">Measured in {kpi.unit}</div>
+        <div className="text-xs text-content-dimmed">{t("turboui.spaceKpisPage.measuredIn", { v1: kpi.unit })}</div>
       </td>
 
       <td className="px-4 py-3 text-content-base">{formatCadence(kpi.cadence)}</td>
@@ -90,7 +91,7 @@ function KpiRow({
             <span className="text-content-base">{kpi.champion.fullName}</span>
           </div>
         ) : (
-          <span className="text-content-subtle">Unassigned</span>
+          <span className="text-content-subtle">{t("turboui.spaceKpisPage.unassigned")}</span>
         )}
       </td>
 
@@ -101,7 +102,7 @@ function KpiRow({
             <TrendIndicator delta={trend} />
           </div>
         ) : (
-          <span className="text-content-subtle">No data</span>
+          <span className="text-content-subtle">{t("turboui.spaceKpisPage.noData")}</span>
         )}
       </td>
 
@@ -115,7 +116,7 @@ function KpiRow({
               onClick={onLogUpdate}
               data-test-id={`log-update-${kpi.id}`}
             >
-              Log update
+              {t("turboui.spaceKpisPage.logUpdate")}
             </button>
 
             <KpiActionsMenu
@@ -125,7 +126,7 @@ function KpiRow({
               customTrigger={
                 <button
                   type="button"
-                  aria-label="KPI actions"
+                  aria-label={t("turboui.spaceKpisPage.kPIActions")}
                   className="rounded-md p-1 text-content-dimmed opacity-0 transition-opacity hover:bg-surface-accent hover:text-content-base group-hover:opacity-100 data-[state=open]:opacity-100"
                 >
                   <IconDots size={18} />
@@ -146,9 +147,9 @@ function EmptyState({ canManage, onNewKpi }: { canManage: boolean; onNewKpi: () 
       data-test-id="kpi-list-empty"
     >
       <IconChartColumn size={40} className="text-content-subtle" />
-      <h3 className="mt-4 font-bold text-content-accent">No KPIs yet</h3>
+      <h3 className="mt-4 font-bold text-content-accent">{t("turboui.spaceKpisPage.noKPIsYet")}</h3>
       <p className="mt-1 max-w-sm text-sm text-content-dimmed">
-        Track key metrics for this space and record updates over time.
+        {t("turboui.spaceKpisPage.trackKeyMetricsForThisSpace")}
       </p>
       {canManage && (
         <button
@@ -157,7 +158,7 @@ function EmptyState({ canManage, onNewKpi }: { canManage: boolean; onNewKpi: () 
           onClick={onNewKpi}
           data-test-id="empty-new-kpi"
         >
-          Add the first KPI
+          {t("turboui.spaceKpisPage.addTheFirstKPI")}
         </button>
       )}
     </div>

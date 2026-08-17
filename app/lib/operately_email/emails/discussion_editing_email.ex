@@ -1,5 +1,6 @@
 defmodule OperatelyEmail.Emails.DiscussionEditingEmail do
   alias Operately.Messages.Message
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(_person, _activity) do
     raise "Email for DiscussionEditing not implemented"
@@ -18,7 +19,7 @@ defmodule OperatelyEmail.Emails.DiscussionEditingEmail do
       parent_id: space.id,
       parent_type: :space,
       parent_name: space.name,
-      headline: "edited the discussion \"#{title}\"",
+      headline: t("discussionEditing.headline", %{v1: title}),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: OperatelyWeb.Paths.message_path(company, message) |> OperatelyWeb.Paths.to_url(),

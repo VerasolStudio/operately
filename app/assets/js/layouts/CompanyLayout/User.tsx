@@ -15,10 +15,12 @@ import {
 } from "turboui";
 import { logOut } from "@/routes/auth";
 import { usePaths } from "@/routes/paths";
+import { useTranslation } from "react-i18next";
 
 export function User() {
   const paths = usePaths();
   const me = useMe();
+  const { t } = useTranslation();
 
   if (!me) return null;
 
@@ -50,22 +52,22 @@ export function User() {
       }
     >
       <MenuLinkItem icon={IconUserCircle} to={paths.profileEditPath(me.id!)} testId="profile-link">
-        Profile
+        {t("userMenu.profile")}
       </MenuLinkItem>
       <MenuLinkItem icon={IconSettings} to={paths.accountSettingsPath()} testId="settings-link">
-        Settings
+        {t("userMenu.settings")}
       </MenuLinkItem>
       <MenuLinkItem icon={IconLockPassword} to={paths.accountSecurityPath()} testId="password-link">
-        Password &amp; Security
+        {t("userMenu.passwordAndSecurity")}
       </MenuLinkItem>
       <MenuLinkItem icon={IconCode} to={paths.accountApiTokensPath()} testId="api-tokens-link">
-        API Tokens
+        {t("userMenu.apiTokens")}
       </MenuLinkItem>
       <MenuLinkItem icon={IconRobotFace} to={paths.accountMcpConnectionsPath()} testId="mcp-connections-link">
-        MCP Connections
+        {t("userMenu.mcpConnections")}
       </MenuLinkItem>
       <MenuActionItem icon={IconDoorExit} onClick={handleLogOut} testId="log-out-button">
-        Sign Out
+        {t("userMenu.signOut")}
       </MenuActionItem>
     </Menu>
   );

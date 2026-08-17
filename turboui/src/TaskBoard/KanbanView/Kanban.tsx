@@ -12,6 +12,7 @@ import { useHorizontalAutoScroll, useSortableItem, DropIndicator } from "../../u
 import type { BoardLocation } from "../../utils/PragmaticDragAndDrop";
 import classNames from "../../utils/classnames";
 import { useTaskKeyboardNavigation } from "../hooks/useTaskKeyboardNavigation";
+import { t } from "../../i18n";
 
 interface Props {
   milestone: TaskBoard.Milestone | null;
@@ -166,7 +167,7 @@ export function Kanban({
               data-test-id="toggle-closed-statuses"
             >
               {areClosedStatusesVisible ? <IconChevronDown size={16} /> : <IconChevronRight size={16} />}
-              <span>Closed</span>
+              <span>{t("turboui.taskBoard.closed")}</span>
               <span className="text-xs tabular-nums">{closedStatuses.length}</span>
             </button>
           )}
@@ -179,7 +180,7 @@ export function Kanban({
               data-test-id="add-status"
             >
               <IconPlus size={16} />
-              Add status
+              {t("turboui.taskBoard.addStatus")}
             </button>
           )}
         </div>

@@ -3,6 +3,7 @@ import React from "react";
 import { PrimaryButton, SecondaryButton } from "../Button";
 import classNames from "../utils/classnames";
 import { useLinkState, useTipTapEditor } from "./EditorContext";
+import { t } from "../i18n";
 
 export function useLinkEditFormClose() {
   const editor = useTipTapEditor();
@@ -92,21 +93,21 @@ export function LinkEditForm({ editor }): JSX.Element {
           {isSelectionLink ? (
             <>
               <PrimaryButton onClick={save} size="xxs">
-                Save
+                {t("turboui.richEditor.save")}
               </PrimaryButton>
 
               <SecondaryButton onClick={unlink} size="xxs">
-                Unlink
+                {t("turboui.richEditor.unlink")}
               </SecondaryButton>
             </>
           ) : (
             <>
               <PrimaryButton onClick={save} size="xxs">
-                Add
+                {t("turboui.richEditor.add")}
               </PrimaryButton>
 
               <SecondaryButton onClick={unlink} size="xxs">
-                Cancel
+                {t("turboui.richEditor.cancel")}
               </SecondaryButton>
             </>
           )}

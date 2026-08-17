@@ -14,6 +14,7 @@ import { Paths } from "@/routes/paths";
 import { PageModule } from "@/routes/types";
 import { match } from "ts-pattern";
 import { Forms } from "turboui";
+import { t } from "@/i18n";
 
 export default { name: "SignUpWithEmailPage", loader: Pages.emptyLoader, Page } as PageModule;
 
@@ -107,8 +108,8 @@ function Form({ form, submitError }: { form: ReturnType<typeof Forms.useForm>; s
         <Paper.Body className="h-dvh sm:h-auto">
           <div className="py-8 sm:px-4 sm:py-4">
             <OperatelyLogo width="40px" height="40px" />
-            <h1 className="text-2xl font-bold mt-4">Sign up for Operately</h1>
-            <p className="text-content-dimmed mb-8">Use your work email — keep work and life separate.</p>
+            <h1 className="text-2xl font-bold mt-4">{t("pages.signUpWithEmailPage.signUpForOperately")}</h1>
+            <p className="text-content-dimmed mb-8">{t("pages.signUpWithEmailPage.useYourWorkEmailKeepWork")}</p>
 
             <Forms.Form form={form}>
               {submitError && (
@@ -120,25 +121,25 @@ function Form({ form, submitError }: { form: ReturnType<typeof Forms.useForm>; s
               <Forms.FieldGroup>
                 <Forms.TextInput
                   field={"email"}
-                  label="Work Email"
-                  placeholder="name@company.com"
+                  label={t("pages.signUpWithEmailPage.workEmail")}
+                  placeholder={t("pages.signUpWithEmailPage.nameCompanyCom")}
                   required
                   okSign={validation.email}
                 />
 
                 <Forms.TextInput
                   field={"name"}
-                  label="Full Name"
-                  placeholder="Enter your full name"
+                  label={t("pages.signUpWithEmailPage.fullName")}
+                  placeholder={t("pages.signUpWithEmailPage.enterYourFullName")}
                   required
                   okSign={validation.name}
                 />
 
                 <Forms.PasswordInput
                   field={"password"}
-                  label="Password"
+                  label={t("pages.signUpWithEmailPage.password")}
                   minLength={12}
-                  placeholder="At least 12 characters"
+                  placeholder={t("pages.signUpWithEmailPage.atLeast12Characters")}
                   required
                   noAutofill
                   okSign={validation.password}
@@ -148,9 +149,9 @@ function Form({ form, submitError }: { form: ReturnType<typeof Forms.useForm>; s
 
                 <Forms.PasswordInput
                   field={"confirmPassword"}
-                  label="Confirm Password"
+                  label={t("pages.signUpWithEmailPage.confirmPassword")}
                   minLength={12}
-                  placeholder="At least 12 characters"
+                  placeholder={t("pages.signUpWithEmailPage.atLeast12Characters")}
                   required
                   noAutofill
                   okSign={validation.confirmPassword}
@@ -177,7 +178,8 @@ function Form({ form, submitError }: { form: ReturnType<typeof Forms.useForm>; s
 function WhatHappensNext() {
   return (
     <div className="my-8 text-center px-20">
-      <span className="font-bold">What happens next?</span> Operately will send you a code to verify your email address.
+      <span className="font-bold">{t("pages.signUpWithEmailPage.whatHappensNext")}</span>{" "}
+      {t("pages.signUpWithEmailPage.operatelyWillSendYouACode")}
     </div>
   );
 }
@@ -190,15 +192,15 @@ function CodeVerification({ form }: { form: ReturnType<typeof Forms.useForm> }) 
           <Forms.Form form={form}>
             <div className="py-8 sm:px-4 sm:py-4 flex flex-col items-center text-center">
               <OperatelyLogo width="32px" height="32px" />
-              <h1 className="text-3xl font-bold mt-4 mb-4">Check your email for a code</h1>
+              <h1 className="text-3xl font-bold mt-4 mb-4">{t("pages.signUpWithEmailPage.checkYourEmailForACode")}</h1>
               <CodeMessage />
 
               <div className="flex flex-col items-center">
                 <CodeInput field={"code"} />
-                <Forms.Submit saveText="Continue ->" className="w-60" />
+                <Forms.Submit saveText={t("pages.signUpWithEmailPage.continue")} className="w-60" />
               </div>
 
-              <div className="mt-8 text-center text-sm">Can’t find your code? Check your spam folder.</div>
+              <div className="mt-8 text-center text-sm">{t("pages.signUpWithEmailPage.canTFindYourCodeCheck")}</div>
             </div>
           </Forms.Form>
         </Paper.Body>

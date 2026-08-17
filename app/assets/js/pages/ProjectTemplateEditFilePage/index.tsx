@@ -9,6 +9,7 @@ import { FileEditPage, emptyContent, showErrorToast } from "turboui";
 import type { FileEditPage as FileEditPageTypes } from "turboui/FileEditPage/types";
 import { useNavigate } from "react-router";
 import React from "react";
+import { t } from "@/i18n";
 
 export default { name: "ProjectTemplateEditFilePage", loader, Page } as PageModule;
 
@@ -56,7 +57,10 @@ function Page() {
       navigate(cancelLink);
       return true;
     } catch {
-      showErrorToast("File not updated", "Check the form and try again.");
+      showErrorToast(
+        t("pages.projectTemplateEditFilePage.fileNotUpdated"),
+        t("pages.projectTemplateEditFilePage.checkTheFormAndTryAgain"),
+      );
       return false;
     }
   }
@@ -77,4 +81,3 @@ function Page() {
     />
   );
 }
-

@@ -2,6 +2,7 @@ import React from "react";
 
 import * as AdminApi from "@/ee/admin_api";
 import { IconTrash, Modal, PrimaryButton, SecondaryButton, showErrorToast } from "turboui";
+import { t } from "@/i18n";
 
 interface RemoveFeatureFlagsModalProps {
   isOpen: boolean;
@@ -84,7 +85,7 @@ export function RemoveFeatureFlagsModal({
       });
     } catch (error: any) {
       const message = error?.response?.data?.message || "Failed to remove feature flags. Please try again.";
-      showErrorToast("Failed to remove feature flags", message);
+      showErrorToast(t("pages.saasAdminCompanyPage.failedToRemoveFeatureFlags"), message);
     } finally {
       setSaving(false);
     }
@@ -94,19 +95,19 @@ export function RemoveFeatureFlagsModal({
 
   return (
     <Modal
-      title="Remove Feature Flags"
+      title={t("pages.saasAdminCompanyPage.removeFeatureFlags")}
       isOpen={isOpen}
       onClose={handleClose}
       size="small"
       closeOnBackdropClick={!saving}
     >
       <div className="mb-4 text-sm text-content-accent">
-        Remove experimental feature flags from this company. Changes are saved when you click Save.
+        {t("pages.saasAdminCompanyPage.removeExperimentalFeatureFlagsFromThis")}
       </div>
 
       {!hasEnabledFeatures ? (
         <div className="py-6 text-sm text-content-dimmed text-center" data-test-id="no-feature-flags">
-          No feature flags enabled
+          {t("pages.saasAdminCompanyPage.noFeatureFlagsEnabled")}
         </div>
       ) : (
         <div className="flex flex-col gap-2 mb-6" data-test-id="feature-flags-list">
@@ -130,14 +131,16 @@ export function RemoveFeatureFlagsModal({
           ))}
 
           {localFeatures.length === 0 && (
-            <div className="py-4 text-sm text-content-dimmed text-center">All flags marked for removal</div>
+            <div className="py-4 text-sm text-content-dimmed text-center">
+              {t("pages.saasAdminCompanyPage.allFlagsMarkedForRemoval")}
+            </div>
           )}
         </div>
       )}
 
       <div className="flex items-center justify-end gap-2">
         <SecondaryButton size="sm" onClick={handleClose} testId="cancel-remove-features">
-          Cancel
+          {t("pages.saasAdminCompanyPage.cancel")}
         </SecondaryButton>
         <PrimaryButton
           size="sm"
@@ -146,7 +149,7 @@ export function RemoveFeatureFlagsModal({
           disabled={!hasEnabledFeatures}
           testId="save-remove-features"
         >
-          Save
+          {t("pages.saasAdminCompanyPage.save")}
         </PrimaryButton>
       </div>
     </Modal>

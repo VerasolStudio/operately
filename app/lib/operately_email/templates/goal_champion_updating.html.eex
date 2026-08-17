@@ -1,7 +1,7 @@
-<%= title("#{short_name(@author)} assinged you as the champion on #{@goal.name}") %>
+<%= title(t("goalChampionUpdating.v1AssingedYouAsTheChampion", %{v1: short_name(@author), v2: @goal.name})) %>
 
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@link, "View Goal") %>
+  <%= cta_button(@link, t("goalChampionUpdating.viewGoal")) %>
 <% end %>

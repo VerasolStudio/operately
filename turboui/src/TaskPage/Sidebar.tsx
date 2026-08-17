@@ -10,6 +10,7 @@ import { MilestoneField } from "../MilestoneField";
 import { durationHumanized, isOverdue } from "../utils/time";
 import { SidebarNotificationSection, SidebarSection } from "../SidebarSection";
 import { showSuccessToast, showErrorToast } from "../Toasts";
+import { t } from "../i18n";
 
 export function Sidebar(props: TaskPage.ContentState) {
   return (
@@ -51,13 +52,13 @@ export function MobileSidebar(props: TaskPage.ContentState) {
 
 function DueDate(props: TaskPage.ContentState) {
   return (
-    <SidebarSection title="Due date">
+    <SidebarSection title={t("turboui.taskPage.dueDate")}>
       <DateField
         date={props.dueDate ?? null}
         onDateSelect={props.onDueDateChange}
         readonly={!props.canEdit}
         showOverdueWarning={!props.status?.closed}
-        placeholder="Set due date"
+        placeholder={t("turboui.taskPage.setDueDate")}
         testId="task-due-date"
         calendarOnly
       />
@@ -95,7 +96,7 @@ function Reminders(props: TaskPage.ContentState) {
   };
 
   return (
-    <SidebarSection title="Reminders" testId="task-reminders">
+    <SidebarSection title={t("turboui.taskPage.reminders")} testId="task-reminders">
       <div className="space-y-2">
         {reminders.map((reminder, index) => (
           <ReminderRow
@@ -117,7 +118,7 @@ function Reminders(props: TaskPage.ContentState) {
             className="inline-flex items-center gap-1 text-xs text-content-dimmed hover:text-content-base"
           >
             <IconPlus size={12} />
-            Add reminder
+            {t("turboui.taskPage.addReminder")}
           </button>
         )}
       </div>
@@ -154,7 +155,7 @@ function ReminderRow({
         disabled={readonly}
         onChange={(e) => onUpdate(index, { type: e.target.value as TaskPage.ReminderType })}
         className="min-w-0 flex-1 rounded border border-stroke-base bg-surface-base px-2 py-1"
-        aria-label="Reminder type"
+        aria-label={t("turboui.taskPage.reminderType")}
       >
         {typeOptions.map((option) => (
           <option key={option.type} value={option.type}>
@@ -172,7 +173,7 @@ function ReminderRow({
             disabled={readonly}
             onChange={(e) => onUpdate(index, { days: normalizeReminderDays(e.target.value) })}
             className="w-14 rounded border border-stroke-base bg-surface-base px-2 py-1"
-            aria-label="Days before due date"
+            aria-label={t("turboui.taskPage.daysBeforeDueDate")}
           />
           <span className="w-10 text-content-dimmed">{dayLabel}</span>
         </>
@@ -185,7 +186,7 @@ function ReminderRow({
           disabled={readonly}
           onChange={(e) => onUpdate(index, { date: normalizeReminderDate(e.target.value) })}
           className="w-32 rounded border border-stroke-base bg-surface-base px-2 py-1"
-          aria-label="Reminder date"
+          aria-label={t("turboui.taskPage.reminderDate")}
         />
       )}
 
@@ -194,7 +195,7 @@ function ReminderRow({
           type="button"
           onClick={() => onRemove(index)}
           className="p-1 text-content-dimmed hover:text-content-error"
-          aria-label="Remove reminder"
+          aria-label={t("turboui.taskPage.removeReminder")}
         >
           <IconTrash size={14} />
         </button>
@@ -230,12 +231,12 @@ function normalizeReminders(reminders: TaskPage.Reminder[], dueDate: TaskPage.Co
 
 function reminderTypeOptions(hasDueDate: boolean) {
   const dueDateOptions: Array<{ type: TaskPage.ReminderType; label: string }> = [
-    { type: "before_due", label: "Before due date" },
-    { type: "due_day", label: "Due date" },
-    { type: "overdue", label: "Overdue" },
+    { type: "before_due", label: t("turboui.taskPage.beforeDueDate") },
+    { type: "due_day", label: t("turboui.taskPage.dueDate") },
+    { type: "overdue", label: t("turboui.taskPage.overdue") },
   ];
 
-  const onDateOption = { type: "on_date" as const, label: "On date" };
+  const onDateOption = { type: "on_date" as const, label: t("turboui.taskPage.onDate") };
 
   if (hasDueDate) return [...dueDateOptions, onDateOption];
   return [onDateOption];
@@ -275,13 +276,13 @@ function createReminderKey() {
 
 function Assignees(props: TaskPage.ContentState) {
   return (
-    <SidebarSection title="Assignees">
+    <SidebarSection title={t("turboui.taskPage.assignees")}>
       <AssigneesField
         people={props.assignees}
         setPeople={props.onAssigneesChange}
         readonly={!props.canEdit}
         searchData={props.assigneePersonSearch}
-        emptyStateMessage="Assign task"
+        emptyStateMessage={t("turboui.taskPage.assignTask")}
         emptyStateReadOnlyMessage="No assignees"
         testId="assignee"
       />
@@ -291,13 +292,13 @@ function Assignees(props: TaskPage.ContentState) {
 
 function DueDateMobile(props: TaskPage.ContentState) {
   return (
-    <SidebarSection title="Due date">
+    <SidebarSection title={t("turboui.taskPage.dueDate")}>
       <DateField
         date={props.dueDate ?? null}
         onDateSelect={props.onDueDateChange}
         readonly={!props.canEdit}
         showOverdueWarning={!props.status?.closed}
-        placeholder="Set due date"
+        placeholder={t("turboui.taskPage.setDueDate")}
         calendarOnly
         size="small"
       />
@@ -307,13 +308,13 @@ function DueDateMobile(props: TaskPage.ContentState) {
 
 function AssigneeMobile(props: TaskPage.ContentState) {
   return (
-    <SidebarSection title="Assignees">
+    <SidebarSection title={t("turboui.taskPage.assignees")}>
       <AssigneesField
         people={props.assignees}
         setPeople={props.onAssigneesChange}
         readonly={!props.canEdit}
         searchData={props.assigneePersonSearch}
-        emptyStateMessage="Assign task"
+        emptyStateMessage={t("turboui.taskPage.assignTask")}
         emptyStateReadOnlyMessage="No assignees"
         size="small"
         showTitle={false}
@@ -326,14 +327,14 @@ function Milestone(props: TaskPage.ContentState) {
   if (props.hideMilestone) return null;
 
   return (
-    <SidebarSection title="Milestone">
+    <SidebarSection title={t("turboui.taskPage.milestone")}>
       <MilestoneField
         milestone={props.milestone}
         setMilestone={props.onMilestoneChange}
         readonly={!props.canEdit}
         milestones={props.milestones}
         onSearch={props.onMilestoneSearch}
-        emptyStateMessage="Select milestone"
+        emptyStateMessage={t("turboui.taskPage.selectMilestone")}
         emptyStateReadOnlyMessage="No milestone"
         formattedTimePreferences={props.formattedTimePreferences}
       />
@@ -345,7 +346,7 @@ function CreatedBy(props: TaskPage.ContentState) {
   if (!props.createdBy) return null;
 
   return (
-    <SidebarSection title="Created">
+    <SidebarSection title={t("turboui.taskPage.created")}>
       <div className="space-y-2 text-sm">
         <AvatarWithName person={props.createdBy} size={"tiny"} nameFormat="short" link={props.createdBy.profileLink} />
         <div className="flex items-center gap-1.5 ml-1 text-content-dimmed text-xs">
@@ -365,34 +366,34 @@ function Actions(props: TaskPage.ContentState) {
   const handleCopyURL = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      showSuccessToast("Success", "Task URL copied to clipboard");
+      showSuccessToast(t("turboui.taskPage.success"), t("turboui.taskPage.taskURLCopiedToClipboard"));
     } catch {
-      showErrorToast("Copy failed", "Unable to copy URL to clipboard");
+      showErrorToast(t("turboui.taskPage.copyFailed"), t("turboui.taskPage.unableToCopyURLToClipboard"));
     }
   };
 
   const actions = [
     {
-      label: "Copy URL",
+      label: t("turboui.taskPage.copyURL"),
       onClick: handleCopyURL,
       icon: IconLink,
       show: true,
     },
     {
-      label: "Move task",
+      label: t("turboui.taskPage.moveTask"),
       onClick: props.openMoveModal,
       icon: IconCircleArrowRight,
       show: Boolean(props.canEdit && props.onMoveTask && props.projectSearch && props.spaceSearch),
       testId: "move-task",
     },
     {
-      label: "Archive",
+      label: t("turboui.taskPage.archive"),
       onClick: props.onArchive,
       icon: IconArchive,
       show: !!props.onArchive,
     },
     {
-      label: "Delete",
+      label: t("turboui.taskPage.delete"),
       onClick: props.openDeleteModal,
       icon: IconTrash,
       show: props.canEdit,
@@ -404,7 +405,7 @@ function Actions(props: TaskPage.ContentState) {
   if (actions.length === 0) return null;
 
   return (
-    <SidebarSection title="Actions">
+    <SidebarSection title={t("turboui.taskPage.actions")}>
       <div className="space-y-1">
         {actions.map((action, index) => (
           <button

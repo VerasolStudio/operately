@@ -12,6 +12,7 @@ import classNames from "../utils/classnames";
 import { buildDiffDecorations } from "./decorations";
 import { createDiffDecorationsExtension } from "./diffDecorationsExtension";
 import { diffRichContent } from "./diffRichContent";
+import { t } from "../i18n";
 
 export type RichContentDiffProps = {
   before: JSONContent | unknown;
@@ -152,10 +153,8 @@ export function RichContentDiff(props: RichContentDiffProps) {
         className={classNames("rounded-lg border border-surface-outline bg-surface-base p-4", props.className)}
         role="alert"
       >
-        <p className="font-medium text-content-error">Unable to compare these versions</p>
-        <p className="mt-1 text-sm text-content-dimmed">
-          One of the snapshots could not be parsed with the current editor schema.
-        </p>
+        <p className="font-medium text-content-error">{t("turboui.richContentDiff.unableToCompareTheseVersions")}</p>
+        <p className="mt-1 text-sm text-content-dimmed">{t("turboui.richContentDiff.oneOfTheSnapshotsCouldNot")}</p>
       </div>
     );
   }
@@ -165,7 +164,7 @@ export function RichContentDiff(props: RichContentDiffProps) {
       {props.showLegend !== false && comparison.changeCount > 0 && <DiffLegend />}
       {comparison.changeCount === 0 && (
         <p className="text-sm text-content-dimmed" data-test-id="no-content-changes">
-          No content changes
+          {t("turboui.richContentDiff.noContentChanges")}
         </p>
       )}
 
@@ -317,10 +316,10 @@ export function DiffLegend(props: { className?: string }) {
   return (
     <div
       className={classNames("flex flex-wrap items-center gap-4 text-sm text-content-dimmed", props.className)}
-      aria-label="Diff legend"
+      aria-label={t("turboui.richContentDiff.diffLegend")}
     >
-      <ChangeBadge kind="removed" label="Removed" />
-      <ChangeBadge kind="added" label="Added" />
+      <ChangeBadge kind="removed" label={t("turboui.richContentDiff.removed")} />
+      <ChangeBadge kind="added" label={t("turboui.richContentDiff.added")} />
     </div>
   );
 }

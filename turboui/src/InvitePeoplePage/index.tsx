@@ -7,6 +7,7 @@ import type { Navigation } from "../Page/Navigation";
 import { Navigation as PageNavigation } from "../Page/Navigation";
 import { useHtmlTitle } from "../Page/useHtmlTitle";
 import { InviteLinkSection } from "./InviteLinkSection";
+import { t } from "../i18n";
 
 export namespace InvitePeoplePage {
   export interface Props {
@@ -106,7 +107,9 @@ export function InvitePeoplePage(props: InvitePeoplePage.Props) {
       {props.navigationItems && <PageNavigation items={props.navigationItems} />}
       <div className="relative bg-surface-base min-h-dvh sm:min-h-0 sm:border sm:border-surface-outline sm:rounded-lg sm:shadow-xl">
         <div className="px-4 sm:px-10 py-8">
-          <div className="text-content-accent text-2xl font-extrabold mb-8">Bring your team on board</div>
+          <div className="text-content-accent text-2xl font-extrabold mb-8">
+            {t("turboui.invitePeoplePage.bringYourTeamOnBoard")}
+          </div>
 
           {props.errorMessage ? (
             <div
@@ -132,9 +135,9 @@ export function InvitePeoplePage(props: InvitePeoplePage.Props) {
             <section className="rounded-lg border border-surface-outline bg-surface-base p-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <h2 className="text-lg font-semibold">Invite one person</h2>
+                  <h2 className="text-lg font-semibold">{t("turboui.invitePeoplePage.inviteOnePerson")}</h2>
                   <p className="mt-1 text-sm text-content-dimmed">
-                    Create a personal link to share with a single team member.
+                    {t("turboui.invitePeoplePage.createAPersonalLinkToShare")}
                   </p>
                 </div>
                 <SecondaryButton
@@ -144,7 +147,7 @@ export function InvitePeoplePage(props: InvitePeoplePage.Props) {
                   disabled={!canInviteIndividually}
                   size="sm"
                 >
-                  Create invite
+                  {t("turboui.invitePeoplePage.createInvite")}
                 </SecondaryButton>
               </div>
             </section>
@@ -154,10 +157,10 @@ export function InvitePeoplePage(props: InvitePeoplePage.Props) {
             isOpen={showResetConfirm}
             onConfirm={handleConfirmResetLink}
             onCancel={handleCancelResetConfirm}
-            title="Generate a new link"
-            message="We’ll disable the current invite link and create a new one. Anyone holding the old link won’t be able to join anymore."
-            confirmText="Generate new link"
-            cancelText="Cancel"
+            title={t("turboui.invitePeoplePage.generateANewLink")}
+            message={t("turboui.invitePeoplePage.weLlDisableTheCurrentInvite")}
+            confirmText={t("turboui.invitePeoplePage.generateNewLink")}
+            cancelText={t("turboui.invitePeoplePage.cancel")}
             variant="danger"
             icon={IconRotate}
             testId="invite-people-reset-confirm"

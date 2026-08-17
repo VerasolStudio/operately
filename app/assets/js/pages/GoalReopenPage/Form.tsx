@@ -8,6 +8,7 @@ import { assertPresent } from "@/utils/assertions";
 import { SubscriptionsState, useSubscriptionsAdapter } from "@/models/subscriptions";
 
 import { FormState, useForm } from "./useForm";
+import { t } from "@/i18n";
 
 export function Form() {
   const { goal } = Pages.useLoadedData<{ goal: Goals.Goal }>();
@@ -30,7 +31,7 @@ export function Form() {
 
       <div className="flex items-center gap-6 mt-8">
         <SubmitButton form={form} />
-        <DimmedLink to={form.cancelPath}>Cancel</DimmedLink>
+        <DimmedLink to={form.cancelPath}>{t("pages.goalReopenPage.cancel")}</DimmedLink>
       </div>
     </>
   );
@@ -39,7 +40,7 @@ export function Form() {
 function Message({ form }: { form: FormState }) {
   return (
     <div className="mt-6">
-      <div className="font-bold mb-2">Why are you reopening this goal?</div>
+      <div className="font-bold mb-2">{t("pages.goalReopenPage.whyAreYouReopeningThisGoal")}</div>
 
       <div className="border border-surface-outline rounded overflow-hidden">
         <Editor editor={form.messageEditor} hideBorder padding="px-2" />
@@ -51,7 +52,7 @@ function Message({ form }: { form: FormState }) {
 function SubmitButton({ form }: { form: FormState }) {
   return (
     <PrimaryButton onClick={form.submit} testId="confirm-reopen-goal">
-      Reopen Goal
+      {t("pages.goalReopenPage.reopenGoal")}
     </PrimaryButton>
   );
 }

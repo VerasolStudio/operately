@@ -5,9 +5,11 @@ import { useAssignmentsCount, useReviewRefreshSignal } from "@/models/assignment
 import { IconCoffee } from "turboui";
 import { DivLink } from "turboui";
 import { usePaths } from "@/routes/paths";
+import { useTranslation } from "react-i18next";
 
 export function Review() {
   const paths = usePaths();
+  const { t } = useTranslation();
   const [count, refetch] = useAssignmentsCount();
   useReviewRefreshSignal(refetch);
 
@@ -18,7 +20,7 @@ export function Review() {
       testId="review-link"
     >
       <IconCoffee size={20} stroke={2} className="mb-[3px]" />
-      Review
+      {t("nav.review")}
       <AssignmentsCount count={count} />
     </DivLink>
   );

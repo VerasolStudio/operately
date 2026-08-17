@@ -12,6 +12,7 @@ import { Paths } from "@/routes/paths";
 import { PageModule } from "@/routes/types";
 import classNames from "classnames";
 import { Forms, DimmedLink, Link, type FormState } from "turboui";
+import { t } from "@/i18n";
 
 export default { name: "LoginPage", loader: Pages.emptyLoader, Page } as PageModule;
 
@@ -68,8 +69,8 @@ function Page() {
         <Paper.Body className="h-dvh sm:h-auto">
           <div className="py-8 sm:px-4 sm:py-4">
             <OperatelyLogo width="40px" height="40px" />
-            <h1 className="text-2xl font-bold mt-4">Operately</h1>
-            <p className="text-content-dimmed mb-8">Please enter your details to sign in</p>
+            <h1 className="text-2xl font-bold mt-4">{t("pages.loginPage.operately")}</h1>
+            <p className="text-content-dimmed mb-8">{t("pages.loginPage.pleaseEnterYourDetailsToSign")}</p>
 
             <Forms.Form form={form}>
               {window.appConfig.allowLoginWithEmail && <EmailLogin form={form} error={error} />}
@@ -77,7 +78,7 @@ function Page() {
 
               {isSignupEnabled() && (
                 <div className="mt-8 text-center text-sm font-medium">
-                  Don't have an account? <Link to="/sign_up">Create an account</Link>
+                  Don't have an account? <Link to="/sign_up">{t("pages.loginPage.createAnAccount")}</Link>
                 </div>
               )}
             </Forms.Form>
@@ -96,7 +97,12 @@ function EmailLogin({ form, error }: { form: FormState<{ email: string; password
   return (
     <div>
       <Forms.FieldGroup>
-        <Forms.TextInput field={"email"} label="Email" placeholder="your@email.com" required />
+        <Forms.TextInput
+          field={"email"}
+          label={t("pages.loginPage.email")}
+          placeholder={t("pages.loginPage.yourEmailCom")}
+          required
+        />
         <PasswordInput />
       </Forms.FieldGroup>
 
@@ -115,11 +121,11 @@ function PasswordInput() {
       field={"password"}
       label={
         <div className="flex justify-between w-full">
-          <span>Password</span>
+          <span>{t("pages.loginPage.password")}</span>
           <ForgotPasswordLink />
         </div>
       }
-      placeholder="Password"
+      placeholder={t("pages.loginPage.password")}
       required
     />
   );
@@ -128,7 +134,7 @@ function PasswordInput() {
 function ForgotPasswordLink() {
   return (
     <DimmedLink to={Paths.forgotPasswordPath()} className="text-sm font-normal" testId="forgot-password-link">
-      Forgot password?
+      {t("pages.loginPage.forgotPassword")}
     </DimmedLink>
   );
 }
@@ -152,7 +158,7 @@ function SubmitButton({ onClick }: { onClick: () => void }) {
 
   return (
     <button type="submit" className={className} onClick={onClick} data-test-id="submit">
-      Sign in
+      {t("pages.loginPage.signIn")}
     </button>
   );
 }

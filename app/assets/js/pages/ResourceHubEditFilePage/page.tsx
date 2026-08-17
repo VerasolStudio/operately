@@ -10,6 +10,7 @@ import type { FileEditPage as FileEditPageTypes } from "turboui/FileEditPage/typ
 
 import { useLoadedData } from "./loader";
 import { buildEditFilePageNavigation } from "./navigation";
+import { t } from "@/i18n";
 
 export function Page() {
   const { file } = useLoadedData();
@@ -37,14 +38,17 @@ export function Page() {
       navigate(cancelLink);
       return true;
     } catch {
-      showErrorToast("File not updated", "Check the form and try again.");
+      showErrorToast(
+        t("pages.resourceHubEditFilePage.fileNotUpdated"),
+        t("pages.resourceHubEditFilePage.checkTheFormAndTryAgain"),
+      );
       return false;
     }
   }
 
   return (
     <FileEditPage
-      pageTitle="Edit File"
+      pageTitle={t("pages.resourceHubEditFilePage.editFile")}
       navigation={buildEditFilePageNavigation(file, paths)}
       testId="resource-hub-edit-file-page"
       richTextHandlers={richTextHandlers}

@@ -3,6 +3,7 @@ defmodule OperatelyEmail.Emails.DiscussionPostingEmail do
 
   alias Operately.Repo
   alias Operately.Messages.Message
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -16,7 +17,7 @@ defmodule OperatelyEmail.Emails.DiscussionPostingEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: space.name, who: author, action: "posted: #{title}")
+    |> subject(where: space.name, who: author, action: t("discussionPosting.action", %{v1: title}))
     |> assign(:author, author)
     |> assign(:message, message)
     |> assign(:title, title)
@@ -38,7 +39,7 @@ defmodule OperatelyEmail.Emails.DiscussionPostingEmail do
       parent_id: space.id,
       parent_type: :space,
       parent_name: space.name,
-      headline: "started the discussion \"#{title}\"",
+      headline: t("discussionPosting.headline", %{v1: title}),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: OperatelyWeb.Paths.message_path(company, message) |> OperatelyWeb.Paths.to_url(),

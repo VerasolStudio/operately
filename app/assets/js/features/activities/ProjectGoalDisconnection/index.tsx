@@ -3,6 +3,7 @@ import type { Activity } from "@/models/activities";
 import type { ActivityHandler } from "../interfaces";
 
 import { feedTitle, goalLink, projectLink } from "../feedItemLinks";
+import { t } from "@/i18n";
 
 const ProjectGoalDisconnection: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -58,7 +59,7 @@ const ProjectGoalDisconnection: ActivityHandler = {
     const projectName = content(activity).project!.name!;
     const goalName = content(activity).goal!.name!;
 
-    return `Disconnected the ${projectName} project from the ${goalName} goal`;
+    return t("features.activities.disconnectedTheProjectFromTheGoal", { v1: projectName, v2: goalName });
   },
 
   NotificationLocation({ activity }: { activity: Activity }) {

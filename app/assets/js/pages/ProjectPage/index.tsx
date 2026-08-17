@@ -34,6 +34,7 @@ import { useSubscription } from "@/models/subscriptions";
 import type * as Hub from "@/models/resourceHubs";
 import { useResourceHubSearchProps } from "@/models/search/resourceHub";
 import { useCompanyLoaderData } from "@/routes/useCompanyLoaderData";
+import { t } from "@/i18n";
 
 export default { name: "ProjectPage", loader, Page } as PageModule;
 export { pageCacheKey as projectPageCacheKey };
@@ -177,7 +178,8 @@ function Page() {
     value: (data: { project: Projects.Project }) => data.project.description && JSON.parse(data.project.description),
     update: (v) =>
       Api.projects.updateDescription({ projectId: project.id, description: JSON.stringify(v) }).then(() => true),
-    onError: () => showErrorToast("Network Error", "Reverted the description to its previous value."),
+    onError: () =>
+      showErrorToast(t("pages.projectPage.networkError"), t("pages.projectPage.revertedTheDescriptionToItsPrevious")),
   });
 
   const [parentGoal, setParentGoal] = usePageField({
@@ -187,7 +189,8 @@ function Page() {
         projectId: project.id,
         goalId: v && v.id,
       }),
-    onError: () => showErrorToast("Network Error", "Reverted the parent goal to its previous value."),
+    onError: () =>
+      showErrorToast(t("pages.projectPage.networkError"), t("pages.projectPage.revertedTheParentGoalToIts")),
   });
 
   const [accessLevels, setAccessLevels] = usePageField({
@@ -196,19 +199,21 @@ function Page() {
       Api.projects
         .updatePermissions({ projectId: project.id, accessLevels: accessLevelsAsNumbers(v) })
         .then(() => true),
-    onError: () => showErrorToast("Network Error", "Reverted the access levels to their previous values."),
+    onError: () =>
+      showErrorToast(t("pages.projectPage.networkError"), t("pages.projectPage.revertedTheAccessLevelsToTheir")),
   });
 
   const [dueDate, setDueDate] = usePageField({
     value: (data: { project: Projects.Project }) => parseContextualDate(data.project.timeframe?.contextualEndDate),
     update: (v) => Api.projects.updateDueDate({ projectId: project.id, dueDate: serializeContextualDate(v) }),
-    onError: () => showErrorToast("Network Error", "Reverted the due date to its previous value."),
+    onError: () => showErrorToast(t("pages.projectPage.networkError"), t("pages.projectPage.revertedTheDueDateToIts")),
   });
 
   const [startedDate, setStartedDate] = usePageField({
     value: (data: { project: Projects.Project }) => parseContextualDate(data.project.timeframe?.contextualStartDate),
     update: (v) => Api.projects.updateStartDate({ projectId: project.id, startDate: serializeContextualDate(v) }),
-    onError: () => showErrorToast("Network Error", "Reverted the started date to its previous value."),
+    onError: () =>
+      showErrorToast(t("pages.projectPage.networkError"), t("pages.projectPage.revertedTheStartedDateToIts")),
   });
 
   const {
@@ -276,7 +281,7 @@ function Page() {
         }
       } catch (error) {
         console.error("Failed to update tasks view", error);
-        showErrorToast("Error", "Failed to update tasks view");
+        showErrorToast(t("pages.projectPage.error"), t("pages.projectPage.failedToUpdateTasksView"));
 
         if (refresh) {
           await refresh();
@@ -356,7 +361,7 @@ function Page() {
       })
       .catch((e) => {
         console.error("Failed to delete project", e);
-        showErrorToast("Error", "Failed to delete project");
+        showErrorToast(t("pages.projectPage.error"), t("pages.projectPage.failedToDeleteProject"));
 
         return { success: false };
       });
@@ -641,19 +646,22 @@ function useSpaceProps({
   const [space, setSpace] = usePageField({
     value: (data) => (data.space ? Spaces.parseSpaceForTurboUI(paths, data.space) : null),
     update: (v) => Api.projects.moveToSpace({ projectId: project.id, spaceId: v!.id }).then(() => true),
-    onError: () => showErrorToast("Network Error", "Reverted the space to its previous value."),
+    onError: () =>
+      showErrorToast(t("pages.projectPage.networkError"), t("pages.projectPage.revertedTheSpaceToItsPrevious")),
   });
 
   const [champion, setChampion] = usePageField<ProjectPage.Person | null>({
     value: (data) => People.parsePersonForTurboUi(paths, data.project.champion),
     update: (v) => Api.projects.updateChampion({ projectId: project.id, championId: v?.id ?? null }),
-    onError: () => showErrorToast("Network Error", "Reverted the champion to its previous value."),
+    onError: () =>
+      showErrorToast(t("pages.projectPage.networkError"), t("pages.projectPage.revertedTheChampionToItsPrevious")),
   });
 
   const [reviewer, setReviewer] = usePageField<ProjectPage.Person | null>({
     value: (data) => People.parsePersonForTurboUi(paths, data.project.reviewer),
     update: (v) => Api.projects.updateReviewer({ projectId: project.id, reviewerId: v?.id ?? null }),
-    onError: () => showErrorToast("Network Error", "Reverted the reviewer to its previous value."),
+    onError: () =>
+      showErrorToast(t("pages.projectPage.networkError"), t("pages.projectPage.revertedTheReviewerToItsPrevious")),
   });
 
   const spaceSearch = useSpaceSearch();
@@ -805,7 +813,7 @@ function useMilestones(paths: Paths, project: Projects.Project, refresh?: () => 
       })
       .catch((e) => {
         console.error("Failed to create milestone", e);
-        showErrorToast("Error", "Failed to create milestone");
+        showErrorToast(t("pages.projectPage.error"), t("pages.projectPage.failedToCreateMilestone"));
 
         return { success: false };
       });
@@ -834,7 +842,7 @@ function useMilestones(paths: Paths, project: Projects.Project, refresh?: () => 
       })
       .catch((e) => {
         console.error("Failed to update milestone", e);
-        showErrorToast("Error", "Failed to update milestone");
+        showErrorToast(t("pages.projectPage.error"), t("pages.projectPage.failedToUpdateMilestone"));
 
         return { success: false };
       });

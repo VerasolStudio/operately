@@ -8,6 +8,7 @@ import type { ActivityHandler } from "../interfaces";
 import { usePaths } from "@/routes/paths";
 import { isContentEmpty, Link, RichContent, Summary } from "turboui";
 import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
+import { t } from "@/i18n";
 
 const ProjectPausing: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -24,7 +25,7 @@ const ProjectPausing: ActivityHandler = {
   },
 
   PageTitle(_props: { activity: any }) {
-    return <>Project paused</>;
+    return <>{t("features.activities.projectPaused")}</>;
   },
 
   PageContent({ activity }: { activity: Activity }) {
@@ -92,7 +93,7 @@ const ProjectPausing: ActivityHandler = {
 
   NotificationTitle({ activity }: { activity: Activity }) {
     const projectName = content(activity).project?.name;
-    return projectName ? `Paused the ${projectName} project` : "Paused a project";
+    return projectName ? t("features.activities.pausedTheProject", { v1: projectName }) : "Paused a project";
   },
 
   NotificationLocation({ activity }: { activity: Activity }) {

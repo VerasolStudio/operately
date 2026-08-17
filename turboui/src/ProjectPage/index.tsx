@@ -23,6 +23,7 @@ import { getTaskCompletionStats } from "./taskCompletion";
 import { ProjectPermissions } from "./types";
 import type { FormattedTimePreferences } from "../FormattedTime";
 import { SaveProjectAsTemplateModal } from "../SaveProjectAsTemplateModal";
+import { t } from "../i18n";
 
 export namespace ProjectPage {
   export interface Space {
@@ -296,7 +297,7 @@ export function ProjectPage(props: ProjectPage.Props) {
 function Activity(props: ProjectPage.State) {
   return (
     <div className="p-4 max-w-6xl mx-auto my-6">
-      <div className="font-bold text-lg mb-4">Activity</div>
+      <div className="font-bold text-lg mb-4">{t("turboui.projectPage.activity")}</div>
       {props.activityFeed}
     </div>
   );

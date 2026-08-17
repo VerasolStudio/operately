@@ -10,6 +10,7 @@ import { PageModule } from "@/routes/types";
 import { useNavigateTo } from "@/routes/useNavigateTo";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export default { name: "SpaceEditGeneralAccessPage", loader, Page } as PageModule;
 
 interface LoaderResult {
@@ -29,7 +30,7 @@ function Page() {
     <Pages.Page title={["Edit General Access", space.name!]}>
       <Paper.Root size="small">
         <Paper.Body>
-          <h1 className="text-2xl font-extrabold">Edit General Access</h1>
+          <h1 className="text-2xl font-extrabold">{t("pages.spaceEditGeneralAccessPage.editGeneralAccess")}</h1>
           <Form />
         </Paper.Body>
       </Paper.Root>

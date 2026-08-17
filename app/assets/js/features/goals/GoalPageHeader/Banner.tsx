@@ -6,6 +6,7 @@ import { assertPresent } from "@/utils/assertions";
 
 import { FormattedTime } from "turboui";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
+import { Trans } from "react-i18next";
 
 export function banner(goal: Goals.Goal) {
   return <GoalStatusBanner goal={goal} />;
@@ -28,8 +29,10 @@ function GoalStatusBanner({ goal }: { goal: Goals.Goal }) {
   if (goal.isArchived) {
     return (
       <Paper.Banner>
-        This goal was archived on{" "}
-        <FormattedTime {...formattedTimePreferences} time={goal.archivedAt!} format="long-date" />
+        <Trans
+          i18nKey="features.goals.thisGoalWasArchivedOn"
+          components={[<FormattedTime {...formattedTimePreferences} time={goal.archivedAt!} format="long-date" />]}
+        />
       </Paper.Banner>
     );
   }

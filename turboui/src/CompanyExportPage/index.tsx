@@ -7,6 +7,7 @@ import { PrimaryButton, SecondaryButton } from "../Button";
 import { ProgressBar } from "../ProgressBar";
 import { Tooltip } from "../Tooltip";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 export namespace CompanyExportPage {
   export interface Run {
@@ -33,27 +34,35 @@ export namespace CompanyExportPage {
 }
 
 export function CompanyExportPage(props: CompanyExportPage.Props) {
-  const navigation = React.useMemo(() => [{ to: props.backPath, label: "Back to Company Admin" }], [props.backPath]);
+  const navigation = React.useMemo(
+    () => [{ to: props.backPath, label: t("turboui.companyExportPage.backToCompanyAdmin") }],
+    [props.backPath],
+  );
 
   return (
-    <Page title="Export Company" size="small" testId="company-export-page" navigation={navigation}>
+    <Page
+      title={t("turboui.companyExportPage.exportCompany")}
+      size="small"
+      testId="company-export-page"
+      navigation={navigation}
+    >
       <div className="px-4 sm:px-10 py-8">
         <header className="flex items-start justify-between gap-4">
           <div>
-            <div className="uppercase text-sm tracking-wide">Company Export</div>
-            <h1 className="text-content-accent text-3xl font-extrabold">Export company data</h1>
-            <p className="mt-2 text-content-dimmed">
-              Export all data from this company as a ZIP package with the company data and related files.
-            </p>
+            <div className="uppercase text-sm tracking-wide">{t("turboui.companyExportPage.companyExport")}</div>
+            <h1 className="text-content-accent text-3xl font-extrabold">
+              {t("turboui.companyExportPage.exportCompanyData")}
+            </h1>
+            <p className="mt-2 text-content-dimmed">{t("turboui.companyExportPage.exportAllDataFromThisCompany")}</p>
           </div>
 
           <PrimaryButton size="sm" onClick={props.onStartExport} loading={props.starting} testId="start-export-button">
-            Start export
+            {t("turboui.companyExportPage.startExport")}
           </PrimaryButton>
         </header>
 
         <section className="mt-10">
-          <h2 className="font-bold">Exports</h2>
+          <h2 className="font-bold">{t("turboui.companyExportPage.exports")}</h2>
 
           {props.runs.length === 0 ? (
             <EmptyState />
@@ -80,7 +89,7 @@ export function CompanyExportPage(props: CompanyExportPage.Props) {
 function EmptyState() {
   return (
     <div className="rounded-lg border border-dashed border-surface-outline p-6 text-sm text-content-dimmed mt-3">
-      No exports yet. Start one when you need to move this company to another Operately instance.
+      {t("turboui.companyExportPage.noExportsYetStartOneWhen")}
     </div>
   );
 }
@@ -103,16 +112,27 @@ function ExportRunCard({
   const latestPackageTestId = latest ? "latest-export-download-package" : undefined;
 
   return (
-    <div className="rounded-lg border border-surface-outline p-4" data-test-id={latest ? "latest-export-run" : undefined}>
+    <div
+      className="rounded-lg border border-surface-outline p-4"
+      data-test-id={latest ? "latest-export-run" : undefined}
+    >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-2 flex-wrap">
-            <Tooltip content={<RunStatusTooltip run={run} formattedTimePreferences={formattedTimePreferences} />} size="sm" testId={latestStatusTestId}>
+            <Tooltip
+              content={<RunStatusTooltip run={run} formattedTimePreferences={formattedTimePreferences} />}
+              size="sm"
+              testId={latestStatusTestId}
+            >
               <RunStatus status={run.status} />
             </Tooltip>
 
             <div className="text-xs text-content-dimmed">
-              <FormattedTime {...formattedTimePreferences} time={run.completedAt || run.insertedAt} format="short-date-with-weekday" />
+              <FormattedTime
+                {...formattedTimePreferences}
+                time={run.completedAt || run.insertedAt}
+                format="short-date-with-weekday"
+              />
             </div>
           </div>
 
@@ -128,7 +148,7 @@ function ExportRunCard({
             testId={latestPackageTestId}
             icon={IconDownload}
           >
-            Download
+            {t("turboui.companyExportPage.download")}
           </SecondaryButton>
         </div>
       </div>
@@ -166,7 +186,8 @@ function RunStatusTooltip({
 
       {run.completedAt && (
         <div>
-          Completed: <FormattedTime {...formattedTimePreferences} time={run.completedAt} format="relative-time-or-date" />
+          Completed:{" "}
+          <FormattedTime {...formattedTimePreferences} time={run.completedAt} format="relative-time-or-date" />
         </div>
       )}
 

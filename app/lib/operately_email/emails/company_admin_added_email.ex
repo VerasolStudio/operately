@@ -2,6 +2,7 @@ defmodule OperatelyEmail.Emails.CompanyAdminAddedEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.Repo
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     activity = Repo.preload(activity, [author: :company])
@@ -13,7 +14,7 @@ defmodule OperatelyEmail.Emails.CompanyAdminAddedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: company.name, who: author, action: "granted you admin privileges")
+    |> subject(where: company.name, who: author, action: t("companyAdminAdded.action"))
     |> assign(:author, author)
     |> assign(:link, link)
     |> render("company_admin_added")

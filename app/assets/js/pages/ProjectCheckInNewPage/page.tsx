@@ -7,6 +7,7 @@ import { Form } from "./Form";
 import { useLoadedData } from "./loader";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function Page() {
   const { project } = useLoadedData();
@@ -31,13 +32,16 @@ function Navigation() {
 
   if (project.space) {
     items.push({ to: paths.spacePath(project.space.id), label: project.space.name });
-    items.push({ to: paths.spaceWorkMapPath(project.space.id, "projects" as const), label: "Work Map" });
+    items.push({
+      to: paths.spaceWorkMapPath(project.space.id, "projects" as const),
+      label: t("pages.projectCheckInNewPage.workMap"),
+    });
   } else {
-    items.push({ to: paths.workMapPath("projects"), label: "Work Map" });
+    items.push({ to: paths.workMapPath("projects"), label: t("pages.projectCheckInNewPage.workMap") });
   }
 
   items.push({ to: paths.projectPath(project.id), label: project.name });
-  items.push({ to: paths.projectCheckInsPath(project.id), label: "Check-Ins" });
+  items.push({ to: paths.projectCheckInsPath(project.id), label: t("pages.projectCheckInNewPage.checkIns") });
 
   return <Paper.Navigation items={items} />;
 }

@@ -7,6 +7,8 @@ import { feedTitle, milestoneLink, projectLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
 import { DateField } from "turboui";
 import { parseContextualDate } from "@/models/contextualDates";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 const MilestoneDueDateUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -50,11 +52,13 @@ const MilestoneDueDateUpdating: ActivityHandler = {
     if (!oldDueDate && newDueDate) {
       return (
         <span>
-          Due date was set to{" "}
-          <span className="inline-block">
-            <DateField date={parseContextualDate(newDueDate)} readonly hideCalendarIcon />
-          </span>
-          .
+          <Trans
+            i18nKey="features.activities.dueDateWasSetTo"
+            components={[
+              <span className="inline-block" />,
+              <DateField date={parseContextualDate(newDueDate)} readonly hideCalendarIcon />,
+            ]}
+          />
         </span>
       );
     }
@@ -62,11 +66,13 @@ const MilestoneDueDateUpdating: ActivityHandler = {
     if (oldDueDate && !newDueDate) {
       return (
         <span>
-          Due date{" "}
-          <span className="inline-block">
-            <DateField date={parseContextualDate(oldDueDate)} readonly hideCalendarIcon />
-          </span>{" "}
-          was removed.
+          <Trans
+            i18nKey="features.activities.dueDateWasRemoved"
+            components={[
+              <span className="inline-block" />,
+              <DateField date={parseContextualDate(oldDueDate)} readonly hideCalendarIcon />,
+            ]}
+          />
         </span>
       );
     }
@@ -74,20 +80,20 @@ const MilestoneDueDateUpdating: ActivityHandler = {
     if (oldDueDate && newDueDate) {
       return (
         <span>
-          Due date was changed from{" "}
-          <span className="inline-block">
-            <DateField date={parseContextualDate(oldDueDate)} readonly hideCalendarIcon />
-          </span>{" "}
-          to{" "}
-          <span className="inline-block">
-            <DateField date={parseContextualDate(newDueDate)} readonly hideCalendarIcon />
-          </span>
-          .
+          <Trans
+            i18nKey="features.activities.dueDateWasChangedFromTo"
+            components={[
+              <span className="inline-block" />,
+              <DateField date={parseContextualDate(oldDueDate)} readonly hideCalendarIcon />,
+              <span className="inline-block" />,
+              <DateField date={parseContextualDate(newDueDate)} readonly hideCalendarIcon />,
+            ]}
+          />
         </span>
       );
     }
 
-    return <>Due date was updated.</>;
+    return <>{t("features.activities.dueDateWasUpdated")}</>;
   },
 
   feedItemAlignment(_activity: Activity): "items-start" | "items-center" {

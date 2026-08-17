@@ -5,6 +5,7 @@ defmodule OperatelyEmail.Emails.ResourceHubFileCreatedEmail do
 
   def send(person, activity) do
     import OperatelyEmail.Mailers.ActivityMailer
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
     author = Repo.preload(activity, :author).author
     company = Repo.preload(author, :company).company
@@ -41,11 +42,11 @@ defmodule OperatelyEmail.Emails.ResourceHubFileCreatedEmail do
   end
 
   defp find_action(files) when length(files) == 1 do
-    "uploaded the file \"#{hd(files).name}\""
+    t("resourceHubFileCreated.uploadedTheFile", %{v1: hd(files).name})
   end
 
   defp find_action(files) do
-    "uploaded #{length(files)} files"
+    t("resourceHubFileCreated.uploadedFiles", %{v1: length(files)})
   end
 
   def buffered_item(_person, activity) do

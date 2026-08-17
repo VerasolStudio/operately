@@ -4,6 +4,7 @@ import type { ResourceHub, ResourceHubDocument } from "@/models/resourceHubs";
 import type { Paths } from "@/routes/paths";
 
 import { buildDocumentVersionsPageNavigation } from "../ResourceHubDocumentVersionsPage/navigation";
+import { t } from "@/i18n";
 
 export function buildDocumentVersionComparisonPageNavigation(
   document: ResourceHubDocument,
@@ -14,7 +15,7 @@ export function buildDocumentVersionComparisonPageNavigation(
     ...buildDocumentVersionsPageNavigation(document, resourceHub, paths),
     {
       to: paths.resourceHubDocumentVersionsPath(document.id!),
-      label: "History of changes",
+      label: t("pages.resourceHubDocumentVersionComparisonPage.historyOfChanges"),
     },
   ];
 }

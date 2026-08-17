@@ -3,6 +3,7 @@ import React from "react";
 import { Forms, Modal } from "turboui";
 import * as AdminApi from "@/ee/admin_api";
 import { useLoadedData } from "./loader";
+import { t } from "@/i18n";
 
 interface EnableFeatureModalProps {
   isOpen: boolean;
@@ -32,15 +33,17 @@ export function EnableFeatureModal({ isOpen, onClose, onSaved }: EnableFeatureMo
   });
 
   return (
-    <Modal title="Enable Feature Flag" isOpen={isOpen} onClose={onClose}>
+    <Modal title={t("pages.saasAdminCompanyPage.enableFeatureFlag")} isOpen={isOpen} onClose={onClose}>
       <Forms.Form form={form}>
-        <div className="mb-4 text-sm text-content-accent">Enable an experimental feature for this company.</div>
+        <div className="mb-4 text-sm text-content-accent">
+          {t("pages.saasAdminCompanyPage.enableAnExperimentalFeatureForThis")}
+        </div>
 
         <Forms.FieldGroup>
           <Forms.TextInput field="feature" testId="feature-name" autoFocus placeholder="e.g. new_dashboard" />
         </Forms.FieldGroup>
 
-        <Forms.Submit cancelText="Cancel" />
+        <Forms.Submit cancelText={t("pages.saasAdminCompanyPage.cancel")} />
       </Forms.Form>
     </Modal>
   );

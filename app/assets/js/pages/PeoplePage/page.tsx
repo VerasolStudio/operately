@@ -6,14 +6,17 @@ import { Avatar, Link } from "turboui";
 import { useLoadedData } from "./loader";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function Page() {
   const { company, people } = useLoadedData();
 
   return (
-    <Pages.Page title={"People"}>
+    <Pages.Page title={t("pages.peoplePage.people")}>
       <div className="max-w-5xl mx-auto sm:px-6 lg:px-8 my-10">
-        <h1 className="text-3xl font-bold text-center mt-2 mb-16">Members of {company.name}</h1>
+        <h1 className="text-3xl font-bold text-center mt-2 mb-16">
+          {t("pages.peoplePage.membersOf", { v1: company.name })}
+        </h1>
 
         <PeopleList people={people} />
       </div>

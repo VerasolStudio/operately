@@ -22,6 +22,7 @@ import { PersonCard } from "../PersonCard";
 import { isContentEmpty } from "../RichContent";
 import { MentionedPersonLookupFn } from "../RichEditor/useEditor";
 import { match } from "ts-pattern";
+import { t } from "../i18n";
 
 export namespace ProfilePage {
   export type Person = PersonCard.Person;
@@ -115,13 +116,28 @@ function useTabsWithItems(workMap: WorkMap.Item[], reviewerWorkMap: WorkMap.Item
   }, [workMap, reviewerWorkMap]);
 
   const tabs = useTabs("tasks", [
-    { id: "tasks", label: "Tasks", icon: <IconChecklist size={14} />, count: tasks.length },
-    { id: "assigned", label: "Assigned", icon: <IconClipboardCheck size={14} />, count: assigned.length },
-    { id: "reviewing", label: "Reviewing", icon: <IconEye size={14} />, count: reviewing.length },
-    { id: "paused", label: "Paused", icon: <IconPlayerPause size={14} />, count: paused.length },
-    { id: "completed", label: "Completed", icon: <IconCircleCheck size={14} />, count: completed.length },
-    { id: "activity", label: "Activity", icon: <IconLogs size={14} /> },
-    { id: "about", label: "About", icon: <IconUserCircle size={14} /> },
+    { id: "tasks", label: t("turboui.profilePage.tasks"), icon: <IconChecklist size={14} />, count: tasks.length },
+    {
+      id: "assigned",
+      label: t("turboui.profilePage.assigned"),
+      icon: <IconClipboardCheck size={14} />,
+      count: assigned.length,
+    },
+    {
+      id: "reviewing",
+      label: t("turboui.profilePage.reviewing"),
+      icon: <IconEye size={14} />,
+      count: reviewing.length,
+    },
+    { id: "paused", label: t("turboui.profilePage.paused"), icon: <IconPlayerPause size={14} />, count: paused.length },
+    {
+      id: "completed",
+      label: t("turboui.profilePage.completed"),
+      icon: <IconCircleCheck size={14} />,
+      count: completed.length,
+    },
+    { id: "activity", label: t("turboui.profilePage.activity"), icon: <IconLogs size={14} /> },
+    { id: "about", label: t("turboui.profilePage.about"), icon: <IconUserCircle size={14} /> },
   ]);
 
   return {
@@ -133,7 +149,7 @@ function useTabsWithItems(workMap: WorkMap.Item[], reviewerWorkMap: WorkMap.Item
 function ActivityFeed(props: ProfilePage.Props) {
   return (
     <div className="p-4 max-w-5xl mx-auto my-6">
-      <div className="font-bold text-lg mb-4">Recent activity</div>
+      <div className="font-bold text-lg mb-4">{t("turboui.profilePage.recentActivity")}</div>
       {props.activityFeed}
     </div>
   );

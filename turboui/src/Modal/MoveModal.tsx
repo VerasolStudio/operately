@@ -3,6 +3,7 @@ import { PrimaryButton, SecondaryButton } from "../Button";
 
 import Modal from "../Modal";
 import { SpaceField } from "../SpaceField";
+import { t } from "../i18n";
 
 namespace MoveModal {
   export interface Space {
@@ -49,11 +50,11 @@ export function MoveModal(props: MoveModal.Props) {
       isOpen={props.isMoveModalOpen}
       onClose={props.closeMoveModal}
       size="small"
-      title="Move goal to another space"
+      title={t("turboui.modal.moveGoalToAnotherSpace")}
     >
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div>
-          <label className="font-bold text-sm mb-1.5 block">Select destination space</label>
+          <label className="font-bold text-sm mb-1.5 block">{t("turboui.modal.selectDestinationSpace")}</label>
           <SpaceField
             testId="space-field"
             space={selectedSpace}
@@ -65,10 +66,10 @@ export function MoveModal(props: MoveModal.Props) {
 
         <div className="flex items-center gap-2">
           <PrimaryButton size="sm" type="submit" loading={isMoving} disabled={isMoving} testId="save">
-            Move
+            {t("turboui.modal.move")}
           </PrimaryButton>
           <SecondaryButton size="sm" onClick={props.closeMoveModal} testId="cancel">
-            Cancel
+            {t("turboui.modal.cancel")}
           </SecondaryButton>
         </div>
       </form>

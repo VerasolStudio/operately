@@ -1,6 +1,7 @@
 defmodule OperatelyEmail.Emails.SpaceMembersAddedEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Groups}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -12,7 +13,7 @@ defmodule OperatelyEmail.Emails.SpaceMembersAddedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: space.name, who: author, action: "added you to the #{space.name} space")
+    |> subject(where: space.name, who: author, action: t("spaceMembersAdded.action", %{v1: space.name}))
     |> assign(:author, author)
     |> assign(:space, space)
     |> assign(:link, link)

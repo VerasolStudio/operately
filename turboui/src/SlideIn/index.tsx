@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { IconX } from "../icons";
+import { t } from "../i18n";
 
 export { ActionConfirmation } from "./ActionConfirmation";
 
@@ -109,9 +110,9 @@ export function SlideIn({
           <button
             onClick={onClose}
             className="absolute top-3 right-3 z-10 cursor-pointer text-content-dimmed hover:text-content-base rounded-full hover:bg-surface-highlight transition-colors"
-            aria-label="Close"
+            aria-label={t("turboui.slideIn.close")}
             data-test-id="slide-in-close-button"
-            title="Close"
+            title={t("turboui.slideIn.close")}
           >
             <IconX size={18} />
           </button>

@@ -8,6 +8,8 @@ import { FormattedTime, IconAlertTriangleFilled, SecondaryButton } from "turboui
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 
 import { useCompanyLoaderData } from "@/routes/useCompanyLoaderData";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 export function BillingDangerBanner() {
   const formattedTimePreferences = useFormattedTimePreferences();
@@ -103,11 +105,14 @@ function renderDescription(
     if (banner.mode === "payment_grace") {
       return (
         <>
-          Billing needs attention
+          {t("layouts.companyLayout.billingNeedsAttention")}
           {banner.deadline ? (
             <>
-              {" by "}
-              <FormattedTime {...formattedTimePreferences} time={banner.deadline} format="long-date" />
+              {" "}
+              <Trans
+                i18nKey="layouts.companyLayout.billingDeadline"
+                components={[<FormattedTime {...formattedTimePreferences} time={banner.deadline} format="long-date" />]}
+              />
             </>
           ) : (
             " soon"
@@ -128,6 +133,6 @@ function renderDescription(
   const blockedActions = Billing.describeBlockedActions(blockedMemberLimit, blockedStorageLimit);
 
   return banner.shouldContactAdmin
-    ? `${blockedActions.subject} ${blockedActions.verb} paused until this company is back within its plan limits. Contact an admin or owner.`
-    : `${blockedActions.subject} ${blockedActions.verb} paused until this company is back within its plan limits. Review billing to change the plan or reduce usage.`;
+    ? t("layouts.companyLayout.pausedUntilThisCompanyIsBack", { v1: blockedActions.subject, v2: blockedActions.verb })
+    : t("layouts.companyLayout.pausedUntilThisCompanyIsBack2", { v1: blockedActions.subject, v2: blockedActions.verb });
 }

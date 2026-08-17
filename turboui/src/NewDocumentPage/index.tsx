@@ -10,6 +10,7 @@ import { isContentEmpty } from "../RichContent";
 import type { RichEditorHandlers } from "../RichEditor/useEditor";
 import { Spacer } from "../Spacer";
 import { SubscribersSelector } from "../Subscriptions";
+import { t } from "../i18n";
 
 export namespace NewDocumentPage {
   export interface Values extends Record<string, unknown> {
@@ -68,16 +69,21 @@ export function NewDocumentPage(props: NewDocumentPage.Props) {
   });
 
   return (
-    <Page title={props.pageTitle} size="medium" navigation={props.navigation} testId={props.testId ?? "new-document-page"}>
+    <Page
+      title={props.pageTitle}
+      size="medium"
+      navigation={props.navigation}
+      testId={props.testId ?? "new-document-page"}
+    >
       <Forms.Form form={form}>
         <div className="px-12 py-10">
           <Forms.FieldGroup>
-            <Forms.TitleInput field="title" placeholder="Title..." autoFocus />
+            <Forms.TitleInput field="title" placeholder={t("turboui.newDocumentPage.title")} autoFocus />
 
             <Forms.RichTextArea
               field="content"
               richTextHandlers={props.richTextHandlers}
-              placeholder="Write here..."
+              placeholder={t("turboui.newDocumentPage.writeHere")}
               hideBorder
               showToolbarTopBorder
               fontSize="text-lg"
@@ -124,14 +130,19 @@ function FormActions({
           onClick={() => form.actions.submit(false)}
         />
         {!hideDraftActions && (
-          <Forms.SubmitButton name="save-as-draft" text="Save as draft" buttonSize="base" onClick={() => form.actions.submit(true)} />
+          <Forms.SubmitButton
+            name="save-as-draft"
+            text={t("turboui.newDocumentPage.saveAsDraft")}
+            buttonSize="base"
+            onClick={() => form.actions.submit(true)}
+          />
         )}
       </div>
 
       <div className="mt-4">
         Or,{" "}
         <Link to={cancelLink} testId="discard" className="font-medium">
-          Discard this document
+          {t("turboui.newDocumentPage.discardThisDocument")}
         </Link>
       </div>
     </div>

@@ -7,6 +7,7 @@ import { feedTitle, projectLink, spaceLink, taskLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
 import { hasAggregatedTasks, UpdatedTaskList } from "../taskUpdatedResources";
 import { AvatarWithName } from "turboui";
+import { t } from "@/i18n";
 
 const TaskAssigneeUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -83,16 +84,16 @@ const TaskAssigneeUpdating: ActivityHandler = {
     return (
       <div className="flex items-center gap-2">
         {removed.length > 1 ? (
-          <span>Previously assigned to {removed.length} people</span>
+          <span>{t("features.activities.previouslyAssignedToPeople", { v1: removed.length })}</span>
         ) : oldAssignee ? (
           <>
-            <span>Previously assigned to:</span>
+            <span>{t("features.activities.previouslyAssignedTo")}</span>
             <div className="flex items-center gap-1">
               <AvatarWithName person={oldAssignee} size="tiny" />
             </div>
           </>
         ) : (
-          <span>Previously it was unassigned</span>
+          <span>{t("features.activities.previouslyItWasUnassigned")}</span>
         )}
       </div>
     );
@@ -139,15 +140,15 @@ function feedMessage(content: ActivityContentTaskAssigneeUpdating): string {
   const [removedAssignee] = removed;
 
   if (addedAssignee && added.length === 1 && removed.length === 0)
-    return `assigned to ${addedAssignee.fullName} the task`;
+    return t("features.activities.assignedToTheTask", { v1: addedAssignee.fullName });
   if (removedAssignee && removed.length === 1 && added.length === 0)
-    return `unassigned ${removedAssignee.fullName} from the task`;
+    return t("features.activities.unassignedFromTheTask", { v1: removedAssignee.fullName });
   if (added.length > 0 && removed.length > 0) return "changed assignees on the task";
-  if (added.length > 1) return `assigned ${added.length} people to the task`;
-  if (removed.length > 1) return `unassigned ${removed.length} people from the task`;
+  if (added.length > 1) return t("features.activities.assignedPeopleToTheTask", { v1: added.length });
+  if (removed.length > 1) return t("features.activities.unassignedPeopleFromTheTask", { v1: removed.length });
 
-  if (content.newAssignee) return `assigned to ${content.newAssignee.fullName} the task`;
-  if (content.oldAssignee) return `unassigned ${content.oldAssignee.fullName} from the task`;
+  if (content.newAssignee) return t("features.activities.assignedToTheTask", { v1: content.newAssignee.fullName });
+  if (content.oldAssignee) return t("features.activities.unassignedFromTheTask", { v1: content.oldAssignee.fullName });
 
   return "updated assignees on the task";
 }
@@ -158,12 +159,13 @@ function notificationMessage(content: ActivityContentTaskAssigneeUpdating): stri
   const [addedAssignee] = added;
   const [removedAssignee] = removed;
 
-  if (addedAssignee && added.length === 1 && removed.length === 0) return `assigned to ${addedAssignee.fullName}`;
+  if (addedAssignee && added.length === 1 && removed.length === 0)
+    return t("features.activities.assignedTo", { v1: addedAssignee.fullName });
   if (removedAssignee && removed.length === 1 && added.length === 0)
-    return `no longer assigned to ${removedAssignee.fullName}`;
+    return t("features.activities.noLongerAssignedTo", { v1: removedAssignee.fullName });
   if (added.length > 0 || removed.length > 0) return "updated with new assignees";
 
-  if (content.newAssignee) return `assigned to ${content.newAssignee.fullName}`;
+  if (content.newAssignee) return t("features.activities.assignedTo", { v1: content.newAssignee.fullName });
 
   return "unassigned";
 }

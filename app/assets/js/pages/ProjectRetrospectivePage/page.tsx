@@ -27,6 +27,7 @@ import { useLoadedData, useRefresh } from "./loader";
 import { AckCTA } from "./AckCTA";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function Page() {
   const { retrospective } = useLoadedData();
@@ -70,7 +71,7 @@ function Options() {
       {retrospective.permissions?.canEdit && (
         <PageOptions.Link
           icon={IconEdit}
-          title="Edit retrospective"
+          title={t("pages.projectRetrospectivePage.editRetrospective")}
           to={paths.projectRetrospectiveEditPath(retrospective.project!.id!)}
           testId="edit-retrospective"
         />
@@ -87,7 +88,9 @@ function Header() {
 
   return (
     <>
-      <div className="text-center text-content-accent text-3xl font-extrabold">Project Retrospective</div>
+      <div className="text-center text-content-accent text-3xl font-extrabold">
+        {t("pages.projectRetrospectivePage.projectRetrospective")}
+      </div>
 
       <div className="flex items-center gap-1.5 font-medium justify-center mt-2">
         {retrospective.author && <AvatarWithName person={retrospective.author!} size={20} />}
@@ -107,12 +110,12 @@ function Acknowledgement() {
     return (
       <span className="flex items-center gap-1">
         <IconSquareCheckFilled size={16} className="text-accent-1" />
-        Acknowledged by {retrospective.acknowledgedBy?.fullName}
+        {t("pages.projectRetrospectivePage.acknowledgedByName", { v1: retrospective.acknowledgedBy?.fullName })}
       </span>
     );
   }
 
-  return <span className="flex items-center gap-1">Not yet acknowledged</span>;
+  return <span className="flex items-center gap-1">{t("pages.projectRetrospectivePage.notYetAcknowledged")}</span>;
 }
 
 function Status() {

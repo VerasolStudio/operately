@@ -3,6 +3,7 @@ import Api, { type TaskStatus } from "@/api";
 import { showErrorToast } from "turboui";
 import type { ProjectPage } from "turboui";
 import * as Tasks from "@/models/tasks";
+import { t } from "@/i18n";
 
 type Status = ProjectPage.TaskStatus;
 
@@ -44,14 +45,14 @@ export function useTaskStatuses(
         });
 
         if (res.success === false) {
-          showErrorToast("Error", "Failed to update task statuses");
+          showErrorToast(t("app.useTaskStatuses.error"), t("app.useTaskStatuses.failedToUpdateTaskStatuses"));
           return;
         }
 
         refresh?.();
       } catch (error) {
         console.error("Failed to update task statuses", error);
-        showErrorToast("Error", "Failed to update task statuses");
+        showErrorToast(t("app.useTaskStatuses.error"), t("app.useTaskStatuses.failedToUpdateTaskStatuses"));
       }
     },
     [projectId, refresh],

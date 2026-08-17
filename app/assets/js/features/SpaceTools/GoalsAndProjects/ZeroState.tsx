@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { GhostButton, IconTargetArrow, IconHexagons } from "turboui";
 import classNames from "classnames";
+import { t } from "@/i18n";
 
 export function ZeroState() {
   return (
@@ -15,13 +16,13 @@ export function ZeroState() {
 function ExplanationAndButton() {
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="text-base font-bold">Goals &amp; Projects</div>
+      <div className="text-base font-bold">{t("features.spaceTools.goalsAmpProjects")}</div>
 
       <div className="flex gap-2 mt-1 mb-4 text-center px-6 text-sm">
-        Set goals, track your progress, and collaborate with your team to achieve them.
+        {t("features.spaceTools.setGoalsTrackYourProgressAnd")}
       </div>
 
-      <GhostButton size="sm">Add goal or project</GhostButton>
+      <GhostButton size="sm">{t("features.spaceTools.addGoalOrProject")}</GhostButton>
     </div>
   );
 }
@@ -30,10 +31,10 @@ function GoalTreeExample() {
   return (
     <div className="relative w-full h-[170px] mt-10 opacity-75 px-[50px] flex flex-col gap-3">
       <div className="flex flex-col">
-        <WorkItem title="Yearly Goal" progress={20} />
-        <WorkItem title="Quarterly Goal 1" progress={60} indent={1} />
-        <WorkItem title="Project 1" progress={90} indent={2} type="project" />
-        <WorkItem title="Quarterly Goal 2" progress={60} indent={1} />
+        <WorkItem title={t("features.spaceTools.yearlyGoal")} progress={20} />
+        <WorkItem title={t("features.spaceTools.quarterlyGoal1")} progress={60} indent={1} />
+        <WorkItem title={t("features.spaceTools.project1")} progress={90} indent={2} type="project" />
+        <WorkItem title={t("features.spaceTools.quarterlyGoal2")} progress={60} indent={1} />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import * as Popover from "@radix-ui/react-popover";
 import classNames from "../utils/classnames";
 import { StatusSelector } from "../StatusSelector";
 import { createTestId } from "../TestableElement";
+import { t } from "../i18n";
 
 export type StatusAppearance = "gray" | "blue" | "green" | "red";
 
@@ -18,29 +19,29 @@ export const STATUS_APPEARANCES: Record<
   }
 > = {
   gray: {
-    label: "Not started (gray)",
-    description: "Use for backlog or paused work",
+    label: t("turboui.statusCustomization.notStartedGray"),
+    description: t("turboui.statusCustomization.useForBacklogOrPausedWork"),
     color: "gray",
     icon: "circleDashed",
     swatchClassName: "bg-gray-400 dark:bg-gray-500",
   },
   blue: {
-    label: "In progress (blue)",
-    description: "Active work underway",
+    label: t("turboui.statusCustomization.inProgressBlue"),
+    description: t("turboui.statusCustomization.activeWorkUnderway"),
     color: "blue",
     icon: "circleDot",
     swatchClassName: "bg-brand-1",
   },
   green: {
-    label: "Done (green)",
-    description: "Completed or approved",
+    label: t("turboui.statusCustomization.doneGreen"),
+    description: t("turboui.statusCustomization.completedOrApproved"),
     color: "green",
     icon: "circleCheck",
     swatchClassName: "bg-emerald-500",
   },
   red: {
-    label: "Canceled (red)",
-    description: "Blocked or intentionally stopped",
+    label: t("turboui.statusCustomization.canceledRed"),
+    description: t("turboui.statusCustomization.blockedOrIntentionallyStopped"),
     color: "red",
     icon: "circleX",
     swatchClassName: "bg-rose-500",
@@ -72,7 +73,7 @@ export function StatusAppearancePicker({ value, onChange, testId }: StatusAppear
         <button
           type="button"
           className="flex items-center justify-center p-1 rounded-md hover:bg-surface-dimmed transition"
-          aria-label="Select status color and icon"
+          aria-label={t("turboui.statusCustomization.selectStatusColorAndIcon")}
           data-test-id={testId}
         >
           <CurrentIcon size={16} className={iconClass} />

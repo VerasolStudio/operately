@@ -7,6 +7,7 @@ import { feedTitle, projectLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
 import { DateField } from "turboui";
 import { parseContextualDate } from "@/models/contextualDates";
+import { t } from "@/i18n";
 
 const ProjectMilestoneUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -36,9 +37,9 @@ const ProjectMilestoneUpdating: ActivityHandler = {
 
     let message;
     if (oldName !== newName) {
-      message = `updated the milestone ${oldName} to ${newName}`;
+      message = t("features.activities.updatedTheMilestoneTo", { v1: oldName, v2: newName });
     } else {
-      message = `updated the milestone ${oldName}`;
+      message = t("features.activities.updatedTheMilestone", { v1: oldName });
     }
 
     if (props.page === "project") {
@@ -68,7 +69,7 @@ const ProjectMilestoneUpdating: ActivityHandler = {
 
     // Removed timeframe/date
     if (oldTimeframe?.contextualEndDate && !newTimeframe?.contextualEndDate) {
-      return <div className="text-sm text-gray-600">Date removed</div>;
+      return <div className="text-sm text-gray-600">{t("features.activities.dateRemoved")}</div>;
     }
 
     if (oldTimeframe?.contextualEndDate && newTimeframe?.contextualEndDate) {

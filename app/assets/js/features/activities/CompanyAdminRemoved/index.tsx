@@ -2,6 +2,7 @@ import { Activity, ActivityContentCompanyAdminRemoved } from "@/api";
 import { firstName } from "@/models/people";
 import { feedTitle } from "../feedItemLinks";
 import { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
 
 const CompanyAdminRemoved: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -27,7 +28,7 @@ const CompanyAdminRemoved: ActivityHandler = {
   FeedItemTitle({ activity }: { activity: Activity; page: any }) {
     const name = firstName(content(activity).person!);
 
-    return feedTitle(activity, `has revoked ${name}'s admin privileges`);
+    return feedTitle(activity, t("features.activities.hasRevokedSAdminPrivileges", { v1: name }));
   },
 
   FeedItemContent(_props: { activity: Activity; page: any }) {

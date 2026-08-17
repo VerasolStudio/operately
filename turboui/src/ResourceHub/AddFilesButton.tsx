@@ -10,6 +10,7 @@ import { MenuActionItem, SubMenu } from "../Menu";
 import { PrimaryButton } from "../Button";
 import { useWindowSizeBreakpoints } from "../utils/useWindowSizeBreakpoint";
 import type { ResourceHubLinkType, ResourceHubPermissions } from "./types";
+import { t } from "../i18n";
 
 interface AddFilesButtonProps {
   permissions?: ResourceHubPermissions | null;
@@ -32,7 +33,7 @@ export function AddFilesButton({
 
   return (
     <PrimaryButton size={size} optionsAlign="start" options={options} testId="add-options">
-      Add
+      {t("turboui.resourceHub.add")}
     </PrimaryButton>
   );
 }
@@ -83,19 +84,14 @@ function NewLinkSubMenu({ hidden, onNewLink }: { hidden: boolean; onNewLink: (ty
   if (hidden) return null;
 
   return (
-    <SubMenu label="Add link" icon={IconLink}>
+    <SubMenu label={t("turboui.resourceHub.addLink")} icon={IconLink}>
       <MenuActionItem
         onClick={() => onNewLink("airtable")}
         testId="link-to-airtable"
         icon={Airtable}
         children="Airtable"
       />
-      <MenuActionItem
-        onClick={() => onNewLink("dropbox")}
-        testId="link-to-dropbox"
-        icon={Dropbox}
-        children="Dropbox"
-      />
+      <MenuActionItem onClick={() => onNewLink("dropbox")} testId="link-to-dropbox" icon={Dropbox} children="Dropbox" />
       <MenuActionItem onClick={() => onNewLink("figma")} testId="link-to-figma" icon={Figma} children="Figma" />
       <MenuActionItem
         onClick={() => onNewLink("google_doc")}
@@ -103,18 +99,8 @@ function NewLinkSubMenu({ hidden, onNewLink }: { hidden: boolean; onNewLink: (ty
         icon={GoogleLogo}
         children="Google Drive"
       />
-      <MenuActionItem
-        onClick={() => onNewLink("notion")}
-        testId="link-to-notion"
-        icon={Notion}
-        children="Notion"
-      />
-      <MenuActionItem
-        onClick={() => onNewLink()}
-        testId="link-to-other-resource"
-        icon={IconLink}
-        children="Other"
-      />
+      <MenuActionItem onClick={() => onNewLink("notion")} testId="link-to-notion" icon={Notion} children="Notion" />
+      <MenuActionItem onClick={() => onNewLink()} testId="link-to-other-resource" icon={IconLink} children="Other" />
     </SubMenu>
   );
 }

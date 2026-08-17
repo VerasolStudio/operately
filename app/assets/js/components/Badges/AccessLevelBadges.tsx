@@ -6,13 +6,14 @@ import { assertPresent } from "@/utils/assertions";
 import { TestableElement } from "@/utils/testid";
 import { AccessOptionsInt } from "@/models/permissions";
 import { Tooltip } from "turboui";
+import { t } from "@/i18n";
 
 // Public interface
 
 export function ProjectAccessLevelBadge({ accessLevel }: { accessLevel: AccessOptionsInt | null }) {
   const level = accessLevel ?? PermissionLevels.NO_ACCESS;
   const data = permissionData[level];
-  assertPresent(data, `Invalid access level: ${level}`);
+  assertPresent(data, t("components.badges.invalidAccessLevel", { v1: level }));
 
   return <AccessBadge title={data.title} colors={data.colors} description={data.description.project} />;
 }
@@ -20,7 +21,7 @@ export function ProjectAccessLevelBadge({ accessLevel }: { accessLevel: AccessOp
 export function SpaceAccessLevelBadge({ accessLevel }: { accessLevel: AccessOptionsInt | null }) {
   const level = accessLevel ?? PermissionLevels.NO_ACCESS;
   const data = permissionData[level];
-  assertPresent(data, `Invalid access level: ${level}`);
+  assertPresent(data, t("components.badges.invalidAccessLevel", { v1: level }));
 
   return (
     <AccessBadge title={data.title} colors={data.colors} description={data.description.space} testId={data.testId} />
@@ -30,7 +31,7 @@ export function SpaceAccessLevelBadge({ accessLevel }: { accessLevel: AccessOpti
 export function GoalAccessLevelBadge({ accessLevel }: { accessLevel: AccessOptionsInt | null }) {
   const level = accessLevel ?? PermissionLevels.NO_ACCESS;
   const data = permissionData[level];
-  assertPresent(data, `Invalid access level: ${level}`);
+  assertPresent(data, t("components.badges.invalidAccessLevel", { v1: level }));
 
   return <AccessBadge title={data.title} colors={data.colors} description={data.description.goal} />;
 }
@@ -91,7 +92,7 @@ interface PermissionData {
 const permissionData: PermissionData = {
   [PermissionLevels.FULL_ACCESS]: {
     testId: "full-access-badge",
-    title: "Full Access",
+    title: t("components.badges.fullAccess"),
     colors: "bg-callout-warning-bg text-callout-warning-content",
     description: {
       project: joinStr(
@@ -110,7 +111,7 @@ const permissionData: PermissionData = {
 
   [PermissionLevels.EDIT_ACCESS]: {
     testId: "edit-access-badge",
-    title: "Edit Access",
+    title: t("components.badges.editAccess"),
     colors: "bg-callout-info-bg text-callout-info-content",
     description: {
       project: joinStr(
@@ -127,7 +128,7 @@ const permissionData: PermissionData = {
 
   [PermissionLevels.COMMENT_ACCESS]: {
     testId: "comment-access-badge",
-    title: "Comment Access",
+    title: t("components.badges.commentAccess"),
     colors: "bg-callout-error-bg text-callout-error-content",
     description: {
       project: joinStr(
@@ -141,7 +142,7 @@ const permissionData: PermissionData = {
 
   [PermissionLevels.VIEW_ACCESS]: {
     testId: "view-access-badge",
-    title: "View Access",
+    title: t("components.badges.viewAccess"),
     colors: "bg-callout-success-bg text-callout-success-content",
     description: {
       project: joinStr(
@@ -158,7 +159,7 @@ const permissionData: PermissionData = {
 
   [PermissionLevels.NO_ACCESS]: {
     testId: "no-access-badge",
-    title: "No Access",
+    title: t("components.badges.noAccess"),
     colors: "bg-callout-error-bg text-callout-error-content",
     description: {
       project: "Cannot access the project.",

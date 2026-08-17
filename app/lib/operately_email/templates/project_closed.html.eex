@@ -1,7 +1,7 @@
-<%= title("#{short_name(@author)} closed the #{@project.name} project and submitted a retrospective") %>
+<%= title(t("projectClosed.v1ClosedTheV2ProjectAnd", %{v1: short_name(@author), v2: @project.name})) %>
 
 <%= spacer() %>
-<%= title("Retrospective notes:", font_size: 20) %>
+<%= title(t("projectClosed.retrospectiveNotes"), font_size: 20) %>
 
 <%= row do %>
   <%= rich_text(@retrospective.content) %>

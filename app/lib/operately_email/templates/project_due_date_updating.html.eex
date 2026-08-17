@@ -1,11 +1,11 @@
 <%= if @new_date do %>
   <%= if @previous_date do %>
-    <%= title("#{short_name(@author)} changed the due date for #{@project.name}") %>
+    <%= title(t("projectDueDateUpdating.v1ChangedTheDueDateFor", %{v1: short_name(@author), v2: @project.name})) %>
   <% else %>
-    <%= title("#{short_name(@author)} set the due date for #{@project.name}") %>
+    <%= title(t("projectDueDateUpdating.v1SetTheDueDateFor", %{v1: short_name(@author), v2: @project.name})) %>
   <% end %>
 <% else %>
-  <%= title("#{short_name(@author)} removed the due date for #{@project.name}") %>
+  <%= title(t("projectDueDateUpdating.v1RemovedTheDueDateFor", %{v1: short_name(@author), v2: @project.name})) %>
 <% end %>
 
 <%= spacer() %>
@@ -13,19 +13,19 @@
 <%= if @new_date do %>
   <%= if @previous_date do %>
     <%= row do %>
-      The due date was changed from <%= @previous_date %> to <%= @new_date %>.
+      <%= t("projectDueDateUpdating.theDueDateWasChangedFrom", %{v1: @previous_date, v2: @new_date}) %>
     <% end %>
   <% else %>
     <%= row do %>
-      The due date is now <%= @new_date %>.
+      <%= t("projectDueDateUpdating.theDueDateIsNow", %{v1: @new_date}) %>
     <% end %>
   <% end %>
 <% else %>
   <%= row do %>
     <%= if @previous_date do %>
-      The due date was removed. Previously it was <%= @previous_date %>.
+      <%= t("projectDueDateUpdating.theDueDateWasRemovedPreviously", %{v1: @previous_date}) %>
     <% else %>
-      The due date was removed.
+      <%= t("projectDueDateUpdating.theDueDateWasRemoved") %>
     <% end %>
   <% end %>
 <% end %>
@@ -33,5 +33,5 @@
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@cta_url, "View Project") %>
+  <%= cta_button(@cta_url, t("projectDueDateUpdating.viewProject")) %>
 <% end %>

@@ -12,6 +12,8 @@ import { compareIds, usePaths } from "@/routes/paths";
 import { PageModule } from "@/routes/types";
 import { createTestId } from "@/utils/testid";
 import { useNavigate } from "react-router";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 export default { name: "SpaceAddMembersPage", loader, Page } as PageModule;
 
@@ -62,19 +64,30 @@ function Page() {
   return (
     <Pages.Page title={["Add members", space.name!]}>
       <Paper.Root size="small">
-        <Paper.NavigateBack to={backPath} title="Back to Team & Access" />
-        <div className="text-2xl font-extrabold mb-4 text-center">Add members to {space.name}</div>
+        <Paper.NavigateBack to={backPath} title={t("pages.spaceAddMembersPage.backToTeamAccess")} />
+        <div className="text-2xl font-extrabold mb-4 text-center">
+          {t("pages.spaceAddMembersPage.addMembersTo", { v1: space.name })}
+        </div>
         <p className="text-sm text-center text-content-dimmed mb-4">
-          Only existing members can be added.{" "}
-          <Link to={paths.invitePeoplePath()} className="text-sm" underline="hover">
-            Invite someone new to the organization
-          </Link>
+          <Trans
+            i18nKey="pages.spaceAddMembersPage.onlyExistingMembersCanBeAdded"
+            components={[
+              <Link to={paths.invitePeoplePath()} className="text-sm" underline="hover">
+                Invite someone new to the organization
+              </Link>,
+            ]}
+          />
         </p>
 
         <Forms.Form form={form}>
           <Members />
 
-          <Forms.Submit saveText="Add members" layout="centered" buttonSize="base" submitOnEnter={false} />
+          <Forms.Submit
+            saveText={t("pages.spaceAddMembersPage.addMembers")}
+            layout="centered"
+            buttonSize="base"
+            submitOnEnter={false}
+          />
         </Forms.Form>
       </Paper.Root>
     </Pages.Page>
@@ -109,8 +122,16 @@ function Member({ field, search, index }) {
     <div data-test-id={`member-${index}`}>
       <Paper.Body>
         <Forms.FieldGroup layout="horizontal">
-          <Forms.SelectPerson field={field + ".personId"} label="Member" searchFn={search} />
-          <Forms.SelectBox field={field + ".accessLevel"} label="Access Level" options={PERMISSIONS_LIST} />
+          <Forms.SelectPerson
+            field={field + ".personId"}
+            label={t("pages.spaceAddMembersPage.member")}
+            searchFn={search}
+          />
+          <Forms.SelectBox
+            field={field + ".accessLevel"}
+            label={t("pages.spaceAddMembersPage.accessLevel")}
+            options={PERMISSIONS_LIST}
+          />
         </Forms.FieldGroup>
 
         <RemoveMemberButton index={index} />

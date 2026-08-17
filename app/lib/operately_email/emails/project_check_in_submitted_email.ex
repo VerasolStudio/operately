@@ -3,6 +3,7 @@ defmodule OperatelyEmail.Emails.ProjectCheckInSubmittedEmail do
   alias Operately.{Repo, Projects}
   alias OperatelyWeb.Paths
   alias __MODULE__.OverviewMsg
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -19,7 +20,7 @@ defmodule OperatelyEmail.Emails.ProjectCheckInSubmittedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: project.name, who: author, action: "submitted a check-in")
+    |> subject(where: project.name, who: author, action: t("projectCheckInSubmitted.action"))
     |> assign(:author, author)
     |> assign(:project, project)
     |> assign(:check_in, check_in)
@@ -34,9 +35,9 @@ defmodule OperatelyEmail.Emails.ProjectCheckInSubmittedEmail do
     url = Paths.project_check_in_path(company, check_in) |> Paths.to_url()
 
     cond do
-      reviewer == nil -> {"View Check-In", url}
+      reviewer == nil -> {t("projectCheckInSubmitted.viewCheckIn"), url}
       person.id == reviewer.id -> {"Acknowledge", url <> "?acknowledge=true"}
-      true -> {"View Check-In", url}
+      true -> {t("projectCheckInSubmitted.viewCheckIn"), url}
     end
   end
 
@@ -58,15 +59,15 @@ defmodule OperatelyEmail.Emails.ProjectCheckInSubmittedEmail do
     end
 
     defp status_msg(:on_track) do
-      [text("The project is "), bg_green("on-track"), text(" and progressing as planned.")]
+      [text(t("projectCheckInSubmitted.theProjectIs")), bg_green("on-track"), text(t("projectCheckInSubmitted.andProgressingAsPlanned"))]
     end
 
     defp status_msg(:caution) do
-      [text("The project "), bg_yellow("needs attention"), text(" due to emerging risks or delays.")]
+      [text(t("projectCheckInSubmitted.theProject")), bg_yellow(t("projectCheckInSubmitted.needsAttention")), text(t("projectCheckInSubmitted.dueToEmergingRisksOrDelays"))]
     end
 
     defp status_msg(:off_track) do
-      [text("The project is "), bg_red("off track"), text(" due to significant problems affecting success.")]
+      [text(t("projectCheckInSubmitted.theProjectIs")), bg_red(t("projectCheckInSubmitted.offTrack")), text(t("projectCheckInSubmitted.dueToSignificantProblemsAffectingSuccess"))]
     end
 
     def reviewer_note(:on_track, _), do: []
@@ -74,12 +75,12 @@ defmodule OperatelyEmail.Emails.ProjectCheckInSubmittedEmail do
     def reviewer_note(:caution, nil), do: []
 
     def reviewer_note(:caution, reviewer),
-      do: [text(" "), text(Person.first_name(reviewer)), text(" should be aware.")]
+      do: [text(" "), text(Person.first_name(reviewer)), text(t("projectCheckInSubmitted.shouldBeAware"))]
 
     def reviewer_note(:off_track, nil), do: []
 
     def reviewer_note(:off_track, reviewer),
-      do: [text(" "), text(Person.first_name(reviewer) <> "'s"), text(" help is needed.")]
+      do: [text(" "), text(Person.first_name(reviewer) <> "'s"), text(t("projectCheckInSubmitted.helpIsNeeded"))]
 
     defp due_date(%{timeframe: nil}), do: []
     defp due_date(%{timeframe: timeframe}) do
@@ -91,7 +92,7 @@ defmodule OperatelyEmail.Emails.ProjectCheckInSubmittedEmail do
 
           cond do
             days < 0 -> [text(" "), text(duration), text(" "), bg_red("overdue.")]
-            days > 0 -> [text(" "), text(duration), text(" "), text("until the deadline.")]
+            days > 0 -> [text(" "), text(duration), text(" "), text(t("projectCheckInSubmitted.untilTheDeadline"))]
           end
       end
     end
@@ -120,7 +121,7 @@ defmodule OperatelyEmail.Emails.ProjectCheckInSubmittedEmail do
       parent_type: :project,
       parent_name: project.name,
       parent_url: OperatelyWeb.Paths.project_path(company, project) |> OperatelyWeb.Paths.to_url(),
-      headline: "submitted a check-in with status \"#{status_label(check_in.status)}\"",
+      headline: t("projectCheckInSubmitted.headline", %{v1: status_label(check_in.status)}),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: OperatelyWeb.Paths.project_check_in_path(company, check_in) |> OperatelyWeb.Paths.to_url(),
@@ -131,7 +132,7 @@ defmodule OperatelyEmail.Emails.ProjectCheckInSubmittedEmail do
   end
 
   defp status_label(:on_track), do: "on track"
-  defp status_label(:off_track), do: "off track"
+  defp status_label(:off_track), do: t("projectCheckInSubmitted.offTrack")
   defp status_label(status) when is_binary(status), do: status
   defp status_label(status) when is_atom(status), do: Atom.to_string(status)
 end

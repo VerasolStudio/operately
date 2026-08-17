@@ -1,4 +1,5 @@
 import * as datefsn from "date-fns";
+import { t } from "../i18n";
 
 export function now() {
   return new Date();
@@ -189,7 +190,7 @@ export function relativeDay(date: Date) {
   if (days === 0) return "Today";
   if (days === 1) return "Yesterday";
 
-  return `${days} days ago`;
+  return t("turboui.utils.daysAgo", { v1: days });
 }
 
 export function dateChanged(old: Date | null, current: Date | null): boolean {

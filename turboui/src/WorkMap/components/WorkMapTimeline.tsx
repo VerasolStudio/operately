@@ -16,7 +16,14 @@ import {
   getMarkerPosition,
   type TimelineColumn as Column,
 } from "../utils/timeline";
-import { flattenTimelineItems, normalizeTimelineDate, toTimelineItem, type TimelineItem, type TimelineMilestone } from "../utils/timelineItem";
+import {
+  flattenTimelineItems,
+  normalizeTimelineDate,
+  toTimelineItem,
+  type TimelineItem,
+  type TimelineMilestone,
+} from "../utils/timelineItem";
+import { t } from "../../i18n";
 
 interface Props {
   items: WorkMap.Item[];
@@ -56,10 +63,7 @@ export function WorkMapTimeline({ items, tab }: Props) {
   const hiddenUndatedCount = timelineItems.filter((item) => !item.startDate && !item.endDate).length;
 
   const visibleItems = React.useMemo(
-    () =>
-      timelineItems
-        .filter((item) => item.startDate || item.endDate)
-        .sort(compareTimelineItems),
+    () => timelineItems.filter((item) => item.startDate || item.endDate).sort(compareTimelineItems),
     [timelineItems],
   );
 
@@ -111,7 +115,12 @@ export function WorkMapTimeline({ items, tab }: Props) {
   }
 
   if (visibleItems.length === 0) {
-    return <TimelineEmptyState message="Nothing in this view has dates yet." hiddenUndatedCount={hiddenUndatedCount} />;
+    return (
+      <TimelineEmptyState
+        message={t("turboui.workMap.nothingInThisViewHasDates")}
+        hiddenUndatedCount={hiddenUndatedCount}
+      />
+    );
   }
 
   return (
@@ -169,7 +178,8 @@ function TimelineRow({
   const finiteEnd = item.endDate ? clampPercent(((item.endDate.getTime() - rangeStart) / rangeMs) * 100) : null;
   const hasInfiniteBar = item.startDate && !item.endDate;
   const barWidth = left !== null && finiteEnd !== null ? Math.max(finiteEnd - left, 8) : null;
-  const visualBarEnd = left === null ? null : hasInfiniteBar ? Math.max(100, left + 12) : barWidth === null ? null : left + barWidth;
+  const visualBarEnd =
+    left === null ? null : hasInfiniteBar ? Math.max(100, left + 12) : barWidth === null ? null : left + barWidth;
   const rangeLabel = formatRangeLabel(item);
 
   return (
@@ -313,7 +323,10 @@ function TimelineHeader({
 
 function TimelineGrid({ columns, highlightedColumnKey }: { columns: Column[]; highlightedColumnKey: string | null }) {
   return (
-    <div className="absolute inset-0 grid" style={{ gridTemplateColumns: `repeat(${columns.length}, minmax(96px, 1fr))` }}>
+    <div
+      className="absolute inset-0 grid"
+      style={{ gridTemplateColumns: `repeat(${columns.length}, minmax(96px, 1fr))` }}
+    >
       {columns.map((column, index) => (
         <div
           key={column.key}
@@ -344,7 +357,7 @@ function TodayBadge({ left, label }: { left: number | null; label: string | null
   return (
     <div className="pointer-events-none absolute top-1 z-30 -translate-x-1/2" style={{ left: `${left}%` }}>
       <div className="rounded-full border border-blue-200 bg-blue-50 px-2 py-1 text-[10px] font-semibold leading-none text-blue-700 shadow-sm dark:border-blue-700 dark:bg-blue-900 dark:text-blue-100 dark:shadow-none">
-        Today · {label}
+        {t("turboui.workMap.todayLabel", { v1: label })}
       </div>
     </div>
   );
@@ -532,7 +545,9 @@ function TimelineEmptyState({ message, hiddenUndatedCount }: { message: string; 
   return (
     <div className="px-6 py-12 text-sm text-content-dimmed">
       <div>{message}</div>
-      {hiddenUndatedCount ? <div className="mt-2">{hiddenUndatedCount} items are hidden because they do not have dates.</div> : null}
+      {hiddenUndatedCount ? (
+        <div className="mt-2">{hiddenUndatedCount} items are hidden because they do not have dates.</div>
+      ) : null}
     </div>
   );
 }

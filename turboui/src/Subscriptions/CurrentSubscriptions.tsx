@@ -5,6 +5,7 @@ import { sortSubscribersByName } from "./utils";
 import { SubscribersSelectorModal } from "./components/SubscribersSelectorModal";
 import { createTestId } from "../TestableElement";
 import type { SubscribersSelector } from "./SubscribersSelector";
+import { t } from "../i18n";
 
 export namespace CurrentSubscriptions {
   export interface Props {
@@ -97,7 +98,7 @@ function CurrentSubscribersSection({
 
   return (
     <>
-      <div className="font-bold text-sm sm:text-[16px]">Subscribers</div>
+      <div className="font-bold text-sm sm:text-[16px]">{t("turboui.subscriptions.subscribers")}</div>
       <div className="text-xs sm:text-sm mt-1">{label}</div>
       <div className="flex items-center gap-1 mt-2 flex-wrap gap-y-2">
         {sortedSubscribers
@@ -112,7 +113,7 @@ function CurrentSubscribersSection({
           ))}
         {canEditSubscribers && (
           <SecondaryButton onClick={() => setIsModalOpen(true)} size="xs" testId="add-remove-subscribers">
-            Add/remove people...
+            {t("turboui.subscriptions.addRemovePeople")}
           </SecondaryButton>
         )}
       </div>
@@ -131,7 +132,7 @@ function buildLabel(count: number, resourceName: string): string {
     prefix = `${count} people`;
   }
 
-  return `${prefix} will be notified when someone comments on this ${resourceName}.`;
+  return t("turboui.subscriptions.willBeNotifiedWhenSomeoneComments", { v1: prefix, v2: resourceName });
 }
 
 interface SubscribeSectionProps {
@@ -142,11 +143,11 @@ interface SubscribeSectionProps {
 function SubscribeSection({ onSubscribe, isLoading }: SubscribeSectionProps) {
   return (
     <div>
-      <div className="font-bold">You&apos;re not subscribed</div>
-      <p className="text-sm">You won&apos;t be notified when comments are posted.</p>
+      <div className="font-bold">{t("turboui.subscriptions.youAposReNotSubscribed")}</div>
+      <p className="text-sm">{t("turboui.subscriptions.youWonAposTBeNotified")}</p>
       <div className="flex mt-2">
         <SecondaryButton onClick={onSubscribe} loading={isLoading} size="xs" testId="subscribe">
-          Subscribe me
+          {t("turboui.subscriptions.subscribeMe")}
         </SecondaryButton>
       </div>
     </div>
@@ -162,13 +163,13 @@ interface UnsubscribeSectionProps {
 function UnsubscribeSection({ resourceName, onUnsubscribe, isLoading }: UnsubscribeSectionProps) {
   return (
     <div>
-      <div className="font-bold text-sm sm:text-[16px]">You&apos;re subscribed</div>
+      <div className="font-bold text-sm sm:text-[16px]">{t("turboui.subscriptions.youAposReSubscribed")}</div>
       <p className="text-xs sm:text-sm mt-1">
-        You&apos;ll get a notification when someone comments on this {resourceName}.
+        {t("turboui.subscriptions.youLlGetANotificationWhen", { v1: resourceName })}
       </p>
       <div className="flex mt-2">
         <SecondaryButton onClick={onUnsubscribe} loading={isLoading} size="xs" testId="unsubscribe">
-          Unsubscribe me
+          {t("turboui.subscriptions.unsubscribeMe")}
         </SecondaryButton>
       </div>
     </div>

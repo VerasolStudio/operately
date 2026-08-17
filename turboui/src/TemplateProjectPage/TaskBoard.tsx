@@ -17,6 +17,7 @@ import type { TemplateProjectPage } from ".";
 import { AssigneesField } from "../AssigneesField";
 import { projectItemsWithPlaceholder, SubtleDropPlaceholder, useBoardDnD } from "../utils/PragmaticDragAndDrop";
 import type { BoardLocation, BoardMove } from "../utils/PragmaticDragAndDrop";
+import { t } from "../i18n";
 
 const ROOT_TASKS_CONTAINER_ID = "no-milestone";
 
@@ -88,10 +89,10 @@ export function TaskBoard({ props, canEdit }: { props: TemplateProjectPage.Props
         <div className="sticky top-0 z-10 flex items-start justify-between gap-3 bg-surface-base px-4 py-4 sm:items-center sm:py-6 lg:px-0">
           <div className="flex min-w-0 flex-wrap items-center gap-2 sm:gap-4">
             <PrimaryButton size="xs" onClick={() => setIsCreating(true)} testId="add-template-task">
-              New task
+              {t("turboui.templateProjectPage.newTask")}
             </PrimaryButton>
             <SecondaryButton size="xs" onClick={() => setIsCreatingMilestone(true)} testId="add-template-milestone">
-              New milestone
+              {t("turboui.templateProjectPage.newMilestone")}
             </SecondaryButton>
           </div>
           <div className="flex flex-shrink-0 items-center gap-1 sm:-mb-2">
@@ -140,7 +141,7 @@ export function TaskBoard({ props, canEdit }: { props: TemplateProjectPage.Props
         })}
         {tasks.length === 0 && props.milestones.length === 0 && (
           <div className="px-4 py-8 text-center text-sm text-content-dimmed">
-            Add the first task to define the work.
+            {t("turboui.templateProjectPage.addTheFirstTaskToDefine")}
           </div>
         )}
       </div>
@@ -239,7 +240,7 @@ function TaskSection({
         <SubtleDropPlaceholder containerId={containerId} index={projectedTasks.length} height={placeholderHeight} />
       )}
       {tasks.length === 0 && placeholderIndex === null && (
-        <div className="px-4 py-3 text-sm text-content-dimmed">No tasks</div>
+        <div className="px-4 py-3 text-sm text-content-dimmed">{t("turboui.templateProjectPage.noTasks")}</div>
       )}
     </section>
   );
@@ -380,10 +381,10 @@ function TaskFormModal({
       <form onSubmit={submit} className="min-w-0 space-y-6 overflow-x-hidden" data-test-id="template-task-form">
         <TextField
           variant="form-field"
-          label="Task title"
+          label={t("turboui.templateProjectPage.taskTitle")}
           text={name}
           onChange={setName}
-          placeholder="Enter task title"
+          placeholder={t("turboui.templateProjectPage.enterTaskTitle")}
           autofocus
           onChangeOnType
           testId="template-task-title"
@@ -392,13 +393,13 @@ function TaskFormModal({
         <div className="grid min-w-0 grid-cols-1 gap-6 md:grid-cols-2">
           <RelativeDayField
             variant="form-field"
-            label="Relative due date"
+            label={t("turboui.templateProjectPage.relativeDueDate")}
             value={dueOffsetDays}
             onChange={setDueOffsetDays}
-            placeholder="Set relative date"
+            placeholder={t("turboui.templateProjectPage.setRelativeDate")}
           />
           <div className="min-w-0">
-            <FieldLabel>Status</FieldLabel>
+            <FieldLabel>{t("turboui.templateProjectPage.status")}</FieldLabel>
             <StatusSelector
               variant="form-field"
               statusOptions={props.statuses}
@@ -410,32 +411,32 @@ function TaskFormModal({
         </div>
 
         <div className="min-w-0">
-          <FieldLabel>Milestone</FieldLabel>
+          <FieldLabel>{t("turboui.templateProjectPage.milestone")}</FieldLabel>
           <MilestoneField
             variant="form-field"
             milestone={selectedMilestone}
             setMilestone={(milestone) => setMilestoneId(milestone?.id ?? null)}
             milestones={milestoneOptions}
             onSearch={async () => undefined}
-            emptyStateMessage="No milestone"
+            emptyStateMessage={t("turboui.templateProjectPage.noMilestone")}
             testId="template-task-milestone"
           />
         </div>
 
         <div className="min-w-0 overflow-x-auto">
-          <FieldLabel>Notes</FieldLabel>
+          <FieldLabel>{t("turboui.templateProjectPage.notes")}</FieldLabel>
           <TaskNotesField key={descriptionEditorKey} props={props} content={description} onChange={setDescription} />
         </div>
 
         {!task && props.personSearch && (
           <div className="min-w-0">
-            <FieldLabel>Assignees</FieldLabel>
+            <FieldLabel>{t("turboui.templateProjectPage.assignees")}</FieldLabel>
             <AssigneesField
               variant="form-field"
               people={assignees}
               setPeople={setAssignees}
               searchData={props.personSearch}
-              emptyStateMessage="Assign people"
+              emptyStateMessage={t("turboui.templateProjectPage.assignPeople")}
             />
           </div>
         )}
@@ -445,14 +446,14 @@ function TaskFormModal({
             <SwitchToggle
               value={createMore}
               setValue={setCreateMore}
-              label="Create more"
+              label={t("turboui.templateProjectPage.createMore")}
               testId="add-template-task-more-switch"
             />
           )}
           <div className="flex-1" />
           <div className="flex space-x-3">
             <SecondaryButton onClick={onClose} type="button">
-              Cancel
+              {t("turboui.templateProjectPage.cancel")}
             </SecondaryButton>
             <PrimaryButton type="submit" disabled={!name.trim() || props.statuses.length === 0}>
               {isUpdating ? "Update task" : "Create task"}
@@ -476,7 +477,7 @@ function TaskNotesField({
   const editor = useEditor({
     content,
     editable: true,
-    placeholder: "Add notes about this task...",
+    placeholder: t("turboui.templateProjectPage.addNotesAboutThisTask"),
     handlers: props.richTextHandlers,
     onUpdate: ({ json }) => onChange(json as RichTextJSON),
   });

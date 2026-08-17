@@ -7,6 +7,7 @@ import { useRouteError, useRouteLoaderData } from "react-router";
 import { GhostButton } from "turboui";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export default function ErrorPage() {
   const error = useRouteError() as AxiosError | null;
 
@@ -36,8 +37,8 @@ function ServerErrorPage() {
         <div className="font-extrabold" style={{ fontSize: "10rem" }}>
           500
         </div>
-        <div className="text-3xl font-bold mt-4">Oops! Something went wrong.</div>
-        <div className="text-lg font-medium my-4">An unexpected error has occurred.</div>
+        <div className="text-3xl font-bold mt-4">{t("app.errorPage.oopsSomethingWentWrong")}</div>
+        <div className="text-lg font-medium my-4">{t("app.errorPage.anUnexpectedErrorHasOccurred")}</div>
 
         {data && data.company ? <LinkToHome /> : <LinkToLobby />}
         <StackTrace />
@@ -52,7 +53,7 @@ function LinkToHome() {
   return (
     <div className="flex w-full justify-center mt-4">
       <GhostButton linkTo={paths.homePath()} testId="back-to-lobby">
-        Go back to Home
+        {t("app.errorPage.goBackToHome")}
       </GhostButton>
     </div>
   );
@@ -62,7 +63,7 @@ function LinkToLobby() {
   return (
     <div className="flex w-full justify-center mt-4">
       <GhostButton linkTo={"/"} testId="back-to-lobby">
-        Go back to Lobby
+        {t("app.errorPage.goBackToLobby")}
       </GhostButton>
     </div>
   );
@@ -76,11 +77,11 @@ function StackTrace() {
 
   return (
     <div className="mt-8 bg-surface-base text-left p-4">
-      <div className="font-bold mb-4">Error Stack Trace</div>
+      <div className="font-bold mb-4">{t("app.errorPage.errorStackTrace")}</div>
 
       <pre className="text-sm font-mono whitespace-pre-wrap">{error!.stack}</pre>
 
-      <div className="mt-4 text-sm">This error is visible only in dev and test environments.</div>
+      <div className="mt-4 text-sm">{t("app.errorPage.thisErrorIsVisibleOnlyIn")}</div>
     </div>
   );
 }

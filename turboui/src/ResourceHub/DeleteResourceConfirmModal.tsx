@@ -2,6 +2,8 @@ import React from "react";
 
 import { DangerButton, SecondaryButton } from "../Button";
 import { Modal } from "../Modal";
+import { t } from "../i18n";
+import { Trans } from "react-i18next";
 
 export function DeleteResourceConfirmModal({
   isOpen,
@@ -30,14 +32,18 @@ export function DeleteResourceConfirmModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <p>
-        Are you sure you want to delete the {resourceType} "<b>{resourceName}</b>"?
+        <Trans
+          i18nKey="turboui.resourceHub.areYouSureYouWantToDelete"
+          values={{ v1: resourceType, v2: resourceName }}
+          components={[<b>{resourceName}</b>]}
+        />
       </p>
       <div className="flex items-center gap-2 mt-6">
         <DangerButton size="sm" onClick={handleDelete} loading={isDeleting} disabled={isDeleting} testId="submit">
-          Delete
+          {t("turboui.resourceHub.delete")}
         </DangerButton>
         <SecondaryButton size="sm" onClick={onClose}>
-          Cancel
+          {t("turboui.resourceHub.cancel")}
         </SecondaryButton>
       </div>
     </Modal>

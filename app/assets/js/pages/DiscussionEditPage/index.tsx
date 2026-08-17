@@ -12,6 +12,7 @@ import { DiscardDiscussionDraftModal, GhostButton, Link, PrimaryButton, Schedule
 import { useNavigate } from "react-router";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export default { name: "DiscussionEditPage", loader, Page } as PageModule;
 
 interface LoaderResult {
@@ -37,7 +38,7 @@ function Page() {
   });
 
   return (
-    <Pages.Page title="Edit Discussion" testId="discussion-edit-page">
+    <Pages.Page title={t("pages.discussionEditPage.editDiscussion")} testId="discussion-edit-page">
       <Paper.Root>
         <Navigation space={discussion.space!} />
 
@@ -71,21 +72,29 @@ function Submit({ form }: { form: FormState }) {
               }
               testId="publish-now"
               formattedTimePreferences={formattedTimePreferences}
-              modalTitle="Schedule Discussion"
+              modalTitle={t("pages.discussionEditPage.scheduleDiscussion")}
               scheduledPrimaryLabel={isScheduled ? "Save Changes" : undefined}
               showScheduleOption={!isScheduled}
               secondaryAction={
                 !isScheduled && (
                   <GhostButton loading={form.saveChangesSubmitting} testId="save-changes" onClick={form.saveChanges}>
-                    Save Changes
+                    {t("pages.discussionEditPage.saveChanges")}
                   </GhostButton>
                 )
               }
               options={
                 isScheduled
                   ? [
-                      { label: "Publish now", action: form.publishNow, testId: "publish-now-option" },
-                      { label: "Save as draft", action: form.saveAsDraft, testId: "save-as-draft-option" },
+                      {
+                        label: t("pages.discussionEditPage.publishNow"),
+                        action: form.publishNow,
+                        testId: "publish-now-option",
+                      },
+                      {
+                        label: t("pages.discussionEditPage.saveAsDraft"),
+                        action: form.saveAsDraft,
+                        testId: "save-as-draft-option",
+                      },
                     ]
                   : []
               }
@@ -93,7 +102,7 @@ function Submit({ form }: { form: FormState }) {
           ) : (
             <div className="flex items-center gap-2">
               <PrimaryButton loading={form.saveChangesSubmitting} testId="save-changes" onClick={form.saveChanges}>
-                Save Changes
+                {t("pages.discussionEditPage.saveChanges")}
               </PrimaryButton>
             </div>
           )}
@@ -116,7 +125,7 @@ function Submit({ form }: { form: FormState }) {
 function CancelLink({ form }: { form: FormState }) {
   return (
     <Link to={form.cancelPath} testId="cancel-edit" className="font-medium">
-      Cancel
+      {t("pages.discussionEditPage.cancel")}
     </Link>
   );
 }
@@ -138,7 +147,7 @@ function DiscardDraftLink({ discussion }: { discussion: Discussions.Discussion }
   return (
     <>
       <button type="button" onClick={toggleDiscardModal} className="font-medium" data-test-id="discard-draft">
-        Discard draft
+        {t("pages.discussionEditPage.discardDraft")}
       </button>
       <DiscardDiscussionDraftModal
         isOpen={showDiscardModal}
@@ -156,7 +165,7 @@ function Navigation({ space }) {
     <Paper.Navigation
       items={[
         { to: paths.spacePath(space.id), label: space.name },
-        { to: paths.spaceDiscussionsPath(space.id), label: "Discussions" },
+        { to: paths.spaceDiscussionsPath(space.id), label: t("pages.discussionEditPage.discussions") },
       ]}
     />
   );

@@ -2,6 +2,7 @@ import React from "react";
 import Api, { CommentParentType } from "@/api";
 import { showErrorToast } from "turboui";
 import { compareIds } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function useEditComment<T extends { id?: string | null; content?: any }>(
   comments: T[],
@@ -32,7 +33,7 @@ export function useEditComment<T extends { id?: string | null; content?: any }>(
         if (comment) {
           setComments((prev) => prev.map((c) => (compareIds(c.id, commentId) ? { ...comment } : c)));
         }
-        showErrorToast("Error", "Failed to edit comment.");
+        showErrorToast(t("app.useEditComment.error"), t("app.useEditComment.failedToEditComment"));
         return false;
       }
     },

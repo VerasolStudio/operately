@@ -11,6 +11,7 @@ import { StatusSelector } from "../../StatusSelector";
 
 // Using TaskWithIndex from our shared types
 import { TaskWithIndex } from "../types";
+import { t } from "../../i18n";
 
 export interface TaskListProps {
   tasks: Types.Task[];
@@ -170,8 +171,8 @@ export function TaskList({
           showHiddenTasksToggle &&
           !suppressEmptyStateWhenOnlyHiddenTasks && (
             <div className="py-3 px-4 text-left text-content-subtle text-sm bg-surface-base sm:text-center">
-              <span className="sm:hidden">Tap + to add a task.</span>
-              <span className="hidden sm:inline">Click + or press c to add a task, or drag a task here.</span>
+              <span className="sm:hidden">{t("turboui.taskBoard.tapToAddATask")}</span>
+              <span className="hidden sm:inline">{t("turboui.taskBoard.clickOrPressCToAdd")}</span>
             </div>
           )}
       </div>
@@ -188,7 +189,7 @@ export function TaskList({
             </div>
             {hiddenTasksExpanded ? (
               <>
-                <span className="sm:hidden">Hide completed</span>
+                <span className="sm:hidden">{t("turboui.taskBoard.hideCompleted")}</span>
                 <span className="hidden sm:inline">
                   {totalHiddenCount} completed task{totalHiddenCount !== 1 ? "s" : ""} (click to collapse)
                 </span>

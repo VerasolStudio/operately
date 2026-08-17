@@ -3,6 +3,7 @@ import type { Activity } from "@/models/activities";
 import { Paths } from "@/routes/paths";
 import { feedTitle, projectLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
 
 const ProjectMilestoneCreation: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -34,7 +35,7 @@ const ProjectMilestoneCreation: ActivityHandler = {
   FeedItemTitle(props: { activity: Activity; page: string }) {
     const project = content(props.activity).project;
     const milestoneName = content(props.activity).milestoneName;
-    const message = `added the ${milestoneName} milestone`;
+    const message = t("features.activities.addedTheMilestone", { v1: milestoneName });
 
     if (props.page === "project") {
       return feedTitle(props.activity, message);

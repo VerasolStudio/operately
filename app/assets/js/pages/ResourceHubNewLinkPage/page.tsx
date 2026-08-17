@@ -11,6 +11,7 @@ import type { LinkNewPage as LinkNewPageTypes } from "turboui/LinkNewPage/types"
 
 import { useLoadedData } from "./loader";
 import { buildNewLinkPageNavigation } from "./navigation";
+import { t } from "@/i18n";
 
 export function Page() {
   const { resourceHub, folder, linkType } = useLoadedData();
@@ -43,14 +44,17 @@ export function Page() {
       navigate(paths.resourceHubLinkPath(res.link.id));
       return true;
     } catch {
-      showErrorToast("Link not created", "Check the form and try again.");
+      showErrorToast(
+        t("pages.resourceHubNewLinkPage.linkNotCreated"),
+        t("pages.resourceHubNewLinkPage.checkTheFormAndTryAgain"),
+      );
       return false;
     }
   }
 
   return (
     <LinkNewPage
-      pageTitle="New Link"
+      pageTitle={t("pages.resourceHubNewLinkPage.newLink")}
       navigation={buildNewLinkPageNavigation(resourceHub, folder, paths)}
       testId="resource-hub-new-link-page"
       richTextHandlers={richTextHandlers}

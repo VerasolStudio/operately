@@ -6,6 +6,7 @@ import { PrimaryButton, SecondaryButton } from "../Button";
 import { CommentInputProps, CommentNotificationInfo, Person } from "./types";
 import { Editor, useEditor } from "../RichEditor";
 import { useDraftActivatedInput } from "./useDraftActivatedInput";
+import { t } from "../i18n";
 
 interface CommentInputActiveProps extends CommentInputProps {
   currentUser: Person;
@@ -50,7 +51,7 @@ function CommentInputInactive({ currentUser, onClick }: CommentInputInactiveProp
       onClick={onClick}
     >
       <Avatar person={currentUser} size="normal" />
-      Write a comment here...
+      {t("turboui.commentSection.writeACommentHere")}
     </div>
   );
 }
@@ -68,7 +69,7 @@ function CommentInputActive({
   const editor = useEditor({
     content: "",
     editable: true,
-    placeholder: "Write a comment here...",
+    placeholder: t("turboui.commentSection.writeACommentHere"),
     handlers: richTextHandlers,
     autoFocus: true,
     className: "min-h-[200px] px-4 py-3",
@@ -130,7 +131,7 @@ function CommentInputActive({
               </PrimaryButton>
 
               <SecondaryButton size="xs" onClick={handleCancel}>
-                Cancel
+                {t("turboui.commentSection.cancel")}
               </SecondaryButton>
             </div>
           </div>
@@ -168,7 +169,9 @@ function CommentNotificationSummary({ info }: { info: CommentNotificationInfo })
             <div className="text-xs text-content-dimmed mt-1">{recipientSummary.allNames.join(", ")}</div>
           )}
           {!info.isCurrentUserSubscribed && subscribedPeople.length > 0 && (
-            <div className="text-xs text-content-dimmed mt-1">Tip: Subscribe if you want notifications too.</div>
+            <div className="text-xs text-content-dimmed mt-1">
+              {t("turboui.commentSection.tipSubscribeIfYouWantNotifications")}
+            </div>
           )}
         </div>
       </div>
@@ -183,7 +186,7 @@ function buildRecipientSummary(people: AvatarPerson[], entityLabel: "task" | "mi
 
   if (names.length === 0) {
     return {
-      message: `Tip: @-mention someone to notify them about this ${entityLabel}.`,
+      message: t("turboui.commentSection.tipMentionSomeoneToNotifyThem", { v1: entityLabel }),
       allNames: [],
       hasHiddenRecipients: false,
     };
@@ -191,7 +194,7 @@ function buildRecipientSummary(people: AvatarPerson[], entityLabel: "task" | "mi
 
   if (names.length === 1) {
     return {
-      message: withSentencePeriod(`This comment will notify ${names[0]}`),
+      message: withSentencePeriod(t("turboui.commentSection.thisCommentWillNotify", { v1: names[0] })),
       allNames: names,
       hasHiddenRecipients: false,
     };
@@ -199,7 +202,7 @@ function buildRecipientSummary(people: AvatarPerson[], entityLabel: "task" | "mi
 
   if (names.length === 2) {
     return {
-      message: withSentencePeriod(`This comment will notify ${names[0]} and ${names[1]}`),
+      message: withSentencePeriod(t("turboui.commentSection.thisCommentWillNotifyAnd", { v1: names[0], v2: names[1] })),
       allNames: names,
       hasHiddenRecipients: false,
     };
@@ -208,7 +211,12 @@ function buildRecipientSummary(people: AvatarPerson[], entityLabel: "task" | "mi
   const remainingCount = names.length - 2;
   return {
     message: withSentencePeriod(
-      `This comment will notify ${names[0]}, ${names[1]}, and ${remainingCount} other${remainingCount === 1 ? "" : "s"}`,
+      t("turboui.commentSection.thisCommentWillNotifyAndOther", {
+        v1: names[0],
+        v2: names[1],
+        v3: remainingCount,
+        v4: remainingCount === 1 ? "" : "s",
+      }),
     ),
     allNames: names,
     hasHiddenRecipients: true,

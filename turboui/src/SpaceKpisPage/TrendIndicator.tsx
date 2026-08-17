@@ -2,6 +2,7 @@ import React from "react";
 
 import { IconChevronDown, IconChevronUp, IconMinus } from "../icons";
 import { formatNumber } from "./utils";
+import { t } from "../i18n";
 
 // Compact up/down/flat badge showing the change since the previous entry.
 // `delta === null` means we cannot compute a trend yet (fewer than 2 entries).
@@ -10,7 +11,10 @@ export function TrendIndicator({ delta }: { delta: number | null }) {
 
   if (delta === 0) {
     return (
-      <span className="inline-flex items-center gap-0.5 text-xs text-content-dimmed" title="No change">
+      <span
+        className="inline-flex items-center gap-0.5 text-xs text-content-dimmed"
+        title={t("turboui.spaceKpisPage.noChange")}
+      >
         <IconMinus size={12} />
       </span>
     );

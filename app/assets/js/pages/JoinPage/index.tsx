@@ -13,6 +13,7 @@ import { logIn } from "@/routes/auth";
 import { redirect } from "react-router";
 
 import { Forms } from "turboui";
+import { t } from "@/i18n";
 
 export default { name: "JoinPage", loader, Page } as PageModule;
 
@@ -35,7 +36,7 @@ async function loader({ request }): Promise<any> {
 
 function Page() {
   return (
-    <Pages.Page title="Welcome to Operately!">
+    <Pages.Page title={t("pages.joinPage.welcomeToOperately")}>
       <Paper.Root size="small">
         <div className="mt-24"></div>
 
@@ -55,9 +56,12 @@ function Header() {
   return (
     <div className="flex items-center justify-between mb-10">
       <div className="">
-        <div className="text-content-accent text-2xl font-extrabold">Welcome to Operately!</div>
+        <div className="text-content-accent text-2xl font-extrabold">{t("pages.joinPage.welcomeToOperately")}</div>
         <div className="text-content-accent mt-1">
-          You were invited by {inviteLink.author?.fullName} to join {inviteLink.company?.name}.
+          {t("pages.joinPage.youWereInvitedByToJoin", {
+            v1: inviteLink.author?.fullName,
+            v2: inviteLink.company?.name,
+          })}
         </div>
         <div className="text-content-dimmed text-sm mt-2">
           You are joining as <span className="font-semibold">{member.fullName}</span>
@@ -75,7 +79,8 @@ function WhatHappensNext() {
 
   return (
     <div className="my-8 text-center px-20">
-      <span className="font-bold">What happens next?</span> You will join the {inviteLink.company?.name} company.
+      <span className="font-bold">{t("pages.joinPage.whatHappensNext")}</span>{" "}
+      {t("pages.joinPage.youWillJoinTheCompany", { v1: inviteLink.company?.name })}
     </div>
   );
 }
@@ -111,15 +116,20 @@ function Form() {
         <>
           <Forms.FieldGroup>
             <Forms.PasswordInput
-              label="Choose a password (minimum 12 characters)"
+              label={t("pages.joinPage.chooseAPasswordMinimum12Characters")}
               field={"password"}
               minLength={12}
               maxLength={72}
             />
-            <Forms.PasswordInput label="Repeat password" field={"passwordConfirmation"} minLength={12} maxLength={72} />
+            <Forms.PasswordInput
+              label={t("pages.joinPage.repeatPassword")}
+              field={"passwordConfirmation"}
+              minLength={12}
+              maxLength={72}
+            />
           </Forms.FieldGroup>
 
-          <Forms.Submit saveText="Set password &amp; Log in" buttonSize="base" className="w-full" />
+          <Forms.Submit saveText={t("pages.joinPage.setPasswordAmpLogIn")} buttonSize="base" className="w-full" />
         </>
       )}
 

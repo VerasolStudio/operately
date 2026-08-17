@@ -2,6 +2,7 @@ import React from "react";
 
 import type { SpaceKpisPage } from "./types";
 import { formatNumber, formatShortDate } from "./utils";
+import { t } from "../i18n";
 
 interface KpiLineChartProps {
   entries: SpaceKpisPage.KpiEntry[];
@@ -63,7 +64,7 @@ function MultiPointChart({ entries, unit, height }: Required<KpiLineChartProps>)
         className="w-full"
         style={{ height }}
         role="img"
-        aria-label="KPI history line chart"
+        aria-label={t("turboui.spaceKpisPage.kPIHistoryLineChart")}
       >
         {gridLines.map((value, i) => (
           <g key={i}>
@@ -134,7 +135,9 @@ function SinglePointChart({ entry, unit, height }: { entry: SpaceKpisPage.KpiEnt
         {unit ? <span className="ml-1 text-base font-medium text-content-dimmed">{unit}</span> : null}
       </div>
       <div className="mt-1 text-sm text-content-dimmed">Recorded {formatShortDate(entry.recordedAt)}</div>
-      <div className="mt-3 text-xs text-content-subtle">Log another update to start plotting a trend line.</div>
+      <div className="mt-3 text-xs text-content-subtle">
+        {t("turboui.spaceKpisPage.logAnotherUpdateToStartPlotting")}
+      </div>
     </div>
   );
 }
@@ -146,8 +149,8 @@ function EmptyChart({ height }: { height: number }) {
       style={{ height }}
       data-test-id="kpi-line-chart-empty"
     >
-      <div className="text-sm font-medium text-content-dimmed">No data yet</div>
-      <div className="mt-1 text-xs text-content-subtle">Log an update to see values plotted over time.</div>
+      <div className="text-sm font-medium text-content-dimmed">{t("turboui.spaceKpisPage.noDataYet")}</div>
+      <div className="mt-1 text-xs text-content-subtle">{t("turboui.spaceKpisPage.logAnUpdateToSeeValues")}</div>
     </div>
   );
 }

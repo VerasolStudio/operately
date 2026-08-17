@@ -2,12 +2,9 @@
   "transform": {
     "^.+\\.(ts|tsx)$": ["ts-jest", { "tsconfig": "tsconfig.json", "isolatedModules": true }]
   },
-  "testMatch": [
-    "**/?(*.)+(test).+(ts|tsx|js)"
-  ],
-  "modulePaths": [
-    "<rootDir>/node_modules"
-  ],
+  "testMatch": ["**/?(*.)+(test).+(ts|tsx|js)"],
+  "setupFiles": ["<rootDir>/assets/js/__tests__/setupLanguage.ts"],
+  "modulePaths": ["<rootDir>/node_modules"],
   "moduleNameMapper": {
     "^turboui$": "<rootDir>/../turboui/src",
     "^turboui/(.*)$": "<rootDir>/../turboui/src/$1",

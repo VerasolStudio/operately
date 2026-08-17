@@ -3,6 +3,7 @@ import React from "react";
 import { PrimaryButton, SecondaryButton } from "../Button";
 import { Textfield } from "../FormElements/Textfield";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 export namespace InviteMemberForm {
   export type Field = "fullName" | "email" | "title";
@@ -42,16 +43,20 @@ export function InviteMemberForm(props: InviteMemberForm.Props) {
 
   return (
     <div>
-      {props.title && <div className="text-content-accent text-xl sm:text-2xl font-extrabold mb-6 mt-2 sm:mt-0 sm:mb-8">{props.title}</div>}
+      {props.title && (
+        <div className="text-content-accent text-xl sm:text-2xl font-extrabold mb-6 mt-2 sm:mt-0 sm:mb-8">
+          {props.title}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} data-test-id={props.testId}>
         <div className="flex flex-col gap-4">
-          <FormRow label="Full Name" htmlFor="invite-full-name">
+          <FormRow label={t("turboui.inviteMemberForm.fullName")} htmlFor="invite-full-name">
             <Textfield
               id="invite-full-name"
               value={props.values.fullName}
               onChange={(event) => props.onChange("fullName", event.target.value)}
-              placeholder="e.g. John Doe"
+              placeholder={t("turboui.inviteMemberForm.eGJohnDoe")}
               minLength={3}
               testId="fullname"
               error={props.errors?.fullName}
@@ -60,12 +65,12 @@ export function InviteMemberForm(props: InviteMemberForm.Props) {
             />
           </FormRow>
 
-          <FormRow label="Email" htmlFor="invite-email">
+          <FormRow label={t("turboui.inviteMemberForm.email")} htmlFor="invite-email">
             <Textfield
               id="invite-email"
               value={props.values.email}
               onChange={(event) => props.onChange("email", event.target.value)}
-              placeholder="e.g. john@yourcompany.com"
+              placeholder={t("turboui.inviteMemberForm.eGJohnYourcompanyCom")}
               minLength={3}
               testId="email"
               error={props.errors?.email}
@@ -73,12 +78,12 @@ export function InviteMemberForm(props: InviteMemberForm.Props) {
             />
           </FormRow>
 
-          <FormRow label="Title" htmlFor="invite-title">
+          <FormRow label={t("turboui.inviteMemberForm.title")} htmlFor="invite-title">
             <Textfield
               id="invite-title"
               value={props.values.title}
               onChange={(event) => props.onChange("title", event.target.value)}
-              placeholder="e.g. Software Engineer"
+              placeholder={t("turboui.inviteMemberForm.eGSoftwareEngineer")}
               testId="title"
               error={props.errors?.title}
               className="w-full"
@@ -118,15 +123,7 @@ export function InviteMemberForm(props: InviteMemberForm.Props) {
   );
 }
 
-function FormRow({
-  label,
-  htmlFor,
-  children,
-}: {
-  label: string;
-  htmlFor: string;
-  children: React.ReactNode;
-}) {
+function FormRow({ label, htmlFor, children }: { label: string; htmlFor: string; children: React.ReactNode }) {
   return (
     <div className="flex sm:gap-4 items-center">
       <label htmlFor={htmlFor} className="w-1/4 shrink-0 font-semibold text-left">

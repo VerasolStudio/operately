@@ -2,6 +2,7 @@ defmodule OperatelyEmail.Emails.GoalCheckInAcknowledgementEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Goals}
   alias Operately.Goals.Update
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -13,7 +14,7 @@ defmodule OperatelyEmail.Emails.GoalCheckInAcknowledgementEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: goal.name, who: author, action: "acknowledged your check-in")
+    |> subject(where: goal.name, who: author, action: t("goalCheckInAcknowledgement.action"))
     |> assign(:author, author)
     |> assign(:goal, goal)
     |> assign(:update, update)
@@ -31,7 +32,7 @@ defmodule OperatelyEmail.Emails.GoalCheckInAcknowledgementEmail do
       parent_id: goal.id,
       parent_type: :goal,
       parent_name: goal.name,
-      headline: "acknowledged a goal check-in",
+      headline: t("goalCheckInAcknowledgement.headline"),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.goal_check_in_path(company, update) |> OperatelyWeb.Paths.to_url(),

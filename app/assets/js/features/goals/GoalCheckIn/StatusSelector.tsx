@@ -4,6 +4,7 @@ import * as React from "react";
 import { createTestId } from "@/utils/testid";
 import { Circle, Forms, IconCheck } from "turboui";
 import classNames from "classnames";
+import { t } from "@/i18n";
 
 type Status = "on_track" | "caution" | "off_track";
 
@@ -23,8 +24,8 @@ const STATUS_LABELS: Record<Status, string> = {
 
 const STATUS_DESCRIPTIONS_TEMPLATE = (reviewer: string) => ({
   on_track: "Progressing as planned. No blockers.",
-  caution: `Emerging risks or delays. ${reviewer} should be aware.`,
-  off_track: `Significant problems affecting success. ${reviewer}'s help is needed.`,
+  caution: t("features.goals.emergingRisksOrDelaysShouldBe", { v1: reviewer }),
+  off_track: t("features.goals.significantProblemsAffectingSuccessSHelp", { v1: reviewer }),
 });
 
 interface SelectGoalStatusProps {
@@ -148,7 +149,7 @@ function StatusTrigger({ value, error }: { value: Status | null; error?: boolean
         {value === null ? (
           <div className="flex items-center gap-2">
             <Circle size={18} border="border-surface-outline" noFill borderSize={2} borderDashed />
-            <div className="font-medium">Pick a status&hellip;</div>
+            <div className="font-medium">{t("features.goals.pickAStatusHellip")}</div>
           </div>
         ) : (
           <div className="flex items-center gap-2">

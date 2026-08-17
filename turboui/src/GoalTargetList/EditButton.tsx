@@ -3,6 +3,7 @@ import React from "react";
 import { SecondaryButton } from "../Button";
 import { createTestId } from "../TestableElement";
 import { State, TargetState } from "./useGoalTargetListState";
+import { t } from "../i18n";
 
 export function EditButton({ state, target }: { state: State; target: TargetState }) {
   const onClick = (e: React.MouseEvent) => {
@@ -13,7 +14,7 @@ export function EditButton({ state, target }: { state: State; target: TargetStat
   return (
     <div className="mt-px">
       <SecondaryButton size="xxs" onClick={onClick} icon={IconPencil} testId={createTestId("edit-target", target.name)}>
-        Edit
+        {t("turboui.goalTargetList.edit")}
       </SecondaryButton>
     </div>
   );

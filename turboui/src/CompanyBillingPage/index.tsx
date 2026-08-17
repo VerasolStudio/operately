@@ -5,6 +5,7 @@ import { Page } from "../Page";
 import { DangerButton, PrimaryButton, SecondaryButton } from "../Button";
 import type { CompanyBillingPage as CompanyBillingPageTypes } from "./types";
 import { buildCompanyBillingPageViewModel } from "./viewModel";
+import { t } from "../i18n";
 
 export {
   buildCompanyBillingConfirmingMode,
@@ -115,17 +116,20 @@ function OverviewModeView({ overview }: { overview: CompanyBillingPage.OverviewM
       {overview.feedback && <FeedbackBlock feedback={overview.feedback} />}
 
       {overview.errorMessage && (
-        <WarningCallout message="Billing action unavailable" description={overview.errorMessage} />
+        <WarningCallout
+          message={t("turboui.companyBillingPage.billingActionUnavailable")}
+          description={overview.errorMessage}
+        />
       )}
 
       {overview.stale && (
         <WarningCallout
-          message="Billing data may be out of date"
-          description="We couldn't refresh billing details the last time we checked. Reload the page to try again."
+          message={t("turboui.companyBillingPage.billingDataMayBeOutOf")}
+          description={t("turboui.companyBillingPage.weCouldnTRefreshBillingDetails")}
         />
       )}
 
-      <Section title="Current plan">
+      <Section title={t("turboui.companyBillingPage.currentPlan")}>
         <SectionCard>
           <div className="flex flex-col gap-3 border-b border-stroke-base pb-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
@@ -142,13 +146,13 @@ function OverviewModeView({ overview }: { overview: CompanyBillingPage.OverviewM
         </SectionCard>
       </Section>
 
-      <Section title="Usage and limits">
+      <Section title={t("turboui.companyBillingPage.usageAndLimits")}>
         <SectionCard>
           <DetailRows rows={overview.usageRows} />
         </SectionCard>
       </Section>
 
-      <Section title="Status details">
+      <Section title={t("turboui.companyBillingPage.statusDetails")}>
         <div className="space-y-3">
           {overview.statusNotices.length === 0 ? (
             <div className="rounded-lg border border-stroke-base bg-surface-dimmed px-4 py-3 text-content-dimmed">
@@ -161,7 +165,7 @@ function OverviewModeView({ overview }: { overview: CompanyBillingPage.OverviewM
       </Section>
 
       {overview.actions.length > 0 && (
-        <Section title="Actions">
+        <Section title={t("turboui.companyBillingPage.actions")}>
           <BillingActionsPanel actions={overview.actions} />
         </Section>
       )}
@@ -174,7 +178,7 @@ function ConfirmingModeView({ confirming }: { confirming: CompanyBillingPage.Con
     <div className="space-y-6">
       <NoticeCallout notice={confirming.notice} />
 
-      <Section title="Checkout status">
+      <Section title={t("turboui.companyBillingPage.checkoutStatus")}>
         <SectionCard>
           <DetailRows rows={confirming.rows} />
         </SectionCard>
@@ -219,8 +223,10 @@ function BillingStatusBadge({ status }: { status: CompanyBillingPage.Status }) {
   const className = {
     free: "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300",
     active: "border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
-    past_due: "border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-800 dark:bg-amber-900/30 dark:text-amber-300",
-    canceled: "border-stone-200 bg-stone-100 text-stone-700 dark:border-stone-600 dark:bg-stone-800 dark:text-stone-300",
+    past_due:
+      "border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-800 dark:bg-amber-900/30 dark:text-amber-300",
+    canceled:
+      "border-stone-200 bg-stone-100 text-stone-700 dark:border-stone-600 dark:bg-stone-800 dark:text-stone-300",
   }[status];
 
   const label = {

@@ -4,14 +4,14 @@
 
 <%= row do %>
   <%= if @mentioned do %>
-    You were mentioned in the description for <%= @task_name %>.
+    <%= t("taskAdding.youWereMentionedInTheDescription", %{v1: @task_name}) %>
   <% else %>
-    A new task named <%= @task_name %> was created in this project.
+    <%= t("taskAdding.aNewTaskNamedWasCreated", %{v1: @task_name}) %>
   <% end %>
 <% end %>
 
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@cta_url, "View Task") %>
+  <%= cta_button(@cta_url, t("taskAdding.viewTask")) %>
 <% end %>

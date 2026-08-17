@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "../Link";
 import type { ResourceHubNode } from "./types";
+import { t } from "../i18n";
 
 interface ContinueEditingDraftsProps {
   drafts: ResourceHubNode[];
@@ -9,12 +10,20 @@ interface ContinueEditingDraftsProps {
   getNodePath: (node: ResourceHubNode) => string;
 }
 
-export function ContinueEditingDrafts({ drafts, draftsPath, getDraftEditPath, getNodePath }: ContinueEditingDraftsProps) {
+export function ContinueEditingDrafts({
+  drafts,
+  draftsPath,
+  getDraftEditPath,
+  getNodePath,
+}: ContinueEditingDraftsProps) {
   if (drafts.length < 1) return null;
 
   const firstDraft = drafts[0];
   const path = drafts.length === 1 && firstDraft ? getDraftEditPath(firstDraft) || getNodePath(firstDraft) : draftsPath;
-  const label = drafts.length === 1 ? "Continue writing your draft document…" : `Continue writing your ${drafts.length} draft documents…`;
+  const label =
+    drafts.length === 1
+      ? "Continue writing your draft document…"
+      : t("turboui.resourceHub.continueWritingYourDraftDocuments", { v1: drafts.length });
 
   return (
     <div className="flex justify-center -mt-2 mb-5">

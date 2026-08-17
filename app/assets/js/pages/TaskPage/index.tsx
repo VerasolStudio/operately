@@ -27,6 +27,7 @@ import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences
 import { useMilestones } from "@/models/milestones/useMilestones";
 import { useSubscription } from "@/models/subscriptions";
 import { StatusSelector } from "turboui";
+import { t } from "@/i18n";
 
 type LoaderResult = {
   data: {
@@ -120,7 +121,7 @@ function Page() {
   const [description, setDescription] = usePageField({
     value: ({ task }) => task.description && JSON.parse(task.description),
     update: (v) => Api.tasks.updateDescription({ taskId: task.id, description: JSON.stringify(v), type: "project" }),
-    onError: () => showErrorToast("Error", "Failed to update task description."),
+    onError: () => showErrorToast(t("pages.taskPage.error"), t("pages.taskPage.failedToUpdateTaskDescription")),
     pageData,
     refreshPageData,
   });
@@ -128,7 +129,7 @@ function Page() {
   const [status, setStatus] = usePageField({
     value: ({ task }) => Tasks.parseTaskForTurboUi(paths, task, { type: "project" }).status,
     update: (v) => Api.tasks.updateStatus({ taskId: task.id, status: Tasks.serializeTaskStatus(v), type: "project" }),
-    onError: () => showErrorToast("Error", "Failed to update task status."),
+    onError: () => showErrorToast(t("pages.taskPage.error"), t("pages.taskPage.failedToUpdateTaskStatus")),
     pageData,
     refreshPageData,
   });
@@ -136,7 +137,7 @@ function Page() {
   const [dueDate, setDueDate] = usePageField({
     value: ({ task }) => parseContextualDate(task.dueDate),
     update: (v) => Api.tasks.updateDueDate({ taskId: task.id, dueDate: serializeContextualDate(v), type: "project" }),
-    onError: () => showErrorToast("Error", "Failed to update due date."),
+    onError: () => showErrorToast(t("pages.taskPage.error"), t("pages.taskPage.failedToUpdateDueDate")),
     pageData,
     refreshPageData,
   });
@@ -145,7 +146,7 @@ function Page() {
     value: ({ task }) => Tasks.parseTaskReminders(task.reminders),
     update: (v) =>
       Api.tasks.updateReminders({ taskId: task.id, reminders: Tasks.serializeTaskReminders(v), type: "project" }),
-    onError: () => showErrorToast("Error", "Failed to update task reminders."),
+    onError: () => showErrorToast(t("pages.taskPage.error"), t("pages.taskPage.failedToUpdateTaskReminders")),
     pageData,
     refreshPageData,
   });
@@ -158,7 +159,7 @@ function Page() {
       }),
     update: (v) =>
       Api.tasks.updateAssignee({ taskId: task.id, assigneeIds: v.map((assignee) => assignee.id), type: "project" }),
-    onError: () => showErrorToast("Error", "Failed to update assignees."),
+    onError: () => showErrorToast(t("pages.taskPage.error"), t("pages.taskPage.failedToUpdateAssignees")),
     pageData,
     refreshPageData,
   });
@@ -166,7 +167,7 @@ function Page() {
   const [milestone, setMilestone] = usePageField<TaskPage.Milestone | null>({
     value: ({ task }) => (task.milestone ? parseMilestoneForTurboUi(paths, task.milestone) : null),
     update: (v) => Api.tasks.updateMilestone({ taskId: task.id, milestoneId: v?.id ?? null }),
-    onError: () => showErrorToast("Error", "Failed to update milestone."),
+    onError: () => showErrorToast(t("pages.taskPage.error"), t("pages.taskPage.failedToUpdateMilestone")),
     pageData,
     refreshPageData,
   });
@@ -197,7 +198,7 @@ function Page() {
         navigate(paths.homePath());
       }
     } catch (error) {
-      showErrorToast("Error", "Failed to delete task.");
+      showErrorToast(t("pages.taskPage.error"), t("pages.taskPage.failedToDeleteTask"));
     }
   };
 
@@ -414,7 +415,7 @@ function useMoveTask(task: Tasks.Task, refreshPageData: (() => Promise<void>) | 
         return true;
       } catch (error) {
         console.error("Failed to move task", error);
-        showErrorToast("Error", "Failed to move task.");
+        showErrorToast(t("pages.taskPage.error"), t("pages.taskPage.failedToMoveTask"));
         return false;
       }
     },

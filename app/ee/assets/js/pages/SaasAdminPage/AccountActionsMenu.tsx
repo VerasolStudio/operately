@@ -1,6 +1,7 @@
 import * as AdminApi from "@/ee/admin_api";
 import * as React from "react";
 import { IconShieldLock, IconTrash, Menu, MenuActionItem, showErrorToast, showSuccessToast } from "turboui";
+import { t } from "@/i18n";
 
 interface AccountActionsMenuProps {
   account: AdminApi.Account;
@@ -14,16 +15,16 @@ export function AccountActionsMenu({ account, onPromote, onDemote, onDelete }: A
     <Menu align="end" testId={`account-actions-${account.id}`}>
       {!account.siteAdmin && (
         <MenuActionItem icon={IconShieldLock} onClick={onPromote} testId={`promote-account-${account.id}`}>
-          Promote to site admin
+          {t("pages.saasAdminPage.promoteToSiteAdmin")}
         </MenuActionItem>
       )}
       {account.siteAdmin && (
         <MenuActionItem icon={IconShieldLock} danger onClick={onDemote} testId={`demote-account-${account.id}`}>
-          Remove site admin access
+          {t("pages.saasAdminPage.removeSiteAdminAccess")}
         </MenuActionItem>
       )}
       <MenuActionItem icon={IconTrash} danger onClick={onDelete} testId={`delete-account-${account.id}`}>
-        Delete account
+        {t("pages.saasAdminPage.deleteAccount")}
       </MenuActionItem>
     </Menu>
   );
@@ -114,25 +115,25 @@ function dialogDetails(action: PendingAccountAction) {
   switch (action.type) {
     case "promote":
       return {
-        title: "Grant site admin access",
-        message: `Grant ${action.account.fullName} access to the site admin dashboard? Site admins can manage instance-wide settings and other privileged admin actions. Only grant this access to someone who should administer the whole site.`,
-        confirmText: "Grant access",
+        title: t("pages.saasAdminPage.grantSiteAdminAccess"),
+        message: t("pages.saasAdminPage.grantAccessToTheSiteAdmin", { v1: action.account.fullName }),
+        confirmText: t("pages.saasAdminPage.grantAccess"),
         variant: "default" as const,
         testId: "promote-site-admin-confirmation",
       };
     case "demote":
       return {
-        title: "Remove site admin access",
-        message: `Remove site admin access from ${action.account.fullName}? This will revoke access to the site admin dashboard and other privileged admin actions. Use this carefully.`,
-        confirmText: "Remove access",
+        title: t("pages.saasAdminPage.removeSiteAdminAccess"),
+        message: t("pages.saasAdminPage.removeSiteAdminAccessFromThis", { v1: action.account.fullName }),
+        confirmText: t("pages.saasAdminPage.removeAccess"),
         variant: "danger" as const,
         testId: "demote-site-admin-confirmation",
       };
     case "delete":
       return {
-        title: "Delete account",
-        message: `Delete ${action.account.fullName}? This will suspend all linked people, anonymize personal data, and revoke access permanently.`,
-        confirmText: "Delete account",
+        title: t("pages.saasAdminPage.deleteAccount"),
+        message: t("pages.saasAdminPage.deleteThisWillSuspendAllLinked", { v1: action.account.fullName }),
+        confirmText: t("pages.saasAdminPage.deleteAccount"),
         variant: "danger" as const,
         testId: "delete-account-confirmation",
       };
@@ -153,11 +154,11 @@ function successActionTitle(actionType: PendingAccountAction["type"]) {
 function successActionMessage(action: PendingAccountAction) {
   switch (action.type) {
     case "promote":
-      return `${action.account.fullName} is now a site admin.`;
+      return t("pages.saasAdminPage.isNowASiteAdmin", { v1: action.account.fullName });
     case "demote":
-      return `${action.account.fullName} no longer has site admin access.`;
+      return t("pages.saasAdminPage.noLongerHasSiteAdminAccess", { v1: action.account.fullName });
     case "delete":
-      return `${action.account.fullName} has been deleted.`;
+      return t("pages.saasAdminPage.hasBeenDeleted", { v1: action.account.fullName });
   }
 }
 

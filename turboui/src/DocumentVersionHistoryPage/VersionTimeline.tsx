@@ -8,6 +8,7 @@ import { Link } from "../Link";
 import { IconArrowRight } from "../icons";
 
 import { eventActionText, previousVersion } from "./types";
+import { t } from "../i18n";
 
 type Props = {
   versions: DocumentVersion[];
@@ -19,7 +20,11 @@ type Props = {
 
 export function VersionTimeline(props: Props) {
   return (
-    <nav aria-label="Version history" className="relative" data-test-id="version-timeline">
+    <nav
+      aria-label={t("turboui.documentVersionHistoryPage.versionHistory")}
+      className="relative"
+      data-test-id="version-timeline"
+    >
       <ol className="relative m-0 list-none space-y-0 p-0">
         {props.versions.map((version, index) => {
           const isLast = index === props.versions.length - 1;
@@ -40,7 +45,10 @@ export function VersionTimeline(props: Props) {
                 type="button"
                 className="absolute inset-0 z-0 cursor-pointer rounded-md"
                 aria-pressed={isSelected}
-                aria-label={`Preview version ${version.versionNumber}: ${actionText}`}
+                aria-label={t("turboui.documentVersionHistoryPage.previewVersion", {
+                  v1: version.versionNumber,
+                  v2: actionText,
+                })}
                 onClick={() => props.onSelectVersion(version.versionNumber)}
                 data-test-id={`select-version-${version.versionNumber}`}
               />
@@ -62,7 +70,7 @@ export function VersionTimeline(props: Props) {
                   </span>
                   {version.isCurrent && (
                     <span className="rounded-full border border-surface-outline bg-surface-base px-2 py-0.5 text-[11px] font-semibold text-content-dimmed">
-                      Latest
+                      {t("turboui.documentVersionHistoryPage.latest")}
                     </span>
                   )}
                 </div>

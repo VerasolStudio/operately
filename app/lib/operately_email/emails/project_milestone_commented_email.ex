@@ -1,6 +1,7 @@
 defmodule OperatelyEmail.Emails.ProjectMilestoneCommentedEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Projects, Updates}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -31,25 +32,25 @@ defmodule OperatelyEmail.Emails.ProjectMilestoneCommentedEmail do
 
   def action_text(milestone, action) do
     case action do
-      "none" -> "commented on the #{milestone.title} milestone"
-      "complete" -> "completed the #{milestone.title} milestone"
-      "reopen" -> "re-opened the #{milestone.title} milestone"
+      "none" -> t("projectMilestoneCommented.commentedOnTheMilestone", %{v1: milestone.title})
+      "complete" -> t("projectMilestoneCommented.completedTheMilestone", %{v1: milestone.title})
+      "reopen" -> t("projectMilestoneCommented.reOpenedTheMilestone", %{v1: milestone.title})
       _ -> raise "Unknown action: #{action}"
     end
   end
 
   def button_text(action) do
     case action do
-      "none" -> "View Comment"
-      _ -> "View Milestone"
+      "none" -> t("projectMilestoneCommented.viewComment")
+      _ -> t("projectMilestoneCommented.viewMilestone")
     end
   end
 
   def headline_text(milestone, action) do
     case action do
-      "none" -> "commented on the milestone \"#{milestone.title}\""
-      "complete" -> "completed the milestone \"#{milestone.title}\""
-      "reopen" -> "re-opened the milestone \"#{milestone.title}\""
+      "none" -> t("projectMilestoneCommented.commentedOnTheMilestone2", %{v1: milestone.title})
+      "complete" -> t("projectMilestoneCommented.completedTheMilestone2", %{v1: milestone.title})
+      "reopen" -> t("projectMilestoneCommented.reOpenedTheMilestone2", %{v1: milestone.title})
       _ -> raise "Unknown action: #{action}"
     end
   end

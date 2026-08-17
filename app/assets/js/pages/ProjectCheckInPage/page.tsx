@@ -37,6 +37,7 @@ import { useLoadedData, useRefresh } from "./loader";
 
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function Page() {
   const { checkIn } = useLoadedData();
@@ -155,14 +156,17 @@ function Navigation() {
 
   if (checkIn.space) {
     items.push({ to: paths.spacePath(checkIn.space.id), label: checkIn.space.name });
-    items.push({ to: paths.spaceWorkMapPath(checkIn.space.id, "projects" as const), label: "Work Map" });
+    items.push({
+      to: paths.spaceWorkMapPath(checkIn.space.id, "projects" as const),
+      label: t("pages.projectCheckInPage.workMap"),
+    });
   } else {
-    items.push({ to: paths.workMapPath("projects"), label: "Work Map" });
+    items.push({ to: paths.workMapPath("projects"), label: t("pages.projectCheckInPage.workMap") });
   }
 
   if (checkIn.project) {
     items.push({ to: paths.projectPath(checkIn.project.id), label: checkIn.project.name });
-    items.push({ to: paths.projectCheckInsPath(checkIn.project.id), label: "Check-Ins" });
+    items.push({ to: paths.projectCheckInsPath(checkIn.project.id), label: t("pages.projectCheckInPage.checkIns") });
   }
 
   return <Paper.Navigation items={items} />;
@@ -185,7 +189,7 @@ function Options({ showDeleteModal }: { showDeleteModal: () => void }) {
       {canEdit && (
         <PageOptions.Link
           icon={IconEdit}
-          title={"Edit"}
+          title={t("pages.projectCheckInPage.edit")}
           to={paths.projectCheckInEditPath(checkIn.id!)}
           testId="edit-check-in"
           keepOutsideOnBigScreen
@@ -222,9 +226,15 @@ function DeleteCheckInModal({ isOpen, toggleModal }: DeleteCheckInModalProps) {
     submit: async () => {
       await remove({ checkInId: checkIn.id });
       if (checkIn.state === "draft" || checkIn.state === "scheduled") {
-        showSuccessToast("Draft discarded", "The draft has been discarded.");
+        showSuccessToast(
+          t("pages.projectCheckInPage.draftDiscarded"),
+          t("pages.projectCheckInPage.theDraftHasBeenDiscarded"),
+        );
       } else {
-        showSuccessToast("Check-in deleted", "The check-in has been successfully deleted.");
+        showSuccessToast(
+          t("pages.projectCheckInPage.checkInDeleted"),
+          t("pages.projectCheckInPage.theCheckInHasBeenSuccessfully"),
+        );
       }
       navigate(paths.projectCheckInsPath(checkIn.project?.id!));
     },
@@ -240,7 +250,7 @@ function DeleteCheckInModal({ isOpen, toggleModal }: DeleteCheckInModalProps) {
         </p>
         <Forms.Submit
           saveText={checkIn.state === "draft" || checkIn.state === "scheduled" ? "Discard draft" : "Delete"}
-          cancelText="Cancel"
+          cancelText={t("pages.projectCheckInPage.cancel")}
         />
       </Forms.Form>
     </Modal>

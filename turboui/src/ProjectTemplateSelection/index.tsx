@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import * as Forms from "../Forms";
+import { t } from "../i18n";
 
 export namespace ProjectTemplateSelection {
   export interface Template {
@@ -42,10 +43,10 @@ export function ProjectTemplateSelection({ spaceId, templates }: ProjectTemplate
   return (
     <>
       <Forms.SelectBox
-        label="Template"
+        label={t("turboui.projectTemplateSelection.template")}
         field="template"
         options={[
-          { value: "", label: "No template" },
+          { value: "", label: t("turboui.projectTemplateSelection.noTemplate") },
           ...compatibleTemplates.map((template) => ({ value: template.id, label: template.name })),
         ]}
       />
@@ -74,7 +75,7 @@ function SelectedTemplateFields({
       <InactivePeopleWarning summary={peopleSummary} />
       <InactiveDiscussionAuthorsWarning count={inactiveDiscussionCount} />
       <Forms.DateInput
-        label="Project start date"
+        label={t("turboui.projectTemplateSelection.projectStartDate")}
         field="startDate"
         required
         requiredMessage="Select a project start date."
@@ -105,9 +106,15 @@ function InactivePeopleWarning({ summary }: { summary?: ProjectTemplateSelection
   if (!summary || summary.personCount === 0) return null;
 
   const people =
-    summary.personCount === 1 ? "1 person in this template is" : `${summary.personCount} people in this template are`;
+    summary.personCount === 1
+      ? "1 person in this template is"
+      : t("turboui.projectTemplateSelection.peopleInThisTemplateAre", { v1: summary.personCount });
   const effects = [
-    summary.roleCount === 1 ? "project role" : summary.roleCount > 1 ? `${summary.roleCount} project roles` : null,
+    summary.roleCount === 1
+      ? "project role"
+      : summary.roleCount > 1
+        ? t("turboui.projectTemplateSelection.projectRoles", { v1: summary.roleCount })
+        : null,
     summary.taskCount === 1 ? "1 task" : summary.taskCount > 1 ? `${summary.taskCount} tasks` : null,
   ].filter((effect): effect is string => effect !== null);
 

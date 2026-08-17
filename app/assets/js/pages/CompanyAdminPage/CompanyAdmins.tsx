@@ -5,6 +5,7 @@ import { Avatar } from "turboui";
 
 import { useLoadedData } from "./loader";
 import { Section } from "./Section";
+import { t } from "@/i18n";
 
 export function CompanyAdmins() {
   const { company } = useLoadedData();
@@ -13,7 +14,7 @@ export function CompanyAdmins() {
   if (company.admins.length === 0) return null;
 
   return (
-    <Section title="Administrators">
+    <Section title={t("pages.companyAdminPage.administrators")}>
       <PeopleList people={company.admins || []} />
     </Section>
   );
@@ -26,7 +27,7 @@ export function CompanyOwners() {
   if (company.owners.length === 0) return null;
 
   return (
-    <Section title="Account Owners">
+    <Section title={t("pages.companyAdminPage.accountOwners")}>
       <PeopleList people={company.owners || []} />
     </Section>
   );

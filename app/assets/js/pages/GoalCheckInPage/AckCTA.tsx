@@ -5,6 +5,7 @@ import * as Pages from "@/components/Pages";
 import { PrimaryButton } from "turboui";
 
 import { useLoadedData, useRefresh } from "./loader";
+import { t } from "@/i18n";
 
 //
 // There are two ways in which the AckCTA component is used:
@@ -35,7 +36,7 @@ export function AckCTA() {
   return (
     <div className="flex flex-row items-center justify-center mt-8 mb-4">
       <PrimaryButton testId="acknowledge-check-in" onClick={ackHandler}>
-        Acknowledge this Check-In
+        {t("pages.goalCheckInPage.acknowledgeThisCheckIn")}
       </PrimaryButton>
     </div>
   );

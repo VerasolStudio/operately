@@ -5,6 +5,8 @@ import { FormattedTime } from "turboui";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 import { feedTitle, projectLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 const ProjectDueDateUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -53,9 +55,9 @@ const ProjectDueDateUpdating: ActivityHandler = {
     if (oldDueDate) {
       const time = <FormattedTime {...formattedTimePreferences} time={oldDueDate} format="short-date" />;
 
-      return <>Previously the due date was {time}</>;
+      return <>{t("features.activities.previouslyTheDueDateWas", { v1: time })}</>;
     } else {
-      return <>Previously had no due date</>;
+      return <>{t("features.activities.previouslyHadNoDueDate")}</>;
     }
   },
 
@@ -79,12 +81,15 @@ const ProjectDueDateUpdating: ActivityHandler = {
     if (newDueDate) {
       return (
         <>
-          Updated due date for {projectName} to{" "}
-          <FormattedTime {...formattedTimePreferences} time={newDueDate} format="short-date" />
+          <Trans
+            i18nKey="features.activities.updatedDueDateForTo"
+            values={{ v1: projectName }}
+            components={[<FormattedTime {...formattedTimePreferences} time={newDueDate} format="short-date" />]}
+          />
         </>
       );
     } else {
-      return <>Cleared due date for {projectName}</>;
+      return <>{t("features.activities.clearedDueDateFor", { v1: projectName })}</>;
     }
   },
 

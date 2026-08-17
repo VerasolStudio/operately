@@ -1,6 +1,7 @@
 import React from "react";
 import { DateField } from "../index";
 import { OptionButton } from "./OptionButton";
+import { t } from "../../i18n";
 
 interface DateTypeSelectorProps {
   dateType: DateField.DateType;
@@ -15,7 +16,7 @@ export const DateTypeSelector: React.FC<DateTypeSelectorProps> = ({ dateType, da
 
   return (
     <div className="mb-3 border-b border-stroke-dimmed pb-2">
-      <label className="block text-xs font-medium text-content-base mb-1.5">Date Type</label>
+      <label className="block text-xs font-medium text-content-base mb-1.5">{t("turboui.dateField.dateType")}</label>
       <div className="flex overflow-hidden rounded-md bg-surface-base">
         {dateTypes.map((type) => (
           <OptionButton

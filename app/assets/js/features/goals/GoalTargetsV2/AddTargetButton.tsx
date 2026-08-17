@@ -2,6 +2,7 @@ import React from "react";
 
 import { IconPlus } from "turboui";
 import { useTargetsContext } from "./TargetsContext";
+import { t } from "@/i18n";
 
 export function AddTargetButton({ display }: { display: boolean }) {
   const { addTarget } = useTargetsContext();
@@ -17,7 +18,7 @@ export function AddTargetButton({ display }: { display: boolean }) {
       <div className="flex flex-col flex-1">
         <div className="flex items-center gap-1 text-content-dimmed font-medium">
           <IconPlus size={16} className="text-content-dimmed shrink-0" />
-          Add target
+          {t("features.goals.addTarget")}
         </div>
       </div>
     </div>

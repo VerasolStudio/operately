@@ -3,6 +3,7 @@ import Api, { SubscriptionList } from "@/api";
 import { showErrorToast, SidebarNotificationSection } from "turboui";
 import { useMe } from "@/contexts/CurrentCompanyContext";
 import { PageCache } from "@/routes/PageCache";
+import { t } from "@/i18n";
 
 interface UseSubscriptionOptions {
   subscriptionList?: SubscriptionList | null;
@@ -69,10 +70,10 @@ export function useSubscription({
 
         console.error(`Failed to toggle ${entityType} subscription`, error);
         showErrorToast(
-          "Error",
+          t("app.useSubscription.error"),
           nextIsSubscribed
-            ? `Failed to subscribe to ${entityType} notifications.`
-            : `Failed to unsubscribe from ${entityType} notifications.`,
+            ? t("app.useSubscription.failedToSubscribeToNotifications", { v1: entityType })
+            : t("app.useSubscription.failedToUnsubscribeFromNotifications", { v1: entityType }),
         );
       }
     },

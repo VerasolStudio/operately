@@ -1,15 +1,15 @@
 <%= if @reviewer == nil do %>
-  <%= title("#{short_name(@author)} removed the reviewer on #{@project.name}") %>
+  <%= title(t("projectReviewerUpdating.v1RemovedTheReviewerOnV2", %{v1: short_name(@author), v2: @project.name})) %>
 <% else %>
   <%= if @reviewer.id == @person.id do %>
-    <%= title("#{short_name(@author)} assigned you as the reviewer on #{@project.name}") %>
+    <%= title(t("projectReviewerUpdating.v1AssignedYouAsTheReviewer", %{v1: short_name(@author), v2: @project.name})) %>
   <% else %>
-    <%= title("#{short_name(@author)} assigned #{short_name(@reviewer)} as the reviewer on #{@project.name}") %>
+    <%= title(t("projectReviewerUpdating.v1AssignedV2AsTheReviewer", %{v1: short_name(@author), v2: short_name(@reviewer), v3: @project.name})) %>
   <% end %>
 <% end %>
 
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@cta_url, "View Project") %>
+  <%= cta_button(@cta_url, t("projectReviewerUpdating.viewProject")) %>
 <% end %>

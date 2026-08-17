@@ -10,6 +10,7 @@ import { serializeContextualDate } from "../contextualDates";
 
 import { DateField, showErrorToast, TaskBoard, TaskPage } from "turboui";
 import { serializeTaskDescription } from "./descriptionSerialization";
+import { t } from "@/i18n";
 
 interface Attrs {
   backendTasks: Tasks.Task[];
@@ -98,7 +99,7 @@ export function useSpaceTasksForTurboUi({ backendTasks, space, cacheKey, refresh
       return { success: true };
     } catch (e) {
       console.error("Failed to create task", e);
-      showErrorToast("Error", "Failed to create task");
+      showErrorToast(t("app.useSpaceTasksForTurboUi.error"), t("app.useSpaceTasksForTurboUi.failedToCreateTask"));
       restoreSnapshot(snapshot);
       return { success: false };
     }
@@ -123,7 +124,7 @@ export function useSpaceTasksForTurboUi({ backendTasks, space, cacheKey, refresh
       return true;
     } catch (e) {
       console.error("Failed to update task name", e);
-      showErrorToast("Error", "Failed to update task name");
+      showErrorToast(t("app.useSpaceTasksForTurboUi.error"), t("app.useSpaceTasksForTurboUi.failedToUpdateTaskName"));
       restoreSnapshot(snapshot);
       return false;
     }
@@ -148,7 +149,10 @@ export function useSpaceTasksForTurboUi({ backendTasks, space, cacheKey, refresh
       return true;
     } catch (e) {
       console.error("Failed to update task due date", e);
-      showErrorToast("Error", "Failed to update task due date");
+      showErrorToast(
+        t("app.useSpaceTasksForTurboUi.error"),
+        t("app.useSpaceTasksForTurboUi.failedToUpdateTaskDueDate"),
+      );
       restoreSnapshot(snapshot);
       return false;
     }
@@ -173,7 +177,10 @@ export function useSpaceTasksForTurboUi({ backendTasks, space, cacheKey, refresh
       return true;
     } catch (e) {
       console.error("Failed to update task reminders", e);
-      showErrorToast("Error", "Failed to update task reminders");
+      showErrorToast(
+        t("app.useSpaceTasksForTurboUi.error"),
+        t("app.useSpaceTasksForTurboUi.failedToUpdateTaskReminders"),
+      );
       restoreSnapshot(snapshot);
       return false;
     }
@@ -198,7 +205,10 @@ export function useSpaceTasksForTurboUi({ backendTasks, space, cacheKey, refresh
       return true;
     } catch (e) {
       console.error("Failed to update task assignee", e);
-      showErrorToast("Error", "Failed to update task assignee");
+      showErrorToast(
+        t("app.useSpaceTasksForTurboUi.error"),
+        t("app.useSpaceTasksForTurboUi.failedToUpdateTaskAssignee"),
+      );
       restoreSnapshot(snapshot);
       return false;
     }
@@ -230,7 +240,7 @@ export function useSpaceTasksForTurboUi({ backendTasks, space, cacheKey, refresh
       return true;
     } catch (e) {
       console.error("Failed to update task status", e);
-      showErrorToast("Error", "Failed to update task status");
+      showErrorToast(t("app.useSpaceTasksForTurboUi.error"), t("app.useSpaceTasksForTurboUi.failedToUpdateTaskStatus"));
       restoreSnapshot(snapshot);
       return false;
     }
@@ -247,7 +257,7 @@ export function useSpaceTasksForTurboUi({ backendTasks, space, cacheKey, refresh
       await invalidateAndRefresh();
     } catch (e) {
       console.error("Failed to delete task", e);
-      showErrorToast("Error", "Failed to delete task");
+      showErrorToast(t("app.useSpaceTasksForTurboUi.error"), t("app.useSpaceTasksForTurboUi.failedToDeleteTask"));
       restoreSnapshot(snapshot);
     }
   };
@@ -271,7 +281,10 @@ export function useSpaceTasksForTurboUi({ backendTasks, space, cacheKey, refresh
       return true;
     } catch (e) {
       console.error("Failed to update task description", e);
-      showErrorToast("Error", "Failed to update task description");
+      showErrorToast(
+        t("app.useSpaceTasksForTurboUi.error"),
+        t("app.useSpaceTasksForTurboUi.failedToUpdateTaskDescription"),
+      );
       return false;
     }
   };

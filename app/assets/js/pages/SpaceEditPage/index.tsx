@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 import { Forms } from "turboui";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export default { name: "SpaceEditPage", loader, Page } as PageModule;
 
 interface LoaderResult {
@@ -53,10 +54,10 @@ function Page() {
           <Forms.Form form={form}>
             <div className="font-extrabold text-2xl text-center mb-4">Editing {space.name}</div>
             <Forms.FieldGroup layout="vertical">
-              <Forms.TextInput label="Name" field={"name"} />
-              <Forms.TextInput label="Purpose" field={"purpose"} />
+              <Forms.TextInput label={t("pages.spaceEditPage.name")} field={"name"} />
+              <Forms.TextInput label={t("pages.spaceEditPage.purpose")} field={"purpose"} />
             </Forms.FieldGroup>
-            <Forms.Submit saveText="Save" />
+            <Forms.Submit saveText={t("pages.spaceEditPage.save")} />
           </Forms.Form>
         </Paper.Body>
       </Paper.Root>

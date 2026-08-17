@@ -7,6 +7,7 @@ import { InputField } from "./FieldGroup";
 import { useFieldError, useFieldValue } from "./context";
 import type { DateInputProps } from "./types";
 import { useValidation, validatePresence } from "./validation";
+import { t } from "../i18n";
 
 export function DateInput({ field, label, testId, hidden, required, requiredMessage }: DateInputProps) {
   const [value, setValue] = useFieldValue<string>(field);
@@ -22,7 +23,7 @@ export function DateInput({ field, label, testId, hidden, required, requiredMess
         onDateSelect={(date) => setValue(date ? toDateWithoutTime(date.date) : "")}
         variant="form-input"
         calendarOnly
-        placeholder="Select a date"
+        placeholder={t("turboui.forms.selectADate")}
         testId={testId ?? createTestId(field)}
         error={!!error}
         ariaLabel={label}

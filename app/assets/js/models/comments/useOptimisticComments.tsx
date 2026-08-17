@@ -4,6 +4,7 @@ import Api from "@/api";
 import { useMe } from "@/contexts/CurrentCompanyContext";
 import * as Comments from "@/models/comments";
 import { showErrorToast } from "turboui";
+import { t } from "@/i18n";
 
 export function useOptimisticComments(opts: {
   taskId: string | null;
@@ -24,7 +25,7 @@ export function useOptimisticComments(opts: {
   const addComment = React.useCallback(
     async (content: any) => {
       if (!taskId || !me) {
-        showErrorToast("Error", "Failed to add comment.");
+        showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToAddComment"));
         return false;
       }
 
@@ -52,7 +53,7 @@ export function useOptimisticComments(opts: {
 
         if (!realId) {
           setComments((prev) => prev.filter((c) => c.id !== tempId));
-          showErrorToast("Error", "Failed to add comment.");
+          showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToAddComment"));
           return false;
         }
 
@@ -64,7 +65,7 @@ export function useOptimisticComments(opts: {
         return true;
       } catch {
         setComments((prev) => prev.filter((c) => c.id !== tempId));
-        showErrorToast("Error", "Failed to add comment.");
+        showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToAddComment"));
         return false;
       }
     },
@@ -77,7 +78,7 @@ export function useOptimisticComments(opts: {
       const prevComment = comments.find((c) => c.id === commentId) ?? null;
 
       if (!taskId || !prevComment) {
-        showErrorToast("Error", "Failed to edit comment.");
+        showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToEditComment"));
         return false;
       }
 
@@ -94,7 +95,7 @@ export function useOptimisticComments(opts: {
         return true;
       } catch {
         setComments((prev) => prev.map((c) => (c.id === commentId ? prevComment : c)));
-        showErrorToast("Error", "Failed to edit comment.");
+        showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToEditComment"));
         return false;
       }
     },
@@ -106,7 +107,7 @@ export function useOptimisticComments(opts: {
       const prevComment = comments.find((c) => c.id === commentId) ?? null;
 
       if (!taskId || !prevComment) {
-        showErrorToast("Error", "Failed to delete comment.");
+        showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToDeleteComment"));
         return;
       }
 
@@ -121,7 +122,7 @@ export function useOptimisticComments(opts: {
         onAfterMutation?.();
       } catch {
         setComments((prev) => [prevComment, ...prev]);
-        showErrorToast("Error", "Failed to delete comment.");
+        showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToDeleteComment"));
       }
     },
     [comments, onAfterMutation, parentType, taskId],
@@ -130,13 +131,13 @@ export function useOptimisticComments(opts: {
   const addReaction = React.useCallback(
     async (commentId: string, emoji: string) => {
       if (!taskId || !me) {
-        showErrorToast("Error", "Failed to add reaction.");
+        showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToAddReaction"));
         return;
       }
 
       const prevComment = comments.find((c) => c.id === commentId) ?? null;
       if (!prevComment || commentId.startsWith("temp-")) {
-        showErrorToast("Error", "Failed to add reaction.");
+        showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToAddReaction"));
         return;
       }
 
@@ -173,7 +174,7 @@ export function useOptimisticComments(opts: {
                 : c,
             ),
           );
-          showErrorToast("Error", "Failed to add reaction.");
+          showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToAddReaction"));
           return;
         }
 
@@ -200,7 +201,7 @@ export function useOptimisticComments(opts: {
               : c,
           ),
         );
-        showErrorToast("Error", "Failed to add reaction.");
+        showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToAddReaction"));
       }
     },
     [comments, me, onAfterMutation, taskId],
@@ -209,7 +210,7 @@ export function useOptimisticComments(opts: {
   const removeReaction = React.useCallback(
     async (_commentId: string, reactionId: string) => {
       if (!taskId) {
-        showErrorToast("Error", "Failed to remove reaction.");
+        showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToRemoveReaction"));
         return;
       }
 
@@ -240,7 +241,7 @@ export function useOptimisticComments(opts: {
             }),
           );
         }
-        showErrorToast("Error", "Failed to remove reaction.");
+        showErrorToast(t("app.useOptimisticComments.error"), t("app.useOptimisticComments.failedToRemoveReaction"));
       }
     },
     [onAfterMutation, taskId],

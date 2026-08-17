@@ -27,6 +27,8 @@ import classNames from "classnames";
 import { useNavigate } from "react-router";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 export default { name: "DiscussionDraftsPage", loader, Page } as PageModule;
 
 interface LoadedData {
@@ -73,7 +75,7 @@ function Navigation() {
     <Paper.Navigation
       items={[
         { to: paths.spacePath(space.id!), label: space.name! },
-        { to: paths.spaceDiscussionsPath(space.id!), label: "Discussions" },
+        { to: paths.spaceDiscussionsPath(space.id!), label: t("pages.discussionDraftsPage.discussions") },
       ]}
     />
   );
@@ -81,7 +83,12 @@ function Navigation() {
 
 function Header() {
   return (
-    <Paper.Header title="Your Drafts" layout="title-center-actions-left" underline actions={<NewDiscussionButton />} />
+    <Paper.Header
+      title={t("pages.discussionDraftsPage.yourDrafts")}
+      layout="title-center-actions-left"
+      underline
+      actions={<NewDiscussionButton />}
+    />
   );
 }
 
@@ -91,13 +98,17 @@ function NewDiscussionButton() {
 
   return (
     <PrimaryButton linkTo={paths.discussionNewPath(space.id!)} size="sm" testId="new-discussion">
-      New Discussion
+      {t("pages.discussionDraftsPage.newDiscussion")}
     </PrimaryButton>
   );
 }
 
 function ZeroDiscussions() {
-  return <div className="text-center text-base font-medium mt-28">You don't have any drafts.</div>;
+  return (
+    <div className="text-center text-base font-medium mt-28">
+      {t("pages.discussionDraftsPage.youDonTHaveAnyDrafts")}
+    </div>
+  );
 }
 
 function DiscussionList() {
@@ -154,13 +165,16 @@ function DiscussionListItem({ discussion }: { discussion: Discussion }) {
           <div className="font-semibold leading-none mb-1">{discussion.title}</div>
           <div className="break-words line-clamp-2">
             <span className="font-medium text-content-dimmed">
-              Last edited on{" "}
-              <FormattedTime
-                {...formattedTimePreferences}
-                time={discussion.updatedAt!}
-                format="relative-time-or-date"
+              <Trans
+                i18nKey="pages.discussionDraftsPage.lastEditedOn"
+                components={[
+                  <FormattedTime
+                    {...formattedTimePreferences}
+                    time={discussion.updatedAt!}
+                    format="relative-time-or-date"
+                  />,
+                ]}
               />{" "}
-              &mdash;{" "}
             </span>
             {truncateString(contentSnippet, 60)}
           </div>
@@ -189,8 +203,8 @@ function DiscussionDraftOptions({ discussion }: { discussion: Discussion }) {
           customTrigger={
             <button
               type="button"
-              title="Draft actions"
-              aria-label="Draft actions"
+              title={t("pages.discussionDraftsPage.draftActions")}
+              aria-label={t("pages.discussionDraftsPage.draftActions")}
               className="w-6 h-6 flex items-center justify-center rounded-full text-content-dimmed hover:text-content-base hover:bg-surface-dimmed focus:text-content-base focus:bg-surface-dimmed focus:outline-none"
             >
               <IconDots size={16} />
@@ -203,7 +217,7 @@ function DiscussionDraftOptions({ discussion }: { discussion: Discussion }) {
             icon={IconTrash}
             danger
           >
-            Discard draft
+            {t("pages.discussionDraftsPage.discardDraft")}
           </MenuActionItem>
         </Menu>
       </div>

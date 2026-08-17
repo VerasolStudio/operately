@@ -8,6 +8,7 @@ import { feedTitle } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
 import { EditedResourceList } from "../resourceHubEditedResources";
 import { resourceHubLocationName, resourceHubPathOrParent, visibleParentDescriptor } from "../resourceHubActivity";
+import { t } from "@/i18n";
 
 const ResourceHubLinkEdited: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -107,7 +108,7 @@ function NameEdited({ previousName, currentName }: { previousName: string; curre
 
   return (
     <div>
-      <b>Name: </b>
+      <b>{t("features.activities.name")} </b>
       <span className="line-through">{previousName}</span> → {currentName}
     </div>
   );
@@ -118,7 +119,7 @@ function UrlEdited({ previousUrl, currentUrl }: { previousUrl: string; currentUr
 
   return (
     <div>
-      <b>Url: </b>
+      <b>{t("features.activities.url")} </b>
       <span className="line-through">{previousUrl}</span> → {currentUrl}
     </div>
   );
@@ -129,7 +130,7 @@ function TypeEdited({ previousType, currentType }: { previousType: string; curre
 
   return (
     <div>
-      <b>Type: </b>
+      <b>{t("features.activities.type")} </b>
       <span className="line-through">{previousType}</span> → {currentType}
     </div>
   );

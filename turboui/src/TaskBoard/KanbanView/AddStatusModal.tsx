@@ -10,6 +10,7 @@ import {
   STATUS_APPEARANCES,
 } from "../../StatusCustomization/StatusAppearancePicker";
 import { createTestId } from "../../TestableElement";
+import { t } from "../../i18n";
 
 interface Props {
   isOpen: boolean;
@@ -112,19 +113,15 @@ export function AddStatusModal({
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-content-base">Name</label>
+          <label className="block text-sm font-medium text-content-base">{t("turboui.taskBoard.name")}</label>
           <div className="flex items-center gap-2">
-            <StatusAppearancePicker
-              value={appearance}
-              onChange={setAppearance}
-              testId={"status-appearance-trigger"}
-            />
+            <StatusAppearancePicker value={appearance} onChange={setAppearance} testId={"status-appearance-trigger"} />
             <div className="flex-1 flex items-center gap-2 rounded-lg border border-surface-outline bg-surface-base px-3 py-1.5">
               <input
                 type="text"
                 value={label}
                 onChange={(event) => setLabel(event.target.value)}
-                placeholder="Status name"
+                placeholder={t("turboui.taskBoard.statusName")}
                 className="flex-1 bg-transparent border-none outline-none text-sm text-content-base placeholder:text-content-dimmed"
                 data-test-id={"status-name-input"}
               />
@@ -134,7 +131,7 @@ export function AddStatusModal({
 
         <div className="flex justify-end gap-3 pt-2">
           <SecondaryButton type="button" onClick={onClose} testId={"status-cancel"}>
-            Cancel
+            {t("turboui.taskBoard.cancel")}
           </SecondaryButton>
           <PrimaryButton
             type="submit"

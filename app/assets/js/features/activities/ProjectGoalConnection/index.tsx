@@ -3,6 +3,7 @@ import type { Activity } from "@/models/activities";
 import type { ActivityHandler } from "../interfaces";
 
 import { feedTitle, goalLink, projectLink } from "../feedItemLinks";
+import { t } from "@/i18n";
 
 const ProjectGoalConnection: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -102,17 +103,19 @@ const ProjectGoalConnection: ActivityHandler = {
 
     if (connectedGoalName) {
       return projectName
-        ? `Connected ${projectName} project to the ${connectedGoalName} goal`
-        : `Connected a project to the ${connectedGoalName} goal`;
+        ? t("features.activities.connectedProjectToTheGoal", { v1: projectName, v2: connectedGoalName })
+        : t("features.activities.connectedAProjectToTheGoal", { v1: connectedGoalName });
     }
 
     if (disconnectedGoalName) {
       return projectName
-        ? `Disconnected ${projectName} project from the ${disconnectedGoalName} goal`
-        : `Disconnected a project from the ${disconnectedGoalName} goal`;
+        ? t("features.activities.disconnectedProjectFromTheGoal", { v1: projectName, v2: disconnectedGoalName })
+        : t("features.activities.disconnectedAProjectFromTheGoal", { v1: disconnectedGoalName });
     }
 
-    return projectName ? `Updated the parent goal of ${projectName} project` : "Updated a project's parent goal";
+    return projectName
+      ? t("features.activities.updatedTheParentGoalOfProject", { v1: projectName })
+      : "Updated a project's parent goal";
   },
 
   NotificationLocation({ activity }: { activity: Activity }) {

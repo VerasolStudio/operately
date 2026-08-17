@@ -1,10 +1,19 @@
+import { uiLocale } from "./formatting";
 // Formats a date as "Mon 1st", "Apr 2nd", etc. for UI display.
 // Adds the correct English ordinal suffix to the day (st, nd, rd, th).
 // Example: formatDateWithDaySuffix(new Date(2025, 3, 17)) => "Apr 17th"
 // Intended for concise, human-friendly date display in check-ins, feeds, etc.
 export function formatDateWithDaySuffix(date: Date) {
   const options: Intl.DateTimeFormatOptions = { month: "short", day: "numeric" };
-  const formatted = date.toLocaleDateString("en-US", options);
+  const locale = uiLocale();
+
+  // The ordinal suffix below is English-only, so other locales get the plain
+  // localized date instead.
+  if (!locale.toLowerCase().startsWith("en")) {
+    return date.toLocaleDateString(locale, options);
+  }
+
+  const formatted = date.toLocaleDateString(locale, options);
   const day = date.getDate();
   let suffix = "th";
   if (day % 10 === 1 && day !== 11) suffix = "st";

@@ -27,6 +27,7 @@ import { SwitchToggle } from "../SwitchToggle";
 import { createTestId } from "../TestableElement";
 import { calculateTargetProgress, formatValueAndUnit } from "../utils/goalTargetProgress";
 import { formatNumber } from "../utils/formatting";
+import { t } from "../i18n";
 
 export namespace GoalTargetList {
   export type Target = {
@@ -170,8 +171,8 @@ function TargetListHeader() {
 
   return (
     <div className={className}>
-      <div className="flex-1">Name</div>
-      <div className="w-40 text-right">Current value</div>
+      <div className="flex-1">{t("turboui.goalTargetList.name")}</div>
+      <div className="w-40 text-right">{t("turboui.goalTargetList.currentValue")}</div>
     </div>
   );
 }
@@ -233,16 +234,16 @@ function TargetAdd({ state }: { state: State }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Textarea
           testId="target-name"
-          label="Name"
+          label={t("turboui.goalTargetList.name")}
           autoFocus
-          placeholder="e.g. Increase monthly signup count"
+          placeholder={t("turboui.goalTargetList.eGIncreaseMonthlySignupCount")}
           error={errors.name?.message as string}
           {...register("name", { required: "Can't be empty" })}
         />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-2">
           <Textfield
             testId={"target-from"}
-            label="Start"
+            label={t("turboui.goalTargetList.start")}
             error={errors.from?.message as string}
             {...register("from", {
               required: "Can't be empty",
@@ -252,7 +253,7 @@ function TargetAdd({ state }: { state: State }) {
           />
           <Textfield
             testId={"target-to"}
-            label="Target"
+            label={t("turboui.goalTargetList.target")}
             error={errors.to?.message as string}
             {...register("to", {
               required: "Can't be empty",
@@ -262,20 +263,20 @@ function TargetAdd({ state }: { state: State }) {
           />
           <Textfield
             testId={"target-unit"}
-            label="Unit"
+            label={t("turboui.goalTargetList.unit")}
             error={errors.unit?.message as string}
             {...register("unit", { required: "Can't be empty" })}
             placeholder="e.g. users"
           />
         </div>
         <div className="flex items-center gap-2 mt-4">
-          <SwitchToggle value={createMore} setValue={setCreateMore} label="Create more" />
+          <SwitchToggle value={createMore} setValue={setCreateMore} label={t("turboui.goalTargetList.createMore")} />
           <div className="flex-1"></div>
           <SecondaryButton size="xs" onClick={() => state.cancelAdd()} type="button" testId="cancel">
-            Cancel
+            {t("turboui.goalTargetList.cancel")}
           </SecondaryButton>
           <PrimaryButton size="xs" type="submit" testId="save">
-            Add Target
+            {t("turboui.goalTargetList.addTarget")}
           </PrimaryButton>
         </div>
       </form>
@@ -306,7 +307,7 @@ function TargetUpdate({ state, target }: { state: State; target: TargetState }) 
         <Textfield
           testId="target-value"
           autoFocus
-          label="New Value"
+          label={t("turboui.goalTargetList.newValue")}
           error={errors.value?.message as string}
           addonRight={target.unit}
           textRight
@@ -317,10 +318,10 @@ function TargetUpdate({ state, target }: { state: State; target: TargetState }) 
         />
         <div className="flex items-center gap-2 justify-end mt-4">
           <SecondaryButton size="xs" onClick={() => state.cancelEdit(target.id)} type="button" testId="cancel">
-            Cancel
+            {t("turboui.goalTargetList.cancel")}
           </SecondaryButton>
           <PrimaryButton size="xs" type="submit" testId="save">
-            Save
+            {t("turboui.goalTargetList.save")}
           </PrimaryButton>
         </div>
       </form>
@@ -355,7 +356,7 @@ function TargetEdit({ state, target }: { state: State; target: TargetState }) {
     <InlineModal index={target.index}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Textarea
-          label="Name"
+          label={t("turboui.goalTargetList.name")}
           autoFocus
           error={errors.name?.message as string}
           {...register("name", { required: "Can't be empty" })}
@@ -363,7 +364,7 @@ function TargetEdit({ state, target }: { state: State; target: TargetState }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-2">
           <Textfield
-            label="Start"
+            label={t("turboui.goalTargetList.start")}
             error={errors.from?.message as string}
             {...register("from", {
               required: "Can't be empty",
@@ -371,7 +372,7 @@ function TargetEdit({ state, target }: { state: State; target: TargetState }) {
             })}
           />
           <Textfield
-            label="Target"
+            label={t("turboui.goalTargetList.target")}
             error={errors.to?.message as string}
             {...register("to", {
               required: "Can't be empty",
@@ -379,17 +380,17 @@ function TargetEdit({ state, target }: { state: State; target: TargetState }) {
             })}
           />
           <Textfield
-            label="Unit"
+            label={t("turboui.goalTargetList.unit")}
             error={errors.unit?.message as string}
             {...register("unit", { required: "Can't be empty" })}
           />
         </div>
         <div className="flex items-center gap-2 justify-end mt-4">
           <SecondaryButton size="xs" onClick={() => state.cancelEdit(target.id)} type="button">
-            Cancel
+            {t("turboui.goalTargetList.cancel")}
           </SecondaryButton>
           <PrimaryButton size="xs" type="submit">
-            Save
+            {t("turboui.goalTargetList.save")}
           </PrimaryButton>
         </div>
       </form>
@@ -401,15 +402,15 @@ function TargetDelete({ state, target }: { state: State; target: TargetState }) 
   return (
     <InlineModal index={target.index}>
       <div className="mb-2 font-bold">Delete {target.name} target?</div>
-      <p>This will remove your target and all associated progress tracking.</p>
+      <p>{t("turboui.goalTargetList.thisWillRemoveYourTargetAnd")}</p>
 
       <div className="flex items-center gap-2 justify-end mt-6">
         <SecondaryButton size="xs" onClick={() => state.cancelDelete(target.id)}>
-          Cancel
+          {t("turboui.goalTargetList.cancel")}
         </SecondaryButton>
 
         <DangerButton size="xs" onClick={() => state.deleteTarget(target.id)} testId="confirm">
-          Yes, Delete
+          {t("turboui.goalTargetList.yesDelete")}
         </DangerButton>
       </div>
     </InlineModal>
@@ -517,7 +518,7 @@ function TargetDetails({ state, target }: { state: State; target: TargetState })
   return (
     <div className="text-sm ml-6 rounded-lg my-2">
       <div className="flex items-center gap-2">
-        <div className="w-20 font-semibold">Target</div>
+        <div className="w-20 font-semibold">{t("turboui.goalTargetList.target")}</div>
         <div>
           From <span className="font-semibold">{formatNumber(from!)}</span> {directionText}{" "}
           <span className="font-semibold">{formatNumber(to!)}</span>
@@ -526,7 +527,7 @@ function TargetDetails({ state, target }: { state: State; target: TargetState })
       </div>
 
       <div className="flex items-center gap-2 mt-1">
-        <div className="w-20 font-semibold">Current</div>
+        <div className="w-20 font-semibold">{t("turboui.goalTargetList.current")}</div>
         <div>
           {formatValueAndUnit(value, unit)}{" "}
           <span className={progress < 0 ? "text-red-500" : ""}>({progress.toFixed(1)}%)</span>

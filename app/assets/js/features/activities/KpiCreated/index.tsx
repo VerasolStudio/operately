@@ -5,6 +5,7 @@ import type { Activity } from "@/models/activities";
 import type { ActivityHandler } from "../interfaces";
 
 import { feedTitle, spaceLink } from "../feedItemLinks";
+import { t } from "@/i18n";
 
 const KpiCreated: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -56,7 +57,7 @@ const KpiCreated: ActivityHandler = {
   },
 
   NotificationTitle({ activity }: { activity: Activity }) {
-    return `Created KPI: ${content(activity).kpiName}`;
+    return t("features.activities.createdKPI", { v1: content(activity).kpiName });
   },
 
   NotificationLocation({ activity }: { activity: Activity }) {

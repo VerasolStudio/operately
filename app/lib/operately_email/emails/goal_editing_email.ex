@@ -1,6 +1,7 @@
 defmodule OperatelyEmail.Emails.GoalEditingEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Goals}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -16,7 +17,7 @@ defmodule OperatelyEmail.Emails.GoalEditingEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: goal.name, who: author, action: "edited the goal")
+    |> subject(where: goal.name, who: author, action: t("goalEditing.action"))
     |> assign(:author, author)
     |> assign(:goal, goal)
     |> assign(:content, activity.content)
@@ -37,7 +38,7 @@ defmodule OperatelyEmail.Emails.GoalEditingEmail do
       parent_id: goal.id,
       parent_type: :goal,
       parent_name: goal.name,
-      headline: "edited this goal",
+      headline: t("goalEditing.headline"),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.goal_path(company, goal) |> OperatelyWeb.Paths.to_url(),

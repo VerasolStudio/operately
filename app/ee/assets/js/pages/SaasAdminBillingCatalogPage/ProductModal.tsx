@@ -2,6 +2,7 @@ import * as AdminApi from "@/ee/admin_api";
 import * as React from "react";
 
 import { Forms, Modal } from "turboui";
+import { t } from "@/i18n";
 
 interface ProductModalProps {
   isOpen: boolean;
@@ -69,16 +70,27 @@ export function ProductModal({ isOpen, onClose, onSuccess, product, planDefiniti
     <Modal title={isEdit ? "Edit product" : "Create product"} isOpen={isOpen} onClose={onClose}>
       <Forms.Form form={form}>
         <Forms.FieldGroup layout="vertical">
-          <Forms.TextInput label="Display Name" field="displayName" required autoFocus />
+          <Forms.TextInput
+            label={t("pages.saasAdminBillingCatalogPage.displayName")}
+            field="displayName"
+            required
+            autoFocus
+          />
           {isEdit ? (
             <>
-              <ReadOnlyField label="Plan Family" value={planFamilyLabel(form.values.planFamily, planDefinitions)} />
-              <ReadOnlyField label="Billing Interval" value={billingIntervalLabel(form.values.billingInterval)} />
+              <ReadOnlyField
+                label={t("pages.saasAdminBillingCatalogPage.planFamily")}
+                value={planFamilyLabel(form.values.planFamily, planDefinitions)}
+              />
+              <ReadOnlyField
+                label={t("pages.saasAdminBillingCatalogPage.billingInterval")}
+                value={billingIntervalLabel(form.values.billingInterval)}
+              />
             </>
           ) : (
             <>
               <Forms.SelectBox
-                label="Plan Family"
+                label={t("pages.saasAdminBillingCatalogPage.planFamily")}
                 field="planFamily"
                 options={availablePlanDefinitions.map((planDefinition) => ({
                   value: planDefinition.key,
@@ -88,19 +100,22 @@ export function ProductModal({ isOpen, onClose, onSuccess, product, planDefiniti
                 required
               />
               <Forms.SelectBox
-                label="Billing Interval"
+                label={t("pages.saasAdminBillingCatalogPage.billingInterval")}
                 field="billingInterval"
                 options={[
-                  { value: "monthly", label: "Monthly" },
-                  { value: "yearly", label: "Yearly" },
+                  { value: "monthly", label: t("pages.saasAdminBillingCatalogPage.monthly") },
+                  { value: "yearly", label: t("pages.saasAdminBillingCatalogPage.yearly") },
                 ]}
                 required
               />
             </>
           )}
-          <Forms.NumberInput label="Price (in cents)" field="unitAmount" required />
+          <Forms.NumberInput label={t("pages.saasAdminBillingCatalogPage.priceInCents")} field="unitAmount" required />
         </Forms.FieldGroup>
-        <Forms.Submit saveText={isEdit ? "Save changes" : "Create product"} cancelText="Cancel" />
+        <Forms.Submit
+          saveText={isEdit ? "Save changes" : "Create product"}
+          cancelText={t("pages.saasAdminBillingCatalogPage.cancel")}
+        />
       </Forms.Form>
     </Modal>
   );

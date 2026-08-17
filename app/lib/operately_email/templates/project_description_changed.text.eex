@@ -1,9 +1,9 @@
-<%= short_name(@author) %> updated the "<%= @project_name %>" project description.
+<%= t("projectDescriptionChanged.updatedTheProjectDescription", %{v1: short_name(@author), v2: @project_name}) %>
 
 <%= if @description do %>
-View the project to read the updated details.
+<%= t("projectDescriptionChanged.viewTheProjectToReadThe") %>
 <% else %>
-The description was cleared.
+<%= t("projectDescriptionChanged.theDescriptionWasCleared") %>
 <% end %>
 
-View Project: <%= @cta_url %>
+<%= t("projectDescriptionChanged.viewProject2", %{v1: @cta_url}) %>

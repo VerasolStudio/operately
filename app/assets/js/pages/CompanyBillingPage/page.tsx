@@ -17,6 +17,7 @@ import { useLoadedData } from "./loader";
 import { useLocation, useNavigate } from "react-router";
 import { usePaths } from "@/routes/paths";
 import { useCompanyLoaderData } from "@/routes/useCompanyLoaderData";
+import { t } from "@/i18n";
 
 interface BillingPageLocationState {
   billing?: Billing.BillingOverview;
@@ -154,7 +155,10 @@ export function Page() {
     if (result.outcome === "target_unavailable") {
       setIsStartingCheckout(false);
       setActionError("That plan is no longer available. Choose another plan.");
-      showErrorToast("Checkout unavailable", "That plan is no longer available. Choose another plan.");
+      showErrorToast(
+        t("pages.companyBillingPage.checkoutUnavailable"),
+        t("pages.companyBillingPage.thatPlanIsNoLongerAvailable"),
+      );
       return;
     }
 
@@ -168,7 +172,10 @@ export function Page() {
     }
 
     setActionError("We couldn't start checkout right now. Please try again.");
-    showErrorToast("Failed to start checkout", "We couldn't start checkout right now. Please try again.");
+    showErrorToast(
+      t("pages.companyBillingPage.failedToStartCheckout"),
+      t("pages.companyBillingPage.weCouldnTStartCheckoutRight"),
+    );
     setIsStartingCheckout(false);
   }, []);
 
@@ -188,8 +195,8 @@ export function Page() {
 
     setActionError("We couldn't open payment method details right now. Please try again.");
     showErrorToast(
-      "Payment method unavailable",
-      "We couldn't open payment method details right now. Please try again.",
+      t("pages.companyBillingPage.paymentMethodUnavailable"),
+      t("pages.companyBillingPage.weCouldnTOpenPaymentMethod"),
     );
   }, [paths]);
 
@@ -208,7 +215,10 @@ export function Page() {
     }
 
     setActionError("We couldn't open billing history right now. Please try again.");
-    showErrorToast("Billing management unavailable", "We couldn't open billing history right now. Please try again.");
+    showErrorToast(
+      t("pages.companyBillingPage.billingManagementUnavailable"),
+      t("pages.companyBillingPage.weCouldnTOpenBillingHistory"),
+    );
   }, [paths]);
 
   const reactivatePlan = React.useCallback(async () => {
@@ -228,7 +238,10 @@ export function Page() {
     }
 
     setActionError("We couldn't keep the current plan right now. Please try again.");
-    showErrorToast("Reactivation unavailable", "We couldn't keep the current plan right now. Please try again.");
+    showErrorToast(
+      t("pages.companyBillingPage.reactivationUnavailable"),
+      t("pages.companyBillingPage.weCouldnTKeepTheCurrent"),
+    );
   }, []);
 
   const refreshFromBillingUpdate = React.useCallback(() => {
@@ -250,7 +263,7 @@ export function Page() {
   return (
     <TurboCompanyBillingPage
       title={[companyName, "Billing"]}
-      navigation={[{ label: "Company Administration", to: paths.companyAdminPath() }]}
+      navigation={[{ label: t("pages.companyBillingPage.companyAdministration"), to: paths.companyAdminPath() }]}
       billing={billing}
       isConfirmingCheckout={isConfirmingCheckout}
       confirmingTarget={checkoutReturnTarget}

@@ -20,6 +20,7 @@ import { useTaskKeyboardNavigation } from "../../TaskBoard/hooks/useTaskKeyboard
 import { sortTasks } from "../../TaskBoard/utils/sortTasks";
 import { TaskSlideIn } from "../../TaskBoard/KanbanView/TaskSlideIn";
 import { compareIds } from "../../utils/ids";
+import { t } from "../../i18n";
 
 export function TasksSection({
   tasks,
@@ -238,7 +239,7 @@ export function TasksSection({
                 ]}
               />
             </div>
-            <h2 className="font-bold">Tasks</h2>
+            <h2 className="font-bold">{t("turboui.milestonePage.tasks")}</h2>
           </div>
           <div className="flex items-center gap-4">
             {milestone.kanbanLink && (
@@ -249,13 +250,13 @@ export function TasksSection({
                   underline="hover"
                 >
                   <IconLayoutKanban size={18} className="text-content-dimmed" />
-                  <span className="sr-only">View on board</span>
+                  <span className="sr-only">{t("turboui.milestonePage.viewOnBoard")}</span>
                 </BlackLink>
               </Tooltip>
             )}
 
             <SecondaryButton size="xs" icon={IconPlus} onClick={openCreator} testId="tasks-section-add-task">
-              <span className="sr-only">Add task</span>
+              <span className="sr-only">{t("turboui.milestonePage.addTask")}</span>
             </SecondaryButton>
           </div>
         </div>
@@ -291,13 +292,13 @@ export function TasksSection({
                     testId="inline-task-creator-milestonepage-empty"
                   />
                   <div className="hidden px-0 pt-2 text-center text-content-subtle text-xs sm:block">
-                    Press Enter to add. You can also drag tasks here.
+                    {t("turboui.milestonePage.pressEnterToAddYouCan")}
                   </div>
                 </>
               ) : (
                 <div className="text-left text-content-subtle text-sm sm:text-center">
-                  <span className="sm:hidden">Tap + to add a task.</span>
-                  <span className="hidden sm:inline">Click + or press c to add a task, or drag a task here.</span>
+                  <span className="sm:hidden">{t("turboui.milestonePage.tapToAddATask")}</span>
+                  <span className="hidden sm:inline">{t("turboui.milestonePage.clickOrPressCToAdd")}</span>
                 </div>
               )}
             </div>

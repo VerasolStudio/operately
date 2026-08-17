@@ -5,6 +5,7 @@ import { IconInfoCircle } from "../icons";
 import { BlackLink, Link } from "../Link";
 import { Tooltip } from "../Tooltip";
 import { SectionHeader } from "./SectionHeader";
+import { t } from "../i18n";
 
 export function Contributors(props: GoalPage.State) {
   if (props.contributors.length === 0) {
@@ -13,7 +14,7 @@ export function Contributors(props: GoalPage.State) {
 
   return (
     <div>
-      <SectionHeader title="Contributors" buttons={<Info />} showButtons={true} />
+      <SectionHeader title={t("turboui.goalPage.contributors")} buttons={<Info />} showButtons={true} />
 
       <div className="mt-4">
         {props.contributors!.map((c) => (
@@ -49,10 +50,8 @@ export function Contributors(props: GoalPage.State) {
 function Info() {
   const tooltip = (
     <div className="max-w-xs">
-      <div className="font-bold text-sm">Who is listed as a contributor?</div>
-      <div className="mt-2 text-xs">
-        Contributors are people who made contributions to this goal by working on subgoals and projects.
-      </div>
+      <div className="font-bold text-sm">{t("turboui.goalPage.whoIsListedAsAContributor")}</div>
+      <div className="mt-2 text-xs">{t("turboui.goalPage.contributorsArePeopleWhoMadeContributions")}</div>
     </div>
   );
 

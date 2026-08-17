@@ -4,6 +4,7 @@ import * as React from "react";
 import { IconChevronDown, IconCircleX, IconProjectPlain, IconSearch } from "../icons";
 import { createTestId } from "../TestableElement";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 export namespace ProjectField {
   export interface Project {
@@ -52,7 +53,7 @@ const DefaultProps = {
   isOpen: false,
   iconSize: 20,
   readonly: false,
-  emptyStateMessage: "Select project",
+  emptyStateMessage: t("turboui.projectField.selectProject"),
   emptyStateReadOnlyMessage: "No project selected",
   variant: "inline",
   testId: "project-field",
@@ -65,7 +66,7 @@ export function ProjectField(props: ProjectField.Props) {
   const containerClass = state.variant === "form-field" ? "w-full" : undefined;
 
   return (
-    <div className={containerClass} >
+    <div className={containerClass}>
       {state.label && <label className="font-bold text-sm mb-1 block text-left">{state.label}</label>}
       <Popover.Root open={state.isOpen} onOpenChange={state.setIsOpen}>
         <Popover.Anchor asChild>
@@ -200,7 +201,7 @@ function MenuMode({ state }: { state: ProjectField.State }) {
           className={classNames(commonButtonClass)}
         >
           <IconCircleX size={14} />
-          <span>Clear project</span>
+          <span>{t("turboui.projectField.clearProject")}</span>
         </button>
       )}
       <button
@@ -208,7 +209,7 @@ function MenuMode({ state }: { state: ProjectField.State }) {
         className={classNames(commonButtonClass, state.project ? "mt-1" : "")}
       >
         <IconSearch size={14} />
-        <span>Choose another project</span>
+        <span>{t("turboui.projectField.chooseAnotherProject")}</span>
       </button>
     </div>
   );
@@ -220,7 +221,7 @@ function SearchMode({ state }: { state: ProjectField.State }) {
       <div className="p-1 pb-0.5">
         <input
           type="text"
-          placeholder="Search projects..."
+          placeholder={t("turboui.projectField.searchProjects")}
           className="w-full border border-surface-outline rounded px-2 py-1 text-sm focus:outline-none focus:ring-0 text-content-base bg-surface-base"
           value={state.searchQuery}
           onChange={(e) => state.setSearchQuery(e.target.value)}
@@ -229,7 +230,7 @@ function SearchMode({ state }: { state: ProjectField.State }) {
       </div>
       <div className="overflow-y-auto pt-0.5 pb-0.5" style={{ maxHeight: "210px" }}>
         {state.searchResults.length === 0 && state.searchQuery && (
-          <div className="px-1.5 py-1 text-sm text-content-dimmed">No projects found.</div>
+          <div className="px-1.5 py-1 text-sm text-content-dimmed">{t("turboui.projectField.noProjectsFound")}</div>
         )}
         {state.searchResults.map((project) => (
           <SearchResult key={project.id} project={project} state={state} />

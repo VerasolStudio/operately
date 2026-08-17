@@ -1,13 +1,13 @@
-<%= title("#{short_name(@author)} moved #{@task_name}") %>
+<%= title(t("taskMoving.v1MovedV2", %{v1: short_name(@author), v2: @task_name})) %>
 
 <%= spacer() %>
 
 <%= row do %>
-  The task is now in <%= @destination_name %>.
+  <%= t("taskMoving.theTaskIsNowIn", %{v1: @destination_name}) %>
 <% end %>
 
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@cta_url, "View Task") %>
+  <%= cta_button(@cta_url, t("taskMoving.viewTask")) %>
 <% end %>

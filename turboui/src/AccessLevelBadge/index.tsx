@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 const PERMISSION_LEVELS = {
   FULL_ACCESS: 100,
@@ -25,31 +26,31 @@ const accessLevelData: Record<
   }
 > = {
   [PERMISSION_LEVELS.FULL_ACCESS]: {
-    title: "Full Access",
+    title: t("turboui.accessLevelBadge.fullAccess"),
     colors: "bg-callout-warning-bg text-callout-warning-content",
   },
   [PERMISSION_LEVELS.ADMIN_ACCESS]: {
-    title: "Admin Access",
+    title: t("turboui.accessLevelBadge.adminAccess"),
     colors: "bg-callout-warning-bg text-callout-warning-content",
   },
   [PERMISSION_LEVELS.EDIT_ACCESS]: {
-    title: "Edit Access",
+    title: t("turboui.accessLevelBadge.editAccess"),
     colors: "bg-callout-info-bg text-callout-info-content",
   },
   [PERMISSION_LEVELS.COMMENT_ACCESS]: {
-    title: "Comment Access",
+    title: t("turboui.accessLevelBadge.commentAccess"),
     colors: "bg-callout-error-bg text-callout-error-content",
   },
   [PERMISSION_LEVELS.VIEW_ACCESS]: {
-    title: "View Access",
+    title: t("turboui.accessLevelBadge.viewAccess"),
     colors: "bg-callout-success-bg text-callout-success-content",
   },
   [PERMISSION_LEVELS.MINIMAL_ACCESS]: {
-    title: "No Access",
+    title: t("turboui.accessLevelBadge.noAccess"),
     colors: "bg-callout-info-bg text-callout-info-content",
   },
   [PERMISSION_LEVELS.NO_ACCESS]: {
-    title: "No Access",
+    title: t("turboui.accessLevelBadge.noAccess"),
     colors: "bg-callout-info-bg text-callout-info-content",
   },
 };

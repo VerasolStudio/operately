@@ -12,6 +12,7 @@ import { assertPresent } from "@/utils/assertions";
 import { useLoadedData } from "./loader";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function Form() {
   const paths = usePaths();
@@ -60,7 +61,7 @@ export function Form() {
 
       <Subscribers subscriptionsState={subscriptionsState} />
 
-      <Forms.Submit saveText="Close Goal" />
+      <Forms.Submit saveText={t("pages.goalClosingPage.closeGoal")} />
     </Forms.Form>
   );
 }
@@ -69,10 +70,10 @@ function AccomplishedOrDropped() {
   return (
     <Forms.RadioButtons
       field="success"
-      label="Was this goal achieved?"
+      label={t("pages.goalClosingPage.wasThisGoalAchieved")}
       options={[
-        { value: "yes", label: "Yes" },
-        { value: "no", label: "No" },
+        { value: "yes", label: t("pages.goalClosingPage.yes") },
+        { value: "no", label: t("pages.goalClosingPage.no") },
       ]}
     />
   );
@@ -85,9 +86,9 @@ function RetrospectiveNotes() {
   return (
     <Forms.RichTextArea
       field="retrospective"
-      label="Retrospective notes"
+      label={t("pages.goalClosingPage.retrospectiveNotes")}
       richTextHandlers={richTextHandlers}
-      placeholder="What went well? What didn't? What did you learn?"
+      placeholder={t("pages.goalClosingPage.whatWentWellWhatDidnT")}
       required
     />
   );

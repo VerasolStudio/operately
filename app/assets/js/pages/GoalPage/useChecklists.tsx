@@ -5,6 +5,7 @@ import Api from "@/api";
 import { Checklist, showErrorToast } from "turboui";
 import { pageCacheKey } from ".";
 import { PageCache } from "../../routes/PageCache";
+import { t } from "@/i18n";
 
 interface Checklists {
   items: Checklist.ChecklistItem[];
@@ -79,7 +80,7 @@ function useAddHandler(params: UseAddHandlerParams): Checklist.AddChecklistItemF
         })
         .catch((error) => {
           console.error("Failed to add checklist item:", error);
-          showErrorToast("Something went wrong", "Failed to add checklist item");
+          showErrorToast(t("pages.goalPage.somethingWentWrong"), t("pages.goalPage.failedToAddChecklistItem"));
           params.setItems((prev) => prev.filter((i) => i.id !== tempId));
         });
 
@@ -111,7 +112,7 @@ function useDeleteHandler(params: UseDeleteHandlerParams): Checklist.DeleteCheck
         await Api.goals.deleteCheck({ goalId: params.goalId, checkId: id });
       } catch (error) {
         console.error("Failed to delete checklist item:", error);
-        showErrorToast("Something went wrong", "Failed to delete checklist item");
+        showErrorToast(t("pages.goalPage.somethingWentWrong"), t("pages.goalPage.failedToDeleteChecklistItem"));
         // Revert deletion if API call fails
         if (deletedItem) {
           params.setItems((prev) => {
@@ -159,7 +160,7 @@ function useUpdateHandler(params: UseToggleHandlerParams): Checklist.UpdateCheck
         });
       } catch (error) {
         console.error("Failed to update checklist item:", error);
-        showErrorToast("Something went wrong", "Failed to update checklist item");
+        showErrorToast(t("pages.goalPage.somethingWentWrong"), t("pages.goalPage.failedToUpdateChecklistItem"));
         // Revert the change
         if (previousName !== undefined) {
           params.setItems((prev) =>
@@ -203,7 +204,7 @@ function useUpdateIndexHandler(params: UseToggleHandlerParams): Checklist.Update
         await Api.goals.updateCheckIndex({ goalId: params.params.goalId, checkId: id, index });
       } catch (error) {
         console.error("Failed to update checklist item index:", error);
-        showErrorToast("Something went wrong", "Failed to update checklist item index");
+        showErrorToast(t("pages.goalPage.somethingWentWrong"), t("pages.goalPage.failedToUpdateChecklistItemIndex"));
         // Revert the change
         if (previousIndex !== undefined) {
           params.setItems((prev) => {
@@ -251,7 +252,7 @@ function useToggleHandler(params: UseToggleHandlerParams): Checklist.ToggleCheck
         await Api.goals.toggleCheck({ goalId: params.params.goalId, checkId: id });
       } catch (error) {
         console.error("Failed to toggle checklist item:", error);
-        showErrorToast("Something went wrong", "Failed to toggle checklist item");
+        showErrorToast(t("pages.goalPage.somethingWentWrong"), t("pages.goalPage.failedToToggleChecklistItem"));
         // Revert the change
         if (previousCompleted !== undefined) {
           params.setItems((prev) =>

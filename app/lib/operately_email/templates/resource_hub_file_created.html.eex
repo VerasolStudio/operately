@@ -4,10 +4,10 @@
 
 <%= if length(@files) == 1 do %>
   <%= row do %>
-    <%= cta_button(@file_url, "View File") %>
+    <%= cta_button(@file_url, t("resourceHubFileCreated.viewFile")) %>
   <% end %>
 <% else %>
   <%= row do %>
-    <%= cta_button(@cta_url, "View Files") %>
+    <%= cta_button(@cta_url, t("resourceHubFileCreated.viewFiles")) %>
   <% end %>
 <% end %>

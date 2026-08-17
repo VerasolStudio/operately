@@ -3,6 +3,7 @@ import { IconSettings } from "../../icons";
 import { Menu, MenuActionItem } from "../../Menu";
 import { StatusCustomizationModal } from "../../StatusCustomization";
 import { StatusSelector } from "../../StatusSelector";
+import { t } from "../../i18n";
 
 interface Props {
   canManageStatuses: boolean;
@@ -40,7 +41,7 @@ export function TasksMenu({ canManageStatuses, statuses, onSaveCustomStatuses }:
           customTrigger={
             <button
               className="flex min-h-11 min-w-11 items-center justify-center rounded-full text-content-dimmed transition hover:bg-surface-dimmed hover:text-content-base sm:min-h-0 sm:min-w-0 sm:p-1.5"
-              aria-label="Settings"
+              aria-label={t("turboui.taskBoard.settings")}
             >
               <IconSettings size={20} />
             </button>
@@ -49,7 +50,7 @@ export function TasksMenu({ canManageStatuses, statuses, onSaveCustomStatuses }:
           align="end"
         >
           <MenuActionItem icon={IconSettings} onClick={openStatusModal}>
-            Manage statuses
+            {t("turboui.taskBoard.manageStatuses")}
           </MenuActionItem>
         </Menu>
       )}

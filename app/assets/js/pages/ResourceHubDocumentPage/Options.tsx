@@ -8,6 +8,7 @@ import { assertPresent } from "@/utils/assertions";
 import { downloadMarkdown, exportToMarkdown } from "@/utils/markdown";
 
 import { useLoadedData } from "./loader";
+import { t } from "@/i18n";
 
 interface Props {
   showCopyModal: () => void;
@@ -25,7 +26,7 @@ export function useDocumentPageOptions({ showCopyModal, showDeleteModal }: Props
       {
         type: "link",
         icon: IconEdit,
-        label: "Edit",
+        label: t("pages.resourceHubDocumentPage.edit"),
         link: paths.resourceHubEditDocumentPath(document.id!),
         hidden: !document.permissions?.canEditDocument,
         keepOutsideOnBigScreen: true,
@@ -34,7 +35,7 @@ export function useDocumentPageOptions({ showCopyModal, showDeleteModal }: Props
       {
         type: "action",
         icon: IconCopy,
-        label: "Copy",
+        label: t("pages.resourceHubDocumentPage.copy"),
         onClick: showCopyModal,
         hidden: !document.permissions?.canCreateDocument,
         testId: "copy-document-link",
@@ -42,7 +43,7 @@ export function useDocumentPageOptions({ showCopyModal, showDeleteModal }: Props
       {
         type: "link",
         icon: IconHistory,
-        label: "History of changes",
+        label: t("pages.resourceHubDocumentPage.historyOfChanges"),
         link: paths.resourceHubDocumentVersionsPath(document.id!),
         hidden: !document.permissions?.canView,
         testId: "version-history-link",
@@ -50,7 +51,7 @@ export function useDocumentPageOptions({ showCopyModal, showDeleteModal }: Props
       {
         type: "action",
         icon: IconFileExport,
-        label: "Export as Markdown",
+        label: t("pages.resourceHubDocumentPage.exportAsMarkdown"),
         onClick: () => {
           const content = JSON.parse(document.content!);
           const markdown = exportToMarkdown(content, { removeEmbeds: true });
@@ -62,7 +63,7 @@ export function useDocumentPageOptions({ showCopyModal, showDeleteModal }: Props
       {
         type: "action",
         icon: IconTrash,
-        label: "Delete",
+        label: t("pages.resourceHubDocumentPage.delete"),
         onClick: showDeleteModal,
         hidden: !document.permissions?.canDeleteDocument,
         testId: "delete-resource-link",

@@ -1,3 +1,3 @@
-<%= short_name(@author) %> posted: <%= @title %>
+<%= t("goalDiscussionCreation.posted", %{v1: short_name(@author), v2: @title}) %>
 
-Link: <%= @link %>
+<%= t("goalDiscussionCreation.link", %{v1: @link}) %>

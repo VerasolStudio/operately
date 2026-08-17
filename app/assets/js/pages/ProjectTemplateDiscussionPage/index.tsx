@@ -9,6 +9,7 @@ import { Paths, usePaths } from "@/routes/paths";
 import type { PageModule } from "@/routes/types";
 import { TemplateDiscussionPage } from "turboui";
 import React from "react";
+import { t } from "@/i18n";
 
 export default { name: "ProjectTemplateDiscussionPage", loader, Page } as PageModule;
 
@@ -27,10 +28,18 @@ async function loader({ params }): Promise<LoadedData> {
   const [templateResult, discussionResult, commentsResult] = await Promise.all([
     Api.project_templates.get({ id: params.templateId }),
     Api.project_templates.getDiscussion({ templateId: params.templateId, discussionId: params.id }),
-    Api.project_templates.listComments({ templateId: params.templateId, parentType: "discussion", parentId: params.id }),
+    Api.project_templates.listComments({
+      templateId: params.templateId,
+      parentType: "discussion",
+      parentId: params.id,
+    }),
   ]);
 
-  return { template: templateResult.template, discussion: discussionResult.discussion, comments: commentsResult.comments };
+  return {
+    template: templateResult.template,
+    discussion: discussionResult.discussion,
+    comments: commentsResult.comments,
+  };
 }
 
 function Page() {
@@ -70,8 +79,14 @@ function Page() {
 function navigation(template: ProjectTemplate, paths: Paths) {
   return [
     { to: paths.spacePath(template.space.id), label: template.space.name },
-    { to: paths.spaceProjectTemplatesPath(template.space.id), label: "Project Templates" },
+    {
+      to: paths.spaceProjectTemplatesPath(template.space.id),
+      label: t("pages.projectTemplateDiscussionPage.projectTemplates"),
+    },
     { to: paths.projectTemplatePath(template.id), label: template.name },
-    { to: paths.projectTemplatePath(template.id, { tab: "discussions" }), label: "Discussions" },
+    {
+      to: paths.projectTemplatePath(template.id, { tab: "discussions" }),
+      label: t("pages.projectTemplateDiscussionPage.discussions"),
+    },
   ];
 }

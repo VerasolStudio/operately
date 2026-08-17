@@ -2,6 +2,7 @@ import React from "react";
 import { FormattedTime, type FormattedTimePreferences } from "../FormattedTime";
 import { GhostButton } from "../Button";
 import { IconCalendarEvent } from "../icons";
+import { t } from "../i18n";
 
 export interface ScheduleNoticeProps {
   date: Date;
@@ -23,7 +24,7 @@ export function ScheduleNotice({ date, onEdit, className = "", formattedTimePref
         </span>
       </div>
       <GhostButton size="sm" onClick={onEdit}>
-        Edit
+        {t("turboui.schedulePosting.edit")}
       </GhostButton>
     </div>
   );

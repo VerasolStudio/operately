@@ -6,6 +6,7 @@ import { PermissionLevels } from "@/features/Permissions";
 import { ActionLink, Avatar } from "turboui";
 import { match } from "ts-pattern";
 import { useBindedPeopleList } from "./loader";
+import { t } from "@/i18n";
 
 export function OtherPeople() {
   const [show, setShow] = React.useState(false);
@@ -27,9 +28,9 @@ function Expanded({ people }: { people: People.Person[] }) {
 
   return (
     <div>
-      <div className="font-bold mt-10 text-lg">Other People with Access</div>
+      <div className="font-bold mt-10 text-lg">{t("pages.goalAccessManagementPage.otherPeopleWithAccess")}</div>
       <div className="text-medium text-sm max-w-lg mb-6">
-        People who have access to the goal based on their company or space membership but are not directly assigned.
+        {t("pages.goalAccessManagementPage.peopleWhoHaveAccessToThe")}
       </div>
 
       <div data-test-id="goal-other-people-list">
@@ -44,7 +45,7 @@ function Expanded({ people }: { people: People.Person[] }) {
 function Condensed({ people, onShowAllClick }: { people: People.Person[]; onShowAllClick: () => void }) {
   const message = match(people.length)
     .with(1, () => "1 other person has access to this goal")
-    .otherwise(() => `${people.length} other people have access to this goal`);
+    .otherwise(() => t("pages.goalAccessManagementPage.otherPeopleHaveAccessToThis", { v1: people.length }));
 
   const testId = "show-all-other-people";
   const showAll = (

@@ -18,6 +18,7 @@ import { useMilestoneTaskStatuses } from "./useMilestoneTaskStatuses";
 import { useMilestones } from "@/models/milestones/useMilestones";
 import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
 import { useMe } from "@/contexts/CurrentCompanyContext";
+import { t } from "@/i18n";
 
 export default { name: "MilestoneKanbanPage", loader, Page } as PageModule;
 export { pageCacheKey as milestoneKanbanPageCacheKey };
@@ -190,7 +191,10 @@ function Page() {
 
     navigation: [
       { to: paths.spacePath(milestone.space.id), label: milestone.space.name },
-      { to: paths.spaceWorkMapPath(milestone.space.id, "projects" as const), label: "Projects" },
+      {
+        to: paths.spaceWorkMapPath(milestone.space.id, "projects" as const),
+        label: t("pages.milestoneKanbanPage.projects"),
+      },
       { to: paths.projectPath(milestone.project.id), label: milestone.project.name },
     ],
 

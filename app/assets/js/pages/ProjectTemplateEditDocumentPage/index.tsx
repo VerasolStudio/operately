@@ -9,6 +9,7 @@ import { DocumentEditPage, showErrorToast } from "turboui";
 import type { DocumentEditPage as DocumentEditPageTypes } from "turboui/DocumentEditPage/types";
 import { useNavigate } from "react-router";
 import React from "react";
+import { t } from "@/i18n";
 
 export default { name: "ProjectTemplateEditDocumentPage", loader, Page } as PageModule;
 
@@ -58,7 +59,10 @@ function Page() {
       navigate(cancelLink);
       return true;
     } catch {
-      showErrorToast("Document not updated", "Check the form and try again.");
+      showErrorToast(
+        t("pages.projectTemplateEditDocumentPage.documentNotUpdated"),
+        t("pages.projectTemplateEditDocumentPage.checkTheFormAndTryAgain"),
+      );
       return false;
     }
   }
@@ -81,4 +85,3 @@ function Page() {
     />
   );
 }
-

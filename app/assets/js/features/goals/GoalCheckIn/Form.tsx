@@ -29,6 +29,8 @@ import { StatusSelector } from "./StatusSelector";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
 import type { GoalCheckInFormState } from "./useForm";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 interface Props {
   form: GoalCheckInFormState;
@@ -68,7 +70,7 @@ export function Form(props: Props) {
 
         <Subscribers {...props} />
 
-        <Forms.FormError message="Fill out all the required fields" className="-mb-6 mt-4" />
+        <Forms.FormError message={t("features.goals.fillOutAllTheRequiredFields")} className="-mb-6 mt-4" />
 
         <SubmitSection {...props} />
       </div>
@@ -96,12 +98,12 @@ function SubmitSection(props: Props) {
       <div className="mt-8">
         <ScheduleFlowControls
           scheduleFlow={scheduleFlow}
-          primaryLabel="Check-in"
+          primaryLabel={t("features.goals.checkIn")}
           onPrimaryClick={() => submit(scheduleFlow.isScheduledLocally ? "schedule" : "submit")}
           loading={isSubmitting && (props.form.trigger === "submit" || props.form.trigger === "schedule")}
           testId="submit"
           formattedTimePreferences={formattedTimePreferences}
-          modalTitle="Schedule Check-in"
+          modalTitle={t("features.goals.scheduleCheckIn")}
           secondaryAction={
             <GhostButton
               loading={isSubmitting && props.form.trigger === "save-draft"}
@@ -109,7 +111,7 @@ function SubmitSection(props: Props) {
               size="base"
               onClick={() => submit("save-draft")}
             >
-              Save as draft
+              {t("features.goals.saveAsDraft")}
             </GhostButton>
           }
         />
@@ -134,7 +136,7 @@ function SubmitSection(props: Props) {
           }
           testId="publish-draft"
           formattedTimePreferences={formattedTimePreferences}
-          modalTitle="Schedule Check-in"
+          modalTitle={t("features.goals.scheduleCheckIn")}
           scheduledPrimaryLabel={isScheduled ? "Save Changes" : undefined}
           showScheduleOption={!isScheduled}
           secondaryAction={
@@ -145,15 +147,23 @@ function SubmitSection(props: Props) {
                 size="base"
                 onClick={() => submit("save-draft")}
               >
-                Save draft
+                {t("features.goals.saveDraft")}
               </GhostButton>
             )
           }
           options={
             isScheduled
               ? [
-                  { label: "Publish now", action: () => submit("publish-now"), testId: "publish-now-option" },
-                  { label: "Save as draft", action: () => submit("save-as-draft"), testId: "save-as-draft-option" },
+                  {
+                    label: t("features.goals.publishNow"),
+                    action: () => submit("publish-now"),
+                    testId: "publish-now-option",
+                  },
+                  {
+                    label: t("features.goals.saveAsDraft"),
+                    action: () => submit("save-as-draft"),
+                    testId: "save-as-draft-option",
+                  },
                 ]
               : []
           }
@@ -162,7 +172,7 @@ function SubmitSection(props: Props) {
     );
   }
 
-  return <Forms.Submit saveText="Save" buttonSize="base" />;
+  return <Forms.Submit saveText={t("features.goals.save")} buttonSize="base" />;
 }
 
 function FullEditDisabledMessage({ mode, allowFullEdit }: Props) {
@@ -171,7 +181,7 @@ function FullEditDisabledMessage({ mode, allowFullEdit }: Props) {
 
   return (
     <InfoCallout
-      message={"Editing locked after 3 days"}
+      message={t("features.goals.editingLockedAfter3Days")}
       description={
         "You can edit the due date, status, and target values for up to 3 days after submitting your check-in. After that, they’re locked in to keep the history clear and decisions accountable. Need to make a changes? Leave a comment or create a new check-in."
       }
@@ -190,7 +200,7 @@ function StatusAndDueDate(props: Props) {
 function TextualOverview({ goal }: { goal: Goals.Goal }) {
   return (
     <div className="ProseMirror">
-      <Label text="Overview" />
+      <Label text={t("features.goals.overview")} />
       <OverviewStatus goal={goal} /> <OverviewDueDate />
     </div>
   );
@@ -257,7 +267,7 @@ function OverviewDueDate() {
       return <span>{durationHumanized(new Date(), date)} until the deadline.</span>;
     }
   } else {
-    return <span>No due date set.</span>;
+    return <span>{t("features.goals.noDueDateSet")}</span>;
   }
 }
 
@@ -278,7 +288,7 @@ function GoalStatusSelector({ goal }: { goal: Goals.Goal }) {
 
   return (
     <div>
-      <Label text="Status" />
+      <Label text={t("features.goals.status")} />
       <StatusSelector field="status" reviewerFirstName={reviewerName} noReviewer={noReviewer} />
     </div>
   );
@@ -298,7 +308,7 @@ function DescriptionView() {
 
   return (
     <div>
-      <Label text="Key wins, obstacles and needs" />
+      <Label text={t("features.goals.keyWinsObstaclesAndNeeds")} />
       <RichContent content={value} mentionedPersonLookup={mentionedPersonLookup} />
     </div>
   );
@@ -311,7 +321,7 @@ function DescriptionEdit({ goal, lastCheckIns, mentionedPersonLookup }: { goal: 
   return (
     <div>
       <div className="mb-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
-        <div className="font-bold">Describe key wins, obstacles and needs</div>
+        <div className="font-bold">{t("features.goals.describeKeyWinsObstaclesAndNeeds")}</div>
 
         {lastCheckIns.length > 0 && (
           <ActionLink
@@ -329,7 +339,7 @@ function DescriptionEdit({ goal, lastCheckIns, mentionedPersonLookup }: { goal: 
       <Forms.FieldGroup>
         <Forms.RichTextArea
           field="description"
-          placeholder="Write here..."
+          placeholder={t("features.goals.writeHere")}
           richTextHandlers={richTextHandlers}
           required
         />
@@ -353,17 +363,20 @@ function PreviousCheckIn({
     <div className="mb-3 mt-2 rounded border border-stroke-base p-4">
       <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
         <div>
-          <div className="text-sm font-semibold text-content-accent">Previous check-in</div>
+          <div className="text-sm font-semibold text-content-accent">{t("features.goals.previousCheckIn")}</div>
           <div className="mt-0.5 text-sm text-content-dimmed">
-            Posted by {checkIn.author?.fullName || "Unknown"} on{" "}
-            <FormattedTime {...formattedTimePreferences} time={checkIn.date} format="long-date" />
+            <Trans
+              i18nKey="features.goals.postedByOn"
+              values={{ v1: checkIn.author?.fullName || t("features.goals.unknown") }}
+              components={[<FormattedTime {...formattedTimePreferences} time={checkIn.date} format="long-date" />]}
+            />
           </div>
         </div>
 
         <div className="flex shrink-0 items-center gap-3">
           <StatusBadge status={checkIn.status} hideIcon />
           <Link to={checkIn.link} underline="hover" className="text-sm font-medium">
-            View original
+            {t("features.goals.viewOriginal")}
           </Link>
         </div>
       </div>
@@ -392,12 +405,12 @@ function DueDateSelector() {
 
   return (
     <div>
-      <Label text="Due Date" info="Set a new due date for the goal." />
+      <Label text={t("features.goals.dueDate")} info="Set a new due date for the goal." />
       <DateField
         date={value ?? null}
         onDateSelect={(date) => setValue(date)}
         variant="form-field"
-        placeholder="No due date set"
+        placeholder={t("features.goals.noDueDateSet2")}
       />
     </div>
   );

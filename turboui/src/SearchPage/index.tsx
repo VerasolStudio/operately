@@ -20,6 +20,7 @@ import { ResourceHubTypeIcon } from "../ResourceHub";
 import { StatusBadge } from "../StatusBadge";
 import { SEARCH_TIME_FILTER_OPTIONS, SEARCH_TYPE_FILTER_OPTIONS } from "./filterOptions";
 import { RefineControls, type RefineControlsProps } from "./RefineControls";
+import { t } from "../i18n";
 
 export { SEARCH_TIME_FILTER_OPTIONS, SEARCH_TYPE_FILTER_OPTIONS };
 
@@ -53,9 +54,9 @@ export function SearchPage({
   const visibleResults = results.slice(0, RESULT_LIMIT);
 
   return (
-    <Page title="Search" size="large" testId="company-search-page">
+    <Page title={t("turboui.searchPage.search")} size="large" testId="company-search-page">
       <main className="min-h-[75vh] px-4 py-8 sm:px-12 sm:py-10">
-        <h1 className="sr-only">Search</h1>
+        <h1 className="sr-only">{t("turboui.searchPage.search")}</h1>
         {refine ? (
           <div className="sticky top-0 z-10 -mx-4 border-b border-surface-outline bg-surface-base px-4 pb-4 pt-1 sm:-mx-12 sm:px-12">
             <SearchField query={query} onQueryChange={onQueryChange} />
@@ -81,7 +82,7 @@ function SearchField({ query, onQueryChange }: Pick<SearchPage.Props, "query" | 
   return (
     <div className="relative">
       <label className="sr-only" htmlFor="company-search-input">
-        Search titles and content…
+        {t("turboui.searchPage.searchTitlesAndContent")}
       </label>
       <IconSearch
         aria-hidden="true"
@@ -95,7 +96,7 @@ function SearchField({ query, onQueryChange }: Pick<SearchPage.Props, "query" | 
         autoFocus
         value={query}
         onChange={(event) => onQueryChange(event.target.value)}
-        placeholder="Search titles and content…"
+        placeholder={t("turboui.searchPage.searchTitlesAndContent")}
         className="py-3 pl-12 pr-4 text-base sm:text-lg"
       />
     </div>
@@ -109,21 +110,23 @@ function SearchContent({
   formattedTimePreferences,
 }: Pick<SearchPage.Props, "query" | "status" | "results" | "formattedTimePreferences">) {
   if (status === "loading") {
-    return <SearchMessage role="status">Searching…</SearchMessage>;
+    return <SearchMessage role="status">{t("turboui.searchPage.searching")}</SearchMessage>;
   }
 
   if (status === "error") {
-    return <SearchMessage role="alert">Search is unavailable. Try again.</SearchMessage>;
+    return <SearchMessage role="alert">{t("turboui.searchPage.searchIsUnavailableTryAgain")}</SearchMessage>;
   }
 
   if (status === "initial") {
     return (
-      <SearchMessage role="status">Search across projects, goals, discussions, documents, and more.</SearchMessage>
+      <SearchMessage role="status">
+        {t("turboui.searchPage.searchAcrossProjectsGoalsDiscussionsDocuments")}
+      </SearchMessage>
     );
   }
 
   if (results.length === 0) {
-    return <SearchMessage role="status">No content found for “{query}”. Try different keywords.</SearchMessage>;
+    return <SearchMessage role="status">{t("turboui.searchPage.noContentFoundFor", { v1: query })}</SearchMessage>;
   }
 
   return (
@@ -131,14 +134,10 @@ function SearchContent({
       <p role="status" className="sr-only">
         {resultCountLabel(results.length)}
       </p>
-      <ol aria-label="Search results" className="divide-y divide-surface-outline">
+      <ol aria-label={t("turboui.searchPage.searchResults")} className="divide-y divide-surface-outline">
         {results.map((result) => (
           <li key={`${result.type}-${result.id}`}>
-            <SearchResultRow
-              query={query}
-              result={result}
-              formattedTimePreferences={formattedTimePreferences}
-            />
+            <SearchResultRow query={query} result={result} formattedTimePreferences={formattedTimePreferences} />
           </li>
         ))}
       </ol>
@@ -187,12 +186,7 @@ function SearchResultRow({
           </span>
           <span className="min-w-0 truncate text-xs font-medium text-content-dimmed">{result.context}</span>
           {result.state ? (
-            <StatusBadge
-              status={result.state}
-              customLabel={STATE_LABELS[result.state]}
-              hideIcon
-              className="shrink-0"
-            />
+            <StatusBadge status={result.state} customLabel={STATE_LABELS[result.state]} hideIcon className="shrink-0" />
           ) : null}
         </div>
         <h2 className="mt-1 min-w-0 break-words text-base font-semibold text-content-accent">
@@ -290,23 +284,23 @@ function escapeRegExp(value: string) {
 }
 
 function resultCountLabel(count: number) {
-  return count === 1 ? "1 result found." : `${count} results found.`;
+  return count === 1 ? "1 result found." : t("turboui.searchPage.resultsFound", { v1: count });
 }
 
 const RESULT_TYPE_METADATA: Record<SearchResultType, { label: string }> = {
-  resource_hub_folder: { label: "Folder" },
-  resource_hub_document: { label: "Document" },
-  resource_hub_file: { label: "File" },
-  resource_hub_link: { label: "Link" },
-  project: { label: "Project" },
-  goal: { label: "Goal" },
-  milestone: { label: "Milestone" },
-  task: { label: "Task" },
-  person: { label: "Person" },
-  discussion: { label: "Discussion" },
-  project_check_in: { label: "Project check-in" },
-  goal_check_in: { label: "Goal check-in" },
-  project_retrospective: { label: "Project retrospective" },
+  resource_hub_folder: { label: t("turboui.searchPage.folder") },
+  resource_hub_document: { label: t("turboui.searchPage.document") },
+  resource_hub_file: { label: t("turboui.searchPage.file") },
+  resource_hub_link: { label: t("turboui.searchPage.link") },
+  project: { label: t("turboui.searchPage.project") },
+  goal: { label: t("turboui.searchPage.goal") },
+  milestone: { label: t("turboui.searchPage.milestone") },
+  task: { label: t("turboui.searchPage.task") },
+  person: { label: t("turboui.searchPage.person") },
+  discussion: { label: t("turboui.searchPage.discussion") },
+  project_check_in: { label: t("turboui.searchPage.projectCheckIn") },
+  goal_check_in: { label: t("turboui.searchPage.goalCheckIn") },
+  project_retrospective: { label: t("turboui.searchPage.projectRetrospective") },
 };
 
 const STATE_LABELS: Record<SearchResultState, string> = {

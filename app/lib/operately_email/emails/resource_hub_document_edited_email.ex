@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.ResourceHubDocumentEditedEmail do
   alias Operately.Activities.Notifications.MentionedPeople
   alias OperatelyEmail.Emails.ResourceHubEmail
   alias Operately.Repo
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -37,7 +38,7 @@ defmodule OperatelyEmail.Emails.ResourceHubDocumentEditedEmail do
       parent_id: parent.id,
       parent_type: parent.type,
       parent_name: parent.name,
-      headline: "updated the document \"#{document.name}\"",
+      headline: t("resourceHubDocumentEdited.headline", %{v1: document.name}),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: OperatelyWeb.Paths.document_path(company, document) |> OperatelyWeb.Paths.to_url(),
@@ -49,9 +50,9 @@ defmodule OperatelyEmail.Emails.ResourceHubDocumentEditedEmail do
 
   defp action(person, document, content) do
     if person.id in MentionedPeople.ids(content) do
-      "mentioned you in the document \"#{document.name}\""
+      t("resourceHubDocumentEdited.mentionedYouInTheDocument", %{v1: document.name})
     else
-      "updated the document \"#{document.name}\""
+      t("resourceHubDocumentEdited.updatedTheDocument", %{v1: document.name})
     end
   end
 end

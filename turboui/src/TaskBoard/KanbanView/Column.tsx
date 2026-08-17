@@ -11,6 +11,7 @@ import { DropPlaceholder, projectItemsWithPlaceholder } from "../../utils/Pragma
 import type { BoardLocation } from "../../utils/PragmaticDragAndDrop";
 import { createTestId } from "../../TestableElement";
 import { OPEN_TASK_CREATE_EVENT } from "../hooks/useTaskKeyboardNavigation";
+import { t } from "../../i18n";
 
 interface Props {
   status: StatusSelector.StatusOption;
@@ -232,7 +233,7 @@ function TaskCreationForm({
           ref={inputRef}
           autoFocus
           type="text"
-          placeholder="What needs to be done?"
+          placeholder={t("turboui.taskBoard.whatNeedsToBeDone")}
           className="w-full text-sm bg-transparent border-none focus:ring-0 p-0 mb-2 text-content-base placeholder:text-content-subtle"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -245,7 +246,7 @@ function TaskCreationForm({
             onClick={handleCreate}
             data-test-id={createTestId("new-task-submit", statusValue)}
           >
-            Add
+            {t("turboui.taskBoard.add")}
           </button>
           <button
             className="px-2 py-1 text-xs font-medium text-content-dimmed hover:text-content-base"
@@ -255,7 +256,7 @@ function TaskCreationForm({
             }}
             data-test-id={createTestId("new-task-cancel", statusValue)}
           >
-            Cancel
+            {t("turboui.taskBoard.cancel")}
           </button>
         </div>
       </div>
@@ -272,7 +273,7 @@ function TaskCreationForm({
         <span className="text-lg leading-none" aria-hidden="true">
           +
         </span>
-        Add task
+        {t("turboui.taskBoard.addTask")}
       </button>
     );
   }
@@ -309,7 +310,7 @@ function ColumnMenu({ status, canManageStatuses, onEditStatus, onDeleteStatus }:
           icon={IconPencil}
           testId={createTestId("edit-status", status.value)}
         >
-          Edit
+          {t("turboui.taskBoard.edit")}
         </MenuActionItem>
         <MenuActionItem
           onClick={() => onDeleteStatus && onDeleteStatus(status)}
@@ -317,7 +318,7 @@ function ColumnMenu({ status, canManageStatuses, onEditStatus, onDeleteStatus }:
           danger
           testId={createTestId("delete-status", status.value)}
         >
-          Delete
+          {t("turboui.taskBoard.delete")}
         </MenuActionItem>
       </Menu>
     </div>

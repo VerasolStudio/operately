@@ -1,6 +1,7 @@
 defmodule OperatelyEmail.Emails.GoalReparentEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Goals}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -12,7 +13,7 @@ defmodule OperatelyEmail.Emails.GoalReparentEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: goal.name, who: author, action: "changed the goal parent of #{goal.name}")
+    |> subject(where: goal.name, who: author, action: t("goalReparent.action", %{v1: goal.name}))
     |> assign(:author, author)
     |> assign(:goal, goal)
     |> assign(:new_parent_goal, new_parent_goal)
@@ -40,6 +41,6 @@ defmodule OperatelyEmail.Emails.GoalReparentEmail do
     }
   end
 
-  defp buffered_headline(nil), do: "removed the goal's parent"
-  defp buffered_headline(parent_goal), do: "changed the goal's parent to \"#{parent_goal.name}\""
+  defp buffered_headline(nil), do: t("goalReparent.removedTheGoalSParent")
+  defp buffered_headline(parent_goal), do: t("goalReparent.changedTheGoalSParentTo", %{v1: parent_goal.name})
 end

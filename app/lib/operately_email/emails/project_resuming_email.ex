@@ -1,5 +1,6 @@
 defmodule OperatelyEmail.Emails.ProjectResumingEmail do
   import OperatelyEmail.Mailers.ActivityMailer
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Operately.Repo.preload(activity, :author).author
@@ -12,7 +13,7 @@ defmodule OperatelyEmail.Emails.ProjectResumingEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: project.name, who: author, action: "resumed the project")
+    |> subject(where: project.name, who: author, action: t("projectResuming.action"))
     |> assign(:author, author)
     |> assign(:project, project)
     |> assign(:link, link)
@@ -31,7 +32,7 @@ defmodule OperatelyEmail.Emails.ProjectResumingEmail do
       parent_id: project.id,
       parent_type: :project,
       parent_name: project.name,
-      headline: "resumed the project",
+      headline: t("projectResuming.headline"),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: OperatelyWeb.Paths.project_path(company, project) |> OperatelyWeb.Paths.to_url(),

@@ -25,6 +25,10 @@ config :operately, :blob_token_secret_key, System.get_env("OPERATELY_BLOB_TOKEN_
 config :operately, :js_sentry_enabled, System.get_env("OPERATELY_JS_SENTRY_ENABLED") == "true"
 config :operately, :js_sentry_dsn, System.get_env("OPERATELY_JS_SENTRY_DSN")
 config :operately, :storage_type, System.get_env("OPERATELY_STORAGE_TYPE", "local")
+
+# Language outgoing email is written in. A queued email has no browser to ask,
+# so the locale is instance-wide.
+config :operately, :email_locale, System.get_env("EMAIL_LOCALE", "en")
 config :operately, :billing_enabled, System.get_env("OPERATELY_BILLING_ENABLED", "false") == "true"
 config :operately, :polar_access_token, System.get_env("POLAR_ACCESS_TOKEN")
 config :operately, :polar_webhook_secret, System.get_env("POLAR_WEBHOOK_SECRET")

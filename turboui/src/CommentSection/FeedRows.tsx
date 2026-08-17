@@ -5,6 +5,7 @@ import type { FormattedTimePreferences } from "../FormattedTime";
 import { IconSquareCheckFilled, IconSquareChevronsLeftFilled } from "../icons";
 import type { MilestoneActivity } from "../Timeline/types";
 import type { Person } from "./types";
+import { t } from "../i18n";
 
 interface MilestoneFeedRowProps {
   activity: MilestoneActivity;
@@ -47,7 +48,7 @@ export function MilestoneCompletedFeedRow({
     <MilestoneFeedRow
       activity={activity}
       formattedTimePreferences={formattedTimePreferences}
-      label="Completed the Milestone"
+      label={t("turboui.commentSection.completedTheMilestone")}
       icon={<IconSquareCheckFilled size={20} className="text-accent-1" />}
     />
   );
@@ -64,7 +65,7 @@ export function MilestoneReopenedFeedRow({
     <MilestoneFeedRow
       activity={activity}
       formattedTimePreferences={formattedTimePreferences}
-      label="Re-Opened the Milestone"
+      label={t("turboui.commentSection.reOpenedTheMilestone")}
       icon={<IconSquareChevronsLeftFilled size={20} className="text-yellow-500" />}
     />
   );

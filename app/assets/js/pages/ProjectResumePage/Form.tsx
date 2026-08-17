@@ -9,6 +9,7 @@ import { useNavigateTo } from "@/routes/useNavigateTo";
 import { usePaths } from "@/routes/paths";
 import { PageCache } from "@/routes/PageCache";
 import { projectPageCacheKey } from "../ProjectPage";
+import { t } from "@/i18n";
 
 export function Form({ project }: { project: Projects.Project }) {
   const paths = usePaths();
@@ -56,9 +57,9 @@ export function Form({ project }: { project: Projects.Project }) {
       <Forms.FieldGroup>
         <Forms.RichTextArea
           field="message"
-          label="Why are you resuming this project?"
+          label={t("pages.projectResumePage.whyAreYouResumingThisProject")}
           richTextHandlers={richTextHandlers}
-          placeholder="Write here..."
+          placeholder={t("pages.projectResumePage.writeHere")}
         />
       </Forms.FieldGroup>
 
@@ -68,9 +69,9 @@ export function Form({ project }: { project: Projects.Project }) {
 
       <div className="flex items-center gap-6 mt-8">
         <PrimaryButton onClick={form.actions.submit} testId="resume-project-button" loading={isSubmitting}>
-          Resume project
+          {t("pages.projectResumePage.resumeProject")}
         </PrimaryButton>
-        <DimmedLink to={paths.projectPath(projectId)}>Keep it paused</DimmedLink>
+        <DimmedLink to={paths.projectPath(projectId)}>{t("pages.projectResumePage.keepItPaused")}</DimmedLink>
       </div>
     </Forms.Form>
   );

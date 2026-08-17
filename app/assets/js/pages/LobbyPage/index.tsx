@@ -11,6 +11,8 @@ import { PageModule } from "@/routes/types";
 import { assertPresent } from "@/utils/assertions";
 import plurarize from "@/utils/plurarize";
 import classnames from "classnames";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 export default { name: "LobbyPage", loader, Page } as PageModule;
 
@@ -37,11 +39,11 @@ function Page() {
   const firstName = People.firstName({ fullName: account.fullName });
 
   return (
-    <Pages.Page title={"Lobby"} testId="lobby-page">
+    <Pages.Page title={t("pages.lobbyPage.lobby")} testId="lobby-page">
       <div className="p-4 py-8 sm:p-8 lg:p-12">
         <OperatelyLogo width="32px" height="32px" />
-        <div className="font-medium mt-4 sm:mt-8">Welcome to Operately, {firstName}!</div>
-        <div className="font-medium hidden sm:block">Let's get you started</div>
+        <div className="font-medium mt-4 sm:mt-8">{t("pages.lobbyPage.welcomeToOperatelyName", { v1: firstName })}</div>
+        <div className="font-medium hidden sm:block">{t("pages.lobbyPage.letSGetYouStarted")}</div>
         <CompanyCards companies={companies} />
         <AdminsLink />
       </div>
@@ -56,11 +58,15 @@ function AdminsLink() {
 
   const adminLink = (
     <Link to="/admin" className="font-medium">
-      Admin Panel
+      {t("pages.lobbyPage.adminPanel")}
     </Link>
   );
 
-  return <div className="font-medium mt-8">Or, visit the {adminLink}.</div>;
+  return (
+    <div className="font-medium mt-8">
+      <Trans i18nKey="pages.lobbyPage.orVisitThe" components={[adminLink]} />
+    </div>
+  );
 }
 
 function CompanyCards({ companies }: { companies: Company[] }) {
@@ -110,7 +116,7 @@ function AddCompanyCard() {
   return (
     <DivLink to={Paths.newCompanyPath()} className={className} testId="add-company-card">
       <div className="font-bold sm:text-lg">+ Create organization</div>
-      <div className="text-xs sm:text-sm font-medium">Start fresh with a new company account</div>
+      <div className="text-xs sm:text-sm font-medium">{t("pages.lobbyPage.startFreshWithANewCompany")}</div>
       <div className="absolute bottom-2 right-2">
         <IconSparkles size={24} className="text-white-1" strokeWidth={1.5} />
       </div>

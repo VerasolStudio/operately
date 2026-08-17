@@ -12,6 +12,7 @@ import {
   type FormattedTimePreferences,
   type RichEditorHandlers,
 } from "turboui";
+import { t } from "@/i18n";
 
 type TurboUiPerson = CommentSectionProps["currentUser"];
 
@@ -94,7 +95,10 @@ export function useTemplateComments({
         return true;
       } catch {
         setItems((current) => current.filter((item) => !isItem(item, tempId)));
-        showErrorToast("Comment not added", "The comment was not saved. Try again.");
+        showErrorToast(
+          t("app.useTemplateComments.commentNotAdded"),
+          t("app.useTemplateComments.theCommentWasNotSavedTry"),
+        );
         return false;
       }
     },
@@ -106,10 +110,17 @@ export function useTemplateComments({
           content: stringifyCommentContent(content),
         });
 
-        setItems((current) => current.map((item) => (item.type === "comment" && item.value.id === id ? toItem(paths, result.comment) : item)));
+        setItems((current) =>
+          current.map((item) =>
+            item.type === "comment" && item.value.id === id ? toItem(paths, result.comment) : item,
+          ),
+        );
         return true;
       } catch {
-        showErrorToast("Comment not updated", "The comment was not saved. Try again.");
+        showErrorToast(
+          t("app.useTemplateComments.commentNotUpdated"),
+          t("app.useTemplateComments.theCommentWasNotSavedTry"),
+        );
         return false;
       }
     },
@@ -119,7 +130,10 @@ export function useTemplateComments({
             await Api.project_templates.deleteComment({ templateId, commentId: id });
             setItems((current) => current.filter((item) => !(item.type === "comment" && item.value.id === id)));
           } catch {
-            showErrorToast("Comment not deleted", "The comment is still on this page. Try again.");
+            showErrorToast(
+              t("app.useTemplateComments.commentNotDeleted"),
+              t("app.useTemplateComments.theCommentIsStillOnThis"),
+            );
           }
         }
       : undefined,

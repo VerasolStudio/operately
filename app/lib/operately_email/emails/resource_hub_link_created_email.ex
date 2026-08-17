@@ -3,6 +3,7 @@ defmodule OperatelyEmail.Emails.ResourceHubLinkCreatedEmail do
 
   alias OperatelyEmail.Emails.ResourceHubEmail
   alias Operately.Repo
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -15,7 +16,7 @@ defmodule OperatelyEmail.Emails.ResourceHubLinkCreatedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: parent.name, who: author, action: "added a link")
+    |> subject(where: parent.name, who: author, action: t("resourceHubLinkCreated.action"))
     |> assign(:author, author)
     |> assign(:link, link)
     |> assign(:cta_url, OperatelyWeb.Paths.link_path(company, link) |> OperatelyWeb.Paths.to_url())
@@ -32,7 +33,7 @@ defmodule OperatelyEmail.Emails.ResourceHubLinkCreatedEmail do
       parent_id: parent.id,
       parent_type: parent.type,
       parent_name: parent.name,
-      headline: "added the link \"#{link.name}\"",
+      headline: t("resourceHubLinkCreated.headline", %{v1: link.name}),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.link_path(company, link) |> OperatelyWeb.Paths.to_url(),

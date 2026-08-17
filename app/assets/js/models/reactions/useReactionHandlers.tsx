@@ -3,6 +3,7 @@ import Api, { CommentParentType } from "@/api";
 import { showErrorToast } from "turboui";
 import { compareIds } from "@/routes/paths";
 import { useMe } from "@/contexts/CurrentCompanyContext";
+import { t } from "@/i18n";
 
 export function useReactionHandlers<T extends { id?: string | null; reactions?: any[]; content?: any }>(
   setComments: React.Dispatch<React.SetStateAction<T[]>>,
@@ -28,7 +29,7 @@ export function useReactionHandlers<T extends { id?: string | null; reactions?: 
   const handleAddReaction = React.useCallback(
     async (commentId: string, emoji: string) => {
       if (!currentUser) {
-        showErrorToast("Error", "Failed to add reaction.");
+        showErrorToast(t("app.useReactionHandlers.error"), t("app.useReactionHandlers.failedToAddReaction"));
         return;
       }
 
@@ -60,7 +61,7 @@ export function useReactionHandlers<T extends { id?: string | null; reactions?: 
           ...comment,
           reactions: (comment.reactions ?? []).filter((reaction) => reaction.id !== tempReactionId),
         }));
-        showErrorToast("Error", "Failed to add reaction.");
+        showErrorToast(t("app.useReactionHandlers.error"), t("app.useReactionHandlers.failedToAddReaction"));
       }
     },
     [currentUser, updateCommentById, invalidateCache, parentType],
@@ -89,7 +90,7 @@ export function useReactionHandlers<T extends { id?: string | null; reactions?: 
           }));
         }
 
-        showErrorToast("Error", "Failed to remove reaction.");
+        showErrorToast(t("app.useReactionHandlers.error"), t("app.useReactionHandlers.failedToRemoveReaction"));
       }
     },
     [updateCommentById, invalidateCache],

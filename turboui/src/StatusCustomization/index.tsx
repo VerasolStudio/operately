@@ -8,6 +8,7 @@ import { DeletedStatusRow } from "./components/DeletedStatusRow";
 import { StatusRow, applyStatusUpdate } from "./components/StatusRow";
 import { useDraftStatuses, useStatusSaving } from "./hooks";
 import { buildStatus } from "./utils";
+import { t } from "../i18n";
 
 type BaseProps = {
   isOpen: boolean;
@@ -131,9 +132,7 @@ export function StatusCustomizationModal(props: StatusCustomizationModalProps) {
       testId="status-customization-modal"
     >
       <div className="p-6 space-y-4">
-        <p className="text-sm text-content-dimmed">
-          Add, edit, or remove task statuses. Click the icon to change the color and appearance.
-        </p>
+        <p className="text-sm text-content-dimmed">{t("turboui.statusCustomization.addEditOrRemoveTaskStatuses")}</p>
 
         <div className="space-y-3">
           {draftStatuses.map((status, index) => {
@@ -159,15 +158,16 @@ export function StatusCustomizationModal(props: StatusCustomizationModalProps) {
           data-test-id="add-status-button"
         >
           <IconPlus size={14} />
-          Add status
+          {t("turboui.statusCustomization.addStatus")}
         </button>
 
         {props.requireReplacement === true && deletedStatuses.length > 0 && fallbackReplacementOption && (
           <div className="pt-4 mt-4 border-t border-surface-outline">
-            <h3 className="text-sm font-semibold text-content-base">Deleted statuses</h3>
+            <h3 className="text-sm font-semibold text-content-base">
+              {t("turboui.statusCustomization.deletedStatuses")}
+            </h3>
             <p className="text-xs text-content-dimmed mt-1">
-              Select a replacement status for each deleted status. Tasks using deleted statuses will be moved to the
-              selected replacements.
+              {t("turboui.statusCustomization.selectAReplacementStatusForEach")}
             </p>
 
             <div className="space-y-3 mt-3" data-test-id="deleted-statuses-section">
@@ -199,7 +199,7 @@ export function StatusCustomizationModal(props: StatusCustomizationModalProps) {
       <div className="flex flex-col gap-4 px-6 py-4 border-t border-surface-outline">
         <div className="flex flex-col sm:flex-row gap-3 sm:justify-end">
           <SecondaryButton type="button" onClick={onClose}>
-            Cancel
+            {t("turboui.statusCustomization.cancel")}
           </SecondaryButton>
           <PrimaryButton
             type="button"
@@ -214,7 +214,7 @@ export function StatusCustomizationModal(props: StatusCustomizationModalProps) {
               }
             }}
           >
-            Save changes
+            {t("turboui.statusCustomization.saveChanges")}
           </PrimaryButton>
         </div>
       </div>

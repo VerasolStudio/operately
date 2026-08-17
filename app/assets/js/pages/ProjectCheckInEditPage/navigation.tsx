@@ -7,21 +7,25 @@ import { assertPresent } from "@/utils/assertions";
 
 import { useLoadedData } from "./loader";
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function buildProjectCheckInEditNavigation(checkIn: ProjectCheckIn, paths: Paths): Paper.NavigationItem[] {
   const items: Paper.NavigationItem[] = [];
 
   if (checkIn.space) {
     items.push({ to: paths.spacePath(checkIn.space.id), label: checkIn.space.name });
-    items.push({ to: paths.spaceWorkMapPath(checkIn.space.id, "projects" as const), label: "Work Map" });
+    items.push({
+      to: paths.spaceWorkMapPath(checkIn.space.id, "projects" as const),
+      label: t("pages.projectCheckInEditPage.workMap"),
+    });
   } else {
-    items.push({ to: paths.workMapPath("projects"), label: "Work Map" });
+    items.push({ to: paths.workMapPath("projects"), label: t("pages.projectCheckInEditPage.workMap") });
   }
 
   const project = checkIn.project;
   assertPresent(project, "Check-in project must be defined");
   items.push({ to: paths.projectPath(project.id), label: project.name });
-  items.push({ to: paths.projectCheckInsPath(project.id), label: "Check-Ins" });
+  items.push({ to: paths.projectCheckInsPath(project.id), label: t("pages.projectCheckInEditPage.checkIns") });
 
   return items;
 }

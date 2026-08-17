@@ -1,20 +1,20 @@
-<%= title("#{short_name(@author)} created the #{@milestone.title} milestone") %>
+<%= title(t("projectMilestoneCreation.v1CreatedTheV2Milestone", %{v1: short_name(@author), v2: @milestone.title})) %>
 
 <%= spacer() %>
 
 <%= row do %>
-  A new milestone was added to <%= @project.name %>.
+  <%= t("projectMilestoneCreation.aNewMilestoneWasAddedTo", %{v1: @project.name}) %>
 <% end %>
 
 <%= if @due_date do %>
   <%= spacer() %>
   <%= row do %>
-    It is scheduled for <%= @due_date %>.
+    <%= t("projectMilestoneCreation.itIsScheduledFor", %{v1: @due_date}) %>
   <% end %>
 <% end %>
 
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@cta_url, "View Milestone") %>
+  <%= cta_button(@cta_url, t("projectMilestoneCreation.viewMilestone")) %>
 <% end %>

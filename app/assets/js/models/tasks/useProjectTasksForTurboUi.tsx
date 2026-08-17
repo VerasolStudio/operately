@@ -12,6 +12,7 @@ import * as Signals from "@/signals";
 import { DateField, showErrorToast, TaskBoard, TaskPage } from "turboui";
 import { serializeTaskDescription } from "./descriptionSerialization";
 import { buildMilestonesOrderingState, normalizeMilestonesOrderingState } from "./milestoneOrdering";
+import { t } from "@/i18n";
 
 interface TasksSnapshot {
   tasks: TaskBoard.Task[];
@@ -181,7 +182,7 @@ export function useProjectTasksForTurboUi({
       return { success: true };
     } catch (e) {
       console.error("Failed to create task", e);
-      showErrorToast("Error", "Failed to create task");
+      showErrorToast(t("app.useProjectTasksForTurboUi.error"), t("app.useProjectTasksForTurboUi.failedToCreateTask"));
       restoreSnapshot(snapshot);
       return { success: false };
     }
@@ -206,7 +207,10 @@ export function useProjectTasksForTurboUi({
       })
       .catch((e) => {
         console.error("Failed to update task due date", e);
-        showErrorToast("Error", "Failed to update task due date");
+        showErrorToast(
+          t("app.useProjectTasksForTurboUi.error"),
+          t("app.useProjectTasksForTurboUi.failedToUpdateTaskDueDate"),
+        );
 
         return false;
       });
@@ -231,7 +235,10 @@ export function useProjectTasksForTurboUi({
       return true;
     } catch (e) {
       console.error("Failed to update task reminders", e);
-      showErrorToast("Error", "Failed to update task reminders");
+      showErrorToast(
+        t("app.useProjectTasksForTurboUi.error"),
+        t("app.useProjectTasksForTurboUi.failedToUpdateTaskReminders"),
+      );
       restoreSnapshot(snapshot);
       return false;
     }
@@ -256,7 +263,10 @@ export function useProjectTasksForTurboUi({
       })
       .catch((e) => {
         console.error("Failed to update task assignee", e);
-        showErrorToast("Error", "Failed to update task assignee");
+        showErrorToast(
+          t("app.useProjectTasksForTurboUi.error"),
+          t("app.useProjectTasksForTurboUi.failedToUpdateTaskAssignee"),
+        );
 
         return false;
       });
@@ -265,7 +275,10 @@ export function useProjectTasksForTurboUi({
   const updateTaskName = React.useCallback(
     async (taskId: string, title: string) => {
       if (title.trim() === "") {
-        showErrorToast("Task name cannot be empty", "Failed to update task name.");
+        showErrorToast(
+          t("app.useProjectTasksForTurboUi.taskNameCannotBeEmpty"),
+          t("app.useProjectTasksForTurboUi.failedToUpdateTaskName"),
+        );
         return false;
       }
 
@@ -286,7 +299,10 @@ export function useProjectTasksForTurboUi({
         return true;
       } catch (e) {
         console.error("Failed to update task name", e);
-        showErrorToast("Error", "Failed to update task name.");
+        showErrorToast(
+          t("app.useProjectTasksForTurboUi.error"),
+          t("app.useProjectTasksForTurboUi.failedToUpdateTaskName"),
+        );
         restoreSnapshot(snapshot);
         return false;
       }
@@ -314,7 +330,10 @@ export function useProjectTasksForTurboUi({
         return true;
       } catch (e) {
         console.error("Failed to update task description", e);
-        showErrorToast("Error", "Failed to update task description.");
+        showErrorToast(
+          t("app.useProjectTasksForTurboUi.error"),
+          t("app.useProjectTasksForTurboUi.failedToUpdateTaskDescription"),
+        );
         restoreSnapshot(snapshot);
         return false;
       }
@@ -353,7 +372,10 @@ export function useProjectTasksForTurboUi({
       return true;
     } catch (e) {
       console.error("Failed to update task status", e);
-      showErrorToast("Error", "Failed to update task status");
+      showErrorToast(
+        t("app.useProjectTasksForTurboUi.error"),
+        t("app.useProjectTasksForTurboUi.failedToUpdateTaskStatus"),
+      );
       restoreSnapshot(snapshot);
       return false;
     }
@@ -368,7 +390,7 @@ export function useProjectTasksForTurboUi({
 
       if (!taskToMove) {
         console.error("Task not found", taskId);
-        showErrorToast("Error", "Something went wrong");
+        showErrorToast(t("app.useProjectTasksForTurboUi.error"), t("app.useProjectTasksForTurboUi.somethingWentWrong"));
         return false;
       }
 
@@ -423,7 +445,10 @@ export function useProjectTasksForTurboUi({
       return true;
     } catch (e) {
       console.error("Failed to update task milestone", e);
-      showErrorToast("Error", "Failed to update task milestone");
+      showErrorToast(
+        t("app.useProjectTasksForTurboUi.error"),
+        t("app.useProjectTasksForTurboUi.failedToUpdateTaskMilestone"),
+      );
       restoreSnapshot(snapshot);
       return false;
     }
@@ -435,7 +460,7 @@ export function useProjectTasksForTurboUi({
 
     if (!taskToDelete) {
       console.error("Task not found", taskId);
-      showErrorToast("Error", "Something went wrong");
+      showErrorToast(t("app.useProjectTasksForTurboUi.error"), t("app.useProjectTasksForTurboUi.somethingWentWrong"));
       return { success: false };
     }
 
@@ -470,7 +495,7 @@ export function useProjectTasksForTurboUi({
       return { success: true };
     } catch (e) {
       console.error("Failed to delete task", e);
-      showErrorToast("Error", "Failed to delete task");
+      showErrorToast(t("app.useProjectTasksForTurboUi.error"), t("app.useProjectTasksForTurboUi.failedToDeleteTask"));
       restoreSnapshot(snapshot);
       return { success: false };
     }

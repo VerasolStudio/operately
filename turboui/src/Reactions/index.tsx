@@ -5,6 +5,7 @@ import classNames from "../utils/classnames";
 import { Avatar } from "../Avatar";
 import { IconMoodPlus, IconTrash, IconX } from "../icons";
 import { compareIds } from "../utils/ids";
+import { t } from "../i18n";
 
 export namespace Reactions {
   export interface Person {
@@ -13,13 +14,13 @@ export namespace Reactions {
     avatarUrl: string | null;
     profileLink: string;
   }
-  
+
   export interface Reaction {
     id: string;
     person: Person;
     emoji: string;
   }
-  
+
   export interface Props {
     reactions: Reaction[];
     size?: number;
@@ -155,7 +156,7 @@ function ReactionItemComponent({
         <div
           className="text-red-500 hover:text-red-600 p-1 pr-2 cursor-pointer"
           onClick={handleDeleteClick}
-          title="Remove reaction"
+          title={t("turboui.reactions.removeReaction")}
         >
           <IconTrash size={size - 8} />
         </div>
@@ -429,7 +430,7 @@ function ReactionPallete({ size, close, onSelected }: ReactionPalleteProps) {
   return (
     <div className="bg-surface p-4 py-3 pb-2 flex flex-col gap-0.5">
       <div className="flex items-start justify-between text-content-dimmed w-full">
-        <div className="text-sm mb-2 font-medium">Add Reaction</div>
+        <div className="text-sm mb-2 font-medium">{t("turboui.reactions.addReaction")}</div>
         <div className="">
           <IconX size={16} onClick={close} className="cursor-pointer" />
         </div>
@@ -439,7 +440,7 @@ function ReactionPallete({ size, close, onSelected }: ReactionPalleteProps) {
       <div className="mb-2">
         <input
           type="text"
-          placeholder="Search emojis..."
+          placeholder={t("turboui.reactions.searchEmojis")}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full px-2 py-1 text-sm border border-surface-outline rounded bg-surface-dimmed text-content-base placeholder-content-dimmed focus:outline-none focus:border-accent-1"
@@ -466,7 +467,7 @@ function ReactionPallete({ size, close, onSelected }: ReactionPalleteProps) {
             </div>
           ))
         ) : (
-          <div className="text-content-dimmed text-sm py-2 text-center">No emojis found</div>
+          <div className="text-content-dimmed text-sm py-2 text-center">{t("turboui.reactions.noEmojisFound")}</div>
         )}
       </div>
     </div>

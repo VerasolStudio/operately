@@ -3,7 +3,7 @@
 <%= spacer() %>
 
 <%= row do %>
-  You now have access to <%= @company.name %> as a company member.
+  <%= t("companyMemberAdded.youNowHaveAccessToAs", %{v1: @company.name}) %>
 <% end %>
 
 <%= spacer() %>

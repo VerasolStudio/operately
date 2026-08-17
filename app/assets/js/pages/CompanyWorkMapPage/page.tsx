@@ -14,6 +14,7 @@ import { usePaths } from "../../routes/paths";
 import { finishFirstItemOnboarding } from "./finishFirstItemOnboarding";
 import { shouldShowFirstProjectOnboarding } from "./firstProjectOnboarding";
 import { companyWorkMapCacheKey, useLoadedData } from "./loader";
+import { t } from "@/i18n";
 
 export function Page() {
   const paths = usePaths();
@@ -22,7 +23,7 @@ export function Page() {
   const companyLoaderData = useCompanyLoaderData();
   const { workMap, company, spacesCount } = useLoadedData().data;
 
-  const title = `${company.name} Work Map`;
+  const title = t("pages.companyWorkMapPage.workMap", { v1: company.name });
 
   const canAddItem = spacesCount > 0;
   const ownerIds = companyLoaderData.company.owners?.map((owner) => owner.id) ?? [];

@@ -6,6 +6,7 @@ import { Page } from "../Page";
 import type { Navigation } from "../Page/Navigation";
 import RichContent from "../RichContent";
 import type { RichEditorHandlers } from "../RichEditor/useEditor";
+import { t } from "../i18n";
 
 export namespace TemplateResourcePage {
   export interface Item {
@@ -71,14 +72,19 @@ function ResourceContent({
       )}
 
       {resource.type === "link" && resource.url && (
-        <DivLink to={resource.url} external target="_blank" className="mt-6 inline-block font-medium text-link-base underline">
-          Open link
+        <DivLink
+          to={resource.url}
+          external
+          target="_blank"
+          className="mt-6 inline-block font-medium text-link-base underline"
+        >
+          {t("turboui.templateResourcePage.openLink")}
         </DivLink>
       )}
 
       {resource.type === "file" && resource.downloadUrl && (
         <a href={resource.downloadUrl} className="mt-6 inline-block font-medium text-link-base underline" download>
-          Download file
+          {t("turboui.templateResourcePage.downloadFile")}
         </a>
       )}
     </div>

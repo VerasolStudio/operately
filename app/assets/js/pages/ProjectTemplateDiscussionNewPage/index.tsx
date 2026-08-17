@@ -7,6 +7,7 @@ import type { PageModule } from "@/routes/types";
 import { showErrorToast, TemplateDiscussionForm } from "turboui";
 import { useNavigate } from "react-router";
 import React from "react";
+import { t } from "@/i18n";
 
 export default { name: "ProjectTemplateDiscussionNewPage", loader, Page } as PageModule;
 
@@ -39,7 +40,10 @@ function Page() {
       navigate(paths.projectTemplateDiscussionPath(template.id, result.discussion.id));
       return true;
     } catch {
-      showErrorToast("Discussion not created", "Check the form and try again.");
+      showErrorToast(
+        t("pages.projectTemplateDiscussionNewPage.discussionNotCreated"),
+        t("pages.projectTemplateDiscussionNewPage.checkTheFormAndTryAgain"),
+      );
       return false;
     }
   }
@@ -59,8 +63,14 @@ function Page() {
 function navigation(template: ProjectTemplate, paths: Paths) {
   return [
     { to: paths.spacePath(template.space.id), label: template.space.name },
-    { to: paths.spaceProjectTemplatesPath(template.space.id), label: "Project Templates" },
+    {
+      to: paths.spaceProjectTemplatesPath(template.space.id),
+      label: t("pages.projectTemplateDiscussionNewPage.projectTemplates"),
+    },
     { to: paths.projectTemplatePath(template.id), label: template.name },
-    { to: paths.projectTemplatePath(template.id, { tab: "discussions" }), label: "Discussions" },
+    {
+      to: paths.projectTemplatePath(template.id, { tab: "discussions" }),
+      label: t("pages.projectTemplateDiscussionNewPage.discussions"),
+    },
   ];
 }

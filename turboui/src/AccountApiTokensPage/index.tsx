@@ -11,6 +11,7 @@ import { Modal } from "../Modal";
 import { Page } from "../Page";
 import { SwitchToggle } from "../SwitchToggle";
 import { createTestId } from "../TestableElement";
+import { t } from "../i18n";
 
 export namespace AccountApiTokensPage {
   export interface Token {
@@ -51,8 +52,8 @@ export function AccountApiTokensPage(props: AccountApiTokensPage.Props) {
 
   const navigation = React.useMemo(
     () => [
-      { to: props.homePath, label: "Home" },
-      { to: props.securityPath, label: "Password & Security" },
+      { to: props.homePath, label: t("turboui.accountApiTokensPage.home") },
+      { to: props.securityPath, label: t("turboui.accountApiTokensPage.passwordSecurity") },
     ],
     [props.homePath, props.securityPath],
   );
@@ -67,41 +68,48 @@ export function AccountApiTokensPage(props: AccountApiTokensPage.Props) {
   }, [props.onDismissNewlyCreatedToken]);
 
   return (
-    <Page title="API Tokens" size="small" testId="account-api-tokens-page" navigation={navigation}>
+    <Page
+      title={t("turboui.accountApiTokensPage.aPITokens")}
+      size="small"
+      testId="account-api-tokens-page"
+      navigation={navigation}
+    >
       <div className="px-4 sm:px-10 py-8">
         <header>
-          <h1 className="text-2xl font-bold">API Tokens</h1>
+          <h1 className="text-2xl font-bold">{t("turboui.accountApiTokensPage.aPITokens")}</h1>
           <p className="text-sm text-content-dimmed mt-2">
-            Use API tokens to access Operately programmatically from scripts, integrations, and automation tools.
+            {t("turboui.accountApiTokensPage.useAPITokensToAccessOperately")}
           </p>
         </header>
 
         <section className="mt-10" data-test-id="create-api-token-section">
-          <h2 className="font-bold">Create A Token</h2>
+          <h2 className="font-bold">{t("turboui.accountApiTokensPage.createAToken")}</h2>
           <p className="text-sm text-content-dimmed mt-1">
-            Read-only tokens can call queries only. Full-access tokens can call both queries and mutations.
+            {t("turboui.accountApiTokensPage.readOnlyTokensCanCallQueries")}
           </p>
 
           <div className="mt-3">
             <PrimaryButton onClick={openCreateModal} testId="open-create-api-token-modal" size="sm">
-              Create API Token
+              {t("turboui.accountApiTokensPage.createAPIToken")}
             </PrimaryButton>
           </div>
 
           <div className="mt-4 text-xs">
             <Link to={props.usagePath} underline="hover" testId="view-api-token-usage">
-              View API usage instructions
+              {t("turboui.accountApiTokensPage.viewAPIUsageInstructions")}
             </Link>
           </div>
         </section>
 
         <section className="mt-10" data-test-id="existing-api-tokens-section">
-          <h2 className="font-bold">Existing Tokens</h2>
-          <p className="text-sm text-content-dimmed mt-1">Manage and revoke your active API tokens.</p>
+          <h2 className="font-bold">{t("turboui.accountApiTokensPage.existingTokens")}</h2>
+          <p className="text-sm text-content-dimmed mt-1">
+            {t("turboui.accountApiTokensPage.manageAndRevokeYourActiveAPI")}
+          </p>
 
           {props.tokens.length === 0 ? (
             <div className="text-sm text-content-dimmed rounded-md border border-stroke-base p-4 mt-3">
-              No API tokens created yet.
+              {t("turboui.accountApiTokensPage.noAPITokensCreatedYet")}
             </div>
           ) : (
             <TokenList
@@ -149,12 +157,18 @@ function CreateTokenModal({
   const hasCreatedToken = Boolean(newlyCreatedToken);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="small" title="Create API token" testId="create-api-token-modal">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size="small"
+      title={t("turboui.accountApiTokensPage.createAPIToken2")}
+      testId="create-api-token-modal"
+    >
       <div className="space-y-6">
         {!hasCreatedToken && (
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <div className="text-sm font-medium">Access mode for new token</div>
+              <div className="text-sm font-medium">{t("turboui.accountApiTokensPage.accessModeForNewToken")}</div>
               <div className="text-sm text-content-dimmed mt-1">
                 {newTokenReadOnly ? "Read-only (queries only)" : "Full access (queries + mutations)"}
               </div>
@@ -174,11 +188,11 @@ function CreateTokenModal({
         <div className="flex justify-end gap-4">
           {!hasCreatedToken && (
             <PrimaryButton size="sm" onClick={onCreateToken} loading={creatingToken} testId="create-api-token-button">
-              Create API Token
+              {t("turboui.accountApiTokensPage.createAPIToken")}
             </PrimaryButton>
           )}
           <SecondaryButton size="sm" onClick={onClose} testId="close-create-api-token-modal">
-            Close
+            {t("turboui.accountApiTokensPage.close")}
           </SecondaryButton>
         </div>
       </div>
@@ -190,8 +204,8 @@ function NewlyCreatedTokenCard({ token }: { token: string }) {
   return (
     <div data-test-id="new-api-token-card">
       <WarningCallout
-        message="Copy the token"
-        description="This is the only time this value will be shown. Copy and store it securely."
+        message={t("turboui.accountApiTokensPage.copyTheToken")}
+        description={t("turboui.accountApiTokensPage.thisIsTheOnlyTimeThis")}
       />
 
       <div className="mt-3 rounded-md border border-stroke-base bg-surface-dimmed p-3 flex items-start gap-3">
@@ -228,12 +242,14 @@ function TokenList({
         <table className="min-w-full text-sm">
           <thead>
             <tr className="bg-surface-dimmed text-left">
-              <th className="px-3 py-2 font-semibold">Token</th>
-              <th className="px-3 py-2 font-semibold">Access</th>
-              <th className="px-3 py-2 font-semibold">Created</th>
-              <th className="px-3 py-2 font-semibold whitespace-nowrap">Last Used</th>
+              <th className="px-3 py-2 font-semibold">{t("turboui.accountApiTokensPage.token")}</th>
+              <th className="px-3 py-2 font-semibold">{t("turboui.accountApiTokensPage.access")}</th>
+              <th className="px-3 py-2 font-semibold">{t("turboui.accountApiTokensPage.created")}</th>
+              <th className="px-3 py-2 font-semibold whitespace-nowrap">
+                {t("turboui.accountApiTokensPage.lastUsed")}
+              </th>
               <th className="px-3 py-2 text-right">
-                <span className="sr-only">Options</span>
+                <span className="sr-only">{t("turboui.accountApiTokensPage.options")}</span>
               </th>
             </tr>
           </thead>
@@ -261,7 +277,7 @@ function TokenList({
 
       {!hasUsageMetadata && (
         <div className="text-xs text-content-dimmed mt-2">
-          Created and last-used timestamps will appear here once available.
+          {t("turboui.accountApiTokensPage.createdAndLastUsedTimestampsWill")}
         </div>
       )}
     </div>
@@ -332,7 +348,11 @@ function TokenRow({
         </td>
 
         <td className="px-3 py-3 text-content-dimmed whitespace-nowrap">
-          <Timestamp value={token.insertedAt} emptyLabel="Not available" formattedTimePreferences={formattedTimePreferences} />
+          <Timestamp
+            value={token.insertedAt}
+            emptyLabel="Not available"
+            formattedTimePreferences={formattedTimePreferences}
+          />
         </td>
 
         <td className="px-3 py-3 text-content-dimmed">
@@ -342,8 +362,12 @@ function TokenRow({
         <td className="px-3 py-3 text-right">
           <div className="inline-flex">
             <Menu align="end" testId={createTestId("api-token-actions-menu", token.id)}>
-              <MenuActionItem icon={IconPencil} onClick={openRenameModal} testId={createTestId("update-api-token-name", token.id)}>
-                Update name
+              <MenuActionItem
+                icon={IconPencil}
+                onClick={openRenameModal}
+                testId={createTestId("update-api-token-name", token.id)}
+              >
+                {t("turboui.accountApiTokensPage.updateName")}
               </MenuActionItem>
 
               <MenuActionItem
@@ -364,7 +388,7 @@ function TokenRow({
                 danger
                 testId={createTestId("delete-api-token", token.id)}
               >
-                Delete
+                {t("turboui.accountApiTokensPage.delete")}
               </MenuActionItem>
             </Menu>
           </div>
@@ -416,31 +440,31 @@ function RenameTokenModal({
       isOpen={isOpen}
       onClose={onClose}
       size="small"
-      title="Update token name"
+      title={t("turboui.accountApiTokensPage.updateTokenName")}
       testId="update-api-token-name-modal"
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <label className="block">
-          <div className="font-bold text-sm mb-1 text-left">Token name</div>
+          <div className="font-bold text-sm mb-1 text-left">{t("turboui.accountApiTokensPage.tokenName")}</div>
           <input
             className="w-full border rounded-lg px-3 py-2 text-sm bg-surface-base border-surface-outline"
             value={name}
             onChange={(e) => onChangeName(e.target.value)}
-            placeholder="Enter token name"
+            placeholder={t("turboui.accountApiTokensPage.enterTokenName")}
             data-test-id="update-api-token-name-input"
             autoFocus
           />
         </label>
 
-        <p className="text-xs text-content-dimmed">Leave empty to clear the name and use the default token label.</p>
+        <p className="text-xs text-content-dimmed">{t("turboui.accountApiTokensPage.leaveEmptyToClearTheName")}</p>
 
         <div className="flex justify-end gap-3">
           <SecondaryButton type="button" onClick={onClose} disabled={isSaving} testId="update-api-token-name-cancel">
-            Cancel
+            {t("turboui.accountApiTokensPage.cancel")}
           </SecondaryButton>
 
           <PrimaryButton type="submit" loading={isSaving} testId="update-api-token-name-save">
-            Save
+            {t("turboui.accountApiTokensPage.save")}
           </PrimaryButton>
         </div>
       </form>
@@ -462,7 +486,13 @@ function DeleteTokenModal({
   tokenName: string;
 }) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="small" title="Delete token" testId="delete-api-token-modal">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size="small"
+      title={t("turboui.accountApiTokensPage.deleteToken")}
+      testId="delete-api-token-modal"
+    >
       <div className="space-y-4">
         <p className="text-sm text-content-dimmed">
           Delete <span className="font-medium text-content-base">{tokenName}</span>? This cannot be undone.
@@ -470,11 +500,11 @@ function DeleteTokenModal({
 
         <div className="flex justify-end gap-3">
           <SecondaryButton type="button" onClick={onClose} disabled={isDeleting} testId="delete-api-token-cancel">
-            Cancel
+            {t("turboui.accountApiTokensPage.cancel")}
           </SecondaryButton>
 
           <DangerButton type="button" onClick={onConfirm} loading={isDeleting} testId="delete-api-token-confirm">
-            Delete
+            {t("turboui.accountApiTokensPage.delete")}
           </DangerButton>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { IconCalendar } from "../icons";
 import { createTestId } from "../TestableElement";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 const INVALID_VALUE_MESSAGE = "Enter zero or a positive number of days.";
 
@@ -22,7 +23,7 @@ export function formatRelativeDay(value: number | null, placeholder = "Set relat
   if (value === null) return placeholder;
   if (value === 0) return "On the project start date";
   if (value === 1) return "1 day after project starts";
-  return `${value} days after project starts`;
+  return t("turboui.relativeDayField.daysAfterProjectStarts", { v1: value });
 }
 
 export function RelativeDayField({

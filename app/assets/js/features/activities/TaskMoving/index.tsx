@@ -3,6 +3,7 @@ import type { ActivityContentTaskMoving } from "@/api";
 import type { Activity } from "@/models/activities";
 import type { ActivityHandler } from "../interfaces";
 import { feedTitle, projectLink, spaceLink, taskLink } from "../feedItemLinks";
+import { t } from "@/i18n";
 
 const TaskMoving: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -53,7 +54,7 @@ const TaskMoving: ActivityHandler = {
   FeedItemContent({ activity }: { activity: Activity; page: any }) {
     const data = content(activity);
 
-    return <>Previously, it was in {originLabel(data)}</>;
+    return <>{t("features.activities.previouslyItWasIn", { v1: originLabel(data) })}</>;
   },
 
   feedItemAlignment(_activity: Activity): "items-start" | "items-center" {

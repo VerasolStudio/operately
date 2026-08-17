@@ -19,6 +19,7 @@ import { Textfield } from "../FormElements/Textfield";
 import { PieChart } from "../PieChart";
 import { SwitchToggle } from "../SwitchToggle";
 import { createTestId } from "../TestableElement";
+import { t } from "../i18n";
 
 export namespace Checklist {
   export type ChecklistItem = {
@@ -161,7 +162,7 @@ function ChecklistSectionHeader({
         )}
         {canEdit && !addActive && togglable && (
           <SecondaryButton size="xxs" onClick={onAddClick} testId="add-checklist-item">
-            Add
+            {t("turboui.checklist.add")}
           </SecondaryButton>
         )}
       </div>
@@ -235,11 +236,7 @@ function ChecklistItemList({ state }: { state: State }) {
         </React.Fragment>
       ))}
       {placeholderIndex !== null && placeholderIndex === itemsWithIndex.length && (
-        <SubtleDropPlaceholder
-          containerId={containerId}
-          index={itemsWithIndex.length}
-          height={placeholderHeight}
-        />
+        <SubtleDropPlaceholder containerId={containerId} index={itemsWithIndex.length} height={placeholderHeight} />
       )}
 
       {state.addActive && <ChecklistItemAdd state={state} />}
@@ -310,22 +307,22 @@ function ChecklistItemAdd({ state }: { state: State }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Textfield
           testId="checklist-item-name"
-          label="Check"
+          label={t("turboui.checklist.check")}
           autoFocus
-          placeholder="e.g. Sign the contract"
+          placeholder={t("turboui.checklist.eGSignTheContract")}
           error={errors.name?.message as string}
           onKeyDown={handleKeyDown}
           {...register("name", { required: "Can't be empty" })}
         />
         <div className="flex items-center mt-4">
-          <SwitchToggle value={createMore} setValue={setCreateMore} label="Create more" />
+          <SwitchToggle value={createMore} setValue={setCreateMore} label={t("turboui.checklist.createMore")} />
           <div className="flex-1"></div>
           <div className="flex gap-2">
             <SecondaryButton size="xs" onClick={() => state.cancelAdd()} type="button" testId="cancel">
-              Cancel
+              {t("turboui.checklist.cancel")}
             </SecondaryButton>
             <PrimaryButton size="xs" type="submit" testId="save">
-              Add Check
+              {t("turboui.checklist.addCheck")}
             </PrimaryButton>
           </div>
         </div>
@@ -362,17 +359,17 @@ function ChecklistItemEdit({ state, item }: { state: State; item: ChecklistItemS
     <InlineModal index={item.index}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Textfield
-          label="Check"
+          label={t("turboui.checklist.check")}
           error={errors.name?.message as string}
           onKeyDown={handleKeyDown}
           {...register("name", { required: "Can't be empty" })}
         />
         <div className="flex items-center gap-2 justify-end mt-4">
           <SecondaryButton size="xs" onClick={() => state.cancelEdit(item.id)} type="button">
-            Cancel
+            {t("turboui.checklist.cancel")}
           </SecondaryButton>
           <PrimaryButton size="xs" type="submit" testId="save">
-            Save
+            {t("turboui.checklist.save")}
           </PrimaryButton>
         </div>
       </form>
@@ -431,7 +428,11 @@ function ChecklistItemView({
       data-test-id={createTestId("checklist-item", item.name)}
     >
       <div ref={dragHandleRef as React.RefObject<HTMLDivElement>}>
-        <DragHandle isDragging={isDragging} disabled={!state.togglable || state.disabled} className="absolute -left-5 mt-0.5" />
+        <DragHandle
+          isDragging={isDragging}
+          disabled={!state.togglable || state.disabled}
+          className="absolute -left-5 mt-0.5"
+        />
       </div>
       <Checkbox
         checked={item.completed}
@@ -493,7 +494,7 @@ function ChecklistItemEditButton({
               }}
               data-test-id="edit"
             >
-              Edit
+              {t("turboui.checklist.edit")}
             </button>
             <button
               className="block w-full text-left px-3 py-1 text-sm text-content-error hover:bg-surface-highlight"
@@ -503,7 +504,7 @@ function ChecklistItemEditButton({
               }}
               data-test-id="delete"
             >
-              Delete
+              {t("turboui.checklist.delete")}
             </button>
           </div>
         </>

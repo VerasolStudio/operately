@@ -5,6 +5,7 @@ import type { ProjectPage } from ".";
 import { isCheckInOverdue } from "./checkInOverdue";
 import { viewerCanPostCheckIn } from "./checkInPermissions";
 import { IconAlertTriangleFilled } from "../icons";
+import { t } from "../i18n";
 
 type Props = ProjectPage.State & {
   className?: string;
@@ -19,13 +20,13 @@ export function CheckInOverdueCallout(props: Props) {
   const canPost = viewerCanPostCheckIn(props);
   const description = canPost
     ? "Post a check-in to keep the team updated on the project's latest progress."
-    : `${championName || "The project champion"} needs to post a check-in to keep the team updated on the project's latest progress.`;
+    : t("turboui.projectPage.needsToPostACheckIn", { v1: championName || "The project champion" });
 
   if (variant === "compact") {
     const compactChampionName = compactPersonName(championName);
     const compactDescription = canPost
       ? "Post the update to keep the team current."
-      : `${compactChampionName || "The champion"} needs to post the update.`;
+      : t("turboui.projectPage.needsToPostTheUpdate", { v1: compactChampionName || "The champion" });
 
     return (
       <div
@@ -35,7 +36,7 @@ export function CheckInOverdueCallout(props: Props) {
         <div className="flex items-start gap-2">
           <IconAlertTriangleFilled aria-hidden className="mt-0.5 h-4 w-4 shrink-0" />
           <div>
-            <div className="font-semibold">Check-in overdue</div>
+            <div className="font-semibold">{t("turboui.projectPage.checkInOverdue")}</div>
             <div className="mt-1">{compactDescription}</div>
           </div>
         </div>
@@ -47,7 +48,7 @@ export function CheckInOverdueCallout(props: Props) {
     <div className={props.className}>
       <WarningCallout
         testId="overdue-check-in-callout"
-        message="Project check-in is overdue"
+        message={t("turboui.projectPage.projectCheckInIsOverdue")}
         description={description}
       />
     </div>

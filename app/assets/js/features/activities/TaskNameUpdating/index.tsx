@@ -6,6 +6,7 @@ import { Paths } from "@/routes/paths";
 import { feedTitle, projectLink, spaceLink, taskLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
 import { hasAggregatedTasks, UpdatedTaskList } from "../taskUpdatedResources";
+import { t } from "@/i18n";
 
 const TaskNameUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -75,7 +76,7 @@ const TaskNameUpdating: ActivityHandler = {
 
     const { oldName } = content(activity);
 
-    return <>Previously, the task was named "{oldName}".</>;
+    return <>{t("features.activities.previouslyTheTaskWasNamed", { v1: oldName })}</>;
   },
 
   feedItemAlignment(_activity: Activity): "items-start" | "items-center" {

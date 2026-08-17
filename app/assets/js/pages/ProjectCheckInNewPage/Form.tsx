@@ -25,6 +25,8 @@ import {
 import { assertPresent } from "@/utils/assertions";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 export function Form({ project }: { project: Project }) {
   const paths = usePaths();
@@ -99,7 +101,7 @@ export function Form({ project }: { project: Project }) {
 
       <SubscribersSelector {...subscriptionsState} />
 
-      <Forms.FormError message="Fill out all the required fields" className="-mb-6 mt-4" />
+      <Forms.FormError message={t("pages.projectCheckInNewPage.fillOutAllTheRequiredFields")} className="-mb-6 mt-4" />
 
       <SubmitButtons form={form} scheduleFlow={scheduleFlow} />
     </Forms.Form>
@@ -125,12 +127,12 @@ function SubmitButtons({
     <div className="mt-8">
       <ScheduleFlowControls
         scheduleFlow={scheduleFlow}
-        primaryLabel="Submit"
+        primaryLabel={t("pages.projectCheckInNewPage.submit")}
         onPrimaryClick={() => submit(scheduleFlow.isScheduledLocally ? "schedule" : "submit")}
         loading={isSubmitting && (form.trigger === "submit" || form.trigger === "schedule")}
         testId="submit"
         formattedTimePreferences={formattedTimePreferences}
-        modalTitle="Schedule Check-in"
+        modalTitle={t("pages.projectCheckInNewPage.scheduleCheckIn")}
         secondaryAction={
           <GhostButton
             loading={isSubmitting && form.trigger === "draft"}
@@ -138,7 +140,7 @@ function SubmitButtons({
             size="base"
             onClick={() => submit("draft")}
           >
-            Save as draft
+            {t("pages.projectCheckInNewPage.saveAsDraft")}
           </GhostButton>
         }
       />
@@ -149,7 +151,7 @@ function SubmitButtons({
 function Header() {
   return (
     <div>
-      <div className="text-2xl font-bold mx-auto">Let's Check In</div>
+      <div className="text-2xl font-bold mx-auto">{t("pages.projectCheckInNewPage.letSCheckIn")}</div>
     </div>
   );
 }
@@ -158,7 +160,7 @@ function StatusSection({ reviewer }: { reviewer?: Person }) {
   return (
     <div className="mt-8 mb-4">
       <Forms.SelectStatus
-        label="1. How's the project going?"
+        label={t("pages.projectCheckInNewPage.1HowSTheProjectGoing")}
         field="status"
         reviewer={reviewer}
         options={["on_track", "caution", "off_track"]}
@@ -192,7 +194,7 @@ function DescriptionSection({
       <Forms.RichTextArea
         field="description"
         richTextHandlers={richTextHandlers}
-        placeholder="Write your check-in here..."
+        placeholder={t("pages.projectCheckInNewPage.writeYourCheckInHere")}
       />
     </div>
   );
@@ -235,17 +237,22 @@ function PreviousCheckIn({
     <div className="mb-3 mt-2 rounded border border-stroke-base p-4">
       <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
         <div>
-          <div className="text-sm font-semibold text-content-accent">Previous check-in</div>
+          <div className="text-sm font-semibold text-content-accent">
+            {t("pages.projectCheckInNewPage.previousCheckIn")}
+          </div>
           <div className="mt-0.5 text-sm text-content-dimmed">
-            Posted by {checkIn.author?.fullName || "Unknown"} on{" "}
-            <FormattedTime {...formattedTimePreferences} time={checkIn.date} format="long-date" />
+            <Trans
+              i18nKey="pages.projectCheckInNewPage.postedByOn"
+              values={{ v1: checkIn.author?.fullName || t("pages.projectCheckInNewPage.unknown") }}
+              components={[<FormattedTime {...formattedTimePreferences} time={checkIn.date} format="long-date" />]}
+            />
           </div>
         </div>
 
         <div className="flex shrink-0 items-center gap-3">
           <StatusBadge status={checkIn.status} hideIcon />
           <Link to={checkIn.link} underline="hover" className="text-sm font-medium">
-            View original
+            {t("pages.projectCheckInNewPage.viewOriginal")}
           </Link>
         </div>
       </div>

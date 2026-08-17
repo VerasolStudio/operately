@@ -7,6 +7,7 @@ import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
 import { SubscriptionsState, useSubscriptionsAdapter } from "@/models/subscriptions";
 import { useNavigate } from "react-router";
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 type Mode = "create" | "edit";
 
@@ -73,10 +74,10 @@ function AccomplishedOrDropped() {
   return (
     <Forms.RadioButtons
       field="success"
-      label="Did this project achieve its intended outcomes?"
+      label={t("features.projectRetrospective.didThisProjectAchieveItsIntended")}
       options={[
-        { value: "yes", label: "Yes" },
-        { value: "no", label: "No" },
+        { value: "yes", label: t("features.projectRetrospective.yes") },
+        { value: "no", label: t("features.projectRetrospective.no") },
       ]}
     />
   );
@@ -89,9 +90,9 @@ function RetrospectiveNotes({ project }: { project: Projects.Project }) {
     <div data-test-id="retrospective-notes">
       <Forms.RichTextArea
         field="retrospective"
-        label="Retrospective notes"
+        label={t("features.projectRetrospective.retrospectiveNotes")}
         richTextHandlers={richTextHandlers}
-        placeholder="What went well? What didn't? What did you learn?"
+        placeholder={t("features.projectRetrospective.whatWentWellWhatDidnT")}
         required
       />
     </div>

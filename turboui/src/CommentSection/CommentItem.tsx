@@ -16,6 +16,7 @@ import { Reactions } from "../Reactions";
 import { useScrollIntoViewOnLoad } from "../utils/useScrollIntoViewOnLoad";
 import { showErrorToast, showSuccessToast } from "../Toasts";
 import { useCommentVisibility } from "./useCommentVisibility";
+import { t } from "../i18n";
 
 function shortName(name: string | undefined): string {
   if (!name) return "";
@@ -168,9 +169,12 @@ function CommentMenu({ comment, canEdit, appearance, onEdit, onDelete }: Comment
       const url = new URL(window.location.href);
       url.hash = comment.id;
       await navigator.clipboard.writeText(url.toString());
-      showSuccessToast("Success", "The comment link has been copied to your clipboard");
+      showSuccessToast(t("turboui.commentSection.success"), t("turboui.commentSection.theCommentLinkHasBeenCopied"));
     } catch (err) {
-      showErrorToast("Unexpected error", "Failed to copy comment link to clipboard");
+      showErrorToast(
+        t("turboui.commentSection.unexpectedError"),
+        t("turboui.commentSection.failedToCopyCommentLinkTo"),
+      );
     }
   }, [comment.id]);
 
@@ -183,12 +187,16 @@ function CommentMenu({ comment, canEdit, appearance, onEdit, onDelete }: Comment
         icon={IconLink}
         testId={isFlat ? "copy-comment-link" : createTestId("copy-link", comment.id)}
       >
-        Copy link
+        {t("turboui.commentSection.copyLink")}
       </MenuActionItem>
       {canEdit && (
         <>
-          <MenuActionItem onClick={onEdit} icon={IconEdit} testId={isFlat ? "edit-comment" : createTestId("edit", comment.id)}>
-            Edit
+          <MenuActionItem
+            onClick={onEdit}
+            icon={IconEdit}
+            testId={isFlat ? "edit-comment" : createTestId("edit", comment.id)}
+          >
+            {t("turboui.commentSection.edit")}
           </MenuActionItem>
           {onDelete && (
             <MenuActionItem
@@ -197,7 +205,7 @@ function CommentMenu({ comment, canEdit, appearance, onEdit, onDelete }: Comment
               danger
               testId={isFlat ? "delete-comment" : createTestId("delete", comment.id)}
             >
-              Delete
+              {t("turboui.commentSection.delete")}
             </MenuActionItem>
           )}
         </>
@@ -258,7 +266,7 @@ function CommentEditMode({ content, onSave, onCancel, richTextHandlers, localDra
   const editor = useEditor({
     content: content,
     editable: true,
-    placeholder: "Edit your comment...",
+    placeholder: t("turboui.commentSection.editYourComment"),
     handlers: richTextHandlers,
     localDraft: { key: localDraftKey },
   });
@@ -282,10 +290,10 @@ function CommentEditMode({ content, onSave, onCancel, richTextHandlers, localDra
       <Editor editor={editor} hideBorder />
       <div className="flex gap-2 p-2 mt-2">
         <PrimaryButton size="xs" onClick={handleSave} disabled={editor.empty} testId="post-comment">
-          Save Changes
+          {t("turboui.commentSection.saveChanges")}
         </PrimaryButton>
         <SecondaryButton size="xs" onClick={handleCancel}>
-          Cancel
+          {t("turboui.commentSection.cancel")}
         </SecondaryButton>
       </div>
     </div>

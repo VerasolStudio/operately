@@ -9,6 +9,7 @@ import { usePaths } from "@/routes/paths";
 import { PageModule } from "@/routes/types";
 import { useNavigate } from "react-router";
 import { buildNotificationSettingsUpdateInput, getNotificationSettingsFormState } from "./state";
+import { t } from "@/i18n";
 
 export default { name: "AccountNotificationSettingsPage", loader: emptyLoader, Page } as PageModule;
 
@@ -66,7 +67,10 @@ function Page() {
 
       navigate(paths.accountSettingsPath());
     } catch {
-      showErrorToast("Error", "Failed to update notification settings");
+      showErrorToast(
+        t("pages.accountNotificationSettingsPage.error"),
+        t("pages.accountNotificationSettingsPage.failedToUpdateNotificationSettings"),
+      );
     } finally {
       setIsSubmitting(false);
     }

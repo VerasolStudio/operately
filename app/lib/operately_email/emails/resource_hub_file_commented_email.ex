@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.ResourceHubFileCommentedEmail do
   alias OperatelyEmail.Emails.ResourceHubEmail
   alias OperatelyWeb.Paths
   alias Operately.{Repo, Updates}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -15,7 +16,7 @@ defmodule OperatelyEmail.Emails.ResourceHubFileCommentedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: parent.name, who: author, action: "commented on: #{file.name}")
+    |> subject(where: parent.name, who: author, action: t("resourceHubFileCommented.action", %{v1: file.name}))
     |> assign(:author, author)
     |> assign(:comment, comment)
     |> assign(:name, file.name)
@@ -35,7 +36,7 @@ defmodule OperatelyEmail.Emails.ResourceHubFileCommentedEmail do
       parent_id: parent.id,
       parent_type: parent.type,
       parent_name: parent.name,
-      headline: "commented on the file \"#{file.name}\"",
+      headline: t("resourceHubFileCommented.headline", %{v1: file.name}),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: Paths.file_path(company, file, comment) |> Paths.to_url(),

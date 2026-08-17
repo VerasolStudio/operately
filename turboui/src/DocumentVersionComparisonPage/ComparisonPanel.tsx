@@ -9,12 +9,8 @@ import classNames from "../utils/classnames";
 
 import type { ComparisonStatus, VersionSnapshot } from "../DocumentVersionHistoryPage/types";
 
-import {
-  ComparisonErrorState,
-  ComparisonLoadingState,
-  NoChangesState,
-  VersionUnavailableState,
-} from "./states";
+import { ComparisonErrorState, ComparisonLoadingState, NoChangesState, VersionUnavailableState } from "./states";
+import { t } from "../i18n";
 
 type Props = {
   versions: DocumentVersion[];
@@ -61,18 +57,10 @@ function ReadyComparison(props: {
   const beforeTime = versionInsertedAt(props.versions, props.before);
   const afterTime = versionInsertedAt(props.versions, props.after);
   const beforeLabel = (
-    <VersionTimeLabel
-      time={beforeTime}
-      preferences={props.formattedTimePreferences}
-      testId="version-label-before"
-    />
+    <VersionTimeLabel time={beforeTime} preferences={props.formattedTimePreferences} testId="version-label-before" />
   );
   const afterLabel = (
-    <VersionTimeLabel
-      time={afterTime}
-      preferences={props.formattedTimePreferences}
-      testId="version-label-after"
-    />
+    <VersionTimeLabel time={afterTime} preferences={props.formattedTimePreferences} testId="version-label-after" />
   );
 
   if (contentEqual) {
@@ -95,8 +83,12 @@ function ReadyComparison(props: {
       after={props.after.content}
       beforeLabel={beforeLabel}
       afterLabel={afterLabel}
-      beforeAriaLabel={beforeTime ? `Version from ${beforeTime}` : "Earlier version"}
-      afterAriaLabel={afterTime ? `Version from ${afterTime}` : "Later version"}
+      beforeAriaLabel={
+        beforeTime ? t("turboui.documentVersionComparisonPage.versionFrom", { v1: beforeTime }) : "Earlier version"
+      }
+      afterAriaLabel={
+        afterTime ? t("turboui.documentVersionComparisonPage.versionFrom", { v1: afterTime }) : "Later version"
+      }
       beforeTitle={props.before.title}
       afterTitle={props.after.title}
       mentionedPersonLookup={props.mentionedPersonLookup}
@@ -113,11 +105,7 @@ function versionInsertedAt(versions: DocumentVersion[], snapshot: VersionSnapsho
   );
 }
 
-function VersionTimeLabel(props: {
-  time: string | null;
-  preferences: FormattedTimePreferences;
-  testId: string;
-}) {
+function VersionTimeLabel(props: { time: string | null; preferences: FormattedTimePreferences; testId: string }) {
   return (
     <span className="text-xs font-normal text-content-dimmed" data-test-id={props.testId}>
       {props.time ? (

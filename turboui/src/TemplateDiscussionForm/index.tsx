@@ -7,6 +7,7 @@ import * as Forms from "../Forms";
 import { emptyContent } from "../RichContent/contentOps";
 import { isContentEmpty } from "../RichContent";
 import type { RichEditorHandlers } from "../RichEditor/useEditor";
+import { t } from "../i18n";
 
 export namespace TemplateDiscussionForm {
   export interface Values extends Record<string, unknown> {
@@ -45,12 +46,17 @@ export function TemplateDiscussionForm(props: TemplateDiscussionForm.Props) {
       <main className="px-8 py-6 sm:px-10 sm:py-8">
         <Forms.Form form={form}>
           <Forms.FieldGroup>
-            <Forms.TitleInput field="title" placeholder="Title..." autoFocus testId="discussion-title" />
+            <Forms.TitleInput
+              field="title"
+              placeholder={t("turboui.templateDiscussionForm.title")}
+              autoFocus
+              testId="discussion-title"
+            />
             <div className="mt-2 border-y border-stroke-base text-content-base font-medium">
               <Forms.RichTextArea
                 field="body"
                 richTextHandlers={props.richTextHandlers}
-                placeholder="Start a new discussion..."
+                placeholder={t("turboui.templateDiscussionForm.startANewDiscussion")}
                 hideBorder
                 height="min-h-[350px]"
                 fontSize="text-lg"
@@ -60,7 +66,7 @@ export function TemplateDiscussionForm(props: TemplateDiscussionForm.Props) {
             </div>
           </Forms.FieldGroup>
 
-          <Forms.FormError message="Fill out all the required fields" className="mt-4" />
+          <Forms.FormError message={t("turboui.templateDiscussionForm.fillOutAllTheRequiredFields")} className="mt-4" />
           <div className="flex items-center gap-4 mt-4">
             <Forms.Submit
               saveText={props.submitLabel}
@@ -68,7 +74,7 @@ export function TemplateDiscussionForm(props: TemplateDiscussionForm.Props) {
               testId="save-template-discussion"
               containerClassName="mt-0"
             />
-            <DimmedLink to={props.cancelLink}>Cancel</DimmedLink>
+            <DimmedLink to={props.cancelLink}>{t("turboui.templateDiscussionForm.cancel")}</DimmedLink>
           </div>
         </Forms.Form>
       </main>

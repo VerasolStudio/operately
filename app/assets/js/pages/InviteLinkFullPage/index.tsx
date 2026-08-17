@@ -8,6 +8,7 @@ import { Paths } from "@/routes/paths";
 import { PageModule } from "@/routes/types";
 import { redirect } from "react-router";
 import { PrimaryButton, SecondaryButton } from "turboui";
+import { t } from "@/i18n";
 
 export default { name: "InviteLinkFullPage", loader, Page } as PageModule;
 
@@ -50,23 +51,23 @@ function Page() {
             <div className="grid gap-3 sm:grid-cols-2">
               <NextStepCard
                 eyebrow="What happens now"
-                title="An admin or owner needs to help"
-                description="An admin or owner needs to review billing or free up member space before anyone else can join."
+                title={t("pages.inviteLinkFullPage.anAdminOrOwnerNeedsTo")}
+                description={t("pages.inviteLinkFullPage.anAdminOrOwnerNeedsTo2")}
               />
               <NextStepCard
                 eyebrow="What you can do"
-                title="Try again later"
-                description="Once the upgrade is done, come back to this link and try again."
+                title={t("pages.inviteLinkFullPage.tryAgainLater")}
+                description={t("pages.inviteLinkFullPage.onceTheUpgradeIsDoneCome")}
               />
             </div>
 
             <div className="mt-8 border-t border-stroke-base pt-6">
               <div className="flex flex-col gap-3 sm:flex-row">
                 <PrimaryButton linkTo={Paths.inviteJoinPath(token)} testId="retry-join">
-                  Try again
+                  {t("pages.inviteLinkFullPage.tryAgain")}
                 </PrimaryButton>
                 <SecondaryButton linkTo="/" testId="back-to-home">
-                  Back to home
+                  {t("pages.inviteLinkFullPage.backToHome")}
                 </SecondaryButton>
               </div>
             </div>
@@ -81,7 +82,7 @@ function Hero({ companyName }: { companyName?: string | null }) {
   return (
     <div className="border-b border-stroke-base px-8 py-8 sm:px-10 sm:py-10">
       <h1 className="max-w-xl text-3xl font-extrabold leading-tight text-content-accent sm:text-4xl">
-        Member limit reached
+        {t("pages.inviteLinkFullPage.memberLimitReached")}
       </h1>
 
       <p className="mt-4 max-w-2xl text-base leading-7 text-content-accent">
@@ -91,7 +92,7 @@ function Hero({ companyName }: { companyName?: string | null }) {
             used yet.
           </>
         ) : (
-          <>This company has reached its member limit, so this invite can't be used yet.</>
+          <>{t("pages.inviteLinkFullPage.thisCompanyHasReachedItsMember")}</>
         )}{" "}
         When more member capacity is available, you can come back and try again.
       </p>

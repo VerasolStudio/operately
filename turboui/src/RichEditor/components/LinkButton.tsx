@@ -4,6 +4,7 @@ import { ToolbarToggleButton } from "./ToolbarToggleButton";
 
 import { IconLink2 } from "../../icons";
 import { useLinkState } from "../EditorContext";
+import { t } from "../../i18n";
 
 export function LinkButton({ editor, iconSize }): JSX.Element {
   const [linkEditActive, setLinkEditActive] = useLinkState();
@@ -20,7 +21,7 @@ export function LinkButton({ editor, iconSize }): JSX.Element {
     <ToolbarToggleButton
       onClick={toggleLink}
       isActive={editor?.isActive("link") || linkEditActive}
-      title="Add/Edit Links"
+      title={t("turboui.richEditor.addEditLinks")}
     >
       <IconLink2 size={iconSize - 2} />
     </ToolbarToggleButton>

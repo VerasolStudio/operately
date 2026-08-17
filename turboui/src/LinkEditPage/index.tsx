@@ -7,6 +7,7 @@ import { areRichTextObjectsEqual } from "../RichContent/contentOps";
 import { isValidURL } from "../utils/url";
 
 import type { LinkEditPage as LinkEditPageNS } from "./types";
+import { t } from "../i18n";
 
 export function LinkEditPage(props: LinkEditPageNS.Props) {
   const navigate = useNavigate();
@@ -47,18 +48,22 @@ export function LinkEditPage(props: LinkEditPageNS.Props) {
           <Forms.FieldGroup>
             <Forms.TextInput
               autoFocus
-              label="What do you want to call this link?"
-              placeholder="Type the title of this link"
+              label={t("turboui.linkEditPage.whatDoYouWantToCall")}
+              placeholder={t("turboui.linkEditPage.typeTheTitleOfThisLink")}
               field="title"
             />
 
-            <Forms.TextInput label="Paste the link" placeholder="eg. https://www.example.com/file/8430762" field="url" />
+            <Forms.TextInput
+              label={t("turboui.linkEditPage.pasteTheLink")}
+              placeholder="eg. https://www.example.com/file/8430762"
+              field="url"
+            />
 
             <Forms.RichTextArea
-              label="Notes (optional)"
+              label={t("turboui.linkEditPage.notesOptional")}
               field="description"
               richTextHandlers={props.richTextHandlers}
-              placeholder="Add any notes here..."
+              placeholder={t("turboui.linkEditPage.addAnyNotesHere")}
             />
           </Forms.FieldGroup>
 

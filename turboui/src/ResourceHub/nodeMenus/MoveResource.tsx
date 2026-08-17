@@ -8,6 +8,7 @@ import { useResourceHubNodesListContext } from "../contexts/NodesListContext";
 import { ResourceHubFolderSelectField } from "../FolderSelectField";
 import { getResourceName, getResourceParentFolderId } from "../selectors";
 import type { ResourceHubResource, ResourceHubResourceTypeName } from "../types";
+import { t } from "../../i18n";
 
 interface MoveResourceMenuItemProps {
   resource: { id: string; name?: string | null };
@@ -19,7 +20,7 @@ export function MoveResourceMenuItem({ resource, showModal }: MoveResourceMenuIt
 
   return (
     <MenuActionItem onClick={showModal} testId={testId}>
-      Move
+      {t("turboui.resourceHub.move")}
     </MenuActionItem>
   );
 }
@@ -85,11 +86,11 @@ export function MoveResourceModal({ resource, resourceType, isOpen, hideModal }:
           <ResourceHubFolderSelectField
             field="location"
             notAllowedSelections={notAllowedSelections}
-            label="Select destination"
+            label={t("turboui.resourceHub.selectDestination")}
           />
         </Forms.FieldGroup>
 
-        <Forms.Submit saveText="Move Here" cancelText="Cancel" />
+        <Forms.Submit saveText={t("turboui.resourceHub.moveHere")} cancelText={t("turboui.resourceHub.cancel")} />
       </Forms.Form>
     </Modal>
   );

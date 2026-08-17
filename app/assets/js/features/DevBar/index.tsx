@@ -6,6 +6,7 @@ import { ToggleTestIds } from "./ToggleTestIds";
 import { ToggleTheme } from "./ToggleTheme";
 import { useDevBarData } from "./useDevBarData";
 import { useDevThemeOverride } from "./useDevThemeOverride";
+import { t } from "@/i18n";
 
 export function DevBar() {
   if (!window.appConfig.showDevBar) return null;
@@ -40,12 +41,12 @@ function DevBarContent() {
       {isExpanded ? (
         <div className="p-1">
           <div className="flex justify-between mb-1">
-            <div className="w-20">Page Name:</div>
+            <div className="w-20">{t("features.devBar.pageName")}</div>
             <div>{pageName}</div>
           </div>
 
           <div className="flex justify-between mb-1">
-            <div className="w-20">Load Time:</div>
+            <div className="w-20">{t("features.devBar.loadTime")}</div>
             <div className={pageLoadColor}>{loadTime.toFixed(0)}ms</div>
           </div>
 

@@ -3,6 +3,7 @@ defmodule OperatelyEmail.Emails.GoalCreatedEmail do
   alias Operately.{Repo, Goals}
   alias Operately.People.Person
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -15,7 +16,7 @@ defmodule OperatelyEmail.Emails.GoalCreatedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: space.name, who: author, action: "added the #{goal.name} goal")
+    |> subject(where: space.name, who: author, action: t("goalCreated.action", %{v1: goal.name}))
     |> assign(:author, author)
     |> assign(:goal, goal)
     |> assign(:role, role)
@@ -32,7 +33,7 @@ defmodule OperatelyEmail.Emails.GoalCreatedEmail do
       parent_id: goal.id,
       parent_type: :goal,
       parent_name: goal.name,
-      headline: "created the goal",
+      headline: t("goalCreated.headline"),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: Paths.goal_path(company, goal) |> Paths.to_url(),

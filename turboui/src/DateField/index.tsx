@@ -14,12 +14,13 @@ import { YearSelector } from "./components/YearSelector";
 import { getDateWithoutCurrentYear } from "./utils";
 import { usePopoverPositioning } from "./hooks/usePopoverPositioning";
 import { useEffect } from "react";
+import { t } from "../i18n";
 
 const DATE_TYPES = [
-  { value: "day" as const, label: "Day" },
-  { value: "month" as const, label: "Month" },
-  { value: "quarter" as const, label: "Quarter" },
-  { value: "year" as const, label: "Year" },
+  { value: "day" as const, label: t("turboui.dateField.day") },
+  { value: "month" as const, label: t("turboui.dateField.month") },
+  { value: "quarter" as const, label: t("turboui.dateField.quarter") },
+  { value: "year" as const, label: t("turboui.dateField.year") },
 ];
 
 export { DateDisplay } from "./DateDisplay";
@@ -319,9 +320,10 @@ function DatePickerTrigger({
   };
 
   const shouldShowMessage = showOverdueMessage && isDateOverdue;
-  const overdueMessage = shouldShowMessage && selectedDate?.date
-    ? `Overdue by ${durationHumanized(selectedDate.date, new Date())}`
-    : null;
+  const overdueMessage =
+    shouldShowMessage && selectedDate?.date
+      ? t("turboui.dateField.overdueBy", { v1: durationHumanized(selectedDate.date, new Date()) })
+      : null;
   const calendarIcon = !hideCalendarIcon ? (
     <IconCalendarEvent
       size={match(size)
@@ -364,11 +366,7 @@ function DatePickerTrigger({
         </span>
       </button>
 
-      {overdueMessage && (
-        <div className="text-xs text-content-error mt-1">
-          {overdueMessage}
-        </div>
-      )}
+      {overdueMessage && <div className="text-xs text-content-error mt-1">{overdueMessage}</div>}
     </div>
   );
 }
@@ -411,7 +409,7 @@ function DatePickerContent(props: DatePickerContentProps) {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold flex items-center gap-2">
           <IconCalendarEvent size={19} />
-          Set Date
+          {t("turboui.dateField.setDate")}
         </h2>
         {selectedDate && <ClearButton onClear={onClearDate} testId={testId} />}
       </div>
@@ -475,7 +473,7 @@ function ClearButton({ onClear, testId }: { onClear?: () => void; testId: string
       data-test-id={createTestId(testId, "clear")}
     >
       <IconX size={14} className="mr-1" />
-      Clear
+      {t("turboui.dateField.clear")}
     </button>
   );
 }

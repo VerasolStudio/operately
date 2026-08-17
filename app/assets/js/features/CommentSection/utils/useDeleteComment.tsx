@@ -4,6 +4,7 @@ import Api from "@/api";
 import * as Comments from "@/models/comments";
 import { compareIds } from "@/routes/paths";
 import { showErrorToast } from "turboui";
+import { t } from "@/i18n";
 
 interface UseDeleteComment {
   comments: Comments.CommentItem[];
@@ -49,7 +50,7 @@ export function useDeleteComment({ comments, setComments, parentType, refetch }:
           });
         }
 
-        showErrorToast("Error", "Failed to delete comment.");
+        showErrorToast(t("features.commentSection.error"), t("features.commentSection.failedToDeleteComment"));
       } finally {
         setLoading(false);
       }

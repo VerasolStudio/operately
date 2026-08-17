@@ -18,6 +18,7 @@ import {
   TimeframeType,
 } from "../utils/timeframes";
 import { LeftChevron, RightChevron } from "./Chevrons";
+import { t } from "../i18n";
 
 const DEFAULTS = {
   size: "base" as const,
@@ -78,7 +79,7 @@ function TimeframeSelectorHeader(props: TimeframeSelectorDialog.Props) {
   return (
     <div className="flex items-center justify-between gap-10 w-full border-b border-stroke-base pb-3 mb-3">
       <div className="">
-        <div className="font-bold shrink-0">Select Timeframe</div>
+        <div className="font-bold shrink-0">{t("turboui.timeframeSelectorDialog.selectTimeframe")}</div>
         <div className="text-content-dimmed text-xs">{formatTimeframe(props.timeframe)}</div>
       </div>
 
@@ -100,10 +101,10 @@ function TimeframeSelectorTypeSelector(props: TimeframeSelectorDialog.Props) {
   return (
     <SegmentedControl
       options={[
-        { label: "Year", value: "year" },
-        { label: "Quarter", value: "quarter" },
-        { label: "Month", value: "month" },
-        { label: "Custom", value: "days" },
+        { label: t("turboui.timeframeSelectorDialog.year"), value: "year" },
+        { label: t("turboui.timeframeSelectorDialog.quarter"), value: "quarter" },
+        { label: t("turboui.timeframeSelectorDialog.month"), value: "month" },
+        { label: t("turboui.timeframeSelectorDialog.custom"), value: "days" },
       ]}
       value={props.timeframe.type}
       onChange={changeHandler}

@@ -8,6 +8,7 @@ import { ProjectTemplatesPage, showErrorToast } from "turboui";
 import React from "react";
 import { useNavigate } from "react-router";
 import { loader, type LoadedData } from "./loader";
+import { t } from "@/i18n";
 
 export default { name: "ProjectTemplatesPage", loader, Page } as PageModule;
 
@@ -41,7 +42,10 @@ function Page() {
       navigate(paths.projectTemplatePath(result.template.id));
       return { success: true };
     } catch (_error) {
-      showErrorToast("Template not created", "Check the name and Space, then try again.");
+      showErrorToast(
+        t("pages.projectTemplatesPage.templateNotCreated"),
+        t("pages.projectTemplatesPage.checkTheNameAndSpaceThen"),
+      );
       return {
         success: false,
         error: "The template could not be created. Check the name and Space, then try again.",
@@ -55,7 +59,7 @@ function Page() {
       navigation={
         fixedSpace
           ? [{ to: paths.spacePath(fixedSpace.id), label: fixedSpace.name }]
-          : [{ to: paths.homePath(), label: "Home" }]
+          : [{ to: paths.homePath(), label: t("pages.projectTemplatesPage.home") }]
       }
       templates={data.templates}
       spaces={data.spaces.map((space) => toSpace(space, paths))}

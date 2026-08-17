@@ -3,6 +3,7 @@ import * as Goals from "@/models/goals";
 import * as React from "react";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function GoalSubpageNavigation({ goal }: { goal: Goals.Goal }) {
   const paths = usePaths();
@@ -10,12 +11,12 @@ export function GoalSubpageNavigation({ goal }: { goal: Goals.Goal }) {
 
   if (goal.space) {
     items.push({ to: paths.spacePath(goal.space.id), label: goal.space.name });
-    items.push({ to: paths.spaceWorkMapPath(goal.space.id), label: "Work Map" });
+    items.push({ to: paths.spaceWorkMapPath(goal.space.id), label: t("features.goals.workMap") });
   } else {
-    items.push({ to: paths.workMapPath("goals"), label: "Work Map" });
+    items.push({ to: paths.workMapPath("goals"), label: t("features.goals.workMap") });
   }
   items.push({ to: paths.goalPath(goal.id), label: goal.name });
-  items.push({ to: paths.goalPath(goal.id, { tab: "discussions" }), label: "Discussions" });
+  items.push({ to: paths.goalPath(goal.id, { tab: "discussions" }), label: t("features.goals.discussions") });
 
   return <Paper.Navigation items={items} />;
 }

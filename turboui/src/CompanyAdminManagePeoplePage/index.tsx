@@ -12,6 +12,7 @@ import { InvitationUrl } from "./components/InvitationUrl";
 import { LegacyModal } from "./components/LegacyModal";
 import type { CompanyAdminManagePeoplePageProps, CompanyAdminManagePerson } from "./types";
 import { useWindowSizeBreakpoints } from "../utils/useWindowSizeBreakpoint";
+import { t } from "../i18n";
 
 export namespace CompanyAdminManagePeoplePage {
   export type Person = CompanyAdminManagePerson;
@@ -142,8 +143,8 @@ export function CompanyAdminManagePeoplePage(props: CompanyAdminManagePeoplePage
       <div className="relative bg-surface-base min-h-dvh sm:min-h-0 sm:border sm:border-surface-outline sm:rounded-lg sm:shadow-xl">
         <div className="px-4 lg:px-12 py-10">
           <PageHeader
-            title="Manage Team Members"
-            subtitle="Add new team members, update profiles, or remove access as needed."
+            title={t("turboui.companyAdminManagePeoplePage.manageTeamMembers")}
+            subtitle={t("turboui.companyAdminManagePeoplePage.addNewTeamMembersUpdateProfiles")}
             actions={
               props.permissions.canInviteMembers && (
                 <PrimaryButton
@@ -152,14 +153,14 @@ export function CompanyAdminManagePeoplePage(props: CompanyAdminManagePeoplePage
                   className="whitespace-nowrap"
                   size={windowSize === "xs" ? "sm" : "base"}
                 >
-                  Invite people
+                  {t("turboui.companyAdminManagePeoplePage.invitePeople")}
                 </PrimaryButton>
               )
             }
           />
 
           {props.invitedPeople.length > 0 && (
-            <Section title="Invitations Awaiting Response">
+            <Section title={t("turboui.companyAdminManagePeoplePage.invitationsAwaitingResponse")}>
               <PeopleList
                 people={props.invitedPeople}
                 testId="invited-people-list"
@@ -177,7 +178,7 @@ export function CompanyAdminManagePeoplePage(props: CompanyAdminManagePeoplePage
           )}
 
           {props.currentMembers.length > 0 && (
-            <Section title="Current Team Members">
+            <Section title={t("turboui.companyAdminManagePeoplePage.currentTeamMembers")}>
               <PeopleList
                 people={props.currentMembers}
                 testId="current-members-list"
@@ -195,7 +196,7 @@ export function CompanyAdminManagePeoplePage(props: CompanyAdminManagePeoplePage
           )}
 
           {showOutsideCollaborators && (
-            <Section title="Outside collaborators">
+            <Section title={t("turboui.companyAdminManagePeoplePage.outsideCollaborators")}>
               <PeopleList
                 people={outsideCollaborators}
                 testId="outside-collaborators-list"
@@ -312,7 +313,12 @@ function ViewInvitationModal({
   if (!person || !person.inviteLinkUrl) return null;
 
   return (
-    <LegacyModal title="Invitation URL" isOpen={isOpen} onClose={onClose} size="lg">
+    <LegacyModal
+      title={t("turboui.companyAdminManagePeoplePage.invitationURL")}
+      isOpen={isOpen}
+      onClose={onClose}
+      size="lg"
+    >
       <InvitationUrl url={person.inviteLinkUrl} personName={person.fullName} />
     </LegacyModal>
   );
@@ -332,7 +338,12 @@ function RenewInvitationModal({
   if (!person) return null;
 
   return (
-    <LegacyModal title="New invitation URL" isOpen={isOpen} onClose={onClose} size="lg">
+    <LegacyModal
+      title={t("turboui.companyAdminManagePeoplePage.newInvitationURL")}
+      isOpen={isOpen}
+      onClose={onClose}
+      size="lg"
+    >
       <InvitationUrl url={inviteUrl} personName={person.fullName} />
     </LegacyModal>
   );

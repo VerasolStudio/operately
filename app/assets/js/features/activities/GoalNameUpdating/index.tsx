@@ -5,6 +5,7 @@ import type { Activity } from "@/models/activities";
 import { Paths } from "@/routes/paths";
 import { feedTitle, goalLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
 
 const GoalNameUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -40,11 +41,7 @@ const GoalNameUpdating: ActivityHandler = {
   FeedItemContent(props: { activity: Activity; page: any }) {
     const { newName, oldName } = content(props.activity);
 
-    return (
-      <>
-        Previously it was {oldName}, now it is {newName}.
-      </>
-    );
+    return <>{t("features.activities.previouslyItWasNowItIs", { v1: oldName, v2: newName })}</>;
   },
 
   feedItemAlignment(_activity: Activity): "items-start" | "items-center" {

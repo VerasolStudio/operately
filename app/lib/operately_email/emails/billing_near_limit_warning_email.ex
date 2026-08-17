@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.BillingNearLimitWarningEmail do
   alias OperatelyWeb.Paths
   alias OperatelyEmail.Mailers.BaseMailer
   alias OperatelyEmail.Mailers.NotificationMailer
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send([], _company, _status), do: {:ok, :no_recipients}
 
@@ -25,11 +26,11 @@ defmodule OperatelyEmail.Emails.BillingNearLimitWarningEmail do
   end
 
   def subject(company, %LimitStatus{limit_key: :member_count}) do
-    "#{company.name} is near its Free plan member limit"
+    t("billingNearLimitWarning.isNearItsFreePlanMember", %{v1: company.name})
   end
 
   def subject(company, %LimitStatus{limit_key: :storage_bytes}) do
-    "#{company.name} is near its Free plan storage limit"
+    t("billingNearLimitWarning.isNearItsFreePlanStorage", %{v1: company.name})
   end
 
   def template_assigns(company, %LimitStatus{} = status, cta_url) do
@@ -37,7 +38,7 @@ defmodule OperatelyEmail.Emails.BillingNearLimitWarningEmail do
       headline: subject(company, status),
       usage_summary: usage_summary(company, status),
       impact_message: impact_message(status),
-      cta_label: "Review billing",
+      cta_label: t("billingNearLimitWarning.reviewBilling"),
       cta_url: cta_url
     }
   end
@@ -49,19 +50,19 @@ defmodule OperatelyEmail.Emails.BillingNearLimitWarningEmail do
   def format_usage(:storage_bytes, value), do: format_storage_bytes(value)
 
   defp usage_summary(company, %LimitStatus{limit_key: :member_count} = status) do
-    "#{company.name} has #{format_usage(status.limit_key, status.current_usage)} of #{format_usage(status.limit_key, status.limit)} active members on the Free plan."
+    t("billingNearLimitWarning.hasOfActiveMembersOnThe", %{v1: company.name, v2: format_usage(status.limit_key, status.current_usage), v3: format_usage(status.limit_key, status.limit)})
   end
 
   defp usage_summary(company, %LimitStatus{limit_key: :storage_bytes} = status) do
-    "#{company.name} is using #{format_usage(status.limit_key, status.current_usage)} of #{format_usage(status.limit_key, status.limit)} on the Free plan."
+    t("billingNearLimitWarning.isUsingOfOnTheFree", %{v1: company.name, v2: format_usage(status.limit_key, status.current_usage), v3: format_usage(status.limit_key, status.limit)})
   end
 
   defp impact_message(%LimitStatus{limit_key: :member_count}) do
-    "Adding or restoring people will be blocked once the member limit is reached."
+    t("billingNearLimitWarning.addingOrRestoringPeopleWillBe")
   end
 
   defp impact_message(%LimitStatus{limit_key: :storage_bytes}) do
-    "Uploading files will be blocked once the storage limit is reached."
+    t("billingNearLimitWarning.uploadingFilesWillBeBlockedOnce")
   end
 
   @storage_units [

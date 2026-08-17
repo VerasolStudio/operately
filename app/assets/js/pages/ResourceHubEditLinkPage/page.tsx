@@ -10,6 +10,7 @@ import type { LinkEditPage as LinkEditPageTypes } from "turboui/LinkEditPage/typ
 
 import { useLoadedData } from "./loader";
 import { buildEditLinkPageNavigation } from "./navigation";
+import { t } from "@/i18n";
 
 export function Page() {
   const { link } = useLoadedData();
@@ -40,14 +41,17 @@ export function Page() {
       navigate(cancelLink);
       return true;
     } catch {
-      showErrorToast("Link not updated", "Check the form and try again.");
+      showErrorToast(
+        t("pages.resourceHubEditLinkPage.linkNotUpdated"),
+        t("pages.resourceHubEditLinkPage.checkTheFormAndTryAgain"),
+      );
       return false;
     }
   }
 
   return (
     <LinkEditPage
-      pageTitle="Edit Link"
+      pageTitle={t("pages.resourceHubEditLinkPage.editLink")}
       navigation={buildEditLinkPageNavigation(link, paths)}
       testId="resource-hub-edit-link-page"
       richTextHandlers={richTextHandlers}

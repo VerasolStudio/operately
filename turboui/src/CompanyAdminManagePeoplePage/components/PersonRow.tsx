@@ -7,6 +7,7 @@ import { IconAlertTriangle } from "../../icons";
 import { AccessOptions, CompanyAdminManagePerson, Permissions } from "../types";
 import { PersonOptions } from "./PersonOptions";
 import { createTestId } from "../../TestableElement";
+import { t } from "../../i18n";
 
 type PersonHandler = (person: CompanyAdminManagePerson) => void;
 
@@ -103,13 +104,13 @@ function InvitationStatus({ person }: { person: CompanyAdminManagePerson }) {
     return (
       <div className="text-content-error font-semibold flex items-center gap-2">
         <IconAlertTriangle size={20} />
-        Invitation Expired
+        {t("turboui.companyAdminManagePeoplePage.invitationExpired")}
       </div>
     );
   }
 
   if (person.hasValidInvite && person.expiresIn) {
-    return <div>Expires in {person.expiresIn}</div>;
+    return <div>{t("turboui.companyAdminManagePeoplePage.expiresIn", { v1: person.expiresIn })}</div>;
   }
 
   return null;

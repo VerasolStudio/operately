@@ -1,3 +1,7 @@
+// Imported first so i18next is initialized before any module that reads
+// translations while it is being evaluated.
+import "./i18n";
+
 import { setupTestErrorLogger } from "@/utils/errorLogger";
 setupTestErrorLogger();
 
@@ -21,7 +25,6 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 
 import Api from "@/api";
 import AdminApi from "@/ee/admin_api";
-import "./i18n";
 
 import "@/api/socket";
 import { ToasterBar } from "turboui";

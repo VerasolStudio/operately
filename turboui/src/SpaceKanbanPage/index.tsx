@@ -10,6 +10,7 @@ import { Navigation } from "../Page/Navigation";
 import { IconChevronRight, IconLayoutKanban } from "../icons";
 import { BlackLink } from "../Link";
 import { createTestId } from "../TestableElement";
+import { t } from "../i18n";
 
 export namespace SpaceKanbanPage {
   export interface Space {
@@ -104,7 +105,9 @@ function SpaceKanbanPageHeader({ navigation }: SpaceKanbanPageHeaderProps) {
         <Breadcrumbs navigation={navigation} />
 
         <div className="flex items-center gap-2 mt-1">
-          <h1 className="text-sm sm:text-base font-semibold text-content-accent truncate">Tasks</h1>
+          <h1 className="text-sm sm:text-base font-semibold text-content-accent truncate">
+            {t("turboui.spaceKanbanPage.tasks")}
+          </h1>
         </div>
       </div>
     </header>

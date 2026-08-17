@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.ResourceHubDocumentCreatedEmail do
   alias OperatelyEmail.Emails.ResourceHubEmail
   alias Operately.Repo
   alias Operately.ResourceHubs.Document
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -19,7 +20,7 @@ defmodule OperatelyEmail.Emails.ResourceHubDocumentCreatedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: parent.name, who: author, action: "#{action} a document: #{document.name}")
+    |> subject(where: parent.name, who: author, action: t("resourceHubDocumentCreated.action", %{v1: action, v2: document.name}))
     |> assign(:author, author)
     |> assign(:document, document)
     |> assign(:copied_document, copied_document)
@@ -49,7 +50,7 @@ defmodule OperatelyEmail.Emails.ResourceHubDocumentCreatedEmail do
       parent_id: parent.id,
       parent_type: parent.type,
       parent_name: parent.name,
-      headline: "#{action} the document \"#{document.name}\"",
+      headline: t("resourceHubDocumentCreated.headline", %{v1: action, v2: document.name}),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.document_path(company, document) |> OperatelyWeb.Paths.to_url(),

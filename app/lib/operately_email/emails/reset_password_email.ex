@@ -2,11 +2,12 @@ defmodule OperatelyEmail.Emails.ResetPasswordEmail do
   import OperatelyEmail.Mailers.NotificationMailer, only: [html: 2, text: 2]
   import Swoosh.Email
   alias OperatelyWeb.Paths  
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(account, token) do
     assigns = %{
       reset_url: Paths.to_url("/reset-password?token=#{token}"),
-      subject: "Reset password instructions"
+      subject: t("resetPassword.resetPasswordInstructions")
     }
 
     email = new()

@@ -4,6 +4,7 @@ import { PrimaryButton } from "../../Button";
 import type { CompanyAdminManagePerson } from "../types";
 import { InvitationUrl } from "./InvitationUrl";
 import { LegacyModal } from "./LegacyModal";
+import { t } from "../../i18n";
 
 export function ReissueInvitationModal({
   isOpen,
@@ -25,12 +26,19 @@ export function ReissueInvitationModal({
   if (!person) return null;
 
   return (
-    <LegacyModal title="Regenerate the invitation URL" isOpen={isOpen} onClose={onClose} size="lg">
+    <LegacyModal
+      title={t("turboui.companyAdminManagePeoplePage.regenerateTheInvitationURL")}
+      isOpen={isOpen}
+      onClose={onClose}
+      size="lg"
+    >
       <div>
         By clicking the button below:
         <ul className="list-disc list-inside mt-2 block">
-          <li>A new invitation URL will be generated for {person.fullName}.</li>
-          <li>The previous URL will no longer be valid.</li>
+          <li>
+            {t("turboui.companyAdminManagePeoplePage.aNewInvitationURLWillBeGeneratedFor", { v1: person.fullName })}
+          </li>
+          <li>{t("turboui.companyAdminManagePeoplePage.thePreviousURLWillNoLonger")}</li>
         </ul>
       </div>
 
@@ -44,7 +52,7 @@ function NewInvitationButton({ onClick, loading }: { onClick: () => void; loadin
   return (
     <div className="flex items-center mt-4">
       <PrimaryButton onClick={onClick} loading={loading} testId="confirm-reissue">
-        I understand, create new invitation
+        {t("turboui.companyAdminManagePeoplePage.iUnderstandCreateNewInvitation")}
       </PrimaryButton>
     </div>
   );

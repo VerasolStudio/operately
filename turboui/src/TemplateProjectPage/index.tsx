@@ -12,17 +12,28 @@ import { Overview } from "./Overview";
 import { TaskBoard } from "./TaskBoard";
 import { Discussions } from "./Discussions";
 import { DocsAndFiles } from "./DocsAndFiles";
+import { t } from "../i18n";
 
 export function TemplateProjectPage(props: TemplateProjectPage.Props) {
   const orderedProps = React.useMemo(() => orderTemplateGraph(props), [props]);
   const canEdit = Boolean(props.permissions.canEdit || props.permissions.hasFullAccess);
   const tabs = useTabs("overview", [
-    { id: "overview", label: "Overview", icon: <IconClipboardText size={14} /> },
-    { id: "tasks", label: "Tasks", icon: <IconListCheck size={14} />, count: props.tasks.length },
-    { id: "discussions", label: "Discussions", icon: <IconMessageCircle size={14} />, count: props.discussions.length },
+    { id: "overview", label: t("turboui.templateProjectPage.overview"), icon: <IconClipboardText size={14} /> },
+    {
+      id: "tasks",
+      label: t("turboui.templateProjectPage.tasks"),
+      icon: <IconListCheck size={14} />,
+      count: props.tasks.length,
+    },
+    {
+      id: "discussions",
+      label: t("turboui.templateProjectPage.discussions"),
+      icon: <IconMessageCircle size={14} />,
+      count: props.discussions.length,
+    },
     {
       id: "docs-and-files",
-      label: "Docs & Files",
+      label: t("turboui.templateProjectPage.docsFiles"),
       icon: <IconPaperclip size={14} />,
       count: props.resourceNodes?.length ?? 0,
     },

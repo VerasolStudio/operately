@@ -19,6 +19,7 @@ import { createTestId } from "../../TestableElement";
 import type { BoardLocation } from "../../utils/PragmaticDragAndDrop";
 import type { RichEditorHandlers } from "../../RichEditor/useEditor";
 import type { FormattedTimePreferences } from "../../FormattedTime";
+import { t } from "../../i18n";
 
 export interface MilestoneCardProps {
   milestone: Types.Milestone;
@@ -134,8 +135,8 @@ export function MilestoneCard({
             ) : (
               <PieChart
                 size={16}
-                ariaLabel={`Milestone progress: ${completionLabel}`}
-                title={`Milestone progress: ${completionLabel}`}
+                ariaLabel={t("turboui.taskBoard.milestoneProgress", { v1: completionLabel })}
+                title={t("turboui.taskBoard.milestoneProgress", { v1: completionLabel })}
                 slices={[
                   {
                     percentage: completionPercentage,
@@ -181,7 +182,7 @@ export function MilestoneCard({
                     onDateSelect={handleMilestoneDueDateChange}
                     variant="inline"
                     showOverdueWarning={showOverdueWarning}
-                    placeholder="Set due date"
+                    placeholder={t("turboui.taskBoard.setDueDate")}
                     readonly={!onMilestoneUpdate}
                     size="small"
                   />
@@ -193,7 +194,7 @@ export function MilestoneCard({
                       onDateSelect={handleMilestoneDueDateChange}
                       variant="inline"
                       showOverdueWarning={showOverdueWarning}
-                      placeholder="Set due date"
+                      placeholder={t("turboui.taskBoard.setDueDate")}
                       readonly={false}
                       size="small"
                     />
@@ -211,7 +212,7 @@ export function MilestoneCard({
                   underline="hover"
                 >
                   <IconLayoutKanban size={18} className="text-content-dimmed" />
-                  <span className="sr-only">Open Kanban</span>
+                  <span className="sr-only">{t("turboui.taskBoard.openKanban")}</span>
                 </BlackLink>
               </Tooltip>
             )}
@@ -224,7 +225,7 @@ export function MilestoneCard({
               testId="milestone-add-task"
             >
               {/* icon-only for reduced repetition; keep accessible label */}
-              <span className="sr-only">Add task</span>
+              <span className="sr-only">{t("turboui.taskBoard.addTask")}</span>
             </SecondaryButton>
           </div>
         </div>
@@ -279,13 +280,13 @@ export function MilestoneCard({
                   testId="inline-task-creator-empty"
                 />
                 <div className="hidden px-4 pb-3 text-center text-content-subtle text-xs sm:block">
-                  Press Enter to add. You can also drag tasks here.
+                  {t("turboui.taskBoard.pressEnterToAddYouCan")}
                 </div>
               </>
             ) : (
               <div className="text-left text-content-subtle text-sm sm:text-center">
-                <span className="sm:hidden">Tap + to add a task.</span>
-                <span className="hidden sm:inline">Click + or press 'c' to add a task, or drag a task here.</span>
+                <span className="sm:hidden">{t("turboui.taskBoard.tapToAddATask")}</span>
+                <span className="hidden sm:inline">{t("turboui.taskBoard.clickOrPressCToAdd2")}</span>
               </div>
             )}
           </EmptyMilestoneDropZone>

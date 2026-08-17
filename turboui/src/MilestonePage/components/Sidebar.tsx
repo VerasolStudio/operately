@@ -3,12 +3,21 @@ import * as Types from "../../TaskBoard/types";
 import { DateField } from "../../DateField";
 import { AvatarWithName } from "../../Avatar";
 import { GhostButton, SecondaryButton } from "../../Button";
-import { IconCalendar, IconCheck, IconLink, IconTrash, IconFlagFilled, IconFlag, IconCircleCheckFilled } from "../../icons";
+import {
+  IconCalendar,
+  IconCheck,
+  IconLink,
+  IconTrash,
+  IconFlagFilled,
+  IconFlag,
+  IconCircleCheckFilled,
+} from "../../icons";
 import FormattedTime, { type FormattedTimePreferences } from "../../FormattedTime";
 import { MilestonePage } from "..";
 import { SidebarSection, SidebarNotificationSection } from "../../SidebarSection";
 import { showSuccessToast, showErrorToast } from "../../Toasts";
 import { launchConfetti } from "../../utils/confetti";
+import { t } from "../../i18n";
 
 export function MilestoneSidebar({
   milestone,
@@ -25,13 +34,21 @@ export function MilestoneSidebar({
   return (
     <div className="sm:col-span-4 hidden sm:block sm:pl-8">
       <div className="space-y-6 mt-4" data-test-id="sidebar">
-        <SidebarDueDate milestone={milestone} onDueDateChange={onDueDateChange} canEdit={permissions.canEdit || false} />
+        <SidebarDueDate
+          milestone={milestone}
+          onDueDateChange={onDueDateChange}
+          canEdit={permissions.canEdit || false}
+        />
         <SidebarStatus status={status} onStatusChange={onStatusChange} canEdit={permissions.canEdit || false} />
         {milestone.completedAt && milestone.status === "done" && (
           <SidebarCompletedOn completedAt={milestone.completedAt} formattedTimePreferences={formattedTimePreferences} />
         )}
         {createdBy && (
-          <SidebarCreatedBy createdBy={createdBy} createdAt={createdAt} formattedTimePreferences={formattedTimePreferences} />
+          <SidebarCreatedBy
+            createdBy={createdBy}
+            createdAt={createdAt}
+            formattedTimePreferences={formattedTimePreferences}
+          />
         )}
         <SidebarNotificationSection {...subscriptions} />
         <SidebarActions onDelete={openDeleteModal} canEdit={permissions.canEdit || false} />
@@ -51,9 +68,9 @@ function SidebarDueDate({
 }) {
   // Don't show overdue warning if milestone is completed
   const showOverdueWarning = milestone.status !== "done";
-  
+
   return (
-    <SidebarSection title="Due Date">
+    <SidebarSection title={t("turboui.milestonePage.dueDate")}>
       <DateField
         date={milestone.dueDate || null}
         onDateSelect={(date) => {
@@ -63,7 +80,7 @@ function SidebarDueDate({
         }}
         readonly={!canEdit}
         showOverdueWarning={showOverdueWarning}
-        placeholder="Set due date"
+        placeholder={t("turboui.milestonePage.setDueDate")}
         testId="milestone-due-date"
         calendarOnly
       />
@@ -93,17 +110,17 @@ function SidebarStatus({
 
   if (!canEdit) {
     return (
-      <SidebarSection title="Milestone status">
+      <SidebarSection title={t("turboui.milestonePage.milestoneStatus")}>
         <div className="flex items-center gap-2 text-sm">
           {isCompleted ? (
             <>
               <IconFlagFilled size={16} className="text-accent-1" />
-              <span className="text-accent-1 font-medium">Completed</span>
+              <span className="text-accent-1 font-medium">{t("turboui.milestonePage.completed")}</span>
             </>
           ) : (
             <>
               <IconFlag size={16} className="text-content-dimmed" />
-              <span className="text-content-base">Active</span>
+              <span className="text-content-base">{t("turboui.milestonePage.active")}</span>
             </>
           )}
         </div>
@@ -112,28 +129,28 @@ function SidebarStatus({
   }
 
   return (
-    <SidebarSection title="Milestone status" testId="sidebar-status">
+    <SidebarSection title={t("turboui.milestonePage.milestoneStatus")} testId="sidebar-status">
       <div className="space-y-2">
         <div className="flex items-center gap-2 text-sm">
           {isCompleted ? (
             <>
               <IconFlagFilled size={16} className="text-accent-1" />
-              <span className="text-accent-1 font-medium">Completed</span>
+              <span className="text-accent-1 font-medium">{t("turboui.milestonePage.completed")}</span>
             </>
           ) : (
             <>
               <IconFlag size={16} className="text-content-dimmed" />
-              <span className="text-content-base">Active</span>
+              <span className="text-content-base">{t("turboui.milestonePage.active")}</span>
             </>
           )}
         </div>
         {isCompleted ? (
           <SecondaryButton size="xs" onClick={handleStatusToggle}>
-            Reopen
+            {t("turboui.milestonePage.reopen")}
           </SecondaryButton>
         ) : (
           <GhostButton size="xs" icon={IconCheck} onClick={handleStatusToggle}>
-            Mark complete
+            {t("turboui.milestonePage.markComplete")}
           </GhostButton>
         )}
       </div>
@@ -149,7 +166,7 @@ function SidebarCompletedOn({
   formattedTimePreferences: FormattedTimePreferences;
 }) {
   return (
-    <SidebarSection title="Completed on">
+    <SidebarSection title={t("turboui.milestonePage.completedOn")}>
       <div className="flex items-center gap-1.5 text-sm">
         <IconCircleCheckFilled size={16} className="text-accent-1" />
         <FormattedTime {...formattedTimePreferences} time={completedAt} format="short-date" />
@@ -168,7 +185,7 @@ function SidebarCreatedBy({
   formattedTimePreferences: FormattedTimePreferences;
 }) {
   return (
-    <SidebarSection title="Created">
+    <SidebarSection title={t("turboui.milestonePage.created")}>
       <div className="space-y-2 text-sm">
         <AvatarWithName person={createdBy} size="tiny" nameFormat="short" link={createdBy.profileLink} />
         <div className="flex items-center gap-1.5 ml-1 text-content-dimmed text-xs">
@@ -180,26 +197,25 @@ function SidebarCreatedBy({
   );
 }
 
-
 function SidebarActions({ onDelete, canEdit }: { onDelete?: () => void; canEdit: boolean }) {
   const handleCopyURL = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      showSuccessToast("Success", "Milestone URL copied to clipboard");
+      showSuccessToast(t("turboui.milestonePage.success"), t("turboui.milestonePage.milestoneURLCopiedToClipboard"));
     } catch {
-      showErrorToast("Copy failed", "Unable to copy URL to clipboard");
+      showErrorToast(t("turboui.milestonePage.copyFailed"), t("turboui.milestonePage.unableToCopyURLToClipboard"));
     }
   };
 
   const actions = [
     {
-      label: "Copy URL",
+      label: t("turboui.milestonePage.copyURL"),
       onClick: handleCopyURL,
       icon: IconLink,
       show: true,
     },
     {
-      label: "Delete",
+      label: t("turboui.milestonePage.delete"),
       onClick: onDelete,
       icon: IconTrash,
       show: canEdit && !!onDelete,
@@ -210,7 +226,7 @@ function SidebarActions({ onDelete, canEdit }: { onDelete?: () => void; canEdit:
   if (actions.length === 0) return null;
 
   return (
-    <SidebarSection title="Actions">
+    <SidebarSection title={t("turboui.milestonePage.actions")}>
       <div className="space-y-1">
         {actions.map((action, index) => (
           <button

@@ -5,19 +5,20 @@ import { Goal } from "@/models/goals";
 import { Paths, usePaths } from "@/routes/paths";
 
 import { useLoadedData } from "./loader";
+import { t } from "@/i18n";
 
 export function buildGoalCheckInNewNavigation(goal: Goal, paths: Paths): Paper.NavigationItem[] {
   const items: Paper.NavigationItem[] = [];
 
   if (goal.space) {
     items.push({ to: paths.spacePath(goal.space.id), label: goal.space.name });
-    items.push({ to: paths.spaceWorkMapPath(goal.space.id), label: "Work Map" });
+    items.push({ to: paths.spaceWorkMapPath(goal.space.id), label: t("pages.goalCheckInNewPage.workMap") });
   } else {
-    items.push({ to: paths.workMapPath("goals"), label: "Work Map" });
+    items.push({ to: paths.workMapPath("goals"), label: t("pages.goalCheckInNewPage.workMap") });
   }
 
   items.push({ to: paths.goalPath(goal.id), label: goal.name });
-  items.push({ to: paths.goalPath(goal.id, { tab: "check-ins" }), label: "Check-ins" });
+  items.push({ to: paths.goalPath(goal.id, { tab: "check-ins" }), label: t("pages.goalCheckInNewPage.checkIns") });
 
   return items;
 }

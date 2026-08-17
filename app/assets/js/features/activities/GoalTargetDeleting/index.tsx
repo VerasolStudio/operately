@@ -5,6 +5,7 @@ import type { Activity } from "@/models/activities";
 import { Paths } from "@/routes/paths";
 import { feedTitle, goalLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
 
 const GoalTargetDeleting: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -30,7 +31,7 @@ const GoalTargetDeleting: ActivityHandler = {
   FeedItemTitle(props: { activity: Activity; page: string }) {
     const goal = content(props.activity).goal!;
     const targetName = content(props.activity).targetName!;
-    const message = `deleted the ${targetName} target`;
+    const message = t("features.activities.deletedTheTarget", { v1: targetName });
 
     if (props.page === "goal") {
       return feedTitle(props.activity, message);

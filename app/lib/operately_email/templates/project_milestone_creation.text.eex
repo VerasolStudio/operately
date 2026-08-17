@@ -1,6 +1,6 @@
-<%= short_name(@author) %> created the <%= @milestone.title %> milestone for <%= @project.name %>.
+<%= t("projectMilestoneCreation.createdTheMilestoneFor", %{v1: short_name(@author), v2: @milestone.title, v3: @project.name}) %>
 <%= if @due_date do %>
-It is scheduled for <%= @due_date %>.
+<%= t("projectMilestoneCreation.itIsScheduledFor", %{v1: @due_date}) %>
 <% end %>
 
-Link: <%= @cta_url %>
+<%= t("projectMilestoneCreation.link", %{v1: @cta_url}) %>

@@ -8,6 +8,7 @@ import { ActivityHandler } from "../interfaces";
 
 import { feedTitle, goalLink } from "../feedItemLinks";
 import { useRichEditorHandlers } from "@/hooks/useRichEditorHandlers";
+import { t } from "@/i18n";
 
 const GoalClosing: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -19,7 +20,7 @@ const GoalClosing: ActivityHandler = {
   },
 
   PageTitle(_props: { activity: any }) {
-    return <>Goal reopened</>;
+    return <>{t("features.activities.goalReopened")}</>;
   },
 
   PageContent({ activity }: { activity: Activity }) {

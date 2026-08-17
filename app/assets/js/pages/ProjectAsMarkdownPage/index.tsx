@@ -5,6 +5,7 @@ import * as React from "react";
 import { SecondaryButton } from "turboui";
 
 import { PageModule } from "@/routes/types";
+import { t } from "@/i18n";
 export default { name: "ProjectAsMarkdownPage", loader, Page } as PageModule;
 
 interface LoaderResult {
@@ -36,7 +37,7 @@ function Page() {
   const [copied, setCopied] = React.useState(false);
 
   return (
-    <Pages.Page title={"Project As Markdown"}>
+    <Pages.Page title={t("pages.projectAsMarkdownPage.projectAsMarkdown")}>
       <Paper.Root>
         <Paper.Body>
           <div className="flex justify-end mb-2">

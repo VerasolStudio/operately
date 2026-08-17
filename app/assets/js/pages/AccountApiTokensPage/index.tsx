@@ -6,6 +6,7 @@ import { PageModule } from "@/routes/types";
 import { usePaths } from "@/routes/paths";
 import { AccountApiTokensPage, showErrorToast, showSuccessToast } from "turboui";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
+import { t } from "@/i18n";
 
 export default { name: "AccountApiTokensPage", loader, Page } as PageModule;
 
@@ -59,10 +60,16 @@ function Page() {
     try {
       const result = await Accounts.createApiToken({ readOnly: newTokenReadOnly });
       setNewlyCreatedToken(result.token);
-      showSuccessToast("API Token Created", "Copy the token now. For security reasons, it will only be shown once.");
+      showSuccessToast(
+        t("pages.accountApiTokensPage.aPITokenCreated"),
+        t("pages.accountApiTokensPage.copyTheTokenNowForSecurity"),
+      );
       refresh();
     } catch {
-      showErrorToast("Failed To Create Token", "Please try again.");
+      showErrorToast(
+        t("pages.accountApiTokensPage.failedToCreateToken"),
+        t("pages.accountApiTokensPage.pleaseTryAgain"),
+      );
     } finally {
       setCreatingToken(false);
     }
@@ -80,12 +87,18 @@ function Page() {
 
       try {
         await Accounts.setApiTokenReadOnly(tokenId, readOnly);
-        showSuccessToast("Token Updated", readOnly ? "Token is now read-only." : "Token now has full access.");
+        showSuccessToast(
+          t("pages.accountApiTokensPage.tokenUpdated"),
+          readOnly ? "Token is now read-only." : "Token now has full access.",
+        );
       } catch {
         setTokens((prev) =>
           prev.map((token) => (token.id === tokenId ? { ...token, readOnly: previousToken.readOnly } : token)),
         );
-        showErrorToast("Failed To Update Token", "Please try again.");
+        showErrorToast(
+          t("pages.accountApiTokensPage.failedToUpdateToken"),
+          t("pages.accountApiTokensPage.pleaseTryAgain"),
+        );
       } finally {
         setPendingTokenAction(tokenId, null);
       }
@@ -107,14 +120,20 @@ function Page() {
 
       try {
         await Accounts.deleteApiToken(tokenId);
-        showSuccessToast("Token Deleted", "The API token was removed.");
+        showSuccessToast(
+          t("pages.accountApiTokensPage.tokenDeleted"),
+          t("pages.accountApiTokensPage.theAPITokenWasRemoved"),
+        );
       } catch {
         setTokens((prev) => {
           const next = [...prev];
           next.splice(previousIndex, 0, deletedToken);
           return next;
         });
-        showErrorToast("Failed To Delete Token", "Please try again.");
+        showErrorToast(
+          t("pages.accountApiTokensPage.failedToDeleteToken"),
+          t("pages.accountApiTokensPage.pleaseTryAgain"),
+        );
       } finally {
         setPendingTokenAction(tokenId, null);
       }
@@ -137,13 +156,19 @@ function Page() {
 
       try {
         await Accounts.updateApiTokenName(tokenId, name);
-        showSuccessToast("Token Updated", "Token name updated.");
+        showSuccessToast(
+          t("pages.accountApiTokensPage.tokenUpdated"),
+          t("pages.accountApiTokensPage.tokenNameUpdated"),
+        );
         return true;
       } catch {
         setTokens((prev) =>
           prev.map((token) => (token.id === tokenId ? { ...token, name: previousToken.name } : token)),
         );
-        showErrorToast("Failed To Update Token", "Please try again.");
+        showErrorToast(
+          t("pages.accountApiTokensPage.failedToUpdateToken"),
+          t("pages.accountApiTokensPage.pleaseTryAgain"),
+        );
         return false;
       } finally {
         setPendingTokenAction(tokenId, null);

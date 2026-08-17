@@ -3,6 +3,7 @@
 
     alias Operately.Repo
     alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
     def send(person, activity) do
       activity = Repo.preload(activity, [author: :company])
@@ -15,7 +16,7 @@
       |> new()
       |> from(author)
       |> to(person)
-      |> subject(where: company.name, who: author, action: "promoted you to an account owner")
+      |> subject(where: company.name, who: author, action: t("companyOwnersAdding.action"))
       |> assign(:author, author)
       |> assign(:link, link)
       |> render("company_owners_adding")

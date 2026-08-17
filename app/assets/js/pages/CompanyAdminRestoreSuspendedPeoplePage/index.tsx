@@ -20,6 +20,8 @@ import { Avatar } from "turboui";
 
 import { useMe } from "@/contexts/CurrentCompanyContext";
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 export default { name: "CompanyAdminRestoreSuspendedPeoplePage", loader, Page } as PageModule;
 
 interface LoaderResult {
@@ -52,12 +54,17 @@ function Page() {
         title={["Restore Deactivated Team Members", company.name!]}
         size="medium"
         testId="restore-suspended-people-page"
-        navigation={[{ to: paths.companyAdminPath(), label: "Company Administration" }]}
+        navigation={[
+          {
+            to: paths.companyAdminPath(),
+            label: t("pages.companyAdminRestoreSuspendedPeoplePage.companyAdministration"),
+          },
+        ]}
       >
         <div className="px-12 py-10">
           <div className="mb-6">
             <div className="text-content-accent text-lg md:text-2xl font-extrabold">
-              Restore Deactivated Team Members
+              {t("pages.companyAdminRestoreSuspendedPeoplePage.restoreDeactivatedTeamMembers")}
             </div>
           </div>
 
@@ -86,8 +93,11 @@ function NoSuspenedPeopleMessage() {
         message={`No deactivated team members`}
         description={
           <p>
-            There are no deactivated team members in {company.name}. To remove access for departing team members, visit
-            the <Link to={paths.companyManagePeoplePath()}>Manage Team Members</Link> page.
+            <Trans
+              i18nKey="pages.companyAdminRestoreSuspendedPeoplePage.noDeactivatedTeamMembers"
+              values={{ v1: company.name }}
+              components={[<Link to={paths.companyManagePeoplePath()}>Manage Team Members</Link>]}
+            />
           </p>
         }
       />
@@ -193,13 +203,16 @@ function RestoreButton({
 
       const message = (error as any)?.response?.data?.message;
 
-      showErrorToast("Unable to restore member", typeof message === "string" ? message : "Please try again.");
+      showErrorToast(
+        t("pages.companyAdminRestoreSuspendedPeoplePage.unableToRestoreMember"),
+        typeof message === "string" ? message : "Please try again.",
+      );
     }
   };
 
   return (
     <SecondaryButton size="xs" testId={createTestId("restore", person.id!)} onClick={handler} loading={loading}>
-      Reactivate Account
+      {t("pages.companyAdminRestoreSuspendedPeoplePage.reactivateAccount")}
     </SecondaryButton>
   );
 }

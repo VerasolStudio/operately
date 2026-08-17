@@ -14,6 +14,7 @@ import { DimmedLink, Forms, emptyContent, isContentEmpty } from "turboui";
 import { match } from "ts-pattern";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export default { name: "GoalDiscussionEditPage", loader, Page } as PageModule;
 
 interface LoaderResult {
@@ -44,16 +45,16 @@ function Page() {
               <div>
                 <Forms.TitleInput
                   field="title"
-                  placeholder="Title..."
+                  placeholder={t("pages.goalDiscussionEditPage.title")}
                   autoFocus
                   testId="discussion-title"
-                  errorMessage="Please add a title"
+                  errorMessage={t("pages.goalDiscussionEditPage.pleaseAddATitle")}
                 />
                 <div className="mt-2 border-y border-stroke-base text-content-base font-medium">
                   <Forms.RichTextArea
                     field="message"
                     richTextHandlers={richTextHandlers}
-                    placeholder="Start a new discussion..."
+                    placeholder={t("pages.goalDiscussionEditPage.startANewDiscussion")}
                     hideBorder
                     height="min-h-[350px]"
                     fontSize="text-lg"
@@ -64,11 +65,18 @@ function Page() {
               </div>
             </Forms.FieldGroup>
 
-            <Forms.FormError message="Fill out all the required fields" className="mt-4" />
+            <Forms.FormError message={t("pages.goalDiscussionEditPage.fillOutAllTheRequiredFields")} className="mt-4" />
 
             <div className="flex items-center gap-4 mt-4">
-              <Forms.Submit saveText="Save" buttonSize="base" testId="save" containerClassName="mt-0" />
-              <DimmedLink to={paths.goalActivityPath(activity.id!)}>Cancel</DimmedLink>
+              <Forms.Submit
+                saveText={t("pages.goalDiscussionEditPage.save")}
+                buttonSize="base"
+                testId="save"
+                containerClassName="mt-0"
+              />
+              <DimmedLink to={paths.goalActivityPath(activity.id!)}>
+                {t("pages.goalDiscussionEditPage.cancel")}
+              </DimmedLink>
             </div>
           </Forms.Form>
         </Paper.Body>

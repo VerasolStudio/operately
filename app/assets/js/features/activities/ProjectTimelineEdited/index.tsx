@@ -9,6 +9,8 @@ import type { ActivityContentProjectTimelineEdited, ActivityMilestone } from "@/
 import type { Activity } from "@/models/activities";
 import { usePaths } from "@/routes/paths";
 import type { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 const ProjectTimelineEdited: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -87,7 +89,7 @@ function NewStartDate({ content }: { content: Content }) {
 
   const date = <FormattedTime {...formattedTimePreferences} time={content.newStartDate} format="long-date" />;
 
-  return <div>The start date was set to {date}.</div>;
+  return <div>{t("features.activities.theStartDateWasSetTo", { v1: date })}</div>;
 }
 
 function NewEndDate({ content }: { content: Content }) {
@@ -97,14 +99,14 @@ function NewEndDate({ content }: { content: Content }) {
 
   const date = <FormattedTime {...formattedTimePreferences} time={content.newDueDate} format="long-date" />;
 
-  return <div>The due date was set to {date}.</div>;
+  return <div>{t("features.activities.theDueDateWasSetTo", { v1: date })}</div>;
 }
 
 function DurationChange({ content }: { content: Content }) {
   if (!content.durationChanged) return null;
 
   if (content.oldDuration === null && content.newDuration !== null) {
-    return <div>Total project duration is {content.newDuration} days.</div>;
+    return <div>{t("features.activities.totalProjectDurationIsDays", { v1: content.newDuration })}</div>;
   }
 
   if (content.oldDuration !== null && content.newDuration !== null) {
@@ -115,9 +117,7 @@ function DurationChange({ content }: { content: Content }) {
     const now = content.newDuration;
 
     return (
-      <div>
-        Total project duration {dir} by {percentage}% ({old} days -&gt; {now} days).
-      </div>
+      <div>{t("features.activities.totalProjectDurationChanged", { v1: dir, v2: percentage, v3: old, v4: now })}</div>
     );
   }
 
@@ -167,8 +167,11 @@ function MilestoneLink({ milestone }: { milestone: ActivityMilestone }) {
   return (
     <div className="font-medium">
       <IconFlag3Filled size={14} className="inline-block mr-1" />
-      <Link to={path}>{title}</Link> <span className="">&middot;</span> Due date on{" "}
-      <FormattedTime {...formattedTimePreferences} time={milestone.deadlineAt!} format="long-date" />
+      <Link to={path}>{title}</Link> <span className="">&middot;</span>{" "}
+      <Trans
+        i18nKey="features.activities.dueDateOn"
+        components={[<FormattedTime {...formattedTimePreferences} time={milestone.deadlineAt!} format="long-date" />]}
+      />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 defmodule OperatelyEmail.Emails.ProjectContributorAdditionEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Projects}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -15,7 +16,7 @@ defmodule OperatelyEmail.Emails.ProjectContributorAdditionEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: project.name, who: author, action: "added you as a #{role}")
+    |> subject(where: project.name, who: author, action: t("projectContributorAddition.action", %{v1: role}))
     |> assign(:author, author)
     |> assign(:project, project)
     |> assign(:responsibility, responsibility)
@@ -26,9 +27,9 @@ defmodule OperatelyEmail.Emails.ProjectContributorAdditionEmail do
 
   def construct_responsibility(contributor) do
     case contributor.role do
-      :champion -> "As a champion, you are responsible for leading the project, defining the scope, goals and timeline, and providing regular updates."
-      :reviewer -> "As a reviewer, you are responsible for reviewing the progress of the project, providing feedback, and approving the final deliverables."
-      :contributor -> "You are responsible for: #{contributor.responsibility}"
+      :champion -> t("projectContributorAddition.asAChampionYouAreResponsible")
+      :reviewer -> t("projectContributorAddition.asAReviewerYouAreResponsible")
+      :contributor -> t("projectContributorAddition.youAreResponsibleFor", %{v1: contributor.responsibility})
     end
   end
 end

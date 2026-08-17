@@ -12,18 +12,19 @@ import { validateEmail } from "@/features/auth/validateEmail";
 import { Forms, Spacer } from "turboui";
 import { OperatelyLogo } from "turboui/Logo";
 import { Paths } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function Page() {
   return (
-    <Pages.Page title="Welcome to Operately!">
+    <Pages.Page title={t("pages.setupPage.welcomeToOperately")}>
       <Paper.Root>
         <Paper.Body>
           <div className="grid grid-cols-[min-content_1fr] gap-x-4">
             <div className="row-span-2 pt-1">
               <OperatelyLogo width="48px" height="48px" />
             </div>
-            <div className="text-content-accent text-2xl font-extrabold">Welcome to Operately!</div>
-            <div className="text-content-accent">Let&apos;s set up your company.</div>
+            <div className="text-content-accent text-2xl font-extrabold">{t("pages.setupPage.welcomeToOperately")}</div>
+            <div className="text-content-accent">{t("pages.setupPage.letAposSSetUpYour")}</div>
           </div>
 
           <Spacer size={6} />
@@ -99,8 +100,8 @@ function Form() {
       <Forms.FieldGroup>
         <Forms.TextInput
           field="companyName"
-          label="Name of the company"
-          placeholder="e.g. Acme Co."
+          label={t("pages.setupPage.nameOfTheCompany")}
+          placeholder={t("pages.setupPage.eGAcmeCo")}
           required
           minLength={3}
           okSign={validation.companyName}
@@ -114,24 +115,24 @@ function Form() {
         <div className="space-y-6">
           <Forms.TextInput
             field="fullName"
-            label="Full name"
-            placeholder="e.g. John Johnson"
+            label={t("pages.setupPage.fullName")}
+            placeholder={t("pages.setupPage.eGJohnJohnson")}
             required
             okSign={validation.fullName}
             testId="full-name"
           />
           <Forms.TextInput
             field="title"
-            label="Title in the company"
-            placeholder="e.g. Founder"
+            label={t("pages.setupPage.titleInTheCompany")}
+            placeholder={t("pages.setupPage.eGFounder")}
             required
             okSign={validation.title}
             testId="title"
           />
           <Forms.TextInput
             field="email"
-            label="Email"
-            placeholder="e.g. john@your-company.com"
+            label={t("pages.setupPage.email")}
+            placeholder={t("pages.setupPage.eGJohnYourCompanyCom")}
             required
             maxLength={160}
             okSign={validation.email}
@@ -139,10 +140,10 @@ function Form() {
           />
           <Forms.PasswordInput
             field="password"
-            label="Password"
+            label={t("pages.setupPage.password")}
             minLength={12}
             maxLength={72}
-            placeholder="At least 12 characters"
+            placeholder={t("pages.setupPage.atLeast12Characters")}
             required
             noAutofill
             okSign={validation.password}
@@ -151,10 +152,10 @@ function Form() {
           <PasswordStrength password={form.values.password} />
           <Forms.PasswordInput
             field="passwordConfirmation"
-            label="Repeat password"
+            label={t("pages.setupPage.repeatPassword")}
             minLength={12}
             maxLength={72}
-            placeholder="At least 12 characters"
+            placeholder={t("pages.setupPage.atLeast12Characters")}
             required
             noAutofill
             okSign={validation.passwordConfirmation}
@@ -178,7 +179,7 @@ function AdminAccountTitle() {
   return (
     <div className="flex items-center gap-2 my-16">
       <div className="bg-content-accent flex-1 h-[1px] bg-black"></div>
-      <span className="text-content-accent text-center">ADMIN ACCOUNT</span>
+      <span className="text-content-accent text-center">{t("pages.setupPage.aDMINACCOUNT")}</span>
       <div className="bg-content-accent flex-1 h-[1px] bg-black"></div>
     </div>
   );

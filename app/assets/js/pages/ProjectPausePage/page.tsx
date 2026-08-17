@@ -7,6 +7,7 @@ import { useLoadedData } from "./loader";
 import { Form } from "./Form";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export function Page() {
   const paths = usePaths();
   const { project } = useLoadedData();
@@ -17,15 +18,17 @@ export function Page() {
         <Paper.Navigation items={[{ to: paths.projectPath(project.id!), label: project.name! }]} />
 
         <Paper.Body minHeight="none">
-          <div className="text-content-accent text-3xl font-extrabold">Pause this project?</div>
+          <div className="text-content-accent text-3xl font-extrabold">
+            {t("pages.projectPausePage.pauseThisProject")}
+          </div>
           <div className="text-content text font-medium mt-2">
             Pausing this project will:
             <ul className="list-disc list-inside mt-4">
-              <li>Suspend all associated milestones and tasks</li>
-              <li>Stop notifications for team members</li>
-              <li>Move the project to your paused projects list</li>
+              <li>{t("pages.projectPausePage.suspendAllAssociatedMilestonesAndTasks")}</li>
+              <li>{t("pages.projectPausePage.stopNotificationsForTeamMembers")}</li>
+              <li>{t("pages.projectPausePage.moveTheProjectToYourPaused")}</li>
             </ul>
-            <p className="mt-4">Note: You can resume the project at any time.</p>
+            <p className="mt-4">{t("pages.projectPausePage.noteYouCanResumeTheProject")}</p>
           </div>
 
           <div className="mt-8">

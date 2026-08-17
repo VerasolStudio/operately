@@ -4,6 +4,7 @@ import { Menu, MenuActionItem, MenuLinkItem, SubMenu } from "../../Menu";
 import { IconId, IconLink, IconLock, IconPencil, IconRefresh, IconRotateDot, IconSwitch, IconUserX } from "../../icons";
 import { createTestId } from "../../TestableElement";
 import { AccessOptions, CompanyAdminManagePerson, Permissions } from "../types";
+import { t } from "../../i18n";
 
 type PersonHandler = (person: CompanyAdminManagePerson) => void;
 
@@ -39,34 +40,34 @@ export function PersonOptions({
   return (
     <Menu testId={testId} size={size}>
       <MenuLinkItem icon={IconId} testId="view-profile" to={person.profilePath}>
-        View Profile
+        {t("turboui.companyAdminManagePeoplePage.viewProfile")}
       </MenuLinkItem>
 
       {permissions?.canEditMembers && (
         <MenuLinkItem icon={IconPencil} testId={createTestId("edit", person.id)} to={person.profileEditPath}>
-          Edit Profile
+          {t("turboui.companyAdminManagePeoplePage.editProfile")}
         </MenuLinkItem>
       )}
 
       {!isInvited && permissions?.canEditMembersAccessLevels && showAccessLevelOptions && (
-        <SubMenu icon={IconLock} label="Change access level" hidden={false}>
+        <SubMenu icon={IconLock} label={t("turboui.companyAdminManagePeoplePage.changeAccessLevel")} hidden={false}>
           <MenuActionItem
             testId={createTestId("edit-access", person.id)}
             onClick={() => onChangeAccessLevel(person.id, "edit_access")}
           >
-            Edit access
+            {t("turboui.companyAdminManagePeoplePage.editAccess")}
           </MenuActionItem>
           <MenuActionItem
             testId={createTestId("comment-access", person.id)}
             onClick={() => onChangeAccessLevel(person.id, "comment_access")}
           >
-            Comment access
+            {t("turboui.companyAdminManagePeoplePage.commentAccess")}
           </MenuActionItem>
           <MenuActionItem
             testId={createTestId("view-access", person.id)}
             onClick={() => onChangeAccessLevel(person.id, "view_access")}
           >
-            View access
+            {t("turboui.companyAdminManagePeoplePage.viewAccess")}
           </MenuActionItem>
         </SubMenu>
       )}
@@ -77,7 +78,7 @@ export function PersonOptions({
           onClick={() => onOpenConvert(person)}
           testId={createTestId("convert-to-guest", person.id)}
         >
-          Convert to Outside Collaborator
+          {t("turboui.companyAdminManagePeoplePage.convertToOutsideCollaborator")}
         </MenuActionItem>
       )}
 
@@ -87,7 +88,7 @@ export function PersonOptions({
           onClick={() => onOpenRenew(person)}
           testId={createTestId("renew-invitation", person.id)}
         >
-          Renew Invitation
+          {t("turboui.companyAdminManagePeoplePage.renewInvitation")}
         </MenuActionItem>
       )}
 
@@ -97,7 +98,7 @@ export function PersonOptions({
           onClick={() => onOpenView(person)}
           testId={createTestId("view-invite-link", person.id)}
         >
-          View Invitation Link
+          {t("turboui.companyAdminManagePeoplePage.viewInvitationLink")}
         </MenuActionItem>
       )}
 
@@ -107,7 +108,7 @@ export function PersonOptions({
           onClick={() => onOpenReissue(person)}
           testId={createTestId("reissue-token", person.id)}
         >
-          Reissue Invitation
+          {t("turboui.companyAdminManagePeoplePage.reissueInvitation")}
         </MenuActionItem>
       )}
 

@@ -15,6 +15,7 @@ import { projectItemsWithPlaceholder, SubtleDropPlaceholder, useBoardDnD } from 
 import type { BoardMove } from "../utils/PragmaticDragAndDrop";
 import classNames from "../utils/classnames";
 import { dropTargetForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { t } from "../i18n";
 
 export function Overview(props: ProjectPage.State) {
   return (
@@ -51,8 +52,8 @@ function OverviewSection(props: ProjectPage.State) {
       <PageDescription
         {...props}
         canEdit={props.permissions.canEdit}
-        label="Description"
-        placeholder="Add a project description..."
+        label={t("turboui.projectPage.description")}
+        placeholder={t("turboui.projectPage.addAProjectDescription")}
         zeroStatePlaceholder="Add a project description..."
         localDraftKey={props.localDraftKeyBase ? `${props.localDraftKeyBase}:description` : undefined}
       />
@@ -124,7 +125,7 @@ function TimelineSection(props: ProjectPage.State) {
     <div className="space-y-4" data-test-id="timeline-section">
       {/* Header with inline completion stats */}
       <div className="flex items-center gap-2">
-        <SectionHeader title="Milestones" />
+        <SectionHeader title={t("turboui.projectPage.milestones")} />
         {totalMilestones > 0 && (
           <div className="flex items-center gap-1 text-sm text-content-accent">
             <PieChart size={16} slices={[{ percentage: completionPercentage, color: "var(--color-green-500)" }]} />
@@ -135,7 +136,7 @@ function TimelineSection(props: ProjectPage.State) {
         )}
         {props.permissions.canEdit && (
           <SecondaryButton size="xxs" onClick={() => setShowAddForm(true)} testId="add-milestone-button">
-            Add milestone
+            {t("turboui.projectPage.addMilestone")}
           </SecondaryButton>
         )}
       </div>
@@ -186,12 +187,12 @@ function EmptyState({ canEdit, setShowAddForm, display }: EmptyStateProps) {
   return (
     <div className="text-center py-8 text-content-dimmed">
       <IconFlag size={48} className="mx-auto mb-4 text-content-subtle" />
-      <p className="text-sm mb-1">No milestones yet</p>
+      <p className="text-sm mb-1">{t("turboui.projectPage.noMilestonesYet")}</p>
       {canEdit && (
         <div>
-          <p className="text-xs mb-4">Add milestones to track key deliverables and deadlines</p>
+          <p className="text-xs mb-4">{t("turboui.projectPage.addMilestonesToTrackKeyDeliverables")}</p>
           <GhostButton size="sm" onClick={() => setShowAddForm(true)}>
-            Add your first milestone
+            {t("turboui.projectPage.addYourFirstMilestone")}
           </GhostButton>
         </div>
       )}
@@ -331,7 +332,7 @@ function AddMilestoneForm({
         <input
           ref={nameInputRef}
           type="text"
-          placeholder="Milestone name"
+          placeholder={t("turboui.projectPage.milestoneName")}
           value={newMilestoneName}
           onChange={(e) => setNewMilestoneName(e.target.value)}
           className="w-full px-3 py-2 border border-stroke-base rounded-md focus:ring-2 focus:ring-accent-base focus:border-accent-base bg-surface-base"
@@ -342,19 +343,24 @@ function AddMilestoneForm({
         <DateField
           date={newMilestoneDueDate}
           onDateSelect={setNewMilestoneDueDate}
-          placeholder="Set target date"
+          placeholder={t("turboui.projectPage.setTargetDate")}
           testId="new-milestone-due-date"
           calendarOnly
         />
         <div className="flex items-center gap-4 justify-between">
-          <SwitchToggle testId="add-more-switch" value={addMore} setValue={setAddMore} label="Create more" />
+          <SwitchToggle
+            testId="add-more-switch"
+            value={addMore}
+            setValue={setAddMore}
+            label={t("turboui.projectPage.createMore")}
+          />
           <div className="flex-1"></div>
           <div className="flex gap-2">
             <SecondaryButton size="sm" onClick={() => setShowAddForm(false)}>
-              Cancel
+              {t("turboui.projectPage.cancel")}
             </SecondaryButton>
             <PrimaryButton size="sm" onClick={handleAddMilestone} disabled={!newMilestoneName.trim()}>
-              Add milestone
+              {t("turboui.projectPage.addMilestone")}
             </PrimaryButton>
           </div>
         </div>

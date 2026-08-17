@@ -4,6 +4,7 @@ import { IconAdjustmentsHorizontal, IconLayoutKanban, IconList } from "../../ico
 import classNames from "../../utils/classnames";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Types from "../types";
+import { t } from "../../i18n";
 
 interface Props {
   mode: Types.TaskDisplayMode;
@@ -16,12 +17,12 @@ export function TaskDisplayMenu({ mode, onChange }: Props) {
       customTrigger={
         <button
           className="inline-flex min-h-11 min-w-11 items-center justify-center gap-0 rounded-md px-2 py-1.5 text-sm font-medium text-content-dimmed transition hover:bg-surface-dimmed hover:text-content-base sm:min-h-0 sm:min-w-0 sm:gap-1"
-          aria-label="Display options"
+          aria-label={t("turboui.taskBoard.displayOptions")}
           data-test-id="display-menu-trigger"
           type="button"
         >
           <IconAdjustmentsHorizontal size={18} />
-          <span className="hidden sm:inline">Display</span>
+          <span className="hidden sm:inline">{t("turboui.taskBoard.display")}</span>
         </button>
       }
       size="tiny"
@@ -43,7 +44,7 @@ export function TaskDisplayMenu({ mode, onChange }: Props) {
               data-test-id="display-menu-option-list"
             >
               <IconList size={20} />
-              <span className="text-sm font-semibold">List</span>
+              <span className="text-sm font-semibold">{t("turboui.taskBoard.list")}</span>
             </button>
           </DropdownMenu.Item>
 
@@ -61,7 +62,7 @@ export function TaskDisplayMenu({ mode, onChange }: Props) {
               data-test-id="display-menu-option-board"
             >
               <IconLayoutKanban size={20} />
-              <span className="text-sm font-semibold">Board</span>
+              <span className="text-sm font-semibold">{t("turboui.taskBoard.board")}</span>
             </button>
           </DropdownMenu.Item>
         </div>

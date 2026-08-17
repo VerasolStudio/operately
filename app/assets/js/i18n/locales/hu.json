@@ -1,0 +1,79 @@
+{
+  "Objectives": "Célok",
+  "Tenets": "Alapelvek",
+  "Projects": "Projektek",
+  "KPIs": "Mérőszámok",
+  "Groups": "Csoportok",
+  "People": "Személyek",
+  "erorr": {
+    "error": "Hiba"
+  },
+  "loading": {
+    "loading": "Betöltés..."
+  },
+  "actions": {
+    "add_group": "Uj csoport",
+    "add_person": "Új személy",
+    "add_project": "Új projekt",
+    "add_kpi": "Új mérőszám",
+    "add_objective": "Új cél",
+    "add_tenet": "Új alapelv"
+  },
+  "forms": {
+    "save": "Mentés",
+    "cancel": "Mégse",
+    "group_add_title": "Új csoport",
+    "group_name_label": "Név",
+    "group_name_placeholder": "pl. Marketing",
+    "kpi_add_title": "Új mérőszám",
+    "kpi_name_label": "Név",
+    "kpi_name_placeholder": "pl. Bevételek",
+    "kpi_description_label": "Leírás",
+    "kpi_description_placeholder": "pl. Az összes bevételek eladásokból",
+    "kpi_unit_label": "Mértékegység",
+    "kpi_unit_percentage": "százalék",
+    "kpi_unit_currency": "pénznem",
+    "kpi_target_label": "Cél",
+    "kpi_target_placeholder": "pl. 1000000",
+    "kpi_target_direction_label": "Cél iránya",
+    "kpi_target_direction_above": "Nagyobb",
+    "kpi_target_direction_below": "Kisebb",
+    "kpi_warning_trigger_label": "Figyelmeztetési küszöb",
+    "kpi_warning_trigger_placeholder": "pl. 500000",
+    "kpi_danger_threshold_label": "Veszély küszöb",
+    "kpi_danger_threshold_placeholder": "pl. 100000",
+    "kpi_danger_direction_label": "Veszély iránya",
+    "kpi_warning_direction_label": "Figyelmeztetés iránya",
+    "objective_add_title": "Új cél",
+    "objective_name_label": "Név",
+    "objective_name_placeholder": "pl. Bevételek növelése",
+    "objective_description_label": "Leírás",
+    "objective_description_placeholder": "pl. Bevételek növelése 10%-kal",
+    "objective_owner_label": "Felelős",
+    "objective_owner_search_placeholder": "Keresés személyek között...",
+    "objective_timeframe_label": "Időkeret",
+    "objective_timeframe_current_quarter": "Jelenlegi negyedév",
+    "project_add_title": "Új projekt",
+    "project_name_label": "Név",
+    "project_name_placeholder": "pl. Új weboldal",
+    "project_description_label": "Leírás",
+    "project_description_placeholder": "pl. Új weboldal készítése a cégnek",
+    "tenet_add_title": "Új alapelv",
+    "tenet_name_label": "Név",
+    "tenet_name_placeholder": "pl. A használó az első",
+    "tenet_description_label": "Leírás",
+    "tenet_description_placeholder": "pl. Mindig a használó érdekében cselekszünk",
+    "add_group_members_title": "Csoport tagjainak hozzáadása",
+    "add_group_members_search_placeholder": "Keresés személyek között...",
+    "add_group_members_button": "Csoport tagjainak hozzáadása"
+  },
+  "keyResults": {
+    "status": "Státusz",
+    "completion": "Teljesítés",
+    "lastUpdated": "Utolsó frissítés",
+    "keyResult": "Kulcs eredmény",
+    "statuses": {
+      "pending": "Indítás"
+    }
+  }
+}

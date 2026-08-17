@@ -3,6 +3,7 @@ import { match } from "ts-pattern";
 import type { AccessLevels } from "../ApiTypes";
 import { Tooltip } from "../Tooltip";
 import { IconLockFilled, IconWorld } from "../icons";
+import { t } from "../i18n";
 
 const DEFAULT_SIZE = 24;
 
@@ -43,7 +44,7 @@ function title(props: PrivacyIndicator.Props) {
 
   return match(props.privacyLevel)
     .with("public", () => "Anyone on the internet")
-    .with("confidential", () => `Only ${props.spaceName} members`)
+    .with("confidential", () => t("turboui.privacyIndicator.onlyMembers", { v1: props.spaceName }))
     .with("secret", () => `Invite-Only`)
     .exhaustive();
 }
@@ -51,13 +52,15 @@ function title(props: PrivacyIndicator.Props) {
 function description(props: PrivacyIndicator.Props) {
   if (props.privacyLevel === "internal") return null;
 
-  const t = props.resourceType;
-  const s = props.spaceName;
+  const resourceType = props.resourceType;
+  const spaceName = props.spaceName;
 
   return match(props.privacyLevel)
-    .with("public", () => `This ${t} is visible to anyone on the internet who has the link.`)
-    .with("confidential", () => `This ${t} is visible only to members of the ${s} space.`)
-    .with("secret", () => `Only people explicitly invited to this ${t} can view it.`)
+    .with("public", () => t("turboui.privacyIndicator.thisIsVisibleToAnyoneOn", { v1: resourceType }))
+    .with("confidential", () =>
+      t("turboui.privacyIndicator.thisIsVisibleOnlyToMembers", { v1: resourceType, v2: spaceName }),
+    )
+    .with("secret", () => t("turboui.privacyIndicator.onlyPeopleExplicitlyInvitedToThis", { v1: resourceType }))
     .exhaustive();
 }
 

@@ -10,6 +10,7 @@ import { SubscribersSelector } from "../Subscriptions";
 import { isValidURL } from "../utils/url";
 
 import type { LinkNewPage as LinkNewPageNS } from "./types";
+import { t } from "../i18n";
 
 export function LinkNewPage(props: LinkNewPageNS.Props) {
   const navigate = useNavigate();
@@ -46,16 +47,26 @@ export function LinkNewPage(props: LinkNewPageNS.Props) {
 
             <div>
               <Forms.FieldGroup>
-                <Forms.TextInput label="Link Title" placeholder="Type the title of this link" field="title" required />
-                <Forms.TextInput label="URL" placeholder="eg. https://www.example.com/file/8430762" field="link" required />
+                <Forms.TextInput
+                  label={t("turboui.linkNewPage.linkTitle")}
+                  placeholder={t("turboui.linkNewPage.typeTheTitleOfThisLink")}
+                  field="title"
+                  required
+                />
+                <Forms.TextInput
+                  label="URL"
+                  placeholder="eg. https://www.example.com/file/8430762"
+                  field="link"
+                  required
+                />
 
                 <SelectTypeField />
 
                 <Forms.RichTextArea
-                  label="Description (optional)"
+                  label={t("turboui.linkNewPage.descriptionOptional")}
                   field="description"
                   richTextHandlers={props.richTextHandlers}
-                  placeholder="Add any notes here..."
+                  placeholder={t("turboui.linkNewPage.addAnyNotesHere")}
                 />
               </Forms.FieldGroup>
 
@@ -79,7 +90,7 @@ function SelectTypeField() {
 
   return (
     <Forms.RadioButtons
-      label="What kind of document is this?"
+      label={t("turboui.linkNewPage.whatKindOfDocumentIsThis")}
       field="type"
       options={GOOGLE_OPTIONS}
       containerClass="flex items-center flex-wrap gap-8"
@@ -88,8 +99,8 @@ function SelectTypeField() {
 }
 
 const GOOGLE_OPTIONS = [
-  { label: "Doc", value: "google_doc" },
-  { label: "Sheet", value: "google_sheet" },
-  { label: "Slide", value: "google_slides" },
-  { label: "Other", value: "google" },
+  { label: t("turboui.linkNewPage.doc"), value: "google_doc" },
+  { label: t("turboui.linkNewPage.sheet"), value: "google_sheet" },
+  { label: t("turboui.linkNewPage.slide"), value: "google_slides" },
+  { label: t("turboui.linkNewPage.other"), value: "google" },
 ];

@@ -9,6 +9,7 @@ import { PageTitle } from "./PageTitle";
 import { LoaderResult, useGotoProjectContributors } from "./loader";
 import { joinStr } from "@/utils/strings";
 import { compareIds } from "@/routes/paths";
+import { t } from "@/i18n";
 
 export function ChangeChampion() {
   const { contributor } = Pages.useLoadedData() as LoaderResult;
@@ -20,8 +21,8 @@ export function ChangeChampion() {
   const title = `Edit project champion`;
 
   const subtitle = joinStr(
-    `${name} is currently the ${contributor.role} on this project. `,
-    `If you select a new champion, ${name} will be reassigned as a contributor.`,
+    t("pages.projectContributorsEditPage.isCurrentlyTheOnThisProject", { v1: name, v2: contributor.role }),
+    t("pages.projectContributorsEditPage.ifYouSelectANewChampion", { v1: name }),
   );
 
   return (
@@ -32,13 +33,13 @@ export function ChangeChampion() {
         <Forms.FieldGroup>
           <Forms.SelectPerson
             field={"person"}
-            label="Project Champion"
+            label={t("pages.projectContributorsEditPage.projectChampion")}
             searchFn={search}
             default={contributor.person}
           />
         </Forms.FieldGroup>
 
-        <Forms.Submit saveText="Save" />
+        <Forms.Submit saveText={t("pages.projectContributorsEditPage.save")} />
       </Forms.Form>
     </Paper.Body>
   );

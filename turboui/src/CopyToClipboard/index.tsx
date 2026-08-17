@@ -3,6 +3,7 @@ import React from "react";
 import { IconCheck, IconCopy, TablerIconProps } from "../icons";
 import { showErrorToast } from "../Toasts";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 interface CopyToClipboardProps {
   text: string;
@@ -22,7 +23,7 @@ export function CopyToClipboard({ text, size, padding = 1, className, iconProps,
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
-      showErrorToast("Copy failed", "Unable to copy to clipboard");
+      showErrorToast(t("turboui.copyToClipboard.copyFailed"), t("turboui.copyToClipboard.unableToCopyToClipboard"));
     }
   };
 
@@ -58,7 +59,7 @@ export function CopyToClipboard({ text, size, padding = 1, className, iconProps,
           transform: "translateY(-50%)",
         }}
       >
-        Copied
+        {t("turboui.copyToClipboard.copied")}
       </span>
     </button>
   );

@@ -4,6 +4,7 @@ import { DangerButton, SecondaryButton } from "../Button";
 import { WarningCallout } from "../Callouts";
 import { MiniWorkMap } from "../MiniWorkMap";
 import Modal from "../Modal";
+import { t } from "../i18n";
 
 export function DeleteModal(props: GoalPage.State) {
   const title = props.relatedWorkItems.length > 0 ? "Cannot delete goal" : "Delete " + props.goalName;
@@ -18,19 +19,16 @@ export function DeleteModal(props: GoalPage.State) {
 function CantDeleteHasSubitems(props: GoalPage.State) {
   return (
     <div>
-      <p className="mb-6">
-        You need to delete all subgoals and projects before you can delete this goal. The following items are connected
-        to this goal and must be deleted first:
-      </p>
+      <p className="mb-6">{t("turboui.goalPage.youNeedToDeleteAllSubgoals")}</p>
 
       <MiniWorkMap items={props.relatedWorkItems} />
 
       <div className="flex items-center gap-2 mt-8">
         <DangerButton size="sm" disabled testId="delete">
-          Delete Forever
+          {t("turboui.goalPage.deleteForever")}
         </DangerButton>
         <SecondaryButton size="sm" onClick={props.closeDeleteModal} testId="cancel">
-          Cancel
+          {t("turboui.goalPage.cancel")}
         </SecondaryButton>
       </div>
     </div>
@@ -55,16 +53,16 @@ function DeleteForm(props: GoalPage.State) {
     <div>
       <form className="space-y-6" onSubmit={handleSubmit}>
         <WarningCallout
-          message="This action cannot be undone"
-          description={`Deleting a goal is permanent and cannot be undone. Please confirm that you want to delete the ${props.goalName} goal.`}
+          message={t("turboui.goalPage.thisActionCannotBeUndone")}
+          description={t("turboui.goalPage.deletingAGoalIsPermanentAnd", { v1: props.goalName })}
         />
 
         <div className="flex items-center gap-2">
           <DangerButton size="sm" type="submit" loading={isDeleting} disabled={isDeleting} testId="delete">
-            Delete Forever
+            {t("turboui.goalPage.deleteForever")}
           </DangerButton>
           <SecondaryButton size="sm" onClick={props.closeDeleteModal} testId="cancel">
-            Cancel
+            {t("turboui.goalPage.cancel")}
           </SecondaryButton>
         </div>
       </form>

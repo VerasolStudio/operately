@@ -1,4 +1,5 @@
 import { match } from "ts-pattern";
+import { t } from "@/i18n";
 
 export { PermissionLevels } from "./PermissionLevels";
 
@@ -7,33 +8,33 @@ import { PermissionLevels } from "./PermissionLevels";
 
 export const VIEW_ACCESS = {
   value: PermissionLevels.VIEW_ACCESS,
-  label: "View Access",
+  label: t("features.permissions.viewAccess"),
 };
 
 export const NO_ACCESS = {
   value: PermissionLevels.NO_ACCESS,
-  label: "No Access",
+  label: t("features.permissions.noAccess"),
 };
 
 export const COMMENT_ACCESS = {
   value: PermissionLevels.COMMENT_ACCESS,
-  label: "Comment Access",
+  label: t("features.permissions.commentAccess"),
 };
 
 export const EDIT_ACCESS = {
   value: PermissionLevels.EDIT_ACCESS,
-  label: "Edit Access",
+  label: t("features.permissions.editAccess"),
 };
 
 export const FULL_ACCESS = {
   value: PermissionLevels.FULL_ACCESS,
-  label: "Full Access",
+  label: t("features.permissions.fullAccess"),
 };
 
 export const PERMISSIONS_LIST = [
-  { value: PermissionLevels.FULL_ACCESS, label: "Full Access" },
-  { value: PermissionLevels.EDIT_ACCESS, label: "Edit Access" },
-  { value: PermissionLevels.COMMENT_ACCESS, label: "Comment Access" },
+  { value: PermissionLevels.FULL_ACCESS, label: t("features.permissions.fullAccess") },
+  { value: PermissionLevels.EDIT_ACCESS, label: t("features.permissions.editAccess") },
+  { value: PermissionLevels.COMMENT_ACCESS, label: t("features.permissions.commentAccess") },
   VIEW_ACCESS,
 ];
 

@@ -5,6 +5,7 @@ import type { ActivityHandler } from "../interfaces";
 
 import { assertPresent } from "@/utils/assertions";
 import { feedTitle, spaceLink } from "../feedItemLinks";
+import { t } from "@/i18n";
 
 const GroupEdited: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -63,12 +64,12 @@ const GroupEdited: ActivityHandler = {
       <div className="flex flex-col gap-1 text-sm">
         {nameChanged && (
           <div>
-            <span className="font-semibold">Name:</span> {oldName} → {newName}
+            <span className="font-semibold">{t("features.activities.name")}</span> {oldName} → {newName}
           </div>
         )}
         {missionChanged && (
           <div>
-            <span className="font-semibold">Purpose:</span> {oldMission} → {newMission}
+            <span className="font-semibold">{t("features.activities.purpose")}</span> {oldMission} → {newMission}
           </div>
         )}
       </div>
@@ -93,7 +94,7 @@ const GroupEdited: ActivityHandler = {
     const spaceName = data.newName || data.space?.name;
 
     if (spaceName) {
-      return `Updated the ${spaceName} space`;
+      return t("features.activities.updatedTheSpace", { v1: spaceName });
     }
 
     return "Updated the space";

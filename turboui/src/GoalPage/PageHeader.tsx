@@ -6,15 +6,16 @@ import { BlackLink } from "../Link";
 import { PrivacyIndicator } from "../PrivacyIndicator";
 import { StatusBadge } from "../StatusBadge";
 import { TextField } from "../TextField";
+import { t } from "../i18n";
 
 export function PageHeader(props: GoalPage.State) {
   const navigation =
     "space" in props
       ? [
           { to: props.space.link, label: props.space.name },
-          { to: props.workmapLink, label: "Goals" },
+          { to: props.workmapLink, label: t("turboui.goalPage.goals") },
         ]
-      : [{ to: props.companyWorkMapLink, label: "Work Map" }];
+      : [{ to: props.companyWorkMapLink, label: t("turboui.goalPage.workMap") }];
 
   const isInviteOnly = props.accessLevels.company === "no_access" && props.accessLevels.space === "no_access";
 

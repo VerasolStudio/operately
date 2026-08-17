@@ -3,6 +3,7 @@ import { IconChevronLeft, IconChevronRight } from "../../icons";
 import classNames from "../../utils/classnames";
 import * as time from "../../utils/time";
 import { DateField } from "../index";
+import { uiLocale } from "../../utils/formatting";
 
 interface Props {
   selectedDate: DateField.ContextualDate | null;
@@ -64,7 +65,9 @@ export function InlineCalendar({
 
     const handleDayClick = (day: Date) => {
       if (isDisabled) return; // Prevent selection if disabled
-      const value = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric" }).format(day);
+      const value = new Intl.DateTimeFormat(uiLocale(), { year: "numeric", month: "short", day: "numeric" }).format(
+        day,
+      );
       setSelectedDate({ date: day, dateType: "day", value });
     };
 
@@ -142,10 +145,10 @@ function isSelectedDay(
 ): boolean {
   return Boolean(
     selectedDate &&
-      selectedDate.dateType === "day" &&
-      selectedDate.date.getDate() === day &&
-      selectedDate.date.getMonth() === month &&
-      selectedDate.date.getFullYear() === year,
+    selectedDate.dateType === "day" &&
+    selectedDate.date.getDate() === day &&
+    selectedDate.date.getMonth() === month &&
+    selectedDate.date.getFullYear() === year,
   );
 }
 

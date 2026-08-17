@@ -6,6 +6,7 @@ import { FormattedTime } from "turboui";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 import { feedTitle, projectLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
 
 const ProjectStartDateUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -55,9 +56,9 @@ const ProjectStartDateUpdating: ActivityHandler = {
     if (oldStartDate) {
       const time = <FormattedTime {...formattedTimePreferences} time={oldStartDate} format="short-date" />;
 
-      return <>Previously the start date was {time}</>;
+      return <>{t("features.activities.previouslyTheStartDateWas", { v1: time })}</>;
     } else {
-      return <>Previously had no start date</>;
+      return <>{t("features.activities.previouslyHadNoStartDate")}</>;
     }
   },
 

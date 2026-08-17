@@ -14,6 +14,7 @@ import classNames from "classnames";
 import { Avatar } from "turboui";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 type Page = "company" | "project" | "goal" | "space" | "profile";
 type ScopeType = "company" | "project" | "goal" | "space" | "person";
 
@@ -63,7 +64,7 @@ export function Feed(props: FeedProps) {
   };
 
   return (
-    <ErrorBoundary fallback={<div>Ooops, something went wrong while loading the feed</div>}>
+    <ErrorBoundary fallback={<div>{t("features.feed.ooopsSomethingWentWrongWhileLoading")}</div>}>
       <div className="w-full" data-test-id={props.testId}>
         {groupedActivities.length === 0 ? (
           <FeedZeroState page={props.page} />
@@ -86,9 +87,9 @@ export function Feed(props: FeedProps) {
         isOpen={!!activityToDelete}
         onConfirm={handleConfirmDelete}
         onCancel={() => setActivityToDelete(null)}
-        title="Delete feed item"
-        message="This removes the item from the company feed. The underlying project, goal, task, or document will not be deleted."
-        confirmText="Delete"
+        title={t("features.feed.deleteFeedItem")}
+        message={t("features.feed.thisRemovesTheItemFromThe")}
+        confirmText={t("features.feed.delete")}
         variant="danger"
         testId="delete-feed-activity-dialog"
       />
@@ -233,8 +234,8 @@ function ActivityItemOptions({
         customTrigger={
           <button
             type="button"
-            title="Feed item actions"
-            aria-label="Feed item actions"
+            title={t("features.feed.feedItemActions")}
+            aria-label={t("features.feed.feedItemActions")}
             className="w-6 h-6 flex items-center justify-center rounded-full text-content-dimmed hover:text-content-base hover:bg-surface-dimmed focus:text-content-base focus:bg-surface-dimmed focus:outline-none"
           >
             <IconDots size={16} />
@@ -242,7 +243,7 @@ function ActivityItemOptions({
         }
       >
         <MenuActionItem onClick={() => onDeleteItem(activity)} testId="delete-feed-activity" icon={IconTrash} danger>
-          Delete feed item
+          {t("features.feed.deleteFeedItem")}
         </MenuActionItem>
       </Menu>
     </div>

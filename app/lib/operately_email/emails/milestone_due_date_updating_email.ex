@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.MilestoneDueDateUpdatingEmail do
   alias Operately.Repo
   alias OperatelyWeb.Paths
   alias Operately.Projects.Milestone
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     %{author: author = %{company: company}} = Repo.preload(activity, author: :company)
@@ -18,7 +19,7 @@ defmodule OperatelyEmail.Emails.MilestoneDueDateUpdatingEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: milestone.project.name, who: author, action: "changed the due date for \"#{milestone.title}\"")
+    |> subject(where: milestone.project.name, who: author, action: t("milestoneDueDateUpdating.action", %{v1: milestone.title}))
     |> assign(:author, author)
     |> assign(:name, milestone.title)
     |> assign(:previous_date, previous_date)
@@ -52,7 +53,7 @@ defmodule OperatelyEmail.Emails.MilestoneDueDateUpdatingEmail do
     }
   end
 
-  defp buffered_headline(milestone_title, _old_date, nil), do: "removed the due date from the milestone \"#{milestone_title}\""
-  defp buffered_headline(milestone_title, nil, new_date), do: "set the due date of the milestone \"#{milestone_title}\" to #{new_date}"
-  defp buffered_headline(milestone_title, _old_date, new_date), do: "changed the due date of the milestone \"#{milestone_title}\" to #{new_date}"
+  defp buffered_headline(milestone_title, _old_date, nil), do: t("milestoneDueDateUpdating.removedTheDueDateFromThe", %{v1: milestone_title})
+  defp buffered_headline(milestone_title, nil, new_date), do: t("milestoneDueDateUpdating.setTheDueDateOfThe", %{v1: milestone_title, v2: new_date})
+  defp buffered_headline(milestone_title, _old_date, new_date), do: t("milestoneDueDateUpdating.changedTheDueDateOfThe", %{v1: milestone_title, v2: new_date})
 end

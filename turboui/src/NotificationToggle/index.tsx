@@ -1,6 +1,7 @@
 import React from "react";
 import { IconBell, IconBellOff } from "../icons";
 import { SecondaryButton } from "../Button";
+import { t } from "../i18n";
 
 const ENTITY_LABEL_BY_TYPE: Record<NotificationToggle.Props["entityType"], string> = {
   project_task: "task",
@@ -17,19 +18,15 @@ export namespace NotificationToggle {
   }
 }
 
-export function NotificationToggle({
-  isSubscribed,
-  onToggle,
-  entityType,
-}: NotificationToggle.Props) {
+export function NotificationToggle({ isSubscribed, onToggle, entityType }: NotificationToggle.Props) {
   const handleToggle = () => {
     onToggle(!isSubscribed);
   };
 
   const entityLabel = ENTITY_LABEL_BY_TYPE[entityType] ?? entityType.replace(/_/g, " ");
 
-  const subscribedMessage = `You're receiving notifications because you're subscribed to this ${entityLabel}.`;
-  const unsubscribedMessage = `You're not receiving notifications from this ${entityLabel}.`;
+  const subscribedMessage = t("turboui.notificationToggle.youReReceivingNotificationsBecauseYou", { v1: entityLabel });
+  const unsubscribedMessage = t("turboui.notificationToggle.youReNotReceivingNotificationsFrom", { v1: entityLabel });
 
   const testId = isSubscribed ? "project-unsubscribe-button" : "project-subscribe-button";
 
@@ -39,9 +36,7 @@ export function NotificationToggle({
         {isSubscribed ? "Unsubscribe" : "Subscribe"}
       </SecondaryButton>
 
-      <div className="text-xs text-content-dimmed">
-        {isSubscribed ? subscribedMessage : unsubscribedMessage}
-      </div>
+      <div className="text-xs text-content-dimmed">{isSubscribed ? subscribedMessage : unsubscribedMessage}</div>
     </div>
   );
 }

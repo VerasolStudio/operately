@@ -1,7 +1,7 @@
-<%= title("You have been promoted to company owner by #{short_name(@author)}") %>
+<%= title(t("companyOwnersAdding.youHaveBeenPromotedToCompany", %{v1: short_name(@author)})) %>
 
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@link, "View Company") %>
+  <%= cta_button(@link, t("companyOwnersAdding.viewCompany")) %>
 <% end %>

@@ -26,6 +26,8 @@ import {
 
 import { PlanDefinitionModal } from "./PlanDefinitionModal";
 import { ProductModal } from "./ProductModal";
+import { t } from "@/i18n";
+import { uiLocale } from "@/utils/formatting";
 
 export async function syncBillingCatalogProducts(sync: (input: {}) => Promise<unknown>, refresh: () => void) {
   await sync({});
@@ -94,8 +96,8 @@ export function Page() {
     planDefinitions: AdminApi.BillingPlanDefinition[];
   };
   const tabs = useTabs("products", [
-    { id: "products", label: "Products", icon: <IconBuilding size={16} /> },
-    { id: "plans", label: "Plans", icon: <IconSettings size={16} /> },
+    { id: "products", label: t("pages.saasAdminBillingCatalogPage.products"), icon: <IconBuilding size={16} /> },
+    { id: "plans", label: t("pages.saasAdminBillingCatalogPage.plans"), icon: <IconSettings size={16} /> },
   ]);
   const refresh = Pages.useRefresh();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -136,7 +138,7 @@ export function Page() {
   };
 
   return (
-    <Pages.Page title="Billing Catalog" testId="saas-admin-billing-catalog-page">
+    <Pages.Page title={t("pages.saasAdminBillingCatalogPage.billingCatalog")} testId="saas-admin-billing-catalog-page">
       <Paper.Root size="xlarge">
         <Paper.Body>
           <PageHeader activeTab={tabs.active} onCreate={openCreate} onRefresh={refresh} />
@@ -181,7 +183,7 @@ function PageHeader({
 }) {
   return (
     <div className="flex items-center justify-between">
-      <Paper.Header title="Billing Catalog" />
+      <Paper.Header title={t("pages.saasAdminBillingCatalogPage.billingCatalog")} />
       {activeTab === "products" && (
         <div className="flex items-center gap-3">
           <button
@@ -189,7 +191,7 @@ function PageHeader({
             className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium bg-surface-dimmed hover:bg-surface-highlight rounded border border-stroke-base transition-colors"
           >
             <IconPlus size={16} />
-            Create product
+            {t("pages.saasAdminBillingCatalogPage.createProduct")}
           </button>
           <SyncButton onRefresh={onRefresh} />
         </div>
@@ -206,7 +208,7 @@ function PlanHeaderActions({ onCreate }: { onCreate: () => void }) {
         className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium bg-surface-dimmed hover:bg-surface-highlight rounded border border-stroke-base transition-colors"
       >
         <IconPlus size={16} />
-        Create plan
+        {t("pages.saasAdminBillingCatalogPage.createPlan")}
       </button>
     </div>
   );
@@ -230,7 +232,7 @@ function SyncButton({ onRefresh }: { onRefresh: () => void }) {
         className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium bg-surface-dimmed hover:bg-surface-highlight rounded border border-stroke-base transition-colors"
       >
         <IconRefresh size={16} className={classNames({ "animate-spin": loading })} />
-        Sync from Polar
+        {t("pages.saasAdminBillingCatalogPage.syncFromPolar")}
       </button>
     </Tooltip>
   );
@@ -248,14 +250,14 @@ function ProductTable({
   return (
     <div className="mt-6">
       <TableRow header gridTemplateColumns="2fr 1fr 1fr 1fr 1fr 1fr 1fr 0.5fr">
-        <div>Product</div>
-        <div>Provider</div>
-        <div>Plan Family</div>
-        <div>Interval</div>
-        <div className="text-right">Price</div>
-        <div className="text-center">Status</div>
-        <div className="text-center">Created</div>
-        <div className="text-right">Actions</div>
+        <div>{t("pages.saasAdminBillingCatalogPage.product")}</div>
+        <div>{t("pages.saasAdminBillingCatalogPage.provider")}</div>
+        <div>{t("pages.saasAdminBillingCatalogPage.planFamily")}</div>
+        <div>{t("pages.saasAdminBillingCatalogPage.interval")}</div>
+        <div className="text-right">{t("pages.saasAdminBillingCatalogPage.price")}</div>
+        <div className="text-center">{t("pages.saasAdminBillingCatalogPage.status")}</div>
+        <div className="text-center">{t("pages.saasAdminBillingCatalogPage.created")}</div>
+        <div className="text-right">{t("pages.saasAdminBillingCatalogPage.actions")}</div>
       </TableRow>
 
       {products.map((product) => (
@@ -277,15 +279,15 @@ function PlanDefinitionTable({
   return (
     <div className="mt-6">
       <TableRow header gridTemplateColumns="1.5fr 1fr 1fr 1.25fr 1fr 1fr 1.25fr 1.5fr 0.75fr">
-        <div>Plan</div>
-        <div>Key</div>
-        <div>Status</div>
-        <div>Behavior</div>
-        <div className="text-center">Selectable</div>
-        <div className="text-right">Tier rank</div>
-        <div className="text-right">Member limit</div>
-        <div className="text-right">Storage limit</div>
-        <div className="text-right">Actions</div>
+        <div>{t("pages.saasAdminBillingCatalogPage.plan")}</div>
+        <div>{t("pages.saasAdminBillingCatalogPage.key")}</div>
+        <div>{t("pages.saasAdminBillingCatalogPage.status")}</div>
+        <div>{t("pages.saasAdminBillingCatalogPage.behavior")}</div>
+        <div className="text-center">{t("pages.saasAdminBillingCatalogPage.selectable")}</div>
+        <div className="text-right">{t("pages.saasAdminBillingCatalogPage.tierRank")}</div>
+        <div className="text-right">{t("pages.saasAdminBillingCatalogPage.memberLimit")}</div>
+        <div className="text-right">{t("pages.saasAdminBillingCatalogPage.storageLimit")}</div>
+        <div className="text-right">{t("pages.saasAdminBillingCatalogPage.actions")}</div>
       </TableRow>
 
       {planDefinitions.map((planDefinition) => (
@@ -346,9 +348,9 @@ function PlanDefinitionRow({
 
       <ConfirmDialog
         isOpen={confirmArchive}
-        title="Archive Plan"
+        title={t("pages.saasAdminBillingCatalogPage.archivePlan")}
         message={`Are you sure you want to archive "${planDefinition.displayName}"?`}
-        confirmText="Archive"
+        confirmText={t("pages.saasAdminBillingCatalogPage.archive")}
         variant="danger"
         onConfirm={handleArchive}
         onCancel={() => setConfirmArchive(false)}
@@ -373,16 +375,16 @@ function PlanDefinitionActionsMenu({
   return (
     <Menu align="end" testId={`plan-definition-actions-${planDefinition.id}`}>
       <MenuActionItem icon={IconEdit} onClick={() => onEdit(planDefinition)}>
-        Edit plan
+        {t("pages.saasAdminBillingCatalogPage.editPlan")}
       </MenuActionItem>
       {isArchived ? (
         <MenuActionItem icon={IconRefresh} onClick={onUnarchive}>
-          Unarchive
+          {t("pages.saasAdminBillingCatalogPage.unarchive")}
         </MenuActionItem>
       ) : (
         planDefinition.key !== "free" && (
           <MenuActionItem icon={IconTrash} danger onClick={onArchive}>
-            Archive
+            {t("pages.saasAdminBillingCatalogPage.archive")}
           </MenuActionItem>
         )
       )}
@@ -445,9 +447,9 @@ function ProductRow({
 
       <ConfirmDialog
         isOpen={confirmArchive}
-        title="Archive Product"
+        title={t("pages.saasAdminBillingCatalogPage.archiveProduct")}
         message={`Are you sure you want to archive "${product.polarProductName}"?`}
-        confirmText="Archive"
+        confirmText={t("pages.saasAdminBillingCatalogPage.archive")}
         variant="danger"
         onConfirm={handleArchive}
         onCancel={() => setConfirmArchive(false)}
@@ -472,16 +474,16 @@ function ProductActionsMenu({
   return (
     <Menu align="end" testId={`product-actions-${product.id}`}>
       <MenuActionItem icon={IconEdit} onClick={() => onEdit(product)}>
-        Edit product
+        {t("pages.saasAdminBillingCatalogPage.editProduct")}
       </MenuActionItem>
       {!isActive && !product.archivedAt && (
         <MenuActionItem icon={IconCheck} onClick={onSetActive}>
-          Set active
+          {t("pages.saasAdminBillingCatalogPage.setActive")}
         </MenuActionItem>
       )}
       {!product.archivedAt && (
         <MenuActionItem icon={IconTrash} danger onClick={onArchive}>
-          Archive
+          {t("pages.saasAdminBillingCatalogPage.archive")}
         </MenuActionItem>
       )}
     </Menu>
@@ -537,5 +539,5 @@ function formatInteger(value: number) {
 
 function formatDate(isoString: string): string {
   const date = new Date(isoString);
-  return date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+  return date.toLocaleDateString(uiLocale(), { year: "numeric", month: "short", day: "numeric" });
 }

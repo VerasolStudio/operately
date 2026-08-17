@@ -1,5 +1,5 @@
-<%= short_name(@author) %> moved <%= @task_name %>.
+<%= t("taskMoving.moved", %{v1: short_name(@author), v2: @task_name}) %>
 
-The task is now in <%= @destination_name %>.
+<%= t("taskMoving.theTaskIsNowIn", %{v1: @destination_name}) %>
 
-Link: <%= @cta_url %>
+<%= t("taskMoving.link", %{v1: @cta_url}) %>

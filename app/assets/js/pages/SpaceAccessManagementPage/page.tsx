@@ -25,6 +25,7 @@ import { useEditSpaceMembersPermissions, useRemoveGroupMember } from "@/models/s
 import { assertPresent } from "@/utils/assertions";
 import { createTestId } from "@/utils/testid";
 import { useLoadedData } from "./loader";
+import { t } from "@/i18n";
 
 export function Page() {
   const { space } = useLoadedData();
@@ -57,13 +58,13 @@ function Title() {
     <div className="rounded-t-[20px]">
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-2xl font-extrabold ">Team &amp; Access</div>
-          <div className="text-medium">Manage the team and access to this space</div>
+          <div className="text-2xl font-extrabold ">{t("pages.spaceAccessManagementPage.teamAmpAccess")}</div>
+          <div className="text-medium">{t("pages.spaceAccessManagementPage.manageTheTeamAndAccessTo")}</div>
         </div>
 
         {space.permissions.hasFullAccess && (
           <PrimaryButton size="sm" linkTo={addMembersPath} testId="add-members">
-            Add Members
+            {t("pages.spaceAccessManagementPage.addMembers")}
           </PrimaryButton>
         )}
       </div>
@@ -85,7 +86,7 @@ function GeneralAccess() {
   assertPresent(space.permissions, "Space permissions must be present");
 
   return (
-    <Paper.Section title="General Access">
+    <Paper.Section title={t("pages.spaceAccessManagementPage.generalAccess")}>
       <BorderedRow>
         <AccessLevelSummary
           resourceType="space"
@@ -96,7 +97,7 @@ function GeneralAccess() {
 
         {space.permissions.hasFullAccess && (
           <SecondaryButton linkTo={editPath} size="xs">
-            Edit
+            {t("pages.spaceAccessManagementPage.edit")}
           </SecondaryButton>
         )}
       </BorderedRow>
@@ -115,7 +116,7 @@ function SpaceManagers() {
   if (managers.length === 0) return null;
 
   return (
-    <Paper.Section title="Space Managers" subtitle={subtitle}>
+    <Paper.Section title={t("pages.spaceAccessManagementPage.spaceManagers")} subtitle={subtitle}>
       {managers.map((contrib) => (
         <Member member={contrib} key={contrib.id} />
       ))}
@@ -133,7 +134,7 @@ function SpaceMembers() {
   if (members.length === 0) return null;
 
   return (
-    <Paper.Section title="Members">
+    <Paper.Section title={t("pages.spaceAccessManagementPage.members")}>
       {members.map((contrib) => (
         <Member member={contrib} key={contrib.id} />
       ))}
@@ -197,7 +198,7 @@ function PromoteToManagerMenuItem({ member, hidden }: { member: People.Person; h
 
   return (
     <MenuActionItem onClick={handleClick} testId="promote-to-manager" hidden={hidden}>
-      Promote to manager
+      {t("pages.spaceAccessManagementPage.promoteToManager")}
     </MenuActionItem>
   );
 }
@@ -216,7 +217,7 @@ function DemoteToMemberMenuItem({ member, hidden }: { member: People.Person; hid
 
   return (
     <MenuActionItem onClick={handleClick} testId="demote-to-member" hidden={hidden}>
-      Reassign to member
+      {t("pages.spaceAccessManagementPage.reassignToMember")}
     </MenuActionItem>
   );
 }
@@ -233,7 +234,7 @@ function RemoveMemberMenuItem({ member, hidden }: { member: People.Person; hidde
 
   return (
     <MenuActionItem danger={true} onClick={handleClick} testId="remove-member" hidden={hidden}>
-      Remove from space
+      {t("pages.spaceAccessManagementPage.removeFromSpace")}
     </MenuActionItem>
   );
 }
@@ -249,15 +250,15 @@ function ChangeAccessLevelMenuItem({ member, hidden }: { member: People.Person; 
   };
 
   return (
-    <SubMenu label="Change access level" hidden={hidden}>
+    <SubMenu label={t("pages.spaceAccessManagementPage.changeAccessLevel")} hidden={hidden}>
       <MenuActionItem testId="edit-access" onClick={() => handleClick(PermissionLevels.EDIT_ACCESS)}>
-        Edit access
+        {t("pages.spaceAccessManagementPage.editAccess")}
       </MenuActionItem>
       <MenuActionItem testId="comment-access" onClick={() => handleClick(PermissionLevels.COMMENT_ACCESS)}>
-        Comment access
+        {t("pages.spaceAccessManagementPage.commentAccess")}
       </MenuActionItem>
       <MenuActionItem testId="view-access" onClick={() => handleClick(PermissionLevels.VIEW_ACCESS)}>
-        View access
+        {t("pages.spaceAccessManagementPage.viewAccess")}
       </MenuActionItem>
     </SubMenu>
   );

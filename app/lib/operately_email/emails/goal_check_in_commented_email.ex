@@ -3,6 +3,7 @@ defmodule OperatelyEmail.Emails.GoalCheckInCommentedEmail do
   alias Operately.{Repo, Goals, Updates}
   alias Operately.Goals.Update
   alias OperatelyWeb.Paths
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -10,7 +11,7 @@ defmodule OperatelyEmail.Emails.GoalCheckInCommentedEmail do
     goal = Goals.get_goal!(activity.content["goal_id"])
     {:ok, update} = Update.get(:system, id: activity.content["goal_check_in_id"])
     comment = Updates.get_comment!(activity.content["comment_id"])
-    action = "commented on the check-in"
+    action = t("goalCheckInCommented.commentedOnTheCheckIn")
 
     company
     |> new()
@@ -38,7 +39,7 @@ defmodule OperatelyEmail.Emails.GoalCheckInCommentedEmail do
       parent_id: goal.id,
       parent_type: :goal,
       parent_name: goal.name,
-      headline: "commented on a goal check-in",
+      headline: t("goalCheckInCommented.headline"),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: OperatelyWeb.Paths.goal_path(company, goal) |> OperatelyWeb.Paths.to_url(),

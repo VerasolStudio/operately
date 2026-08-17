@@ -4,6 +4,8 @@ import { Form, NumberInput, Submit, useForm } from "../Forms";
 import { Modal } from "../Modal";
 import type { SpaceKpisPage } from "./types";
 import { formatShortDate, formatValue, latestEntry } from "./utils";
+import { t } from "../i18n";
+import { Trans } from "react-i18next";
 
 interface LogUpdateFormProps {
   kpi: SpaceKpisPage.Kpi | null;
@@ -83,7 +85,7 @@ export function LogUpdateForm({ kpi, isOpen, onClose, onRecord }: LogUpdateFormP
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={`Log update — ${kpi.name}`}
+      title={t("turboui.spaceKpisPage.logUpdate", { v1: kpi.name })}
       size="x-small"
       testId="log-update-modal"
     >
@@ -107,7 +109,7 @@ export function LogUpdateForm({ kpi, isOpen, onClose, onRecord }: LogUpdateFormP
           {editingPeriod ? (
             <div>
               <label htmlFor="kpi-entry-period" className="block text-sm font-medium text-content-accent mb-1">
-                Date
+                {t("turboui.spaceKpisPage.date")}
               </label>
               <input
                 ref={periodInputRef}
@@ -118,17 +120,24 @@ export function LogUpdateForm({ kpi, isOpen, onClose, onRecord }: LogUpdateFormP
                 className="w-full rounded-lg border border-surface-outline bg-surface-base px-3 py-1.5 text-sm text-content-accent"
                 data-test-id="log-update-period"
               />
-              {form.errors["period"] && (
-                <div className="mt-1 text-sm text-content-error">{form.errors["period"]}</div>
-              )}
+              {form.errors["period"] && <div className="mt-1 text-sm text-content-error">{form.errors["period"]}</div>}
             </div>
           ) : (
-            <div className="flex items-center gap-2 text-sm text-content-dimmed" data-test-id="log-update-period-summary">
+            <div
+              className="flex items-center gap-2 text-sm text-content-dimmed"
+              data-test-id="log-update-period-summary"
+            >
               <span>
-                Logging for{" "}
-                <span className="font-medium text-content-base">
-                  {form.values.period === today() ? "today" : formatPeriodLabel(form.values.period)}
-                </span>
+                <Trans
+                  i18nKey="turboui.spaceKpisPage.loggingFor"
+                  values={{
+                    v1:
+                      form.values.period === today()
+                        ? t("turboui.spaceKpisPage.today")
+                        : formatPeriodLabel(form.values.period),
+                  }}
+                  components={[<span className="font-medium text-content-base" />]}
+                />
               </span>
               <button
                 type="button"
@@ -136,7 +145,7 @@ export function LogUpdateForm({ kpi, isOpen, onClose, onRecord }: LogUpdateFormP
                 className="font-medium text-link-base hover:underline"
                 data-test-id="log-update-change-date"
               >
-                Change date
+                {t("turboui.spaceKpisPage.changeDate")}
               </button>
             </div>
           )}
@@ -148,7 +157,7 @@ export function LogUpdateForm({ kpi, isOpen, onClose, onRecord }: LogUpdateFormP
           </div>
         )}
 
-        <Submit saveText="Record update" cancelText="Cancel" />
+        <Submit saveText={t("turboui.spaceKpisPage.recordUpdate")} cancelText={t("turboui.spaceKpisPage.cancel")} />
       </Form>
     </Modal>
   );

@@ -5,6 +5,7 @@ import type { Activity } from "@/models/activities";
 import { Paths } from "@/routes/paths";
 import { feedTitle, goalLink } from "../feedItemLinks";
 import type { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
 
 const GoalTargetUpdating: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -30,7 +31,7 @@ const GoalTargetUpdating: ActivityHandler = {
   FeedItemTitle({ activity, page }: { activity: Activity; page: string }) {
     const goal = content(activity).goal;
     const targetName = content(activity).targetName;
-    const message = `updated the value for the ${targetName} target`;
+    const message = t("features.activities.updatedTheValueForTheTarget", { v1: targetName });
 
     if (page === "goal") {
       return feedTitle(activity, message);

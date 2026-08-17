@@ -1,7 +1,7 @@
-<%= title("#{short_name(@author)} deleted a file: #{@file.name}") %>
+<%= title(t("resourceHubFileDeleted.v1DeletedAFileV2", %{v1: short_name(@author), v2: @file.name})) %>
 
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@cta_url, "View Resource Hub") %>
+  <%= cta_button(@cta_url, t("resourceHubFileDeleted.viewResourceHub")) %>
 <% end %>

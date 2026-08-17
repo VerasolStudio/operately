@@ -23,6 +23,7 @@ import { RichEditorHandlers } from "../RichEditor/useEditor";
 import { StatusBanner } from "../ProjectPageLayout/StatusBanner";
 import { GoalPermissions } from "./types";
 import type { FormattedTimePreferences } from "../FormattedTime";
+import { t } from "../i18n";
 
 export namespace GoalPage {
   export interface Space {
@@ -216,17 +217,27 @@ export function GoalPage(props: GoalPage.Props) {
   const state = useGoalPageState(props);
 
   const tabs = useTabs("overview", [
-    { id: "overview", label: "Overview", icon: <IconClipboardText size={14} /> },
-    { id: "check-ins", label: "Check-Ins", icon: <IconMessage size={14} />, count: props.childrenCount.checkInsCount },
-    { id: "discussions", label: "Discussions", icon: <IconMessages size={14} />, count: props.childrenCount.discussionsCount },
+    { id: "overview", label: t("turboui.goalPage.overview"), icon: <IconClipboardText size={14} /> },
+    {
+      id: "check-ins",
+      label: t("turboui.goalPage.checkIns"),
+      icon: <IconMessage size={14} />,
+      count: props.childrenCount.checkInsCount,
+    },
+    {
+      id: "discussions",
+      label: t("turboui.goalPage.discussions"),
+      icon: <IconMessages size={14} />,
+      count: props.childrenCount.discussionsCount,
+    },
     {
       id: "docs-and-files",
-      label: "Docs & Files",
+      label: t("turboui.goalPage.docsFiles"),
       icon: <IconClipboardText size={14} />,
       count: props.childrenCount.docsAndFilesCount,
       hidden: !state.docsAndFiles,
     },
-    { id: "activity", label: "Activity", icon: <IconLogs size={14} /> },
+    { id: "activity", label: t("turboui.goalPage.activity"), icon: <IconLogs size={14} /> },
   ]);
   const activeTab = !state.docsAndFiles && tabs.active === "docs-and-files" ? "overview" : tabs.active;
 
@@ -247,7 +258,9 @@ export function GoalPage(props: GoalPage.Props) {
           {activeTab === "overview" && <Overview {...state} />}
           {activeTab === "check-ins" && <CheckIns {...state} />}
           {activeTab === "discussions" && <Discussions {...state} />}
-          {activeTab === "docs-and-files" && state.docsAndFiles && <PageDocsAndFilesTab docsAndFiles={state.docsAndFiles} />}
+          {activeTab === "docs-and-files" && state.docsAndFiles && (
+            <PageDocsAndFilesTab docsAndFiles={state.docsAndFiles} />
+          )}
           {activeTab === "activity" && <Activity {...state} />}
         </div>
 

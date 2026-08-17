@@ -16,6 +16,7 @@ import classNames from "../utils/classnames";
 import Modal from "../Modal";
 import type { TemplateProjectPage } from ".";
 import { MilestoneFormModal } from "./MilestoneFormModal";
+import { t } from "../i18n";
 
 export function MilestoneList({ props, canEdit }: { props: TemplateProjectPage.Props; canEdit: boolean }) {
   const [isCreating, setIsCreating] = React.useState(false);
@@ -61,10 +62,10 @@ export function MilestoneList({ props, canEdit }: { props: TemplateProjectPage.P
   return (
     <section className="border-t border-surface-outline pt-8" data-test-id="template-milestones">
       <div className="mb-4 flex items-center gap-2">
-        <h2 className="font-bold">Milestones</h2>
+        <h2 className="font-bold">{t("turboui.templateProjectPage.milestones")}</h2>
         {canEdit && (
           <SecondaryButton size="xxs" onClick={() => setIsCreating(true)} testId="add-template-milestone-overview">
-            Add milestone
+            {t("turboui.templateProjectPage.addMilestone")}
           </SecondaryButton>
         )}
       </div>
@@ -97,7 +98,9 @@ export function MilestoneList({ props, canEdit }: { props: TemplateProjectPage.P
           />
         )}
         {props.milestones.length === 0 && (
-          <p className="py-6 text-center text-sm text-content-dimmed">No milestones yet</p>
+          <p className="py-6 text-center text-sm text-content-dimmed">
+            {t("turboui.templateProjectPage.noMilestonesYet")}
+          </p>
         )}
       </div>
       <DeleteMilestoneModal
@@ -144,8 +147,10 @@ function DeleteMilestoneModal({
     >
       <form className="space-y-6" onSubmit={handleSubmit}>
         <WarningCallout
-          message="This action cannot be undone"
-          description={`Deleting the ${milestone?.title ?? "selected"} milestone is permanent and cannot be undone.`}
+          message={t("turboui.templateProjectPage.thisActionCannotBeUndone")}
+          description={t("turboui.templateProjectPage.deletingTheMilestoneIsPermanentAnd", {
+            v1: milestone?.title ?? "selected",
+          })}
         />
 
         <div className="flex items-center gap-2">
@@ -156,10 +161,10 @@ function DeleteMilestoneModal({
             disabled={isDeleting}
             testId="delete-template-milestone"
           >
-            Delete Forever
+            {t("turboui.templateProjectPage.deleteForever")}
           </DangerButton>
           <SecondaryButton size="sm" onClick={onClose} testId="cancel-delete-template-milestone">
-            Cancel
+            {t("turboui.templateProjectPage.cancel")}
           </SecondaryButton>
         </div>
       </form>

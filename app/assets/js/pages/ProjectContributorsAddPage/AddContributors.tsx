@@ -14,6 +14,8 @@ import { createTestId } from "@/utils/testid";
 import { useLoadedData } from "./loader";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
+import { Trans } from "react-i18next";
 
 interface ContributorFields {
   key: number;
@@ -68,19 +70,33 @@ export function AddContributors() {
   return (
     <Pages.Page title={["Add contributors", project.name!]}>
       <Paper.Root size="small">
-        <Paper.NavigateBack to={paths.projectContributorsPath(project.id!)} title="Back to Team & Access" />
-        <div className="text-2xl font-extrabold mb-4 text-center">Add contributors to {project.name}</div>
+        <Paper.NavigateBack
+          to={paths.projectContributorsPath(project.id!)}
+          title={t("pages.projectContributorsAddPage.backToTeamAccess")}
+        />
+        <div className="text-2xl font-extrabold mb-4 text-center">
+          {t("pages.projectContributorsAddPage.addContributorsTo", { v1: project.name })}
+        </div>
         <p className="text-sm text-center text-content-dimmed mb-4">
-          Only existing members can be added.{" "}
-          <Link to={paths.invitePeoplePath()} className="text-sm" underline="hover">
-            Invite someone new to the organization
-          </Link>
+          <Trans
+            i18nKey="pages.projectContributorsAddPage.onlyExistingMembersCanBeAdded"
+            components={[
+              <Link to={paths.invitePeoplePath()} className="text-sm" underline="hover">
+                Invite someone new to the organization
+              </Link>,
+            ]}
+          />
         </p>
 
         <Forms.Form form={form}>
           <Contributors project={project} />
 
-          <Forms.Submit saveText="Add contributors" layout="centered" buttonSize="base" submitOnEnter={false} />
+          <Forms.Submit
+            saveText={t("pages.projectContributorsAddPage.addContributors")}
+            layout="centered"
+            buttonSize="base"
+            submitOnEnter={false}
+          />
         </Forms.Form>
       </Paper.Root>
     </Pages.Page>
@@ -134,13 +150,22 @@ function Contributor({ field, search, index, last, addMore }) {
     <div data-test-id={`contributor-${index}`}>
       <Paper.Body>
         <Forms.FieldGroup layout="horizontal">
-          <Forms.SelectPerson field={field + ".personId"} label="Contributor" searchFn={search} autoFocus />
-          <Forms.SelectBox field={field + ".accessLevel"} label="Access Level" options={permissionsList} />
+          <Forms.SelectPerson
+            field={field + ".personId"}
+            label={t("pages.projectContributorsAddPage.contributor")}
+            searchFn={search}
+            autoFocus
+          />
+          <Forms.SelectBox
+            field={field + ".accessLevel"}
+            label={t("pages.projectContributorsAddPage.accessLevel")}
+            options={permissionsList}
+          />
 
           <Forms.TextInput
             field={field + ".responsibility"}
-            placeholder="e.g. Project Manager"
-            label="Responsibility"
+            placeholder={t("pages.projectContributorsAddPage.eGProjectManager")}
+            label={t("pages.projectContributorsAddPage.responsibility")}
             onEnter={() => {
               if (last) addMore();
             }}

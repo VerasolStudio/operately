@@ -2,6 +2,7 @@ import React, { useRef, useLayoutEffect } from "react";
 import { generateMonths } from "../utils";
 import { OptionButton } from "./OptionButton";
 import { DateField } from "../index";
+import { uiLocale } from "../../utils/formatting";
 
 interface Props {
   selectedDate: DateField.ContextualDate | null;
@@ -43,7 +44,7 @@ export function MonthSelector({
 
   const handleSelect = (month: DateField.PeriodOption) => {
     const date = new Date(month.value);
-    const value = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short" }).format(date);
+    const value = new Intl.DateTimeFormat(uiLocale(), { year: "numeric", month: "short" }).format(date);
     setSelectedDate({ date, dateType: "month", value });
   };
 
@@ -83,9 +84,9 @@ export function MonthSelector({
 function isSelectedMonth(monthValue: string, year: number, selectedDate: DateField.ContextualDate | null) {
   return Boolean(
     selectedDate &&
-      selectedDate.dateType === "month" &&
-      selectedDate.date?.getMonth() === new Date(monthValue).getMonth() &&
-      selectedDate.date?.getFullYear() === year,
+    selectedDate.dateType === "month" &&
+    selectedDate.date?.getMonth() === new Date(monthValue).getMonth() &&
+    selectedDate.date?.getFullYear() === year,
   );
 }
 

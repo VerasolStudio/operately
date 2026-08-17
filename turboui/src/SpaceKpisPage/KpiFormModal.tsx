@@ -3,6 +3,7 @@ import React from "react";
 import { Form, SelectBox, SelectPerson, Submit, TextInput, useForm } from "../Forms";
 import { Modal } from "../Modal";
 import type { SpaceKpisPage } from "./types";
+import { t } from "../i18n";
 
 interface KpiFormModalProps {
   isOpen: boolean;
@@ -18,8 +19,8 @@ interface KpiFormModalProps {
 }
 
 const CADENCE_OPTIONS = [
-  { label: "Weekly", value: "weekly" },
-  { label: "Monthly", value: "monthly" },
+  { label: t("turboui.spaceKpisPage.weekly"), value: "weekly" },
+  { label: t("turboui.spaceKpisPage.monthly"), value: "monthly" },
 ];
 
 // Create/Edit KPI form → calls the `createKpi` / `updateKpi` mutation via the
@@ -86,14 +87,25 @@ export function KpiFormModal({ isOpen, onClose, championSearch, kpi, onCreate, o
     >
       <Form form={form}>
         <div className="space-y-4">
-          <TextInput field="name" label="Name" placeholder="e.g. Monthly Recurring Revenue" required autoFocus />
+          <TextInput
+            field="name"
+            label={t("turboui.spaceKpisPage.name")}
+            placeholder={t("turboui.spaceKpisPage.eGMonthlyRecurringRevenue")}
+            required
+            autoFocus
+          />
           <div className="grid grid-cols-2 gap-4">
-            <TextInput field="unit" label="Unit" placeholder="e.g. USD, %, users" required />
-            <SelectBox field="cadence" label="Cadence" options={CADENCE_OPTIONS} />
+            <TextInput
+              field="unit"
+              label={t("turboui.spaceKpisPage.unit")}
+              placeholder={t("turboui.spaceKpisPage.eGUSDUsers")}
+              required
+            />
+            <SelectBox field="cadence" label={t("turboui.spaceKpisPage.cadence")} options={CADENCE_OPTIONS} />
           </div>
           <SelectPerson
             field="championId"
-            label="Champion"
+            label={t("turboui.spaceKpisPage.champion")}
             searchFn={searchFn}
             default={kpi?.champion ?? undefined}
             allowEmpty
@@ -109,7 +121,7 @@ export function KpiFormModal({ isOpen, onClose, championSearch, kpi, onCreate, o
           </div>
         )}
 
-        <Submit saveText={isEditing ? "Save changes" : "Create KPI"} cancelText="Cancel" />
+        <Submit saveText={isEditing ? "Save changes" : "Create KPI"} cancelText={t("turboui.spaceKpisPage.cancel")} />
       </Form>
     </Modal>
   );

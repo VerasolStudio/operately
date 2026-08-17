@@ -7,6 +7,7 @@ import { SpaceField } from "../SpaceField";
 import { Dropdown } from "../FormElements/Dropdown";
 import { showErrorToast } from "../Toasts";
 import { TaskPage } from ".";
+import { t } from "../i18n";
 
 const DESTINATION_TYPES = [
   { id: "project", name: "Project", testId: "move-task-destination-project" },
@@ -49,20 +50,25 @@ export function MoveModal(props: TaskPage.ContentState) {
       if (moved !== false) {
         props.closeMoveModal();
       } else {
-        showErrorToast("Failed to move task", "Please try again");
+        showErrorToast(t("turboui.taskPage.failedToMoveTask"), t("turboui.taskPage.pleaseTryAgain"));
       }
     } catch {
-      showErrorToast("Failed to move task", "Please try again");
+      showErrorToast(t("turboui.taskPage.failedToMoveTask"), t("turboui.taskPage.pleaseTryAgain"));
     } finally {
       setIsMoving(false);
     }
   };
 
   return (
-    <Modal isOpen={props.isMoveModalOpen} onClose={props.closeMoveModal} size="small" title="Move task">
+    <Modal
+      isOpen={props.isMoveModalOpen}
+      onClose={props.closeMoveModal}
+      size="small"
+      title={t("turboui.taskPage.moveTask")}
+    >
       <form className="space-y-6" onSubmit={handleSubmit} data-test-id="move-task-modal">
         <div>
-          <label className="font-bold text-sm mb-1.5 block">Destination type</label>
+          <label className="font-bold text-sm mb-1.5 block">{t("turboui.taskPage.destinationType")}</label>
           <Dropdown
             testId="move-task-destination-type"
             items={DESTINATION_TYPES.map((item) => ({ ...item }))}
@@ -103,10 +109,10 @@ export function MoveModal(props: TaskPage.ContentState) {
             disabled={isMoving || !destinationId}
             testId="confirm-move-task"
           >
-            Move
+            {t("turboui.taskPage.move")}
           </PrimaryButton>
           <SecondaryButton size="sm" onClick={props.closeMoveModal} testId="cancel-move-task">
-            Cancel
+            {t("turboui.taskPage.cancel")}
           </SecondaryButton>
         </div>
       </form>

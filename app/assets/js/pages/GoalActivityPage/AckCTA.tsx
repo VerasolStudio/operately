@@ -6,6 +6,7 @@ import * as Activities from "@/models/activities";
 import { PrimaryButton, IconSquareCheckFilled } from "turboui";
 
 import { useLoaderData } from "./loader";
+import { t } from "@/i18n";
 
 export function AckCTA() {
   const { activity, goal } = useLoaderData();
@@ -21,7 +22,7 @@ export function AckCTA() {
   return (
     <div className="flex flex-row items-center justify-center mt-8 mb-4">
       <PrimaryButton testId="acknowledge-retrospective" onClick={ackHandler}>
-        Acknowledge Retrospective
+        {t("pages.goalActivityPage.acknowledgeRetrospective")}
       </PrimaryButton>
     </div>
   );
@@ -36,12 +37,12 @@ export function AcknowledgementStatus() {
     return (
       <span className="flex items-center gap-1">
         <IconSquareCheckFilled size={16} className="text-accent-1" />
-        Acknowledged by {activity.commentThread.acknowledgedBy?.fullName}
+        {t("pages.goalActivityPage.acknowledgedByName", { v1: activity.commentThread.acknowledgedBy?.fullName })}
       </span>
     );
   }
 
-  return <span className="flex items-center gap-1">Not yet acknowledged</span>;
+  return <span className="flex items-center gap-1">{t("pages.goalActivityPage.notYetAcknowledged")}</span>;
 }
 
 function showAcknowledgeButton(activity: Activities.Activity) {

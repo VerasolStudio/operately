@@ -7,6 +7,7 @@ import classNames from "../utils/classnames";
 import { useFieldError, useFieldValue } from "./context";
 import { InputField } from "./FieldGroup";
 import type { SelectStatusOption, SelectStatusProps } from "./types";
+import { t } from "../i18n";
 
 export function SelectStatus({ field, options, reviewer, label }: SelectStatusProps) {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -123,8 +124,8 @@ function Placeholder() {
       <div className="w-10 h-10 rounded-full border-2 border-surface-outline border-dashed" />
 
       <div>
-        <p className="font-semibold">Select a status</p>
-        <div className="text-sm">Choose from the available options</div>
+        <p className="font-semibold">{t("turboui.forms.selectAStatus")}</p>
+        <div className="text-sm">{t("turboui.forms.chooseFromTheAvailableOptions")}</div>
       </div>
     </div>
   );
@@ -141,13 +142,19 @@ function StatusDescription({
 
   switch (status) {
     case "on_track":
-      return <>Progressing as planned. No blockers.</>;
+      return <>{t("turboui.forms.progressingAsPlannedNoBlockers")}</>;
     case "caution":
-      return <>Emerging risks or delays. {reviewerName || "The reviewer"} should be aware.</>;
+      return <>{t("turboui.forms.emergingRisksOrDelays", { v1: reviewerName || t("turboui.forms.theReviewer") })}</>;
     case "off_track":
-      return <>Significant problems affecting success. {reviewerName || "The reviewer"}’s help is needed.</>;
+      return (
+        <>
+          {t("turboui.forms.significantProblemsAffectingSuccess", {
+            v1: reviewerName || t("turboui.forms.theReviewer"),
+          })}
+        </>
+      );
     case "pending":
-      return <>Work hasn't started yet.</>;
+      return <>{t("turboui.forms.workHasnTStartedYet")}</>;
     default:
       throw new Error(`Unknown status: ${status}`);
   }

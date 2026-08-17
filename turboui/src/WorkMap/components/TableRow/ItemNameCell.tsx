@@ -10,6 +10,7 @@ import { createTestId } from "../../../TestableElement";
 import classNames from "../../../utils/classnames";
 import { useItemStatus } from "../../hooks/useItemStatus";
 import { AddItemModal } from "../AddItemModal";
+import { t } from "../../../i18n";
 
 interface Props {
   item: WorkMap.Item;
@@ -186,7 +187,7 @@ function AddButton({
   return (
     <div className="-mt-[2px] ml-2 opacity-0 group-hover/row:opacity-100 transition-opacity">
       <SecondaryButton size="xxs" onClick={open} testId="add-subitem">
-        Add
+        {t("turboui.workMap.add")}
       </SecondaryButton>
 
       <AddItemModal

@@ -4,6 +4,7 @@ defmodule OperatelyEmail.Emails.ProjectGoalConnectionEmail do
   alias Operately.Repo
   alias Operately.Projects
   alias Operately.Goals
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -16,7 +17,7 @@ defmodule OperatelyEmail.Emails.ProjectGoalConnectionEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: project.name, who: author, action: "connected the project to the #{goal.name} goal")
+    |> subject(where: project.name, who: author, action: t("projectGoalConnection.action", %{v1: goal.name}))
     |> assign(:author, author)
     |> assign(:project, project)
     |> assign(:goal, goal)
@@ -34,7 +35,7 @@ defmodule OperatelyEmail.Emails.ProjectGoalConnectionEmail do
       parent_id: project.id,
       parent_type: :project,
       parent_name: project.name,
-      headline: "connected the project to the goal \"#{goal.name}\"",
+      headline: t("projectGoalConnection.headline", %{v1: goal.name}),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.project_path(company, project) |> OperatelyWeb.Paths.to_url(),

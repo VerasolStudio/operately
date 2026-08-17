@@ -3,6 +3,7 @@ import { Forms, IconBuilding, IconTent } from "turboui";
 
 import { PermissionLevels } from "../Permissions";
 import { Option } from "../Permissions/AccessFields";
+import { t } from "@/i18n";
 
 export function AccessSelectors() {
   const [companyMembersOptions = []] = Forms.useFieldValue<Option[]>("access.companyMembersOptions");
@@ -13,14 +14,14 @@ export function AccessSelectors() {
       <Forms.FieldGroup layout="horizontal" layoutOptions={{ dividers: true, ratio: "1:1" }}>
         <Forms.SelectBox
           field={"access.companyMembers"}
-          label="Company members"
+          label={t("features.projects.companyMembers")}
           labelIcon={<IconBuilding size={20} />}
           options={companyMembersOptions}
           hidden={shouldHide(companyMembersOptions)}
         />
         <Forms.SelectBox
           field={"access.spaceMembers"}
-          label="Space members"
+          label={t("features.projects.spaceMembers")}
           labelIcon={<IconTent size={20} />}
           options={spaceMembersOptions}
         />

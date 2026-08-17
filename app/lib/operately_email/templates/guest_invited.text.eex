@@ -1,5 +1,5 @@
-<%= short_name(@author) %> invited you as an outside collaborator to <%= @company.name %>.
+<%= t("guestInvited.invitedYouAsAnOutsideCollaborator", %{v1: short_name(@author), v2: @company.name}) %>
 
-You now have access to <%= @company.name %> as an outside collaborator.
+<%= t("guestInvited.youNowHaveAccessToAs", %{v1: @company.name}) %>
 
-Log in to Operately: <%= @login_url %>
+<%= t("guestInvited.logInToOperately2", %{v1: @login_url}) %>

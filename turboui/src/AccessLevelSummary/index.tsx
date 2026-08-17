@@ -1,6 +1,7 @@
 import React from "react";
 import { match } from "ts-pattern";
 import { IconBuilding, IconLock, IconLockFilled, IconWorld } from "../icons";
+import { t } from "../i18n";
 
 const PERMISSION_LEVELS = {
   FULL_ACCESS: 100,
@@ -49,35 +50,41 @@ function AccessIcon(props: AccessLevelSummaryProps) {
 
 function calcTitle(props: AccessLevelSummaryProps) {
   if (props.anonymous >= PERMISSION_LEVELS.VIEW_ACCESS) {
-    return "Public Access";
+    return t("turboui.accessLevelSummary.publicAccess");
   }
 
   if (props.company >= PERMISSION_LEVELS.VIEW_ACCESS) {
-    return "Company-wide Access";
+    return t("turboui.accessLevelSummary.companyWideAccess");
   }
 
   if (props.resourceType !== "space" && (props.space ?? 0) >= PERMISSION_LEVELS.VIEW_ACCESS) {
-    return "Space-wide Access";
+    return t("turboui.accessLevelSummary.spaceWideAccess");
   }
 
-  return "Invite-only Access";
+  return t("turboui.accessLevelSummary.inviteOnlyAccess");
 }
 
 export function calcDescription(props: AccessLevelSummaryProps) {
-  const can = props.tense === "future" ? "will be able to" : "can";
+  const can =
+    props.tense === "future" ? t("turboui.accessLevelSummary.willBeAbleTo") : t("turboui.accessLevelSummary.can");
   const resource = props.resourceType;
   const spaceLevel = props.space ?? 0;
 
   if (props.anonymous >= PERMISSION_LEVELS.VIEW_ACCESS) {
-    let message = `Anyone on the internet ${can} view this ${resource}`;
-    const have = props.tense === "future" ? "will have" : "have";
+    let message = t("turboui.accessLevelSummary.anyoneOnTheInternetViewThis", { v1: can, v2: resource });
+    const have =
+      props.tense === "future" ? t("turboui.accessLevelSummary.willHave") : t("turboui.accessLevelSummary.have");
 
     if (props.company > props.anonymous) {
       message += match(props.company)
         .with(PERMISSION_LEVELS.VIEW_ACCESS, () => "")
-        .with(PERMISSION_LEVELS.COMMENT_ACCESS, () => `, company members ${can} view and comment`)
-        .with(PERMISSION_LEVELS.EDIT_ACCESS, () => `, company members ${can} edit`)
-        .with(PERMISSION_LEVELS.FULL_ACCESS, () => `, company members ${have} full access`)
+        .with(PERMISSION_LEVELS.COMMENT_ACCESS, () =>
+          t("turboui.accessLevelSummary.companyMembersViewAndComment", { v1: can }),
+        )
+        .with(PERMISSION_LEVELS.EDIT_ACCESS, () => t("turboui.accessLevelSummary.companyMembersEdit", { v1: can }))
+        .with(PERMISSION_LEVELS.FULL_ACCESS, () =>
+          t("turboui.accessLevelSummary.companyMembersFullAccess", { v1: have }),
+        )
         .otherwise(() => "");
     }
 
@@ -85,24 +92,34 @@ export function calcDescription(props: AccessLevelSummaryProps) {
   }
 
   if (props.company >= PERMISSION_LEVELS.VIEW_ACCESS) {
-    let message = `Everyone in the company `;
-    const have = props.tense === "future" ? "will have" : "has";
+    let message = t("turboui.accessLevelSummary.everyoneInTheCompany");
+    const have =
+      props.tense === "future" ? t("turboui.accessLevelSummary.willHave") : t("turboui.accessLevelSummary.has");
 
     message += match(props.company)
-      .with(PERMISSION_LEVELS.VIEW_ACCESS, () => `${can} view this ${resource}`)
-      .with(PERMISSION_LEVELS.COMMENT_ACCESS, () => `${can} view and comment on this ${resource}`)
-      .with(PERMISSION_LEVELS.EDIT_ACCESS, () => `${can} view and edit this ${resource}`)
-      .with(PERMISSION_LEVELS.FULL_ACCESS, () => `${have} full access to this ${resource}`)
+      .with(PERMISSION_LEVELS.VIEW_ACCESS, () => t("turboui.accessLevelSummary.viewThis", { v1: can, v2: resource }))
+      .with(PERMISSION_LEVELS.COMMENT_ACCESS, () =>
+        t("turboui.accessLevelSummary.viewAndCommentOnThis", { v1: can, v2: resource }),
+      )
+      .with(PERMISSION_LEVELS.EDIT_ACCESS, () =>
+        t("turboui.accessLevelSummary.viewAndEditThis", { v1: can, v2: resource }),
+      )
+      .with(PERMISSION_LEVELS.FULL_ACCESS, () =>
+        t("turboui.accessLevelSummary.fullAccessToThis", { v1: have, v2: resource }),
+      )
       .otherwise(() => "");
 
     if (props.resourceType !== "space" && spaceLevel > props.company) {
-      const spaceHave = props.tense === "future" ? "will have" : "have";
+      const spaceHave =
+        props.tense === "future" ? t("turboui.accessLevelSummary.willHave") : t("turboui.accessLevelSummary.have");
 
       message += match(spaceLevel)
         .with(PERMISSION_LEVELS.VIEW_ACCESS, () => "")
-        .with(PERMISSION_LEVELS.COMMENT_ACCESS, () => ", space members can view and comment")
-        .with(PERMISSION_LEVELS.EDIT_ACCESS, () => ", space members can edit")
-        .with(PERMISSION_LEVELS.FULL_ACCESS, () => `, space members ${spaceHave} full access`)
+        .with(PERMISSION_LEVELS.COMMENT_ACCESS, () => t("turboui.accessLevelSummary.spaceMembersViewAndComment"))
+        .with(PERMISSION_LEVELS.EDIT_ACCESS, () => t("turboui.accessLevelSummary.spaceMembersEdit"))
+        .with(PERMISSION_LEVELS.FULL_ACCESS, () =>
+          t("turboui.accessLevelSummary.spaceMembersFullAccess", { v1: spaceHave }),
+        )
         .otherwise(() => "");
     }
 
@@ -110,17 +127,19 @@ export function calcDescription(props: AccessLevelSummaryProps) {
   }
 
   if (props.resourceType !== "space" && spaceLevel >= PERMISSION_LEVELS.VIEW_ACCESS) {
-    let message = `Everyone in the space ${can} `;
+    let message = t("turboui.accessLevelSummary.everyoneInTheSpace", { v1: can });
 
     message += match(spaceLevel)
-      .with(PERMISSION_LEVELS.VIEW_ACCESS, () => `view this ${resource}`)
-      .with(PERMISSION_LEVELS.COMMENT_ACCESS, () => `view and comment on this ${resource}`)
-      .with(PERMISSION_LEVELS.EDIT_ACCESS, () => `view and edit this ${resource}`)
-      .with(PERMISSION_LEVELS.FULL_ACCESS, () => `view and edit this ${resource}`)
+      .with(PERMISSION_LEVELS.VIEW_ACCESS, () => t("turboui.accessLevelSummary.viewThis2", { v1: resource }))
+      .with(PERMISSION_LEVELS.COMMENT_ACCESS, () =>
+        t("turboui.accessLevelSummary.viewAndCommentOnThis2", { v1: resource }),
+      )
+      .with(PERMISSION_LEVELS.EDIT_ACCESS, () => t("turboui.accessLevelSummary.viewAndEditThis2", { v1: resource }))
+      .with(PERMISSION_LEVELS.FULL_ACCESS, () => t("turboui.accessLevelSummary.viewAndEditThis2", { v1: resource }))
       .otherwise(() => "");
 
     return message;
   }
 
-  return `Only people you add to the ${resource} ${can} view it`;
+  return t("turboui.accessLevelSummary.onlyPeopleYouAddToThe", { v1: resource, v2: can });
 }

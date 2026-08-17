@@ -2,6 +2,7 @@ import React from "react";
 import { IconClipboardText, IconListCheck, IconLogs, IconMessage, IconMessages } from "../icons";
 import { useTabs, type TabsState } from "../Tabs";
 import type { ProjectPageLayout } from "./index";
+import { t } from "../i18n";
 
 export type ProjectPageTabId = "overview" | "tasks" | "check-ins" | "discussions" | "docs-and-files" | "activity";
 
@@ -25,33 +26,33 @@ export function useProjectPageTabs({
   return useTabs(
     defaultTab,
     [
-      { id: "overview", label: "Overview", icon: <IconClipboardText size={14} /> },
+      { id: "overview", label: t("turboui.projectPageLayout.overview"), icon: <IconClipboardText size={14} /> },
       {
         id: "tasks",
-        label: "Tasks",
+        label: t("turboui.projectPageLayout.tasks"),
         icon: <IconListCheck size={14} />,
         count: childrenCount.tasksCount,
       },
       {
         id: "check-ins",
-        label: "Check-ins",
+        label: t("turboui.projectPageLayout.checkIns"),
         icon: <IconMessage size={14} />,
         count: childrenCount.checkInsCount,
       },
       {
         id: "discussions",
-        label: "Discussions",
+        label: t("turboui.projectPageLayout.discussions"),
         icon: <IconMessages size={14} />,
         count: childrenCount.discussionsCount,
       },
       {
         id: "docs-and-files",
-        label: "Docs & Files",
+        label: t("turboui.projectPageLayout.docsFiles"),
         icon: <IconClipboardText size={14} />,
         count: childrenCount.docsAndFilesCount,
         hidden: !showDocsAndFiles,
       },
-      { id: "activity", label: "Activity", icon: <IconLogs size={14} /> },
+      { id: "activity", label: t("turboui.projectPageLayout.activity"), icon: <IconLogs size={14} /> },
     ],
     urlPath ? { urlPath } : undefined,
   );

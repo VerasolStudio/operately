@@ -1,9 +1,9 @@
-<%= short_name(@author) %> updated the description for "<%= @milestone_name %>".
+<%= t("milestoneDescriptionUpdating.updatedTheDescriptionFor", %{v1: short_name(@author), v2: @milestone_name}) %>
 
 <%= if @description do %>
-View the milestone to read the updated details.
+<%= t("milestoneDescriptionUpdating.viewTheMilestoneToReadThe") %>
 <% else %>
-The description was cleared.
+<%= t("milestoneDescriptionUpdating.theDescriptionWasCleared") %>
 <% end %>
 
-View Milestone: <%= @cta_url %>
+<%= t("milestoneDescriptionUpdating.viewMilestone2", %{v1: @cta_url}) %>

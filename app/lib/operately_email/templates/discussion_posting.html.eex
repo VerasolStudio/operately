@@ -1,4 +1,4 @@
-<%= title("#{short_name(@author)} posted: #{@title}") %>
+<%= title(t("discussionPosting.v1PostedV2", %{v1: short_name(@author), v2: @title})) %>
 
 <%= spacer() %>
 
@@ -10,5 +10,5 @@
 <%= spacer() %>
 
 <%= row do %>
-  <%= cta_button(@cta_url, "View Discussion") %>
+  <%= cta_button(@cta_url, t("discussionPosting.viewDiscussion")) %>
 <% end %>

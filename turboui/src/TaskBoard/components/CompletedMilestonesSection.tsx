@@ -5,6 +5,7 @@ import type { FormattedTimePreferences } from "../../FormattedTime";
 import { BlackLink } from "../../Link";
 import { IconChevronDown, IconChevronRight, IconFlagFilled } from "../../icons";
 import * as Types from "../types";
+import { t } from "../../i18n";
 
 interface CompletedMilestonesSectionProps {
   milestones: Types.MilestoneWithStats[];
@@ -14,7 +15,10 @@ interface CompletedMilestonesSectionProps {
 export function CompletedMilestonesSection({ milestones, formattedTimePreferences }: CompletedMilestonesSectionProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const contentId = useId();
-  const sectionLabel = `${milestones.length} completed milestone${milestones.length === 1 ? "" : "s"}`;
+  const sectionLabel = t("turboui.taskBoard.completedMilestone", {
+    v1: milestones.length,
+    v2: milestones.length === 1 ? "" : "s",
+  });
 
   return (
     <section className="mt-6" data-test-id="completed-milestones-compact-section">

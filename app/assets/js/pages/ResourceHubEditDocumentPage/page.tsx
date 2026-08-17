@@ -11,6 +11,7 @@ import type { DocumentEditPage as DocumentEditPageTypes } from "turboui/Document
 
 import { useLoadedData } from "./loader";
 import { buildEditDocumentPageNavigation } from "./navigation";
+import { t } from "@/i18n";
 
 export function Page() {
   const { document } = useLoadedData();
@@ -87,13 +88,16 @@ export function Page() {
       navigate(cancelLink);
       return true;
     } catch {
-      showErrorToast("Document not updated", "Check the form and try again.");
+      showErrorToast(
+        t("pages.resourceHubEditDocumentPage.documentNotUpdated"),
+        t("pages.resourceHubEditDocumentPage.checkTheFormAndTryAgain"),
+      );
       return false;
     }
   }
 
   const shared = {
-    pageTitle: "Edit Document" as const,
+    pageTitle: t("pages.resourceHubEditDocumentPage.editDocument"),
     navigation: buildEditDocumentPageNavigation(document, paths),
     testId: "resource-hub-edit-document-page",
     richTextHandlers,

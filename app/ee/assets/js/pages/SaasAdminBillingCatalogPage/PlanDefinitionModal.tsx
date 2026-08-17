@@ -2,6 +2,7 @@ import * as AdminApi from "@/ee/admin_api";
 import * as React from "react";
 
 import { Forms, Modal, formatStorageBytes } from "turboui";
+import { t } from "@/i18n";
 
 interface PlanDefinitionModalProps {
   isOpen: boolean;
@@ -95,63 +96,74 @@ export function PlanDefinitionModal({ isOpen, onClose, onSuccess, planDefinition
       <Forms.Form form={form}>
         <Forms.FieldGroup layout="vertical">
           {isEdit ? (
-            <ReadOnlyField label="Plan key" value={planDefinition.key} />
+            <ReadOnlyField label={t("pages.saasAdminBillingCatalogPage.planKey")} value={planDefinition.key} />
           ) : (
-            <Forms.TextInput label="Plan key" field="planKey" required autoFocus />
+            <Forms.TextInput
+              label={t("pages.saasAdminBillingCatalogPage.planKey")}
+              field="planKey"
+              required
+              autoFocus
+            />
           )}
-          <Forms.TextInput label="Display Name" field="displayName" required />
-          <Forms.NumberInput label="Tier rank" field="tierRank" required />
+          <Forms.TextInput label={t("pages.saasAdminBillingCatalogPage.displayName")} field="displayName" required />
+          <Forms.NumberInput label={t("pages.saasAdminBillingCatalogPage.tierRank")} field="tierRank" required />
           <Forms.SelectBox
-            label="Billing behavior"
+            label={t("pages.saasAdminBillingCatalogPage.billingBehavior")}
             field="billingBehavior"
             options={[
-              { value: "provider_managed", label: "Provider managed" },
-              { value: "internal", label: "Internal" },
+              { value: "provider_managed", label: t("pages.saasAdminBillingCatalogPage.providerManaged") },
+              { value: "internal", label: t("pages.saasAdminBillingCatalogPage.internal") },
             ]}
             required
           />
           {form.values.billingBehavior === "internal" ? (
-            <ReadOnlyField label="Customer selectable" value="No" />
+            <ReadOnlyField label={t("pages.saasAdminBillingCatalogPage.customerSelectable")} value="No" />
           ) : (
             <Forms.SelectBox
-              label="Customer selectable"
+              label={t("pages.saasAdminBillingCatalogPage.customerSelectable")}
               field="customerSelectable"
               options={[
-                { value: "false", label: "No" },
-                { value: "true", label: "Yes" },
+                { value: "false", label: t("pages.saasAdminBillingCatalogPage.no") },
+                { value: "true", label: t("pages.saasAdminBillingCatalogPage.yes") },
               ]}
               required
             />
           )}
           <Forms.SelectBox
-            label="Member limit"
+            label={t("pages.saasAdminBillingCatalogPage.memberLimit")}
             field="memberLimitMode"
             options={[
-              { value: "limited", label: "Limited" },
-              { value: "unlimited", label: "Unlimited" },
+              { value: "limited", label: t("pages.saasAdminBillingCatalogPage.limited") },
+              { value: "unlimited", label: t("pages.saasAdminBillingCatalogPage.unlimited") },
             ]}
             required
           />
           {form.values.memberLimitMode === "limited" && (
-            <Forms.NumberInput label="Member limit value" field="memberLimit" />
+            <Forms.NumberInput label={t("pages.saasAdminBillingCatalogPage.memberLimitValue")} field="memberLimit" />
           )}
           <Forms.SelectBox
-            label="Storage limit"
+            label={t("pages.saasAdminBillingCatalogPage.storageLimit")}
             field="storageLimitMode"
             options={[
-              { value: "limited", label: "Limited" },
-              { value: "unlimited", label: "Unlimited" },
+              { value: "limited", label: t("pages.saasAdminBillingCatalogPage.limited") },
+              { value: "unlimited", label: t("pages.saasAdminBillingCatalogPage.unlimited") },
             ]}
             required
           />
           {form.values.storageLimitMode === "limited" && (
             <div className="flex flex-col gap-1">
-              <Forms.NumberInput label="Storage limit bytes" field="storageLimitBytes" />
+              <Forms.NumberInput
+                label={t("pages.saasAdminBillingCatalogPage.storageLimitBytes")}
+                field="storageLimitBytes"
+              />
               <StorageLimitPreview value={form.values.storageLimitBytes} />
             </div>
           )}
         </Forms.FieldGroup>
-        <Forms.Submit saveText={isEdit ? "Save changes" : "Create plan"} cancelText="Cancel" />
+        <Forms.Submit
+          saveText={isEdit ? "Save changes" : "Create plan"}
+          cancelText={t("pages.saasAdminBillingCatalogPage.cancel")}
+        />
       </Forms.Form>
     </Modal>
   );

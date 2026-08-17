@@ -4,6 +4,7 @@ import * as React from "react";
 import { IconChevronDown, IconCircleX, IconSearch, IconTent } from "../icons";
 import { createTestId } from "../TestableElement";
 import classNames from "../utils/classnames";
+import { t } from "../i18n";
 
 export namespace SpaceField {
   export interface Space {
@@ -52,7 +53,7 @@ const DefaultProps = {
   isOpen: false,
   iconSize: 20,
   readonly: false,
-  emptyStateMessage: "Select space",
+  emptyStateMessage: t("turboui.spaceField.selectSpace"),
   emptyStateReadOnlyMessage: "No space selected",
   variant: "inline",
   testId: "space-field",
@@ -197,7 +198,7 @@ function MenuMode({ state }: { state: SpaceField.State }) {
           className={classNames(commonButtonClass)}
         >
           <IconCircleX size={14} />
-          <span>Clear space</span>
+          <span>{t("turboui.spaceField.clearSpace")}</span>
         </button>
       )}
       <button
@@ -205,7 +206,7 @@ function MenuMode({ state }: { state: SpaceField.State }) {
         className={classNames(commonButtonClass, state.space ? "mt-1" : "")} // Add margin if clear button is present
       >
         <IconSearch size={14} />
-        <span>Choose another space</span>
+        <span>{t("turboui.spaceField.chooseAnotherSpace")}</span>
       </button>
     </div>
   );
@@ -217,7 +218,7 @@ function SearchMode({ state }: { state: SpaceField.State }) {
       <div className="p-1 pb-0.5">
         <input
           type="text"
-          placeholder="Search spaces..."
+          placeholder={t("turboui.spaceField.searchSpaces")}
           className="w-full border border-surface-outline rounded px-2 py-1 text-sm focus:outline-none focus:ring-0 text-content-base bg-surface-base"
           value={state.searchQuery}
           onChange={(e) => state.setSearchQuery(e.target.value)}
@@ -226,7 +227,7 @@ function SearchMode({ state }: { state: SpaceField.State }) {
       </div>
       <div className="overflow-y-auto pt-0.5 pb-0.5" style={{ maxHeight: "210px" }}>
         {state.searchResults.length === 0 && state.searchQuery && (
-          <div className="px-1.5 py-1 text-sm text-content-dimmed">No spaces found.</div>
+          <div className="px-1.5 py-1 text-sm text-content-dimmed">{t("turboui.spaceField.noSpacesFound")}</div>
         )}
         {state.searchResults.map((space) => (
           <SearchResult key={space.id} space={space} state={state} />

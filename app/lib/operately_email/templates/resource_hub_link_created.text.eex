@@ -1,3 +1,3 @@
-<%= short_name(@author) %> added a link
+<%= t("resourceHubLinkCreated.addedALink", %{v1: short_name(@author)}) %>
 
-Link: <%= @cta_url %>
+<%= t("resourceHubLinkCreated.link", %{v1: @cta_url}) %>

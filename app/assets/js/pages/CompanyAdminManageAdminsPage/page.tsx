@@ -15,6 +15,7 @@ import { Avatar, BlackLink, SecondaryButton, Page as TurboUIPage } from "turboui
 import classNames from "classnames";
 
 import { usePaths } from "@/routes/paths";
+import { t } from "@/i18n";
 export function Page() {
   const paths = usePaths();
   const form = useFrom();
@@ -23,27 +24,31 @@ export function Page() {
 
   return (
     <TurboUIPage
-      title={"Manage admins and owners"}
+      title={t("pages.companyAdminManageAdminsPage.manageAdminsAndOwners")}
       testId="manage-admins-page"
-      navigation={[{ to: paths.companyAdminPath(), label: "Company Administration" }]}
+      navigation={[
+        { to: paths.companyAdminPath(), label: t("pages.companyAdminManageAdminsPage.companyAdministration") },
+      ]}
     >
       <div className="px-12 py-10">
         <div className="mb-6">
-          <div className="text-content-accent text-lg md:text-2xl font-extrabold">Manage admins and owners</div>
-          <div className="mt-2">Add/Remove people who are in charge of the company and its operations</div>
+          <div className="text-content-accent text-lg md:text-2xl font-extrabold">
+            {t("pages.companyAdminManageAdminsPage.manageAdminsAndOwners")}
+          </div>
+          <div className="mt-2">{t("pages.companyAdminManageAdminsPage.addRemovePeopleWhoAreIn")}</div>
         </div>
 
         <Section
-          title="Administrators"
-          subtitle="Company administrators can add/remove people from the company, manage their profiles, update company settings, and more."
+          title={t("pages.companyAdminManageAdminsPage.administrators")}
+          subtitle={t("pages.companyAdminManageAdminsPage.companyAdministratorsCanAddRemovePeople")}
           actions={<AddAdminsModal form={form} />}
         >
           <PeopleList type="admins" people={admins} />
         </Section>
 
         <Section
-          title="Account Owners"
-          subtitle="Owners have the highest level of access and can manage all aspects of the company, including billing, and have access to all resources."
+          title={t("pages.companyAdminManageAdminsPage.accountOwners")}
+          subtitle={t("pages.companyAdminManageAdminsPage.ownersHaveTheHighestLevelOf")}
           actions={<AddOwnersModal form={form} />}
         >
           <PeopleList type="owners" people={owners} />
@@ -152,7 +157,7 @@ function RemoveAction({ person, type }: { person: People.Person; type: "admins" 
   return (
     <>
       <SecondaryButton onClick={handle} size="xs" testId={createTestId("remove", person.fullName!)}>
-        Remove
+        {t("pages.companyAdminManageAdminsPage.remove")}
       </SecondaryButton>
     </>
   );

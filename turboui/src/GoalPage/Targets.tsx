@@ -4,6 +4,7 @@ import { GoalPage } from ".";
 import { SecondaryButton } from "../Button";
 import { GoalTargetList } from "../GoalTargetList";
 import { SectionHeader } from "./SectionHeader";
+import { t } from "../i18n";
 
 export function Targets(props: GoalPage.State) {
   const [addActive, setAddActive] = React.useState(false);
@@ -11,10 +12,10 @@ export function Targets(props: GoalPage.State) {
   return (
     <div>
       <SectionHeader
-        title="Targets"
+        title={t("turboui.goalPage.targets")}
         buttons={
           <SecondaryButton size="xxs" onClick={() => setAddActive(true)} testId="add-target">
-            Add
+            {t("turboui.goalPage.add")}
           </SecondaryButton>
         }
         showButtons={props.permissions.canEdit && !addActive}

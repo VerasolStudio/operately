@@ -8,6 +8,7 @@ import * as CompanyExports from "@/models/companyExports";
 import { CompanyExportPage as TurboCompanyExportPage, showErrorToast, showSuccessToast } from "turboui";
 import { useLoadedData, loader } from "./loader";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
+import { t } from "@/i18n";
 
 export default { name: "CompanyExportPage", loader, Page } as PageModule;
 
@@ -44,10 +45,13 @@ function Page() {
 
     try {
       await Api.company_transfers.startExport({});
-      showSuccessToast("Export started", "You'll receive the package here when the job finishes.");
+      showSuccessToast(
+        t("pages.companyExportPage.exportStarted"),
+        t("pages.companyExportPage.youLlReceiveThePackageHere"),
+      );
       await refreshRuns();
     } catch {
-      showErrorToast("Failed to start export", "Please try again.");
+      showErrorToast(t("pages.companyExportPage.failedToStartExport"), t("pages.companyExportPage.pleaseTryAgain"));
     } finally {
       setStarting(false);
     }
@@ -73,7 +77,10 @@ function Page() {
       link.click();
       document.body.removeChild(link);
     } catch {
-      showErrorToast("Download failed", "The export package is not ready yet.");
+      showErrorToast(
+        t("pages.companyExportPage.downloadFailed"),
+        t("pages.companyExportPage.theExportPackageIsNotReady"),
+      );
     } finally {
       setDownloading(null);
     }

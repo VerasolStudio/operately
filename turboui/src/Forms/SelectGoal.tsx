@@ -8,6 +8,7 @@ import { useFieldError, useFieldValue } from "./context";
 import { InputField } from "./FieldGroup";
 import type { SelectGoalGoal, SelectGoalProps } from "./types";
 import { useValidation, validatePresence } from "./validation";
+import { t } from "../i18n";
 
 const DEFAULT_VALIDATION_PROPS = {
   required: true,
@@ -76,7 +77,7 @@ function GoalSelectorDropdown(props: GoalSelectorDropdownProps) {
             <IconGoalPlain size={16} /> {props.selected.name}
           </div>
         ) : (
-          <div className="text-content-dimmed">Select a goal &hellip;</div>
+          <div className="text-content-dimmed">{t("turboui.forms.selectAGoalHellip")}</div>
         )}
         <IconChevronDown size={20} />
       </div>
@@ -88,10 +89,10 @@ function GoalSelectorDropdown(props: GoalSelectorDropdownProps) {
               <div className="w-full flex items-center justify-between">
                 <div className="flex items-center gap-1">
                   <IconBuildingEstate size={16} />
-                  <span>Company-wide goal</span>
+                  <span>{t("turboui.forms.companyWideGoal")}</span>
                 </div>
                 <PrimaryButton onClick={() => handleSelect(null)} size="xxs" testId="select-company-wide-option">
-                  Select
+                  {t("turboui.forms.select")}
                 </PrimaryButton>
               </div>
             </div>
@@ -129,10 +130,7 @@ function GoalNodeView({
   return (
     <div>
       <div className="px-2 py-1.5 flex items-center justify-between gap-2 hover:bg-surface-dimmed">
-        <div
-          className="inline-flex items-center gap-1.5 truncate flex-1"
-          style={{ paddingLeft: node.depth * 24 }}
-        >
+        <div className="inline-flex items-center gap-1.5 truncate flex-1" style={{ paddingLeft: node.depth * 24 }}>
           <ExpandToggle
             hasChildren={hasChildren}
             isExpanded={isExpanded}
@@ -147,12 +145,8 @@ function GoalNodeView({
           ) : null}
         </div>
 
-        <PrimaryButton
-          onClick={() => onSelect(node.goal)}
-          size="xxs"
-          testId={createTestId("goal", node.goal.name)}
-        >
-          Select
+        <PrimaryButton onClick={() => onSelect(node.goal)} size="xxs" testId={createTestId("goal", node.goal.name)}>
+          {t("turboui.forms.select")}
         </PrimaryButton>
       </div>
 

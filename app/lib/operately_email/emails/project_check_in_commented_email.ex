@@ -1,6 +1,7 @@
 defmodule OperatelyEmail.Emails.ProjectCheckInCommentedEmail do
   import OperatelyEmail.Mailers.ActivityMailer
   alias Operately.{Repo, Projects, Updates}
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -14,12 +15,12 @@ defmodule OperatelyEmail.Emails.ProjectCheckInCommentedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: project.name, who: author, action: "commented on a check-in")
+    |> subject(where: project.name, who: author, action: t("projectCheckInCommented.action"))
     |> assign(:author, author)
     |> assign(:project, project)
     |> assign(:check_in, check_in)
     |> assign(:comment, comment)
-    |> assign(:cta_text, "View Comment")
+    |> assign(:cta_text, t("projectCheckInCommented.ctaText"))
     |> assign(:cta_url, link)
     |> render("project_check_in_commented")
   end
@@ -37,7 +38,7 @@ defmodule OperatelyEmail.Emails.ProjectCheckInCommentedEmail do
       parent_id: project.id,
       parent_type: :project,
       parent_name: project.name,
-      headline: "commented on a project check-in",
+      headline: t("projectCheckInCommented.headline"),
       excerpt_html: excerpt_html,
       excerpt_text: excerpt_text,
       item_url: OperatelyWeb.Paths.project_check_in_path(company, check_in, comment) |> OperatelyWeb.Paths.to_url(),

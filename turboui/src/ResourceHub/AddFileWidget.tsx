@@ -10,6 +10,7 @@ import { SubscribersSelector } from "../Subscriptions";
 import { FileIcon } from "./NodeIcon";
 import { findNameAndExtension } from "./utils";
 import { useNewFileModalsContext } from "./contexts/NewFileModalsContext";
+import { t } from "../i18n";
 
 export interface AddFileUploadItem {
   name: string;
@@ -74,7 +75,7 @@ export function AddFileWidget({ subscriptions, richTextHandlers, formatFileSize,
         <div className="mt-4" />
         <SubscribersSelector {...subscriptions} />
 
-        <Forms.Submit cancelText="Cancel" />
+        <Forms.Submit cancelText={t("turboui.resourceHub.cancel")} />
       </Forms.Form>
     </div>
   );
@@ -137,7 +138,7 @@ function FileForm({
 
           <Forms.RichTextArea
             field={`items[${index}].description`}
-            placeholder="Leave notes here..."
+            placeholder={t("turboui.resourceHub.leaveNotesHere")}
             richTextHandlers={richTextHandlers}
             height="min-h-[80px]"
           />
@@ -156,11 +157,11 @@ function FileDetails({ file, formatFileSize }: { file: File; formatFileSize: (si
   return (
     <div className="flex gap-4 items-center text-sm">
       <div>
-        <b>File:</b> {file.name}
+        <b>{t("turboui.resourceHub.file")}</b> {file.name}
       </div>
       <div>&middot;</div>
       <div>
-        <b>Size:</b> {formatFileSize(file.size)}
+        <b>{t("turboui.resourceHub.size")}</b> {formatFileSize(file.size)}
       </div>
     </div>
   );

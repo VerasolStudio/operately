@@ -2,6 +2,7 @@ import React from "react";
 
 import { GhostButton } from "../Button";
 import { IconClipboardText } from "../icons";
+import { t } from "../i18n";
 
 const MAX_TEMPLATES = 7;
 
@@ -31,10 +32,12 @@ function ZeroState() {
       <TemplateExamples />
 
       <div className="flex flex-col items-center px-6 text-center">
-        <div className="text-base font-bold">Templates</div>
-        <div className="mt-1 mb-4 text-sm">Save reusable project structures for recurring work.</div>
+        <div className="text-base font-bold">{t("turboui.spaceTemplatesTool.templates")}</div>
+        <div className="mt-1 mb-4 text-sm">
+          {t("turboui.spaceTemplatesTool.saveReusableProjectStructuresForRecurring")}
+        </div>
         <GhostButton size="sm" spanButton>
-          Create a template
+          {t("turboui.spaceTemplatesTool.createATemplate")}
         </GhostButton>
       </div>
     </div>
@@ -64,7 +67,7 @@ function TemplateExample({ name, taskCount }: { name: string; taskCount: number 
 function RegularState({ templates }: Pick<SpaceTemplatesTool.Props, "templates">) {
   return (
     <div className="flex flex-col h-full">
-      <div className="py-2 text-base font-bold text-center">Templates</div>
+      <div className="py-2 text-base font-bold text-center">{t("turboui.spaceTemplatesTool.templates")}</div>
 
       <div className="flex-1 mx-2 overflow-hidden rounded bg-surface-dimmed">
         {templates.slice(0, MAX_TEMPLATES).map((template) => (

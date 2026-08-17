@@ -12,6 +12,7 @@ import { validateEmail } from "@/features/auth/validateEmail";
 import { validatePassword } from "@/features/auth/validatePassword";
 import { PasswordStrength } from "@/features/auth/PasswordStrength";
 import { PageModule } from "@/routes/types";
+import { t } from "@/i18n";
 
 export default { name: "ResetPasswordPage", loader: Pages.emptyLoader, Page } as PageModule;
 
@@ -54,30 +55,30 @@ function Page() {
         <Paper.Body className="h-dvh sm:h-auto">
           <div className="py-8 sm:px-4 sm:py-4">
             <OperatelyLogo width="30px" height="30px" />
-            <h1 className="text-2xl font-bold my-4">Reset Password</h1>
+            <h1 className="text-2xl font-bold my-4">{t("pages.resetPasswordPage.resetPassword")}</h1>
 
             <Forms.Form form={form}>
               <Forms.FieldGroup>
                 <Forms.TextInput
                   field="email"
-                  label="Email"
-                  placeholder="e.g. your@email.com"
+                  label={t("pages.resetPasswordPage.email")}
+                  placeholder={t("pages.resetPasswordPage.eGYourEmailCom")}
                   required
                   okSign={okEmail}
                 />
 
                 <Forms.PasswordInput
                   field="password"
-                  label="Password"
-                  placeholder="Enter your new password"
+                  label={t("pages.resetPasswordPage.password")}
+                  placeholder={t("pages.resetPasswordPage.enterYourNewPassword")}
                   required
                   okSign={okPassword}
                 />
 
                 <Forms.PasswordInput
                   field="confirmPassword"
-                  label="Confirm Password"
-                  placeholder="Re-enter your new password"
+                  label={t("pages.resetPasswordPage.confirmPassword")}
+                  placeholder={t("pages.resetPasswordPage.reEnterYourNewPassword")}
                   required
                   okSign={okConfirmPassword}
                 />

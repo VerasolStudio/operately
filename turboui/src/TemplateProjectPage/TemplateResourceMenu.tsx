@@ -6,6 +6,7 @@ import { RenameFolderModal } from "../ResourceHub/nodeMenus/FolderMenu";
 import { createTestId } from "../TestableElement";
 import type { TemplateProjectPage } from ".";
 import { TemplateMoveResourceModal } from "./TemplateMoveResourceModal";
+import { t } from "../i18n";
 
 type ResourceNode = TemplateProjectPage.ResourceNode;
 
@@ -50,17 +51,17 @@ export function TemplateResourceMenu({
             onClick={() => setShowRenameForm(true)}
             testId={createTestId("rename-folder", node.folderId!)}
           >
-            Rename
+            {t("turboui.templateProjectPage.rename")}
           </MenuActionItem>
         )}
         {onMove && (
           <MenuActionItem onClick={() => setShowMoveForm(true)} testId={createTestId("move", node.id)}>
-            Move
+            {t("turboui.templateProjectPage.move")}
           </MenuActionItem>
         )}
         {onDelete && (
           <MenuActionItem onClick={() => setShowDeleteConfirm(true)} testId={createTestId("delete", node.id)} danger>
-            Delete
+            {t("turboui.templateProjectPage.delete")}
           </MenuActionItem>
         )}
       </Menu>

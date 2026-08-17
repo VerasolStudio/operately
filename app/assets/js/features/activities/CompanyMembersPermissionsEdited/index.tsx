@@ -1,6 +1,7 @@
 import { Activity, ActivityContentCompanyMembersPermissionsEdited } from "@/api";
 import { feedTitle } from "../feedItemLinks";
 import { ActivityHandler } from "../interfaces";
+import { t } from "@/i18n";
 
 const CompanyMembersPermissionsEdited: ActivityHandler = {
   pageHtmlTitle(_activity: Activity) {
@@ -27,7 +28,7 @@ const CompanyMembersPermissionsEdited: ActivityHandler = {
     const memberCount = content(activity).members?.length ?? 0;
     const memberText = memberCount === 1 ? "member's" : "members'";
 
-    return feedTitle(activity, `has updated ${memberCount} ${memberText} access level`);
+    return feedTitle(activity, t("features.activities.hasUpdatedAccessLevel", { v1: memberCount, v2: memberText }));
   },
 
   FeedItemContent(_props: { activity: Activity; page: any }) {
@@ -53,7 +54,7 @@ const CompanyMembersPermissionsEdited: ActivityHandler = {
     const member = members[0];
     if (!member) return "Updated your company access level";
 
-    return `Updated your company access level to ${member.updatedAccessLevelLabel}`;
+    return t("features.activities.updatedYourCompanyAccessLevelTo", { v1: member.updatedAccessLevelLabel });
   },
 
   NotificationLocation(_props: { activity: Activity }) {

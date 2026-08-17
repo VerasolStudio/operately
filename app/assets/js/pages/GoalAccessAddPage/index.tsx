@@ -12,6 +12,7 @@ import { compareIds, usePaths } from "@/routes/paths";
 import { PageModule } from "@/routes/types";
 import { createTestId } from "@/utils/testid";
 import { useNavigate } from "react-router";
+import { t } from "@/i18n";
 
 export default { name: "GoalAccessAddPage", loader, Page } as PageModule;
 
@@ -72,13 +73,20 @@ function Page() {
   return (
     <Pages.Page title={["Add people", goalName]} testId="goal-access-add-page">
       <Paper.Root size="small">
-        <Paper.NavigateBack to={backPath} title="Back to Team & Access" />
-        <div className="text-2xl font-extrabold mb-4 text-center">Add people to {goalName}</div>
+        <Paper.NavigateBack to={backPath} title={t("pages.goalAccessAddPage.backToTeamAccess")} />
+        <div className="text-2xl font-extrabold mb-4 text-center">
+          {t("pages.goalAccessAddPage.addPeopleTo", { v1: goalName })}
+        </div>
 
         <Forms.Form form={form}>
           <Members accessMembers={accessMembers} />
 
-          <Forms.Submit saveText="Add people" layout="centered" buttonSize="base" submitOnEnter={false} />
+          <Forms.Submit
+            saveText={t("pages.goalAccessAddPage.addPeople")}
+            layout="centered"
+            buttonSize="base"
+            submitOnEnter={false}
+          />
         </Forms.Form>
       </Paper.Root>
     </Pages.Page>
@@ -122,8 +130,17 @@ function Member({
     <div data-test-id={`member-${index}`}>
       <Paper.Body>
         <Forms.FieldGroup layout="horizontal">
-          <Forms.SelectPerson field={field + ".personId"} label="Person" searchFn={search} exclude={exclude} />
-          <Forms.SelectBox field={field + ".accessLevel"} label="Access Level" options={PERMISSIONS_LIST} />
+          <Forms.SelectPerson
+            field={field + ".personId"}
+            label={t("pages.goalAccessAddPage.person")}
+            searchFn={search}
+            exclude={exclude}
+          />
+          <Forms.SelectBox
+            field={field + ".accessLevel"}
+            label={t("pages.goalAccessAddPage.accessLevel")}
+            options={PERMISSIONS_LIST}
+          />
         </Forms.FieldGroup>
 
         <RemoveMemberButton index={index} />

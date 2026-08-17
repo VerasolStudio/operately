@@ -3,6 +3,7 @@ defmodule OperatelyEmail.Emails.ResourceHubDocumentDeletedEmail do
 
   alias OperatelyEmail.Emails.ResourceHubEmail
   alias Operately.Repo
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
   def send(person, activity) do
     author = Repo.preload(activity, :author).author
@@ -15,7 +16,7 @@ defmodule OperatelyEmail.Emails.ResourceHubDocumentDeletedEmail do
     |> new()
     |> from(author)
     |> to(person)
-    |> subject(where: parent.name, who: author, action: "deleted a document: #{document.name}")
+    |> subject(where: parent.name, who: author, action: t("resourceHubDocumentDeleted.action", %{v1: document.name}))
     |> assign(:author, author)
     |> assign(:document, document)
     |> assign(:cta_url, OperatelyWeb.Paths.resource_hub_path(company, document.resource_hub) |> OperatelyWeb.Paths.to_url())
@@ -33,7 +34,7 @@ defmodule OperatelyEmail.Emails.ResourceHubDocumentDeletedEmail do
       parent_id: parent.id,
       parent_type: parent.type,
       parent_name: parent.name,
-      headline: "deleted the document \"#{document.name}\"",
+      headline: t("resourceHubDocumentDeleted.headline", %{v1: document.name}),
       excerpt_html: nil,
       excerpt_text: nil,
       item_url: OperatelyWeb.Paths.resource_hub_path(company, document.resource_hub) |> OperatelyWeb.Paths.to_url(),

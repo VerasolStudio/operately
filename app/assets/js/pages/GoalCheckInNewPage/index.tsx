@@ -13,6 +13,7 @@ import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences
 
 import { loader, useLoadedData } from "./loader";
 import { Navigation } from "./navigation";
+import { t } from "@/i18n";
 export default { name: "GoalCheckInNewPage", loader, Page } as PageModule;
 
 function Page() {
@@ -40,7 +41,7 @@ function Header() {
       <h1 className="text-content-accent text-xl sm:text-3xl font-extrabold text-center">
         Check-In for <FormattedTime {...formattedTimePreferences} time={new Date()} format="long-date" />
       </h1>
-      <p className="text-center mt-1">Share the progress with the team</p>
+      <p className="text-center mt-1">{t("pages.goalCheckInNewPage.shareTheProgressWithTheTeam")}</p>
     </div>
   );
 }

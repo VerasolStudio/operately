@@ -20,6 +20,7 @@ import classNames from "../../utils/classnames";
 import * as Types from "../types";
 import { AvatarWithName } from "../../Avatar";
 import { PrimaryButton, SecondaryButton } from "../../Button";
+import { t } from "../../i18n";
 
 // Status configuration helper matching StatusSelector semantics
 function getStatusConfig(status: Types.Status | null | undefined): {
@@ -29,7 +30,7 @@ function getStatusConfig(status: Types.Status | null | undefined): {
 } {
   if (!status) {
     return {
-      label: "Unknown status",
+      label: t("turboui.taskBoard.unknownStatus"),
       icon: <IconCircleDashed size={14} />,
       color: "text-content-dimmed",
     };
@@ -59,39 +60,67 @@ interface FilterOption {
 }
 
 const filterOptions: FilterOption[] = [
-  { type: "status", label: "Status", icon: <IconCircle size={14} />, operators: ["is", "is_not"], hasSubmenu: true },
-  { type: "assignee", label: "Assignee", icon: <IconUser size={14} />, operators: ["is", "is_not"], hasSubmenu: true },
-  { type: "creator", label: "Creator", icon: <IconUser size={14} />, operators: ["is", "is_not"], hasSubmenu: true },
+  {
+    type: "status",
+    label: t("turboui.taskBoard.status"),
+    icon: <IconCircle size={14} />,
+    operators: ["is", "is_not"],
+    hasSubmenu: true,
+  },
+  {
+    type: "assignee",
+    label: t("turboui.taskBoard.assignee"),
+    icon: <IconUser size={14} />,
+    operators: ["is", "is_not"],
+    hasSubmenu: true,
+  },
+  {
+    type: "creator",
+    label: t("turboui.taskBoard.creator"),
+    icon: <IconUser size={14} />,
+    operators: ["is", "is_not"],
+    hasSubmenu: true,
+  },
   {
     type: "milestone",
-    label: "Milestone",
+    label: t("turboui.taskBoard.milestone"),
     icon: <IconFlag size={14} />,
     operators: ["is", "is_not"],
     hasSubmenu: true,
   },
-  { type: "content", label: "Content", icon: <IconMessage size={14} />, operators: ["contains", "does_not_contain"] },
-  { type: "due_date", label: "Due date", icon: <IconCalendar size={14} />, operators: ["before", "after", "between"] },
+  {
+    type: "content",
+    label: t("turboui.taskBoard.content"),
+    icon: <IconMessage size={14} />,
+    operators: ["contains", "does_not_contain"],
+  },
+  {
+    type: "due_date",
+    label: t("turboui.taskBoard.dueDate"),
+    icon: <IconCalendar size={14} />,
+    operators: ["before", "after", "between"],
+  },
   {
     type: "created_date",
-    label: "Created date",
+    label: t("turboui.taskBoard.createdDate"),
     icon: <IconCalendar size={14} />,
     operators: ["before", "after", "between"],
   },
   {
     type: "updated_date",
-    label: "Updated date",
+    label: t("turboui.taskBoard.updatedDate"),
     icon: <IconCalendar size={14} />,
     operators: ["before", "after", "between"],
   },
   {
     type: "started_date",
-    label: "Started date",
+    label: t("turboui.taskBoard.startedDate"),
     icon: <IconCalendar size={14} />,
     operators: ["before", "after", "between"],
   },
   {
     type: "completed_date",
-    label: "Completed date",
+    label: t("turboui.taskBoard.completedDate"),
     icon: <IconCalendar size={14} />,
     operators: ["before", "after", "between"],
   },
@@ -234,7 +263,7 @@ export function TaskFilter({ filters, onFiltersChange, tasks }: TaskFilterProps)
       type: "status",
       operator: "is",
       value: status,
-      label: `Status is ${config.label}`,
+      label: t("turboui.taskBoard.statusIs", { v1: config.label }),
     };
 
     onFiltersChange([...filters, newFilter]);
@@ -264,7 +293,7 @@ export function TaskFilter({ filters, onFiltersChange, tasks }: TaskFilterProps)
       type: "milestone",
       operator: "is",
       value: milestone,
-      label: `Milestone is ${milestone.name}`,
+      label: t("turboui.taskBoard.milestoneIs", { v1: milestone.name }),
     };
 
     onFiltersChange([...filters, newFilter]);
@@ -353,7 +382,7 @@ export function TaskFilter({ filters, onFiltersChange, tasks }: TaskFilterProps)
                   <input
                     ref={searchInputRef}
                     type="text"
-                    placeholder="Search filters..."
+                    placeholder={t("turboui.taskBoard.searchFilters")}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-8 pr-3 py-2 text-sm border border-surface-outline rounded bg-surface-base text-content-base placeholder-content-subtle focus:outline-none focus:ring-1 focus:ring-primary-base"
@@ -479,7 +508,7 @@ export function TaskFilter({ filters, onFiltersChange, tasks }: TaskFilterProps)
             </button>
           ))}
           {availablePeople.length === 0 && (
-            <div className="px-2 py-1.5 text-sm text-content-subtle">No assignees found</div>
+            <div className="px-2 py-1.5 text-sm text-content-subtle">{t("turboui.taskBoard.noAssigneesFound")}</div>
           )}
         </FilterSubmenu>
 
@@ -503,7 +532,7 @@ export function TaskFilter({ filters, onFiltersChange, tasks }: TaskFilterProps)
             </button>
           ))}
           {availablePeople.length === 0 && (
-            <div className="px-2 py-1.5 text-sm text-content-subtle">No people found</div>
+            <div className="px-2 py-1.5 text-sm text-content-subtle">{t("turboui.taskBoard.noPeopleFound")}</div>
           )}
         </FilterSubmenu>
 
@@ -528,7 +557,7 @@ export function TaskFilter({ filters, onFiltersChange, tasks }: TaskFilterProps)
             </button>
           ))}
           {availableMilestones.length === 0 && (
-            <div className="px-2 py-1.5 text-sm text-content-subtle">No milestones found</div>
+            <div className="px-2 py-1.5 text-sm text-content-subtle">{t("turboui.taskBoard.noMilestonesFound")}</div>
           )}
         </FilterSubmenu>
       </Popover.Root>
@@ -537,14 +566,14 @@ export function TaskFilter({ filters, onFiltersChange, tasks }: TaskFilterProps)
       {contentModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-surface-base border border-surface-outline rounded-lg shadow-lg p-6 w-full max-w-md mx-4">
-            <h3 className="text-lg font-semibold text-content-base mb-4">Search content</h3>
+            <h3 className="text-lg font-semibold text-content-base mb-4">{t("turboui.taskBoard.searchContent")}</h3>
 
             <input
               type="text"
               value={contentSearchTerm}
               onChange={(e) => setContentSearchTerm(e.target.value)}
               onKeyDown={handleContentKeyDown}
-              placeholder="Enter text to search for..."
+              placeholder={t("turboui.taskBoard.enterTextToSearchFor")}
               className="w-full px-3 py-2 text-sm border border-surface-outline rounded-md bg-surface-base text-content-base placeholder-content-subtle focus:outline-none focus:ring-1 focus:ring-primary-base mb-6"
               autoFocus
             />
@@ -552,10 +581,10 @@ export function TaskFilter({ filters, onFiltersChange, tasks }: TaskFilterProps)
             {/* Buttons */}
             <div className="flex justify-end gap-2">
               <SecondaryButton size="sm" onClick={handleContentFilterCancel}>
-                Cancel
+                {t("turboui.taskBoard.cancel")}
               </SecondaryButton>
               <PrimaryButton size="sm" onClick={handleContentFilterApply} disabled={!contentSearchTerm.trim()}>
-                Apply Filter
+                {t("turboui.taskBoard.applyFilter")}
               </PrimaryButton>
             </div>
           </div>

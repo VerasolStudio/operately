@@ -69,9 +69,7 @@ test("completes progress without NaN when uploading zero-byte files", async () =
 
   expect(setProgress).not.toHaveBeenCalledWith(NaN);
   expect(setProgress).toHaveBeenLastCalledWith(100);
-  expect(persist).toHaveBeenCalledWith([
-    expect.objectContaining({ name: "Empty.txt", blobId: "blob-empty" }),
-  ]);
+  expect(persist).toHaveBeenCalledWith([expect.objectContaining({ name: "Empty.txt", blobId: "blob-empty" })]);
 });
 
 test("waits for the original and preview uploads before persisting files", async () => {
@@ -97,9 +95,7 @@ test("waits for the original and preview uploads before persisting files", async
   previewUpload.resolve({ id: "preview-1" });
   await upload;
 
-  expect(persist).toHaveBeenCalledWith([
-    expect.objectContaining({ blobId: "blob-1", previewBlobId: "preview-1" }),
-  ]);
+  expect(persist).toHaveBeenCalledWith([expect.objectContaining({ blobId: "blob-1", previewBlobId: "preview-1" })]);
 });
 
 function uploadItem(mainFile: File): AddFileUploadItem {

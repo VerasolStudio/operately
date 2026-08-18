@@ -1,4 +1,5 @@
 import type { CompanyBillingPage as CompanyBillingPageTypes } from "../CompanyBillingPage/types";
+import { uiLocale } from "../utils/formatting";
 
 export function formatCompanyBillingPlanName(planKey?: string | null, fallback = "Unknown plan"): string {
   if (!planKey) return fallback;
@@ -31,7 +32,11 @@ export function formatCompanyBillingDate(value?: string | null): string | null {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return null;
 
-  return new Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(date);
+  // `undefined` here means the OS locale, which is not the same thing as the
+  // language the app is set to — switching Operately to Japanese left billing
+  // dates in whatever the browser was, and vice versa. `uiLocale()` is the
+  // convention the rest of turboui already follows.
+  return new Intl.DateTimeFormat(uiLocale(), { dateStyle: "medium" }).format(date);
 }
 
 export function formatCompanyBillingRelativeDateLine(prefix: string, value?: string | null): string | null {
@@ -46,7 +51,7 @@ export function formatCompanyBillingPriceFromMinorUnits(amount?: number | null, 
     return "Unavailable";
   }
 
-  return new Intl.NumberFormat(undefined, {
+  return new Intl.NumberFormat(uiLocale(), {
     style: "currency",
     currency: currency.toUpperCase(),
     minimumFractionDigits: 0,

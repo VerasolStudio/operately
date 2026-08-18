@@ -91,7 +91,9 @@ describe("ProjectTemplatesPage", () => {
     const { container } = renderPage();
 
     expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/home");
-    expect(container.querySelector('[data-test-id="project-templates-page"]')).toHaveClass("sm:border");
+    // The page no longer floats on a bordered card — the redesign runs pages
+    // full-bleed — so this only asserts the page container is rendered.
+    expect(container.querySelector('[data-test-id="project-templates-page"]')).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Marketing" })).toHaveAttribute(
       "href",
       "/spaces/space-1/project-templates",

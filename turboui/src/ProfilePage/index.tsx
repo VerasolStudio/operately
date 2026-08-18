@@ -10,8 +10,10 @@ import {
   IconUserCircle,
 } from "../icons";
 
-import { PageNew } from "../Page";
-import { Tabs, useTabs } from "../Tabs";
+import { UnderlineTabs } from "../DesignKit/Controls";
+import { Screen } from "../DesignKit/Layout";
+import { useTabLinks } from "../DesignKit/useTabLinks";
+import { useTabs } from "../Tabs";
 import { AboutMe, Colleagues, Contact, PageHeader } from "./components";
 
 import type { FormattedTimePreferences } from "../FormattedTime";
@@ -45,6 +47,9 @@ export namespace ProfilePage {
 
     viewer: Person | null;
 
+    /** Breadcrumb target for the company's people directory. */
+    peoplePath?: string;
+
     aboutMe?: string | null;
     mentionedPersonLookup: MentionedPersonLookupFn;
     formattedTimePreferences: FormattedTimePreferences;
@@ -74,25 +79,32 @@ export function ProfilePage(props: ProfilePage.Props) {
       .otherwise(() => undefined);
   }, [tabs.active]);
 
-  return (
-    <PageNew title={props.title} size="fullwidth">
-      <PageHeader {...props} />
-      <Tabs tabs={tabs} />
+  const tabLinks = useTabLinks(tabs);
 
-      {["tasks", "assigned", "reviewing", "paused", "completed"].includes(tabs.active) && (
-        <WorkMapTable
-          items={items[tabs.active]}
-          tab={["completed", "paused"].includes(tabs.active) ? (tabs.active as WorkMap.Filter) : "all"}
-          profileUser={props.person}
-          viewer={props.viewer || undefined}
-          columnOptions={workMapColumnOptions}
-          zeroStateMessage={zeroStateMessage}
-          formattedTimePreferences={props.formattedTimePreferences}
-        />
-      )}
-      {tabs.active === "activity" && <ActivityFeed {...props} />}
-      {tabs.active === "about" && <About {...props} />}
-    </PageNew>
+  return (
+    <Screen title={props.title} testId="profile-page">
+      <PageHeader {...props} />
+
+      <div className="px-6 pt-5 sm:px-8">
+        <UnderlineTabs layoutId="profile-tabs" tabs={tabLinks} activeId={tabs.active} />
+      </div>
+
+      <div className="px-6 pt-4 pb-12 sm:px-8">
+        {["tasks", "assigned", "reviewing", "paused", "completed"].includes(tabs.active) && (
+          <WorkMapTable
+            items={items[tabs.active]}
+            tab={["completed", "paused"].includes(tabs.active) ? (tabs.active as WorkMap.Filter) : "all"}
+            profileUser={props.person}
+            viewer={props.viewer || undefined}
+            columnOptions={workMapColumnOptions}
+            zeroStateMessage={zeroStateMessage}
+            formattedTimePreferences={props.formattedTimePreferences}
+          />
+        )}
+        {tabs.active === "activity" && <ActivityFeed {...props} />}
+        {tabs.active === "about" && <About {...props} />}
+      </div>
+    </Screen>
   );
 }
 

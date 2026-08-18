@@ -27,6 +27,7 @@ jest.mock("../icons", () => {
     IconDots: HiddenIcon,
     IconLink: HiddenIcon,
     IconSearch: HiddenIcon,
+    IconChevronRight: HiddenIcon,
     IconSlash: HiddenIcon,
     IconX: HiddenIcon,
   };

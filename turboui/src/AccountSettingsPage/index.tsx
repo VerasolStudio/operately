@@ -30,7 +30,7 @@ export function AccountSettingsPage(props: AccountSettingsPage.Props) {
       navigation={navigation}
     >
       <div className="px-4 sm:px-10 py-8">
-        <div className="mb-2 text-content-accent text-3xl font-extrabold">{t("turboui.accountSettingsPage.title")}</div>
+        <div className="mb-1.5 text-2xl font-semibold tracking-[-0.01em] text-content-strong">{t("turboui.accountSettingsPage.title")}</div>
         <p className="mb-8">{t("turboui.accountSettingsPage.description")}</p>
 
         <OptionsMenuItem

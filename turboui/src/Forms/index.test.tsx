@@ -1082,8 +1082,10 @@ describe("Forms", () => {
     const submitContainer = saveButton?.parentElement;
 
     expect(saveButton).toHaveAttribute("type", "button");
-    expect(saveButton).toHaveClass("px-4", "py-2");
-    expect(cancelButton).toHaveClass("px-4", "py-2");
+    // Default button metrics come from the redesign's control scale (see
+    // Button/calcClassNames): 14px horizontal padding on the `base` size.
+    expect(saveButton).toHaveClass("px-3.5", "py-2");
+    expect(cancelButton).toHaveClass("px-3.5", "py-2");
     expect(submitContainer).toHaveClass("justify-center", "custom-submit-container");
   });
 
@@ -1193,7 +1195,11 @@ describe("Forms", () => {
 
 function selectCurrentDate(label: string) {
   const date = new Date();
-  const isoDate = [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("-");
+  const isoDate = [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0"),
+  ].join("-");
 
   fireEvent.click(screen.getByLabelText(label));
 

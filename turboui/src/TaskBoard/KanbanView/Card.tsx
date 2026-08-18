@@ -143,10 +143,10 @@ export function Card({
     <div
       ref={ref as React.RefObject<HTMLDivElement>}
       className={classNames(
-        "relative rounded-lg border bg-surface-base px-3.5 py-3 shadow-xs group w-full cursor-grab focus-visible:outline-none transition-[border-color,box-shadow] hover:border-surface-outline hover:shadow-sm",
+        "group relative w-full cursor-grab rounded-[10px] border bg-surface-base px-3 py-2.5 transition-[border-color,background-color] focus-visible:outline-none hover:border-primary-soft-border",
         selected
-          ? "border-brand-1 bg-[rgba(224,242,254,0.75)] shadow-[inset_0_0_0_2px_var(--color-brand-1)] dark:bg-[rgba(37,99,235,0.20)]"
-          : "border-surface-subtle dark:border-stroke-base",
+          ? "border-primary bg-primary-soft-bg shadow-[inset_0_0_0_1px_var(--color-primary)]"
+          : "border-surface-outline",
         {
           "opacity-60": isDimmed,
           "cursor-grabbing": isDragging,
@@ -168,7 +168,7 @@ export function Card({
         <div className="flex-1 min-w-0 flex flex-col gap-2">
           <div onMouseDown={stopDragFromInteractive}>
             <div
-              className="block text-[15px] font-medium leading-5 text-content-base hover:text-link-hover transition-colors break-words cursor-pointer hover:underline"
+              className="block text-[13px] font-medium leading-[1.45] text-content-strong hover:text-link-hover transition-colors break-words cursor-pointer hover:underline"
               title={task.title}
               onClick={(e) => {
                 e.preventDefault();

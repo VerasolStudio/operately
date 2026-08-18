@@ -162,11 +162,25 @@ import IconWorld from "@tabler/icons-react/dist/esm/icons/IconWorld.mjs";
 import IconX from "@tabler/icons-react/dist/esm/icons/IconX.mjs";
 import IconLayoutKanban from "@tabler/icons-react/dist/esm/icons/IconLayoutKanban.mjs";
 import IconAdjustmentsHorizontal from "@tabler/icons-react/dist/esm/icons/IconAdjustmentsHorizontal.mjs";
+import IconArrowNarrowRight from "@tabler/icons-react/dist/esm/icons/IconArrowNarrowRight.mjs";
+import IconBellCog from "@tabler/icons-react/dist/esm/icons/IconBellCog.mjs";
+import IconFiles from "@tabler/icons-react/dist/esm/icons/IconFiles.mjs";
+import IconInbox from "@tabler/icons-react/dist/esm/icons/IconInbox.mjs";
+import IconListTree from "@tabler/icons-react/dist/esm/icons/IconListTree.mjs";
+import IconSelector from "@tabler/icons-react/dist/esm/icons/IconSelector.mjs";
+import IconTrendingUp from "@tabler/icons-react/dist/esm/icons/IconTrendingUp.mjs";
 
 import type { IconProps as TablerIconProps } from "@tabler/icons-react";
 
 export {
   IconActivity,
+  IconArrowNarrowRight,
+  IconBellCog,
+  IconFiles,
+  IconInbox,
+  IconListTree,
+  IconSelector,
+  IconTrendingUp,
   IconAlertTriangle,
   IconAlertTriangleFilled,
   IconAlignJustified,

@@ -14,6 +14,8 @@ import { usePaths } from "../../routes/paths";
 import { finishFirstItemOnboarding } from "./finishFirstItemOnboarding";
 import { shouldShowFirstProjectOnboarding } from "./firstProjectOnboarding";
 import { companyWorkMapCacheKey, useLoadedData } from "./loader";
+import { AddWorkButton } from "@/features/workMap/AddWorkButton";
+import { countWorkMapTypes } from "@/models/workMap";
 import { t } from "@/i18n";
 
 export function Page() {
@@ -50,9 +52,17 @@ export function Page() {
     [company.id, navigate, paths],
   );
 
+  const counts = countWorkMapTypes(visibleItems);
+
   return (
     <WorkMapPage
       title={title}
+      subtitle={
+        t("pages.companyWorkMapPage.goalCount", { count: counts.goals }) +
+        " / " +
+        t("pages.companyWorkMapPage.projectCount", { count: counts.projects })
+      }
+      actions={canAddItem ? <AddWorkButton /> : undefined}
       items={convertToWorkMapItems(paths, visibleItems)}
       addItem={addItem}
       spaceSearch={spaceSearch}

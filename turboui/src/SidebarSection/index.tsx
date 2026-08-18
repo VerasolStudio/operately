@@ -15,10 +15,11 @@ export function SidebarSection({
   className?: string;
 }) {
   return (
-    <div className={classNames("space-y-1 sm:space-y-2", className)} data-test-id={testId}>
-      <div className="font-medium text-xs sm:font-semibold sm:text-sm">
-        <div className="truncate">{title}</div>
-      </div>
+    <div className={classNames("space-y-1.5", className)} data-test-id={testId}>
+      {/* The 11px uppercase label is the redesign's standard for anything that
+          titles a field rather than a section of the page. It keeps a column
+          of five or six of them from competing with the content beside it. */}
+      <div className="truncate text-[11px] font-semibold uppercase tracking-[0.06em] text-content-label">{title}</div>
       {children}
     </div>
   );

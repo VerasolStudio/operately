@@ -5,6 +5,7 @@ import { MemoryRouter } from "react-router";
 
 jest.mock("../../icons", () => ({
   IconDots: () => <span>dots</span>,
+  IconChevronRight: () => <span>slash</span>,
   IconSlash: () => <span>slash</span>,
 }));
 

@@ -21,29 +21,28 @@ import { Tooltip } from "../Tooltip";
 import { SidebarNotificationSection, SidebarSection } from "../SidebarSection";
 import { showSuccessToast, showErrorToast } from "../Toasts";
 import { ProjectPage } from ".";
-import { CheckInOverdueCallout } from "./CheckInOverdueCallout";
 import { viewerCanPostCheckIn } from "./checkInPermissions";
 import { t } from "../i18n";
 
 export function OverviewSidebar(props: ProjectPage.State) {
   return (
-    <div className="sm:col-span-4 sm:pl-8" data-test-id="overview-sidebar">
-      <div className="space-y-6">
+    <div data-test-id="overview-sidebar">
+      <div className="space-y-5">
         <CheckInsSection {...props} />
         <ParentGoal {...props} />
         <ProjectDates {...props} />
       </div>
 
-      <div className="space-y-6 pt-6 mt-6 border-t border-surface-outline">
+      <div className="space-y-5 pt-5 mt-5 border-t border-surface-outline">
         <Champion {...props} />
         <Reviewer {...props} />
         <Contributors {...props} />
         <Privacy {...props} />
       </div>
 
-      <SidebarNotificationSection {...props.subscriptions} className="pt-6 mt-6 border-t border-surface-outline" />
+      <SidebarNotificationSection {...props.subscriptions} className="pt-5 mt-5 border-t border-surface-outline" />
 
-      <div className="pt-6 mt-6 border-t border-surface-outline">
+      <div className="pt-5 mt-5 border-t border-surface-outline">
         <Actions {...props} />
       </div>
     </div>
@@ -83,7 +82,9 @@ function CheckInsSection(props: ProjectPage.State) {
   return (
     <SidebarSection title={header} className="pt-4 sm:pt-0">
       <div className="space-y-3">
-        <CheckInOverdueCallout {...props} variant="compact" />
+        {/* The overdue warning lives in the "Next up" banner under the page
+            header now. Repeating it here made the same sentence appear twice
+            on one screen, which trains people to stop reading both. */}
         {checkIns.length > 0 ? (
           <LastCheckIn
             checkIns={checkIns}

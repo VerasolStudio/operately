@@ -11,7 +11,8 @@ import { SidebarNotificationSection } from "../SidebarSection";
 
 import { PageHeader } from "./PageHeader";
 import { Overview } from "./Overview";
-import { Sidebar, MobileSidebar } from "./Sidebar";
+import { Sidebar } from "./Sidebar";
+import { PageColumns } from "../DesignKit/Layout";
 import { DeleteModal } from "./DeleteModal";
 import { ProjectPermissions } from "../ProjectPage/types";
 import { MoveModal } from "./MoveModal";
@@ -289,11 +290,7 @@ export function TaskPage(props: TaskPage.Props) {
       tabs={tabs}
       status={props.projectStatus}
     >
-      <div className="flex-1 overflow-auto">
-        <div className="p-4 max-w-6xl mx-auto">
-          <TaskContent {...contentState} />
-        </div>
-      </div>
+      <TaskContent {...contentState} />
     </ProjectPageLayout>
   );
 }
@@ -301,12 +298,10 @@ export function TaskPage(props: TaskPage.Props) {
 export function TaskContent(props: TaskPage.ContentState) {
   return (
     <>
-      <PageHeader {...props} />
-      <MobileSidebar {...props} />
-      <div className="sm:grid sm:grid-cols-12 mt-6">
+      <PageColumns aside={<Sidebar {...props} />}>
+        <PageHeader {...props} />
         <Overview {...props} />
-        <Sidebar {...props} />
-      </div>
+      </PageColumns>
 
       <MoveModal {...props} />
       <DeleteModal {...props} />

@@ -1,48 +1,73 @@
 import * as Pages from "@/components/Pages";
-import * as Paper from "@/components/PaperContainer";
 import * as Goals from "@/models/goals";
 import * as React from "react";
 
 import { Form as CheckInForm, useForm } from "@/features/goals/GoalCheckIn";
-import { banner } from "@/features/goals/GoalPageHeader/Banner";
 import { useSubscriptionsAdapter } from "@/models/subscriptions";
 import { PageModule } from "@/routes/types";
 
-import { FormattedTime } from "turboui";
+import { DesignKit, FormattedTime } from "turboui";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 
+import { usePaths } from "@/routes/paths";
 import { loader, useLoadedData } from "./loader";
-import { Navigation } from "./navigation";
+import { buildGoalCheckInNewNavigation } from "./navigation";
 import { t } from "@/i18n";
+
 export default { name: "GoalCheckInNewPage", loader, Page } as PageModule;
 
+/**
+ * Writing a goal check-in.
+ *
+ * The page tells you up front when the last one was and who finds out when you
+ * submit. Both were previously discoverable only by leaving the page, and both
+ * change how much detail is worth writing.
+ */
 function Page() {
+  const paths = usePaths();
   const { goal } = useLoadedData();
+  const formattedTimePreferences = useFormattedTimePreferences();
+
+  const crumbs = buildGoalCheckInNewNavigation(goal, paths).map((item) => ({ label: item.label!, to: item.to }));
 
   return (
     <Pages.Page title={["Check-in", goal.name!]} testId="goal-check-in-new-page">
-      <Paper.Root>
-        <Navigation />
+      <div className="min-h-full bg-surface-base">
+        <DesignKit.PageHead
+          crumbs={[...crumbs, { label: t("pages.goalCheckInNewPage.checkIn") }]}
+          title={
+            <>
+              {t("pages.goalCheckInNewPage.checkInFor")}{" "}
+              <FormattedTime {...formattedTimePreferences} time={new Date()} format="long-date" />
+            </>
+          }
+          subtitle={<Subtitle goal={goal} />}
+        />
 
-        <Paper.Body className="p-4 md:p-8 lg:px-28 lg:py-8" noPadding banner={banner(goal)}>
-          <Header />
+        <DesignKit.PageBody width="medium">
           <Form goal={goal} />
-        </Paper.Body>
-      </Paper.Root>
+        </DesignKit.PageBody>
+      </div>
     </Pages.Page>
   );
 }
 
-function Header() {
+function Subtitle({ goal }: { goal: Goals.Goal }) {
   const formattedTimePreferences = useFormattedTimePreferences();
+  const reviewerCount = (goal.potentialSubscribers ?? []).length;
 
   return (
-    <div>
-      <h1 className="text-content-accent text-xl sm:text-3xl font-extrabold text-center">
-        Check-In for <FormattedTime {...formattedTimePreferences} time={new Date()} format="long-date" />
-      </h1>
-      <p className="text-center mt-1">{t("pages.goalCheckInNewPage.shareTheProgressWithTheTeam")}</p>
-    </div>
+    <>
+      {goal.lastCheckIn?.insertedAt ? (
+        <>
+          {t("pages.goalCheckInNewPage.lastCheckInWas")}{" "}
+          <FormattedTime {...formattedTimePreferences} time={goal.lastCheckIn.insertedAt} format="long-date" />
+        </>
+      ) : (
+        t("pages.goalCheckInNewPage.firstCheckIn")
+      )}
+      {reviewerCount > 0 && <> · {t("pages.goalCheckInNewPage.notifiesOnSubmit", { count: reviewerCount })}</>}
+    </>
   );
 }
 

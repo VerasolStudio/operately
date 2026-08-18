@@ -1,25 +1,15 @@
 import React from "react";
-import classNames from "../utils/classnames";
 
+/**
+ * The surface a page's content sits on.
+ *
+ * It used to be a shadowed, rounded card floating on a coloured background.
+ * The redesign puts pages full-bleed on white, so this is now just the page
+ * body — the sidebar's border is the only structural line left.
+ */
 export function Paper({ children, testId }: { children: React.ReactNode; testId?: string }) {
-  const classname = classNames(
-    "relative",
-    "bg-surface-base",
-
-    // full height on mobile, no min height on larger screens
-    "min-h-dvh sm:min-h-0",
-
-    // apply border shadow and rounded corners on larger screens
-    "sm:border sm:border-surface-outline",
-
-    "sm:rounded-lg",
-    "sm:shadow-xl",
-
-    "sm:mx-4"
-  );
-
   return (
-    <div className={classname} data-test-id={testId}>
+    <div className="relative" data-test-id={testId}>
       {children}
     </div>
   );

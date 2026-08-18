@@ -106,7 +106,11 @@ function OwnersMenu() {
   const { company, ownerIds } = useLoadedData();
 
   const me = useMe();
-  const amIOwner = includesId(ownerIds, me!.id);
+  // `useMe` is genuinely nullable — a hot reload can re-evaluate the company
+  // context and leave this rendering without one. Asserting non-null turned
+  // that into a crashed page; not knowing who you are is the same as not
+  // being able to prove you are the owner, so the menu simply stays hidden.
+  const amIOwner = !!me?.id && includesId(ownerIds, me.id);
 
   // Don't show the menu at all if user is not an owner
   if (!amIOwner) {

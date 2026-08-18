@@ -3,14 +3,13 @@ import React from "react";
 import { expect, screen, userEvent, waitFor, within } from "storybook/test";
 import { PrivacyIndicator } from "../../PrivacyIndicator";
 
-import { TableRow, SetItemExpandedFn, IsItemExpandedFn } from "../components/TableRow";
-import { TableHeader } from "../components/WorkMapTable";
+import { WorkMapRow, SetItemExpandedFn, IsItemExpandedFn } from "../components/WorkMapRow";
 
 import * as data from "../tests/mockData";
 import * as Steps from "../tests/steps";
 import { defaultFormattedTimePreferences } from "../../utils/storybook/formattedTime";
 
-type TableRowProps = React.ComponentProps<typeof TableRow>;
+type TableRowProps = React.ComponentProps<typeof WorkMapRow>;
 
 function StoryTableRow({
   isExpanded: _ignoredIsExpanded,
@@ -46,12 +45,12 @@ function StoryTableRow({
     });
   }, []);
 
-  return <TableRow {...rest} isExpanded={getItemExpanded} setItemExpanded={updateItemExpanded} />;
+  return <WorkMapRow {...rest} isExpanded={getItemExpanded} setItemExpanded={updateItemExpanded} />;
 }
 
 const meta = {
-  title: "Components/WorkMap/TableRow",
-  component: TableRow,
+  title: "Components/WorkMap/WorkMapRow",
+  component: WorkMapRow,
   parameters: {
     layout: "padded",
   },
@@ -74,27 +73,18 @@ const meta = {
       description: "Indentation level",
       control: { type: "number", min: 0, max: 5 },
     },
-    isLast: {
-      description: "Whether this is the last item in the list",
-      control: "boolean",
-    },
     tab: {
       description: "Current tab applied to the WorkMap",
       options: [undefined, "all", "goals", "completed"],
       control: { type: "select" },
     },
-    showIndentation: {
-      description: "Whether to show indentation guides",
-      control: "boolean",
-    },
   },
   args: {
-    showIndentation: true,
+    index: 0,
     isExpanded: () => true,
     setItemExpanded: () => undefined,
-    formattedTimePreferences: defaultFormattedTimePreferences,
   },
-} satisfies Meta<typeof TableRow>;
+} satisfies Meta<typeof WorkMapRow>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -104,17 +94,13 @@ type Story = StoryObj<typeof meta>;
  */
 export const Default: Story = {
   render: (args) => (
-    <>
-      <TableHeader tab={args.tab} columnOptions={args.columnOptions} />
-      <tbody>
-        <StoryTableRow {...args} />
-      </tbody>
-    </>
+    <tbody>
+      <StoryTableRow {...args} />
+    </tbody>
   ),
   args: {
     item: data.mockGoalOnTrack,
     level: 0,
-    isLast: false,
     tab: "all",
     columnOptions: {
       hideProject: true,
@@ -127,17 +113,13 @@ export const Default: Story = {
  */
 export const CompletedGoal: Story = {
   render: (args) => (
-    <>
-      <TableHeader tab={args.tab} columnOptions={args.columnOptions} />
-      <tbody>
-        <StoryTableRow {...args} />
-      </tbody>
-    </>
+    <tbody>
+      <StoryTableRow {...args} />
+    </tbody>
   ),
   args: {
     item: data.mockGoalCompleted,
     level: 0,
-    isLast: false,
     tab: "completed",
     columnOptions: {
       hideProject: true,
@@ -155,17 +137,13 @@ export const CompletedGoal: Story = {
  */
 export const AchievedGoal: Story = {
   render: (args) => (
-    <>
-      <TableHeader tab={args.tab} columnOptions={args.columnOptions} />
-      <tbody>
-        <StoryTableRow {...args} />
-      </tbody>
-    </>
+    <tbody>
+      <StoryTableRow {...args} />
+    </tbody>
   ),
   args: {
     item: data.mockGoalAchieved,
     level: 0,
-    isLast: false,
     tab: "completed",
     columnOptions: {
       hideProject: true,
@@ -183,12 +161,9 @@ export const AchievedGoal: Story = {
  */
 export const GoalProgressHoverSummary: Story = {
   render: (args) => (
-    <>
-      <TableHeader tab={args.tab} columnOptions={args.columnOptions} />
-      <tbody>
-        <StoryTableRow {...args} />
-      </tbody>
-    </>
+    <tbody>
+      <StoryTableRow {...args} />
+    </tbody>
   ),
   args: {
     item: {
@@ -196,7 +171,6 @@ export const GoalProgressHoverSummary: Story = {
       children: [],
     },
     level: 0,
-    isLast: false,
     tab: "all",
     columnOptions: {
       hideProject: true,
@@ -228,17 +202,13 @@ export const GoalProgressHoverSummary: Story = {
  */
 export const ProjectProgressHoverSummary: Story = {
   render: (args) => (
-    <>
-      <TableHeader tab={args.tab} columnOptions={args.columnOptions} />
-      <tbody>
-        <StoryTableRow {...args} />
-      </tbody>
-    </>
+    <tbody>
+      <StoryTableRow {...args} />
+    </tbody>
   ),
   args: {
     item: data.mockProjectOnTrack,
     level: 0,
-    isLast: false,
     tab: "all",
     columnOptions: {
       hideProject: true,
@@ -270,17 +240,13 @@ export const ProjectProgressHoverSummary: Story = {
  */
 export const MissedGoal: Story = {
   render: (args) => (
-    <>
-      <TableHeader tab={args.tab} columnOptions={args.columnOptions} />
-      <tbody>
-        <StoryTableRow {...args} />
-      </tbody>
-    </>
+    <tbody>
+      <StoryTableRow {...args} />
+    </tbody>
   ),
   args: {
     item: data.mockGoalMissed,
     level: 0,
-    isLast: false,
     tab: "completed",
     columnOptions: {
       hideProject: true,
@@ -298,17 +264,13 @@ export const MissedGoal: Story = {
  */
 export const PausedGoal: Story = {
   render: (args) => (
-    <>
-      <TableHeader tab={args.tab} columnOptions={args.columnOptions} />
-      <tbody>
-        <StoryTableRow {...args} />
-      </tbody>
-    </>
+    <tbody>
+      <StoryTableRow {...args} />
+    </tbody>
   ),
   args: {
     item: data.mockGoalPaused,
     level: 0,
-    isLast: false,
     tab: "all",
     columnOptions: {
       hideProject: true,
@@ -328,17 +290,13 @@ export const PausedGoal: Story = {
  */
 export const CautionGoal: Story = {
   render: (args) => (
-    <>
-      <TableHeader tab={args.tab} columnOptions={args.columnOptions} />
-      <tbody>
-        <StoryTableRow {...args} />
-      </tbody>
-    </>
+    <tbody>
+      <StoryTableRow {...args} />
+    </tbody>
   ),
   args: {
     item: data.mockGoalCaution,
     level: 0,
-    isLast: false,
     tab: "all",
     columnOptions: {
       hideProject: true,
@@ -358,17 +316,13 @@ export const CautionGoal: Story = {
  */
 export const IssueGoal: Story = {
   render: (args) => (
-    <>
-      <TableHeader tab={args.tab} columnOptions={args.columnOptions} />
-      <tbody>
-        <StoryTableRow {...args} />
-      </tbody>
-    </>
+    <tbody>
+      <StoryTableRow {...args} />
+    </tbody>
   ),
   args: {
     item: data.mockGoalIssue,
     level: 0,
-    isLast: false,
     tab: "all",
     columnOptions: {
       hideProject: true,
@@ -405,7 +359,6 @@ export const OutdatedGoal: Story = {
   args: {
     item: data.mockGoalOutdated, // This is required by the Story type but overridden in render
     level: 0,
-    isLast: false,
     tab: "all",
     columnOptions: {
       hideProject: true,
@@ -425,17 +378,13 @@ export const OutdatedGoal: Story = {
  */
 export const OnTrackProject: Story = {
   render: (args) => (
-    <>
-      <TableHeader tab={args.tab} columnOptions={args.columnOptions} />
-      <tbody>
-        <StoryTableRow {...args} />
-      </tbody>
-    </>
+    <tbody>
+      <StoryTableRow {...args} />
+    </tbody>
   ),
   args: {
     item: data.mockProjectOnTrack,
     level: 0,
-    isLast: false,
     tab: "all",
     columnOptions: {
       hideProject: true,
@@ -465,7 +414,6 @@ export const CompletedProject: Story = {
   args: {
     item: data.mockProjectCompleted,
     level: 0,
-    isLast: false,
     tab: "completed",
     columnOptions: {
       hideProject: true,
@@ -525,7 +473,6 @@ export const MultipleRows: Story = {
     tab: "all",
     item: data.mockGoalOnTrack, // These args won't be used directly by the render function
     level: 0, // but are required by the StoryAnnotations type
-    isLast: false,
     columnOptions: {
       hideProject: true,
     },
@@ -594,8 +541,7 @@ export const PrivacyLevels: Story = {
   args: {
     level: 0,
     tab: "all",
-    item: data.mockGoalOnTrack, // This is required by the Story type, but our render function overrides it
-    isLast: false, // Also required by the Story type
+    item: data.mockGoalOnTrack, // This is required by the Story type, but our render function overrides it // Also required by the Story type
     columnOptions: {
       hideProject: true,
     },

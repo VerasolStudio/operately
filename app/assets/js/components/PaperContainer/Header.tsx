@@ -10,72 +10,39 @@ interface Props {
   subtitle?: string;
   actions?: React.ReactNode;
   underline?: boolean;
+  /**
+   * Retained so existing callers keep compiling. Both values now render the
+   * same way: a centred title with its primary action pushed to the far left
+   * put the most important button in the last place the eye looks.
+   */
   layout?: LayoutType;
 }
 
-const DEFAULT_PROPS = {
-  layout: "title-left-actions-right" as LayoutType,
-  underline: false,
-};
-
+/**
+ * The heading of a page rendered inside `Paper.Root`.
+ *
+ * Matches the redesign's page header — 24px semibold title on the left, one
+ * line of context under it, actions on the right — so screens that still use
+ * the paper chrome open the same way as the rewritten ones.
+ */
 export function Header(props: Props) {
-  props = { ...DEFAULT_PROPS, ...props };
+  const { negHor, horPadding } = usePaperSizeHelpers();
 
-  const { negHor, negTop } = usePaperSizeHelpers();
-
-  const className = classNames("flex items-center justify-between", {
-    "mb-6": true,
-    "pt-5 pb-4": props.underline,
-    "border-b border-stroke-base": props.underline,
+  const className = classNames("flex flex-wrap items-end justify-between gap-x-6 gap-y-3", {
+    "mb-5": !props.underline,
+    "mb-6 pb-4 border-b border-surface-outline": props.underline,
     [negHor]: props.underline,
-    [negTop]: props.underline,
-    "px-4 sm:px-8": props.underline,
+    [horPadding]: props.underline,
   });
 
-  if (props.layout === "title-center-actions-left") {
-    return <HeaderCentered {...props} className={className} />;
-  }
-
-  if (props.layout === "title-left-actions-right") {
-    return <HeaderLeft {...props} className={className} />;
-  }
-
-  throw new Error(`Unknown layout: ${props.layout}`);
-}
-
-function HeaderLeft(props: Props & { className: string }) {
   return (
-    <div className={props.className}>
-      <div>
-        <Title title={props.title} />
-        {props.subtitle && <Subtitle message={props.subtitle} />}
+    <div className={className}>
+      <div className="min-w-0">
+        <h1 className="m-0 text-2xl font-semibold tracking-[-0.01em] text-content-strong">{props.title}</h1>
+        {props.subtitle && <p className="mt-1.5 mb-0 text-[13px] text-content-dimmed">{props.subtitle}</p>}
       </div>
 
-      <div>{props.actions}</div>
+      {props.actions && <div className="flex flex-shrink-0 items-center gap-2">{props.actions}</div>}
     </div>
   );
-}
-
-function HeaderCentered(props: Props & { className: string }) {
-  return (
-    <div className={props.className}>
-      {/* allows longer button captions */}
-      <div className="w-[30%]">{props.actions}</div>
-
-      <div className="w-[50%] text-center flex-1">
-        <Title title={props.title} />
-        {props.subtitle && <Subtitle message={props.subtitle} />}
-      </div>
-
-      <div className="w-[30%]" />
-    </div>
-  );
-}
-
-function Title({ title }) {
-  return <div className="text-content-accent text-lg md:text-2xl font-extrabold">{title}</div>;
-}
-
-function Subtitle({ message }) {
-  return <div className="mt-2">{message}</div>;
 }

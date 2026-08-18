@@ -59,7 +59,7 @@ function SharedListContent({
   search,
 }: SharedListContentProps) {
   return (
-    <div className="min-h-[75vh] px-4 sm:px-12 py-10">
+    <div className="min-h-[75vh] px-6 py-8 sm:px-8">
       <ResourceHubHeader
         title={heading}
         actions={

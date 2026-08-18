@@ -51,6 +51,71 @@ module.exports = {
         "callout-success-bg": "var(--color-callout-success-bg)",
         "callout-success-content": "var(--color-callout-success-content)",
 
+        // --- Redesign tokens (Operately 改修案) ---
+
+        "sidebar-bg": "var(--color-sidebar-bg)",
+        "sidebar-hover": "var(--color-sidebar-hover)",
+        "sidebar-active": "var(--color-sidebar-active)",
+
+        "line-strong": "var(--color-line-strong)",
+        "line-soft": "var(--color-line-soft)",
+
+        "content-strong": "var(--color-content-strong)",
+        "content-muted": "var(--color-content-muted)",
+        "content-label": "var(--color-content-label)",
+        "content-faint": "var(--color-content-faint)",
+
+        primary: "var(--color-primary)",
+        "primary-hover": "var(--color-primary-hover)",
+        "primary-content": "var(--color-primary-content)",
+        "primary-soft-bg": "var(--color-primary-soft-bg)",
+        "primary-soft-border": "var(--color-primary-soft-border)",
+        "primary-soft-content": "var(--color-primary-soft-content)",
+
+        "status-ontrack": "var(--color-status-ontrack)",
+        "status-ontrack-content": "var(--color-status-ontrack-content)",
+        "status-ontrack-bg": "var(--color-status-ontrack-bg)",
+
+        "status-caution": "var(--color-status-caution)",
+        "status-caution-content": "var(--color-status-caution-content)",
+        "status-caution-bg": "var(--color-status-caution-bg)",
+
+        "status-offtrack": "var(--color-status-offtrack)",
+        "status-offtrack-content": "var(--color-status-offtrack-content)",
+        "status-offtrack-bg": "var(--color-status-offtrack-bg)",
+
+        "status-pending": "var(--color-status-pending)",
+        "status-pending-content": "var(--color-status-pending-content)",
+        "status-pending-bg": "var(--color-status-pending-bg)",
+
+        "status-paused": "var(--color-status-paused)",
+        "status-paused-content": "var(--color-status-paused-content)",
+        "status-paused-bg": "var(--color-status-paused-bg)",
+
+        "entity-goal": "var(--color-entity-goal)",
+        "entity-goal-bg": "var(--color-entity-goal-bg)",
+        "entity-project": "var(--color-entity-project)",
+        "entity-project-bg": "var(--color-entity-project-bg)",
+        "entity-neutral": "var(--color-entity-neutral)",
+        "entity-neutral-bg": "var(--color-entity-neutral-bg)",
+
+        "banner-info-bg": "var(--color-banner-info-bg)",
+        "banner-info-border": "var(--color-banner-info-border)",
+        "banner-info-content": "var(--color-banner-info-content)",
+
+        "banner-warning-bg": "var(--color-banner-warning-bg)",
+        "banner-warning-border": "var(--color-banner-warning-border)",
+        "banner-warning-content": "var(--color-banner-warning-content)",
+
+        "banner-danger-bg": "var(--color-banner-danger-bg)",
+        "banner-danger-border": "var(--color-banner-danger-border)",
+        "banner-danger-content": "var(--color-banner-danger-content)",
+
+        "avatar-bg": "var(--color-avatar-bg)",
+        "avatar-content": "var(--color-avatar-content)",
+        track: "var(--color-track)",
+        "badge-alert": "var(--color-badge-alert)",
+
         brand: {
           1: "#3185FF",
           2: "#E3F2FF",

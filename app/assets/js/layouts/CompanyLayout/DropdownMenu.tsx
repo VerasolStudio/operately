@@ -31,6 +31,8 @@ interface DropdownMenuProps {
   showDropdownIcon?: boolean;
   minWidth?: number;
   triggerClassName?: string;
+  /** Replaces the icon + name trigger entirely. */
+  customTrigger?: React.ReactNode;
 }
 
 export function DropdownMenu(props: DropdownMenuProps) {
@@ -49,16 +51,22 @@ export function DropdownMenu(props: DropdownMenuProps) {
     });
   }, [props.children]);
 
-  const triggerClassName = classNames(
-    "font-semibold whitespace-nowrap",
-    "flex items-center gap-1",
-    "cursor-pointer",
-    "group",
-    "hover:bg-surface-bg-highlight",
-    "px-1.5 py-0.5",
-    "rounded",
-    props.triggerClassName,
-  );
+  // A caller that supplies its own trigger classes replaces the defaults
+  // outright. Merging the two only produces pairs of competing padding and
+  // background utilities whose winner depends on Tailwind's output order.
+  const triggerClassName = props.customTrigger
+    ? classNames("cursor-pointer", props.triggerClassName)
+    : props.triggerClassName
+      ? classNames("cursor-pointer whitespace-nowrap group", props.triggerClassName)
+      : classNames(
+          "font-semibold whitespace-nowrap",
+          "flex items-center gap-1",
+          "cursor-pointer",
+          "group",
+          "hover:bg-surface-bg-highlight",
+          "px-1.5 py-0.5",
+          "rounded",
+        );
 
   if (!hasVisibleChildren) return null;
 
@@ -66,9 +74,13 @@ export function DropdownMenu(props: DropdownMenuProps) {
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
         <div className={triggerClassName} data-test-id={props.testId}>
-          {React.createElement(props.icon, { size: 16 })}
-          <div className="font-semibold">{props.name}</div>
-          {props.showDropdownIcon && <IconChevronDown size={16} />}
+          {props.customTrigger ?? (
+            <>
+              {React.createElement(props.icon, { size: 16, className: "flex-shrink-0" })}
+              <div className="truncate">{props.name}</div>
+              {props.showDropdownIcon && <IconChevronDown size={16} />}
+            </>
+          )}
         </div>
       </Popover.Trigger>
 

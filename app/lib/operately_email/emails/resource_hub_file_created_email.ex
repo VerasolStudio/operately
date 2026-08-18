@@ -3,9 +3,10 @@ defmodule OperatelyEmail.Emails.ResourceHubFileCreatedEmail do
   alias OperatelyEmail.Emails.ResourceHubEmail
   alias OperatelyWeb.Paths
 
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
+
   def send(person, activity) do
     import OperatelyEmail.Mailers.ActivityMailer
-  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
     author = Repo.preload(activity, :author).author
     company = Repo.preload(author, :company).company

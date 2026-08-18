@@ -1,17 +1,17 @@
 import React from "react";
 
-import { WorkMap } from "..";
+import { WorkMap } from ".";
+import { Column, Table } from "../../DesignKit/Table";
+import { IconPlus } from "../../icons";
 import { SpaceField } from "../../SpaceField";
 import { Tooltip } from "../../Tooltip";
-import { IconInfoCircle, IconPlus } from "../../icons";
-import classNames from "../../utils/classnames";
-import { useStateWithLocalStorage } from "../../utils/useStateWithLocalStorage";
-import { AddItemModal } from "./AddItemModal";
-import { IsItemExpandedFn, SetItemExpandedFn, TableRow } from "./TableRow";
-import { ZeroState } from "./ZeroState";
-import { compareIds } from "../../utils/ids";
-import type { FormattedTimePreferences } from "../../FormattedTime";
+import { IconInfoCircle } from "../../icons";
 import { t } from "../../i18n";
+import { useStateWithLocalStorage } from "../../utils/useStateWithLocalStorage";
+import type { FormattedTimePreferences } from "../../FormattedTime";
+import { AddItemModal } from "./AddItemModal";
+import { IsItemExpandedFn, SetItemExpandedFn, WorkMapRow } from "./WorkMapRow";
+import { ZeroState } from "./ZeroState";
 
 interface Props {
   items: WorkMap.Item[];
@@ -40,19 +40,13 @@ export function WorkMapTable({
   spaceSearch,
   addItemDefaultSpace,
   type = "company",
-  viewer,
-  profileUser,
   hideCompanyAccessInQuickAdd = false,
   zeroStateMessage,
   emptyStateVariant,
   onItemCreated,
-  formattedTimePreferences,
 }: Props) {
-  const emptyWorkMap = items.length === 0;
-  const showIndentation = React.useMemo(() => items.some((item) => item.children.length > 0), [items]);
-
-  // Default to hide assigned date
-  const resolvedColumnOptions = { hideAssignedDate: true, ...columnOptions };
+  const resolvedColumnOptions: WorkMap.ColumnOptions = { hideAssignedDate: true, ...columnOptions };
+  const isCompletedTab = tab === "completed";
 
   const storageScope = React.useMemo(() => {
     const path = typeof window !== "undefined" ? window.location.pathname : "unknown";
@@ -76,18 +70,16 @@ export function WorkMapTable({
             ? (valueOrUpdater as (prev: boolean) => boolean)(currentValue)
             : valueOrUpdater;
 
+        // Expanded is the default, so an expanded item is stored by *removing*
+        // its key. Otherwise the record grows without bound as people browse.
         if (nextValue === true) {
-          if (currentValue === true && !(id in previousState)) {
-            return previousState;
-          }
+          if (currentValue === true && !(id in previousState)) return previousState;
 
           const { [id]: _removed, ...rest } = previousState;
           return rest;
         }
 
-        if (currentValue === nextValue) {
-          return previousState;
-        }
+        if (currentValue === nextValue) return previousState;
 
         return { ...previousState, [id]: nextValue };
       });
@@ -95,130 +87,83 @@ export function WorkMapTable({
     [setExpandedState],
   );
 
+  if (items.length === 0) {
+    return (
+      <ZeroState
+        addingEnabled={addingEnabled}
+        spaceSearch={spaceSearch!}
+        addItem={addItem!}
+        addItemDefaultSpace={addItemDefaultSpace!}
+        hideCompanyAccess={hideCompanyAccessInQuickAdd}
+        zeroStateMessage={zeroStateMessage}
+        variant={emptyStateVariant}
+        onItemCreated={onItemCreated}
+      />
+    );
+  }
+
+  const columns = buildColumns(resolvedColumnOptions, isCompletedTab);
+
   return (
-    <div className="overflow-x-auto bg-surface-base rounded-b-lg">
-      {emptyWorkMap ? (
-        <ZeroState
-          addingEnabled={addingEnabled}
-          spaceSearch={spaceSearch!}
-          addItem={addItem!}
+    <div className="overflow-x-auto">
+      <Table columns={columns}>
+        {items.map((item, index) => (
+          <WorkMapRow
+            key={item.id}
+            item={item}
+            level={0}
+            index={index}
+            tab={tab}
+            columnOptions={resolvedColumnOptions}
+            addItem={addItem}
+            addingEnabled={addingEnabled}
+            spaceSearch={spaceSearch}
+            hideCompanyAccessInQuickAdd={hideCompanyAccessInQuickAdd}
+            isExpanded={getItemExpanded}
+            setItemExpanded={setItemExpanded}
+          />
+        ))}
+      </Table>
+
+      {addingEnabled && addItem && spaceSearch && (
+        <AddNewRow
+          spaceSearch={spaceSearch}
+          addItem={addItem}
           addItemDefaultSpace={addItemDefaultSpace!}
           hideCompanyAccess={hideCompanyAccessInQuickAdd}
-          zeroStateMessage={zeroStateMessage}
-          variant={emptyStateVariant}
-          onItemCreated={onItemCreated}
         />
-      ) : (
-        <table className="min-w-full divide-y divide-surface-outline">
-          <TableHeader tab={tab} columnOptions={resolvedColumnOptions} profileUser={profileUser} viewer={viewer} />
-          <tbody>
-            {items.map((item, idx) => (
-              <TableRow
-                key={item.id}
-                item={item}
-                level={0}
-                isLast={idx === items.length - 1}
-                tab={tab}
-                columnOptions={resolvedColumnOptions}
-                showIndentation={showIndentation}
-                addItem={addItem}
-                addingEnabled={addingEnabled}
-                spaceSearch={spaceSearch}
-                hideCompanyAccessInQuickAdd={hideCompanyAccessInQuickAdd}
-                isExpanded={getItemExpanded}
-                setItemExpanded={setItemExpanded}
-                profileUser={profileUser}
-                formattedTimePreferences={formattedTimePreferences}
-              />
-            ))}
-
-            {addingEnabled && (
-              <AddNewRow
-                addingEnabled={addingEnabled}
-                spaceSearch={spaceSearch!}
-                addItem={addItem!}
-                addItemDefaultSpace={addItemDefaultSpace!}
-                hideCompanyAccess={hideCompanyAccessInQuickAdd}
-              />
-            )}
-          </tbody>
-        </table>
       )}
     </div>
   );
 }
 
-interface HeaderProps {
-  tab: WorkMap.Filter;
-  columnOptions?: WorkMap.ColumnOptions;
-  viewer?: WorkMap.Person;
-  profileUser?: WorkMap.Person;
+function buildColumns(columnOptions: WorkMap.ColumnOptions, isCompletedTab: boolean): Column[] {
+  const columns: Column[] = [{ label: t("turboui.workMap.name"), width: "42%" }];
+
+  if (!columnOptions.hideStatus) {
+    columns.push({ label: t("turboui.workMap.status"), width: "13%" });
+  }
+
+  if (!columnOptions.hideProgress) {
+    columns.push({ label: t("turboui.workMap.progress"), width: "13%", hideOnMobile: true });
+  }
+
+  if (!columnOptions.hideDueDate) {
+    columns.push({
+      label: isCompletedTab ? t("turboui.workMap.completedOn") : t("turboui.workMap.dueDate"),
+      width: "12%",
+      align: "right",
+    });
+  }
+
+  if (!columnOptions.hideNextStep) {
+    columns.push({ label: <NextStepHeaderLabel />, width: "20%", hideOnMobile: true });
+  }
+
+  return columns;
 }
 
-export function TableHeader({ tab, columnOptions = {}, viewer, profileUser }: HeaderProps) {
-  const isCompletedPage = tab === "completed";
-  const roleLabel = getRoleLabel(viewer, profileUser);
-
-  return (
-    <thead>
-      <tr className="border-b-2 border-surface-outline dark:border-gray-600 bg-surface-dimmed dark:bg-gray-800/80 text-content-base dark:text-gray-200 text-xs sm:text-sm sticky top-0">
-        <HeaderCell
-          className={isCompletedPage ? "w-[65%] md:w-[58%] md:px-4" : "w-[65%] lg:w-[55%] xl:w-[40%] md:px-4"}
-        >
-          {t("turboui.workMap.name")}
-        </HeaderCell>
-        <HeaderCell hide={columnOptions.hideStatus} className={isCompletedPage ? "md:px-4" : "md:px-4"}>
-          {t("turboui.workMap.status")}
-        </HeaderCell>
-        <HeaderCell hide={isCompletedPage || columnOptions.hideProgress} className="pr-6 lg:px-4">
-          {t("turboui.workMap.progress")}
-        </HeaderCell>
-        <HeaderCell
-          hide={columnOptions.hideDueDate}
-          className={isCompletedPage ? "md:px-4" : "hidden lg:table-cell md:px-4"}
-        >
-          {isCompletedPage ? "Completed On" : "Due Date"}
-        </HeaderCell>
-        <HeaderCell hide={columnOptions.hideAssignedDate} className="hidden lg:table-cell md:px-4">
-          {t("turboui.workMap.assignedOn")}
-        </HeaderCell>
-        <HeaderCell hide={columnOptions.hideSpace} className="hidden lg:table-cell md:px-4">
-          {t("turboui.workMap.space")}
-        </HeaderCell>
-        <HeaderCell hide={columnOptions.hideProject} className="hidden lg:table-cell md:px-4">
-          {t("turboui.workMap.project")}
-        </HeaderCell>
-        <HeaderCell hide={columnOptions.hideOwner} className="hidden xl:table-cell md:px-4">
-          {t("turboui.workMap.champion")}
-        </HeaderCell>
-        {roleLabel && (
-          <HeaderCell hide={columnOptions.hideRole} className="hidden xl:table-cell md:px-4">
-            {roleLabel}
-          </HeaderCell>
-        )}
-        <NextStepHeaderCell hide={isCompletedPage || columnOptions.hideNextStep} />
-      </tr>
-    </thead>
-  );
-}
-
-interface HeaderCellProps {
-  className?: string;
-  hide?: boolean;
-  children?: React.ReactNode;
-}
-
-function HeaderCell({ className, hide, children }: HeaderCellProps) {
-  if (hide) return null;
-
-  return (
-    <th className={classNames("text-left py-2 md:py-3.5 px-2 font-semibold whitespace-nowrap", className)}>
-      {children}
-    </th>
-  );
-}
-
-function NextStepHeaderCell({ hide }: { hide?: boolean }) {
+function NextStepHeaderLabel() {
   const tooltipContent = (
     <div className="text-xs">
       <p className="mb-2">{t("turboui.workMap.showsWhatNeedsToHappenNext")}</p>
@@ -229,65 +174,49 @@ function NextStepHeaderCell({ hide }: { hide?: boolean }) {
   );
 
   return (
-    <HeaderCell hide={hide} className="hidden xl:table-cell xl:w-[200px] 2xl:w-[300px] md:px-4">
-      <div className="flex items-center gap-1">
-        Next step
-        <Tooltip content={tooltipContent} className="z-50">
-          <IconInfoCircle size={12} className="text-content-dimmed" />
-        </Tooltip>
-      </div>
-    </HeaderCell>
+    <span className="inline-flex items-center gap-1 pl-5">
+      {t("turboui.workMap.nextAction")}
+      <Tooltip content={tooltipContent} className="z-50">
+        <IconInfoCircle size={12} className="text-content-faint" />
+      </Tooltip>
+    </span>
   );
 }
 
 function AddNewRow({
-  addingEnabled,
   spaceSearch,
   addItem,
   addItemDefaultSpace,
   hideCompanyAccess,
 }: {
-  addingEnabled: boolean;
   spaceSearch: SpaceField.SearchSpaceFn;
   addItem: WorkMap.AddNewItemFn;
   addItemDefaultSpace: SpaceField.Space;
   hideCompanyAccess: boolean;
 }) {
-  if (!addingEnabled) return null;
-
   const [isOpen, setIsOpen] = React.useState(false);
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
 
   return (
-    <tr>
-      <td className="py-2 px-2 sm:px-4">
-        <button
-          className="flex items-center gap-1 text-sm text-content-dimmed hover:text-content-base transition-colors py-1.5 px-2 rounded-md hover:bg-surface-highlight"
-          aria-label={t("turboui.workMap.addNewItem")}
-          onClick={open}
-        >
-          <IconPlus size={16} className="text-content-dimmed" />
-          <span>{t("turboui.workMap.addNewItem")}</span>
-        </button>
+    <div className="pt-2">
+      <button
+        type="button"
+        className="flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-[13px] text-content-dimmed transition-colors hover:bg-surface-highlight hover:text-content-strong"
+        aria-label={t("turboui.workMap.addNewItem")}
+        onClick={() => setIsOpen(true)}
+      >
+        <IconPlus size={15} />
+        {t("turboui.workMap.addNewItem")}
+      </button>
 
-        <AddItemModal
-          isOpen={isOpen}
-          close={close}
-          parentGoal={null}
-          spaceSearch={spaceSearch}
-          save={addItem}
-          space={addItemDefaultSpace}
-          hideCompanyAccess={hideCompanyAccess}
-        />
-      </td>
-    </tr>
+      <AddItemModal
+        isOpen={isOpen}
+        close={() => setIsOpen(false)}
+        parentGoal={null}
+        spaceSearch={spaceSearch}
+        save={addItem}
+        space={addItemDefaultSpace}
+        hideCompanyAccess={hideCompanyAccess}
+      />
+    </div>
   );
-}
-
-function getRoleLabel(viewer?: WorkMap.Person, profileUser?: WorkMap.Person) {
-  if (!profileUser) return;
-
-  const isViewer = compareIds(viewer?.id, profileUser?.id);
-  return isViewer ? "My Role" : "Role";
 }

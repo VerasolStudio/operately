@@ -7,7 +7,13 @@ import { Paths, usePaths } from "@/routes/paths";
 import { useTranslation } from "react-i18next";
 import { DropdownLinkItem, DropdownMenu, DropdownSeparator } from "./DropdownMenu";
 
-export function CompanyDropdown({ company }: { company: Companies.Company }) {
+export function CompanyDropdown({
+  company,
+  customTrigger,
+}: {
+  company: Companies.Company;
+  customTrigger?: React.ReactNode;
+}) {
   const paths = usePaths();
   const { t } = useTranslation();
 
@@ -18,6 +24,8 @@ export function CompanyDropdown({ company }: { company: Companies.Company }) {
       icon={IconBuildingEstate}
       align="start"
       showDropdownIcon
+      customTrigger={customTrigger}
+      triggerClassName={customTrigger ? "block" : undefined}
     >
       <DropdownLinkItem
         path={paths.peoplePath()}

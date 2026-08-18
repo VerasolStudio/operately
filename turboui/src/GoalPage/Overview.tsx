@@ -2,7 +2,7 @@ import React from "react";
 
 import { DocsAndFilesPreview } from "../DocsAndFiles";
 import { GoalPage } from ".";
-import { WarningCallout } from "../Callouts";
+import { PageColumns } from "../DesignKit/Layout";
 import { Checklists } from "./Checklists";
 import { Contributors } from "./Contributors";
 import { RelatedWork } from "./RelatedWork";
@@ -13,19 +13,15 @@ import { t } from "../i18n";
 
 export function Overview(props: GoalPage.State) {
   return (
-    <div className="p-4 max-w-6xl mx-auto my-6">
-      <div className="sm:grid sm:grid-cols-12">
-        <MainContent {...props} />
-        <Sidebar {...props} />
-      </div>
-    </div>
+    <PageColumns aside={<Sidebar {...props} />}>
+      <MainContent {...props} />
+    </PageColumns>
   );
 }
 
 function MainContent(props: GoalPage.State) {
   return (
-    <div className="space-y-12 sm:col-span-8 sm:pr-8">
-      <Warnings {...props} />
+    <div className="space-y-10">
       <PageDescription
         {...props}
         canEdit={props.permissions.canEdit}
@@ -57,32 +53,4 @@ function ResourcesSection(props: GoalPage.State) {
       getNodePath={props.docsAndFiles.nodesListProps.getNodePath}
     />
   );
-}
-
-function Warnings(props: GoalPage.State) {
-  if (props.state == "closed") return null;
-
-  if (props.neglectedGoal) {
-    return <NeglectedGoalWarning {...props} />;
-  }
-
-  return null;
-}
-
-function NeglectedGoalWarning(props: GoalPage.State) {
-  if (props.permissions.canEdit) {
-    return (
-      <WarningCallout
-        message={t("turboui.goalPage.outdatedGoal")}
-        description={<div>{t("turboui.goalPage.theLastCheckInWasMore")}</div>}
-      />
-    );
-  } else {
-    return (
-      <WarningCallout
-        message={t("turboui.goalPage.outdatedGoal")}
-        description={<div>{t("turboui.goalPage.theLastCheckInWasMore2")}</div>}
-      />
-    );
-  }
 }

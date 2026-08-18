@@ -1,9 +1,8 @@
 import React from "react";
 
 import { PrimaryButton } from "../Button";
-import { Navigation } from "../Page/Navigation";
+import { Breadcrumbs } from "../DesignKit/Layout";
 import { useHtmlTitle } from "../Page/useHtmlTitle";
-import classNames from "../utils/classnames";
 import { ConvertToGuestModal } from "./components/ConvertToGuestModal";
 import { PeopleList } from "./components/PeopleList";
 import { ReissueInvitationModal } from "./components/ReissueInvitationModal";
@@ -134,14 +133,13 @@ export function CompanyAdminManagePeoplePage(props: CompanyAdminManagePeoplePage
   }, [activeModal, props.onRenewInvitation, renewState.inviteUrl, renewState.loading]);
 
   return (
-    <div
-      className="mx-auto relative sm:my-10 sm:max-w-[100%] lg:max-w-5xl"
-      data-test-id={props.testId ?? "manage-people-page"}
-    >
-      <Navigation items={props.navigationItems} />
+    <div className="min-h-full bg-surface-base" data-test-id={props.testId ?? "manage-people-page"}>
+      <div className="px-6 pt-6 sm:px-8">
+        <Breadcrumbs items={props.navigationItems.map((item) => ({ label: item.label, to: item.to }))} />
+      </div>
 
-      <div className="relative bg-surface-base min-h-dvh sm:min-h-0 sm:border sm:border-surface-outline sm:rounded-lg sm:shadow-xl">
-        <div className="px-4 lg:px-12 py-10">
+      <div>
+        <div className="max-w-[1000px] px-6 pb-12 pt-2 sm:px-8">
           <PageHeader
             title={t("turboui.companyAdminManagePeoplePage.manageTeamMembers")}
             subtitle={t("turboui.companyAdminManagePeoplePage.addNewTeamMembersUpdateProfiles")}
@@ -266,37 +264,30 @@ function Section({
   actions?: React.ReactNode;
   children: React.ReactNode;
 }) {
-  const className = classNames("flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-0", {
-    "mb-6": subtitle,
-    "mb-2": !subtitle,
-  });
-
   return (
-    <div className="mt-10">
-      <div className={className}>
+    <div className="mt-8">
+      <div className="mb-2.5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
         <div>
-          <h2 className="font-bold">{title}</h2>
-          {subtitle && <p className="text-sm max-w-xl">{subtitle}</p>}
+          <h2 className="m-0 text-sm font-semibold text-content-strong">{title}</h2>
+          {subtitle && <p className="mt-1 mb-0 max-w-xl text-[13px] text-content-dimmed">{subtitle}</p>}
         </div>
 
         {actions && <div className="w-full sm:w-auto">{actions}</div>}
       </div>
 
-      {children}
+      <div className="overflow-hidden rounded-xl border border-surface-outline">{children}</div>
     </div>
   );
 }
 
 function PageHeader({ title, subtitle, actions }: { title: string; subtitle?: string; actions?: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-[1fr_auto] sm:flex items-center justify-between mb-6">
-      <div>
-        <div className="text-content-accent text-lg md:text-2xl font-extrabold">{title}</div>
-        {subtitle && <div className="mt-2 sm:block hidden">{subtitle}</div>}
+    <div className="mt-2 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
+      <div className="min-w-0">
+        <h1 className="m-0 text-2xl font-semibold tracking-[-0.01em] text-content-strong">{title}</h1>
+        {subtitle && <p className="mt-1.5 mb-0 text-[13px] text-content-dimmed">{subtitle}</p>}
       </div>
-      <div>{actions}</div>
-
-      {subtitle && <div className="mt-2 col-span-2 sm:hidden block">{subtitle}</div>}
+      <div className="flex flex-shrink-0 items-center gap-2">{actions}</div>
     </div>
   );
 }

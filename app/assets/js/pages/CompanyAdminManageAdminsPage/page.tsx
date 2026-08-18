@@ -152,7 +152,10 @@ function RemoveAction({ person, type }: { person: People.Person; type: "admins" 
     refresh();
   };
 
-  if (compareIds(person.id, me!.id)) return null;
+  // The button is hidden on your own row so nobody demotes themselves by
+  // accident. When we cannot tell who the viewer is, every row might be their
+  // own, so it stays hidden rather than crashing on a null id.
+  if (!me?.id || compareIds(person.id, me.id)) return null;
 
   return (
     <>

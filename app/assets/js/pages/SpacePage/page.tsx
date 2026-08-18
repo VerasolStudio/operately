@@ -1,16 +1,23 @@
 import React from "react";
 
 import * as Pages from "@/components/Pages";
-import * as Paper from "@/components/PaperContainer";
 import * as PageOptions from "@/components/PaperContainer/PageOptions";
+import * as Companies from "@/models/companies";
 import * as Spaces from "@/models/spaces";
 
 import { Feed, useItemsQuery } from "@/features/Feed";
 import {
   AvatarList,
   DangerButton,
+  DesignKit,
+  IconChartColumn,
+  IconChevronRight,
+  IconFiles,
+  IconListCheck,
+  IconMessages,
   IconPencil,
   IconSettings,
+  IconStack2,
   IconTrash,
   Modal,
   PrimaryButton,
@@ -22,99 +29,207 @@ import {
 } from "turboui";
 
 import { useClearNotificationsOnLoad } from "@/features/notifications";
-import { ToolsSection } from "@/features/SpaceTools";
+import { spaceColor } from "@/features/spaces/spaceColor";
 import { useJoinSpace } from "@/models/spaces";
 import { assertPresent } from "@/utils/assertions";
 
 import { usePaths } from "@/routes/paths";
+import { useCompanyLoaderData } from "@/routes/useCompanyLoaderData";
 import { useNavigate } from "react-router";
-import { match } from "ts-pattern";
 import { useLoadedData, useRefresh } from "./loader";
+import { SpaceWorkTable, statusCounts, useSpaceWorkRows } from "./WorkTable";
 import { t } from "@/i18n";
 
+/**
+ * A space's home.
+ *
+ * The old page was a directory: a centred title, an avatar row, and a wall of
+ * tool cards. The redesign leads with the space's work — the goals and
+ * projects it owns, worst first — and demotes the tools to a sidebar, because
+ * "what is happening here" is the question people open a space to answer, and
+ * "where are the documents" is the one they can answer from the rail.
+ */
 export function Page() {
+  const paths = usePaths();
   const { space, tools } = useLoadedData();
 
   useClearNotificationsOnLoad(space.notifications || []);
 
+  const goals = tools.goals ?? [];
+  const projects = tools.projects ?? [];
+  const rows = useSpaceWorkRows(goals, projects);
+  const counts = statusCounts(rows);
+
   return (
     <Pages.Page title={space.name!} testId="space-page">
-      <Paper.Root size="xlarge">
-        <Paper.Body>
-          <SpaceOptions />
-          <SpaceHeader space={space} />
-          <SpaceMembers space={space} />
-          <JoinButton space={space} />
-          <ToolsSection space={space} tools={tools} />
-          <SpaceFooter space={space} />
-        </Paper.Body>
-      </Paper.Root>
+      <div className="min-h-full bg-surface-base">
+        <SpaceOptions />
+
+        <DesignKit.PageHead
+          align="start"
+          crumbs={[{ label: t("sidebar.spaces"), to: paths.homePath() }, { label: space.name! }]}
+          glyph={
+            <span className="mt-0.5 flex h-[34px] w-[34px] flex-shrink-0 items-center justify-center rounded-[9px] bg-entity-neutral-bg">
+              <DesignKit.SpaceDot color={spaceColor(space)} className="h-3 w-3 rounded" />
+            </span>
+          }
+          title={space.name!}
+          subtitle={
+            <span className="inline-flex flex-wrap items-center gap-2">
+              {space.mission}
+              <SpacePrivacyIndicator accessLevels={space.accessLevels} iconSize={14} />
+            </span>
+          }
+          actions={
+            <>
+              <AvatarList people={space.members ?? []} stacked size="small" maxElements={4} />
+              <ManageAccessButton space={space} />
+              <JoinButton space={space} />
+            </>
+          }
+        />
+
+        <DesignKit.PageColumns aside={<SpaceSidebar counts={counts} />}>
+          <DesignKit.Section
+            title={t("pages.spacePage.workInThisSpace")}
+            note={t("pages.spacePage.workCounts", { goals: goals.length, projects: projects.length })}
+            action={
+              <a href={paths.spaceWorkMapPath(space.id!)} className="text-xs text-primary hover:underline">
+                {t("pages.spacePage.openWorkMap")}
+              </a>
+            }
+          >
+            {rows.length > 0 ? (
+              <SpaceWorkTable rows={rows} />
+            ) : (
+              <div className="rounded-xl border border-surface-outline px-4 py-6 text-center text-[13px] text-content-dimmed">
+                {t("pages.spacePage.noWorkYet")}
+              </div>
+            )}
+          </DesignKit.Section>
+
+          <DesignKit.Section title={t("pages.spacePage.recentActivity")}>
+            <SpaceActivity space={space} />
+          </DesignKit.Section>
+        </DesignKit.PageColumns>
+      </div>
     </Pages.Page>
   );
 }
 
-function SpaceHeader({ space }: { space: Spaces.Space }) {
+function SpaceSidebar({ counts }: { counts: { status: string; count: number }[] }) {
+  const paths = usePaths();
+  const { company } = useCompanyLoaderData();
+  const { space, tools } = useLoadedData();
+
+  const showKpis = Companies.hasFeature(company, "space_kpis") && tools.kpisEnabled;
+  const showTemplates = Companies.hasFeature(company, "project_templates") && tools.templatesEnabled;
+
+  const documentCount = (tools.resourceHubs ?? []).length;
+  const discussionCount = (tools.messagesBoards ?? []).reduce((sum, board) => sum + (board.messages?.length ?? 0), 0);
+  const taskCount = (tools.tasks ?? []).length;
+
+  const firstHub = (tools.resourceHubs ?? [])[0];
+
   return (
-    <div className="mt-2">
-      <SpaceName space={space} />
-      <SpaceMission space={space} />
-    </div>
+    <>
+      {counts.length > 0 && (
+        <DesignKit.Card>
+          <DesignKit.MicroLabel className="mb-2.5">{t("pages.spacePage.stateOfThisSpace")}</DesignKit.MicroLabel>
+          <div className="flex flex-col gap-2.5 text-[13px]">
+            {counts.map(({ status, count }) => (
+              <div key={status} className="flex items-center justify-between">
+                <DesignKit.StatusLabel status={status} label={DesignKit.statusLabel(status)} size="sm" />
+                <span className="font-semibold text-content-strong">{count}</span>
+              </div>
+            ))}
+          </div>
+        </DesignKit.Card>
+      )}
+
+      {tools.resourceHubEnabled && firstHub && (
+        <ToolCard
+          icon={<IconFiles size={20} className="text-content-label" />}
+          title={t("sidebar.documents")}
+          subtitle={t("pages.spacePage.hubCount", { count: documentCount })}
+          to={paths.resourceHubPath(firstHub.id)}
+        />
+      )}
+
+      {tools.discussionsEnabled && (
+        <ToolCard
+          icon={<IconMessages size={20} className="text-content-label" />}
+          title={t("sidebar.discussions")}
+          subtitle={t("pages.spacePage.discussionCount", { count: discussionCount })}
+          to={paths.spaceDiscussionsPath(space.id!)}
+        />
+      )}
+
+      {tools.tasksEnabled && (
+        <ToolCard
+          icon={<IconListCheck size={20} className="text-content-label" />}
+          title={t("sidebar.tasks")}
+          subtitle={t("pages.spacePage.taskCount", { count: taskCount })}
+          to={paths.spaceKanbanPath(space.id!)}
+        />
+      )}
+
+      {showKpis && (
+        <ToolCard
+          icon={<IconChartColumn size={20} className="text-content-label" />}
+          title={t("features.spaceTools.kpis")}
+          subtitle={t("pages.spacePage.kpiCount", { count: (tools.kpis ?? []).length })}
+          to={paths.spaceKpisPath(space.id!)}
+        />
+      )}
+
+      {showTemplates && (
+        <ToolCard
+          icon={<IconStack2 size={20} className="text-content-label" />}
+          title={t("features.spaceTools.templates")}
+          subtitle={t("pages.spacePage.templateCount", { count: (tools.templates ?? []).length })}
+          to={paths.spaceProjectTemplatesPath(space.id!)}
+        />
+      )}
+    </>
   );
 }
 
-function SpaceName({ space }: { space: Spaces.Space }) {
+function ToolCard({
+  icon,
+  title,
+  subtitle,
+  to,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  subtitle: string;
+  to: string;
+}) {
   return (
-    <div className="flex items-center gap-2 justify-center">
-      <SpacePrivacyIndicator accessLevels={space.accessLevels} iconSize={30} />
-      <div className="font-bold text-4xl text-center">{space.name}</div>
-    </div>
-  );
-}
-
-function SpaceMission({ space }: { space: Spaces.Space }) {
-  return (
-    <div className="text-center mt-1">
-      <div className="">{space.mission}</div>
-    </div>
-  );
-}
-
-function SpaceMembers({ space }: { space: Spaces.Space }) {
-  const size = Pages.useWindowSizeBreakpoints();
-
-  const peopleToShow = match(size)
-    .with("xs", () => 5)
-    .with("sm", () => 10)
-    .with("md", () => 15)
-    .otherwise(() => 20);
-
-  return (
-    <div className="font-medium flex items-center gap-2 w-full justify-center mt-2" data-test-id="space-members">
-      <AvatarList people={space.members!} stacked size="small" maxElements={peopleToShow} />
-      <ManageAccessButton space={space} />
-    </div>
-  );
-}
-
-function SpaceFooter({ space }: { space: Spaces.Space }) {
-  return (
-    <Paper.DimmedSection>
-      <div className="uppercase text-xs font-semibold mb-2">{t("pages.spacePage.activity")}</div>
-      <SpaceActivity space={space} />
-    </Paper.DimmedSection>
+    <DesignKit.Card to={to}>
+      <div className="flex items-center gap-3">
+        {icon}
+        <div className="min-w-0 flex-1">
+          <div className="text-sm font-medium text-content-strong">{title}</div>
+          <div className="text-xs text-content-subtle">{subtitle}</div>
+        </div>
+        <IconChevronRight size={16} className="text-content-faint" />
+      </div>
+    </DesignKit.Card>
   );
 }
 
 function SpaceActivity({ space }: { space: Spaces.Space }) {
   const { data, loading, error } = useItemsQuery("space", space.id!);
 
-  if (loading) return <div>{t("pages.spacePage.loading")}</div>;
-  if (error) return <div>{t("pages.spacePage.error")}</div>;
+  if (loading) return <div className="text-[13px] text-content-dimmed">{t("pages.spacePage.loading")}</div>;
+  if (error) return <div className="text-[13px] text-content-dimmed">{t("pages.spacePage.error")}</div>;
 
-  return <Feed items={data?.activities || []} testId="space-feed" page="space" />;
+  return <Feed items={data?.activities || []} testId="space-feed" page="space" hideTopBorder />;
 }
 
-function JoinButton({ space }) {
+function JoinButton({ space }: { space: Spaces.Space }) {
   const refresh = useRefresh();
   const [join] = useJoinSpace();
 
@@ -126,11 +241,9 @@ function JoinButton({ space }) {
   };
 
   return (
-    <div className="flex justify-center mb-8 mt-6">
-      <PrimaryButton size="sm" onClick={handleClick} testId="join-space-button">
-        {t("pages.spacePage.joinThisSpace")}
-      </PrimaryButton>
-    </div>
+    <PrimaryButton size="sm" onClick={handleClick} testId="join-space-button">
+      {t("pages.spacePage.joinThisSpace")}
+    </PrimaryButton>
   );
 }
 
@@ -142,7 +255,7 @@ function ManageAccessButton({ space }: { space: Spaces.Space }) {
   if (!space.permissions.hasFullAccess) return null;
 
   return (
-    <SecondaryButton linkTo={path} size="xs" testId="access-management">
+    <SecondaryButton linkTo={path} size="sm" testId="access-management">
       {t("pages.spacePage.manageAccess")}
     </SecondaryButton>
   );
@@ -195,7 +308,7 @@ function SpaceOptions() {
     try {
       await performDelete();
       setIsModalOpen(false);
-    } catch (error) {
+    } catch {
       // Error toast already shown in performDelete; keep modal open for another attempt.
     }
   }, [performDelete]);

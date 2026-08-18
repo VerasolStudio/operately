@@ -12,7 +12,11 @@ import { PersonField } from "../PersonField";
 import { PrivacyField } from "../PrivacyField";
 import * as TaskBoardTypes from "../TaskBoard/types";
 import type { KanbanBoardProps, KanbanState } from "../TaskBoard/KanbanView/types";
+import { PrimaryButton, SecondaryButton } from "../Button";
+import { IconMessage } from "../icons";
 import { CheckIns } from "./CheckIns";
+import { NextAction } from "./NextAction";
+import { viewerCanPostCheckIn } from "./checkInPermissions";
 import { DeleteModal } from "./DeleteModal";
 import { Discussions } from "./Discussions";
 import { Overview } from "./Overview";
@@ -263,6 +267,10 @@ export function ProjectPage(props: ProjectPage.Props) {
       testId="project-page"
       tabs={tabs}
       {...state}
+      dueDate={state.dueAt}
+      parentGoal={state.parentGoal}
+      nextAction={<NextAction {...state} />}
+      actions={<HeaderActions {...state} />}
     >
       <div className="flex-1 overflow-auto">
         {activeTab === "overview" && <Overview {...state} />}
@@ -291,6 +299,26 @@ export function ProjectPage(props: ProjectPage.Props) {
         />
       )}
     </ProjectPageLayout>
+  );
+}
+
+function HeaderActions(props: ProjectPage.State) {
+  const isClosed = props.state === "closed";
+
+  return (
+    <>
+      {props.permissions.canEdit && !isClosed && (
+        <SecondaryButton size="sm" linkTo={props.manageTeamLink} testId="manage-team-members">
+          {t("turboui.projectPage.manageTeam")}
+        </SecondaryButton>
+      )}
+
+      {viewerCanPostCheckIn(props) && !isClosed && (
+        <PrimaryButton size="sm" linkTo={props.newCheckInLink} icon={IconMessage} testId="check-in-button">
+          {t("turboui.projectPage.checkIn")}
+        </PrimaryButton>
+      )}
+    </>
   );
 }
 

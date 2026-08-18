@@ -21,28 +21,30 @@ export function MemberTypeSelectionPage(props: MemberTypeSelectionPage.Props) {
   useHtmlTitle(pageTitle);
 
   return (
-    <div className="mx-auto relative sm:my-10 max-w-2xl" data-test-id={props.testId}>
+    // The rest of the redesign dropped the floating card in favour of a page
+    // that starts at the top-left, under its own breadcrumb. This screen kept
+    // the old shell, so arriving here felt like leaving the product.
+    <div className="relative w-full pt-6 pb-12" data-test-id={props.testId}>
       {props.navigationItems && <PageNavigation items={props.navigationItems} />}
-      <div className="relative bg-surface-base min-h-dvh sm:min-h-0 sm:border sm:border-surface-outline sm:rounded-lg sm:shadow-xl">
-        <div className="px-4 sm:px-10 py-8">
-          <div className="text-content-accent text-2xl font-extrabold mb-6">
-            {t("turboui.memberTypeSelectionPage.whoAreYouInviting")}
-          </div>
 
-          <div className="flex flex-col gap-4">
-            <MemberTypeCard
-              title={t("turboui.memberTypeSelectionPage.teamMember")}
-              description={t("turboui.memberTypeSelectionPage.thisPersonIsPartOfThe")}
-              to={props.teamMemberPath}
-              testId="select-team-member"
-            />
-            <MemberTypeCard
-              title={t("turboui.memberTypeSelectionPage.outsideCollaborator")}
-              description={t("turboui.memberTypeSelectionPage.thisPersonIsNotACompany")}
-              to={props.outsideCollaboratorPath}
-              testId="select-outside-collaborator"
-            />
-          </div>
+      <div className="max-w-2xl px-6 pt-2 sm:px-8">
+        <h1 className="m-0 mb-6 text-2xl font-semibold tracking-[-0.01em] text-content-strong">
+          {t("turboui.memberTypeSelectionPage.whoAreYouInviting")}
+        </h1>
+
+        <div className="flex flex-col gap-3">
+          <MemberTypeCard
+            title={t("turboui.memberTypeSelectionPage.teamMember")}
+            description={t("turboui.memberTypeSelectionPage.thisPersonIsPartOfThe")}
+            to={props.teamMemberPath}
+            testId="select-team-member"
+          />
+          <MemberTypeCard
+            title={t("turboui.memberTypeSelectionPage.outsideCollaborator")}
+            description={t("turboui.memberTypeSelectionPage.thisPersonIsNotACompany")}
+            to={props.outsideCollaboratorPath}
+            testId="select-outside-collaborator"
+          />
         </div>
       </div>
     </div>
@@ -63,11 +65,11 @@ function MemberTypeCard({
   return (
     <DivLink
       to={to}
-      className="block border border-surface-outline rounded-lg px-5 py-4 text-left hover:bg-surface-dimmed transition-colors"
+      className="block rounded-xl border border-line-soft bg-surface-base px-5 py-4 text-left transition-colors hover:border-primary-soft-border hover:bg-surface-accent"
       testId={testId}
     >
-      <div className="font-bold text-content-accent">{title}</div>
-      <div className="text-sm text-content-dimmed mt-1">{description}</div>
+      <div className="text-[15px] font-semibold text-content-strong">{title}</div>
+      <div className="mt-1 text-[13px] text-content-muted">{description}</div>
     </DivLink>
   );
 }

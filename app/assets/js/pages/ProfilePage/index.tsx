@@ -44,6 +44,7 @@ function Page() {
 
     canEditProfile: canEditProfile(person, me),
     editProfilePath: paths.profileEditPath(person.id),
+    peoplePath: paths.peoplePath(),
 
     activityFeed: <ActivityFeed personId={person.id} />,
     aboutMe: person.description,

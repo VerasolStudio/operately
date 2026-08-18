@@ -63,6 +63,7 @@ function Page() {
       onSuccess={onSuccess}
       space={prepareSpace(paths, space)}
       parentGoal={prepareParentGoal(paths, parentGoal)}
+      cancelLink={parentGoal ? paths.goalPath(parentGoal.id) : paths.workMapPath("goals")}
     />
   );
 }

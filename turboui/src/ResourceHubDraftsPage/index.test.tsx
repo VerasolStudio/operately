@@ -10,6 +10,7 @@ jest.mock("../icons", () => ({
   IconFolderFilled: () => <span>folder</span>,
   IconLink: () => <span>link</span>,
   IconLogs: () => <span>logs</span>,
+  IconChevronRight: () => <span>slash</span>,
   IconSlash: () => <span>slash</span>,
   IconVideo: () => <span>video</span>,
 }));

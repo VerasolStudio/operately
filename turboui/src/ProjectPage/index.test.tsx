@@ -30,10 +30,13 @@ jest.mock("../icons", () => {
   const HiddenIcon = () => <span aria-hidden="true" />;
 
   return {
+    IconAlertTriangle: HiddenIcon,
     IconAlignJustified: HiddenIcon,
+    IconArrowNarrowRight: HiddenIcon,
     IconCheck: HiddenIcon,
     IconChartColumn: HiddenIcon,
     IconChevronDown: HiddenIcon,
+    IconChecklist: HiddenIcon,
     IconChevronRight: HiddenIcon,
     IconCircleArrowRight: HiddenIcon,
     IconCircleCheck: HiddenIcon,
@@ -51,11 +54,13 @@ jest.mock("../icons", () => {
     IconLogs: HiddenIcon,
     IconMessage: HiddenIcon,
     IconMessages: HiddenIcon,
+    IconMinus: HiddenIcon,
     IconPlayerPause: HiddenIcon,
     IconProject: HiddenIcon,
     IconRotateDot: HiddenIcon,
     IconSearch: HiddenIcon,
     IconSlash: HiddenIcon,
+    IconTarget: HiddenIcon,
     IconTrash: HiddenIcon,
     IconUpload: HiddenIcon,
     IconVideo: HiddenIcon,

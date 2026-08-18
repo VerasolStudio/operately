@@ -2,56 +2,71 @@ import * as Pages from "@/components/Pages";
 import * as React from "react";
 
 import { Person } from "@/models/people";
-import { Avatar, Link } from "turboui";
+import { Avatar, DesignKit, SecondaryButton } from "turboui";
 import { useLoadedData } from "./loader";
 
 import { usePaths } from "@/routes/paths";
 import { t } from "@/i18n";
 
+/**
+ * The company directory.
+ *
+ * A two-column grid of cards looked generous but made the list unreadable past
+ * about a dozen people: names zig-zag, and there is no column to scan. A table
+ * with the name on the left puts every name on the same vertical line, which
+ * is the whole job of a directory.
+ */
 export function Page() {
+  const paths = usePaths();
   const { company, people } = useLoadedData();
 
   return (
-    <Pages.Page title={t("pages.peoplePage.people")}>
-      <div className="max-w-5xl mx-auto sm:px-6 lg:px-8 my-10">
-        <h1 className="text-3xl font-bold text-center mt-2 mb-16">
-          {t("pages.peoplePage.membersOf", { v1: company.name })}
-        </h1>
+    <Pages.Page title={t("pages.peoplePage.people")} testId="people-page">
+      <div className="min-h-full bg-surface-base">
+        <DesignKit.PageHead
+          crumbs={[{ label: company.name!, to: paths.homePath() }, { label: t("pages.peoplePage.people") }]}
+          title={t("pages.peoplePage.people")}
+          subtitle={t("pages.peoplePage.memberCount", { count: people.length })}
+          actions={
+            <SecondaryButton size="sm" linkTo={paths.companyManagePeoplePath()}>
+              {t("pages.peoplePage.managePermissions")}
+            </SecondaryButton>
+          }
+        />
 
-        <PeopleList people={people} />
+        <DesignKit.PageBody width="wide">
+          <PeopleTable people={people} />
+        </DesignKit.PageBody>
       </div>
     </Pages.Page>
   );
 }
 
-function PeopleList({ people }: { people: Person[] }) {
-  return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
-      {people.map((person) => (
-        <PersonCard key={person.id} person={person} />
-      ))}
-    </div>
-  );
-}
-
-function PersonCard({ person }: { person: Person }) {
+function PeopleTable({ people }: { people: Person[] }) {
   const paths = usePaths();
-  const testId = "person-" + person.id!;
 
   return (
-    <div className="bg-surface-base rounded shadow p-4 border border-stroke-base">
-      <div className="flex items-start gap-4">
-        <Avatar person={person} size={40} />
-
-        <div className="flex flex-col">
-          <div className="font-bold leading-tight">
-            <Link to={paths.profilePath(person.id!!)} underline="never" testId={testId}>
-              {person.fullName}
-            </Link>
-          </div>
-          <div className="font-medium text-sm text-content-dimmed">{person.title}</div>
-        </div>
-      </div>
-    </div>
+    <DesignKit.Table
+      columns={[
+        { label: t("pages.peoplePage.name"), width: "44%" },
+        { label: t("pages.peoplePage.title"), width: "28%" },
+        { label: t("pages.peoplePage.email"), width: "28%", hideOnMobile: true },
+      ]}
+    >
+      {people.map((person, index) => (
+        <DesignKit.Row key={person.id} index={index} to={paths.profilePath(person.id!)} testId={"person-" + person.id!}>
+          <DesignKit.Cell first>
+            <div className="flex items-center gap-3">
+              <Avatar person={person} size={32} />
+              <span className="min-w-0 truncate text-sm font-medium text-content-strong">{person.fullName}</span>
+            </div>
+          </DesignKit.Cell>
+          <DesignKit.Cell className="truncate">{person.title}</DesignKit.Cell>
+          <DesignKit.Cell hideOnMobile last className="truncate text-content-subtle">
+            {person.email}
+          </DesignKit.Cell>
+        </DesignKit.Row>
+      ))}
+    </DesignKit.Table>
   );
 }

@@ -15,9 +15,11 @@ const DiscordIcon = IconBrandDiscordFilled;
 export function HelpDropdown({
   company,
   onOpenKeyboardShortcuts,
+  triggerClassName,
 }: {
   company: Companies.Company;
   onOpenKeyboardShortcuts: () => void;
+  triggerClassName?: string;
 }) {
   const { t } = useTranslation();
 
@@ -28,7 +30,7 @@ export function HelpDropdown({
       icon={IconLifebuoy}
       align="center"
       minWidth={220}
-      triggerClassName="hidden lg:flex"
+      triggerClassName={triggerClassName}
     >
       <DropdownActionItem
         icon={IconQuestionMark}
@@ -38,7 +40,12 @@ export function HelpDropdown({
       />
       <DropdownSeparator />
       <DropdownLinkItem path={contactUsLink(company)} icon={IconMail} title={t("helpMenu.contactUs")} />
-      <DropdownLinkItem path={window.appConfig!.discordUrl} icon={DiscordIcon} title={t("helpMenu.discordChat")} target="_blank" />
+      <DropdownLinkItem
+        path={window.appConfig!.discordUrl}
+        icon={DiscordIcon}
+        title={t("helpMenu.discordChat")}
+        target="_blank"
+      />
       <DropdownLinkItem path={newsLink} icon={IconSpeakerphone} title={t("helpMenu.whatsNew")} target="_blank" />
       <DropdownLinkItem path={roadmap} icon={IconMap2} title={t("helpMenu.roadmap")} target="_blank" />
     </DropdownMenu>

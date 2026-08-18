@@ -19,7 +19,9 @@ import { t } from "@/i18n";
 export function DangerZone() {
   const { company, ownerIds } = useLoadedData();
   const me = useMe();
-  const amIOwner = includesId(ownerIds, me!.id);
+  // Nullable for the same reason as the owners menu, and deleting a company is
+  // the last thing that should appear to someone we cannot identify.
+  const amIOwner = !!me?.id && includesId(ownerIds, me.id);
 
   if (!amIOwner) return null;
 

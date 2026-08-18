@@ -357,6 +357,7 @@
       "employeeHandbook": "従業員ハンドブック",
       "goalsAmpProjects": "ゴールとプロジェクト",
       "goalsProjects": "ゴールとプロジェクト",
+      "kpis": "KPI",
       "markItDone": "完了にする",
       "monthlyReports": "月次レポート",
       "organizeTasksOnAKanbanBoard": "ステータス列のあるカンバンボードでタスクを整理します。",
@@ -369,6 +370,7 @@
       "quarterlyGoal2": "四半期ゴール 2",
       "setGoalsTrackYourProgressAnd": "ゴールを設定し、進捗を追跡し、チームで協力して達成します。",
       "tasks": "タスク",
+      "templates": "テンプレート",
       "writeANewPost": "新しい投稿を書く",
       "yearlyGoal": "年間ゴール"
     }
@@ -680,12 +682,36 @@
     },
     "companyPermissionsPage": {
       "admins": "管理者",
+      "audiences": {
+        "everyone": "全員",
+        "adminsAndOwners": "管理者・オーナー",
+        "ownersOnly": "オーナーのみ"
+      },
       "companyAdministration": "会社の管理",
+      "groups": {
+        "createWork": "仕事をつくる",
+        "managePeople": "人を管理する",
+        "manageCompany": "会社を管理する"
+      },
+      "headline": "誰が何をできるか",
       "members": "メンバー",
       "owners": "オーナー",
       "permission": "権限",
       "permissionBreakdown": "権限の一覧",
-      "permissions": "権限"
+      "permissionNames": {
+        "addSpaces": "スペースを作る",
+        "addGoals": "ゴールを作る",
+        "addProjects": "プロジェクトを作る",
+        "invitePeople": "メンバーを招待する",
+        "removePeople": "メンバーを削除する",
+        "updateProfiles": "プロフィールを更新する",
+        "manageAdmins": "管理者を追加・削除する",
+        "manageOwners": "オーナーを追加・削除する",
+        "manageTrustedDomains": "信頼済みメールドメインを管理する",
+        "accessAnyResource": "すべてのリソースにアクセスする"
+      },
+      "permissions": "権限",
+      "subheadline": "会社レベルの権限です。個々のゴール・プロジェクトの公開範囲は各画面で設定します。"
     },
     "companyRenamePage": {
       "companyAdministration": "会社の管理",
@@ -695,6 +721,10 @@
       "save": "保存"
     },
     "companyWorkMapPage": {
+      "goalCount_one": "ゴール{{count}}件",
+      "goalCount_other": "ゴール{{count}}件",
+      "projectCount_one": "プロジェクト{{count}}件",
+      "projectCount_other": "プロジェクト{{count}}件",
       "workMap": "{{v1}} のワークマップ"
     },
     "discussionDraftsPage": {
@@ -775,7 +805,13 @@
       "goalAsMarkdown": "ゴールを Markdown で表示"
     },
     "goalCheckInNewPage": {
+      "checkIn": "チェックイン",
+      "checkInFor": "チェックイン",
       "checkIns": "チェックイン",
+      "firstCheckIn": "最初のチェックインです",
+      "lastCheckInWas": "前回は",
+      "notifiesOnSubmit_one": "提出すると{{count}}名に通知されます",
+      "notifiesOnSubmit_other": "提出すると{{count}}名に通知されます",
       "shareTheProgressWithTheTeam": "進捗をチームに共有する",
       "workMap": "ワークマップ"
     },
@@ -853,12 +889,19 @@
     "homePage": {
       "addSpace": "スペースを追加",
       "couldNotDeleteFeedItem": "フィード項目を削除できませんでした",
+      "dashboardSubtitle_one": "{{date}} · {{count}}件の仕事が進行中",
+      "dashboardSubtitle_other": "{{date}} · {{count}}件の仕事が進行中",
       "error": "エラー",
       "home": "ホーム",
       "invitePeople": "メンバーを招待",
       "manageProjectsTrackGoalsAndOrganize": "プロジェクトを管理し、ゴールを追跡し、チームの仕事を整理します。",
       "noSpacesYet": "スペースはまだありません",
+      "openWorkMap": "ワークマップを開く",
       "pleaseTryAgain": "もう一度お試しください。",
+      "reasonNeedsReview": "確認が必要",
+      "reasonOverdue_one": "期限を{{count}}日超過",
+      "reasonOverdue_other": "期限を{{count}}日超過",
+      "reasonPaused": "停止中",
       "spacesWillAppearHereWhenSomeone": "誰かからアクセス権を付与されると、ここにスペースが表示されます。",
       "stayUpToDateWithYour": "チームの進捗を把握しましょう。",
       "whatSNew": "新着情報",
@@ -945,19 +988,35 @@
       "sorryWeCouldnTFindThat": "お探しのページは見つかりませんでした。"
     },
     "notificationsPage": {
+      "actionableItemsLiveIn": "対応が必要なものは",
+      "actionableItemsLiveInSuffix": "にまとまっています",
+      "earlier": "それ以前",
       "hereSEveryNotificationYouVe": "Operately から届いた通知の一覧です。",
       "markAllRead": "すべて既読にする",
       "newForYou": "新着",
+      "noNotificationsYet": "通知はまだありません。",
       "nothingNewForYou": "新着はありません。",
       "notifications": "通知",
-      "previousNotifications": "以前の通知"
+      "previousNotifications": "以前の通知",
+      "tabAll": "すべて",
+      "tabUnread": "未読",
+      "today": "今日",
+      "unreadCount_one": "未読{{count}}件",
+      "unreadCount_other": "未読{{count}}件",
+      "yesterday": "昨日"
     },
     "peopleOrgChartPage": {
       "orgChart": "組織図"
     },
     "peoplePage": {
+      "email": "メール",
+      "managePermissions": "権限を管理",
+      "memberCount_one": "{{count}}名",
+      "memberCount_other": "{{count}}名",
       "membersOf": "{{v1}} のメンバー",
-      "people": "メンバー"
+      "name": "名前",
+      "people": "メンバー",
+      "title": "役職"
     },
     "profilePage": {
       "error": "エラー",
@@ -1569,16 +1628,32 @@
       "deleteEverything": "すべて削除",
       "deleteSpace": "スペースを削除",
       "deletingThisSpaceWillPermanentlyRemove": "このスペースを削除すると、中身がすべて完全に削除されます。すべてのプロジェクト、ゴール、ディスカッションが対象です。",
+      "discussionCount_one": "{{count}}件",
+      "discussionCount_other": "{{count}}件",
       "edit": "編集",
       "error": "エラー",
       "failedToDeleteSpace": "スペースを削除できませんでした",
+      "hubCount_one": "{{count}}件",
+      "hubCount_other": "{{count}}件",
       "joinThisSpace": "このスペースに参加",
+      "kpiCount_one": "{{count}}件",
+      "kpiCount_other": "{{count}}件",
       "loading": "読み込み中...",
       "manageAccess": "アクセス権を管理",
+      "noWorkYet": "まだゴールもプロジェクトもありません。",
+      "openWorkMap": "ワークマップで見る",
       "pleaseTryAgain": "もう一度お試しください。",
+      "recentActivity": "最近の動き",
       "spaceDeleted": "スペースを削除しました",
+      "stateOfThisSpace": "このスペースの状態",
+      "taskCount_one": "{{count}}件",
+      "taskCount_other": "{{count}}件",
+      "templateCount_one": "{{count}}件",
+      "templateCount_other": "{{count}}件",
       "theSpaceAndItsContentWere": "スペースとその内容を削除しました。",
-      "thisActionCannotBeUndone": "この操作は取り消せません。"
+      "thisActionCannotBeUndone": "この操作は取り消せません。",
+      "workCounts": "{{goals}}件のゴール / {{projects}}件のプロジェクト",
+      "workInThisSpace": "このスペースの仕事"
     },
     "spaceWorkMapPage": {
       "workMap": "ワークマップ"
@@ -1594,6 +1669,27 @@
       "failedToUpdateTaskReminders": "タスクのリマインダーを更新できませんでした。",
       "failedToUpdateTaskStatus": "タスクのステータスを更新できませんでした。"
     }
+  },
+  "sidebar": {
+    "discussions": "ディスカッション",
+    "addSpace": "スペースを追加",
+    "companyAdmin": "会社の管理",
+    "companyWide": "全社",
+    "documents": "ドキュメント",
+    "goals": "ゴール",
+    "home": "ホーム",
+    "memberCount_one": "{{count}}名",
+    "memberCount_other": "{{count}}名",
+    "myWork": "自分の担当",
+    "notificationSettings": "通知設定",
+    "notifications": "通知",
+    "people": "メンバー",
+    "projects": "プロジェクト",
+    "search": "検索",
+    "spaces": "スペース",
+    "tasks": "タスク",
+    "todo": "やること",
+    "workMap": "ワークマップ"
   },
   "userMenu": {
     "apiTokens": "API トークン",

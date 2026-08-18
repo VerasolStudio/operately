@@ -1,37 +1,52 @@
 import React from "react";
-import { IconChevronRight, IconProject } from "../icons";
-import { BlackLink } from "../Link";
-import { PieChart } from "../PieChart";
-import { PrivacyIndicator } from "../PrivacyIndicator";
-import { StatusBadge } from "../StatusBadge";
-import { TextField } from "../TextField";
+
 import { ProjectPageLayout } from ".";
+import { EntityGlyph } from "../DesignKit/Entities";
+import { PageHead } from "../DesignKit/Layout";
+import { StatusLabel, statusLabel } from "../DesignKit/Status";
+import { dueNote } from "../DesignKit/dueDate";
+import { DivLink } from "../Link";
+import { PrivacyIndicator } from "../PrivacyIndicator";
+import { TextField } from "../TextField";
 import { t } from "../i18n";
 
+/**
+ * Header for the project, milestone and task pages.
+ *
+ * Task completion moved from a pill into the metadata line as plain text.
+ * The pie chart looked like a control and read like decoration: at 14px it
+ * cannot show the difference between 60% and 70%, which is exactly the
+ * distinction the number next to it makes for free.
+ */
 export function PageHeader(props: ProjectPageLayout.Props) {
-  const navigation =
+  const isTemplate = props.mode === "template";
+
+  const crumbs =
     "space" in props
       ? [
-          { to: props.space.link, label: props.space.name },
+          { label: props.space.name, to: props.space.link },
           {
-            to: props.mode === "template" ? props.projectTemplatesLink || props.workmapLink : props.workmapLink,
-            label: props.mode === "template" ? "Project Templates" : "Projects",
+            label: isTemplate
+              ? t("turboui.projectPageLayout.projectTemplates")
+              : t("turboui.projectPageLayout.projects"),
+            to: isTemplate ? props.projectTemplatesLink || props.workmapLink : props.workmapLink,
           },
         ]
-      : [{ to: props.homeLink, label: t("turboui.projectPageLayout.home") }];
+      : [{ label: t("turboui.projectPageLayout.home"), to: props.homeLink }];
 
   const isInviteOnly = props.accessLevels?.company === "no_access" && props.accessLevels?.space === "no_access";
+  const due = props.dueDate ? dueNote(props.dueDate.date) : null;
+  const isClosed = props.state === "closed";
 
   return (
-    <div className="mt-4 px-4 flex items-center gap-3">
-      <IconProject size={38} className="rounded-lg bg-blue-50 dark:bg-blue-900" />
-
-      <div className="min-w-0">
-        <Breadcrumbs navigation={navigation} />
-
-        <div className="flex flex-wrap items-center gap-2">
+    <PageHead
+      align="start"
+      crumbs={crumbs}
+      glyph={<EntityGlyph kind="project" size="lg" className="mt-0.5" />}
+      title={
+        <span className="flex items-center gap-2">
           <TextField
-            className="font-semibold text-lg"
+            className="text-2xl font-semibold tracking-[-0.01em]"
             text={props.projectName}
             onChange={props.updateProjectName}
             readonly={!props.permissions.canEdit}
@@ -39,7 +54,7 @@ export function PageHeader(props: ProjectPageLayout.Props) {
             testId="project-name-field"
           />
 
-          {props.mode !== "template" && isInviteOnly && (
+          {!isTemplate && isInviteOnly && (
             <PrivacyIndicator
               privacyLevel="secret"
               resourceType="project"
@@ -49,58 +64,53 @@ export function PageHeader(props: ProjectPageLayout.Props) {
             />
           )}
 
-          {props.mode === "template" ? (
-            <span className="inline-flex rounded-full border border-brand-1/20 bg-brand-2 px-2 py-0.5 text-xs font-medium text-content-accent">
+          {isTemplate && (
+            <span className="inline-flex rounded-full border border-primary-soft-border bg-primary-soft-bg px-2 py-0.5 text-xs font-medium text-primary-soft-content">
               {t("turboui.projectPageLayout.template")}
             </span>
-          ) : (
-            props.status && (
-              <StatusBadge status={props.status} hideIcon className="scale-90 inline-block shrink-0 align-[5px]" />
-            )
+          )}
+        </span>
+      }
+      meta={
+        <>
+          {/* "active" is a lifecycle state, not a health status, and has no
+              label of its own — printing the raw enum is worse than omitting
+              it. Paused and closed get their own banner above the tabs. */}
+          {!isTemplate && props.status && props.status !== "active" && (
+            <StatusLabel status={props.status} label={statusLabel(props.status)} />
           )}
 
-          {props.taskCompletion && <TaskCompletionIndicator stats={props.taskCompletion} />}
-        </div>
-      </div>
-    </div>
-  );
-}
+          {props.taskCompletion && props.taskCompletion.totalCount > 0 && (
+            <span className="whitespace-nowrap">
+              {t("turboui.projectPageLayout.tasksProgress", {
+                completed: props.taskCompletion.completedCount,
+                total: props.taskCompletion.totalCount,
+              })}
+            </span>
+          )}
 
-function TaskCompletionIndicator({ stats }: { stats: ProjectPageLayout.TaskCompletionStats }) {
-  const title = t("turboui.projectPageLayout.tasksCompleted", { v1: stats.completedCount, v2: stats.totalCount });
-  const ariaLabel = t("turboui.projectPageLayout.tasksCompleted2", { v1: stats.percentage, v2: title });
+          {props.dueDate && (
+            <span className="whitespace-nowrap">
+              {t("turboui.projectPageLayout.dueOn", { date: props.dueDate.value })}
+              {due && !isClosed && (
+                <span className={due.overdue ? "ml-1.5 text-status-offtrack-content" : "ml-1.5 text-content-subtle"}>
+                  ({due.label})
+                </span>
+              )}
+            </span>
+          )}
 
-  return (
-    <div
-      className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-brand-1/20 bg-brand-2 px-2 py-0.5 text-xs font-medium text-content-accent dark:border-surface-outline dark:bg-surface-base dark:text-content-base"
-      title={ariaLabel}
-    >
-      <PieChart
-        size={14}
-        slices={[{ percentage: stats.percentage, color: "var(--color-brand-1)" }]}
-        ariaLabel={ariaLabel}
-      />
-      <span>{stats.percentage}% tasks completed</span>
-      <span className="text-content-subtle dark:text-content-dimmed">
-        {stats.completedCount}/{stats.totalCount}
-      </span>
-    </div>
-  );
-}
-
-function Breadcrumbs({ navigation }: { navigation: { to: string; label: string }[] }) {
-  return (
-    <div>
-      <nav className="flex items-center space-x-0.5 mt-1">
-        {navigation.map((item, index) => (
-          <React.Fragment key={index}>
-            <BlackLink to={item.to} className="text-xs text-content-dimmed leading-snug" underline="hover">
-              {item.label}
-            </BlackLink>
-            {index < navigation.length - 1 && <IconChevronRight size={10} className="text-content-dimmed" />}
-          </React.Fragment>
-        ))}
-      </nav>
-    </div>
+          {props.parentGoal && (
+            <span className="whitespace-nowrap">
+              {t("turboui.projectPageLayout.goalLabel")}{" "}
+              <DivLink to={props.parentGoal.link} className="inline text-primary hover:underline">
+                {props.parentGoal.name}
+              </DivLink>
+            </span>
+          )}
+        </>
+      }
+      actions={props.actions}
+    />
   );
 }

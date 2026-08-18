@@ -1,70 +1,98 @@
 import * as Pages from "@/components/Pages";
 import { PageModule } from "@/routes/types";
-import { IconCheck, IconX, Page as TurboUIPage } from "turboui";
+import { DesignKit } from "turboui";
 import * as React from "react";
 
 import { usePaths } from "@/routes/paths";
 import { t } from "@/i18n";
+
 export default { name: "CompanyPermissionsPage", loader: Pages.emptyLoader, Page } as PageModule;
+
+/** Who a capability is available to. Ordered from most open to most restricted. */
+type Audience = "everyone" | "adminsAndOwners" | "ownersOnly";
+
+interface PermissionGroup {
+  id: string;
+  permissions: { id: string; audience: Audience }[];
+}
+
+/**
+ * Company-wide permissions, grouped by what they let you do.
+ *
+ * The old page was a three-column yes/no matrix. Reading it meant scanning
+ * across to find the first tick, which is a lot of work to answer "who can do
+ * this?" — a question with exactly one answer per row. Naming the audience
+ * directly turns three columns into one, and grouping the rows by purpose
+ * makes the escalation from "everyone" to "owners only" visible as structure.
+ */
+const PERMISSION_GROUPS: PermissionGroup[] = [
+  {
+    id: "createWork",
+    permissions: [
+      { id: "addSpaces", audience: "everyone" },
+      { id: "addGoals", audience: "everyone" },
+      { id: "addProjects", audience: "everyone" },
+    ],
+  },
+  {
+    id: "managePeople",
+    permissions: [
+      { id: "invitePeople", audience: "adminsAndOwners" },
+      { id: "removePeople", audience: "adminsAndOwners" },
+      { id: "updateProfiles", audience: "adminsAndOwners" },
+    ],
+  },
+  {
+    id: "manageCompany",
+    permissions: [
+      { id: "manageAdmins", audience: "ownersOnly" },
+      { id: "manageOwners", audience: "ownersOnly" },
+      { id: "manageTrustedDomains", audience: "ownersOnly" },
+      { id: "accessAnyResource", audience: "ownersOnly" },
+    ],
+  },
+];
 
 function Page() {
   const paths = usePaths();
+
   return (
-    <TurboUIPage
-      title={t("pages.companyPermissionsPage.permissions")}
-      size="small"
-      navigation={[{ to: paths.companyAdminPath(), label: t("pages.companyPermissionsPage.companyAdministration") }]}
-    >
-      <div className="px-10 py-8">
-        <div className="font-extrabold text-2xl mb-4 text-center">
-          {t("pages.companyPermissionsPage.permissionBreakdown")}
-        </div>
+    <Pages.Page title={t("pages.companyPermissionsPage.permissions")} testId="company-permissions-page">
+      <div className="min-h-full bg-surface-base">
+        <DesignKit.PageHead
+          crumbs={[
+            { label: t("pages.companyPermissionsPage.companyAdministration"), to: paths.companyAdminPath() },
+            { label: t("pages.companyPermissionsPage.permissions") },
+          ]}
+          title={t("pages.companyPermissionsPage.headline")}
+          subtitle={t("pages.companyPermissionsPage.subheadline")}
+        />
 
-        <Header />
+        <DesignKit.PageBody width="reading">
+          <div className="flex flex-col gap-6">
+            {PERMISSION_GROUPS.map((group) => (
+              <div key={group.id}>
+                <DesignKit.MicroLabel className="mb-2">
+                  {t(`pages.companyPermissionsPage.groups.${group.id}`)}
+                </DesignKit.MicroLabel>
 
-        <Row permission="Add spaces" members={true} admins={true} owners={true} />
-        <Row permission="Add goals" members={true} admins={true} owners={true} />
-        <Row permission="Add projects" members={true} admins={true} owners={true} />
-
-        <Row permission="Invite people" members={false} admins={true} owners={true} />
-        <Row permission="Remove people" members={false} admins={true} owners={true} />
-        <Row permission="Update profiles" members={false} admins={true} owners={true} />
-
-        <Row permission="Add/Remove admins" members={false} admins={false} owners={true} />
-        <Row permission="Add/Remove owners" members={false} admins={false} owners={true} />
-        <Row permission="Manage trusted email domains" members={false} admins={false} owners={true} />
-        <Row permission="Access any resource" members={false} admins={false} owners={true} />
+                <DesignKit.Panel>
+                  {group.permissions.map((permission) => (
+                    <DesignKit.PanelRow key={permission.id}>
+                      <span className="min-w-0 flex-1 text-sm text-content-muted">
+                        {t(`pages.companyPermissionsPage.permissionNames.${permission.id}`)}
+                      </span>
+                      <span className="flex-shrink-0 whitespace-nowrap text-[13px] text-content-strong">
+                        {t(`pages.companyPermissionsPage.audiences.${permission.audience}`)}
+                      </span>
+                    </DesignKit.PanelRow>
+                  ))}
+                </DesignKit.Panel>
+              </div>
+            ))}
+          </div>
+        </DesignKit.PageBody>
       </div>
-    </TurboUIPage>
+    </Pages.Page>
   );
-}
-
-function Header() {
-  return (
-    <div className="flex items-center justify-between mb-4">
-      <div className="flex-1 font-bold">{t("pages.companyPermissionsPage.permission")}</div>
-      <div className="w-24 flex justify-center font-bold">{t("pages.companyPermissionsPage.members")}</div>
-      <div className="w-24 flex justify-center font-bold">{t("pages.companyPermissionsPage.admins")}</div>
-      <div className="w-24 flex justify-center font-bold">{t("pages.companyPermissionsPage.owners")}</div>
-    </div>
-  );
-}
-
-function Row({ permission, members, admins, owners }) {
-  return (
-    <div className="flex items-center justify-between border-t border-stroke-base py-2">
-      <div className="flex-1">{permission}</div>
-      <div className="w-24 flex justify-center">{members ? <Yes /> : <No />}</div>
-      <div className="w-24 flex justify-center">{admins ? <Yes /> : <No />}</div>
-      <div className="w-24 flex justify-center">{owners ? <Yes /> : <No />}</div>
-    </div>
-  );
-}
-
-function Yes() {
-  return <IconCheck />;
-}
-
-function No() {
-  return <IconX className="text-content-subtle" size={16} />;
 }

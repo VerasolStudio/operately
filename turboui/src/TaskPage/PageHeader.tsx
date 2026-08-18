@@ -1,51 +1,62 @@
 import React from "react";
-import { TaskPage } from ".";
-import { StatusSelector } from "../StatusSelector";
-import { TextField } from "../TextField";
-import { TaskCheckbox } from "./TaskCheckbox";
-import { findCompletedStatus } from "../TaskBoard/utils/status";
-import { useWindowSizeBiggerOrEqualTo } from "../utils/useWindowSizeBreakpoint";
 
-export function PageHeader({ statusOptions, ...props }: TaskPage.ContentState) {
-  const completedStatus = findCompletedStatus(statusOptions || []);
-  const isLargeScreen = useWindowSizeBiggerOrEqualTo("sm");
+import { TaskPage } from ".";
+import { PrimaryButton } from "../Button";
+import { IconCheck } from "../icons";
+import { TextField } from "../TextField";
+import { findCompletedStatus } from "../TaskBoard/utils/status";
+import { TaskCheckbox } from "./TaskCheckbox";
+import { PropertyBar } from "./PropertyBar";
+import { t } from "../i18n";
+
+/**
+ * A task's own header, rendered inside the project page frame.
+ *
+ * The completion checkbox and the "Mark complete" button do the same thing on
+ * purpose: the checkbox is the fast path for someone scanning, the button is
+ * the obvious one for someone who has just finished reading the task.
+ */
+export function PageHeader(props: TaskPage.ContentState) {
+  const completedStatus = findCompletedStatus(props.statusOptions || []);
+  const isComplete = Boolean(props.status?.closed);
 
   return (
-    <div className="mt-4">
-      <div className="flex-1">
-        <div className="flex items-start gap-3" data-test-id="task-header">
-          {completedStatus && (
+    <div>
+      <div className="flex items-start gap-3" data-test-id="task-header">
+        {completedStatus && (
+          <div className="mt-1.5">
             <TaskCheckbox
               status={props.status}
               canEdit={props.canEdit}
               onComplete={() => props.onStatusChange(completedStatus)}
             />
-          )}
+          </div>
+        )}
 
-          <TextField
-            className="font-semibold leading-tight text-xl sm:text-2xl md:text-3xl break-words"
-            text={props.name}
-            onChange={props.onNameChange}
-            readonly={!props.canEdit}
-            trimBeforeSave
-            testId="task-name"
-            multiline
-          />
+        <TextField
+          className="flex-1 break-words text-2xl font-semibold leading-tight tracking-[-0.01em]"
+          text={props.name}
+          onChange={props.onNameChange}
+          readonly={!props.canEdit}
+          trimBeforeSave
+          testId="task-name"
+          multiline
+        />
 
-          {statusOptions?.length > 0 && (
-            <div className="shrink-0 sm:mt-1">
-              <StatusSelector
-                statusOptions={statusOptions}
-                status={props.status ?? statusOptions[0]!}
-                onChange={(nextStatus) => props.onStatusChange(nextStatus)}
-                size={isLargeScreen ? "md" : "sm"}
-                readonly={!props.canEdit}
-                showFullBadge={true}
-                testId="task-status"
-              />
-            </div>
-          )}
-        </div>
+        {completedStatus && props.canEdit && !isComplete && (
+          <PrimaryButton
+            size="sm"
+            icon={IconCheck}
+            onClick={() => props.onStatusChange(completedStatus)}
+            testId="complete-task"
+          >
+            {t("turboui.taskPage.markComplete")}
+          </PrimaryButton>
+        )}
+      </div>
+
+      <div className="mt-3">
+        <PropertyBar {...props} />
       </div>
     </div>
   );

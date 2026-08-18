@@ -7,10 +7,10 @@ import { calcClassName } from "./calcClassNames";
 
 export function PrimaryButton(props: BaseButtonProps) {
   const className = calcClassName(props, {
-    always: "border border-brand-1",
-    normal: "text-white-1 bg-brand-1 hover:bg-blue-600",
-    loading: "text-content-subtle bg-blue-400 border-blue-400",
-    disabled: "text-white-1 bg-blue-500 border-blue-500 opacity-50",
+    always: "border border-primary",
+    normal: "text-primary-content bg-primary hover:bg-primary-hover hover:border-primary-hover",
+    loading: "text-content-subtle bg-primary/70 border-transparent",
+    disabled: "text-primary-content bg-primary border-primary opacity-50",
   });
 
   return (
@@ -41,10 +41,10 @@ export function DangerButton(props: BaseButtonProps) {
 
 export function GhostButton(props: BaseButtonProps) {
   const className = calcClassName(props, {
-    always: "border border-brand-1",
-    normal: "text-brand-1 hover:text-white-1 hover:bg-brand-1",
-    loading: "text-content-subtle bg-brand-2 border-brand-2",
-    disabled: "text-content-subtle border-blue-300",
+    always: "border border-primary-soft-border bg-surface-base",
+    normal: "text-primary hover:bg-primary-soft-bg",
+    loading: "text-content-subtle bg-primary-soft-bg border-primary-soft-bg",
+    disabled: "text-content-subtle border-primary-soft-border",
   });
 
   return (
@@ -58,8 +58,8 @@ export function GhostButton(props: BaseButtonProps) {
 
 export function SecondaryButton(props: BaseButtonProps) {
   const className = calcClassName(props, {
-    always: "border border-surface-outline bg-surface-base",
-    normal: "text-content-dimmed hover:text-content-base hover:bg-surface-accent",
+    always: "border border-line-strong bg-surface-base",
+    normal: "text-content-muted hover:bg-surface-accent",
     loading: "text-content-subtle bg-surface-accent border-surface-accent",
     disabled: "text-content-subtle bg-surface-accent border-surface-accent",
   });

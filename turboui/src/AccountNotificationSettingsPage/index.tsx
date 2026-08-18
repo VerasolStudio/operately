@@ -1,9 +1,11 @@
 import React from "react";
 
-import { Dropdown } from "../FormElements/Dropdown";
-import { Page } from "../Page";
 import { PrimaryButton, SecondaryButton } from "../Button";
+import { Chip } from "../DesignKit/Controls";
+import { PageBody, PageHead, Panel, PanelRow, Screen } from "../DesignKit/Layout";
+import { Dropdown } from "../FormElements/Dropdown";
 import { SwitchToggle } from "../SwitchToggle";
+import { Expandable } from "../Motion";
 import { IconChecklist, IconClockPlay, IconMail, IconMailFast } from "../icons";
 import classNames from "../utils/classnames";
 import { t } from "../i18n";
@@ -31,43 +33,35 @@ export namespace AccountNotificationSettingsPage {
   }
 }
 
-interface WindowOption extends Dropdown.Item {
-  minutes: AccountNotificationSettingsPage.EmailWindowMinutes;
-}
-
 interface DailySummaryTimeOption extends Dropdown.Item {
   value: AccountNotificationSettingsPage.DailySummaryDeliveryTime;
 }
 
-const WINDOW_OPTIONS: WindowOption[] = [
-  { id: "5", name: "5 minutes", minutes: 5, testId: "email-window-minutes-option-5" },
-  { id: "10", name: "10 minutes", minutes: 10, testId: "email-window-minutes-option-10" },
-  { id: "15", name: "15 minutes", minutes: 15, testId: "email-window-minutes-option-15" },
-  { id: "30", name: "30 minutes", minutes: 30, testId: "email-window-minutes-option-30" },
-  { id: "60", name: "60 minutes", minutes: 60, testId: "email-window-minutes-option-60" },
-];
+const WINDOW_MINUTES: AccountNotificationSettingsPage.EmailWindowMinutes[] = [5, 10, 15, 30, 60];
 
 const DAILY_SUMMARY_TIME_OPTIONS: DailySummaryTimeOption[] = Array.from({ length: 24 }, (_, hour) => {
   const value = `${String(hour).padStart(2, "0")}:00`;
-  const label = formatDailySummaryHourLabel(hour);
 
   return {
     id: value,
     value,
-    name: label,
+    name: formatDailySummaryHourLabel(hour),
     testId: `daily-summary-delivery-time-option-${value}`,
   };
 });
 
+/**
+ * Notification preferences.
+ *
+ * The page now opens by stating what the current settings actually do — "every
+ * 15 minutes plus a daily summary at 08:00" — because the individual controls
+ * below only make sense once you know what they add up to.
+ *
+ * The batch interval moved inside the "batched" card. It only applies when
+ * that mode is selected, and a standalone dropdown gave no hint of that
+ * dependency; nesting it makes the relationship structural.
+ */
 export function AccountNotificationSettingsPage(props: AccountNotificationSettingsPage.Props) {
-  const navigation = React.useMemo(
-    () => [
-      { to: props.homePath, label: t("turboui.accountNotificationSettingsPage.home") },
-      { to: props.settingsPath, label: t("turboui.accountNotificationSettingsPage.settings") },
-    ],
-    [props.homePath, props.settingsPath],
-  );
-
   const handleSubmit = React.useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
@@ -77,89 +71,140 @@ export function AccountNotificationSettingsPage(props: AccountNotificationSettin
   );
 
   return (
-    <Page
+    <Screen
       title={t("turboui.accountNotificationSettingsPage.notificationSettings")}
-      size="small"
-      navigation={navigation}
       testId="account-notification-settings-page"
     >
-      <div className="px-4 sm:px-10 py-8">
-        <header>
-          <h1 className="text-2xl font-bold">{t("turboui.accountNotificationSettingsPage.notificationSettings2")}</h1>
-          <p className="text-sm text-content-dimmed mt-2">
-            {t("turboui.accountNotificationSettingsPage.activityEmailsAreAlwaysBatchedYou")}
-          </p>
-        </header>
+      <PageHead
+        crumbs={[
+          { label: t("turboui.accountNotificationSettingsPage.settings"), to: props.settingsPath },
+          { label: t("turboui.accountNotificationSettingsPage.notifications") },
+        ]}
+        title={t("turboui.accountNotificationSettingsPage.notifications")}
+        subtitle={currentSettingsSummary(props)}
+      />
 
-        <form className="mt-8 space-y-8" onSubmit={handleSubmit}>
-          <section>
-            <div className="font-bold text-sm">{t("turboui.accountNotificationSettingsPage.activityEmails")}</div>
-            <div className="text-sm text-content-dimmed mt-1">
-              {t("turboui.accountNotificationSettingsPage.chooseHowDirectMentionsShouldBe")}
-            </div>
+      <PageBody width="reading">
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-3">
+            <PreferenceCard
+              title={t("turboui.accountNotificationSettingsPage.batchedNotifications")}
+              description={t("turboui.accountNotificationSettingsPage.allActivityEmailsWaitForThe")}
+              selected={!props.notifyOnMention}
+              onClick={() => props.onNotifyOnMentionChange(false)}
+              testId="email-preference-buffered"
+              icon={<IconMail size={19} />}
+            >
+              <Expandable open={!props.notifyOnMention}>
+                <div className="flex flex-wrap items-center gap-2 pt-3">
+                  <span className="text-xs text-content-dimmed">
+                    {t("turboui.accountNotificationSettingsPage.interval")}
+                  </span>
+                  {WINDOW_MINUTES.map((minutes) => (
+                    <Chip
+                      key={minutes}
+                      bordered
+                      active={props.emailWindowMinutes === minutes}
+                      onClick={() => props.onEmailWindowMinutesChange(minutes)}
+                    >
+                      {t("turboui.accountNotificationSettingsPage.minutes", { count: minutes })}
+                    </Chip>
+                  ))}
+                </div>
+              </Expandable>
+            </PreferenceCard>
 
-            <div className="mt-4 grid gap-3">
-              <PreferenceCard
-                title={t("turboui.accountNotificationSettingsPage.batchedNotifications")}
-                description={t("turboui.accountNotificationSettingsPage.allActivityEmailsWaitForThe")}
-                selected={!props.notifyOnMention}
-                onClick={() => props.onNotifyOnMentionChange(false)}
-                testId="email-preference-buffered"
-                icon={<IconMail size={20} />}
+            <PreferenceCard
+              title={t("turboui.accountNotificationSettingsPage.directMentionsAreInstant")}
+              description={t("turboui.accountNotificationSettingsPage.emailsForDirectMentionsAreSent")}
+              selected={props.notifyOnMention}
+              onClick={() => props.onNotifyOnMentionChange(true)}
+              testId="email-preference-mentions-only"
+              icon={<IconMailFast size={19} />}
+            />
+          </div>
+
+          <Panel>
+            <PanelRow align="start">
+              <IconClockPlay size={18} className="mt-0.5 flex-shrink-0 text-content-label" />
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-medium text-content-strong">
+                  {t("turboui.accountNotificationSettingsPage.dailySummary")}
+                </div>
+                <div className="mt-0.5 text-xs text-content-subtle">
+                  {t("turboui.accountNotificationSettingsPage.sendOneSummaryEmailAtThe")}
+                </div>
+
+                <Expandable open={props.sendDailySummary}>
+                  <div className="max-w-[200px] pt-3">
+                    <Dropdown
+                      items={DAILY_SUMMARY_TIME_OPTIONS}
+                      value={props.dailySummaryDeliveryTime}
+                      onSelect={(item) => props.onDailySummaryDeliveryTimeChange(item.value)}
+                      testId="daily-summary-delivery-time-dropdown"
+                    />
+                  </div>
+                </Expandable>
+              </div>
+
+              <SwitchToggle
+                label={t("turboui.accountNotificationSettingsPage.sendDailySummary")}
+                value={props.sendDailySummary}
+                setValue={props.onSendDailySummaryChange}
+                testId={props.sendDailySummary ? "disable-daily-summary-toggle" : "enable-daily-summary-toggle"}
+                labelHidden
               />
+            </PanelRow>
 
-              <PreferenceCard
-                title={t("turboui.accountNotificationSettingsPage.directMentionsAreInstant")}
-                description={t("turboui.accountNotificationSettingsPage.emailsForDirectMentionsAreSent")}
-                selected={props.notifyOnMention}
-                onClick={() => props.onNotifyOnMentionChange(true)}
-                testId="email-preference-mentions-only"
-                icon={<IconMailFast size={20} />}
+            <PanelRow align="start">
+              <IconChecklist size={18} className="mt-0.5 flex-shrink-0 text-content-label" />
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-medium text-content-strong">
+                  {t("turboui.accountNotificationSettingsPage.assignmentsEmail")}
+                </div>
+                <div className="mt-0.5 text-xs text-content-subtle">
+                  {t("turboui.accountNotificationSettingsPage.receiveADailyEmailWithYour")}
+                </div>
+              </div>
+
+              <SwitchToggle
+                label={t("turboui.accountNotificationSettingsPage.sendAssignmentsEmail")}
+                value={props.notifyAboutAssignments}
+                setValue={props.onNotifyAboutAssignmentsChange}
+                testId={
+                  props.notifyAboutAssignments ? "disable-assignments-email-toggle" : "enable-assignments-email-toggle"
+                }
+                labelHidden
               />
-            </div>
-          </section>
+            </PanelRow>
+          </Panel>
 
-          <section>
-            <div className="font-bold text-sm">{t("turboui.accountNotificationSettingsPage.batchWindow")}</div>
-            <div className="text-sm text-content-dimmed mt-1">
-              {t("turboui.accountNotificationSettingsPage.chooseHowLongOperatelyShouldWait")}
-            </div>
-
-            <div className="mt-4 max-w-xs">
-              <Dropdown
-                items={WINDOW_OPTIONS}
-                value={String(props.emailWindowMinutes)}
-                onSelect={(item) => props.onEmailWindowMinutesChange(item.minutes)}
-                testId="email-window-minutes-dropdown"
-              />
-            </div>
-          </section>
-
-          <DailySummarySection
-            sendDailySummary={props.sendDailySummary}
-            dailySummaryDeliveryTime={props.dailySummaryDeliveryTime}
-            onSendDailySummaryChange={props.onSendDailySummaryChange}
-            onDailySummaryDeliveryTimeChange={props.onDailySummaryDeliveryTimeChange}
-          />
-
-          <AssignmentsEmailSection
-            notifyAboutAssignments={props.notifyAboutAssignments}
-            onNotifyAboutAssignmentsChange={props.onNotifyAboutAssignmentsChange}
-          />
-
-          <div className="flex justify-end gap-2">
-            <SecondaryButton type="button" onClick={props.onCancel} disabled={props.isSubmitting}>
-              {t("turboui.accountNotificationSettingsPage.cancel")}
-            </SecondaryButton>
-
-            <PrimaryButton type="submit" loading={props.isSubmitting} testId="save-notification-settings">
+          <div className="flex items-center gap-2.5">
+            <PrimaryButton size="sm" type="submit" loading={props.isSubmitting} testId="save-notification-settings">
               {t("turboui.accountNotificationSettingsPage.saveChanges")}
             </PrimaryButton>
+
+            <SecondaryButton size="sm" type="button" onClick={props.onCancel} disabled={props.isSubmitting}>
+              {t("turboui.accountNotificationSettingsPage.cancel")}
+            </SecondaryButton>
           </div>
         </form>
-      </div>
-    </Page>
+      </PageBody>
+    </Screen>
   );
+}
+
+function currentSettingsSummary(props: AccountNotificationSettingsPage.Props): string {
+  const delivery = props.notifyOnMention
+    ? t("turboui.accountNotificationSettingsPage.summaryMentionsInstant", { count: props.emailWindowMinutes })
+    : t("turboui.accountNotificationSettingsPage.summaryBatched", { count: props.emailWindowMinutes });
+
+  if (!props.sendDailySummary) return delivery;
+
+  return t("turboui.accountNotificationSettingsPage.summaryWithDaily", {
+    delivery,
+    time: props.dailySummaryDeliveryTime,
+  });
 }
 
 function formatDailySummaryHourLabel(hour: number) {
@@ -170,88 +215,6 @@ function formatDailySummaryHourLabel(hour: number) {
   return `${hour - 12}:00 PM`;
 }
 
-function DailySummarySection({
-  sendDailySummary,
-  dailySummaryDeliveryTime,
-  onSendDailySummaryChange,
-  onDailySummaryDeliveryTimeChange,
-}: {
-  sendDailySummary: boolean;
-  dailySummaryDeliveryTime: AccountNotificationSettingsPage.DailySummaryDeliveryTime;
-  onSendDailySummaryChange: (value: boolean) => void;
-  onDailySummaryDeliveryTimeChange: (value: AccountNotificationSettingsPage.DailySummaryDeliveryTime) => void;
-}) {
-  return (
-    <section className="rounded-lg border border-surface-outline bg-surface-dimmed p-4">
-      <div className="flex items-start justify-between gap-4">
-        <div className="pr-6">
-          <div className="font-bold text-sm flex items-center gap-2">
-            <IconClockPlay size={18} />
-            {t("turboui.accountNotificationSettingsPage.dailySummary")}
-          </div>
-          <div className="text-sm text-content-dimmed mt-1">
-            {t("turboui.accountNotificationSettingsPage.sendOneSummaryEmailAtThe")}
-          </div>
-        </div>
-
-        <SwitchToggle
-          label={t("turboui.accountNotificationSettingsPage.sendDailySummary")}
-          value={sendDailySummary}
-          setValue={onSendDailySummaryChange}
-          testId={sendDailySummary ? "disable-daily-summary-toggle" : "enable-daily-summary-toggle"}
-          labelHidden
-        />
-      </div>
-
-      {sendDailySummary && (
-        <div className="mt-4 max-w-xs">
-          <div className="text-xs text-content-dimmed mb-1">
-            {t("turboui.accountNotificationSettingsPage.deliveryTime")}
-          </div>
-          <Dropdown
-            items={DAILY_SUMMARY_TIME_OPTIONS}
-            value={dailySummaryDeliveryTime}
-            onSelect={(item) => onDailySummaryDeliveryTimeChange(item.value)}
-            testId="daily-summary-delivery-time-dropdown"
-          />
-        </div>
-      )}
-    </section>
-  );
-}
-
-function AssignmentsEmailSection({
-  notifyAboutAssignments,
-  onNotifyAboutAssignmentsChange,
-}: {
-  notifyAboutAssignments: boolean;
-  onNotifyAboutAssignmentsChange: (value: boolean) => void;
-}) {
-  return (
-    <section className="rounded-lg border border-surface-outline bg-surface-dimmed p-4">
-      <div className="flex items-start justify-between gap-4">
-        <div className="pr-6">
-          <div className="font-bold text-sm flex items-center gap-2">
-            <IconChecklist size={18} />
-            {t("turboui.accountNotificationSettingsPage.assignmentsEmail")}
-          </div>
-          <div className="text-sm text-content-dimmed mt-1">
-            {t("turboui.accountNotificationSettingsPage.receiveADailyEmailWithYour")}
-          </div>
-        </div>
-
-        <SwitchToggle
-          label={t("turboui.accountNotificationSettingsPage.sendAssignmentsEmail")}
-          value={notifyAboutAssignments}
-          setValue={onNotifyAboutAssignmentsChange}
-          testId={notifyAboutAssignments ? "disable-assignments-email-toggle" : "enable-assignments-email-toggle"}
-          labelHidden
-        />
-      </div>
-    </section>
-  );
-}
-
 function PreferenceCard({
   title,
   description,
@@ -259,6 +222,7 @@ function PreferenceCard({
   onClick,
   testId,
   icon,
+  children,
 }: {
   title: string;
   description: string;
@@ -266,44 +230,44 @@ function PreferenceCard({
   onClick: () => void;
   testId: string;
   icon: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   return (
-    <button
-      type="button"
-      className={classNames("w-full rounded-lg border p-4 text-left transition-colors", {
-        "border-brand-1 bg-surface-dimmed": selected,
-        "border-surface-outline hover:bg-surface-dimmed": !selected,
+    <div
+      className={classNames("w-full rounded-xl border p-3.5 text-left transition-colors", {
+        "border-[1.5px] border-primary bg-primary-soft-bg": selected,
+        "border-surface-outline hover:bg-surface-accent": !selected,
       })}
-      onClick={onClick}
       data-test-id={testId}
     >
-      <div className="flex items-start gap-3">
-        <div className="mt-0.5 text-content-dimmed">{icon}</div>
+      <button type="button" className="flex w-full items-start gap-3 text-left" onClick={onClick}>
+        <span className={classNames("mt-0.5", selected ? "text-primary" : "text-content-label")}>{icon}</span>
 
-        <div className="flex-1">
-          <div className="flex items-center justify-between gap-4">
-            <div className="font-bold text-sm">{title}</div>
+        <span className="min-w-0 flex-1">
+          <span className="flex items-center justify-between gap-4">
+            <span className="text-sm font-semibold text-content-strong">{title}</span>
             <SelectionIndicator selected={selected} />
-          </div>
+          </span>
 
-          <div className="text-sm text-content-dimmed mt-1">{description}</div>
-        </div>
-      </div>
-    </button>
+          <span className="mt-1 block text-[13px] text-content-dimmed">{description}</span>
+        </span>
+      </button>
+
+      {children && <div className="pl-[31px]">{children}</div>}
+    </div>
   );
 }
 
 function SelectionIndicator({ selected }: { selected: boolean }) {
   return (
-    <div
-      className={classNames("flex h-4 w-4 items-center justify-center rounded-full border", {
-        "border-brand-1": selected,
-        "border-surface-outline": !selected,
+    <span
+      className={classNames("flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border", {
+        "border-primary": selected,
+        "border-line-strong": !selected,
       })}
+      aria-hidden
     >
-      {selected && <div className="h-2 w-2 rounded-full bg-brand-1" />}
-    </div>
+      {selected && <span className="h-2 w-2 rounded-full bg-primary" />}
+    </span>
   );
 }
-
-export default AccountNotificationSettingsPage;

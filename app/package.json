@@ -9,6 +9,7 @@
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
     "i18next": "^22.4.14",
+    "motion": "^13.1.0",
     "nprogress": "^0.2.0",
     "phoenix": "^1.8.9",
     "prosemirror-markdown": "^1.13.1",

@@ -45,17 +45,14 @@ function ActionItem({ item }: { item: ActionList.Item }) {
   const Icon = item.icon;
 
   const className = classNames(
-    "flex items-center gap-2 py-0.5 text-sm",
-    "cursor-pointer rounded",
+    "flex items-center gap-2.5 py-1.5 px-2 text-[13px]",
+    "cursor-pointer rounded-lg",
     "transition-colors duration-150",
-    "-ml-1 pl-1 pr-2", // Negative left margin to align icon with title text
-    "w-fit", // Set width to fit content, ensuring hover only covers the content area
-    "max-w-full", // Ensure it doesn't overflow its container
+    "-ml-2", // Pull the icon back into line with the labels above it
+    "w-fit max-w-full",
     {
-      // Danger styling
-      "text-red-600 hover:text-red-700 hover:bg-red-50": item.danger,
-      // Normal styling
-      "hover:text-content-base hover:bg-surface-dimmed": !item.danger,
+      "text-status-offtrack-content hover:bg-status-offtrack-bg": item.danger,
+      "text-content-muted hover:bg-surface-accent hover:text-content-strong": !item.danger,
     },
   );
 

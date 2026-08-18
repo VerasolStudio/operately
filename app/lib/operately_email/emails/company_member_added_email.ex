@@ -3,9 +3,10 @@ defmodule OperatelyEmail.Emails.CompanyMemberAddedEmail do
   alias OperatelyWeb.Paths
   alias Operately.InviteLinks.InviteLink
 
+  import OperatelyEmail.I18n, only: [t: 1, t: 2]
+
   def send(person, activity) do
     import OperatelyEmail.Mailers.ActivityMailer
-  import OperatelyEmail.I18n, only: [t: 1, t: 2]
 
     activity = Repo.preload(activity, author: :company)
     author = activity.author

@@ -38,11 +38,11 @@ export function PersonRow({
 }: Props) {
   return (
     <div
-      className="flex items-start sm:items-center justify-between border-t border-stroke-dimmed py-4 last:border-b"
+      className="flex items-start justify-between gap-3 border-b border-line-soft px-4 py-3 transition-colors last:border-b-0 hover:bg-surface-highlight sm:items-center"
       data-test-id={createTestId("person-row", person.id)}
     >
-      <div className="flex items-start gap-2 sm:items-center sm:gap-4">
-        <Avatar className="mt-0.5 sm:mt-0" person={person} size={48} />
+      <div className="flex min-w-0 items-start gap-3 sm:items-center">
+        <Avatar className="mt-0.5 sm:mt-0" person={person} size={32} />
         <PersonInfo person={person} showAccessLevelOptions={showAccessLevelOptions} />
       </div>
 
@@ -81,14 +81,14 @@ function PersonInfo({
 }) {
   return (
     <div>
-      <BlackLink to={person.profilePath} className="font-bold" underline="hover">
+      <BlackLink to={person.profilePath} className="text-sm font-medium" underline="hover">
         {person.fullName}
       </BlackLink>
 
-      <div className="flex flex-col sm:block text-content-dimmed text-sm">
-        <span className="text-sm">{person.title}</span>
-        <span className="text-sm hidden sm:inline"> &middot; </span>
-        <span className="break-all mt-0.5">{person.email}</span>
+      <div className="flex flex-col text-xs text-content-subtle sm:block">
+        <span>{person.title}</span>
+        <span className="hidden sm:inline"> &middot; </span>
+        <span className="mt-0.5 break-all">{person.email}</span>
         {!person.hasOpenInvitation && person.accessLevel !== undefined && showAccessLevelOptions && (
           <div>
             <AccessLevelBadge accessLevel={person.accessLevel} size="xs" className="block mt-2 sm:hidden" />

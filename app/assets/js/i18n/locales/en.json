@@ -357,6 +357,7 @@
       "employeeHandbook": "Employee Handbook",
       "goalsAmpProjects": "Goals & Projects",
       "goalsProjects": "Goals & Projects",
+      "kpis": "KPIs",
       "markItDone": "Mark it done",
       "monthlyReports": "Monthly Reports",
       "organizeTasksOnAKanbanBoard": "Organize tasks on a Kanban board with status columns.",
@@ -369,6 +370,7 @@
       "quarterlyGoal2": "Quarterly Goal 2",
       "setGoalsTrackYourProgressAnd": "Set goals, track your progress, and collaborate with your team to achieve them.",
       "tasks": "Tasks",
+      "templates": "Templates",
       "writeANewPost": "Write a new post",
       "yearlyGoal": "Yearly Goal"
     }
@@ -680,12 +682,36 @@
     },
     "companyPermissionsPage": {
       "admins": "Admins",
+      "audiences": {
+        "everyone": "Everyone",
+        "adminsAndOwners": "Admins and owners",
+        "ownersOnly": "Owners only"
+      },
       "companyAdministration": "Company Administration",
+      "groups": {
+        "createWork": "Creating work",
+        "managePeople": "Managing people",
+        "manageCompany": "Managing the company"
+      },
+      "headline": "Who can do what",
       "members": "Members",
       "owners": "Owners",
       "permission": "Permission",
       "permissionBreakdown": "Permission Breakdown",
-      "permissions": "Permissions"
+      "permissionNames": {
+        "addSpaces": "Create a space",
+        "addGoals": "Create a goal",
+        "addProjects": "Create a project",
+        "invitePeople": "Invite people",
+        "removePeople": "Remove people",
+        "updateProfiles": "Update profiles",
+        "manageAdmins": "Add and remove admins",
+        "manageOwners": "Add and remove owners",
+        "manageTrustedDomains": "Manage trusted email domains",
+        "accessAnyResource": "Access every resource"
+      },
+      "permissions": "Permissions",
+      "subheadline": "Company-level permissions. Visibility of individual goals and projects is set on each of them."
     },
     "companyRenamePage": {
       "companyAdministration": "Company Administration",
@@ -695,6 +721,10 @@
       "save": "Save"
     },
     "companyWorkMapPage": {
+      "goalCount_one": "{{count}} goal",
+      "goalCount_other": "{{count}} goals",
+      "projectCount_one": "{{count}} project",
+      "projectCount_other": "{{count}} projects",
       "workMap": "{{v1}} Work Map"
     },
     "discussionDraftsPage": {
@@ -775,7 +805,13 @@
       "goalAsMarkdown": "Goal As Markdown"
     },
     "goalCheckInNewPage": {
+      "checkIn": "Check-in",
+      "checkInFor": "Check-in for",
       "checkIns": "Check-ins",
+      "firstCheckIn": "This is the first check-in",
+      "lastCheckInWas": "Last one was",
+      "notifiesOnSubmit_one": "submitting notifies {{count}} person",
+      "notifiesOnSubmit_other": "submitting notifies {{count}} people",
       "shareTheProgressWithTheTeam": "Share the progress with the team",
       "workMap": "Work Map"
     },
@@ -853,12 +889,19 @@
     "homePage": {
       "addSpace": "Add Space",
       "couldNotDeleteFeedItem": "Could not delete feed item",
+      "dashboardSubtitle_one": "{{date}} · {{count}} item in flight",
+      "dashboardSubtitle_other": "{{date}} · {{count}} items in flight",
       "error": "Error",
       "home": "Home",
       "invitePeople": "Invite People",
       "manageProjectsTrackGoalsAndOrganize": "Manage projects, track goals, and organize your team's work.",
       "noSpacesYet": "No spaces yet",
+      "openWorkMap": "Open the work map",
       "pleaseTryAgain": "Please try again.",
+      "reasonNeedsReview": "Needs a look",
+      "reasonOverdue_one": "{{count}} day past due",
+      "reasonOverdue_other": "{{count}} days past due",
+      "reasonPaused": "Paused",
       "spacesWillAppearHereWhenSomeone": "Spaces will appear here when someone grants you access to them.",
       "stayUpToDateWithYour": "Stay up to date with your team's progress.",
       "whatSNew": "What's new?",
@@ -945,19 +988,35 @@
       "sorryWeCouldnTFindThat": "Sorry, we couldn't find that page you were looking for."
     },
     "notificationsPage": {
+      "actionableItemsLiveIn": "Anything that needs doing is collected in ",
+      "actionableItemsLiveInSuffix": ".",
+      "earlier": "Earlier",
       "hereSEveryNotificationYouVe": "Here's every notification you've received from Operately.",
       "markAllRead": "Mark all read",
       "newForYou": "New for you",
+      "noNotificationsYet": "No notifications yet.",
       "nothingNewForYou": "Nothing new for you.",
       "notifications": "Notifications",
-      "previousNotifications": "Previous Notifications"
+      "previousNotifications": "Previous Notifications",
+      "tabAll": "All",
+      "tabUnread": "Unread",
+      "today": "Today",
+      "unreadCount_one": "{{count}} unread",
+      "unreadCount_other": "{{count}} unread",
+      "yesterday": "Yesterday"
     },
     "peopleOrgChartPage": {
       "orgChart": "Org Chart"
     },
     "peoplePage": {
+      "email": "Email",
+      "managePermissions": "Manage permissions",
+      "memberCount_one": "{{count}} member",
+      "memberCount_other": "{{count}} members",
       "membersOf": "Members of {{v1}}",
-      "people": "People"
+      "name": "Name",
+      "people": "People",
+      "title": "Title"
     },
     "profilePage": {
       "error": "Error",
@@ -1569,16 +1628,32 @@
       "deleteEverything": "Delete everything",
       "deleteSpace": "Delete space",
       "deletingThisSpaceWillPermanentlyRemove": "Deleting this space will permanently remove everything in it. This includes all projects, goals, and discussions.",
+      "discussionCount_one": "{{count}} discussion",
+      "discussionCount_other": "{{count}} discussions",
       "edit": "Edit",
       "error": "Error",
       "failedToDeleteSpace": "Failed to delete space",
+      "hubCount_one": "{{count}} resource hub",
+      "hubCount_other": "{{count}} resource hubs",
       "joinThisSpace": "Join this Space",
+      "kpiCount_one": "{{count}} KPI",
+      "kpiCount_other": "{{count}} KPIs",
       "loading": "Loading...",
       "manageAccess": "Manage access",
+      "noWorkYet": "No goals or projects here yet.",
+      "openWorkMap": "Open in the work map",
       "pleaseTryAgain": "Please try again.",
+      "recentActivity": "Recent activity",
       "spaceDeleted": "Space deleted",
+      "stateOfThisSpace": "State of this space",
+      "taskCount_one": "{{count}} task",
+      "taskCount_other": "{{count}} tasks",
+      "templateCount_one": "{{count}} template",
+      "templateCount_other": "{{count}} templates",
       "theSpaceAndItsContentWere": "The space and its content were deleted.",
-      "thisActionCannotBeUndone": "This action cannot be undone."
+      "thisActionCannotBeUndone": "This action cannot be undone.",
+      "workCounts": "{{goals}} goals / {{projects}} projects",
+      "workInThisSpace": "Work in this space"
     },
     "spaceWorkMapPage": {
       "workMap": "Work Map"
@@ -1594,6 +1669,27 @@
       "failedToUpdateTaskReminders": "Failed to update task reminders.",
       "failedToUpdateTaskStatus": "Failed to update task status."
     }
+  },
+  "sidebar": {
+    "discussions": "Discussions",
+    "addSpace": "Add a space",
+    "companyAdmin": "Company admin",
+    "companyWide": "Company-wide",
+    "documents": "Documents",
+    "goals": "Goals",
+    "home": "Home",
+    "memberCount_one": "{{count}} member",
+    "memberCount_other": "{{count}} members",
+    "myWork": "My work",
+    "notificationSettings": "Notification settings",
+    "notifications": "Notifications",
+    "people": "People",
+    "projects": "Projects",
+    "search": "Search",
+    "spaces": "Spaces",
+    "tasks": "Tasks",
+    "todo": "To do",
+    "workMap": "Work Map"
   },
   "userMenu": {
     "apiTokens": "API Tokens",

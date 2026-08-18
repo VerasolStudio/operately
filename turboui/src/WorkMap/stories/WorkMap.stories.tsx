@@ -71,7 +71,9 @@ export const Default: Story = {
     },
   },
   play: async ({ canvasElement, step }) => {
-    await Steps.assertRowsNumber(canvasElement, step, 15);
+    // 14 work items. The "add new item" affordance is no longer a table row —
+    // it is a button under the table, since it is a control rather than data.
+    await Steps.assertRowsNumber(canvasElement, step, 14);
   },
 };
 

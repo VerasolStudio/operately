@@ -99,7 +99,7 @@ function PageTitle({ title }: { title: string }) {
   return (
     <div className="flex items-center gap-4 mb-8">
       <FancyLineSeparator />
-      <h1 className="text-4xl font-extrabold text-center">{title}</h1>
+      <h1 className="m-0 text-2xl font-semibold tracking-[-0.01em] text-content-strong">{title}</h1>
       <FancyLineSeparator />
     </div>
   );

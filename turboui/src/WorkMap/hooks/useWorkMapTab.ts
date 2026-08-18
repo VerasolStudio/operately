@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { IconLayoutGrid, IconTarget, IconChecklist, IconCircleCheck, IconPlayerPause } from "../../icons";
 
+import { t } from "../../i18n";
 import * as sort from "../utils/sort";
 import { processItems, processPersonalItems } from "../utils/itemProcessor";
 import { useTabs } from "../../Tabs";
@@ -29,7 +30,7 @@ export function useWorkMapTab({ rawItems, type, opts = {} }: Params) {
     };
   }, [rawItems]);
 
-  const tabOptions = type === "personal" ? {...opts.tabOptions, hidePaused: true} : opts.tabOptions;
+  const tabOptions = type === "personal" ? { ...opts.tabOptions, hidePaused: true } : opts.tabOptions;
 
   const allowedTabs = getAllowedTabs(tabOptions);
   const defaultTab = getDefaultTab(allowedTabs, tabOptions);
@@ -56,31 +57,31 @@ function getTabOptions(tabOptions?: WorkMap.TabOptions, filteredItems?: Record<W
   return [
     {
       id: "all",
-      label: "All work",
+      label: t("turboui.workMap.tabs.all"),
       icon: React.createElement(IconLayoutGrid, { size: 16 }),
       count: countAllItems(filteredItems?.all),
     },
     {
       id: "goals",
-      label: "Goals",
+      label: t("turboui.workMap.tabs.goals"),
       icon: React.createElement(IconTarget, { size: 16 }),
       count: countAllItems(filteredItems?.goals),
     },
     {
       id: "projects",
-      label: "Projects",
+      label: t("turboui.workMap.tabs.projects"),
       icon: React.createElement(IconChecklist, { size: 16 }),
       count: countAllItems(filteredItems?.projects),
     },
     {
       id: "paused",
-      label: "Paused",
+      label: t("turboui.workMap.tabs.paused"),
       icon: React.createElement(IconPlayerPause, { size: 16 }),
       count: countAllItems(filteredItems?.paused),
     },
     {
       id: "completed",
-      label: "Completed",
+      label: t("turboui.workMap.tabs.completed"),
       icon: React.createElement(IconCircleCheck, { size: 16 }),
       count: countAllItems(filteredItems?.completed),
     },

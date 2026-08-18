@@ -32,8 +32,8 @@ export function MilestoneSidebar({
   formattedTimePreferences,
 }: MilestonePage.State) {
   return (
-    <div className="sm:col-span-4 hidden sm:block sm:pl-8">
-      <div className="space-y-6 mt-4" data-test-id="sidebar">
+    <div>
+      <div className="flex flex-col gap-5" data-test-id="sidebar">
         <SidebarDueDate
           milestone={milestone}
           onDueDateChange={onDueDateChange}

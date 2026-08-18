@@ -1,29 +1,19 @@
 import React from "react";
+
 import classnames from "classnames";
-import { Context } from "./Context";
 
+import { usePaperSizeHelpers } from "./";
+
+/**
+ * A quieter band at the foot of a page — activity feeds, older items.
+ *
+ * It bleeds out to the page's horizontal padding so the tint reads as a
+ * section of the page rather than a box floating inside it.
+ */
 export function DimmedSection(props: { children: React.ReactNode }) {
-  const { size } = React.useContext(Context);
+  const { negHor, horPadding } = usePaperSizeHelpers();
 
-  const negativeMargin = calcNegativeMargins(size);
-  const className = classnames("mt-6 border-t border-surface-outline bg-surface-dimmed rounded-b-lg", negativeMargin);
+  const className = classnames("mt-8 border-t border-surface-outline bg-surface-accent py-8", negHor, horPadding);
 
   return <div className={className}>{props.children}</div>;
-}
-
-function calcNegativeMargins(size: string) {
-  switch (size) {
-    case "small":
-      return "-mx-10 px-10 -my-8 py-8";
-    case "medium":
-      return "-mx-12 px-12 -my-10 py-10";
-    case "large":
-      return "-mx-12 px-12 -my-10 py-12";
-    case "xlarge":
-      return "-mx-12 px-12 -my-12 py-12";
-    case "xxlarge":
-      throw new Error("XXLarge not supported");
-    default:
-      throw new Error(`Unknown size ${size}`);
-  }
 }

@@ -111,14 +111,14 @@ export function Column({
   return (
     <div
       ref={!disableDnD ? columnRef : null}
-      className="relative flex flex-col gap-3 bg-surface-dimmed min-h-[72vh] flex-shrink-0 p-3 rounded-lg dark:border dark:border-stroke-base"
+      className="relative flex min-h-[72vh] flex-shrink-0 flex-col overflow-hidden rounded-xl border border-surface-outline bg-surface-base"
       style={{ width: columnWidth }}
       data-test-id={createTestId("kanban-column", status.value)}
     >
       <div
         ref={dragHandleRef}
         className={classNames(
-          "flex items-center justify-between px-1 min-h-[28px]",
+          "flex min-h-[40px] items-center justify-between gap-2 border-b border-surface-outline bg-surface-accent px-3 py-2",
           isStatusDraggable && "cursor-grab active:cursor-grabbing",
         )}
         data-test-id={createTestId("kanban-column-header", status.value)}
@@ -127,9 +127,9 @@ export function Column({
           {!hideStatusIcon && (
             <StatusSelector status={status} statusOptions={allStatuses} onChange={() => {}} readonly={true} size="sm" />
           )}
-          <span className="truncate text-sm font-semibold text-content-base">{title}</span>
+          <span className="truncate text-[13px] font-semibold text-content-strong">{title}</span>
           <span
-            className="rounded-full border border-surface-outline bg-surface-base px-1.5 py-0.5 text-xs font-medium tabular-nums text-content-dimmed"
+            className="text-xs tabular-nums text-content-label"
             data-test-id={createTestId("kanban-column-task-count", status.value)}
           >
             {tasks.length}

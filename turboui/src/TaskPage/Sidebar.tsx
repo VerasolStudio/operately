@@ -2,68 +2,22 @@ import { IconArchive, IconCalendar, IconCircleArrowRight, IconLink, IconPlus, Ic
 import React from "react";
 import { TaskPage } from ".";
 import { AvatarWithName } from "../Avatar";
-import { AssigneesField } from "../AssigneesField";
-import { WarningCallout } from "../Callouts";
-import { DateField } from "../DateField";
 import FormattedTime from "../FormattedTime";
-import { MilestoneField } from "../MilestoneField";
-import { durationHumanized, isOverdue } from "../utils/time";
 import { SidebarNotificationSection, SidebarSection } from "../SidebarSection";
 import { showSuccessToast, showErrorToast } from "../Toasts";
 import { t } from "../i18n";
 
 export function Sidebar(props: TaskPage.ContentState) {
   return (
-    <div className="sm:col-span-4 space-y-6 hidden sm:block sm:pl-8" data-test-id="task-sidebar">
-      <DueDate {...props} />
+    <div className="flex flex-col gap-5" data-test-id="task-sidebar">
+      {/* Status, assignees, due date and milestone moved into the property bar
+          under the title; what stays here is the material you only consult
+          once — reminders, provenance, notifications, destructive actions. */}
       <Reminders {...props} />
-      <Assignees {...props} />
-      <Milestone {...props} />
       <CreatedBy {...props} />
       <Subscription {...props} />
       <Actions {...props} />
     </div>
-  );
-}
-
-// Compact, mobile-only subset of sidebar content
-export function MobileSidebar(props: TaskPage.ContentState) {
-  return (
-    <div className="sm:hidden block mt-4">
-      <div className="grid grid-cols-[auto_auto_1fr] gap-4 items-start">
-        <div>
-          <DueDateMobile {...props} />
-        </div>
-        <div>
-          <AssigneeMobile {...props} />
-        </div>
-      </div>
-      {hasReminderRecipients(props) && (
-        <div className="mt-4">
-          <Reminders {...props} />
-        </div>
-      )}
-      <div className="mt-4">
-        <Milestone {...props} />
-      </div>
-    </div>
-  );
-}
-
-function DueDate(props: TaskPage.ContentState) {
-  return (
-    <SidebarSection title={t("turboui.taskPage.dueDate")}>
-      <DateField
-        date={props.dueDate ?? null}
-        onDateSelect={props.onDueDateChange}
-        readonly={!props.canEdit}
-        showOverdueWarning={!props.status?.closed}
-        placeholder={t("turboui.taskPage.setDueDate")}
-        testId="task-due-date"
-        calendarOnly
-      />
-      <OverdueWarning {...props} />
-    </SidebarSection>
   );
 }
 
@@ -274,74 +228,6 @@ function createReminderKey() {
   return `reminder-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
 
-function Assignees(props: TaskPage.ContentState) {
-  return (
-    <SidebarSection title={t("turboui.taskPage.assignees")}>
-      <AssigneesField
-        people={props.assignees}
-        setPeople={props.onAssigneesChange}
-        readonly={!props.canEdit}
-        searchData={props.assigneePersonSearch}
-        emptyStateMessage={t("turboui.taskPage.assignTask")}
-        emptyStateReadOnlyMessage="No assignees"
-        testId="assignee"
-      />
-    </SidebarSection>
-  );
-}
-
-function DueDateMobile(props: TaskPage.ContentState) {
-  return (
-    <SidebarSection title={t("turboui.taskPage.dueDate")}>
-      <DateField
-        date={props.dueDate ?? null}
-        onDateSelect={props.onDueDateChange}
-        readonly={!props.canEdit}
-        showOverdueWarning={!props.status?.closed}
-        placeholder={t("turboui.taskPage.setDueDate")}
-        calendarOnly
-        size="small"
-      />
-    </SidebarSection>
-  );
-}
-
-function AssigneeMobile(props: TaskPage.ContentState) {
-  return (
-    <SidebarSection title={t("turboui.taskPage.assignees")}>
-      <AssigneesField
-        people={props.assignees}
-        setPeople={props.onAssigneesChange}
-        readonly={!props.canEdit}
-        searchData={props.assigneePersonSearch}
-        emptyStateMessage={t("turboui.taskPage.assignTask")}
-        emptyStateReadOnlyMessage="No assignees"
-        size="small"
-        showTitle={false}
-      />
-    </SidebarSection>
-  );
-}
-
-function Milestone(props: TaskPage.ContentState) {
-  if (props.hideMilestone) return null;
-
-  return (
-    <SidebarSection title={t("turboui.taskPage.milestone")}>
-      <MilestoneField
-        milestone={props.milestone}
-        setMilestone={props.onMilestoneChange}
-        readonly={!props.canEdit}
-        milestones={props.milestones}
-        onSearch={props.onMilestoneSearch}
-        emptyStateMessage={t("turboui.taskPage.selectMilestone")}
-        emptyStateReadOnlyMessage="No milestone"
-        formattedTimePreferences={props.formattedTimePreferences}
-      />
-    </SidebarSection>
-  );
-}
-
 function CreatedBy(props: TaskPage.ContentState) {
   if (!props.createdBy) return null;
 
@@ -422,19 +308,5 @@ function Actions(props: TaskPage.ContentState) {
         ))}
       </div>
     </SidebarSection>
-  );
-}
-
-function OverdueWarning(props: TaskPage.ContentState) {
-  if (!props.dueDate || !props.dueDate.date) return null;
-  if (!isOverdue(props.dueDate.date)) return null;
-  if (props.status?.closed) return null; // Don't show overdue for completed tasks
-
-  const duration = durationHumanized(props.dueDate.date, new Date());
-
-  return (
-    <div className="mt-2">
-      <WarningCallout message={`Overdue by ${duration}.`} />
-    </div>
   );
 }

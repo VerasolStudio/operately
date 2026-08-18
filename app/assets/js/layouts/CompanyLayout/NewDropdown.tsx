@@ -11,14 +11,34 @@ interface Props {
   canAddProject: boolean;
   canAddSpace: boolean;
   canInvitePeople: boolean;
+  triggerClassName?: string;
+  /**
+   * Defaults to the global hook the navigation feature tests use. A second
+   * copy of this menu on the same page (the one index pages put in their
+   * header) must pass its own, or selectors match two elements.
+   */
+  testId?: string;
 }
 
-export function NewDropdown({ canAddGoal, canAddProject, canAddSpace, canInvitePeople }: Props) {
+export function NewDropdown({
+  canAddGoal,
+  canAddProject,
+  canAddSpace,
+  canInvitePeople,
+  triggerClassName,
+  testId = "new-dropdown",
+}: Props) {
   const paths = usePaths();
   const { t } = useTranslation();
 
   return (
-    <DropdownMenu testId="new-dropdown" name={t("newMenu.title")} icon={IconPlus} align="end" triggerClassName="hidden lg:flex">
+    <DropdownMenu
+      testId={testId}
+      name={t("newMenu.title")}
+      icon={IconPlus}
+      align="end"
+      triggerClassName={triggerClassName}
+    >
       <DropdownLinkItem
         path={paths.newGoalPath()}
         icon={IconTargetArrow}

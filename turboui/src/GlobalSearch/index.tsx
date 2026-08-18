@@ -79,6 +79,8 @@ export namespace GlobalSearch {
     fullTextSearchPath?: (query: string) => string;
     placeholder?: string;
     testId?: string;
+    /** Class list for the activator button, e.g. "w-full" in the sidebar. */
+    activatorClassName?: string;
   }
 
   export interface State {
@@ -211,7 +213,12 @@ export function GlobalSearch(props: GlobalSearch.Props) {
 
   return (
     <>
-      <SearchActivator placeholder={state.placeholder} onActivate={openOverlay} testId={state.testId} />
+      <SearchActivator
+        placeholder={state.placeholder}
+        onActivate={openOverlay}
+        testId={state.testId}
+        className={props.activatorClassName}
+      />
       <SearchOverlay state={state} isOpen={overlayOpen} onClose={closeOverlay} />
     </>
   );

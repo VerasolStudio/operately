@@ -1,5 +1,5 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { IconDots, IconSlash } from "../icons";
+import { IconChevronRight, IconDots } from "../icons";
 import * as React from "react";
 
 import { Link } from "../Link";
@@ -18,12 +18,13 @@ export namespace Navigation {
   }
 }
 
+// A breadcrumb, not a tab strip. The tinted bordered bar centred above the
+// page was the top edge of a floating card tucked under the old top bar;
+// neither exists any more.
 const navigationClassName = classNames(
-  "bg-surface-dimmed",
-  "flex items-center gap-1 justify-center",
-  "px-2 pt-2 pb-1 mx-0 sm:mx-10",
-  "font-semibold rounded-t",
-  "border-b sm:border-b-0 sm:border-t sm:border-x border-surface-outline",
+  "flex flex-wrap items-center gap-1.5",
+  "px-6 sm:px-8",
+  "text-xs text-content-label",
 );
 
 export function Navigation({ items, testId }: Navigation.Props) {
@@ -54,8 +55,8 @@ const menuContentClass = classNames(
 function HiddenItems({ items, hiddenCount }: { items: Navigation.Item[]; hiddenCount: number }) {
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger className="border border-surface-outline px-1 rounded">
-        <IconDots className="cursor-pointer shrink-0" size={18} />
+      <DropdownMenu.Trigger className="rounded border border-surface-outline px-1">
+        <IconDots className="shrink-0 cursor-pointer" size={14} />
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
@@ -77,13 +78,16 @@ function HiddenItems({ items, hiddenCount }: { items: Navigation.Item[]; hiddenC
 }
 
 function NavItem({ item, index }: { item: Navigation.Item; index: number }) {
-  const className = classNames("truncate");
-
   return (
     <React.Fragment key={`fragment-${index}`}>
       {index > 0 && <NavSeparator key={`separator-${index}`} />}
 
-      <Link to={item.to} testId={createTestId("nav-item", item.label)} className={className}>
+      <Link
+        to={item.to}
+        testId={createTestId("nav-item", item.label)}
+        className="truncate hover:text-content-strong"
+        underline="never"
+      >
         {item.label}
       </Link>
     </React.Fragment>
@@ -91,13 +95,7 @@ function NavItem({ item, index }: { item: Navigation.Item; index: number }) {
 }
 
 function NavSeparator() {
-  const iconSize = 14;
-
-  return (
-    <div className="shrink-0">
-      <IconSlash size={iconSize} />
-    </div>
-  );
+  return <IconChevronRight size={11} className="shrink-0 text-content-faint" />;
 }
 
 //

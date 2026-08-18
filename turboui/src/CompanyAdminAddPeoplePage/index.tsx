@@ -100,8 +100,9 @@ type MemberCopy = {
 };
 
 const helperTextWrapper = (content: React.ReactNode) => (
-  <div className="my-8 text-center px-8 sm:px-20">
-    <span className="font-bold">{t("turboui.companyAdminAddPeoplePage.whatHappensNext")}</span> {content}
+  <div className="mt-8 max-w-xl text-[13px] leading-relaxed text-content-muted">
+    <span className="font-semibold text-content-strong">{t("turboui.companyAdminAddPeoplePage.whatHappensNext")}</span>{" "}
+    {content}
   </div>
 );
 
@@ -145,7 +146,9 @@ export function CompanyAdminAddPeoplePage(props: CompanyAdminAddPeoplePage.Props
   useHtmlTitle(pageTitle);
 
   const sizeClassName = props.state.state === "form" ? "max-w-2xl" : "max-w-4xl";
-  const bodyClassName = props.state.state === "form" ? "px-4 py-4 sm:px-10 sm:py-8" : "px-4 py-4 sm:px-12 sm:py-10";
+  // Horizontal padding now belongs to the page shell, so this only sets the
+  // extra breathing room the success state wants above and below its content.
+  const bodyClassName = props.state.state === "form" ? "pb-8" : "py-2 sm:py-4";
 
   const helperText = copy.helperText;
   const inviteAnotherLabel = props.inviteAnotherLabel ?? copy.inviteAnotherLabel;
@@ -155,9 +158,9 @@ export function CompanyAdminAddPeoplePage(props: CompanyAdminAddPeoplePage.Props
   const permissionOptions = props.permissionOptions ?? DEFAULT_PERMISSION_OPTIONS;
 
   return (
-    <div className={`mx-auto relative sm:my-10 ${sizeClassName}`}>
+    <div className="relative w-full pt-6 pb-12">
       <Navigation items={props.navigationItems} />
-      <div className="relative bg-surface-base min-h-dvh sm:min-h-0 sm:border sm:border-surface-outline sm:rounded-lg sm:shadow-xl">
+      <div className={`${sizeClassName} px-6 pt-2 sm:px-8`}>
         <div className={bodyClassName}>
           {match(props.state)
             .with({ state: "form" }, () => (
@@ -207,24 +210,25 @@ export function CompanyAdminAddPeoplePage(props: CompanyAdminAddPeoplePage.Props
             ))
             .exhaustive()}
         </div>
+
+        {match(props.state)
+          .with({ state: "form" }, () => helperText)
+          .otherwise(() =>
+            showSuccessActions ? (
+              <SuccessActions
+                onInviteAnother={() => {
+                  resourceAccess.reset();
+                  props.onInviteAnother?.();
+                }}
+                inviteAnotherLabel={inviteAnotherLabel}
+                onGoBack={props.onGoBack}
+                goBackLabel={props.goBackLabel}
+              />
+            ) : showGrantAccessButton ? (
+              <GrantAccessButton onClick={handleGrantAccessButtonClick} isLoading={props.isGrantingAccess} />
+            ) : null,
+          )}
       </div>
-      {match(props.state)
-        .with({ state: "form" }, () => helperText)
-        .otherwise(() =>
-          showSuccessActions ? (
-            <SuccessActions
-              onInviteAnother={() => {
-                resourceAccess.reset();
-                props.onInviteAnother?.();
-              }}
-              inviteAnotherLabel={inviteAnotherLabel}
-              onGoBack={props.onGoBack}
-              goBackLabel={props.goBackLabel}
-            />
-          ) : showGrantAccessButton ? (
-            <GrantAccessButton onClick={handleGrantAccessButtonClick} isLoading={props.isGrantingAccess} />
-          ) : null,
-        )}
 
       {props.limitGuidance && (
         <BillingLimitGuidanceNotice isOpen={true} onClose={props.onCloseLimitGuidance} guidance={props.limitGuidance} />
@@ -235,7 +239,7 @@ export function CompanyAdminAddPeoplePage(props: CompanyAdminAddPeoplePage.Props
 
 function GrantAccessButton({ onClick, isLoading }: { onClick: () => void; isLoading?: boolean }) {
   return (
-    <div className="flex justify-center mt-4 mb-16">
+    <div className="mt-4 mb-16 flex">
       <PrimaryButton onClick={onClick} testId="grant-access-button" loading={isLoading}>
         {t("turboui.companyAdminAddPeoplePage.grantAccess")}
       </PrimaryButton>
@@ -259,7 +263,7 @@ function SuccessActions({
   if (!hasInviteAnother && !hasGoBack) return null;
 
   return (
-    <div className="flex flex-col items-center gap-3 mt-8 sm:flex-row sm:justify-center">
+    <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
       {hasInviteAnother && (
         <PrimaryButton onClick={onInviteAnother} testId="invite-another-button">
           {inviteAnotherLabel ?? "Invite Another Member"}

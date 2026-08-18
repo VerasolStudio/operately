@@ -15,7 +15,8 @@ import {
   IconUser,
 } from "../icons";
 import { DivLink } from "../Link";
-import { Page } from "../Page";
+import { MicroLabel, PageBody, PageHead, Panel, Screen } from "../DesignKit/Layout";
+import { groupSearchResults } from "./groups";
 import { ResourceHubTypeIcon } from "../ResourceHub";
 import { StatusBadge } from "../StatusBadge";
 import { SEARCH_TIME_FILTER_OPTIONS, SEARCH_TYPE_FILTER_OPTIONS } from "./filterOptions";
@@ -54,18 +55,14 @@ export function SearchPage({
   const visibleResults = results.slice(0, RESULT_LIMIT);
 
   return (
-    <Page title={t("turboui.searchPage.search")} size="large" testId="company-search-page">
-      <main className="min-h-[75vh] px-4 py-8 sm:px-12 sm:py-10">
-        <h1 className="sr-only">{t("turboui.searchPage.search")}</h1>
-        {refine ? (
-          <div className="sticky top-0 z-10 -mx-4 border-b border-surface-outline bg-surface-base px-4 pb-4 pt-1 sm:-mx-12 sm:px-12">
-            <SearchField query={query} onQueryChange={onQueryChange} />
-            <RefineControls {...refine} />
-          </div>
-        ) : (
-          <SearchField query={query} onQueryChange={onQueryChange} />
-        )}
-        <div className="mt-8">
+    <Screen title={t("turboui.searchPage.search")} testId="company-search-page">
+      <PageHead title={t("turboui.searchPage.search")} />
+
+      <PageBody width="medium">
+        <SearchField query={query} onQueryChange={onQueryChange} />
+        {refine && <RefineControls {...refine} />}
+
+        <div className="mt-6">
           <SearchContent
             query={query}
             status={status}
@@ -73,8 +70,8 @@ export function SearchPage({
             formattedTimePreferences={formattedTimePreferences}
           />
         </div>
-      </main>
-    </Page>
+      </PageBody>
+    </Screen>
   );
 }
 
@@ -86,8 +83,8 @@ function SearchField({ query, onQueryChange }: Pick<SearchPage.Props, "query" | 
       </label>
       <IconSearch
         aria-hidden="true"
-        size={22}
-        className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-content-subtle"
+        size={18}
+        className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-content-subtle"
       />
       <Input
         id="company-search-input"
@@ -97,7 +94,7 @@ function SearchField({ query, onQueryChange }: Pick<SearchPage.Props, "query" | 
         value={query}
         onChange={(event) => onQueryChange(event.target.value)}
         placeholder={t("turboui.searchPage.searchTitlesAndContent")}
-        className="py-3 pl-12 pr-4 text-base sm:text-lg"
+        className="py-2.5 pl-10 pr-4 text-[15px]"
       />
     </div>
   );
@@ -129,18 +126,40 @@ function SearchContent({
     return <SearchMessage role="status">{t("turboui.searchPage.noContentFoundFor", { v1: query })}</SearchMessage>;
   }
 
+  const groups = groupSearchResults(results);
+
   return (
     <>
       <p role="status" className="sr-only">
         {resultCountLabel(results.length)}
       </p>
-      <ol aria-label={t("turboui.searchPage.searchResults")} className="divide-y divide-surface-outline">
-        {results.map((result) => (
-          <li key={`${result.type}-${result.id}`}>
-            <SearchResultRow query={query} result={result} formattedTimePreferences={formattedTimePreferences} />
-          </li>
+
+      <div className="flex flex-col gap-6">
+        {groups.map((group) => (
+          <section key={group.id} aria-label={group.label}>
+            <div className="mb-2 flex items-center gap-2">
+              <MicroLabel>{group.label}</MicroLabel>
+              <span className="text-xs text-content-subtle">
+                {t("turboui.searchPage.groupCount", { count: group.results.length })}
+              </span>
+            </div>
+
+            <Panel>
+              <ol aria-label={t("turboui.searchPage.searchResults")}>
+                {group.results.map((result) => (
+                  <li key={`${result.type}-${result.id}`}>
+                    <SearchResultRow
+                      query={query}
+                      result={result}
+                      formattedTimePreferences={formattedTimePreferences}
+                    />
+                  </li>
+                ))}
+              </ol>
+            </Panel>
+          </section>
         ))}
-      </ol>
+      </div>
     </>
   );
 }
@@ -169,33 +188,34 @@ function SearchResultRow({
     <DivLink
       to={result.link}
       testId="company-search-result"
-      className="group flex items-start gap-3 rounded-lg px-2 py-5 transition-colors hover:bg-surface-highlight sm:gap-4 sm:px-3"
+      className="group flex items-start gap-3 border-b border-line-soft px-4 py-3 transition-colors last:border-b-0 hover:bg-surface-highlight"
     >
       <div
         aria-hidden="true"
         data-testid="search-result-icon"
-        className="mt-0.5 flex h-12 w-12 shrink-0 self-start items-center justify-center"
+        className="mt-0.5 flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-lg bg-entity-neutral-bg text-entity-neutral"
       >
         <SearchResultIcon type={result.type} />
       </div>
       <div className="min-w-0 flex-1">
-        <div className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-1">
-          <span className="text-xs font-semibold uppercase tracking-wide text-content-dimmed">{metadata.label}</span>
-          <span aria-hidden="true" className="text-xs text-content-subtle">
+        <h2 className="m-0 min-w-0 break-words text-sm font-medium text-content-strong">
+          <HighlightedText text={result.title} terms={highlightTerms} />
+        </h2>
+        <div className="mt-0.5 flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-1">
+          <span className="min-w-0 truncate text-xs text-content-subtle">{result.context}</span>
+          <span aria-hidden="true" className="text-xs text-content-faint">
             ·
           </span>
-          <span className="min-w-0 truncate text-xs font-medium text-content-dimmed">{result.context}</span>
+          <span className="text-xs text-content-subtle">{metadata.label}</span>
           {result.state ? (
             <StatusBadge status={result.state} customLabel={STATE_LABELS[result.state]} hideIcon className="shrink-0" />
           ) : null}
         </div>
-        <h2 className="mt-1 min-w-0 break-words text-base font-semibold text-content-accent">
-          <HighlightedText text={result.title} terms={highlightTerms} />
-        </h2>
+
         {result.snippet ? (
           <p
             data-testid="search-result-snippet"
-            className="mt-1 line-clamp-3 break-words text-sm leading-6 text-content-base"
+            className="mt-1 line-clamp-2 break-words text-[13px] leading-relaxed text-content-muted"
           >
             <HighlightedText text={result.snippet} terms={highlightTerms} />
           </p>
@@ -204,7 +224,7 @@ function SearchResultRow({
       {result.insertedAt ? (
         <span
           data-test-id="search-result-inserted-at"
-          className="mt-1 shrink-0 whitespace-nowrap text-xs text-content-subtle"
+          className="shrink-0 whitespace-nowrap text-xs text-content-subtle"
         >
           <FormattedTime {...formattedTimePreferences} time={result.insertedAt} format="relative-time-or-date" />
         </span>
@@ -216,30 +236,30 @@ function SearchResultRow({
 function SearchResultIcon({ type }: { type: SearchResultType }) {
   switch (type) {
     case "resource_hub_folder":
-      return <ResourceHubTypeIcon type="folder" size={48} />;
+      return <ResourceHubTypeIcon type="folder" size={16} />;
     case "resource_hub_document":
-      return <ResourceHubTypeIcon type="document" size={48} />;
+      return <ResourceHubTypeIcon type="document" size={16} />;
     case "resource_hub_file":
-      return <ResourceHubTypeIcon type="file" size={48} />;
+      return <ResourceHubTypeIcon type="file" size={16} />;
     case "resource_hub_link":
-      return <ResourceHubTypeIcon type="link" size={48} />;
+      return <ResourceHubTypeIcon type="link" size={16} />;
     case "project":
-      return <IconProject size={32} />;
+      return <IconProject size={14} />;
     case "goal":
-      return <IconGoal size={32} />;
+      return <IconGoal size={14} />;
     case "milestone":
-      return <IconMilestone size={32} />;
+      return <IconMilestone size={14} />;
     case "task":
-      return <IconTask size={32} />;
+      return <IconTask size={14} />;
     case "person":
-      return <IconUser size={28} className="text-content-dimmed" />;
+      return <IconUser size={14} />;
     case "discussion":
-      return <IconMessage size={28} className="text-content-dimmed" />;
+      return <IconMessage size={14} />;
     case "project_check_in":
     case "goal_check_in":
-      return <IconCalendar size={28} className="text-content-dimmed" />;
+      return <IconCalendar size={14} />;
     case "project_retrospective":
-      return <IconHistory size={28} className="text-content-dimmed" />;
+      return <IconHistory size={14} />;
   }
 }
 

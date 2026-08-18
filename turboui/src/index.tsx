@@ -1,5 +1,10 @@
 export * from "./TestableElement";
 
+export * from "./AppShell";
+export * as DesignKit from "./DesignKit";
+export * as Motion from "./Motion";
+export { MotionProvider } from "./Motion";
+
 export { AccessLevelSummary } from "./AccessLevelSummary";
 export type { AccessLevelSummaryProps } from "./AccessLevelSummary";
 export { AssigneesField } from "./AssigneesField";
@@ -124,6 +129,7 @@ export {
   CompanyBillingPlanSelectionPage,
 } from "./CompanyBillingPlanSelectionPage";
 export { CompanyAdminManagePeoplePage } from "./CompanyAdminManagePeoplePage";
+export { CompanyDashboardPage } from "./CompanyDashboardPage";
 export { CompanyExportPage } from "./CompanyExportPage";
 export { MilestoneKanbanPage } from "./MilestoneKanbanPage";
 export { MilestonePage } from "./MilestonePage";

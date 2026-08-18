@@ -206,7 +206,7 @@ export function TaskItem({
           "flex items-center px-4 py-2.5 transition-colors",
           selected
             ? "bg-[rgba(224,242,254,0.75)] shadow-[inset_0_0_0_2px_var(--color-brand-1)] dark:bg-[rgba(37,99,235,0.20)]"
-            : "bg-surface-base hover:bg-surface-highlight group-focus-visible/task-row:bg-[rgba(224,242,254,0.75)] group-focus-visible/task-row:shadow-[inset_0_0_0_2px_var(--color-brand-1)] dark:group-focus-visible/task-row:bg-[rgba(37,99,235,0.20)]",
+            : "bg-surface-base hover:bg-surface-highlight group-focus-visible/task-row:bg-primary-soft-bg group-focus-visible/task-row:shadow-[inset_0_0_0_2px_var(--color-primary)]",
         )}
         data-test-id={createTestId("task", task.id)}
       >

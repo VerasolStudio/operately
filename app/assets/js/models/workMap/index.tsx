@@ -51,6 +51,29 @@ const convertTimeframe = (timeframe: WorkMapItem["timeframe"]) => {
 
 export type { WorkMapItem };
 
+/**
+ * Counts goals and projects across the whole tree, including closed ones.
+ *
+ * Used for the one-line summary under a work map's title. The tree is walked
+ * rather than counting the top level, because a goal's sub-goals are part of
+ * "how much work is here" even when they are collapsed out of sight.
+ */
+export function countWorkMapTypes(items: WorkMapItem[]): { goals: number; projects: number } {
+  let goals = 0;
+  let projects = 0;
+
+  const walk = (list: WorkMapItem[]) => {
+    list.forEach((item) => {
+      if (item.type === "goal") goals += 1;
+      if (item.type === "project") projects += 1;
+      walk(item.children || []);
+    });
+  };
+
+  walk(items);
+  return { goals, projects };
+}
+
 interface WorkMapItemOptions {
   projectChampionId?: string;
 }

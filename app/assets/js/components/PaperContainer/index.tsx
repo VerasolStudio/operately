@@ -33,9 +33,9 @@ const sizes = {
   tiny: "max-w-xl",
   small: "max-w-2xl",
   medium: "max-w-4xl",
-  large: "sm:max-w-[90%] lg:max-w-5xl ",
-  xlarge: "sm:max-w-[90%] lg:max-w-6xl ",
-  xxlarge: "sm:max-w-[90%] lg:max-w-7xl",
+  large: "max-w-5xl",
+  xlarge: "max-w-6xl",
+  xxlarge: "max-w-7xl",
 };
 
 interface RootProps {
@@ -48,15 +48,14 @@ interface RootProps {
 export function Root({ size, children, className, fluid = false }: RootProps): JSX.Element {
   size = size || "medium";
 
-  className = classNames(
-    className,
-    "mx-auto relative",
-    "sm:my-10", // no margin on mobile, 10 margin on larger screens
-    {
-      "w-[90%]": fluid,
-      [sizes[size]]: !fluid,
-    },
-  );
+  // The redesign runs pages full-bleed on a white background instead of
+  // floating a shadowed card on a coloured one. With the palette now white on
+  // white that card was only a shadow, and the breadcrumb strip that tucked
+  // under the old top bar had nothing left to tuck under.
+  className = classNames(className, "relative w-full", "pt-6 pb-12", {
+    "max-w-[90%]": fluid,
+    [sizes[size]]: !fluid,
+  });
 
   return (
     <Context.Provider value={{ size }}>
@@ -65,13 +64,15 @@ export function Root({ size, children, className, fluid = false }: RootProps): J
   );
 }
 
+// Horizontal padding only: the page's vertical rhythm now comes from `Root`,
+// so a body no longer has to reserve space for the card edge it sat on.
 const bodyPaddings = {
-  tiny: "px-8 py-6 sm:px-10 sm:py-8",
-  small: "px-10 py-8",
-  medium: "px-12 py-10",
-  large: "px-4 sm:px-12 py-10",
-  xlarge: "px-12 py-10",
-  xxlarge: "px-16 py-12",
+  tiny: "px-6 sm:px-8 pt-2",
+  small: "px-6 sm:px-8 pt-2",
+  medium: "px-6 sm:px-8 pt-2",
+  large: "px-6 sm:px-8 pt-2",
+  xlarge: "px-6 sm:px-8 pt-2",
+  xxlarge: "px-6 sm:px-8 pt-2",
 };
 
 interface BodyProps {
@@ -94,18 +95,7 @@ export function Body({
   const { size } = React.useContext(Context);
   const padding = noPadding ? "" : bodyPaddings[size];
 
-  const outerClass = classNames(
-    "relative",
-    backgroundColor,
-
-    // full height on mobile, no min height on larger screens
-    "min-h-dvh sm:min-h-0",
-
-    // apply border shadow and rounded corners on larger screens
-    "sm:border sm:border-surface-outline",
-    "sm:rounded-lg",
-    "sm:shadow-xl",
-  );
+  const outerClass = classNames("relative", backgroundColor === "bg-surface-base" ? "" : backgroundColor);
 
   const innerClass = classNames(padding, { "pt-4": banner }, className);
 
@@ -122,74 +112,14 @@ export function Body({
 export function usePaperSizeHelpers(): { size: Size; negHor: string; negTop: string; horPadding: string } {
   const { size } = React.useContext(Context);
 
-  let negHor = "";
-  switch (size) {
-    case "small":
-      negHor = "-mx-10";
-      break;
-    case "medium":
-      negHor = "-mx-12";
-      break;
-    case "large":
-      negHor = "-mx-4 sm:-mx-12";
-      break;
-    case "xlarge":
-      negHor = "-mx-12";
-      break;
-    case "xxlarge":
-      negHor = "-mx-16";
-      break;
-    default:
-      throw new Error(`Unknown size ${size}`);
-  }
-
-  let negTop = "";
-  switch (size) {
-    case "small":
-      negTop = "-mt-8";
-      break;
-    case "medium":
-      negTop = "-mt-10";
-      break;
-    case "large":
-      negTop = "-mt-10";
-      break;
-    case "xlarge":
-      negTop = "-mt-10";
-      break;
-    case "xxlarge":
-      negTop = "-mt-12";
-      break;
-    default:
-      throw new Error(`Unknown size ${size}`);
-  }
-
-  let horPadding = "";
-  switch (size) {
-    case "small":
-      horPadding = "px-10";
-      break;
-    case "medium":
-      horPadding = "px-12";
-      break;
-    case "large":
-      horPadding = "px-12";
-      break;
-    case "xlarge":
-      horPadding = "px-12";
-      break;
-    case "xxlarge":
-      horPadding = "px-16";
-      break;
-    default:
-      throw new Error(`Unknown size ${size}`);
-  }
-
+  // Kept for callers that bleed a band out to the page edge — a header
+  // underline, a dimmed footer section. There is no card to bleed past any
+  // more, so the offsets are the body padding and nothing vertical.
   return {
-    size: size,
-    negHor: negHor,
-    negTop: negTop,
-    horPadding,
+    size: size as Size,
+    negHor: "-mx-6 sm:-mx-8",
+    negTop: "",
+    horPadding: "px-6 sm:px-8",
   };
 }
 

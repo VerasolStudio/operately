@@ -1,11 +1,15 @@
 import React, { ReactNode } from "react";
-import { PageNew } from "../Page";
+
+import { DateField } from "../DateField";
+import { UnderlineTabs } from "../DesignKit/Controls";
+import { Screen } from "../DesignKit/Layout";
+import { useTabLinks } from "../DesignKit/useTabLinks";
 import { PrivacyField } from "../PrivacyField";
-import { Tabs, TabsState } from "../Tabs";
-import { StatusBanner } from "./StatusBanner";
-import { PageHeader } from "./PageHeader";
-import { BadgeStatus } from "../StatusBadge/types";
 import { ProjectPermissions } from "../ProjectPage/types";
+import { BadgeStatus } from "../StatusBadge/types";
+import { TabsState } from "../Tabs";
+import { PageHeader } from "./PageHeader";
+import { StatusBanner } from "./StatusBanner";
 
 export namespace ProjectPageLayout {
   export interface Space {
@@ -48,6 +52,15 @@ export namespace ProjectPageLayout {
     permissions: ProjectPermissions;
     accessLevels?: PrivacyField.AccessLevels;
 
+    /** Shown in the header's metadata line. */
+    dueDate?: DateField.ContextualDate | null;
+    parentGoal?: { name: string; link: string } | null;
+
+    /** Page-level buttons, rendered on the right of the header. */
+    actions?: ReactNode;
+    /** The "next up" banner, rendered under the header when there is one. */
+    nextAction?: ReactNode;
+
     state?: "paused" | "closed" | "active";
     closedAt?: Date | null;
     projectTemplatesLink?: string;
@@ -62,21 +75,31 @@ export namespace ProjectPageLayout {
 }
 
 export function ProjectPageLayout(props: ProjectPageLayout.Props) {
+  const tabLinks = useTabLinks(props.tabs);
+
   return (
-    <PageNew title={props.title} size="fullwidth" testId={props.testId}>
+    <Screen title={props.title} testId={props.testId}>
       <PageHeader {...props} />
 
-      {(props.state === "paused" || props.state === "closed") && (
-        <StatusBanner
-          state={props.state}
-          closedAt={props.closedAt}
-          reopenLink={props.reopenLink}
-          retrospectiveLink={props.retrospectiveLink}
-        />
+      {(props.state === "paused" || props.state === "closed" || props.nextAction) && (
+        <div className="px-6 pt-4 sm:px-8">
+          {(props.state === "paused" || props.state === "closed") && (
+            <StatusBanner
+              state={props.state}
+              closedAt={props.closedAt}
+              reopenLink={props.reopenLink}
+              retrospectiveLink={props.retrospectiveLink}
+            />
+          )}
+          {props.nextAction}
+        </div>
       )}
-      <Tabs tabs={props.tabs} />
+
+      <div className="px-6 pt-5 sm:px-8">
+        <UnderlineTabs layoutId="project-tabs" tabs={tabLinks} activeId={props.tabs.active} />
+      </div>
 
       {props.children}
-    </PageNew>
+    </Screen>
   );
 }

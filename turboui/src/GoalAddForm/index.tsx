@@ -1,7 +1,9 @@
 import React from "react";
 
-import { PrimaryButton } from "../Button";
-import { Page } from "../Page";
+import { PrimaryButton, SecondaryButton } from "../Button";
+import { PageBody, PageHead, Screen } from "../DesignKit/Layout";
+import { IconChevronDown } from "../icons";
+import { Expandable, SNAP, motion } from "../Motion";
 import { PrivacyField } from "../PrivacyField";
 import { SpaceField } from "../SpaceField";
 import { TextField } from "../TextField";
@@ -11,14 +13,16 @@ import { t } from "../i18n";
 import { Trans } from "react-i18next";
 
 export function GoalAddPage(props: GoalAddForm.Props) {
-  const title = props.parentGoal ? "Add a subgoal" : "Add a new goal";
+  const title = props.parentGoal ? t("turboui.goalAddForm.addSubgoal") : t("turboui.goalAddForm.addNewGoal");
 
   return (
-    <Page title={title} testId="goal-add-page" size="small">
-      <div className="p-8">
+    <Screen title={title} testId="goal-add-page">
+      <PageHead title={title} subtitle={t("turboui.goalAddForm.subtitle")} />
+
+      <PageBody width="narrow">
         <GoalAddForm {...props} />
-      </div>
-    </Page>
+      </PageBody>
+    </Screen>
   );
 }
 
@@ -46,6 +50,8 @@ export namespace GoalAddForm {
 
     save: (props: SaveProps) => Promise<{ id: string }>;
     onSuccess?: (id: string) => void;
+    /** Where "Cancel" goes back to. */
+    cancelLink?: string;
   }
 
   export interface State {
@@ -63,13 +69,20 @@ export namespace GoalAddForm {
   }
 }
 
+/**
+ * The goal creation form.
+ *
+ * Only the name and the space are asked for up front; visibility sits behind
+ * "More options" with its current value summarised on the line. Creating a
+ * goal is the moment someone is least sure of the details, and a form that
+ * asks for six of them is a form people put off filling in.
+ */
 export function GoalAddForm(props: GoalAddForm.Props) {
   const state = useFormState(props);
-  const title = props.parentGoal ? "Add a subgoal" : "Add a new goal";
+  const [showAdvanced, setShowAdvanced] = React.useState(false);
 
   return (
     <div>
-      <h1 className="font-bold text-xl">{title}</h1>
       {props.parentGoal && (
         <div className="text-xs text-content-dimmed">
           <Trans
@@ -84,7 +97,7 @@ export function GoalAddForm(props: GoalAddForm.Props) {
         </div>
       )}
 
-      <div className="mt-4 flex flex-col gap-4">
+      <div className="flex flex-col gap-[18px]">
         <TextField
           autofocus
           label={t("turboui.goalAddForm.name")}
@@ -106,19 +119,50 @@ export function GoalAddForm(props: GoalAddForm.Props) {
           error={state.spaceError}
         />
 
-        <PrivacyField
-          accessLevels={state.accessLevels}
-          setAccessLevels={state.setAccessLevels}
-          resourceType={"goal"}
-          variant="form-field"
-          label={t("turboui.goalAddForm.privacy")}
-        />
+        <div className="border-t border-surface-outline pt-4">
+          <button
+            type="button"
+            className="flex w-full items-center justify-between gap-3 text-left"
+            onClick={() => setShowAdvanced((value) => !value)}
+            aria-expanded={showAdvanced}
+            data-test-id="goal-advanced-options"
+          >
+            <span>
+              <span className="block text-[13px] font-semibold text-content-strong">
+                {t("turboui.goalAddForm.moreOptions")}
+              </span>
+              <span className="mt-0.5 block text-xs text-content-subtle">{t("turboui.goalAddForm.privacy")}</span>
+            </span>
+
+            <motion.span animate={{ rotate: showAdvanced ? 180 : 0 }} transition={SNAP} className="text-content-label">
+              <IconChevronDown size={16} />
+            </motion.span>
+          </button>
+
+          <Expandable open={showAdvanced}>
+            <div className="pt-4">
+              <PrivacyField
+                accessLevels={state.accessLevels}
+                setAccessLevels={state.setAccessLevels}
+                resourceType={"goal"}
+                variant="form-field"
+                label={t("turboui.goalAddForm.privacy")}
+              />
+            </div>
+          </Expandable>
+        </div>
       </div>
 
-      <div className="mt-6 flex items-center gap-2">
+      <div className="mt-6 flex items-center gap-2.5">
         <PrimaryButton onClick={state.submit} loading={state.submitting} testId="submit" size="sm">
           {t("turboui.goalAddForm.addGoal")}
         </PrimaryButton>
+
+        {props.cancelLink && (
+          <SecondaryButton linkTo={props.cancelLink} size="sm">
+            {t("turboui.goalAddForm.cancel")}
+          </SecondaryButton>
+        )}
       </div>
     </div>
   );

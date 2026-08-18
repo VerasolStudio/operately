@@ -34,7 +34,7 @@ import { uiLocale } from "../utils/formatting";
 
 export function Sidebar(props: GoalPage.State) {
   return (
-    <div className="sm:col-span-4 space-y-6 hidden sm:block sm:pl-8" data-test-id="sidebar">
+    <div className="flex flex-col gap-5" data-test-id="sidebar">
       <Retrospective {...props} />
       <CompletedOn {...props} />
       <CheckInsSection {...props} />
@@ -399,7 +399,7 @@ function Actions(props: GoalPage.State) {
   }
 
   return (
-    <div className="border-t pt-4 border-stroke-base">
+    <div className="border-t border-surface-outline pt-4">
       <ActionList actions={actions} />
     </div>
   );

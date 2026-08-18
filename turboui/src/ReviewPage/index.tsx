@@ -1,11 +1,10 @@
 import * as React from "react";
 
-import { PageNew } from "../Page";
-import { IconCoffee, IconInfoCircle, IconSparkles } from "../icons";
-import { TestableElement } from "../TestableElement";
-import { Tooltip } from "../Tooltip";
-
-import { AssignmentGroups } from "./AssignmentsList";
+import { PageBody, PageHead, Screen } from "../DesignKit/Layout";
+import { IconSparkles } from "../icons";
+import { FadeIn } from "../Motion";
+import { UrgencyBucket, bucketAssignments } from "./buckets";
+import { AssignmentBucket } from "./AssignmentsList";
 import { mergeUrgentGroups } from "./utils";
 import type { FormattedTimePreferences } from "../FormattedTime";
 import { t } from "../i18n";
@@ -63,127 +62,62 @@ export namespace ReviewPageV2 {
   }
 }
 
+/**
+ * "To do" — everything waiting on this person, ordered by when it is due.
+ *
+ * The previous version grouped by where the work came from: all the items
+ * belonging to one goal, then all the items belonging to the next. That
+ * answers "what is happening in this project", which is a question the project
+ * page already answers. What someone opening this screen actually wants is
+ * "what do I have to do before I stop for the day", so the redesign groups by
+ * urgency and puts the overdue bucket first.
+ */
 export function ReviewPage(props: ReviewPageV2.Props) {
   const { dueSoon, needsReview, upcoming } = props;
 
-  // Merge due_soon and needs_review while maintaining backend's sort order
   const urgentGroups = React.useMemo(() => mergeUrgentGroups(dueSoon, needsReview), [dueSoon, needsReview]);
 
-  const hasUrgent = urgentGroups.length > 0;
-  const hasUpcoming = upcoming.length > 0;
-  const hasAnyAssignments = hasUrgent || hasUpcoming;
+  const buckets = React.useMemo(() => bucketAssignments(urgentGroups, upcoming), [urgentGroups, upcoming]);
 
-  // Count only urgent items (due soon + needs review), not upcoming
   const urgentCount = urgentGroups.reduce((sum, group) => sum + group.assignments.length, 0);
-
-  const pageTitle = urgentCount === 0 ? "Review" : `Review (${urgentCount})`;
-
-  return (
-    <PageNew title={pageTitle} size="fullwidth" testId="review-page">
-      <div className="p-4 max-w-3xl mx-auto md:my-6 overflow-auto">
-        <Header assignmentsCount={urgentCount} />
-
-        <div className="flex flex-col mt-8 gap-6">
-          {hasAnyAssignments ? (
-            <>
-              {hasUrgent && (
-                <AssignmentGroups groups={urgentGroups} formattedTimePreferences={props.formattedTimePreferences} />
-              )}
-
-              {hasUpcoming && (
-                <Section
-                  title={t("turboui.reviewPage.myUpcomingWork")}
-                  description={t("turboui.reviewPage.workAssignedToYouWithFuture")}
-                  groups={upcoming}
-                  testId="upcoming-section"
-                  formattedTimePreferences={props.formattedTimePreferences}
-                />
-              )}
-            </>
-          ) : (
-            <CaughtUpState />
-          )}
-        </div>
-      </div>
-    </PageNew>
-  );
-}
-
-function Header({ assignmentsCount }: { assignmentsCount: number }) {
-  const headline =
-    assignmentsCount > 0
-      ? `${assignmentsCount} outstanding ${assignmentsCount === 1 ? "item" : "items"}`
-      : "All caught up";
+  const pageTitle =
+    urgentCount === 0 ? t("turboui.reviewPage.title") : `${t("turboui.reviewPage.title")} (${urgentCount})`;
 
   return (
-    <div className="mt-4 pr-4" data-test-id="page-header">
-      <div className="flex items-center gap-3 border-b border-surface-outline pb-3">
-        <div className="w-12 h-12 flex-shrink-0 bg-brand-2 rounded-lg flex items-center justify-center">
-          <IconCoffee size={20} className="text-brand-1" />
-        </div>
+    <Screen title={pageTitle} testId="review-page">
+      <PageHead title={t("turboui.reviewPage.headline")} subtitle={t("turboui.reviewPage.subheadline")} align="end" />
 
-        <div>
-          <div className="flex items-baseline gap-2">
-            <h1 className="text-lg font-semibold text-content-strong">{t("turboui.reviewPage.review")}</h1>
-            <span className="text-sm text-content-dimmed">{headline}</span>
+      <PageBody width="medium">
+        {buckets.length > 0 ? (
+          <div className="flex flex-col gap-7">
+            {buckets.map((bucket) => (
+              <AssignmentBucket
+                key={bucket.id}
+                bucket={bucket}
+                formattedTimePreferences={props.formattedTimePreferences}
+              />
+            ))}
           </div>
-          <p className="text-sm text-content-dimmed mt-1">{t("turboui.reviewPage.catchUpOnWorkThatS")}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-interface SectionProps extends TestableElement {
-  title: string;
-  description?: string;
-  infoTooltip?: string;
-  groups: ReviewPageV2.AssignmentGroup[];
-  formattedTimePreferences: FormattedTimePreferences;
-}
-
-function Section({ title, description, infoTooltip, groups, testId, formattedTimePreferences }: SectionProps) {
-  if (groups.length === 0) {
-    return null;
-  }
-
-  return (
-    <section data-test-id={testId}>
-      <div className="px-4 py-4">
-        <div className="border-b border-surface-outline mb-4">
-          <div className="flex items-center gap-2 mb-1">
-            <h2 className="font-bold text-content-strong">{title}</h2>
-            {infoTooltip ? (
-              <Tooltip content={infoTooltip} delayDuration={150}>
-                <button
-                  type="button"
-                  aria-label={t("turboui.reviewPage.moreInformationAbout", { v1: title })}
-                  className="inline-flex items-center justify-center text-content-dimmed hover:text-content-strong"
-                >
-                  <IconInfoCircle size={14} className="relative top-px" />
-                </button>
-              </Tooltip>
-            ) : null}
-          </div>
-          {description ? <p className="text-sm text-content-base mb-4">{description}</p> : null}
-        </div>
-
-        <AssignmentGroups groups={groups} formattedTimePreferences={formattedTimePreferences} />
-      </div>
-    </section>
+        ) : (
+          <CaughtUpState />
+        )}
+      </PageBody>
+    </Screen>
   );
 }
 
 function CaughtUpState() {
   return (
-    <div className="py-10 flex justify-center">
-      <div className="flex max-w-md flex-col items-center gap-4 rounded-xl border border-surface-outline bg-surface-base px-8 py-14 text-center shadow-sm">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-callout-success-bg">
-          <IconSparkles size={20} className="text-callout-success-content" />
+    <FadeIn>
+      <div className="flex flex-col items-center gap-4 rounded-xl border border-surface-outline px-8 py-14 text-center">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-status-ontrack-bg">
+          <IconSparkles size={20} className="text-status-ontrack-content" />
         </div>
         <p className="text-lg font-semibold text-content-strong">{t("turboui.reviewPage.youReAllCaughtUp")}</p>
         <p className="text-sm text-content-dimmed">{t("turboui.reviewPage.noAssignmentsCheckInsMilestonesOr")}</p>
       </div>
-    </div>
+    </FadeIn>
   );
 }
+
+export type { UrgencyBucket };

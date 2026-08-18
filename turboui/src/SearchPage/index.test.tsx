@@ -127,9 +127,11 @@ describe("SearchPage", () => {
     expect(screen.getByText("Extend runway from Series A")).toBeInTheDocument();
     expect(screen.queryByText("In Extend runway from Series A")).not.toBeInTheDocument();
 
+    // The redesign shrinks the result icon into a 26px badge so the title,
+    // not the glyph, is the widest thing on the row.
     const icon = screen.getByTestId("search-result-icon");
-    expect(icon).toHaveClass("h-12", "w-12", "self-start");
-    expect(icon.querySelector(".border-stroke-base")).toBeInTheDocument();
+    expect(icon).toHaveClass("h-[26px]", "w-[26px]");
+    expect(icon.querySelector("svg")).toBeInTheDocument();
   });
 
   test("highlights matching query terms in titles and snippets without rendering HTML", () => {

@@ -1,8 +1,7 @@
-import { IconFileText, IconFlagFilled, IconLayoutKanban, IconMessageCircle, IconPlus } from "../../icons";
+import { IconFileText, IconFlag, IconFlagFilled, IconLayoutKanban, IconMessageCircle, IconPlus } from "../../icons";
 import React, { useState } from "react";
 import { DateField } from "../../DateField";
 import { BlackLink } from "../../Link";
-import { PieChart } from "../../PieChart";
 import { Tooltip } from "../../Tooltip";
 import * as Types from "../types";
 import { PersonField } from "../../PersonField";
@@ -122,27 +121,23 @@ export function MilestoneCard({
         {/* Milestone header */}
         <div
           className={classNames(
-            "flex items-center justify-between gap-3 px-4 py-3 bg-surface-dimmed border-b border-surface-outline",
+            "flex items-center justify-between gap-3 border-b border-surface-outline bg-surface-accent px-4 py-2.5",
             !milestone.dueDate && onMilestoneUpdate ? "group/milestone-header" : undefined,
           )}
           data-test-id={createTestId("milestone", milestone.id)}
         >
           <div className="flex items-center gap-2 flex-1 min-w-0">
             {isCompleted ? (
-              <div className="flex items-center gap-1.5 flex-shrink-0 text-accent-1">
-                <IconFlagFilled size={16} className="flex-shrink-0" />
+              <div className="flex flex-shrink-0 items-center gap-1.5 text-status-ontrack">
+                <IconFlagFilled size={15} className="flex-shrink-0" />
               </div>
             ) : (
-              <PieChart
-                size={16}
-                ariaLabel={t("turboui.taskBoard.milestoneProgress", { v1: completionLabel })}
-                title={t("turboui.taskBoard.milestoneProgress", { v1: completionLabel })}
-                slices={[
-                  {
-                    percentage: completionPercentage,
-                    color: "var(--color-callout-success-content)",
-                  },
-                ]}
+              // A flag plus the "3 / 7 done" text beside it reads faster than a
+              // 16px pie, which cannot distinguish 60% from 70% at that size.
+              <IconFlag
+                size={15}
+                className="flex-shrink-0 text-content-label"
+                aria-label={t("turboui.taskBoard.milestoneProgress", { v1: completionLabel })}
               />
             )}
             <div className="flex items-center gap-2 flex-1 min-w-0">

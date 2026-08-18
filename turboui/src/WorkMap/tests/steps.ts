@@ -30,35 +30,14 @@ export const resetWorkMapExpandedState = async (_canvasElement: StoryCanvas, ste
 
 export const selectTab = async (canvasElement: StoryCanvas, step: StoryStep, tab: WorkMapTab) => {
   await step("Select the " + tab + " tab", async () => {
-    let tabLabel: string;
-
-    switch (tab) {
-      case "all":
-        tabLabel = "All work";
-        break;
-      case "goals":
-        tabLabel = "Goals";
-        break;
-      case "projects":
-        tabLabel = "Projects";
-        break;
-      case "completed":
-        tabLabel = "Completed";
-        break;
-      case "paused":
-        tabLabel = "Paused";
-        break;
-      default:
-        tabLabel = tab;
-    }
-
-    const tabTestId = `tab-${tabLabel.toLowerCase()}`;
-    const tabElement = canvasElement.querySelector(`[data-test-id="${tabTestId}"]`);
+    // Tabs are identified by their filter id rather than their label, so the
+    // helper keeps working when the labels are translated.
+    const tabElement = canvasElement.querySelector(`[data-test-id="tab-${tab}"]`);
     expect(tabElement).not.toBeNull();
     await userEvent.click(tabElement!);
 
     await waitFor(() => {
-      expect(tabElement!.className).toContain("text-white");
+      expect(tabElement!.className).toContain("font-semibold");
     });
   });
 };
@@ -118,11 +97,17 @@ export const assertIndentation = async (
   const canvas = within(canvasElement);
 
   await step(`Verify indentation of level ${level} items is ${indentation}`, async () => {
+    // Nesting is expressed as left padding on the title block rather than a
+    // spacer element, so the tree has no throwaway nodes between its rows.
     const level1Project = canvas.getByText(name);
-    const level1ProjectRow = level1Project.closest("tr") as HTMLElement;
+    const indentedContainer = level1Project.closest('[style*="padding-left"]') as HTMLElement | null;
 
-    const level1ProjectIndentation = within(level1ProjectRow).getByTestId("indentation");
-    expect(level1ProjectIndentation.style.width).toBe(indentation);
+    if (level === 0) {
+      expect(indentedContainer).toBeNull();
+    } else {
+      expect(indentedContainer).not.toBeNull();
+      expect(indentedContainer!.style.paddingLeft).toBe(indentation);
+    }
   });
 };
 
@@ -170,7 +155,7 @@ export const assertItemHasLineThrough = async (canvasElement: StoryCanvas, step:
 
   await step(`Assert that "${name}" has line-through style`, async () => {
     const item = canvas.getByText(name);
-    expect(item.style.textDecoration).toContain("line-through");
+    expect(item.closest(".line-through")).not.toBeNull();
   });
 };
 
@@ -179,7 +164,7 @@ export const refuteItemHasLineThrough = async (canvasElement: StoryCanvas, step:
 
   await step(`Assert that "${name}" does not have line-through style`, async () => {
     const item = canvas.getByText(name);
-    expect(item.style.textDecoration).not.toContain("line-through");
+    expect(item.closest(".line-through")).toBeNull();
   });
 };
 
@@ -193,29 +178,23 @@ export const assertStatusBadge = async (
 ) => {
   const canvas = within(canvasElement);
 
-  await step("Verify status badge has correct styles", async () => {
-    const statusBadge = canvas.getByText(label);
+  await step("Verify the status label has correct styles", async () => {
+    // Status in a table is a coloured dot plus a word, not a filled pill, so
+    // the assertion is on the semantic token rather than a raw palette class.
+    const statusLabel = canvas.getByText(label).closest("span")!;
 
     switch (color) {
       case "green":
-        expect(statusBadge.className).toContain("bg-callout-success-bg");
-        expect(statusBadge.className).toContain("text-callout-success-content");
-        expect(statusBadge?.className).toContain("border-emerald-200");
+        expect(statusLabel.className).toContain("text-status-ontrack-content");
         break;
       case "amber":
-        expect(statusBadge.className).toContain("bg-amber-50");
-        expect(statusBadge.className).toContain("text-amber-800");
-        expect(statusBadge?.className).toContain("border-amber-200");
+        expect(statusLabel.className).toContain("text-status-caution-content");
         break;
       case "red":
-        expect(statusBadge.className).toContain("bg-red-50");
-        expect(statusBadge.className).toContain("text-red-700");
-        expect(statusBadge?.className).toContain("border-red-200");
+        expect(statusLabel.className).toContain("text-status-offtrack-content");
         break;
       case "gray":
-        expect(statusBadge.className).toContain("bg-gray-100");
-        expect(statusBadge.className).toContain("text-gray-700");
-        expect(statusBadge?.className).toContain("border-gray-200");
+        expect(statusLabel.className).toContain("text-content-dimmed");
         break;
     }
   });
@@ -243,16 +222,16 @@ export const assertProgressBar = async (
 
     switch (color) {
       case "gray":
-        expect(innerBar?.className).toContain("bg-gray-400");
+        expect(innerBar?.className).toContain("bg-status-paused");
         break;
       case "amber":
-        expect(innerBar?.className).toContain("bg-amber-400");
+        expect(innerBar?.className).toContain("bg-status-caution");
         break;
       case "red":
-        expect(innerBar?.className).toContain("bg-red-400");
+        expect(innerBar?.className).toContain("bg-status-offtrack");
         break;
       case "green":
-        expect(innerBar?.className).toContain("bg-emerald-400");
+        expect(innerBar?.className).toContain("bg-status-ontrack");
         break;
     }
   });

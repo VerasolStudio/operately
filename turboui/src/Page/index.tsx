@@ -33,19 +33,26 @@ export namespace Page {
 }
 
 const sizeClasses: Record<Page.Size, string> = {
-  tiny: "max-w-xl mx-auto",
-  small: "max-w-2xl mx-auto",
-  medium: "max-w-4xl mx-auto",
-  large: "sm:max-w-[90%] lg:max-w-5xl mx-auto",
-  xlarge: "sm:max-w-[90%] lg:max-w-6xl mx-auto",
-  xxlarge: "sm:max-w-[90%] lg:max-w-7xl mx-auto",
+  tiny: "max-w-xl",
+  small: "max-w-2xl",
+  medium: "max-w-4xl",
+  large: "max-w-5xl",
+  xlarge: "max-w-6xl",
+  xxlarge: "max-w-7xl",
   fullwidth: "max-w-full",
 };
 
-// Old style pages
+/**
+ * The page frame every screen that has not been individually rewritten still
+ * renders inside.
+ *
+ * Full-bleed on white with a breadcrumb at the top, matching the rewritten
+ * screens — so moving between the two no longer changes the shape of the page
+ * around you.
+ */
 export function Page(props: Page.Props) {
   useHtmlTitle(props.title);
-  const containerClass = classNames("sm:my-4", sizeClasses[props.size || "medium"]);
+  const containerClass = classNames("w-full pt-6 pb-12", sizeClasses[props.size || "medium"]);
 
   return (
     <div className={containerClass}>
@@ -63,13 +70,16 @@ export function Page(props: Page.Props) {
 export function PageNew(props: Page.Props) {
   useHtmlTitle(props.title);
 
-  const containerClass = classNames("absolute inset-0");
   const innerClass = classNames("bg-surface-base", "flex flex-col", "min-h-full", props.className);
   const contentClass = classNames(sizeClasses[props.size || "medium"]);
 
   return (
-    <div className={containerClass} data-test-id={props.testId}>
-      {props.navigation && <Navigation items={props.navigation} testId={props.navigationTestId ?? "navigation"} />}
+    <div className="min-h-full" data-test-id={props.testId}>
+      {props.navigation && (
+        <div className="pt-6">
+          <Navigation items={props.navigation} testId={props.navigationTestId ?? "navigation"} />
+        </div>
+      )}
 
       <div className={innerClass}>
         <PageOptions options={props.options} testId={props.optionsTestId ?? "options-button"} />

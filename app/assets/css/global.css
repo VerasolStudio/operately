@@ -20,26 +20,26 @@
 }
 
 .light {
-  --color-surface-bg: rgba(254, 245, 237, 1);
-  --color-surface-bg-highlight: rgba(255, 255, 255, 0.9);
+  --color-surface-bg: rgba(255, 255, 255, 1);
+  --color-surface-bg-highlight: rgba(247, 249, 252, 1);
   --color-surface-base: rgba(255, 255, 255, 1);
-  --color-surface-dimmed: rgba(249, 249, 249, 1);
-  --color-surface-accent: rgba(251, 251, 251, 1);
-  --color-surface-outline: rgba(211, 204, 189, 1);
-  --color-surface-highlight: rgba(224, 242, 254, 0.4);
+  --color-surface-dimmed: rgba(250, 251, 252, 1);
+  --color-surface-accent: rgba(247, 248, 250, 1);
+  --color-surface-outline: rgba(228, 231, 236, 1);
+  --color-surface-highlight: rgba(247, 249, 252, 1);
   --color-surface-subtle: var(--color-zinc-200);
 
-  --color-content-base: rgba(0, 0, 0, 0.95);
-  --color-content-accent: rgba(0, 0, 0, 1);
-  --color-content-dimmed: rgba(0, 0, 0, 0.6);
-  --color-content-subtle: rgba(0, 0, 0, 0.3);
+  --color-content-base: rgba(22, 24, 29, 1);
+  --color-content-accent: rgba(22, 24, 29, 1);
+  --color-content-dimmed: rgba(107, 114, 128, 1);
+  --color-content-subtle: rgba(154, 160, 170, 1);
   --color-content-error: var(--color-red-500);
 
   --color-stroke-base: rgba(0, 0, 0, 0.1);
   --color-stroke-dimmed: rgba(0, 0, 0, 0.05);
 
-  --color-link-base: var(--color-blue-700);
-  --color-link-hover: var(--color-blue-600);
+  --color-link-base: rgba(31, 111, 235, 1);
+  --color-link-hover: rgba(26, 95, 208, 1);
 
   --color-toggle-active: var(--color-sky-200);
   --color-stale-selection: var(--color-sky-100);
@@ -58,6 +58,71 @@
 
   --color-callout-success-bg: var(--color-emerald-50);
   --color-callout-success-content: var(--color-emerald-600);
+
+  /* --- Redesign tokens (Operately 改修案) --- */
+
+  --color-sidebar-bg: rgba(247, 248, 250, 1);
+  --color-sidebar-hover: rgba(237, 239, 243, 1);
+  --color-sidebar-active: rgba(255, 255, 255, 1);
+
+  --color-line-strong: rgba(217, 221, 227, 1);
+  --color-line-soft: rgba(240, 241, 244, 1);
+
+  --color-content-strong: rgba(22, 24, 29, 1);
+  --color-content-muted: rgba(60, 66, 76, 1);
+  --color-content-label: rgba(121, 128, 140, 1);
+  --color-content-faint: rgba(180, 185, 194, 1);
+
+  --color-primary: rgba(31, 111, 235, 1);
+  --color-primary-hover: rgba(26, 95, 208, 1);
+  --color-primary-content: rgba(255, 255, 255, 1);
+  --color-primary-soft-bg: rgba(240, 246, 255, 1);
+  --color-primary-soft-border: rgba(199, 219, 251, 1);
+  --color-primary-soft-content: rgba(23, 92, 211, 1);
+
+  --color-status-ontrack: rgba(18, 183, 106, 1);
+  --color-status-ontrack-content: rgba(2, 122, 72, 1);
+  --color-status-ontrack-bg: rgba(244, 252, 247, 1);
+
+  --color-status-caution: rgba(247, 144, 9, 1);
+  --color-status-caution-content: rgba(181, 71, 8, 1);
+  --color-status-caution-bg: rgba(255, 250, 235, 1);
+
+  --color-status-offtrack: rgba(240, 68, 56, 1);
+  --color-status-offtrack-content: rgba(180, 35, 24, 1);
+  --color-status-offtrack-bg: rgba(254, 243, 242, 1);
+
+  --color-status-pending: rgba(46, 144, 250, 1);
+  --color-status-pending-content: rgba(23, 92, 211, 1);
+  --color-status-pending-bg: rgba(239, 248, 255, 1);
+
+  --color-status-paused: rgba(152, 162, 179, 1);
+  --color-status-paused-content: rgba(102, 112, 133, 1);
+  --color-status-paused-bg: rgba(242, 244, 247, 1);
+
+  --color-entity-goal: rgba(224, 79, 79, 1);
+  --color-entity-goal-bg: rgba(254, 243, 242, 1);
+  --color-entity-project: rgba(46, 144, 250, 1);
+  --color-entity-project-bg: rgba(239, 248, 255, 1);
+  --color-entity-neutral: rgba(102, 112, 133, 1);
+  --color-entity-neutral-bg: rgba(242, 244, 247, 1);
+
+  --color-banner-info-bg: rgba(247, 250, 255, 1);
+  --color-banner-info-border: rgba(199, 219, 251, 1);
+  --color-banner-info-content: rgba(23, 92, 211, 1);
+
+  --color-banner-warning-bg: rgba(255, 252, 245, 1);
+  --color-banner-warning-border: rgba(254, 223, 137, 1);
+  --color-banner-warning-content: rgba(181, 71, 8, 1);
+
+  --color-banner-danger-bg: rgba(255, 251, 250, 1);
+  --color-banner-danger-border: rgba(254, 205, 202, 1);
+  --color-banner-danger-content: rgba(180, 35, 24, 1);
+
+  --color-avatar-bg: rgba(60, 66, 76, 1);
+  --color-avatar-content: rgba(255, 255, 255, 1);
+  --color-track: rgba(237, 239, 243, 1);
+  --color-badge-alert: rgba(225, 29, 72, 1);
 }
 
 .dark {
@@ -99,6 +164,71 @@
 
   --color-callout-success-bg: var(--color-emerald-900);
   --color-callout-success-content: var(--color-emerald-300);
+
+  /* --- Redesign tokens (Operately 改修案) --- */
+
+  --color-sidebar-bg: rgba(26, 26, 30, 1);
+  --color-sidebar-hover: rgba(43, 45, 49, 1);
+  --color-sidebar-active: rgba(49, 51, 56, 1);
+
+  --color-line-strong: rgba(255, 255, 255, 0.14);
+  --color-line-soft: rgba(255, 255, 255, 0.07);
+
+  --color-content-strong: rgba(255, 255, 255, 0.95);
+  --color-content-muted: rgba(255, 255, 255, 0.72);
+  --color-content-label: rgba(255, 255, 255, 0.5);
+  --color-content-faint: rgba(255, 255, 255, 0.32);
+
+  --color-primary: rgba(49, 133, 255, 1);
+  --color-primary-hover: rgba(90, 160, 255, 1);
+  --color-primary-content: rgba(255, 255, 255, 1);
+  --color-primary-soft-bg: rgba(49, 133, 255, 0.12);
+  --color-primary-soft-border: rgba(49, 133, 255, 0.32);
+  --color-primary-soft-content: rgba(143, 192, 255, 1);
+
+  --color-status-ontrack: rgba(18, 183, 106, 1);
+  --color-status-ontrack-content: rgba(63, 214, 154, 1);
+  --color-status-ontrack-bg: rgba(18, 183, 106, 0.12);
+
+  --color-status-caution: rgba(247, 144, 9, 1);
+  --color-status-caution-content: rgba(253, 176, 34, 1);
+  --color-status-caution-bg: rgba(247, 144, 9, 0.12);
+
+  --color-status-offtrack: rgba(240, 68, 56, 1);
+  --color-status-offtrack-content: rgba(255, 122, 112, 1);
+  --color-status-offtrack-bg: rgba(240, 68, 56, 0.12);
+
+  --color-status-pending: rgba(46, 144, 250, 1);
+  --color-status-pending-content: rgba(124, 192, 255, 1);
+  --color-status-pending-bg: rgba(46, 144, 250, 0.12);
+
+  --color-status-paused: rgba(152, 162, 179, 1);
+  --color-status-paused-content: rgba(180, 188, 200, 1);
+  --color-status-paused-bg: rgba(152, 162, 179, 0.12);
+
+  --color-entity-goal: rgba(255, 122, 112, 1);
+  --color-entity-goal-bg: rgba(240, 68, 56, 0.12);
+  --color-entity-project: rgba(124, 192, 255, 1);
+  --color-entity-project-bg: rgba(46, 144, 250, 0.12);
+  --color-entity-neutral: rgba(180, 188, 200, 1);
+  --color-entity-neutral-bg: rgba(255, 255, 255, 0.06);
+
+  --color-banner-info-bg: rgba(49, 133, 255, 0.1);
+  --color-banner-info-border: rgba(49, 133, 255, 0.3);
+  --color-banner-info-content: rgba(156, 199, 255, 1);
+
+  --color-banner-warning-bg: rgba(247, 144, 9, 0.1);
+  --color-banner-warning-border: rgba(247, 144, 9, 0.28);
+  --color-banner-warning-content: rgba(253, 176, 34, 1);
+
+  --color-banner-danger-bg: rgba(240, 68, 56, 0.1);
+  --color-banner-danger-border: rgba(240, 68, 56, 0.28);
+  --color-banner-danger-content: rgba(255, 156, 148, 1);
+
+  --color-avatar-bg: rgba(255, 255, 255, 0.16);
+  --color-avatar-content: rgba(255, 255, 255, 1);
+  --color-track: rgba(255, 255, 255, 0.1);
+  --color-badge-alert: rgba(225, 29, 72, 1);
 }
 
 body {

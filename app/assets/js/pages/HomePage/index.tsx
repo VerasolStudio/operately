@@ -1,12 +1,10 @@
 import React from "react";
 
-import Api, { Activity } from "@/api";
+import Api, { Activity, WorkMapItem } from "@/api";
 import { PageModule } from "@/routes/types";
 
 import * as Pages from "@/components/Pages";
-import * as Paper from "@/components/PaperContainer";
 import * as Companies from "@/models/companies";
-import * as People from "@/models/people";
 import * as Spaces from "@/models/spaces";
 import { getWorkMap } from "@/models/workMap";
 import { t } from "@/i18n";
@@ -14,10 +12,14 @@ import { t } from "@/i18n";
 export default { name: "HomePage", loader, Page } as PageModule;
 
 import { useMe } from "@/contexts/CurrentCompanyContext";
+import { AddWorkButton } from "@/features/workMap/AddWorkButton";
 import { Feed, useItemsQuery } from "@/features/Feed";
+import { spaceColor } from "@/features/spaces/spaceColor";
+import { listAssignments, type ReviewAssignmentGroup } from "@/models/assignments";
 import { includesId, usePaths } from "@/routes/paths";
-import { GhostButton, PrimaryButton, showErrorToast, SpaceCard, SpaceCardGrid } from "turboui";
+import { CompanyDashboardPage, SecondaryButton, showErrorToast } from "turboui";
 import { Navigate } from "react-router";
+import { aggregateBySpace, collectAttentionItems, collectStatusCounts } from "./dashboardData";
 import { canDeleteFeedItems } from "./feedPermissions";
 import { shouldOpenCompanyWorkMap } from "./firstRun";
 import { SpacesZeroState } from "./SpacesZeroState";
@@ -27,7 +29,8 @@ interface LoaderData {
   spaces: Spaces.Space[];
   adminIds: string[];
   ownerIds: string[];
-  hasWorkItems: boolean;
+  workMap: WorkMapItem[];
+  assignments: { dueSoon: ReviewAssignmentGroup[]; needsReview: ReviewAssignmentGroup[] };
 }
 
 async function loader(): Promise<LoaderData> {
@@ -37,19 +40,21 @@ async function loader(): Promise<LoaderData> {
     includePermissions: true,
   }).then((d) => d.company);
 
-  const [spaces, hasWorkItems] = await Promise.all([
+  // The dashboard is built entirely from the work map plus the viewer's own
+  // assignments, so both are loaded up front rather than trickling in.
+  const [spaces, workMap, assignments] = await Promise.all([
     Spaces.getSpaces({ includeAccessLevels: true }),
-    company.setupCompleted ? Promise.resolve(false) : getWorkMap({}).then((data) => data.workMap.length > 0),
+    getWorkMap({}).then((data) => data.workMap),
+    listAssignments({}).catch(() => ({ dueSoon: [], needsReview: [], upcoming: [] })),
   ]);
-  const adminIds = company.admins?.map((a) => a.id);
-  const ownerIds = company.owners?.map((o) => o.id);
 
   return {
     company,
     spaces,
-    adminIds: adminIds || [],
-    ownerIds: ownerIds || [],
-    hasWorkItems,
+    workMap,
+    assignments: { dueSoon: assignments.dueSoon ?? [], needsReview: assignments.needsReview ?? [] },
+    adminIds: company.admins?.map((a) => a.id) || [],
+    ownerIds: company.owners?.map((o) => o.id) || [],
   };
 }
 
@@ -59,68 +64,116 @@ function useLoadedData(): LoaderData {
 
 function Page() {
   const paths = usePaths();
-  const { company, hasWorkItems } = useLoadedData();
+  const { company, spaces, workMap, assignments } = useLoadedData();
   const isOwner = useIsOwner();
 
   if (
     shouldOpenCompanyWorkMap({
       isOwner,
       setupCompleted: company.setupCompleted,
-      hasWorkItems,
+      hasWorkItems: workMap.length > 0,
     })
   ) {
     return <Navigate to={paths.workMapPath()} replace />;
   }
 
+  const { statusCounts, total } = collectStatusCounts(workMap);
+  const spaceAggregates = aggregateBySpace(workMap);
+
+  const attention: CompanyDashboardPage.AttentionItem[] = collectAttentionItems(workMap).map(
+    ({ item, daysUntilDue }) => ({
+      id: item.id,
+      name: item.name,
+      type: item.type === "project" ? "project" : "goal",
+      spaceName: item.space?.name ?? null,
+      ownerName: item.owner?.fullName ?? null,
+      reason: attentionReason(item, daysUntilDue),
+      status: item.status,
+      dueLabel: formatShortDate(item.timeframe?.contextualEndDate?.date),
+      link: item.itemPath,
+    }),
+  );
+
+  const spaceStats: CompanyDashboardPage.SpaceStat[] = spaces
+    .map((space) => {
+      const aggregate = spaceAggregates.get(space.id!) ?? { itemCount: 0, onTrackCount: 0, lateCount: 0 };
+
+      return {
+        id: space.id!,
+        name: space.name!,
+        color: spaceColor(space),
+        itemCount: aggregate.itemCount,
+        onTrackPercentage: aggregate.itemCount > 0 ? (aggregate.onTrackCount / aggregate.itemCount) * 100 : 0,
+        lateCount: aggregate.lateCount,
+        link: paths.spacePath(space.id!),
+      };
+    })
+    // A space with nothing in flight has nothing to report; listing it would
+    // pad the table with rows that are all zeroes.
+    .filter((space) => space.itemCount > 0)
+    .sort((a, b) => b.lateCount - a.lateCount || b.itemCount - a.itemCount);
+
+  const todoAssignments = [...assignments.dueSoon, ...assignments.needsReview].flatMap((group) => group.assignments);
+
   return (
-    <Pages.Page title={t("pages.homePage.home")} testId="company-home">
-      <Paper.Root size="medium" className="px-4 sm:px-0">
-        <Greeting />
-        <SpacesSection />
-        <FeedSection />
-      </Paper.Root>
-    </Pages.Page>
+    <CompanyDashboardPage
+      title={t("turboui.companyDashboard.title")}
+      companyName={company.name!}
+      subtitle={t("pages.homePage.dashboardSubtitle", {
+        date: formatToday(),
+        count: total,
+      })}
+      actions={
+        <>
+          <SecondaryButton linkTo={paths.workMapPath()} size="sm">
+            {t("pages.homePage.openWorkMap")}
+          </SecondaryButton>
+          <AddWorkButton />
+        </>
+      }
+      statusCounts={statusCounts}
+      attention={attention}
+      spaces={spaceStats}
+      todo={{
+        count: todoAssignments.length,
+        overdueCount: todoAssignments.filter((assignment) => assignment.dueStatus === "overdue").length,
+        link: paths.reviewPath(),
+      }}
+      workMapLink={paths.workMapPath()}
+      feed={<ActivityFeed />}
+      emptyState={spaces.length === 0 ? <SpacesZeroState /> : undefined}
+    />
   );
 }
 
-function SpacesSection() {
-  const { spaces } = useLoadedData();
-  const isEmpty = spaces.length === 0;
+function attentionReason(item: WorkMapItem, daysUntilDue: number | null): string {
+  if (daysUntilDue !== null && daysUntilDue < 0) {
+    return t("pages.homePage.reasonOverdue", { count: Math.abs(daysUntilDue) });
+  }
 
-  return (
-    <div className="mt-8">
-      <Paper.Section
-        title={t("pages.homePage.yourOperatelySpaces")}
-        subtitle={t("pages.homePage.manageProjectsTrackGoalsAndOrganize")}
-        actions={
-          <div className="flex flex-wrap gap-2 justify-start sm:justify-end sm:flex-nowrap">
-            <InvitePeopleButton />
-            <AddSpaceButton />
-          </div>
-        }
-      >
-        {isEmpty ? <SpacesZeroState /> : <SpaceGrid spaces={spaces} />}
-      </Paper.Section>
-    </div>
-  );
+  if (item.status === "paused") return t("pages.homePage.reasonPaused");
+  if (item.nextStep) return item.nextStep;
+
+  return t("pages.homePage.reasonNeedsReview");
 }
 
-function FeedSection() {
-  return (
-    <div className="mt-8">
-      <Paper.Section title={t("pages.homePage.whatSNew")} subtitle={t("pages.homePage.stayUpToDateWithYour")}>
-        <div className="bg-surface-base shadow rounded-2xl">
-          <ActivityFeed />
-        </div>
-      </Paper.Section>
-    </div>
-  );
+function formatShortDate(value: string | null | undefined): string | null {
+  if (!value) return null;
+
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return null;
+
+  return `${parsed.getMonth() + 1}/${parsed.getDate()}`;
+}
+
+function formatToday(): string {
+  return new Intl.DateTimeFormat(undefined, { dateStyle: "long" }).format(new Date());
 }
 
 function ActivityFeed() {
   const { company } = useLoadedData();
   const { data, loading, error } = useItemsQuery("company", company.id!);
-  const canDeleteFeedItems = useCanDeleteFeedItems();
+  const canDelete = useCanDeleteFeedItems();
   const [deleteActivity] = Api.companies.useDeleteActivity();
   const [activities, setActivities] = React.useState(data?.activities || []);
 
@@ -140,7 +193,7 @@ function ActivityFeed() {
   };
 
   if (loading) return <ActivityFeedSkeleton />;
-  if (error) return <div>{t("pages.homePage.error")}</div>;
+  if (error) return <div className="text-[13px] text-content-dimmed">{t("pages.homePage.error")}</div>;
 
   return (
     <Feed
@@ -148,8 +201,7 @@ function ActivityFeed() {
       testId="company-feed"
       page="company"
       hideTopBorder
-      paddedGroups
-      canDeleteItems={canDeleteFeedItems}
+      canDeleteItems={canDelete}
       onDeleteItem={handleDeleteActivity}
     />
   );
@@ -157,128 +209,32 @@ function ActivityFeed() {
 
 function ActivityFeedSkeleton() {
   return (
-    <div className="w-full p-8">
-      {/* Simulate 2 activity groups */}
-      <ActivityGroupSkeleton />
-      <ActivityGroupSkeleton />
-    </div>
-  );
-}
-
-function ActivityGroupSkeleton() {
-  return (
-    <div className="w-full border-t border-stroke-base animate-pulse flex flex-col sm:flex-row items-start gap-2 py-4">
-      {/* Date section skeleton */}
-      <div className="w-1/5 shrink-0 mb-2">
-        <div className="h-4 bg-surface-dimmed rounded animate-pulse mb-1"></div>
-        <div className="h-3 bg-surface-dimmed rounded animate-pulse w-3/4"></div>
-      </div>
-
-      {/* Activity items skeleton */}
-      <div className="flex-1 flex flex-col gap-4">
-        <ActivityItemSkeleton />
-        <ActivityItemSkeleton />
-        <ActivityItemSkeleton />
-      </div>
-    </div>
-  );
-}
-
-function ActivityItemSkeleton() {
-  return (
-    <div className="flex flex-1 gap-3">
-      {/* Avatar skeleton */}
-      <div className="w-8 h-8 bg-surface-dimmed rounded-full animate-pulse"></div>
-
-      {/* Content skeleton */}
-      <div className="w-full break-words -mt-0.5">
-        <div className="h-4 bg-surface-dimmed rounded animate-pulse mb-1 w-3/4"></div>
-        <div className="h-3 bg-surface-dimmed rounded animate-pulse w-1/2"></div>
-      </div>
-    </div>
-  );
-}
-
-function AddSpaceButton() {
-  const { company } = useLoadedData();
-  const paths = usePaths();
-
-  if (!company.permissions?.canCreateSpace) {
-    return null;
-  }
-
-  return (
-    <PrimaryButton linkTo={paths.newSpacePath()} testId="add-space" size="sm">
-      {t("pages.homePage.addSpace")}
-    </PrimaryButton>
-  );
-}
-
-function InvitePeopleButton() {
-  const paths = usePaths();
-  const { company } = useLoadedData();
-
-  if (!company.permissions?.canInviteMembers) {
-    return null;
-  }
-
-  return (
-    <GhostButton linkTo={paths.invitePeoplePath()} testId="invite-people" size="sm">
-      {t("pages.homePage.invitePeople")}
-    </GhostButton>
-  );
-}
-
-function Greeting() {
-  const me = useMe();
-
-  let hour = new Date().getHours();
-  let greeting = "";
-
-  if (hour < 12) {
-    greeting = "Good morning";
-  } else if (hour < 18) {
-    greeting = "Good afternoon";
-  } else {
-    greeting = "Good evening";
-  }
-
-  return (
-    <p className="font-bold text-3xl mt-20">
-      {greeting}, {People.firstName(me!)}!
-    </p>
-  );
-}
-
-function SpaceGrid({ spaces }: { spaces: Spaces.Space[] }) {
-  const paths = usePaths();
-  const sorted = [...spaces].sort((a, b) => {
-    if (a.isCompanySpace) return -1;
-
-    return a.name!.localeCompare(b.name!);
-  });
-
-  return (
-    <SpaceCardGrid>
-      {sorted.map((space) => (
-        <SpaceCard
-          key={space.id}
-          name={space.name!}
-          mission={space.mission}
-          accessLevels={space.accessLevels}
-          members={space.members ?? []}
-          linkTo={paths.spacePath(space.id!)}
-        />
+    <div className="flex flex-col gap-3">
+      {[0, 1, 2, 3].map((index) => (
+        <div key={index} className="flex animate-pulse gap-2.5">
+          <div className="h-6 w-6 flex-shrink-0 rounded-full bg-surface-dimmed" />
+          <div className="w-full">
+            <div className="mb-1 h-3 w-3/4 rounded bg-surface-dimmed" />
+            <div className="h-2 w-1/2 rounded bg-surface-dimmed" />
+          </div>
+        </div>
       ))}
-    </SpaceCardGrid>
+    </div>
   );
 }
 
 function useIsOwner() {
   const { ownerIds } = useLoadedData();
-
   const me = useMe();
-  return includesId(ownerIds, me!.id);
+
+  // `useMe` is typed as nullable and genuinely returns null when this renders
+  // outside the company provider — which a hot reload can cause in dev. The
+  // old non-null assertion turned that into a crashed page; not being able to
+  // prove you are the owner is the right answer when we do not know who you
+  // are, and it only costs the first-run redirect.
+  if (!me?.id) return false;
+
+  return includesId(ownerIds, me.id);
 }
 
 function useCanDeleteFeedItems() {

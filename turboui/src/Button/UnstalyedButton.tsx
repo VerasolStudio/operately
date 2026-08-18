@@ -5,6 +5,7 @@ import { IconChevronDown } from "../icons";
 import { match } from "ts-pattern";
 import { DivLink } from "../Link";
 import { Menu } from "../Menu";
+import { SNAP, motion } from "../Motion";
 import { TestableElement } from "../TestableElement";
 
 interface Linkable {
@@ -123,17 +124,23 @@ function UnstyledActionButton(props: UnstyledButtonProps) {
   }
 
   return (
-    <button
+    // A press is the one moment a button has to confirm it registered the
+    // click before anything else on screen can. The scale is deliberately
+    // small — enough to feel, not enough to notice — and `MotionProvider`
+    // drops it entirely for people who ask for reduced motion.
+    <motion.button
       type={type}
       className={props.className}
       onClick={handleClick}
       disabled={disabled}
       aria-label={props.ariaLabel}
       data-test-id={props.testId}
+      whileTap={disabled ? undefined : { scale: 0.97 }}
+      transition={SNAP}
     >
       {children}
       {props.spinner}
-    </button>
+    </motion.button>
   );
 }
 

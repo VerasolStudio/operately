@@ -105,7 +105,13 @@ export function ProfileEditPage(props: ProfileEditPage.Props) {
       navigation={navigation}
       testId="profile-edit-page"
     >
-      <div className="p-8">
+      <div className="px-6 pt-2 pb-4 sm:px-8">
+        {/* Every other screen in the redesign names itself. This one opened
+            straight onto an avatar, so you had to infer where you were. */}
+        <h1 className="m-0 mb-5 text-2xl font-semibold tracking-[-0.01em] text-content-strong">
+          {t("turboui.profileEditPage.editProfile")}
+        </h1>
+
         <form onSubmit={handleSubmit}>
           <AvatarSection {...props} />
 
@@ -272,7 +278,10 @@ function AvatarSection(props: ProfileEditPage.Props) {
   };
 
   return (
-    <section className="flex flex-col w-full justify-center items-center text-center mb-8">
+    // Left-aligned with the fields below it. Centring the avatar over a
+    // left-aligned form put the first thing you look at out of line with
+    // everything you actually edit.
+    <section className="mb-8 flex w-full flex-col items-start">
       <div className="relative inline-block">
         <Avatar person={previewPerson} size="xxlarge" />
 

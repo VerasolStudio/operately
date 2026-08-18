@@ -103,69 +103,72 @@ export function InvitePeoplePage(props: InvitePeoplePage.Props) {
   useHtmlTitle(pageTitle);
 
   return (
-    <div className="mx-auto relative sm:my-10 max-w-2xl" data-test-id={props.testId}>
+    // Same shell as every other page in the redesign: no floating card, the
+    // title left-aligned under the breadcrumb rather than centred in a panel.
+    <div className="relative w-full pt-6 pb-12" data-test-id={props.testId}>
       {props.navigationItems && <PageNavigation items={props.navigationItems} />}
-      <div className="relative bg-surface-base min-h-dvh sm:min-h-0 sm:border sm:border-surface-outline sm:rounded-lg sm:shadow-xl">
-        <div className="px-4 sm:px-10 py-8">
-          <div className="text-content-accent text-2xl font-extrabold mb-8">
-            {t("turboui.invitePeoplePage.bringYourTeamOnBoard")}
+
+      <div className="max-w-2xl px-6 pt-2 sm:px-8">
+        <h1 className="m-0 mb-8 text-2xl font-semibold tracking-[-0.01em] text-content-strong">
+          {t("turboui.invitePeoplePage.bringYourTeamOnBoard")}
+        </h1>
+
+        {props.errorMessage ? (
+          <div
+            className="mb-6 rounded-lg border border-banner-danger-border bg-banner-danger-bg px-4 py-3 text-sm text-banner-danger-content"
+            data-test-id="invite-people-error"
+          >
+            {props.errorMessage}
           </div>
+        ) : null}
 
-          {props.errorMessage ? (
-            <div
-              className="mb-6 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600"
-              data-test-id="invite-people-error"
-            >
-              {props.errorMessage}
-            </div>
-          ) : null}
-
-          <div className="space-y-8">
-            <InviteLinkSection
-              invitationLink={props.invitationLink}
-              linkEnabled={linkEnabled}
-              onToggleLink={handleLinkToggle}
-              onOpenResetConfirm={handleOpenResetConfirm}
-              isResettingLink={isResettingLink}
-              domainRestriction={props.domainRestriction}
-              onDomainToggle={handleDomainToggle}
-              onDomainChange={handleDomainChange}
-            />
-
-            <section className="rounded-lg border border-surface-outline bg-surface-base p-6">
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h2 className="text-lg font-semibold">{t("turboui.invitePeoplePage.inviteOnePerson")}</h2>
-                  <p className="mt-1 text-sm text-content-dimmed">
-                    {t("turboui.invitePeoplePage.createAPersonalLinkToShare")}
-                  </p>
-                </div>
-                <SecondaryButton
-                  linkTo={props.inviteIndividuallyHref}
-                  onClick={props.inviteIndividuallyHref ? undefined : props.onInviteIndividually}
-                  testId="invite-people-individual"
-                  disabled={!canInviteIndividually}
-                  size="sm"
-                >
-                  {t("turboui.invitePeoplePage.createInvite")}
-                </SecondaryButton>
-              </div>
-            </section>
-          </div>
-
-          <ConfirmDialog
-            isOpen={showResetConfirm}
-            onConfirm={handleConfirmResetLink}
-            onCancel={handleCancelResetConfirm}
-            title={t("turboui.invitePeoplePage.generateANewLink")}
-            message={t("turboui.invitePeoplePage.weLlDisableTheCurrentInvite")}
-            confirmText={t("turboui.invitePeoplePage.generateNewLink")}
-            cancelText={t("turboui.invitePeoplePage.cancel")}
-            variant="danger"
-            icon={IconRotate}
-            testId="invite-people-reset-confirm"
+        <div className="space-y-8">
+          <InviteLinkSection
+            invitationLink={props.invitationLink}
+            linkEnabled={linkEnabled}
+            onToggleLink={handleLinkToggle}
+            onOpenResetConfirm={handleOpenResetConfirm}
+            isResettingLink={isResettingLink}
+            domainRestriction={props.domainRestriction}
+            onDomainToggle={handleDomainToggle}
+            onDomainChange={handleDomainChange}
           />
+
+          <section className="rounded-xl border border-line-soft bg-surface-base p-5">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h2 className="text-[15px] font-semibold text-content-strong">
+                  {t("turboui.invitePeoplePage.inviteOnePerson")}
+                </h2>
+                <p className="mt-1 text-[13px] text-content-muted">
+                  {t("turboui.invitePeoplePage.createAPersonalLinkToShare")}
+                </p>
+              </div>
+              <SecondaryButton
+                linkTo={props.inviteIndividuallyHref}
+                onClick={props.inviteIndividuallyHref ? undefined : props.onInviteIndividually}
+                testId="invite-people-individual"
+                disabled={!canInviteIndividually}
+                size="sm"
+              >
+                {t("turboui.invitePeoplePage.createInvite")}
+              </SecondaryButton>
+            </div>
+          </section>
         </div>
+
+        <ConfirmDialog
+          isOpen={showResetConfirm}
+          onConfirm={handleConfirmResetLink}
+          onCancel={handleCancelResetConfirm}
+          title={t("turboui.invitePeoplePage.generateANewLink")}
+          message={t("turboui.invitePeoplePage.weLlDisableTheCurrentInvite")}
+          confirmText={t("turboui.invitePeoplePage.generateNewLink")}
+          cancelText={t("turboui.invitePeoplePage.cancel")}
+          variant="danger"
+          icon={IconRotate}
+          testId="invite-people-reset-confirm"
+        />
       </div>
     </div>
   );

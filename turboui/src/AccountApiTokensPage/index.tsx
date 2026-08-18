@@ -76,7 +76,7 @@ export function AccountApiTokensPage(props: AccountApiTokensPage.Props) {
     >
       <div className="px-4 sm:px-10 py-8">
         <header>
-          <h1 className="text-2xl font-bold">{t("turboui.accountApiTokensPage.aPITokens")}</h1>
+          <h1 className="m-0 text-2xl font-semibold tracking-[-0.01em] text-content-strong">{t("turboui.accountApiTokensPage.aPITokens")}</h1>
           <p className="text-sm text-content-dimmed mt-2">
             {t("turboui.accountApiTokensPage.useAPITokensToAccessOperately")}
           </p>

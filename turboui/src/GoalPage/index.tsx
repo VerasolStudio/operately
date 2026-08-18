@@ -4,16 +4,18 @@ import type { GoalTargetList } from "../GoalTargetList";
 import type { MiniWorkMap } from "../MiniWorkMap";
 
 import { PageDocsAndFilesTab, type PageDocsAndFiles } from "../DocsAndFiles/PageDocsAndFiles";
-import { PageNew } from "../Page";
-import { IconClipboardText, IconLogs, IconMessage, IconMessages } from "../icons";
+import { UnderlineTabs } from "../DesignKit/Controls";
+import { Screen } from "../DesignKit/Layout";
+import { useTabLinks } from "../DesignKit/useTabLinks";
 
 import { DateField } from "../DateField";
 import { MoveModal } from "../Modal/MoveModal";
 import { PersonField } from "../PersonField";
 import { PrivacyField } from "../PrivacyField";
 import { BadgeStatus } from "../StatusBadge/types";
-import { Tabs, useTabs } from "../Tabs";
+import { useTabs } from "../Tabs";
 import { Activity } from "./Activity";
+import { NextAction } from "./NextAction";
 import { CheckIns } from "./CheckIns";
 import { DeleteModal } from "./DeleteModal";
 import { Discussions } from "./Discussions";
@@ -217,34 +219,32 @@ export function GoalPage(props: GoalPage.Props) {
   const state = useGoalPageState(props);
 
   const tabs = useTabs("overview", [
-    { id: "overview", label: t("turboui.goalPage.overview"), icon: <IconClipboardText size={14} /> },
-    {
-      id: "check-ins",
-      label: t("turboui.goalPage.checkIns"),
-      icon: <IconMessage size={14} />,
-      count: props.childrenCount.checkInsCount,
-    },
+    { id: "overview", label: t("turboui.goalPage.overview"), icon: null },
+    { id: "check-ins", label: t("turboui.goalPage.checkIns"), icon: null, count: props.childrenCount.checkInsCount },
     {
       id: "discussions",
       label: t("turboui.goalPage.discussions"),
-      icon: <IconMessages size={14} />,
+      icon: null,
       count: props.childrenCount.discussionsCount,
     },
     {
       id: "docs-and-files",
       label: t("turboui.goalPage.docsFiles"),
-      icon: <IconClipboardText size={14} />,
+      icon: null,
       count: props.childrenCount.docsAndFilesCount,
       hidden: !state.docsAndFiles,
     },
-    { id: "activity", label: t("turboui.goalPage.activity"), icon: <IconLogs size={14} /> },
+    { id: "activity", label: t("turboui.goalPage.activity"), icon: null },
   ]);
+
+  const tabLinks = useTabLinks(tabs);
   const activeTab = !state.docsAndFiles && tabs.active === "docs-and-files" ? "overview" : tabs.active;
 
   return (
-    <>
-      <PageNew title={[state.goalName]} size="fullwidth" testId="goal-page">
-        <PageHeader {...state} />
+    <Screen title={[state.goalName]} testId="goal-page">
+      <PageHeader {...state} />
+
+      <div className="px-6 pt-4 sm:px-8">
         <StatusBanner
           state={state.state === "closed" ? "closed" : null}
           closedAt={state.closedAt}
@@ -252,21 +252,25 @@ export function GoalPage(props: GoalPage.Props) {
           retrospectiveLink={state.retrospective?.link}
           entityName="goal"
         />
-        <Tabs tabs={tabs} />
+        <NextAction {...state} />
+      </div>
 
-        <div className="flex-1 overflow-auto">
-          {activeTab === "overview" && <Overview {...state} />}
-          {activeTab === "check-ins" && <CheckIns {...state} />}
-          {activeTab === "discussions" && <Discussions {...state} />}
-          {activeTab === "docs-and-files" && state.docsAndFiles && (
-            <PageDocsAndFilesTab docsAndFiles={state.docsAndFiles} />
-          )}
-          {activeTab === "activity" && <Activity {...state} />}
-        </div>
+      <div className="px-6 pt-5 sm:px-8">
+        <UnderlineTabs layoutId="goal-tabs" tabs={tabLinks} activeId={activeTab} />
+      </div>
 
-        <DeleteModal {...state} />
-        {"space" in state && <MoveModal {...state} />}
-      </PageNew>
-    </>
+      <div>
+        {activeTab === "overview" && <Overview {...state} />}
+        {activeTab === "check-ins" && <CheckIns {...state} />}
+        {activeTab === "discussions" && <Discussions {...state} />}
+        {activeTab === "docs-and-files" && state.docsAndFiles && (
+          <PageDocsAndFilesTab docsAndFiles={state.docsAndFiles} />
+        )}
+        {activeTab === "activity" && <Activity {...state} />}
+      </div>
+
+      <DeleteModal {...state} />
+      {"space" in state && <MoveModal {...state} />}
+    </Screen>
   );
 }

@@ -5,29 +5,39 @@ import { Navigation } from "../../Page/Navigation";
 import { PrivacyIndicator } from "../../PrivacyIndicator";
 
 import { DateField } from "../../DateField";
-import { IconChevronRight } from "../../icons";
-import { BlackLink } from "../../Link";
-import { PageNew } from "../../Page";
+import { SegmentedControl, UnderlineTabs, type UnderlineTab } from "../../DesignKit/Controls";
+import { PageBody, PageHead, Screen } from "../../DesignKit/Layout";
+import { IconListTree, IconTimeline } from "../../icons";
 import { SpaceField } from "../../SpaceField";
 import type { StatusSelector } from "../../StatusSelector";
 import { useLocation } from "react-router";
 import { useWorkMapTab } from "../hooks/useWorkMapTab";
 import { AddItemModal } from "./AddItemModal";
+import { WorkMapSummary } from "./WorkMapSummary";
 import { WorkMapTimeline } from "./WorkMapTimeline";
-import { WorkMapNavigation } from "./WorkMapNavigation";
 import { WorkMapTable } from "./WorkMapTable";
 import type { FormattedTimePreferences } from "../../FormattedTime";
+import { t } from "../../i18n";
 
 export { WorkMapTable };
 
 export function WorkMapPage(props: WorkMap.Props) {
   return (
-    <PageNew title={props.title} size="fullwidth">
+    <Screen title={props.title} testId="work-map-page">
       <WorkMap {...props} />
-    </PageNew>
+    </Screen>
   );
 }
 
+/**
+ * The work map: every goal and project in one tree.
+ *
+ * Structure follows the redesign — three summary cards, then the filter tabs,
+ * then the table. The cards are there so the page opens with an answer rather
+ * than a wall of rows; a company with fourteen items in flight has maybe three
+ * that need a decision today, and finding those three by reading was the main
+ * thing people did on this screen.
+ */
 export function WorkMap({
   title,
   items,
@@ -39,6 +49,8 @@ export function WorkMap({
   spaceSearch,
   addItemDefaultSpace,
   navigation,
+  subtitle,
+  actions,
   viewer,
   profileUser,
   hideCompanyAccessInQuickAdd,
@@ -49,68 +61,115 @@ export function WorkMap({
 }: WorkMap.Props) {
   const location = useLocation();
   const { filteredItems, tabsState, tab } = useWorkMapTab({ rawItems: items, type, opts: { tabOptions } });
+
   const searchParams = new URLSearchParams(location.search);
   const timelineAvailable = type !== "personal" && tab === "projects";
   const view = timelineAvailable && searchParams.get("view") === "timeline" ? "timeline" : "table";
   const firstProjectStateVisible = emptyStateVariant === "first-project" && items.length === 0 && addingEnabled;
 
+  const tabs: UnderlineTab[] = tabsState.tabs.map((entry) => ({
+    id: entry.id,
+    label: entry.label,
+    count: entry.count,
+    to: tabPath(location.pathname, location.search, entry.id, tabsState.urlPath),
+  }));
+
   return (
-    <div className="flex flex-col w-full bg-surface-base rounded-lg">
-      <header className="px-4 py-3 border-b border-surface-outline">
-        <Breadcrumbs navigation={navigation || []} />
+    <div>
+      <PageHead
+        crumbs={navigation?.map((item) => ({ label: item.label, to: item.to }))}
+        title={title}
+        subtitle={subtitle}
+        actions={actions}
+      />
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <h1 className="text-sm sm:text-base font-bold text-content-accent">{title}</h1>
-          </div>
+      {!firstProjectStateVisible && items.length > 0 && (
+        <div className="px-6 pt-5 sm:px-8">
+          <WorkMapSummary items={items} />
         </div>
-      </header>
-
-      {!firstProjectStateVisible && (
-        <WorkMapNavigation tabsState={tabsState} timelineAvailable={timelineAvailable} view={view} />
       )}
-      <div className="flex-1 overflow-auto">
-        {view === "timeline" ? (
-          <WorkMapTimeline items={filteredItems} tab={tab} />
-        ) : (
-          <WorkMapTable
-            items={filteredItems}
-            tab={tab}
-            columnOptions={columnOptions}
-            addItem={addItem}
-            addingEnabled={addingEnabled}
-            spaceSearch={spaceSearch}
-            addItemDefaultSpace={addItemDefaultSpace}
-            type={type}
-            viewer={viewer}
-            profileUser={profileUser}
-            hideCompanyAccessInQuickAdd={Boolean(hideCompanyAccessInQuickAdd)}
-            zeroStateMessage={zeroStateMessage}
-            emptyStateVariant={emptyStateVariant}
-            onItemCreated={onItemCreated}
-            formattedTimePreferences={formattedTimePreferences}
+
+      <PageBody width="full" className="pt-6">
+        {!firstProjectStateVisible && (
+          <UnderlineTabs
+            className="mb-1"
+            layoutId="work-map-tabs"
+            tabs={tabs}
+            activeId={tabsState.active}
+            trailing={
+              timelineAvailable ? (
+                <SegmentedControl
+                  layoutId="work-map-view"
+                  activeId={view}
+                  options={[
+                    {
+                      id: "table",
+                      label: t("turboui.workMap.tree"),
+                      icon: <IconListTree size={14} />,
+                      to: buildViewPath(location.pathname, location.search, "table"),
+                    },
+                    {
+                      id: "timeline",
+                      label: t("turboui.workMap.timeline"),
+                      icon: <IconTimeline size={14} />,
+                      to: buildViewPath(location.pathname, location.search, "timeline"),
+                    },
+                  ]}
+                />
+              ) : undefined
+            }
           />
         )}
-      </div>
+
+        <div className="pt-2">
+          {view === "timeline" ? (
+            <WorkMapTimeline items={filteredItems} tab={tab} />
+          ) : (
+            <WorkMapTable
+              items={filteredItems}
+              tab={tab}
+              columnOptions={columnOptions}
+              addItem={addItem}
+              addingEnabled={addingEnabled}
+              spaceSearch={spaceSearch}
+              addItemDefaultSpace={addItemDefaultSpace}
+              type={type}
+              viewer={viewer}
+              profileUser={profileUser}
+              hideCompanyAccessInQuickAdd={Boolean(hideCompanyAccessInQuickAdd)}
+              zeroStateMessage={zeroStateMessage}
+              emptyStateVariant={emptyStateVariant}
+              onItemCreated={onItemCreated}
+              formattedTimePreferences={formattedTimePreferences}
+            />
+          )}
+        </div>
+      </PageBody>
     </div>
   );
 }
 
-function Breadcrumbs({ navigation }: { navigation: { to: string; label: string }[] }) {
-  return (
-    <div>
-      <nav className="flex items-center space-x-0.5 mt-1">
-        {navigation.map((item, index) => (
-          <React.Fragment key={index}>
-            <BlackLink to={item.to} className="text-xs text-content-dimmed leading-snug" underline="hover">
-              {item.label}
-            </BlackLink>
-            {index < navigation.length - 1 && <IconChevronRight size={10} className="text-content-dimmed" />}
-          </React.Fragment>
-        ))}
-      </nav>
-    </div>
-  );
+function tabPath(pathname: string, search: string, tabId: string, urlPath?: string): string {
+  const searchParams = new URLSearchParams(search);
+  searchParams.set("tab", tabId);
+  // Switching filters should not carry the timeline view into a tab that has
+  // no timeline; the toggle only exists on projects.
+  if (tabId !== "projects") searchParams.delete("view");
+
+  return `${urlPath || pathname}?${searchParams.toString()}`;
+}
+
+function buildViewPath(pathname: string, search: string, view: WorkMap.View): string {
+  const searchParams = new URLSearchParams(search);
+
+  if (view === "timeline") {
+    searchParams.set("view", "timeline");
+  } else {
+    searchParams.delete("view");
+  }
+
+  const nextSearch = searchParams.toString();
+  return nextSearch ? `${pathname}?${nextSearch}` : pathname;
 }
 
 export default WorkMap;
@@ -229,6 +288,11 @@ export namespace WorkMap {
     tabOptions?: TabOptions;
     type?: WorkMapType;
     navigation?: Navigation.Item[];
+
+    /** One line of context under the title, e.g. "8 goals / 6 projects". */
+    subtitle?: React.ReactNode;
+    /** Page-level buttons rendered on the right of the header. */
+    actions?: React.ReactNode;
 
     hideCompanyAccessInQuickAdd?: boolean;
 

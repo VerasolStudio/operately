@@ -3,18 +3,15 @@ import { DateField } from "../DateField";
 import TaskCreationModal from "../TaskBoard/components/TaskCreationModal";
 import * as Types from "../TaskBoard/types";
 import { Timeline } from "../Timeline";
-import { IconCheck, IconFlag, IconFlagFilled } from "../icons";
 import { ProjectPageLayout } from "../ProjectPageLayout";
 import { useProjectPageTabs } from "../ProjectPageLayout/useProjectPageTabs";
+import { PageColumns } from "../DesignKit/Layout";
 import { MilestoneSidebar } from "./components/Sidebar";
 import { DeleteModal } from "./components/DeleteModal";
 import { PersonField } from "../PersonField";
 import { TimelineItem } from "../Timeline/types";
 import { Header } from "./components/Header";
 import { TasksSection } from "./components/TasksSection";
-import { SidebarSection } from "../SidebarSection";
-import { GhostButton, SecondaryButton } from "../Button";
-import { launchConfetti } from "../utils/confetti";
 import { RichEditorHandlers } from "../RichEditor/useEditor";
 import { PageDescription } from "../PageDescription";
 import { SidebarNotificationSection } from "../SidebarSection";
@@ -172,6 +169,8 @@ export function MilestonePage(props: MilestonePage.Props) {
     }
   };
 
+  const completedTaskCount = state.tasks.filter((task) => task.status?.closed).length;
+
   const tabs = useProjectPageTabs({
     defaultTab: "tasks",
     childrenCount,
@@ -199,37 +198,34 @@ export function MilestonePage(props: MilestonePage.Props) {
 
   return (
     <ProjectPageLayout {...layoutProps}>
-      <MainContainer>
+      <PageColumns aside={<MilestoneSidebar {...state} />}>
         <Header
           title={title}
           canEdit={permissions.canEdit || false}
           status={status}
+          dueDate={state.dueDate ?? state.milestone.dueDate ?? null}
+          completedTasks={completedTaskCount}
+          totalTasks={state.tasks.length}
           onMilestoneTitleChange={onMilestoneTitleChange}
+          onStatusChange={state.onStatusChange}
         />
 
-        <MobileMeta {...state} />
+        <div className="space-y-10">
+          <PageDescription
+            {...state}
+            canEdit={permissions.canEdit}
+            label={t("turboui.milestonePage.notes")}
+            placeholder={t("turboui.milestonePage.describeTheMilestone")}
+            zeroStatePlaceholder="Add details about this milestone..."
+            emptyTestId="description-section-empty"
+            localDraftKey={state.localDraftKeyBase ? `${state.localDraftKeyBase}:description` : undefined}
+          />
 
-        <div className="sm:grid sm:grid-cols-12">
-          {/* Main content - left column (8 columns) */}
-          <div className="sm:col-span-8 sm:px-4 space-y-4">
-            <PageDescription
-              {...state}
-              canEdit={permissions.canEdit}
-              label={t("turboui.milestonePage.notes")}
-              placeholder={t("turboui.milestonePage.describeTheMilestone")}
-              zeroStatePlaceholder="Add details about this milestone..."
-              emptyTestId="description-section-empty"
-              localDraftKey={state.localDraftKeyBase ? `${state.localDraftKeyBase}:description` : undefined}
-            />
+          <TasksSection {...state} />
 
-            <TasksSection {...state} />
-
-            <TimelineSection {...state} />
-          </div>
-
-          <MilestoneSidebar {...state} />
+          <TimelineSection {...state} />
         </div>
-      </MainContainer>
+      </PageColumns>
 
       <TaskCreationModal
         isOpen={isTaskModalOpen}
@@ -248,84 +244,12 @@ export function MilestonePage(props: MilestonePage.Props) {
   );
 }
 
-function MobileMeta(props: MilestonePage.State) {
-  const { status, onStatusChange, permissions, dueDate, onDueDateChange, milestone } = props;
-  const isCompleted = status === "done";
-  const showOverdueWarning = !isCompleted;
-  const { canEdit } = permissions;
-
-  const handleStatusToggle = () => {
-    if (!canEdit) return;
-
-    const nextStatus = isCompleted ? "pending" : "done";
-    if (nextStatus === "done") {
-      launchConfetti();
-    }
-
-    onStatusChange(nextStatus);
-  };
-
-  return (
-    <div className="sm:hidden mt-4 mb-6" data-test-id="milestone-mobile-meta">
-      <div className="flex flex-wrap gap-4">
-        <SidebarSection title={t("turboui.milestonePage.dueDate2")} className="flex-1 min-w-[160px]">
-          <DateField
-            date={dueDate ?? milestone.dueDate ?? null}
-            onDateSelect={onDueDateChange}
-            readonly={!canEdit}
-            showOverdueWarning={showOverdueWarning}
-            placeholder={t("turboui.milestonePage.setDueDate")}
-            size="small"
-          />
-        </SidebarSection>
-
-        <SidebarSection title={t("turboui.milestonePage.milestoneStatus")} className="flex-1 min-w-[160px]">
-          <div className="flex flex-wrap items-center gap-3 text-sm">
-            <div className="flex items-center gap-2">
-              {isCompleted ? (
-                <>
-                  <IconFlagFilled size={16} className="text-accent-1" />
-                  <span className="font-medium text-accent-1">{t("turboui.milestonePage.completed")}</span>
-                </>
-              ) : (
-                <>
-                  <IconFlag size={16} className="text-content-dimmed" />
-                  <span className="text-content-base">{t("turboui.milestonePage.active")}</span>
-                </>
-              )}
-            </div>
-
-            {canEdit &&
-              (isCompleted ? (
-                <SecondaryButton size="xs" onClick={handleStatusToggle}>
-                  {t("turboui.milestonePage.reopen")}
-                </SecondaryButton>
-              ) : (
-                <GhostButton size="xs" icon={IconCheck} onClick={handleStatusToggle}>
-                  {t("turboui.milestonePage.markComplete")}
-                </GhostButton>
-              ))}
-          </div>
-        </SidebarSection>
-      </div>
-    </div>
-  );
-}
-
-function MainContainer({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex-1 overflow-auto">
-      <div className="flex-1 overflow-auto">
-        <div className="p-4 max-w-6xl mx-auto">{children}</div>
-      </div>
-    </div>
-  );
-}
-
 function TimelineSection(props: MilestonePage.State) {
   return (
-    <div className="pt-8" data-test-id="timeline-section">
-      <h3 className="font-bold mb-4">{t("turboui.milestonePage.commentsActivity")}</h3>
+    <div data-test-id="timeline-section">
+      <h2 className="m-0 mb-4 text-[15px] font-semibold text-content-strong">
+        {t("turboui.milestonePage.commentsActivity")}
+      </h2>
       <Timeline
         items={props.timelineItems}
         currentUser={props.currentUser}

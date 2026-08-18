@@ -10,10 +10,9 @@ interface BannerProps extends TestableElement {
 export function Banner(props: BannerProps) {
   const className = classnames(
     "leading-none",
-    "bg-yellow-400/10",
-    "text-content-accent font-bold",
-    "flex items-center justify-center",
-    "rounded-t border-b border-surface-outline py-4",
+    "bg-banner-warning-bg text-banner-warning-content",
+    "flex items-center justify-center gap-2",
+    "border-b border-banner-warning-border py-3 text-[13px] font-semibold",
     props.className,
   );
 

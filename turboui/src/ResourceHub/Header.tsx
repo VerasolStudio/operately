@@ -1,23 +1,27 @@
 import * as React from "react";
-import classNames from "../utils/classnames";
 
 interface HeaderProps {
   title: string;
+  /** Sub-line under the title: counts, last update. */
+  subtitle?: React.ReactNode;
   actions?: React.ReactNode;
 }
 
-export function Header({ title, actions }: HeaderProps) {
-  const className = classNames(
-    "flex items-center justify-between mb-6 pt-5 pb-4 border-b border-stroke-base -mx-4 sm:-mx-8 -mt-4 sm:-mt-8 px-4 sm:px-8",
-  );
-
+/**
+ * The heading of a resource hub or folder listing.
+ *
+ * The title used to be centred with the actions pushed to the far left, which
+ * put the primary "New" button in the last place the eye looks. It now follows
+ * the same shape as every other index screen: title left, actions right.
+ */
+export function Header({ title, subtitle, actions }: HeaderProps) {
   return (
-    <div className={className}>
-      <div className="w-[30%]">{actions}</div>
-      <div className="w-[50%] text-center flex-1">
-        <div className="text-content-accent text-lg md:text-2xl font-extrabold">{title}</div>
+    <div className="mb-5 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
+      <div className="min-w-0">
+        <h1 className="m-0 text-2xl font-semibold tracking-[-0.01em] text-content-strong">{title}</h1>
+        {subtitle && <p className="mt-1.5 mb-0 text-[13px] text-content-dimmed">{subtitle}</p>}
       </div>
-      <div className="w-[30%]" />
+      {actions && <div className="flex flex-shrink-0 items-center gap-2">{actions}</div>}
     </div>
   );
 }

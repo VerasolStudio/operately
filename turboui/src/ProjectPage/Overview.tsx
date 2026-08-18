@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { GhostButton, PrimaryButton, SecondaryButton } from "../Button";
 import { DateField } from "../DateField";
+import { PageColumns } from "../DesignKit/Layout";
 import { DocsAndFilesPreview } from "../DocsAndFiles";
 import { PieChart } from "../PieChart";
 import { SwitchToggle } from "../SwitchToggle";
@@ -19,29 +20,18 @@ import { t } from "../i18n";
 
 export function Overview(props: ProjectPage.State) {
   return (
-    <div className="flex-1 overflow-auto">
-      <div className="p-4 max-w-6xl mx-auto my-6">
-        <div className="sm:grid sm:grid-cols-12 gap-8">
-          <LeftColumn {...props} />
-          <OverviewSidebar {...props} />
-        </div>
-      </div>
-    </div>
+    <PageColumns aside={<OverviewSidebar {...props} />}>
+      <LeftColumn {...props} />
+    </PageColumns>
   );
 }
 
 function LeftColumn(props: ProjectPage.State) {
   return (
-    <div className="sm:col-span-8 space-y-8">
+    <div className="space-y-10">
       <OverviewSection {...props} />
-      <div className="pt-8 mt-8 border-t border-surface-outline">
-        <TimelineSection {...props} />
-      </div>
-      {props.docsAndFiles && (
-        <div className="pt-8 mt-8 border-t border-surface-outline">
-          <ResourcesSection {...props} />
-        </div>
-      )}
+      <TimelineSection {...props} />
+      {props.docsAndFiles && <ResourcesSection {...props} />}
     </div>
   );
 }

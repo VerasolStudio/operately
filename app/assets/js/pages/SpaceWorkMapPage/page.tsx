@@ -5,7 +5,7 @@ import { useLoadedData } from "./loader";
 
 import { usePaths } from "@/routes/paths";
 import { useSpaceSearch } from "../../models/spaces";
-import { convertToWorkMapItems, useWorkMapItems } from "../../models/workMap";
+import { countWorkMapTypes, convertToWorkMapItems, useWorkMapItems } from "../../models/workMap";
 import { useFormattedTimePreferences } from "@/hooks/useFormattedTimePreferences";
 import { t } from "@/i18n";
 
@@ -18,10 +18,16 @@ export function Page() {
   const [items, addItem] = useWorkMapItems(workMap);
   const spaceSearch = useSpaceSearch();
   const formattedTimePreferences = useFormattedTimePreferences();
+  const counts = countWorkMapTypes(items);
 
   return (
     <WorkMapPage
       title={t("pages.spaceWorkMapPage.workMap")}
+      subtitle={
+        t("pages.companyWorkMapPage.goalCount", { count: counts.goals }) +
+        " / " +
+        t("pages.companyWorkMapPage.projectCount", { count: counts.projects })
+      }
       addingEnabled={space.permissions?.canEdit}
       items={convertToWorkMapItems(paths, items)}
       addItem={addItem}

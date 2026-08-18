@@ -2,7 +2,7 @@ import React from "react";
 
 import { useMe } from "@/contexts/CurrentCompanyContext";
 import {
-  Avatar,
+  IconDots,
   Menu,
   MenuLinkItem,
   MenuActionItem,
@@ -35,11 +35,14 @@ export function User() {
   return (
     <Menu
       customTrigger={
+        // The sidebar already shows who is signed in, so the trigger only has
+        // to be a discoverable handle for the account actions — not a second
+        // copy of the avatar sitting next to the first one.
         <div
-          className="flex items-center cursor-pointer border border-stroke-base rounded-full"
-          style={{ height: "32px", width: "32px" }}
+          className="flex cursor-pointer items-center justify-center rounded-lg p-1.5 text-content-subtle transition-colors hover:bg-sidebar-hover hover:text-content-muted"
+          aria-label={t("userMenu.settings")}
         >
-          <Avatar person={me} size={30} />
+          <IconDots size={18} />
         </div>
       }
       testId="account-menu"
